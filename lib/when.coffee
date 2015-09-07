@@ -5,4 +5,5 @@ module.exports = ->
   thenReturn: (stubbedValue) ->
     last = remembersLastInvocation.recall()
     remembersStubbings(last.testDouble, last.args, stubbedValue)
+    last.testDouble
 
