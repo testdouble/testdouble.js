@@ -1,6 +1,6 @@
 _ = require('lodash')
 
-stubbings = []
+globalStubbings = []
 
 module.exports = (testDouble, args, stubbedValue) ->
   set(forDouble(testDouble), args, stubbedValue)
@@ -15,15 +15,16 @@ set = (tdStubbings, args, stubbedValue) ->
   if stubbing = stubbingForArgs(tdStubbings, args)
     stubbing.stubbedValue = stubbedValue
   else
-    tdStubbings.push({args, stubbedValue})
+    tdStubbings.stubbings.push({args, stubbedValue})
 
 forDouble = (testDouble) ->
-  return stubbing if stubbing = _.find(stubbings, {testDouble})
+  return stubbing if stubbing = _.find(globalStubbings, {testDouble})
   _.tap {testDouble, stubbings: []}, (entry) ->
-    stubbings.push(entry)
+    globalStubbings.push(entry)
 
 stubbingForArgs = (tdStubbings, args) ->
-  _.find(tdStubbings, (s) -> argsMatch(args, s.args))
+  _.find(tdStubbings.stubbings, (stubbing) ->
+    argsMatch(args, stubbing.args))
 
-argsMatch = ->
-  true
+argsMatch = (args1, args2) ->
+  _.eq(args1, args2)
