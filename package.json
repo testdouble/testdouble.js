@@ -1,0 +1,41 @@
+{
+  "name": "testdouble",
+  "version": "0.0.1",
+  "description": "A minimal test double library for TDD with JavaScript",
+  "homepage": "https://github.com/testdouble/testdouble.js",
+  "author": {
+    "name": "Justin Searls",
+    "company": "Test Double, LLC"
+  },
+  "main": "main.js",
+  "scripts": {
+    "test": "mocha --ui mocha-gwt --recursive --require coffee-script --compilers coffee:coffee-script/register 'test/helper.coffee' 'test/'"
+  },
+  "dependencies": {
+    "coffee-script": "^1.10.0"
+  },
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "grunt": "~0.4.2",
+    "mocha": "^2.3.1",
+    "mocha-gwt": "^0.2.0",
+    "testem": "~0.6.15"
+  },
+  "keywords": [
+    "tdd",
+    "bdd",
+    "mock",
+    "stub",
+    "spy",
+    "test double",
+    "double"
+  ],
+  "bugs": {
+    "url": "https://github.com/testdouble/testdouble.js/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/testdouble/testdouble.js.git"
+  },
+  "license": "MIT"
+}
