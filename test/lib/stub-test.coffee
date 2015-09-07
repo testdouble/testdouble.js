@@ -1,2 +1,0 @@
-describe 'lol', ->
-  Then -> false
