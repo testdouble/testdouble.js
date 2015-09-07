@@ -3,6 +3,9 @@ describe 'when', ->
 
   describe 'unconditional stubbing', ->
     Given -> @testDouble = requireSubject('lib/create')()
-    Given -> @when(@testDouble()).thenReturn("foo")
-    When -> @result = @testDouble()
-    Then -> @result == "foo"
+    context 'foo', ->
+      Given -> @when(@testDouble()).thenReturn("foo")
+      Then -> @testDouble() == "foo"
+    context 'bar', ->
+      Given -> @when(@testDouble()).thenReturn("bar")
+      Then -> @testDouble() == "bar"
