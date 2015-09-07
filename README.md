@@ -34,3 +34,6 @@ myTestDouble('a', 5, {foo: 'bar'}); // returns "YES"
 myTestDouble('a', 5, {foo: 'baz'}); // returns undefined
 ```
 
+# TODO: Verifying, Matchers, Etc
+
+The rest of the stuff we'd like to do with this is a work-in-progress. See the [issues](https://github.com/testdouble/testdouble.js/issues) for more detail on where we're headed.
