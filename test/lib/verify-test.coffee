@@ -12,12 +12,22 @@ describe '.verify', ->
       Unsatisfied test double verification.
 
         Wanted:
-          - called with `("WOAH")`
+          - called with `("WOAH")`.
 
         But there were no invocations of the test double.
       """
 
   context 'unsatisfied verify - other interactions', ->
+    When -> @testDouble("the wrong WOAH")
+    Then -> shouldThrow (=> @verify(@testDouble("WOAH"))), """
+      Unsatisfied test double verification.
+
+        Wanted:
+          - called with `("WOAH")`.
+
+        But was actually called:
+          - called with `("the wrong WOAH")`.
+      """
 
   context 'a double-free verification', ->
     Then -> shouldThrow (=> @verify()), """
