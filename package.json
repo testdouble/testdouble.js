@@ -12,6 +12,7 @@
     "mocha_reporter": "spec"
   },
   "scripts": {
+    "start": "testem",
     "test": "mocha -u mocha-gwt -R $npm_package_config_mocha_reporter --compilers coffee:coffee-script --recursive test/helper.coffee test/",
     "test:debug": "npm test -- --debug-brk",
     "preversion": "git pull --rebase && npm test",
