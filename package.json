@@ -22,7 +22,7 @@
     "chai": "^3.2.0",
     "mocha": "^2.3.1",
     "mocha-gwt": "^0.2.0",
-    "testem": "~0.6.15"
+    "testem": "^0.9.4"
   },
   "keywords": [
     "tdd",
