@@ -10,7 +10,7 @@
   },
   "scripts": {
     "test": "mocha --ui mocha-gwt --recursive --require coffee-script --compilers coffee:coffee-script/register test/helper.coffee test/",
-    "test-debug": "mocha --debug-brk --ui mocha-gwt --recursive --require coffee-script --compilers coffee:coffee-script/register 'test/helper.coffee' 'test/'",
+    "test:debug": "npm test -- --debug-brk",
     "preversion": "git pull --rebase && npm test",
     "postversion": "git push && git push --tags && npm publish"
   },
