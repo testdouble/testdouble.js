@@ -11,3 +11,30 @@ module.exports =
         _.isBoolean(actual)
       else
         actual instanceof type
+  anything: ->
+    __matches: -> true
+
+  contains: (containings...) ->
+    containsAllSpecified = (containing, actual) ->
+      _.all containing, (val, key) ->
+        if _.isPlainObject(val)
+          containsAllSpecified(val, actual[key])
+        else
+          _.eq(val, actual[key])
+
+    __matches: (actual) ->
+      _.all containings, (containing) ->
+        if _.isString(containing)
+          _.include(actual, containing)
+        else if _.isArray(containing)
+          _.any actual, (actualElement) ->
+            _.eq(actualElement, containing)
+        else if _.isPlainObject(containing)
+          containsAllSpecified(containing, actual)
+        else
+          throw new Error("the contains() matcher only supports strings, arrays, and plain objects")
+
+  argThat: (predicate) ->
+    __matches: (actual) ->
+      predicate(actual)
+
