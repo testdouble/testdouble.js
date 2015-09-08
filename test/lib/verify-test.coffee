@@ -37,13 +37,26 @@ describe '.verify', ->
           verify(myTestDouble('foo'))
       """
 
+  context 'using matchers', ->
+    Given -> @matchers = requireSubject('lib/matchers')
+    When -> @testDouble(55)
+
+    context 'satisfied', ->
+      Then -> shouldNotThrow(=> @verify(@testDouble(@matchers.isA(Number))))
+
+    context 'unsatisfied', ->
+      Then -> shouldThrow(=> @verify(@testDouble(@matchers.isA(String))))
+
+shouldNotThrow = (func) ->
+  func()
+
 shouldThrow = (func, message) ->
   threw = null
   try
     func()
     threw = false
   catch e
-    expect(e.message).to.eq(message)
+    expect(e.message).to.eq(message) if message?
     threw = true
   expect(threw, "Expected function to throw an error").to.be.true
 
