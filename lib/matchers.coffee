@@ -34,4 +34,7 @@ module.exports =
         else
           throw new Error("the contains() matcher only supports strings, arrays, and plain objects")
 
+  argThat: (predicate) ->
+    __matches: (actual) ->
+      predicate(actual)
 

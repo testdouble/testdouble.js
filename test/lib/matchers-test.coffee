@@ -53,5 +53,8 @@ describe '.matchers', ->
       the contains() matcher only supports strings, arrays, and plain objects
       """
 
+  describe 'argThat', ->
+    Then -> @matchers.argThat((arg) -> arg > 5).__matches(6) == true
+    Then -> @matchers.argThat((arg) -> arg > 5).__matches(5) == false
 
 
