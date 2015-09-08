@@ -5,7 +5,8 @@ module.exports = {
 
   launchers: {
     node: {
-      command: 'npm test'
+      command: 'npm test --testdouble:mocha_reporter=tap',
+      protocol: 'tap'
     }
   }
 };
