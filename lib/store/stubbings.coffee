@@ -10,3 +10,6 @@ module.exports =
       _.eq(stubbing.args, actualArgs)
     ?.stubbedValue
 
+  for: (testDouble) ->
+    store.for(testDouble).stubbings
+

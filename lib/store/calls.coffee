@@ -14,6 +14,7 @@ module.exports =
       lastCall = null #<-- no double-dipping since it's global & destructive
       store.for(call.testDouble).calls.pop() if call?
 
-
+  for: (testDouble) ->
+    store.for(testDouble).calls
 
 

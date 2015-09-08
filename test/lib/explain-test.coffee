@@ -32,7 +32,6 @@ describe '.explain', ->
         - when called with `(88)`, then return `5`.
 
       Invocations:
-        - called with `(88)`
-        - called with `("not 88", 44)`
-
+        - called with `(88)`.
+        - called with `("not 88", 44)`.
       """
