@@ -5,7 +5,8 @@
   "homepage": "https://github.com/testdouble/testdouble.js",
   "author": {
     "name": "Justin Searls",
-    "company": "Test Double, LLC"
+    "email": "justin@testdouble.com",
+    "url": "http://testdouble.com"
   },
   "scripts": {
     "test": "mocha --ui mocha-gwt --recursive --require coffee-script --compilers coffee:coffee-script/register 'test/helper.coffee' 'test/'",
