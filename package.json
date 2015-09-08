@@ -10,8 +10,8 @@
   "scripts": {
     "test": "mocha --ui mocha-gwt --recursive --require coffee-script --compilers coffee:coffee-script/register 'test/helper.coffee' 'test/'",
     "test-debug": "mocha --debug-brk --ui mocha-gwt --recursive --require coffee-script --compilers coffee:coffee-script/register 'test/helper.coffee' 'test/'",
-    "preversion": "npm test",
-    "postversion": "npm publish"
+    "preversion": "git pull --rebase && npm test",
+    "postversion": "git push && git push --tags && npm publish"
   },
   "dependencies": {
     "coffee-script": "^1.10.0",
