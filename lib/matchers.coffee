@@ -3,11 +3,11 @@ _ = require('lodash')
 module.exports =
   isA: (type) ->
     __matches: (actual) ->
-      if _.isNumber(actual)
-        new Number(actual) instanceof type
-      else if _.isString(actual)
-        new String(actual) instanceof type
-      else if _.isBoolean(actual)
-        new Boolean(actual) instanceof type
+      if type == Number
+        _.isNumber(actual)
+      else if type == String
+        _.isString(actual)
+      else if type == Boolean
+        _.isBoolean(actual)
       else
         actual instanceof type
