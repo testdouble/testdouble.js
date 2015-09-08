@@ -33,7 +33,25 @@ describe '.matchers', ->
       Then -> @matchers.isA(Date).__matches(new Object()) == false
 
   describe 'anything', ->
-      Then -> @matchers.anything().__matches(null) == true
-      Then -> @matchers.anything().__matches(undefined) == true
-      Then -> @matchers.anything().__matches(new Date()) == true
-      Then -> @matchers.anything().__matches(a: 'foo', b: 'bar') == true
+    Then -> @matchers.anything().__matches(null) == true
+    Then -> @matchers.anything().__matches(undefined) == true
+    Then -> @matchers.anything().__matches(new Date()) == true
+    Then -> @matchers.anything().__matches(a: 'foo', b: 'bar') == true
+
+  describe 'contains', ->
+    Then -> @matchers.contains('a').__matches(['a','b','c']) == true
+    Then -> @matchers.contains('a','c').__matches(['a','b','c']) == true
+    Then -> @matchers.contains(['a','c']).__matches(['a','b','c']) == false
+    Then -> @matchers.contains(['a','c']).__matches([1, ['a','c'], 4]) == true
+    Then -> @matchers.contains(['a','c']).__matches(['a','b','z']) == false
+    Then -> @matchers.contains(foo: 'bar', baz: 42).__matches(foo: 'bar', baz: 42, stuff: this) == true
+    Then -> @matchers.contains(foo: 'bar', lol: 42).__matches(foo: 'bar', baz: 42) == false
+    Then -> @matchers.contains(lol: {deep: [4,2]}).__matches(lol: {deep: [4,2], other: "stuff"}) == true
+    Then -> @matchers.contains('bar').__matches('foobarbaz') == true
+    Then -> @matchers.contains('biz').__matches('foobarbaz') == false
+    Then -> shouldThrow (=> @matchers.contains(48).__matches()), """
+      the contains() matcher only supports strings, arrays, and plain objects
+      """
+
+
+
