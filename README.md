@@ -138,7 +138,64 @@ Organize it however you like, being mindful that sprinkling in globals might sav
 on per-test setup cost, but at the expense of increased indirection for folks
 unfamiliar with the test suite's setup.
 
+## Argument matchers in `matchers`
 
-# TODO: Matchers, Etc
+The library also supports argument matchers for stubbing and verifying. While, in
+many cases it's sufficient to rely on the default deep-equality check, sometimes
+a looser specification is necessary (e.g. maybe it only matters that _some_
+number be passed to a method, or maybe we only want to verify _part_ of a large
+object was passed to another method).
+
+Some matchers are provided out of the box via the `require('testdouble').matchers`
+top-level object. You can alias any or all of these functions to globals if you
+prefer the terseness of a DSL-style, or you can use the fully-qualified paths.
+
+Here's an example usage of the provided `isA()` matcher:
+
+```
+var td = require('testdouble');
+var myTestDouble = td.create();
+
+when(myTestDouble(td.matchers.isA(String))).thenReturn("YES");
+
+myTestDouble() // undefined
+myTestDouble(5) // undefined
+myTestDouble("HI") // returns "YES"
+myTestDouble(new String("neato")) // returns "YES"
+```
+
+Matchers can also be used to relax or augment the `verify()` method, like so:
+
+```
+verify(myTestDouble(td.matchers.isA(Date)))
+```
+
+Will throw an error unless something like `myTestDouble(new Date())` was
+previously invoked.
+
+### Writing your own matcher
+
+There's nothing magical about matchers. Any object passed into a `when()` or
+`verify()` invocation that has a `__matches` function on it and returns truthy
+when it matches and falsey when it doesn't can be a matcher.
+
+Here's a naive implementation of `isA` from above (don't use this, as it's
+incomplete):
+
+``` javascript
+isA = function(type) {
+  return {
+    __matches: function(actual) {
+      return actual instanceof type;
+    }
+  };
+```
+
+This pattern—a function that takes matcher configuration which is then referenced
+via lexical scoping in the `__matches` function itself—is very common.
+Most matchers other than an `anything()` matcher will need some sort of input to
+compare against for the actual argument.
+
+## Unfinished business
 
 The rest of the stuff we'd like to do with this is a work-in-progress. See the [issues](https://github.com/testdouble/testdouble.js/issues) for more detail on where we're headed.
