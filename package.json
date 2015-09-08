@@ -9,12 +9,14 @@
     "url": "http://testdouble.com"
   },
   "config": {
+    "build_file": "dist/testdouble.js",
     "mocha_reporter": "spec"
   },
   "scripts": {
     "start": "testem",
     "test": "mocha -u mocha-gwt -R $npm_package_config_mocha_reporter --compilers coffee:coffee-script --recursive test/helper.coffee test/",
     "test:debug": "npm test -- --debug-brk",
+    "build": "browserify lib/testdouble -t coffeeify --extension=.coffee -o $npm_package_config_build_file",
     "preversion": "git pull --rebase && npm test",
     "postversion": "git push && git push --tags && npm publish"
   },
@@ -23,7 +25,9 @@
     "lodash": "^3.10.1"
   },
   "devDependencies": {
+    "browserify": "^11.0.1",
     "chai": "^3.2.0",
+    "coffeeify": "^1.1.0",
     "mocha": "^2.3.1",
     "mocha-gwt": "^0.2.0",
     "testem": "^0.9.4"
