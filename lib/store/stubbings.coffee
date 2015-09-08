@@ -1,5 +1,6 @@
 _ = require('lodash')
 store = require('./index')
+argsMatch = require('./../args-match')
 
 module.exports =
   add: (testDouble, stubbedValue, args) ->
@@ -7,7 +8,7 @@ module.exports =
 
   get: (testDouble, actualArgs) ->
     _(store.for(testDouble).stubbings).findLast (stubbing) ->
-      _.eq(stubbing.args, actualArgs)
+      argsMatch(stubbing.args, actualArgs)
     ?.stubbedValue
 
   for: (testDouble) ->

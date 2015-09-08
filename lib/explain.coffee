@@ -2,6 +2,7 @@ _ = require('lodash')
 
 callsStore = require('./store/calls')
 stubbingsStore = require('./store/stubbings')
+stringifyArgs = require('./stringify-args')
 
 module.exports = (testDouble) ->
   calls = callsStore.for(testDouble)
@@ -25,12 +26,5 @@ callDescription = (calls) ->
     desc + "\n  - called with `(#{stringifyArgs(call.args)})`."
   , "\n\nInvocations:"
 
-stringifyArgs = (args) ->
-  _(args).map (arg) ->
-    try
-      JSON.stringify(arg)
-    catch e
-      "[Circular Object]"
-  .join(", ")
 
 
