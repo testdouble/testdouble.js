@@ -11,6 +11,12 @@ describe 'when', ->
       Given -> @when(@testDouble()).thenReturn("bar")
       Then -> @testDouble() == "bar"
 
+  describe 'last-in-wins overwriting', ->
+    Given -> @testDouble = @create()
+    Given -> @when(@testDouble("something")).thenReturn("gold")
+    Given -> @when(@testDouble("something")).thenReturn("iron")
+    Then -> @testDouble("something") == "iron"
+
   describe 'conditional stubbing', ->
     Given -> @testDouble = @create()
     Given -> @when(@testDouble(1)).thenReturn("foo")
