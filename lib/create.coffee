@@ -1,7 +1,7 @@
-remembersLastInvocation = require('./when/remembers-last-invocation')
+calls = require('./store/calls')
 stubbings = require('./store/stubbings')
 
 module.exports = ->
   testDouble = (args...) -> #<-- return a test double
-    remembersLastInvocation(testDouble, args)
+    calls.log(testDouble, args, this)
     stubbings.get(testDouble, args)
