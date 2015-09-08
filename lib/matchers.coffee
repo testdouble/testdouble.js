@@ -11,3 +11,5 @@ module.exports =
         _.isBoolean(actual)
       else
         actual instanceof type
+  anything: ->
+    __matches: -> true

@@ -31,3 +31,9 @@ describe '.matchers', ->
       Then -> @matchers.isA(Object).__matches([]) == true
       Then -> @matchers.isA(Date).__matches(new Date()) == true
       Then -> @matchers.isA(Date).__matches(new Object()) == false
+
+  describe 'anything', ->
+      Then -> @matchers.anything().__matches(null) == true
+      Then -> @matchers.anything().__matches(undefined) == true
+      Then -> @matchers.anything().__matches(new Date()) == true
+      Then -> @matchers.anything().__matches(a: 'foo', b: 'bar') == true
