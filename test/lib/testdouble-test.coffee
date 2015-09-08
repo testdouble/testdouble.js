@@ -5,3 +5,4 @@ describe "testdouble.js", ->
     Then -> @subject.verify == requireSubject('lib/verify')
     Then -> @subject.create == requireSubject('lib/create')
     Then -> @subject.matchers == requireSubject('lib/matchers')
+    Then -> @subject.explain == requireSubject('lib/explain')

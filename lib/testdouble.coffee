@@ -3,3 +3,4 @@ module.exports =
   when: require('./when')
   verify: require('./verify')
   matchers: require('./matchers')
+  explain: require('./explain')
