@@ -34,6 +34,16 @@ describe '.verify', ->
     When -> @result = (shouldThrow => @verify(@testDouble()))
     Then -> expect(@result).to.contain("verification on test double `#footime`.")
 
+  context 'with a prototype-modeling double', ->
+    Given -> @SomeType = `function Foo() {}`
+    Given -> @SomeType::bar = ->
+    Given -> @SomeType::baz = ->
+    Given -> @SomeType::biz = "not a function!"
+    Given -> @testDoubleObj = @create(@SomeType)
+    When -> @result = (shouldThrow => @verify(@testDoubleObj.baz()))
+    Then -> expect(@result).to.contain("verification on test double `Foo#baz`.")
+    Then -> @testDoubleObj.biz == "not a function!"
+
   context 'a double-free verification error', ->
     Then -> shouldThrow (=> @verify()), """
       No test double invocation detected for `verify()`.
