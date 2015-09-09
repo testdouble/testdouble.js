@@ -16,17 +16,58 @@ At the moment, the library is only published to npm as a normal CommonJS module.
 If you'd like to use this for browser tests, please use Browserify or consider
 sending a pull request for [this issue](https://github.com/testdouble/testdouble.js/issues/10)
 
-## Stub with `when()`
+## Create with `create()`
 
-To stub with testdouble.js, first require it:
+The easiest way to create a test double function is to make one anonymously:
 
 ```
 var td = require('testdouble');
+var myTestDouble = td.create();
 ```
 
-Create a test double with the `create` function:
+In the above, `myTestDouble` will be able to be stubbed or verified as shown below.
+
+### Naming your test double
+
+For slightly easier-to-understand error messages (with the trade-off of greater
+redundancy in your tests), you can supply a string name to `create`
 
 ```
+var myNamedDouble = td.create("#foo");
+```
+
+All error messages and descriptions provided for the above `myNamedDouble` will
+also print the name `#foo`.
+
+### Creating test doubles for an entire type
+
+It's very typical that the code under test will depend not only on a single
+function, but on an object type that's full of them.
+
+Suppose your subject has a dependency:
+
+``` javascript
+function Dog() {};
+Dog.prototype.bark = function(){};
+Dog.prototype.bite = function(){};
+```
+
+Then you can create a test double of `Dog` with:
+
+``` javascript
+var myDogDouble = td.create(Dog)
+```
+
+This will return a plain object with `bark` and `byte` test double functions,
+ready to be stubbed or verified and named `"Dog#bark"` and `"Dog#bite"`,
+respectively.
+
+## Stub with `when()`
+
+To stub values with testdouble.js, first create one:
+
+```
+var td = require('testdouble');
 myTestDouble = td.create();
 ```
 
