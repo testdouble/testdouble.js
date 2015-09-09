@@ -16,10 +16,13 @@
     "start": "testem",
     "test": "mocha -u mocha-gwt -R $npm_package_config_mocha_reporter --compilers coffee:coffee-script --recursive test/helper.coffee test/",
     "test:debug": "npm test -- --debug-brk",
-    "build": "browserify lib/testdouble -t coffeeify --extension=.coffee -o $npm_package_config_build_file",
+    "build": "browserify lib/testdouble --extension=.coffee -o $npm_package_config_build_file",
     "audit:disc": "npm run build -- --full-paths && discify $npm_package_config_build_file --open",
     "preversion": "git pull --rebase && npm test",
     "postversion": "git push && git push --tags && npm publish"
+  },
+  "browserify": {
+    "transform": [ "coffeeify" ]
   },
   "dependencies": {
     "coffee-script": "^1.10.0",
