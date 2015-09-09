@@ -17,7 +17,7 @@ module.exports = (testDouble) ->
 stubbingDescription = (stubs) ->
   return "" if stubs.length == 0
   _.reduce stubs, (desc, stub) ->
-    desc + "\n  - when called with `(#{stringifyArgs(stub.args)})`, then return `#{stub.stubbedValue}`."
+    desc + "\n  - when called with `(#{stringifyArgs(stub.args)})`, then return `#{stringifyArgs(stub.stubbedValues)}`."
   , "\n\nStubbings:"
 
 callDescription = (calls) ->

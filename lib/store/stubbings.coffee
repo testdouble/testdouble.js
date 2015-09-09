@@ -3,13 +3,13 @@ store = require('./index')
 argsMatch = require('./../args-match')
 
 module.exports =
-  add: (testDouble, stubbedValue, args) ->
-    store.for(testDouble).stubbings.push({stubbedValue, args})
+  add: (testDouble, args, stubbedValues) ->
+    store.for(testDouble).stubbings.push({stubbedValues, args})
 
   get: (testDouble, actualArgs) ->
     _(store.for(testDouble).stubbings).findLast (stubbing) ->
       argsMatch(stubbing.args, actualArgs)
-    ?.stubbedValue
+    ?.stubbedValues[0]
 
   for: (testDouble) ->
     store.for(testDouble).stubbings
