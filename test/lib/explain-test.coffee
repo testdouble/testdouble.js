@@ -14,6 +14,12 @@ describe '.explain', ->
       This test double has 0 stubbings and 0 invocations.
       """
 
+  context 'a named test double', ->
+    Given -> @testDouble = @create("foobaby")
+    Then -> expect(@result.description).to.deep.eq """
+      This test double `foobaby` has 0 stubbings and 0 invocations.
+      """
+
   context 'a double with some interactions', ->
     Given -> @when(@testDouble(88)).thenReturn(5)
     Given -> @when(@testDouble("two things!")).thenReturn("woah", "such")

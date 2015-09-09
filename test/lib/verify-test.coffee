@@ -9,7 +9,7 @@ describe '.verify', ->
 
   context 'an unsatisfied verification - no interactions', ->
     Then -> shouldThrow (=> @verify(@testDouble("WOAH"))), """
-      Unsatisfied test double verification.
+      Unsatisfied verification on test double.
 
         Wanted:
           - called with `("WOAH")`.
@@ -20,7 +20,7 @@ describe '.verify', ->
   context 'unsatisfied verify - other interactions', ->
     When -> @testDouble("the wrong WOAH")
     Then -> shouldThrow (=> @verify(@testDouble("WOAH"))), """
-      Unsatisfied test double verification.
+      Unsatisfied verification on test double.
 
         Wanted:
           - called with `("WOAH")`.
@@ -29,9 +29,14 @@ describe '.verify', ->
           - called with `("the wrong WOAH")`.
       """
 
-  context 'a double-free verification', ->
+  context 'with a named double', ->
+    Given -> @testDouble = @create("#footime")
+    When -> @result = (shouldThrow => @verify(@testDouble()))
+    Then -> expect(@result).to.contain("verification on test double `#footime`.")
+
+  context 'a double-free verification error', ->
     Then -> shouldThrow (=> @verify()), """
-      No test double invocation call detected for `verify()`.
+      No test double invocation detected for `verify()`.
 
         Usage:
           verify(myTestDouble('foo'))
