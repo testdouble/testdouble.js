@@ -45,3 +45,10 @@ describe 'when', ->
     Then -> @testDouble(44, 5) == undefined
     Then -> @testDouble(88, "five") == undefined
 
+  describe 'stubbing sequential returns', ->
+    Given -> @testDouble = @create()
+    Given -> @when(@testDouble()).thenReturn(10,9)
+    When -> [@first, @second, @third] = [@testDouble(), @testDouble(), @testDouble()]
+    Then -> @first == 10
+    Then -> @second == 9
+    Then -> @third == 9 #<-- last one repeats

@@ -2,9 +2,9 @@ calls = require('./store/calls')
 stubbings = require('./store/stubbings')
 
 module.exports = ->
-  thenReturn: (stubbedValue) ->
+  thenReturn: (stubbedValues...) ->
     if last = calls.pop()
-      stubbings.add(last.testDouble, stubbedValue, last.args)
+      stubbings.add(last.testDouble, last.args, stubbedValues)
       last.testDouble
     else
       throw new Error """

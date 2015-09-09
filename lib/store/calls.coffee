@@ -16,9 +16,11 @@ module.exports =
       store.for(call.testDouble).calls.pop() if call?
 
   wasInvoked: (testDouble, args) ->
-    _.any store.for(testDouble).calls, (call) ->
-      argsMatch(args, call.args)
+    this.where(testDouble, args).length > 0
 
+  where: (testDouble, args) ->
+    _.select store.for(testDouble).calls, (call) ->
+      argsMatch(args, call.args)
 
   for: (testDouble) ->
     store.for(testDouble).calls

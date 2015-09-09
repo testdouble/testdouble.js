@@ -16,6 +16,7 @@ describe '.explain', ->
 
   context 'a double with some interactions', ->
     Given -> @when(@testDouble(88)).thenReturn(5)
+    Given -> @when(@testDouble("two things!")).thenReturn("woah", "such")
     Given -> @testDouble(88)
     Given -> @testDouble("not 88", 44)
 
@@ -26,10 +27,11 @@ describe '.explain', ->
       ]
       callCount: 2
       description: """
-      This test double has 1 stubbings and 2 invocations.
+      This test double has 2 stubbings and 2 invocations.
 
       Stubbings:
         - when called with `(88)`, then return `5`.
+        - when called with `("two things!")`, then return `"woah"`, then `"such"`.
 
       Invocations:
         - called with `(88)`.
