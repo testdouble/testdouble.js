@@ -7,14 +7,16 @@ global.xThen = ->
 global.shouldNotThrow = (func) ->
   func()
 
-global.shouldThrow = (func, message) ->
+global.shouldThrow = (func, expectedMessage) ->
   threw = null
+  actualMessage = null
   try
     func()
     threw = false
   catch e
-    expect(e.message).to.eq(message) if message?
+    actualMessage = e.message
+    expect(actualMessage).to.eq(expectedMessage) if expectedMessage?
     threw = true
   expect(threw, "Expected function to throw an error").to.be.true
-
+  actualMessage
 
