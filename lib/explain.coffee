@@ -1,5 +1,6 @@
 _ = require('lodash')
 
+store = require('./store')
 callsStore = require('./store/calls')
 stubbingsStore = require('./store/stubbings')
 stringifyArgs = require('./stringify-args')
@@ -11,7 +12,7 @@ module.exports = (testDouble) ->
   callCount: calls.length
   calls: calls
   description: """
-  This test double has #{stubs.length} stubbings and #{calls.length} invocations.
+  This test double #{stringifyName(testDouble)}has #{stubs.length} stubbings and #{calls.length} invocations.
   """ + stubbingDescription(stubs) + callDescription(calls)
 
 stubbingDescription = (stubs) ->
@@ -26,4 +27,8 @@ callDescription = (calls) ->
     desc + "\n  - called with `(#{stringifyArgs(call.args)})`."
   , "\n\nInvocations:"
 
-
+stringifyName = (testDouble) ->
+  if name = store.for(testDouble).name
+    "`#{name}` "
+  else
+    ""
