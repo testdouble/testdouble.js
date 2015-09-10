@@ -8,6 +8,8 @@
     "email": "justin@testdouble.com",
     "url": "http://testdouble.com"
   },
+  "main": "index.js",
+  "browser": "lib/testdouble.coffee",
   "config": {
     "build_file": "dist/testdouble.js",
     "mocha_reporter": "spec"
@@ -16,7 +18,7 @@
     "start": "testem",
     "test": "mocha -u mocha-gwt -R $npm_package_config_mocha_reporter --compilers coffee:coffee-script --recursive test/helper.coffee test/",
     "test:debug": "npm test -- --debug-brk",
-    "build": "browserify lib/testdouble --extension=.coffee -o $npm_package_config_build_file",
+    "build": "browserify . --extension=.coffee -o $npm_package_config_build_file",
     "audit:disc": "npm run build -- --full-paths && discify $npm_package_config_build_file --open",
     "preversion": "git pull --rebase && npm test",
     "postversion": "git push && git push --tags && npm publish"
