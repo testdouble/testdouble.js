@@ -20,7 +20,7 @@ sending a pull request for [this issue](https://github.com/testdouble/testdouble
 
 The easiest way to create a test double function is to make one anonymously:
 
-```
+``` javascript
 var td = require('testdouble');
 var myTestDouble = td.create();
 ```
@@ -32,7 +32,7 @@ In the above, `myTestDouble` will be able to be stubbed or verified as shown bel
 For slightly easier-to-understand error messages (with the trade-off of greater
 redundancy in your tests), you can supply a string name to `create`
 
-```
+``` javascript
 var myNamedDouble = td.create("#foo");
 ```
 
@@ -66,14 +66,14 @@ respectively.
 
 To stub values with testdouble.js, first create one:
 
-```
+``` javascript
 var td = require('testdouble');
 myTestDouble = td.create();
 ```
 
 You can stub a no-arg invocation like so:
 
-```
+``` javascript
 td.when(myTestDouble()).thenReturn("HEY");
 
 myTestDouble(); // returns "HEY"
@@ -81,7 +81,7 @@ myTestDouble(); // returns "HEY"
 
 You can stub a specific set of args (performs lodash's `_.isEqual` on each) with:
 
-```
+``` javascript
 td.when(myTestDouble('a', 5, {foo: 'bar'})).thenReturn("YES");
 
 myTestDouble('a', 5, {foo: 'bar'}); // returns "YES"
@@ -102,7 +102,7 @@ you can use the `verify` function.
 
 First, create a test double:
 
-```
+``` javascript
 var td = require('testdouble');
 var myTestDouble = td.create();
 ```
@@ -110,7 +110,7 @@ var myTestDouble = td.create();
 Now, suppose you've passed this function into your [subject](https://github.com/testdouble/contributing-tests/wiki/Subject)
 and you want to verify that it was called with the arguments `("foo", 5)`:
 
-```
+``` javascript
 subject.callTheThingThatShouldBeInvokingMyTestDouble()
 
 td.verify(myTestDouble("foo", 5))
@@ -146,7 +146,7 @@ You can see the built-in matchers in the [source](https://github.com/testdouble/
 
 Here's an example usage of the provided `isA()` matcher:
 
-```
+``` javascript
 var td = require('testdouble');
 var myTestDouble = td.create();
 
@@ -160,7 +160,7 @@ myTestDouble(new String("neato")) // returns "YES"
 
 Matchers can also be used to relax or augment the `verify()` method, like so:
 
-```
+``` javascript
 verify(myTestDouble(td.matchers.isA(Date)))
 ```
 
@@ -223,13 +223,13 @@ you may choose to make a few of the top-level functions global in a test helper
 
 Perhaps you want to keep everything namespaced under `td` for short:
 
-```
+``` javascript
 global.td = require('testdouble');
 ```
 
 Or, you might prefer to plop the methods directly on the global:
 
-```
+``` javascript
 global.double = require('testdouble').create;
 global.when = require('testdouble').when;
 global.verify = require('testdouble').verify;
