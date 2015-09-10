@@ -8,9 +8,13 @@
     "email": "justin@testdouble.com",
     "url": "http://testdouble.com"
   },
+  "config": {
+    "mocha_reporter": "spec"
+  },
   "scripts": {
-    "test": "mocha --ui mocha-gwt --recursive --require coffee-script --compilers coffee:coffee-script/register 'test/helper.coffee' 'test/'",
-    "test-debug": "mocha --debug-brk --ui mocha-gwt --recursive --require coffee-script --compilers coffee:coffee-script/register 'test/helper.coffee' 'test/'",
+    "start": "testem",
+    "test": "mocha -u mocha-gwt -R $npm_package_config_mocha_reporter --compilers coffee:coffee-script --recursive test/helper.coffee test/",
+    "test:debug": "npm test -- --debug-brk",
     "preversion": "git pull --rebase && npm test",
     "postversion": "git push && git push --tags && npm publish"
   },
@@ -20,10 +24,9 @@
   },
   "devDependencies": {
     "chai": "^3.2.0",
-    "grunt": "~0.4.2",
     "mocha": "^2.3.1",
     "mocha-gwt": "^0.2.0",
-    "testem": "~0.6.15"
+    "testem": "^0.9.4"
   },
   "keywords": [
     "tdd",
