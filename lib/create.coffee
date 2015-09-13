@@ -11,7 +11,11 @@ module.exports = (nameOrType) ->
 
 createTestDouble = (name) ->
   _.tap createTestDoubleFunction(), (testDouble) ->
-    if name? then store.for(testDouble).name = name
+    if name?
+      store.for(testDouble).name = name
+      testDouble.toString = -> "[test double for \"#{name}\"]"
+    else
+      testDouble.toString = -> "[test double (unnamed)]"
 
 createTestDoubleFunction = ->
   testDouble = (args...) ->

@@ -44,6 +44,18 @@ describe '.verify', ->
     Then -> expect(@result).to.contain("verification on test double `Foo#baz`.")
     Then -> @testDoubleObj.biz == "not a function!"
 
+  context 'with a test double *as an arg* to another', ->
+    Given -> @testDouble = @create()
+    When -> @result = (shouldThrow => @verify(@testDouble(@someTestDoubleArg)))
+
+    context 'with an unnamed double _as an arg_', ->
+      Given -> @someTestDoubleArg = @create()
+      Then -> expect(@result).to.contain("- called with `([test double (unnamed)])`.")
+
+    context 'with a named double _as an arg_', ->
+      Given -> @someTestDoubleArg = @create("#foo")
+      Then -> expect(@result).to.contain("- called with `([test double for \"#foo\"])`.")
+
   context 'a double-free verification error', ->
     Then -> shouldThrow (=> @verify()), """
       No test double invocation detected for `verify()`.

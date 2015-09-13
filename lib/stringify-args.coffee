@@ -7,6 +7,6 @@ module.exports = (args, joiner = ", ", wrapper = "") ->
 
 stringifyArg = (arg) ->
   try
-    JSON.stringify(arg)
+    JSON.stringify(arg) || arg?.toString?()
   catch e
     "[Circular Object]"
