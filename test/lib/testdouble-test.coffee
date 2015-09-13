@@ -1,5 +1,5 @@
 describe "testdouble.js", ->
-  Given -> @subject = requireSubject('lib/testdouble')
+  Given -> @subject = requireSubject()
   describe "where all the functions are", ->
     Then -> @subject.when == requireSubject('lib/when')
     Then -> @subject.verify == requireSubject('lib/verify')

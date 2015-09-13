@@ -16,7 +16,7 @@
   },
   "scripts": {
     "start": "testem",
-    "test": "mocha -u mocha-gwt -R $npm_package_config_mocha_reporter --compilers coffee:coffee-script --recursive test/helper.coffee test/",
+    "test": "mocha -u mocha-gwt -R $npm_package_config_mocha_reporter --compilers coffee:coffee-script --recursive test/node-helper.coffee test/general-helper.coffee test/",
     "test:debug": "npm test -- --debug-brk",
     "build": "browserify . --extension=.coffee -o $npm_package_config_build_file",
     "audit:disc": "npm run build -- --full-paths && discify $npm_package_config_build_file --open",

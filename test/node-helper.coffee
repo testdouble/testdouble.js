@@ -1,6 +1,16 @@
+global.testdouble = require('./../lib/testdouble')
+global._ = require('lodash')
 global.expect = require('chai').expect
+
+# Stuff to pull into the common-helper
 global.context = describe
-global.requireSubject = (path) -> require("#{process.cwd()}/#{path}")
+global.requireSubject = (path) ->
+  return testdouble unless path?
+  [lib, pathComponents...] = path.split('/')
+  _.reduce pathComponents, (memo, nextProp) ->
+    console.log "HEYY", testdouble, "memo:", memo, "next:", nextProp
+    memo[nextProp]
+  , testdouble
 
 global.xThen = ->
 
