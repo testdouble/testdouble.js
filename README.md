@@ -8,13 +8,15 @@ If you need a robust test double library that's designed to cover every possible
 
 ## Install
 
+### Node.js
+
 ```
 npm install testdouble --save-dev
 ```
 
-At the moment, the library is only published to npm as a normal CommonJS module.
-If you'd like to use this for browser tests, please use Browserify or consider
-sending a pull request for [this issue](https://github.com/testdouble/testdouble.js/issues/10)
+### Browsers
+
+The most-recent release is persisted in git at `dist/testdouble.js`. You can download it [here](https://raw.githubusercontent.com/testdouble/testdouble.js/master/dist/testdouble.js). The library will set the global `window.testdouble`.
 
 ## Create with `create()`
 
