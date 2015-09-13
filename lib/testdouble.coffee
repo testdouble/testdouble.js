@@ -4,3 +4,4 @@ module.exports =
   verify: require('./verify')
   matchers: require('./matchers')
   explain: require('./explain')
+  version: require('../package.json').version
