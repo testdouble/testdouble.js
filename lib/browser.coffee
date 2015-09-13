@@ -1,0 +1,1 @@
+window.testdouble = require('./testdouble')

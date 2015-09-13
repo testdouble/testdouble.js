@@ -1,6 +1,11 @@
-global.expect = require('chai').expect
+global.expect = chai.expect
 global.context = describe
-global.requireSubject = (path) -> require("#{process.cwd()}/#{path}")
+global.requireSubject = (path) ->
+  return testdouble unless path?
+  [lib, pathComponents...] = path.split('/')
+  _.reduce pathComponents, (memo, nextProp) ->
+    memo[nextProp]
+  , testdouble
 
 global.xThen = ->
 
