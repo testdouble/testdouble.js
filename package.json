@@ -16,7 +16,7 @@
   },
   "scripts": {
     "start": "testem",
-    "test": "mocha -u mocha-given -R $npm_package_config_mocha_reporter --compilers coffee:coffee-script --recursive test/node-helper.coffee test/general-helper.coffee test/lib",
+    "test": "mocha -u mocha-given -R $npm_package_config_mocha_reporter --compilers coffee:coffee-script --recursive test/node-helper.coffee test/lib",
     "test:ci": "npm run test && testem ci",
     "test:debug": "npm test -- --debug-brk",
     "build": "browserify . -s testdouble --extension=.coffee -o $npm_package_config_build_file",
