@@ -13,7 +13,7 @@ module.exports = {
 
   framework: 'mocha+chai',
 
-  before_tests: "mkdir -p tmp && npm run build --testdouble:build_file=tmp/subject.js && coffee -o tmp/browser-test-coffee/ test/",
+  before_tests: "mkdir -p tmp && npm run build --testdouble:build_file=tmp/subject.js && npm run build:tests",
   //might want to add this if you do a lot of file-delete/add churn; faster w/o.
   //after_tests: "rm -rf tmp/browser-test-coffee; rm tmp/subject.js",
 
