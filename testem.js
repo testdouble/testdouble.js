@@ -18,7 +18,6 @@ module.exports = {
   test_page: ".browser-testem-view.mustache",
   serve_files: [
     "test/browser-vendor/**/*.js",
-    "tmp/browser-test-coffee/browser-helper.js",
     "tmp/browser-test-coffee/general-helper.js",
     "tmp/browser-test-coffee/lib/**/*.js"
   ],
