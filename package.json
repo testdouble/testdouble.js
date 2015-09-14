@@ -9,7 +9,7 @@
     "url": "http://testdouble.com"
   },
   "main": "index.js",
-  "browser": "lib/browser.coffee",
+  "browser": "lib/testdouble.coffee",
   "config": {
     "build_file": "dist/testdouble.js",
     "mocha_reporter": "spec"
