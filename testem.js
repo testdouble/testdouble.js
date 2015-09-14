@@ -11,7 +11,7 @@ module.exports = {
     }
   },
 
-  before_tests: "mkdir -p tmp && browserify . --extension=.coffee -o tmp/subject.js && coffee -o tmp/browser-test-coffee/ test/",
+  before_tests: "mkdir -p tmp && npm run build && coffee -o tmp/browser-test-coffee/ test/",
   //might want to add this if you do a lot of file-delete/add churn; faster w/o.
   //after_tests: "rm -rf tmp/browser-test-coffee; rm tmp/subject.js",
 
@@ -19,7 +19,8 @@ module.exports = {
   serve_files: [
     "test/browser-vendor/**/*.js",
     "tmp/browser-test-coffee/general-helper.js",
-    "tmp/browser-test-coffee/lib/**/*.js"
+    "tmp/browser-test-coffee/lib/**/*.js",
+    process.env.npm_package_config_build_file
   ],
   watch_files: [
     "lib/**/*",
