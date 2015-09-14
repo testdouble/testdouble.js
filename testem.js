@@ -20,6 +20,7 @@ module.exports = {
   serve_files: [
     "test/browser-vendor/**/*.js",
     "node_modules/lodash/index.js",
+    "node_modules/mocha-given/browser/mocha-given.js",
     "tmp/browser-test-coffee/general-helper.js",
     "tmp/browser-test-coffee/lib/**/*.js",
     pkg.config.build_file
