@@ -1,5 +1,4 @@
 global.expect = chai.expect
-global.context = describe
 global.requireSubject = (path) ->
   return testdouble unless path?
   [lib, pathComponents...] = path.split('/')
@@ -24,4 +23,3 @@ global.shouldThrow = (func, expectedMessage) ->
     threw = true
   expect(threw, "Expected function to throw an error").to.be.true
   actualMessage
-

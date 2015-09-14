@@ -1,1 +1,1 @@
-window.global = window
+mocha.setup('mocha-given')

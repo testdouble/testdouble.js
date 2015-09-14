@@ -11,17 +11,28 @@ module.exports = {
     }
   },
 
-  before_tests: "mkdir -p tmp && $(npm bin)/browserify . --extension=.coffee -o tmp/subject.js && $(npm bin)/coffee -o tmp/browser-test-coffee/ test/",
+  framework: 'mocha+chai',
+
+  before_tests: "mkdir -p tmp && npm run build --testdouble:build_file=tmp/subject.js && npm run build:tests",
   //might want to add this if you do a lot of file-delete/add churn; faster w/o.
   //after_tests: "rm -rf tmp/browser-test-coffee; rm tmp/subject.js",
 
-  test_page: ".browser-testem-view.mustache",
   serve_files: [
-    "test/browser-vendor/**/*.js",
-    "tmp/browser-test-coffee/browser-helper.js",
+    // subject
+    "tmp/subject.js",
+
+    // vendor helpers
+    "node_modules/lodash/index.js",
+    "node_modules/mocha-given/browser/mocha-given.js",
+
+    // test helpers
     "tmp/browser-test-coffee/general-helper.js",
+    "tmp/browser-test-coffee/browser-helper.js",
+
+    // tests
     "tmp/browser-test-coffee/lib/**/*.js"
   ],
+
   watch_files: [
     "lib/**/*",
     "test/**/*"
