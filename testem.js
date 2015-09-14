@@ -18,13 +18,21 @@ module.exports = {
 
   test_page: ".browser-testem-view.mustache",
   serve_files: [
-    "test/browser-vendor/**/*.js",
+    // subject
+    pkg.config.build_file,
+
+    // vendor helpers
     "node_modules/lodash/index.js",
     "node_modules/mocha-given/browser/mocha-given.js",
+
+    // test helpers
     "tmp/browser-test-coffee/general-helper.js",
-    "tmp/browser-test-coffee/lib/**/*.js",
-    pkg.config.build_file
+    "tmp/browser-test-coffee/browser-helper.js",
+
+    // tests
+    "tmp/browser-test-coffee/lib/**/*.js"
   ],
+
   watch_files: [
     "lib/**/*",
     "test/**/*"
