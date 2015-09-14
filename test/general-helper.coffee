@@ -1,5 +1,4 @@
 global.expect = chai.expect
-global.context = describe
 global.requireSubject = (path) ->
   return testdouble unless path?
   [lib, pathComponents...] = path.split('/')
