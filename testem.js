@@ -1,3 +1,4 @@
+var pkg = require('./package.json');
 browserLauncher = process.env['TESTEM_BROWSER'] || 'phantomjs';
 
 module.exports = {
@@ -20,7 +21,7 @@ module.exports = {
     "test/browser-vendor/**/*.js",
     "tmp/browser-test-coffee/general-helper.js",
     "tmp/browser-test-coffee/lib/**/*.js",
-    process.env.npm_package_config_build_file
+    pkg.config.build_file
   ],
   watch_files: [
     "lib/**/*",
