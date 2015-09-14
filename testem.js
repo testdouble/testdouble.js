@@ -16,7 +16,7 @@ module.exports = {
   //after_tests: "rm -rf tmp/browser-test-coffee; rm tmp/subject.js",
 
   test_page: ".browser-testem-view.mustache",
-  src_files: [
+  serve_files: [
     "test/browser-vendor/**/*.js",
     "tmp/browser-test-coffee/browser-helper.js",
     "tmp/browser-test-coffee/general-helper.js",
