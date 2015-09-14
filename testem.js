@@ -12,11 +12,12 @@ module.exports = {
     }
   },
 
+  framework: 'mocha+chai',
+
   before_tests: "mkdir -p tmp && npm run build && coffee -o tmp/browser-test-coffee/ test/",
   //might want to add this if you do a lot of file-delete/add churn; faster w/o.
   //after_tests: "rm -rf tmp/browser-test-coffee; rm tmp/subject.js",
 
-  test_page: ".browser-testem-view.mustache",
   serve_files: [
     // subject
     pkg.config.build_file,
