@@ -19,6 +19,7 @@ module.exports = {
   test_page: ".browser-testem-view.mustache",
   serve_files: [
     "test/browser-vendor/**/*.js",
+    "node_modules/lodash/index.js",
     "tmp/browser-test-coffee/general-helper.js",
     "tmp/browser-test-coffee/lib/**/*.js",
     pkg.config.build_file
