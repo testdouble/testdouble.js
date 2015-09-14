@@ -23,4 +23,3 @@ global.shouldThrow = (func, expectedMessage) ->
     threw = true
   expect(threw, "Expected function to throw an error").to.be.true
   actualMessage
-
