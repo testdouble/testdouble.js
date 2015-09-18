@@ -6,3 +6,4 @@ describe "testdouble.js", ->
     Then -> @subject.create == requireSubject('lib/create')
     Then -> @subject.matchers == requireSubject('lib/matchers')
     Then -> @subject.explain == requireSubject('lib/explain')
+    Then -> !!@subject.version.match(/\d+\.\d+\.\d+/)
