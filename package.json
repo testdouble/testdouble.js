@@ -8,8 +8,7 @@
     "email": "justin@testdouble.com",
     "url": "http://testdouble.com"
   },
-  "main": "index.js",
-  "browser": "lib/testdouble.coffee",
+  "main": "lib/testdouble.js",
   "config": {
     "build_file": "dist/testdouble.js",
     "mocha_reporter": "spec"
@@ -20,7 +19,7 @@
     "test:ci": "npm run test && testem ci",
     "test:debug": "npm test -- --debug-brk",
     "compile": "coffee -co lib lib",
-    "build": "browserify . -s testdouble --extension=.coffee -o $npm_package_config_build_file",
+    "build": "browserify . -s testdouble -o $npm_package_config_build_file",
     "build:tests": "coffee -o tmp/browser-test-coffee/ test/",
     "clean": "rm -rf tmp/ dist/* && git checkout -- dist",
     "audit:disc": "npm run build -- --full-paths && discify $npm_package_config_build_file --open",
@@ -30,7 +29,6 @@
   },
   "browserify": {
     "transform": [
-      "coffeeify",
       "envify",
       "unreachable-branch-transform"
     ]
@@ -42,7 +40,6 @@
   "devDependencies": {
     "browserify": "^11.0.1",
     "chai": "^3.2.0",
-    "coffeeify": "^1.1.0",
     "disc": "^1.3.2",
     "envify": "^3.4.0",
     "mocha": "^2.3.1",
