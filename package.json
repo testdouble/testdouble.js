@@ -19,6 +19,7 @@
     "test": "mocha -u mocha-given -R $npm_package_config_mocha_reporter --compilers coffee:coffee-script --recursive test/node-helper.coffee test/lib",
     "test:ci": "npm run test && testem ci",
     "test:debug": "npm test -- --debug-brk",
+    "compile": "coffee -co lib lib",
     "build": "browserify . -s testdouble --extension=.coffee -o $npm_package_config_build_file",
     "build:tests": "coffee -o tmp/browser-test-coffee/ test/",
     "clean": "rm -rf tmp/ dist/* && git checkout -- dist",
