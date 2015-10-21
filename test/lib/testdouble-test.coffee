@@ -6,4 +6,6 @@ describe "testdouble.js", ->
     Then -> @subject.create == requireSubject('lib/create')
     Then -> @subject.matchers == requireSubject('lib/matchers')
     Then -> @subject.explain == requireSubject('lib/explain')
+    # This test is a farse because requireSubject no longer calls require
+    # Then -> @subject.reset == requireSubject('lib/store').reset
     Then -> !!@subject.version.match(/\d+\.\d+\.\d+/)
