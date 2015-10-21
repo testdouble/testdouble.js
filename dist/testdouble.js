@@ -1,4 +1,4 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.testdouble = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 var _;
 
 _ = require('lodash');
@@ -22,7 +22,7 @@ module.exports = function(expectedArgs, actualArgs) {
 };
 
 
-},{"lodash":12}],2:[function(require,module,exports){
+},{"lodash":11}],2:[function(require,module,exports){
 var _, calls, createTestDouble, createTestDoubleFunction, createTestDoublesForEntireType, store, stubbings,
   slice = [].slice;
 
@@ -45,7 +45,14 @@ module.exports = function(nameOrType) {
 createTestDouble = function(name) {
   return _.tap(createTestDoubleFunction(), function(testDouble) {
     if (name != null) {
-      return store["for"](testDouble).name = name;
+      store["for"](testDouble).name = name;
+      return testDouble.toString = function() {
+        return "[test double for \"" + name + "\"]";
+      };
+    } else {
+      return testDouble.toString = function() {
+        return "[test double (unnamed)]";
+      };
     }
   });
 };
@@ -68,7 +75,7 @@ createTestDoublesForEntireType = function(type) {
 };
 
 
-},{"./store":6,"./store/calls":5,"./store/stubbings":7,"lodash":12}],3:[function(require,module,exports){
+},{"./store":6,"./store/calls":5,"./store/stubbings":7,"lodash":11}],3:[function(require,module,exports){
 var _, callDescription, callsStore, store, stringifyArgs, stringifyName, stubbingDescription, stubbingsStore;
 
 _ = require('lodash');
@@ -120,7 +127,7 @@ stringifyName = function(testDouble) {
 };
 
 
-},{"./store":6,"./store/calls":5,"./store/stubbings":7,"./stringify-args":8,"lodash":12}],4:[function(require,module,exports){
+},{"./store":6,"./store/calls":5,"./store/stubbings":7,"./stringify-args":8,"lodash":11}],4:[function(require,module,exports){
 var _,
   slice = [].slice;
 
@@ -189,7 +196,7 @@ module.exports = {
 };
 
 
-},{"lodash":12}],5:[function(require,module,exports){
+},{"lodash":11}],5:[function(require,module,exports){
 var _, argsMatch, lastCall, store;
 
 _ = require('lodash');
@@ -235,7 +242,7 @@ module.exports = {
 };
 
 
-},{"./../args-match":1,"./index":6,"lodash":12}],6:[function(require,module,exports){
+},{"./../args-match":1,"./index":6,"lodash":11}],6:[function(require,module,exports){
 var _, globalStore, initialEntryFor;
 
 _ = require('lodash');
@@ -269,7 +276,7 @@ initialEntryFor = function(testDouble) {
 };
 
 
-},{"lodash":12}],7:[function(require,module,exports){
+},{"lodash":11}],7:[function(require,module,exports){
 var _, argsMatch, callsStore, store, stubbingFor;
 
 _ = require('lodash');
@@ -311,7 +318,7 @@ stubbingFor = function(testDouble, actualArgs) {
 };
 
 
-},{"./../args-match":1,"./calls":5,"./index":6,"lodash":12}],8:[function(require,module,exports){
+},{"./../args-match":1,"./calls":5,"./index":6,"lodash":11}],8:[function(require,module,exports){
 var _, stringifyArg;
 
 _ = require('lodash');
@@ -331,7 +338,7 @@ module.exports = function(args, joiner, wrapper) {
 stringifyArg = function(arg) {
   var e, error;
   try {
-    return JSON.stringify(arg);
+    return JSON.stringify(arg) || (arg != null ? typeof arg.toString === "function" ? arg.toString() : void 0 : void 0);
   } catch (error) {
     e = error;
     return "[Circular Object]";
@@ -339,17 +346,7 @@ stringifyArg = function(arg) {
 };
 
 
-},{"lodash":12}],9:[function(require,module,exports){
-module.exports = {
-  create: require('./create'),
-  when: require('./when'),
-  verify: require('./verify'),
-  matchers: require('./matchers'),
-  explain: require('./explain')
-};
-
-
-},{"./create":2,"./explain":3,"./matchers":4,"./verify":10,"./when":11}],10:[function(require,module,exports){
+},{"lodash":11}],9:[function(require,module,exports){
 var _, callsStore, invocationSummary, store, stringifyArgs, stringifyName, unsatisfiedErrorMessage;
 
 _ = require('lodash');
@@ -399,7 +396,7 @@ stringifyName = function(testDouble) {
 };
 
 
-},{"./store":6,"./store/calls":5,"./stringify-args":8,"lodash":12}],11:[function(require,module,exports){
+},{"./store":6,"./store/calls":5,"./stringify-args":8,"lodash":11}],10:[function(require,module,exports){
 var calls, stubbings,
   slice = [].slice;
 
@@ -423,7 +420,7 @@ module.exports = function() {
 };
 
 
-},{"./store/calls":5,"./store/stubbings":7}],12:[function(require,module,exports){
+},{"./store/calls":5,"./store/stubbings":7}],11:[function(require,module,exports){
 (function (global){
 /**
  * @license
@@ -12778,8 +12775,17 @@ module.exports = function() {
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],13:[function(require,module,exports){
-window.testdouble = require('./testdouble');
+},{}],12:[function(require,module,exports){
+module.exports = {
+  create: require('./create'),
+  when: require('./when'),
+  verify: require('./verify'),
+  matchers: require('./matchers'),
+  explain: require('./explain'),
+  reset: require('./store').reset,
+  version: "0.3.0"
+};
 
 
-},{"./testdouble":9}]},{},[13]);
+},{"./create":2,"./explain":3,"./matchers":4,"./store":6,"./verify":9,"./when":10}]},{},[12])(12)
+});
