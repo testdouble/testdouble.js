@@ -86,6 +86,26 @@ describe '.verify', ->
     context 'unsatisfied', ->
       Then -> shouldThrow(=> @verify(@testDouble(@matchers.isA(String))))
 
-  describe 'ignoring extra arguments (more thoroughly tested via when())', ->
-    When -> @testDouble('matters', 'not')
-    Then -> shouldNotThrow(=> @verify(@testDouble('matters'), ignoreExtraArgs: true))
+  describe 'configuration', ->
+
+    describe 'ignoring extra arguments (more thoroughly tested via when())', ->
+      When -> @testDouble('matters', 'not')
+      Then -> shouldNotThrow(=> @verify(@testDouble('matters'), ignoreExtraArgs: true))
+
+    describe 'number of times an invocation is satisfied', ->
+      context '0 times, satisfied', ->
+        Then -> shouldNotThrow(=> @verify(@testDouble(), times: 0))
+
+      context '0 times, unsatisfied', ->
+        When -> @testDouble()
+        Then -> shouldThrow (=> @verify(@testDouble(), times: 0)), """
+          Unsatisfied verification on test double.
+
+            Wanted:
+              - called with `()` 0 times.
+
+            But was actually called:
+              - called with `()`.
+          """
+
+
