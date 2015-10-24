@@ -126,5 +126,30 @@ describe '.verify', ->
               - called with `()`.
           """
 
+      context '4 times, satisfied', ->
+        When -> @testDouble()
+        And -> @testDouble()
+        And -> @testDouble()
+        And -> @testDouble()
+        Then -> shouldNotThrow(=> @verify(@testDouble(), times: 4))
+
+      context '4 times, unsatisfied (with 3)', ->
+        When -> @testDouble()
+        And -> @testDouble()
+        And -> @testDouble()
+        Then -> shouldThrow (=> @verify(@testDouble(), times: 4)), """
+          Unsatisfied verification on test double.
+
+            Wanted:
+              - called with `()` 4 times.
+
+            But was actually called:
+              - called with `()`.
+              - called with `()`.
+              - called with `()`.
+          """
+
+
+
 
 
