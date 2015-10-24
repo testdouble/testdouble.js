@@ -255,7 +255,6 @@ by testing it synchronously. The benefits to this are comprehensability of what
 the test does at runtime, easier debugging, and no reliance on a test framework
 to provide async support.
 
-
 ## Debug with `explain()`
 
 One shortcoming of lots of JavaScript test double libraries is pretty rotten
@@ -280,7 +279,24 @@ td.explain(myTestDouble); /*
 If the test double does have stubbings or invocations, they'll be listed in the
 description body for nicer error output.
 
-## Configuration
+## Configuring interactions
+
+You can pass options to `when` and `verify` like so:
+
+```
+when(someTestDouble(), {ignoreExtraArgs: true}).thenReturn('foo');
+verify(someOtherTestDouble(), {ignoreExtraArgs: true});
+```
+
+Suported options are:
+
+* `ignoreExtraArgs` (default: **false**) a stubbing or verification will be satisfied
+if the argument positions which are explicitly specified in a `when` or `verify`
+call, and if additional arguments are passed by the subject, the interaction will
+still be considered satisfied. Use when you don't care about one, some, or any
+of the arguments a test double will receive. Use sparingly.
+
+## Setup notes
 
 The library is not coupled to any test framework, which means it can be used with
 jasmine, QUnit, Mocha, or anything else. However, to get the most out of the library,
