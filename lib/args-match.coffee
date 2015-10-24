@@ -1,8 +1,8 @@
 _ = require('lodash')
 
-module.exports = (expectedArgs, actualArgs) ->
+module.exports = (expectedArgs, actualArgs, config) ->
   return true if _.eq(expectedArgs, actualArgs)
-  return false if expectedArgs.length != actualArgs.length
+  return false if expectedArgs.length != actualArgs.length && !config.ignoreExtraArgs
   satisfiesEqualityPlusAnyArgumentMatchers(expectedArgs, actualArgs)
 
 satisfiesEqualityPlusAnyArgumentMatchers = (expectedArgs, actualArgs) ->

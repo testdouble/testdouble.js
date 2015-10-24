@@ -1,10 +1,10 @@
 calls = require('./store/calls')
 stubbings = require('./store/stubbings')
 
-module.exports = ->
+module.exports = (__userDoesPretendInvocationHere__, config = {}) ->
   thenReturn: (stubbedValues...) ->
     if last = calls.pop()
-      stubbings.add(last.testDouble, last.args, stubbedValues)
+      stubbings.add(last.testDouble, last.args, stubbedValues, config)
       last.testDouble
     else
       throw new Error """

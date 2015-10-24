@@ -4,8 +4,8 @@ callsStore = require('./calls')
 argsMatch = require('./../args-match')
 
 module.exports =
-  add: (testDouble, args, stubbedValues) ->
-    store.for(testDouble).stubbings.push({stubbedValues, args})
+  add: (testDouble, args, stubbedValues, config) ->
+    store.for(testDouble).stubbings.push({stubbedValues, args, config})
 
   get: (testDouble, args) ->
     return unless stubbing = stubbingFor(testDouble, args)
@@ -20,5 +20,5 @@ module.exports =
 
 stubbingFor = (testDouble, actualArgs) ->
   _(store.for(testDouble).stubbings).findLast (stubbing) ->
-    argsMatch(stubbing.args, actualArgs)
+    argsMatch(stubbing.args, actualArgs, stubbing.config)
 
