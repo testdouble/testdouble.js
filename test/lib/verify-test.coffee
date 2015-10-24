@@ -108,4 +108,23 @@ describe '.verify', ->
               - called with `()`.
           """
 
+      context '1 time, satisfied', ->
+        When -> @testDouble()
+        Then -> shouldNotThrow(=> @verify(@testDouble(), times: 1))
+
+      context '1 time, unsatisfied (with 2)', ->
+        When -> @testDouble()
+        And -> @testDouble()
+        Then -> shouldThrow (=> @verify(@testDouble(), times: 1)), """
+          Unsatisfied verification on test double.
+
+            Wanted:
+              - called with `()` 1 time.
+
+            But was actually called:
+              - called with `()`.
+              - called with `()`.
+          """
+
+
 

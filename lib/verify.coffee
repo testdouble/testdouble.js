@@ -42,4 +42,4 @@ stringifyName = (testDouble) ->
 
 timesMessage = (config) ->
   return "" unless config.times?
-  " #{config.times} time#{'s' if config.time != 1}"
+  " #{config.times} time#{if config.times == 1 then '' else 's'}"
