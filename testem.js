@@ -1,3 +1,4 @@
+var pkg = require('./package.json');
 browserLauncher = process.env['TESTEM_BROWSER'] || 'phantomjs';
 
 module.exports = {
@@ -13,24 +14,24 @@ module.exports = {
 
   framework: 'mocha+chai',
 
-  before_tests: "mkdir -p tmp && npm run build --testdouble:build_file=tmp/subject.js && npm run build:tests",
+  before_tests: "npm run compile:tests && npm run build",
   //might want to add this if you do a lot of file-delete/add churn; faster w/o.
-  //after_tests: "rm -rf tmp/browser-test-coffee; rm tmp/subject.js",
+  //after_tests: "npm run clean",
 
   serve_files: [
     // subject
-    "tmp/subject.js",
+    pkg.config.build_file,
 
     // vendor helpers
     "node_modules/lodash/index.js",
     "node_modules/mocha-given/browser/mocha-given.js",
 
     // test helpers
-    "tmp/browser-test-coffee/general-helper.js",
-    "tmp/browser-test-coffee/browser-helper.js",
+    "generated/test/general-helper.js",
+    "generated/test/browser-helper.js",
 
     // tests
-    "tmp/browser-test-coffee/lib/**/*.js"
+    "generated/test/lib/**/*.js"
   ],
 
   watch_files: [

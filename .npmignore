@@ -1,0 +1,2 @@
+# this file is necessary so that npm doesn't use .gitignore;
+# gitignore ignores generated/ which *must* be included in the package.
