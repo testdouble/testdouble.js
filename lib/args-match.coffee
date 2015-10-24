@@ -1,8 +1,10 @@
 _ = require('lodash')
 
 module.exports = (expectedArgs, actualArgs) ->
+  return true if _.eq(expectedArgs, actualArgs)
+  return false if expectedArgs.length != actualArgs.length
+
   _.eq expectedArgs, actualArgs, (expected, actual) ->
-    return true if _.eq(expectedArgs, actualArgs)
     _.all expectedArgs, (expectedArg, i) ->
       return true if _.eq(expectedArg, actualArgs[i])
       if _.isFunction(expectedArg?.__matches)
