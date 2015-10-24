@@ -15,12 +15,12 @@ module.exports =
       lastCall = null #<-- no double-dipping since it's global & destructive
       store.for(call.testDouble).calls.pop() if call?
 
-  wasInvoked: (testDouble, args) ->
-    this.where(testDouble, args).length > 0
+  wasInvoked: (testDouble, args, config) ->
+    this.where(testDouble, args, config).length > 0
 
-  where: (testDouble, args) ->
+  where: (testDouble, args, config) ->
     _.select store.for(testDouble).calls, (call) ->
-      argsMatch(args, call.args)
+      argsMatch(args, call.args, config)
 
   for: (testDouble) ->
     store.for(testDouble).calls

@@ -86,3 +86,6 @@ describe '.verify', ->
     context 'unsatisfied', ->
       Then -> shouldThrow(=> @verify(@testDouble(@matchers.isA(String))))
 
+  describe 'ignoring extra arguments (more thoroughly tested via when())', ->
+    When -> @testDouble('matters', 'not')
+    Then -> shouldNotThrow(=> @verify(@testDouble('matters'), ignoreExtraArgs: true))

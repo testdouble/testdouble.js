@@ -3,9 +3,9 @@ store = require('./store')
 callsStore = require('./store/calls')
 stringifyArgs = require('./stringify-args')
 
-module.exports = ->
+module.exports = (__userDoesPretendInvocationHere__, config = {}) ->
   if last = callsStore.pop()
-    if callsStore.wasInvoked(last.testDouble, last.args)
+    if callsStore.wasInvoked(last.testDouble, last.args, config)
       # Do nothing! We're verified! :-D
     else
       throw new Error(unsatisfiedErrorMessage(last.testDouble, last.args))
