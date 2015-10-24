@@ -1,6 +1,9 @@
 _ = require('lodash')
+captor = require('./captor')
 
 module.exports =
+  captor: captor
+
   isA: (type) ->
     __matches: (actual) ->
       if type == Number
@@ -11,6 +14,7 @@ module.exports =
         _.isBoolean(actual)
       else
         actual instanceof type
+
   anything: ->
     __matches: -> true
 
