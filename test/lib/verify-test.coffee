@@ -29,6 +29,18 @@ describe '.verify', ->
           - called with `("the wrong WOAH")`.
       """
 
+  context 'unsatisfied verify - wrong arg count', ->
+    When -> @testDouble("good", "bad")
+    Then -> shouldThrow (=> @verify(@testDouble("good"))), """
+      Unsatisfied verification on test double.
+
+        Wanted:
+          - called with `("good")`.
+
+        But was actually called:
+          - called with `("good", "bad")`.
+      """
+
   context 'with a named double', ->
     Given -> @testDouble = @create("#footime")
     When -> @result = (shouldThrow => @verify(@testDouble()))
