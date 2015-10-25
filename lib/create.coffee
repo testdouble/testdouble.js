@@ -17,10 +17,14 @@ createTestDouble = (name) ->
     else
       testDouble.toString = -> "[test double (unnamed)]"
 
+# Refactoring TODO: this isn't at all obvious that "YO THIS FUNCTION ANONYMOUSLY
+# CREATES THE ACTUAL TEST DOUBLE. Even moreso, it gets a function chucked onto
+# it by the function above (toString). Seems def like a first class object ought
+# to be devoted to this so it's easier to find.
 createTestDoubleFunction = ->
   testDouble = (args...) ->
     calls.log(testDouble, args, this)
-    stubbings.get(testDouble, args)
+    stubbings.invoke(testDouble, args)
 
 createTestDoublesForEntireType = (type) ->
   _.reduce Object.getOwnPropertyNames(type.prototype), (memo, name) ->
