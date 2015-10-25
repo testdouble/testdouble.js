@@ -10,9 +10,7 @@ module.exports =
   invoke: (testDouble, args) ->
     return unless stubbing = stubbingFor(testDouble, args)
     stubbing.callCount += 1
-    # TODO: callIndex uses the total call index. It ought to be local to the call
-    # count of that particular stubbing (which we ought to store)
-    callIndex = callsStore.where(testDouble, args).length - 1
+    callIndex = stubbing.callCount - 1
     if callIndex < stubbing.stubbedValues.length
       stubbing.stubbedValues[callIndex]
     else

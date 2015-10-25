@@ -50,6 +50,11 @@ describe 'when', ->
       Then -> @second == 9
       Then -> @third == 9 #<-- last one repeats
 
+    context 'two overlapping stubbings', ->
+      Given -> @when(@testDouble()).thenReturn('A')
+      Given -> @testDouble() #<-- returns A, td's callCount will be 1
+      Given -> @when(@testDouble()).thenReturn('B', 'C')
+      Then -> @testDouble() == 'B'
 
   describe 'config object', ->
     describe 'ignoring extra arguments', ->
