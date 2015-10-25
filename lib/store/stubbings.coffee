@@ -5,20 +5,31 @@ argsMatch = require('./../args-match')
 
 module.exports =
   add: (testDouble, args, stubbedValues, config) ->
-    store.for(testDouble).stubbings.push({stubbedValues, args, config})
+    store.for(testDouble).stubbings.push({callCount: 0, stubbedValues, args, config})
 
-  get: (testDouble, args) ->
+  invoke: (testDouble, args) ->
     return unless stubbing = stubbingFor(testDouble, args)
-    callIndex = callsStore.where(testDouble, args).length - 1
-    if callIndex < stubbing.stubbedValues.length
-      stubbing.stubbedValues[callIndex]
-    else
-      _.last(stubbing.stubbedValues)
+    _.tap stubbedValueFor(stubbing), ->
+      stubbing.callCount += 1
 
   for: (testDouble) ->
     store.for(testDouble).stubbings
 
 stubbingFor = (testDouble, actualArgs) ->
   _(store.for(testDouble).stubbings).findLast (stubbing) ->
-    argsMatch(stubbing.args, actualArgs, stubbing.config)
+    isSatisfied(stubbing, actualArgs)
+
+stubbedValueFor = (stubbing) ->
+  if stubbing.callCount < stubbing.stubbedValues.length
+    stubbing.stubbedValues[stubbing.callCount]
+  else
+    _.last(stubbing.stubbedValues)
+
+isSatisfied = (stubbing, actualArgs) ->
+  argsMatch(stubbing.args, actualArgs, stubbing.config) &&
+    hasTimesRemaining(stubbing)
+
+hasTimesRemaining = (stubbing) ->
+  return true unless stubbing.config.times?
+  stubbing.callCount < stubbing.config.times
 

@@ -8,7 +8,7 @@ module.exports = (__userDoesPretendInvocationHere__, config = {}) ->
     if callsStore.wasInvoked(last.testDouble, last.args, config)
       # Do nothing! We're verified! :-D
     else
-      throw new Error(unsatisfiedErrorMessage(last.testDouble, last.args))
+      throw new Error(unsatisfiedErrorMessage(last.testDouble, last.args, config))
   else
     throw new Error """
       No test double invocation detected for `verify()`.
@@ -17,12 +17,12 @@ module.exports = (__userDoesPretendInvocationHere__, config = {}) ->
           verify(myTestDouble('foo'))
       """
 
-unsatisfiedErrorMessage = (testDouble, args) ->
+unsatisfiedErrorMessage = (testDouble, args, config) ->
   """
   Unsatisfied verification on test double#{stringifyName(testDouble)}.
 
     Wanted:
-      - called with `(#{stringifyArgs(args)})`.
+      - called with `(#{stringifyArgs(args)})`#{timesMessage(config)}.
   """ + invocationSummary(testDouble)
 
 invocationSummary = (testDouble) ->
@@ -39,3 +39,7 @@ stringifyName = (testDouble) ->
     " `#{name}`"
   else
     ""
+
+timesMessage = (config) ->
+  return "" unless config.times?
+  " #{config.times} time#{if config.times == 1 then '' else 's'}"

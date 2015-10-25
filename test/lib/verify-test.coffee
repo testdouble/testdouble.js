@@ -86,6 +86,70 @@ describe '.verify', ->
     context 'unsatisfied', ->
       Then -> shouldThrow(=> @verify(@testDouble(@matchers.isA(String))))
 
-  describe 'ignoring extra arguments (more thoroughly tested via when())', ->
-    When -> @testDouble('matters', 'not')
-    Then -> shouldNotThrow(=> @verify(@testDouble('matters'), ignoreExtraArgs: true))
+  describe 'configuration', ->
+
+    describe 'ignoring extra arguments (more thoroughly tested via when())', ->
+      When -> @testDouble('matters', 'not')
+      Then -> shouldNotThrow(=> @verify(@testDouble('matters'), ignoreExtraArgs: true))
+
+    describe 'number of times an invocation is satisfied', ->
+      context '0 times, satisfied', ->
+        Then -> shouldNotThrow(=> @verify(@testDouble(), times: 0))
+
+      context '0 times, unsatisfied', ->
+        When -> @testDouble()
+        Then -> shouldThrow (=> @verify(@testDouble(), times: 0)), """
+          Unsatisfied verification on test double.
+
+            Wanted:
+              - called with `()` 0 times.
+
+            But was actually called:
+              - called with `()`.
+          """
+
+      context '1 time, satisfied', ->
+        When -> @testDouble()
+        Then -> shouldNotThrow(=> @verify(@testDouble(), times: 1))
+
+      context '1 time, unsatisfied (with 2)', ->
+        When -> @testDouble()
+        And -> @testDouble()
+        Then -> shouldThrow (=> @verify(@testDouble(), times: 1)), """
+          Unsatisfied verification on test double.
+
+            Wanted:
+              - called with `()` 1 time.
+
+            But was actually called:
+              - called with `()`.
+              - called with `()`.
+          """
+
+      context '4 times, satisfied', ->
+        When -> @testDouble()
+        And -> @testDouble()
+        And -> @testDouble()
+        And -> @testDouble()
+        Then -> shouldNotThrow(=> @verify(@testDouble(), times: 4))
+
+      context '4 times, unsatisfied (with 3)', ->
+        When -> @testDouble()
+        And -> @testDouble()
+        And -> @testDouble()
+        Then -> shouldThrow (=> @verify(@testDouble(), times: 4)), """
+          Unsatisfied verification on test double.
+
+            Wanted:
+              - called with `()` 4 times.
+
+            But was actually called:
+              - called with `()`.
+              - called with `()`.
+              - called with `()`.
+          """
+
+
+
+
+
