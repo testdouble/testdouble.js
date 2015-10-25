@@ -9,12 +9,8 @@ module.exports =
 
   invoke: (testDouble, args) ->
     return unless stubbing = stubbingFor(testDouble, args)
-    stubbing.callCount += 1
-    callIndex = stubbing.callCount - 1
-    if callIndex < stubbing.stubbedValues.length
-      stubbing.stubbedValues[callIndex]
-    else
-      _.last(stubbing.stubbedValues)
+    _.tap stubbedValueFor(stubbing), ->
+      stubbing.callCount += 1
 
   for: (testDouble) ->
     store.for(testDouble).stubbings
@@ -22,6 +18,12 @@ module.exports =
 stubbingFor = (testDouble, actualArgs) ->
   _(store.for(testDouble).stubbings).findLast (stubbing) ->
     isSatisfied(stubbing, actualArgs)
+
+stubbedValueFor = (stubbing) ->
+  if stubbing.callCount < stubbing.stubbedValues.length
+    stubbing.stubbedValues[stubbing.callCount]
+  else
+    _.last(stubbing.stubbedValues)
 
 isSatisfied = (stubbing, actualArgs) ->
   argsMatch(stubbing.args, actualArgs, stubbing.config) &&
