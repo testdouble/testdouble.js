@@ -53,26 +53,39 @@ describe 'when', ->
     Then -> @second == 9
     Then -> @third == 9 #<-- last one repeats
 
-  describe 'ignoring extra arguments', ->
+  describe 'config object', ->
     Given -> @testDouble = @create()
 
-    context 'for a no-arg stubbing', ->
-      Given -> @when(@testDouble(), ignoreExtraArgs: true).thenReturn('pewpew')
-      When -> @result = @testDouble('so', 'many', 'args')
-      Then -> @result == 'pewpew'
+    describe 'ignoring extra arguments', ->
+      context 'for a no-arg stubbing', ->
+        Given -> @when(@testDouble(), ignoreExtraArgs: true).thenReturn('pewpew')
+        When -> @result = @testDouble('so', 'many', 'args')
+        Then -> @result == 'pewpew'
 
-    context 'when an initial-arg-matters', ->
-      Given -> @when(@testDouble('important'), ignoreExtraArgs: true).thenReturn('neat')
+      context 'when an initial-arg-matters', ->
+        Given -> @when(@testDouble('important'), ignoreExtraArgs: true).thenReturn('neat')
 
-      context 'satisfied without extra args', ->
-        Then -> @testDouble('important') == 'neat'
+        context 'satisfied without extra args', ->
+          Then -> @testDouble('important') == 'neat'
 
-      context 'satisfied with extra args', ->
-        Then -> @testDouble('important', 'not important') == 'neat'
+        context 'satisfied with extra args', ->
+          Then -> @testDouble('important', 'not important') == 'neat'
 
-      context 'unsatisfied with no args', ->
-        Then -> @testDouble() == undefined
+        context 'unsatisfied with no args', ->
+          Then -> @testDouble() == undefined
 
-      context 'unsatisfied with extra args', ->
-        Then -> @testDouble('unimportant', 'not important') == undefined
+        context 'unsatisfied with extra args', ->
+          Then -> @testDouble('unimportant', 'not important') == undefined
+
+    describe 'limiting times stubbing will work', ->
+      context 'a single stub', ->
+        Given -> @when(@testDouble(), times: 2).thenReturn('pants')
+        When -> @result = [@testDouble(), @testDouble(), @testDouble()]
+        Then -> expect(@result).to.deep.equal(['pants', 'pants', undefined])
+
+      context 'two overlapping stubbings', ->
+        Given -> @when(@testDouble()).thenReturn('NO')
+        Given -> @when(@testDouble(), times: 1).thenReturn('YES')
+        When -> @result = [@testDouble(), @testDouble(), @testDouble()]
+        Then -> expect(@result).to.deep.equal(['YES', 'NO', 'NO'])
 
