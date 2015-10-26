@@ -1,7 +1,7 @@
 describe 'argument captors (a special sub-type of matchers)', ->
   Given -> @when = requireSubject('lib/when')
   Given -> @verify = requireSubject('lib/verify')
-  Given -> @testDouble = requireSubject('lib/create')()
+  Given -> @testDouble = requireSubject('lib/function')()
 
   Given -> @subject = requireSubject('lib/matchers/captor')
   Given -> @captor = @subject()

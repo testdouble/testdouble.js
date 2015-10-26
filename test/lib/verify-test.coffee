@@ -1,7 +1,8 @@
 describe '.verify', ->
   Given -> @verify = requireSubject('lib/verify')
-  Given -> @create = requireSubject('lib/create')
-  Given -> @testDouble = @create()
+  Given -> @function = requireSubject('lib/function')
+  Given -> @object = requireSubject('lib/object')
+  Given -> @testDouble = @function()
 
   context 'a satisfied verification', ->
     When -> @testDouble("dogs", "cats")
@@ -42,7 +43,7 @@ describe '.verify', ->
       """
 
   context 'with a named double', ->
-    Given -> @testDouble = @create("#footime")
+    Given -> @testDouble = @function("#footime")
     When -> @result = (shouldThrow => @verify(@testDouble()))
     Then -> expect(@result).to.contain("verification on test double `#footime`.")
 
@@ -51,21 +52,21 @@ describe '.verify', ->
     Given -> @SomeType::bar = ->
     Given -> @SomeType::baz = ->
     Given -> @SomeType::biz = "not a function!"
-    Given -> @testDoubleObj = @create(@SomeType)
+    Given -> @testDoubleObj = @object(@SomeType)
     When -> @result = (shouldThrow => @verify(@testDoubleObj.baz()))
     Then -> expect(@result).to.contain("verification on test double `Foo#baz`.")
     Then -> @testDoubleObj.biz == "not a function!"
 
   context 'with a test double *as an arg* to another', ->
-    Given -> @testDouble = @create()
+    Given -> @testDouble = @function()
     When -> @result = (shouldThrow => @verify(@testDouble(@someTestDoubleArg)))
 
     context 'with an unnamed double _as an arg_', ->
-      Given -> @someTestDoubleArg = @create()
+      Given -> @someTestDoubleArg = @function()
       Then -> expect(@result).to.contain("- called with `([test double (unnamed)])`.")
 
     context 'with a named double _as an arg_', ->
-      Given -> @someTestDoubleArg = @create("#foo")
+      Given -> @someTestDoubleArg = @function("#foo")
       Then -> expect(@result).to.contain("- called with `([test double for \"#foo\"])`.")
 
   context 'a double-free verification error', ->

@@ -1,7 +1,7 @@
 describe 'when', ->
   Given -> @when = requireSubject('lib/when')
-  Given -> @create = requireSubject('lib/create')
-  Given -> @testDouble = @create()
+  Given -> @function = requireSubject('lib/function')
+  Given -> @testDouble = @function()
 
   describe 'no-arg stubbing', ->
     context 'foo', ->
@@ -30,8 +30,8 @@ describe 'when', ->
     And -> @testDouble({lol: 'fungus'}, 2) == "eww2"
 
   describe 'multiple test doubles', ->
-    Given -> @td1 = @when(@create()()).thenReturn("lol1")
-    Given -> @td2 = @when(@create()()).thenReturn("lol2")
+    Given -> @td1 = @when(@function()()).thenReturn("lol1")
+    Given -> @td2 = @when(@function()()).thenReturn("lol2")
     Then -> @td1() == "lol1"
     Then -> @td2() == "lol2"
 

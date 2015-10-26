@@ -3,7 +3,8 @@ describe "testdouble.js", ->
   describe "where all the functions are", ->
     Then -> @subject.when == requireSubject('lib/when')
     Then -> @subject.verify == requireSubject('lib/verify')
-    Then -> @subject.create == requireSubject('lib/create')
+    Then -> @subject.function == requireSubject('lib/function')
+    Then -> @subject.object == requireSubject('lib/object')
     Then -> @subject.matchers == requireSubject('lib/matchers')
     Then -> @subject.explain == requireSubject('lib/explain')
     # This test is a farse because requireSubject no longer calls require
