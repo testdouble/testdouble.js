@@ -18,7 +18,9 @@ npm install testdouble --save-dev
 
 The most-recent release is persisted in git at `dist/testdouble.js`. You can download it [here](https://raw.githubusercontent.com/testdouble/testdouble.js/master/dist/testdouble.js). The library will set the global `window.testdouble`.
 
-## Create with `function()` and `object()`
+## Creating Test Doubles
+
+### Creating test double functions with `function()`
 
 The easiest way to create a test double function is to make one anonymously:
 
@@ -29,7 +31,7 @@ var myTestDouble = td.function();
 
 In the above, `myTestDouble` will be able to be stubbed or verified as shown below.
 
-### Naming your test double
+#### Naming your test double
 
 For slightly easier-to-understand error messages (with the trade-off of greater
 redundancy in your tests), you can supply a string name to `create`
@@ -41,10 +43,57 @@ var myNamedDouble = td.function("#foo");
 All error messages and descriptions provided for the above `myNamedDouble` will
 also print the name `#foo`.
 
-### Creating test doubles for an entire type with `object()`
+### Creating test doubles objects with `object()`
 
 It's very typical that the code under test will depend not only on a single
 function, but on an object type that's full of them.
+
+#### Dynamic test double objects
+
+If your tests run under ES2015 or later and [Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy)
+is available (as of 2015/10/26: only under MS Edge & Firefox) in your JS runtime,
+then test double can create a test double object that can set up stubbings or
+verify function invocations for any name, completely dynamically!
+
+``` javascript
+var cat = td.object('Cat')
+
+td.when(cat.meow()).thenReturn('purr')
+
+cat.meow() // returns 'purr'
+
+cat.literallyAnythingAtAll() // undefined
+```
+
+##### Excluding certain methods from the double
+
+Sometimes, your subject code will check to see if a property is defined, which
+may make a bit of code unreachable when a dynamic test double responds to every
+single accessed property.
+
+For example, if you have this code:
+
+``` javascript
+function leftovers(walrus) {
+  if(!walrus.eat) {
+    return 'cheese';
+  }
+}
+```
+
+You could create a test double walrus that can reach the cheese with this:
+
+``` javascript
+walrus = td.object('Walrus', {excludeMethods: ['eat']});
+
+leftovers(walrus) // 'cheese'
+```
+
+By default, `excludeMethods` is set to `['then']`, so that test libraries like
+Mocha don't mistake every test double object for a Promise (which would cause the
+test suite to time out)
+
+#### Mirroring an instantiable type
 
 Suppose your subject has a dependency:
 
@@ -288,13 +337,17 @@ when(someTestDouble(), {ignoreExtraArgs: true}).thenReturn('foo');
 verify(someOtherTestDouble(), {ignoreExtraArgs: true});
 ```
 
-Suported options are:
+Suported options are. Each should only ever be needed sparingly:
 
 * `ignoreExtraArgs` (default: **false**) a stubbing or verification will be satisfied
 if the argument positions which are explicitly specified in a `when` or `verify`
 call, and if additional arguments are passed by the subject, the interaction will
 still be considered satisfied. Use when you don't care about one, some, or any
-of the arguments a test double will receive. Use sparingly.
+of the arguments a test double will receive.
+* `times` (default: **undefined**) if set for a verification, will fail to verify
+unless a satisfactory invocation was made on the test double function `n` times.
+If set for a stubbing, will only return the stubbed value `n` times; afterward,
+the stubbing will be effectively deactivated.
 
 ## Setup notes
 
