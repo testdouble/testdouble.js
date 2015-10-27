@@ -109,7 +109,7 @@ Then you can create a test double of `Dog` with:
 var myDogDouble = td.object(Dog)
 ```
 
-This will return a plain object with `bark` and `byte` test double functions,
+This will return a plain object with `bark` and `bite` test double functions,
 ready to be stubbed or verified and named `"Dog#bark"` and `"Dog#bite"`,
 respectively.
 
