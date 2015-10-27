@@ -1,5 +1,6 @@
 module.exports =
-  create: require('./create')
+  function: require('./function')
+  object: require('./object')
   when: require('./when')
   verify: require('./verify')
   matchers: require('./matchers/index')

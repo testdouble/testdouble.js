@@ -18,13 +18,13 @@ npm install testdouble --save-dev
 
 The most-recent release is persisted in git at `dist/testdouble.js`. You can download it [here](https://raw.githubusercontent.com/testdouble/testdouble.js/master/dist/testdouble.js). The library will set the global `window.testdouble`.
 
-## Create with `create()`
+## Create with `function()` and `object()`
 
 The easiest way to create a test double function is to make one anonymously:
 
 ``` javascript
 var td = require('testdouble');
-var myTestDouble = td.create();
+var myTestDouble = td.function();
 ```
 
 In the above, `myTestDouble` will be able to be stubbed or verified as shown below.
@@ -35,13 +35,13 @@ For slightly easier-to-understand error messages (with the trade-off of greater
 redundancy in your tests), you can supply a string name to `create`
 
 ``` javascript
-var myNamedDouble = td.create("#foo");
+var myNamedDouble = td.function("#foo");
 ```
 
 All error messages and descriptions provided for the above `myNamedDouble` will
 also print the name `#foo`.
 
-### Creating test doubles for an entire type
+### Creating test doubles for an entire type with `object()`
 
 It's very typical that the code under test will depend not only on a single
 function, but on an object type that's full of them.
@@ -57,7 +57,7 @@ Dog.prototype.bite = function(){};
 Then you can create a test double of `Dog` with:
 
 ``` javascript
-var myDogDouble = td.create(Dog)
+var myDogDouble = td.object(Dog)
 ```
 
 This will return a plain object with `bark` and `byte` test double functions,
@@ -70,7 +70,7 @@ To stub values with testdouble.js, first create one:
 
 ``` javascript
 var td = require('testdouble');
-myTestDouble = td.create();
+myTestDouble = td.function();
 ```
 
 You can stub a no-arg invocation like so:
@@ -106,7 +106,7 @@ First, create a test double:
 
 ``` javascript
 var td = require('testdouble');
-var myTestDouble = td.create();
+var myTestDouble = td.function();
 ```
 
 Now, suppose you've passed this function into your [subject](https://github.com/testdouble/contributing-tests/wiki/Subject)
@@ -150,7 +150,7 @@ Here's an example usage of the provided `isA()` matcher:
 
 ``` javascript
 var td = require('testdouble');
-var myTestDouble = td.create();
+var myTestDouble = td.function();
 
 when(myTestDouble(td.matchers.isA(String))).thenReturn("YES");
 
@@ -231,8 +231,8 @@ top-level function along with its embedded anonymous function.
 //Stage 1: Test the outer function
 var td = require('testdouble'),
     assert = require('assert'),
-    logger = td.create('logger'),
-    fetcher = td.create('fetcher'),
+    logger = td.function('logger'),
+    fetcher = td.function('fetcher'),
     captor = td.matchers.captor();
 
 logInvalidComments(fetcher, logger);
@@ -264,7 +264,7 @@ data about your test doubles can be gleaned by passing them to a top-level
 
 ``` javascript
 var td = require('testdouble');
-var myTestDouble = td.create();
+var myTestDouble = td.function();
 
 td.explain(myTestDouble); /*
   Returns:
@@ -312,7 +312,7 @@ global.td = require('testdouble');
 Or, you might prefer to plop the methods directly on the global:
 
 ``` javascript
-global.double = require('testdouble').create;
+global.double = require('testdouble').function;
 global.when = require('testdouble').when;
 global.verify = require('testdouble').verify;
 ```

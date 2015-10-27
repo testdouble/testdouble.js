@@ -1,9 +1,9 @@
 describe '.explain', ->
   Given -> @explain = requireSubject('lib/explain')
-  Given -> @create = requireSubject('lib/create')
+  Given -> @function = requireSubject('lib/function')
   Given -> @when = requireSubject('lib/when')
 
-  Given -> @testDouble = @create()
+  Given -> @testDouble = @function()
   When -> @result = @explain(@testDouble)
 
   context 'a brand new test double', ->
@@ -15,7 +15,7 @@ describe '.explain', ->
       """
 
   context 'a named test double', ->
-    Given -> @testDouble = @create("foobaby")
+    Given -> @testDouble = @function("foobaby")
     Then -> expect(@result.description).to.deep.eq """
       This test double `foobaby` has 0 stubbings and 0 invocations.
       """
