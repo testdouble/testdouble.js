@@ -328,6 +328,22 @@ td.explain(myTestDouble); /*
 If the test double does have stubbings or invocations, they'll be listed in the
 description body for nicer error output.
 
+## Get a clean slate with `reset()`
+
+There are times when you need to re-use the same double over multiple tests.  
+When that happens, you need to reset the state of the double to avoid polluting
+your tests.  You can call `reset()` to achieve this:
+
+```javascript
+var td = require('testdouble');
+var myTestDouble = td.function();
+
+// use myTestDouble however you need
+
+td.reset(myTestDouble); // Forget everything you know
+```
+
+
 ## Configuring interactions
 
 You can pass options to `when` and `verify` like so:
