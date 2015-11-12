@@ -5,5 +5,6 @@ module.exports =
   verify: require('./verify')
   matchers: require('./matchers/index')
   explain: require('./explain')
-  reset: require('./store').reset
+  replace: require('./replace')
+  reset: require('./reset')
   version: process.env.npm_package_version || require('../package.json').version

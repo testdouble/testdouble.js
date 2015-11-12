@@ -11,6 +11,9 @@ global.xThen = ->
 global.shouldNotThrow = (func) ->
   func()
 
+afterEach ->
+  testdouble.reset()
+
 global.shouldThrow = (func, expectedMessage) ->
   threw = null
   actualMessage = null
