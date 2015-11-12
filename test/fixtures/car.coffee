@@ -1,5 +1,7 @@
+Passenger = require('./passenger')
 module.exports =
-  passenger: require('./passenger')
+  seatPassenger: ->
+    new Passenger().sit()
   honk: require('./honk')
   turn: require('./turn')
   brake: require('./brake')

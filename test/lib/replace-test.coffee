@@ -12,11 +12,10 @@ describe '.replace', ->
     Given -> @brake = @replace('../fixtures/brake', 'ANYTHING I WANT') #<-- a manual stub bc brake does not exist
     Given -> @lights = @replace('../fixtures/lights') #<- a plain object of funcs
     Given -> @car = require('../fixtures/car')
-    Then -> @car.passenger == @passenger
 
     describe 'quibbling prototypal constructors get created with td.object(Type)', ->
-      Given -> @td.when(@car.passenger.sit()).thenReturn('ow')
-      When -> @result = @car.passenger.sit()
+      Given -> @td.when(@passenger.sit()).thenReturn('ow')
+      When -> @result = @car.seatPassenger()
       Then -> @result == 'ow'
 
     describe 'quibbling plain old functions with td.function()', ->
