@@ -13,6 +13,20 @@ describe 'testdouble.object', ->
     And -> @testDouble.toString() == '[test double object for "Thing"]'
     And -> @testDouble.foo.toString() == '[test double for "Thing#foo"]'
 
+  describe 'making a test double based on a plain object funcbag', ->
+    Given -> @funcBag =
+      lol: ->
+      kek: ->
+      now: ->
+      otherThing: 8
+    Given -> @testDouble = @subject(@funcBag)
+    When -> @when(@testDouble.kek()).thenReturn('nay!')
+    Then -> @testDouble.kek() == 'nay!'
+    And -> @testDouble.toString() == '[test double object]'
+    And -> @testDouble.now.toString() == '[test double for ".now"]'
+    And -> @testDouble.otherThing == 8
+
+
   if global.Proxy?
     describe 'creating a proxy object (ES2015; only supported in FF + Edge atm)', ->
       Given -> @testDouble = @subject('Thing')

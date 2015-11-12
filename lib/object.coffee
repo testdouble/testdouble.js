@@ -8,19 +8,14 @@ module.exports = (nameOrType, config) ->
     obj.toString = -> description(nameOrType)
 
 createTestDoubleObject = (nameOrType, config) ->
-  if hasPrototype(nameOrType)
-    createTestDoublesForEntireType(nameOrType)
+  if _.isFunction(nameOrType)
+    createTestDoublesForPrototype(nameOrType)
+  else if _.isPlainObject(nameOrType)
+    createTestDoublesForFunctionBag(nameOrType)
   else
     createTestDoubleViaProxy(nameOrType, config)
 
-createTestDoubleViaProxy = (name, config) ->
-  proxy = new Proxy obj = {},
-    get: (target, propKey, receiver) ->
-      if !obj.hasOwnProperty(propKey) && !_.include(config.excludeMethods, propKey)
-        obj[propKey] = proxy[propKey] = tdFunction("#{nameOf(name)}##{propKey}")
-      obj[propKey]
-
-createTestDoublesForEntireType = (type) ->
+createTestDoublesForPrototype = (type) ->
   _.reduce Object.getOwnPropertyNames(type.prototype), (memo, name) ->
     memo[name] = if _.isFunction(type.prototype[name])
       tdFunction("#{nameOf(type)}##{name}")
@@ -29,16 +24,25 @@ createTestDoublesForEntireType = (type) ->
     memo
   , {}
 
+createTestDoublesForFunctionBag = (bag) ->
+  _(bag).functions().reduce (memo, functionName) ->
+    memo[functionName] = tdFunction(".#{functionName}")
+    memo
+  , _.extend({}, bag)
+
+createTestDoubleViaProxy = (name, config) ->
+  proxy = new Proxy obj = {},
+    get: (target, propKey, receiver) ->
+      if !obj.hasOwnProperty(propKey) && !_.include(config.excludeMethods, propKey)
+        obj[propKey] = proxy[propKey] = tdFunction("#{nameOf(name)}##{propKey}")
+      obj[propKey]
+
 withDefaults = (config) ->
   _.extend({}, DEFAULT_OPTIONS, config)
 
-hasPrototype = (thing) -> thing?.prototype?
-
 nameOf = (nameOrType) ->
-  if hasPrototype(nameOrType)
+  if _.isFunction(nameOrType) && nameOrType.name?
     nameOrType.name
-  else if nameOrType?
-    nameOrType
   else
     ''
 
