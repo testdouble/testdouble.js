@@ -26,6 +26,12 @@ describe 'testdouble.object', ->
     And -> @testDouble.now.toString() == '[test double for ".now"]'
     And -> @testDouble.otherThing == 8
 
+  describe 'making a test double based on an array of strings', ->
+    Given -> @testDouble = @subject(['biz','bam','boo'])
+    When -> @when(@testDouble.biz()).thenReturn('zing!')
+    Then -> @testDouble.biz() == 'zing!'
+    And -> @testDouble.toString() == '[test double object]'
+    And -> @testDouble.bam.toString() == '[test double for ".bam"]'
 
   if global.Proxy?
     describe 'creating a proxy object (ES2015; only supported in FF + Edge atm)', ->

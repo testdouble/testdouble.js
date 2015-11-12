@@ -12,6 +12,8 @@ createTestDoubleObject = (nameOrType, config) ->
     createTestDoublesForPrototype(nameOrType)
   else if _.isPlainObject(nameOrType)
     createTestDoublesForFunctionBag(nameOrType)
+  else if _.isArray(nameOrType)
+    createTestDoublesForFunctionNames(nameOrType)
   else
     createTestDoubleViaProxy(nameOrType, config)
 
@@ -29,6 +31,12 @@ createTestDoublesForFunctionBag = (bag) ->
     memo[functionName] = tdFunction(".#{functionName}")
     memo
   , _.extend({}, bag)
+
+createTestDoublesForFunctionNames = (names) ->
+  _(names).reduce (memo, functionName) ->
+    memo[functionName] = tdFunction(".#{functionName}")
+    memo
+  , {}
 
 createTestDoubleViaProxy = (name, config) ->
   proxy = new Proxy obj = {},
