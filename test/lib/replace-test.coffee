@@ -7,6 +7,7 @@ describe '.replace', ->
     Given -> @honk = @replace('../fixtures/honk') #<-- a plain ol' func
     Given -> @turn = @replace('../fixtures/turn') #<-- a named func
     Given -> @brake = @replace('../fixtures/brake', 'ANYTHING I WANT') #<-- a manual stub bc brake does not exist
+    Given -> @lights = @replace('../fixtures/lights') #<- a plain object of funcs
     Given -> @car = require('../fixtures/car')
     Then -> @car.passenger == @passenger
 
@@ -25,3 +26,8 @@ describe '.replace', ->
 
     describe 'manually stubbing an entry', ->
       Then -> @car.brake == 'ANYTHING I WANT'
+
+    describe 'an object of funcs', ->
+      Then -> @car.lights.headlight.toString() == '[test double for ".headlight"]'
+      And -> @car.lights.turnSignal.toString() == '[test double for ".turnSignal"]'
+      And -> @car.lights.count == 4
