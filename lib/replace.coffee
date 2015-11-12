@@ -12,14 +12,16 @@ module.exports = (path, stub) ->
     quibble(path, stub) #<-- pass-thru the user's stub without requiring thing
 
 stubFor = (realThingPath) ->
-  toBeReplaced = require(quibble.absolutify(realThingPath))
-  if shouldReplaceWithObject(toBeReplaced)
-    object(toBeReplaced)
+  realThing = require(quibble.absolutify(realThingPath))
+  if shouldReplaceWithObject(realThing)
+    object(realThing)
   else
-    tdFunction() #<-- get the func.name but write a test first
+    tdFunction(if realThing?.name then realThing.name else realThingPath)
 
 shouldReplaceWithObject = (thing) ->
   hasPrototype(thing)
 
-hasPrototype = (thing) -> thing?.prototype?
+hasPrototype = (thing) ->
+  return unless thing?.prototype?
+  _(thing.prototype).functions().any()
 
