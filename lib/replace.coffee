@@ -9,19 +9,23 @@ quibble.ignoreCallsFromThisFile()
 
 module.exports = (path, stub) ->
   return quibble(path, stub) if arguments.length > 1
-  quibble(path, stubFor(path))
-
-stubFor = (realThingPath) ->
-  realThing = require(quibble.absolutify(realThingPath))
-  if shouldReplaceWithObject(realThing)
-    object(realThing)
+  realThing = require(quibble.absolutify(path))
+  if isConstructorFunc(realThing)
+    funcBag = object(realThing)
+    quibble(path, wrapConstructorAround(funcBag))
+    funcBag
+  else if _.isPlainObject(realThing)
+    quibble(path, object(realThing))
   else
-    tdFunction(if realThing?.name then realThing.name else realThingPath)
+    quibble(path, tdFunction(if realThing?.name then realThing.name else path))
 
-shouldReplaceWithObject = (thing) ->
-  hasPrototype(thing) || _.isPlainObject(thing)
+wrapConstructorAround = (testDoubleFunctionBag) ->
+  constructor = (class TestDoubleConstructor)
+  _.each testDoubleFunctionBag, (func, name) ->
+    TestDoubleConstructor.prototype[name] = func
+  constructor
 
-hasPrototype = (thing) ->
+isConstructorFunc = (thing) ->
   return unless thing?.prototype?
   _(thing.prototype).functions().any()
 
