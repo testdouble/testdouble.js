@@ -5,6 +5,11 @@ describe '.replace', ->
     Given -> @passenger = @replace('../fixtures/passenger')
     Given -> @car = require('../fixtures/car')
     Then -> @car.passenger == @passenger
-    #And -> td.explain(@car.passenger.sit) == 'h'
+
+    context 'double check that the test double works', ->
+      Given -> @td = requireSubject()
+      Given -> @td.when(@car.passenger.sit()).thenReturn('ow')
+      When -> @result = @car.passenger.sit()
+      Then -> @result == 'ow'
 
 
