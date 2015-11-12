@@ -1,3 +1,6 @@
+_ = require('lodash')
+return unless _.isFunction(require('quibble'))
+
 describe '.replace', ->
   Given -> @td = requireSubject()
   Given -> @replace = requireSubject('lib/replace')
