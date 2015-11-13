@@ -8,7 +8,13 @@ module.exports = (__userDoesPretendInvocationHere__, config = {}) ->
     if callsStore.wasInvoked(last.testDouble, last.args, config)
       # Do nothing! We're verified! :-D
     else
-      throw new Error(unsatisfiedErrorMessage(last.testDouble, last.args, config))
+      err = new Error(unsatisfiedErrorMessage(last.testDouble, last.args, config))
+      err.info =
+        testDouble: last.testDouble
+        calls: callsStore.for last.testDouble
+        expectedArgs: last.args
+        config: config
+      throw err
   else
     throw new Error """
       No test double invocation detected for `verify()`.
