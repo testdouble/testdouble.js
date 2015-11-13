@@ -1,4 +1,7 @@
 language: node_js
+node_js:
+  - "4.1"
+  - "0.12"
 script:
   - npm run test:ci
-  - cd examples/node && npm i && npm test && cd ../..
+  - npm run test:examples

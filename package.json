@@ -20,6 +20,7 @@
     "compile:tests": "coffee --output generated/test --compile test",
     "test": "mocha --ui mocha-given --reporter $npm_package_config_mocha_reporter --compilers coffee:coffee-script --recursive test/node-helper.coffee test/lib",
     "test:ci": "npm run test --testdouble:mocha_reporter=tap && testem ci",
+    "test:examples": "cd examples/node && npm i && npm test && cd ../..",
     "test:debug": "npm test -- --debug-brk",
     "prebuild": "npm run compile",
     "build": "browserify . --standalone testdouble --outfile $npm_package_config_build_file --ignore 'quibble' --ignore \"lib/replace.coffee\"",
@@ -66,5 +67,9 @@
     "type": "git",
     "url": "https://github.com/testdouble/testdouble.js.git"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "engines": {
+    "node": ">= 0.12.0",
+    "iojs": ">= 1.0.0"
+  }
 }
