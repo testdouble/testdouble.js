@@ -4,6 +4,7 @@ describe('Car', function(){
     gasPedal = td.replace('../../lib/gas-pedal') //<-- a plain ol' function
     accelerometer = td.replace('../../lib/accelerometer') //<-- an obj of functions
     brake = td.replace('../../lib/brake') //<-- a constructor function
+    copilot = td.replace('../../lib/copilot', function() { return 'HIGHFIVE'}) //<-- a manual override
     subject = require('../../lib/car')
   })
 
@@ -29,6 +30,17 @@ describe('Car', function(){
 
       it('engages the brake for 2 units', function(){
         td.verify(brake.engage(2))
+      })
+    })
+
+    describe('going exactly 60', function(){
+      var result;
+      beforeEach(function(){
+        result = subject.goSixty()
+      })
+
+      it('invokes the copilot for some weird reason', function(){
+        expect(result).to.equal('HIGHFIVE')
       })
     })
   })
