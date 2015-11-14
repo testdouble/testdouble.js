@@ -2,6 +2,24 @@
 
 [![Build Status](https://secure.travis-ci.org/testdouble/testdouble.js.svg)](http://travis-ci.org/testdouble/testdouble.js)
 
+Welcome! Are you writing JavaScript tests and in the market for a mocking library to
+fake out real things for you? testdouble.js is an opinionated, carefully-designed
+test double library maintained by, oddly enough, a software agency that's also
+named [Test Double](http://testdouble.com).
+
+If you practice test-driven development, testdouble.js was designed to promote
+terse, clear, and easy-to-understand tests. There's an awful lot to cover, so
+please take some time and enjoy our documentation, which itself is designed to
+show you how to make the most out of test doubles in your tests.
+
+TODO: OUTLINE GO HERE.
+
+
+---
+Delete/extract everything below here:
+---
+
+
 The goal of this project is to provide a test-framework-agnostic test double library for JavaScript which mirrors [Mockito](http://mockito.org) pretty closely. That means each Test Double created by the library will be a spy that is also capable of stubbing values. Other conveniences have been and will be added, but only to the extent they benefit an isolated TDD workflow.
 
 If you need a robust test double library that's designed to cover every possible use case, we recommend checking out [Sinon.JS](http://sinonjs.org).
@@ -330,7 +348,7 @@ description body for nicer error output.
 
 ## Get a clean slate with `reset()`
 
-There are times when you need to re-use the same double over multiple tests.  
+There are times when you need to re-use the same double over multiple tests.
 When that happens, you need to reset the state of the double to avoid polluting
 your tests.  You can call `reset()` to achieve this:
 
