@@ -37,7 +37,7 @@ the returned result without a need for fake objects & functions
 
 2. Functions which don't do any heavy-lifting themselves, but rather depend on
 other functions and invoke them as necessary to either return a value or trigger
-a side effect. Specifying these sort of "collaborators" are **why test doubles
+a side effect. Specifying these sort of "collaborators" types are **why test doubles
 exist**, as those depended-on functions can be replaced with test doubles and
 configured to stub responses or used to verify interactions
 
@@ -91,7 +91,7 @@ negative test
 failures](http://github.com/testdouble/contributing-tests/wiki/Test-Failure-Analysis).
 
 Due to these risks, when writing integrated tests it's usually preferable to only
-faks things that are outside the purview of the system under test. For instance, if
+fake things that are outside the purview of the system under test. For instance, if
 your application makes network requests which you want to control, a fake server
 that can be configured to stub HTTP responses and verify HTTP requests (e.g.
 [covet](https://github.com/testdouble/covet)) will increase confidence that the
