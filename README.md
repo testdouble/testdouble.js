@@ -1,6 +1,6 @@
 # testdouble.js
 
-[![Build Status](https://secure.travis-ci.org/testdouble/testdouble.js.png)](http://travis-ci.org/testdouble/testdouble.js)
+[![Build Status](https://secure.travis-ci.org/testdouble/testdouble.js.svg)](http://travis-ci.org/testdouble/testdouble.js)
 
 The goal of this project is to provide a test-framework-agnostic test double library for JavaScript which mirrors [Mockito](http://mockito.org) pretty closely. That means each Test Double created by the library will be a spy that is also capable of stubbing values. Other conveniences have been and will be added, but only to the extent they benefit an isolated TDD workflow.
 
