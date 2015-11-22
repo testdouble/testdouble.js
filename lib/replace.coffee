@@ -3,8 +3,6 @@ quibble = require('quibble')
 object = require('./object')
 tdFunction = require('./function')
 
-return (module.exports = ->) unless _.isFunction(quibble) #<-- browserify hack
-
 quibble.ignoreCallsFromThisFile()
 
 module.exports = (path, stub) ->
