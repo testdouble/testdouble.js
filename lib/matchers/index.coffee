@@ -21,6 +21,7 @@ module.exports =
   contains: (containings...) ->
     containsAllSpecified = (containing, actual) ->
       _.all containing, (val, key) ->
+        return false unless actual?
         if _.isPlainObject(val)
           containsAllSpecified(val, actual[key])
         else
