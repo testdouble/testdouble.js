@@ -39,20 +39,27 @@ describe '.matchers', ->
     Then -> @matchers.anything().__matches(a: 'foo', b: 'bar') == true
 
   describe '.contains', ->
-    Then -> @matchers.contains('a').__matches(['a','b','c']) == true
-    Then -> @matchers.contains('a','c').__matches(['a','b','c']) == true
-    Then -> @matchers.contains(['a','c']).__matches(['a','b','c']) == false
-    Then -> @matchers.contains(['a','c']).__matches([1, ['a','c'], 4]) == true
-    Then -> @matchers.contains(['a','c']).__matches(['a','b','z']) == false
-    Then -> @matchers.contains(foo: 'bar', baz: 42).__matches(foo: 'bar', baz: 42, stuff: this) == true
-    Then -> @matchers.contains(foo: 'bar', lol: 42).__matches(foo: 'bar', baz: 42) == false
-    Then -> @matchers.contains(lol: {deep: [4,2]}).__matches(lol: {deep: [4,2], other: "stuff"}) == true
-    Then -> @matchers.contains(deep: {thing: 'stuff'}).__matches({}) == false
-    Then -> @matchers.contains('bar').__matches('foobarbaz') == true
-    Then -> @matchers.contains('biz').__matches('foobarbaz') == false
-    Then -> shouldThrow (=> @matchers.contains(48).__matches()), """
-      the contains() matcher only supports strings, arrays, and plain objects
-      """
+    context 'strings', ->
+      Then -> @matchers.contains('bar').__matches('foobarbaz') == true
+      Then -> @matchers.contains('biz').__matches('foobarbaz') == false
+      Then -> shouldThrow (=> @matchers.contains(48).__matches()), """
+        the contains() matcher only supports strings, arrays, and plain objects
+        """
+
+    context 'arrays', ->
+      Then -> @matchers.contains('a').__matches(['a','b','c']) == true
+      Then -> @matchers.contains('a','c').__matches(['a','b','c']) == true
+      Then -> @matchers.contains(['a','c']).__matches(['a','b','c']) == false
+      Then -> @matchers.contains(['a','c']).__matches([1, ['a','c'], 4]) == true
+      Then -> @matchers.contains(['a','c']).__matches(['a','b','z']) == false
+
+    context 'objects', ->
+      Then -> @matchers.contains(foo: 'bar', baz: 42).__matches(foo: 'bar', baz: 42, stuff: this) == true
+      Then -> @matchers.contains(foo: 'bar', lol: 42).__matches(foo: 'bar', baz: 42) == false
+      Then -> @matchers.contains(lol: {deep: [4,2]}).__matches(lol: {deep: [4,2], other: "stuff"}) == true
+      Then -> @matchers.contains(deep: {thing: 'stuff'}).__matches({}) == false
+      Then -> @matchers.contains(deep: {thing: 'stuff'}).__matches(deep: {thing: 'stuff', shallow: 5}) == true
+      Then -> @matchers.contains({container: {size: 'S'}}).__matches({ingredient: 'beans', container: { type: 'cup', size: 'S'}}) == true
 
   describe 'argThat', ->
     Then -> @matchers.argThat((arg) -> arg > 5).__matches(6) == true
