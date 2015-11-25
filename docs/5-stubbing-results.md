@@ -133,7 +133,7 @@ An "argument matcher" is a special function which, when passed to a test double 
 
 Out of the box, testdouble.js ships with a handful of matchers. They are:
 
-#### td.matchers.anything()
+#### testdouble.matchers.anything()
 
 When passed `td.matchers.anything()`, any invocation of that test double function will ignore that parameter when determining whether an invocation satisfies the stubbing. For example:
 
@@ -148,7 +148,7 @@ bark() // undefined
 bark(2, 'other stuff') // undefined
 ```
 
-#### td.matchers.isA()
+#### testdouble.matchers.isA()
 
 When passed `td.matchers.isA(someType)`, then invocations of the test double function will satisfy the stubbing when the actual type matches what is passed to `isA`. For example:
 
@@ -164,7 +164,7 @@ eatBiscuit() // undefined
 
 While `Number` is shown above, it will work for any built-in type (e.g. `String` or `Date`) or any named custom prototypal constructors defined by the user.
 
-#### td.matchers.contains()
+#### testdouble.matchers.contains()
 
 When passed `td.matchers.contains()`, then a stubbed argument can be loosened to be satisfied by any invocations that simply contain the portion of the argument. This works for several types, including strings, arrays, and objects.
 
@@ -182,7 +182,7 @@ yell('ARGHHHHHHH') // 'AYE'
 yell('ARG') // undefined
 ```
 
-#### Arrays
+##### Arrays
 
 Here's how to use `contains` with an array argument:
 
@@ -196,10 +196,10 @@ jellyBeans(['grape', 'popcorn', 'strawberry']) // undefined
 
 ```
 
-#### Objects
+##### Objects
 
 You can also use `contains` to specify only part of an object. This is especially
-useful when a large object is being passed around, but only part of it matters to
+useul when a large object is being passed around, but only part of it matters to
 the interaction being tested.
 
 ``` javascript
@@ -217,11 +217,26 @@ properties:
 ``` javascript
 var brew = td.function()
 
-td.when(brew({container: {size: 'S'}})).thenReturn('small coffee')
+td.when(brew(td.matchers.contains({container: {size: 'S'}}))).thenReturn('small coffee')
 
 brew({ingredient: 'beans', container: { type: 'cup', size: 'S'}}) // 'small coffee'
 brew({ingredient: 'beans', container: { type: 'cup', size: 'L'}}) // undefined
 brew({}) // undefined
 ```
 
+#### testdouble.matchers.argThat()
+
+If the other built-in matchers don't serve your needs and you don't want to roll
+your own custom matcher, you can use `argThat()` to pass a truth test function
+to determine whether an invocation will satisfy the stubbing.
+
+``` javascript
+var pet = td.function()
+
+td.when(pet(td.matchers.argThat(function(animals){ return animals.length > 2 }))).thenReturn('goood')
+
+pet(['cat', 'dog', 'horse']) // 'goood'
+pet(['cat', 'dog']) // undefined
+pet({length: 81}) // 'goood'
+```
 
