@@ -37,7 +37,7 @@ No style is right or wrong, as they both have trade-offs (full disclosure: when 
 
 Suppose you have a constructor function:
 
-```
+``` javascript
 function Dog(){}
 Dog.prototype.bark = function(){}
 Dog.prototype.woof = function(){}
@@ -45,7 +45,7 @@ Dog.prototype.woof = function(){}
 
 To create a test double object that has functions `bark` and `woof`, simply pass `Dog` to `object()`
 
-```
+``` javascript
 var dog = td.object(Dog)
 
 dog.bark // a test double function named 'Dog#bark'
@@ -72,7 +72,7 @@ var fish = {
 
 Then you could fake the fish out with:
 
-```
+``` javascript
 var fish = td.object(fish)
 
 fish.eat // a test double function named '.eat'
@@ -97,7 +97,7 @@ cat.meow // a test double function named 'meow'
 
 If passed either a string name or no arguments at all, `td.object` will return an [ES2015 Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) object designed to forward any property access as if it was a test double function. By using `Proxy`, testdouble.js is able to intercept calls to properties that don't exist, immediately create a new test double function, and invoke that function for use in either stubbing or verifying behavior.
 
-```
+``` javascript
 var parrot = td.object('Parrot')
 
 parrot.squawk // a test double function named 'Parrot#squawk'
