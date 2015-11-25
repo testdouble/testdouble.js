@@ -199,7 +199,8 @@ jellyBeans(['grape', 'popcorn', 'strawberry']) // undefined
 #### Objects
 
 You can also use `contains` to specify only part of an object. This is especially
-useful when a large object is being thrown around, but only part of it matters.
+useful when a large object is being passed around, but only part of it matters to
+the interaction being tested.
 
 ``` javascript
 var brew = td.function()
@@ -210,7 +211,17 @@ brew({ingredient: 'beans', temperature: 'hot'}) // 'coffee'
 brew({ingredient: 'hops', temperature: 'hot'}) // undefined
 ```
 
-Better yet, the `contains` matcher is capable of doing deep searches of sparse 
+Better yet, the `contains` matcher is capable of doing deep searches of sparse
 properties:
+
+``` javascript
+var brew = td.function()
+
+td.when(brew({container: {size: 'S'}})).thenReturn('small coffee')
+
+brew({ingredient: 'beans', container: { type: 'cup', size: 'S'}}) // 'small coffee'
+brew({ingredient: 'beans', container: { type: 'cup', size: 'L'}}) // undefined
+brew({}) // undefined
+```
 
 
