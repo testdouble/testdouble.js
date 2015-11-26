@@ -240,3 +240,35 @@ pet(['cat', 'dog']) // undefined
 pet({length: 81}) // 'goood'
 ```
 
+If you find yourself needing a matcher that isn't defined above, you can
+[define your own custom matchers](8-custom-matchers.md) as well.
+
+### Configuring stubbings
+
+So far, we've seen `td.when()` only invoked with one argument, but it sports a
+second configuration parameter as well, with a handful of options.
+
+Keep in mind that these additional options are made available because they each
+have occassional genuine value, but they ought to only be needed sparingly. If
+you find yourself reaching for any of these options on a very frequent basis,
+we recommend you pause and ask what about the design of your code is encouraging
+the perceived need of that option.
+
+#### ignoreExtraArgs
+
+```
+when(someTestDouble(), {ignoreExtraArgs: true}).thenReturn('foo');
+```
+
+* `ignoreExtraArgs` (default: **false**) a stubbing or verification will be satisfied
+if the argument positions which are explicitly specified in a `when` or `verify`
+call, and if additional arguments are passed by the subject, the interaction will
+still be considered satisfied. Use when you don't care about one, some, or any
+of the arguments a test double will receive.
+
+#### times
+
+* `times` (default: **undefined**) if set for a verification, will fail to verify
+unless a satisfactory invocation was made on the test double function `n` times.
+If set for a stubbing, will only return the stubbed value `n` times; afterward,
+the stubbing will be effectively deactivated.

@@ -56,17 +56,51 @@ And then find the browser distribution of the library in
 While npm3 has in many ways obviated the need for Bower, it probably works too.
 gl;hf, etc.
 
-## Setting up in your test suite
+## Configuring testdouble.js Setting up in your test suite
 
-testdouble.js is test framework-agnostic, meaning it'll work fine with qunit,
-jasmine, mocha, or plain ol' assert. One thing is important, however, which is to
-make sure testdouble.js is reset in-between tests with its `reset()` function.
+testdouble.js is a standalone library. It can be used with any test library,
+such as [QUnit](http://qunitjs.com), [Mocha](https://mochajs.org),
+[Jasmine](http://jasmine.github.io), or any other. In fact, you can use it
+without any test library at all.
 
-For instance, mocha and jasmine expose an `afterEach` method. In a top-level
-test helper, write:
+### Naming test double
 
-```
+In browsers, testdouble.js will be set as a global variable at `window.testdouble`.
+In Node.js, the library is available via `require('testdouble')` like any other
+module.
+
+However, because the risk of global variables wreaking havoc on the universe is
+less extraordinary for test-scoped code, and because typing `testdouble` or
+`require('testdouble')` thousands of times in a test suite seems like a bummer,
+we typically will alias the library a test helper to
+`window.td = window.testdouble` for browsers or
+`global.td = require('testdouble')` for Node.js.
+
+You're welcome to address testdouble or any of its functions however you prefer,
+but all of this documentation will assume that you've aliased it to `td` for the
+sake of terseness.
+
+### Resetting state between test runs
+
+The only configuration you'll want to make sure you set up is to reset the state of
+testdouble.js between tests, because it stores the state of all your test double
+functions globally. If you don't reset, you run the risk of succumbing to subtle
+test pollution and/or accidental order dependencies between tests.
+
+For instance, Mocha and Jasmine both expose an `afterEach` method. In a top-level
+test helper, you could write:
+
+``` javascript
 afterEach(function(){
+  td.reset()
+})
+```
+
+In QUnit, you should be able to reset testdouble.js using the `QUnit.testDone`
+hook.
+
+``` javascript
+QUnit.testDone(function() {
   td.reset()
 })
 ```

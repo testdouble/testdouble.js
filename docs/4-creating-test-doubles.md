@@ -103,6 +103,34 @@ var parrot = td.object('Parrot')
 parrot.squawk // a test double function named 'Parrot#squawk'
 ```
 
+#### Excluding certain methods from Proxy-based test doubles
+
+Sometimes, your subject code will check to see if a property is defined, which
+may make a bit of code unreachable when a dynamic test double responds to every
+single accessed property.
+
+For example, if you have this code:
+
+``` javascript
+function leftovers(walrus) {
+  if(!walrus.eat) {
+    return 'cheese';
+  }
+}
+```
+
+You could create a test double walrus that can reach the cheese with this:
+
+``` javascript
+walrus = td.object('Walrus', {excludeMethods: ['eat']});
+
+leftovers(walrus) // 'cheese'
+```
+
+By default, `excludeMethods` is set to `['then']`, so that test libraries like
+Mocha don't mistake every test double object for a Promise (which would cause the
+test suite to time out)
+
 ## Conclusion
 
 As you can see, there are a plethora of ways to create test doubles with testdouble.js, each designed to handle a different style of organizing JavaScript code. We recommend on landing on one consistent style (e.g. each module as one function) for each project, which in turn would encourage one consistent style of creating test doubles. This API is written to be flexible for a number of potential contexts across objects, but it has come at the cost of a large enough surface area that if any project were to make ample use of all or most of the above invocation styles, it would confuse readers.
