@@ -256,19 +256,65 @@ the perceived need of that option.
 
 #### ignoreExtraArgs
 
-```
-when(someTestDouble(), {ignoreExtraArgs: true}).thenReturn('foo');
+Sometimes, a subject will call a dependency with arbitrarily many arguments, but
+for the purpose of a test, only the earlier arguments are significant to the
+interaction being considered "correct". Once in a great while, none of the
+arguments passed to a depended-on function matter at all. In either of these
+cases, you can use the `ignoreExtraArgs` configuration property when stubbing
+with `when()`
+
+Here's an example:
+
+``` javascript
+logger = td.function()
+
+td.when(logger("Outcomes are:"), {ignoreExtraArgs: true}).thenReturn('loggy')
+
+logger("Outcomes are:") // 'loggy'
+logger("Outcomes are:", "stuff") // 'loggy'
+logger("Outcomes are:", "stuff", "that", "keeps", "going") // 'loggy'
+logger("Outcomes are not:", "stuff") // undefined
 ```
 
-* `ignoreExtraArgs` (default: **false**) a stubbing or verification will be satisfied
-if the argument positions which are explicitly specified in a `when` or `verify`
-call, and if additional arguments are passed by the subject, the interaction will
-still be considered satisfied. Use when you don't care about one, some, or any
-of the arguments a test double will receive.
+Or, in the case where _literally none of the arguments matter_:
+
+``` javascript
+whatever = td.function()
+
+td.when(whatever(), {ignoreExtraArgs: true}).thenReturn('yesss')
+
+whatever() // 'yesss'
+whatever(1,2,3,4,5) // 'yesss'
+```
 
 #### times
 
-* `times` (default: **undefined**) if set for a verification, will fail to verify
-unless a satisfactory invocation was made on the test double function `n` times.
-If set for a stubbing, will only return the stubbed value `n` times; afterward,
-the stubbing will be effectively deactivated.
+Sometimes you want to ensure that a function will only return a particular value
+at most `n` times.
+
+Note that for simple cases, one could use
+[sequential stubbing](#stubbing-sequential-return-values) like
+`td.when(...).thenReturn('foo','foo',undefined)` to return `'foo'` at most two
+times.
+
+For more complex cases, the `times` property can be configured to effectively
+disable a stubbing after it's been satisfied `n` times. This is especially
+useful in cases where a generic stubbing is configured first, but a more specific
+stubbing is configured later and you want to fall back on the earlier generic
+stubbing later. If this sounds incredibly obtuse and convoluted, you'd be right
+to think so.
+
+Here's an example of using the `times` property for a complex stubbing
+arrangement:
+
+``` javascript
+var nextToken = td.function()
+
+td.when(nextToken(td.matchers.isA(Number))).thenReturn("foo")
+td.when(nextToken(3), {times: 2}).thenReturn("bar")
+
+nextToken(3) // 'bar'
+nextToken(5) // 'foo'
+nextToken(3) // 'bar'
+nextToken(3) // 'foo'
+```
