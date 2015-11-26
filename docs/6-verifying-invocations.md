@@ -1,15 +1,34 @@
+# Verifying interactions
 
-## Verify with `verify()`
+If you haven't read through the document on [stubbing](5-stubbing-results.md), be
+sure to read it first. Why?
 
-You can verify the behavior of methods with side-effects so long as you promise
-to:
-* Default to writing code that returns meaningful values and to asserting on those
-* Never verify an invocation you've stubbed. If the stubbing is necessary for the
-test to pass, then the verification is redundant.
+First, because the API for verifying invocations of
+test double functions is essentially identical to the API for stubbing responses,
+so if you're familiar with how to stub using testdouble.js, there isn't much
+more to know about verifying interactions.
 
-That said, lots of code has side-effects, and to test-drive those interactions,
-you can use the `verify` function.
+Second, verifying that a method was invoked is only necessary when a depended-on
+function is being invoked for its side effect (as opposed to returning a
+meaningful value). For starters, pure functions that return useful values without
+a side effect are much easier to understand, test, and maintain, so we'd be
+better off writing more of them—that means it'd be a bit worrisome to see a
+test suite with lots of test double verification calls.
 
+One last word of warning, never verify an invocation that was also stubbed. If
+the stubbing is necessary for the test to pass, then adding a verification for
+the same invocation is redundant and unnecessary. This is a counter-intuitive
+point for a lot of people, so we'll just leave it at, "only verify an invocation
+when there's no other way to assert that your subject is doing what you want it
+to do."
+
+OK, disclaimers aside, lots of functions have side effects by design, and
+testdouble.js provides a `verify()` function for asserting that an invocation
+happened exactly as you expected it.
+
+
+
+------
 First, create a test double:
 
 ``` javascript
