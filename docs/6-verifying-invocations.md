@@ -24,9 +24,63 @@ to do."
 
 OK, disclaimers aside, lots of functions have side effects by design, and
 testdouble.js provides a `verify()` function for asserting that an invocation
-happened exactly as you expected it.
+happened exactly as you expected it. Here's how to use it.
 
+The examples in this document assume you've aliased `testdouble` to `td`.
 
+## testdouble.verify()
+
+A basic verification looks like this:
+
+``` javascript
+var quack = td.function('quack')
+
+quack('QUACK')
+
+td.verify(quack('QUACK')) // Nothing happens, because verification was satisfied
+```
+
+As you can see, `td.verify` is very similar to `td.when`, in that it ignores the
+first argument passed to it so that in our test we can write a "demonstration"
+of how we expected the test double to have been invoked by our code under test.
+
+When a verification fails, an error is thrown with a message like the following:
+
+``` javascript
+td.verify(quack())
+Error: Unsatisfied verification on test double `quack`.
+
+  Wanted:
+    - called with `()`.
+
+  But was actually called:
+    - called with `("QUACK")`.
+  at Object.module.exports [as verify] (/Users/justin/code/testdouble/testdouble.js/generated/verify.js:22:15)
+```
+
+As you can see, the expected arguments of the failed verification are pritned
+along with any actual invocations of the test double function.
+
+### Arguments
+
+All of the rules about argument precision when stubbing apply here, too. By
+default, each expected argument is tested against the arguments actually
+passed to the test double with lodash's [_.isEqual](http://lodash.com/docs#isEqual)
+function.
+
+``` javascript
+var enroll = td.function()
+
+enroll({name: 'Joe', age: 22, gender: null})
+
+td.verify(enroll({name: 'Joe', age: 22, gender: null})) // passes — deeply equal
+td.verify(enroll({name: 'Joe', age: 22})) // throws - missing property
+td.verify(enroll({name: 'Joe', age: 23, gender: null})) // throws - not equal
+```
+
+### Relaxing verifications with argument matchers
+
+Each of the
 
 ------
 First, create a test double:

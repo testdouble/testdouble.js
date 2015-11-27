@@ -24,9 +24,9 @@ As JavaScript APIs go, this should strike readers as unusual, but it's an intent
 
 The `when()` function returns an object containing the function `thenReturn`, which is used to specify the value the test double should return if it's invoked as specified in the `when()` call. For now, only `thenReturn` is supported as a response type. For whatever reason, we haven't found an urgent need to implement two other typical responses, `thenDo` (to invoke a function that has some side effect, [#8](https://github.com/testdouble/testdouble.js/issues/8)) and `thenThrow` (to throw some error, [#7](https://github.com/testdouble/testdouble.js/issues/7)), but we'd gladly accept pull requests for either.
 
-## Simple, exact argument stubbing
+## Simple, precise argument stubbing
 
-When practicing outside-in TDD, unit tests are typically completely isolated. As a result, in most cases it's fair to expect that the test will be able to (and will desire to) specify the exact interactions the subject should have with each of its dependencies. The stubbing API exposed by testdouble.js assumes that the "rehearsed" invocation in a stubbing is made with the exact arguments the subject is expected to use. (Granted, that is not always desired; later, we'll show how to use so-called "argument matchers" as a means to loosen that specification.)
+When practicing outside-in TDD, unit tests are typically completely isolated. As a result, in most cases it's fair to expect that the test will be able to (and will desire to) specify the exact interactions the subject should have with each of its dependencies. The stubbing API exposed by testdouble.js assumes that the "rehearsed" invocation in a stubbing is made with deeply-equivalents arguments to what the subject is expected to use. (Granted, that is not always desired; later, we'll show how to use so-called "argument matchers" as a means to loosen that specification.)
 
 ### No-argument stubbings
 
