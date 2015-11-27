@@ -318,3 +318,11 @@ nextToken(5) // 'foo'
 nextToken(3) // 'bar'
 nextToken(3) // 'foo'
 ```
+
+## Congratulations!
+
+And that's about all there is to say about stubbing. Great news, because the
+other major feature of any test double library—verifying an invocation took
+place—has an API that was carefully-designed to be completely symmetrical! Read
+on about [verifying interactions with `verify()`](6-verifying-invocations.md),
+and rest easy knowing that you already know exactly how to do it.

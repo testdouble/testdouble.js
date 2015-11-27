@@ -63,8 +63,9 @@ along with any actual invocations of the test double function.
 
 ### Arguments
 
-All of the rules about argument precision when stubbing apply here, too. By
-default, each expected argument is tested against the arguments actually
+All of testdouble.js's [rules about argument precision when
+stubbing](5-stubbing-results.md#simple-precise-argument-stubbing) apply here,
+too. By default, each expected argument is tested against the arguments actually
 passed to the test double with lodash's [_.isEqual](http://lodash.com/docs#isEqual)
 function.
 
@@ -80,93 +81,186 @@ td.verify(enroll({name: 'Joe', age: 23, gender: null})) // throws - not equal
 
 ### Relaxing verifications with argument matchers
 
-Each of the
+Each of the [argument matchers supported when
+stubbing](5-stubbing-results.md#what-are-argument-matchers) also work when
+verifying an interaction. Below are simple examples of each built-in matcher
 
-------
-First, create a test double:
+#### testdouble.matchers.anything()
 
-``` javascript
-var td = require('testdouble');
-var myTestDouble = td.function();
-```
-
-Now, suppose you've passed this function into your [subject](https://github.com/testdouble/contributing-tests/wiki/Subject)
-and you want to verify that it was called with the arguments `("foo", 5)`:
+The `anything()` matcher will only ensure that an argument was passed, but will
+ignore whatever its value was.
 
 ``` javascript
-subject.callTheThingThatShouldBeInvokingMyTestDouble()
+var bark = td.function()
 
-td.verify(myTestDouble("foo", 5))
+bark('woof')
+
+td.verify(bark('woof')) // passes
+td.verify(bark(td.matchers.anything())) // passes
+td.verify(bark(td.matchers.anything(), td.matchers.anything())) // throws - was 1 arg
+td.verify(bark()) // throws - 1 arg needed
 ```
 
-Just invoke the method as you want to see it invoked inside a call to `verify()`.
+#### testdouble.matchers.isA()
 
-If the verification succeeded, nothing will happen. If the verification fails,
-you'll see an error like this one:
+The `isA()` matcher can be used to verify a matching type for a given argument.
 
+``` javascript
+var eatBiscuit = td.function()
+
+eatBiscuit(44)
+
+td.verify(eatBiscuit(44)) // passes
+td.verify(eatBiscuit(td.matchers.isA(Number))) // passes
+td.verify(eatBiscuit(td.matchers.isA(Date))) // throws - 44 is not a Date
+td.verify(eatBiscuit(td.matchers.isA(Object))) // throws - Number is not an Object
 ```
-Unsatisfied test double verification.
 
-  Wanted:
-    - called with `("WOAH")`.
+Unfortunately, the error message generated when a verification fails due to an
+argument matcher mis-match is not very informative. If you'd like to help out,
+see this issue to [improve the argument
+matcher](https://github.com/testdouble/testdouble.js/issues/59) API.
 
-  But there were no invocations of the test double.
+#### testdouble.matchers.contains()
+
+The contains matcher is satisified if the passed-in portion of a string, array,
+or object is found on an actual invocation of the test double.
+
+##### Strings
+
+``` javascript
+var log = td.function()
+
+log('Why hello there!')
+
+td.verify(log('Why hello there!')) // passes
+td.verify(log(td.matchers.contains('hello'))) // passes
+td.verify(log(td.matchers.contains('goodbye'))) // throws - string not found
 ```
 
-### Using Argument Captors
+##### Arrays
 
-An argument captor is a object that provides a function called "capture", which
-itself is a special type of an argument matcher, which "captures" an
-actual value that's passed into a test double by your subject code, such that
-your test can access that value. Typically, a test would want to use a captor
-when complex assertion logic is necessary or when an anonymous function is
-passed into a test double and that function should be put under test directly.
+``` javascript
+var join = td.function()
 
-**Beware before using:** if your test double is receiving an argument that can't
-be verified with the default equality check or a more straightforward matcher,
-ask yourself if the contract between the subject and the test double is as simple
-as it should be before trying to salve the "gee, this is hard to test" pain by
-using a captor. In my practice, I typically only use captors when I'm testing
-legacy code or when exposing an anonymous function via a public API would be
-undesirable. **/BEWARE**
+join(['this','and','that'])
 
-Here's an example. Suppose you want to write a test that would specify this bit
-of code:
-
+td.verify(join(['this','and','that'])) // passes
+td.verify(join(td.matchers.contains('and'))) // passes
+td.verify(join(td.matchers.contains('this','that'))) // passes
+td.verify(join(td.matchers.contains('this','not that'))) // throws - 'not that' absent
 ```
+
+##### Objects
+
+``` javascript
+var brew = td.function()
+
+brew({ingredient: 'beans', temperature: 'cold'})
+
+td.verify(brew({ingredient: 'beans', temperature: 'cold'})) // passes
+td.verify(brew(td.matchers.contains({ingredient: 'beans'}))) // passes
+td.verify(brew(td.matchers.contains({temperature: 'hot'}))) // throws - wa cold
+```
+
+And, just like when stubbing, `contains()` can be used to [match deeply-nested
+object properties](5-stubbing-results.md#objects).
+
+#### testdouble.matchers.argThat()
+
+When the argument match needed is more complex than can be described above, one
+option is to pass a truth test to `argThat()`, like so:
+
+``` javascript
+var pet = td.function()
+
+pet(['cat', 'dog'])
+
+td.verify(pet(td.matchers.argThat(function(n){ return n.length > 1 }))) // passes
+td.verify(pet(td.matchers.argThat(function(n){ return n.length > 2 }))) // throws
+```
+
+#### custom argument matchers
+
+Remember that if none of the matchers above suit you, writing your own is as
+easy as writing a function that returns an object with a `__matches` property.
+Read the document on [custom matchers](8-custom-matchers.md) for more information.
+
+### Multi-phase assertions with argument captors
+
+Often in JavaScript, we'll pass an anonymous or privately-scoped function from
+our subject under test to one of its dependencies. In order to fully test the
+interaction between the subject and such a dependency, we need a way to get a
+reference to that function.
+
+One way to do this is to make the function publicly reachable and put it under
+direct test. That has the benefit of being simple to read and explicit, but
+often comes at the added cost of sacrificing the convenience of lexically-scoped
+values and at the risk of cluttering an API with highly contextual one-off bits
+of behavior.
+
+Another way to accomplish the same thing is with what is called an "argument
+captor". You can think of an argument captor as a special type of argument
+matcher. To be more precise, an argument captor is an object that generates
+an argument matcher which always reports a successful match, all-the-while
+storing the value passed into said matcher for later access by the originating
+test.
+
+But, that sounds confusing! Let's see an example:
+
+#### td.matchers.captor()
+
+Let's say that we wrote a test for a function that looked like this:
+
+``` javascript
 function logInvalidComments(fetcher, logger) {
   fetcher('/comments', function(response){
     response.comments.forEach(function(comment) {
       if(!comment.valid) {
-        logger('Hey, '+comment.text+' is invalid');
+        logger('Hey, '+comment.text+' is invalid')
       }
-    });
-  });
+    })
+  })
 }
 ```
+
+JavaScript has a knack for enabling very dense functions—the above makes an HTTP
+request, handles the response, and for each invalid `comment` resource, writes
+out a particular logger statement. So, how do we verify that the `logger()`
+function is being invoked exactly as we specified?
 
 You could use an argument captor to write a sort of two-staged test for both the
 top-level function along with its embedded anonymous function.
 
-```
-//Stage 1: Test the outer function
-var td = require('testdouble'),
-    assert = require('assert'),
-    logger = td.function('logger'),
+The test begins similarly to what we've seen before, with a verification of the
+top-most depended-on function, `fetcher`:
+
+``` javascript
+var logger = td.function('logger'),
     fetcher = td.function('fetcher'),
-    captor = td.matchers.captor();
+    captor = td.matchers.captor()
 
-logInvalidComments(fetcher, logger);
+logInvalidComments(fetcher, logger)
 
-td.verify(fetcher('/comments', captor.capture()));
+td.verify(fetcher('/comments', captor.capture()))
+```
 
-// Stage 2: Now we test the anonymous function passed to `fetcher`
-var response = {comments: [{valid: true}, {valid: false, text: 'PANTS'}]};
+The only novel thing seen above is the invocation of `captor()` to create a new
+argument captor object and its use in the `verify()` demonstration call to
+`fetcher` with `captor.capture()`. Remember, we're said to be "capturing" the
+value of that second argument because there's no other way for our test to get
+a reference to that function without changing the production source code.
 
-captor.value(response);
+Now that we've captured a reference to the anonymous callback function, we can
+put it under test, too. Once `capture()` is called, the `captor` object will
+retain the captured argument on a property named `value`:
 
-assert.ok(td.explain(logger).callCount === 1);
-td.verify(logger('Hey, PANTS is invalid'));
+``` javascript
+var response = {comments: [{valid: true}, {valid: false, text: 'PANTS'}]}
+
+captor.value(response)
+
+td.verify(logger('Hey, PANTS is invalid'))
 ```
 
 This style is definitely verbose, but it's very explicit and entirely
@@ -176,4 +270,87 @@ by testing it synchronously. The benefits to this are comprehensability of what
 the test does at runtime, easier debugging, and no reliance on a test framework
 to provide async support.
 
+Is writing tests in this style worth it? A better question might be, "is there
+an easier-to-use design conducive to an outside-in TDD workflow?" Without casting
+judgment on passing around anonymous functions per se, I've found that they're
+typically best used in two places, neither of whose tests do I use test doubles:
 
+* Calls to asynchronous I/O - one reason for needing to pass a function is to
+defer some bit of evaluation until an I/O operation has completed. I do my best
+to draw my I/O interactions near enough to the entry point such that my "domain
+logic" is relatively unconcerned with it. If I succeed at making the entry point
+mostly branchless and imperative, I'll test it only via an integration test and
+not concern myself with trying to unit test it with test doubles
+* Transforming data - the other major use for passing around
+anonymous functions is when using a library like [lodash](http://lodash.com) to
+translate some initial value using operations like
+[map](https://lodash.com/docs#map), [reduce](https://lodash.com/docs#reduce),
+[zip](https://lodash.com/docs#zip), and [groupBy](https://lodash.com/docs#groupBy).
+I tend not to use test doubles in tests of functions that do much of this either,
+because they can usually be expressed or composed into pure functions that can
+be tested perfectly well without any dependencies to be isolated from.
+
+It's due to the reasoning above that one should question the frequent use of
+argument captors or the perceived need for asynchronous behavior in unit tests.
+For related conversation, check out Gary Bernhardt's excellent talk on this topic
+called [Boundaries](https://www.destroyallsoftware.com/talks/boundaries).
+
+### Configuring verifications
+
+Verifications can be configured in [the exact same ways that stubbings
+can](5-stubbing-results.md#configuring-stubbings). By passing an options object
+as the second argument to `verify()`, you can modify the behavior of an assertion.
+For added clarity, below are some example uses to demonstrate their behavior.
+
+#### ignoreExtraArgs
+
+When you don't care about any of the args passed to a function, or only the first
+n arguments passed, you can use the `ignoreExtraArgs: true` option:
+
+``` javascript
+var print = td.function()
+
+print('some', 'stuff', 'out', 'like', 8)
+
+td.verify(print()) // throws, missng all arguments
+td.verify(print(), {ignoreExtraArgs: true}) // passes
+td.verify(print('some'), {ignoreExtraArgs: true}) // passes
+td.verify(print('some', 'stuff'), {ignoreExtraArgs: true}) // passes
+td.verify(print('some', 'stuff', 'NOPE'), {ignoreExtraArgs: true}) // throws, wrong arg
+```
+
+If you'd like to improve the error message when `ignoreExtraArgs` is used,
+consider contributing a pull request for [this
+issue](https://github.com/testdouble/testdouble.js/issues/60).
+
+#### times
+
+Sometimes, we want to verify that a test double was called an exact number of
+times in a certain way. With the `times` option we can do that.
+
+``` javascript
+var save = td.function()
+
+save('thing')
+save('thing')
+
+td.verify(save('thing')) // passes
+td.verify(save('thing'), {times: 1}) // throws - was called twice
+```
+
+##### Never, ever call something
+
+As a silly example to combine both options so far, consider this test to ensure
+that a function was never called, regardless of arguments:
+
+``` javascript
+var doNotCall = td.function()
+
+td.verify(doNotCall(), {times: 0, ignoreExtraArgs: true}) // passes
+```
+
+## Congratulations!
+
+And that's everything there is to know about verifying behavior with
+testdouble.js! At this point, you know everything you need to know to be pretty
+dangerous writing isolated tests.
