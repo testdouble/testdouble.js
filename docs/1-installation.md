@@ -51,10 +51,13 @@ And then find the browser distribution of the library in
 
 #### bower
 
-**TODO: Test this**
+To install testdouble.js with bower:
 
-While npm3 has in many ways obviated the need for Bower, it probably works too.
-gl;hf, etc.
+```
+$ bower install --save-dev testdouble/testdouble.js
+```
+
+Once installed, the browser library can be found in `bower_components/testdouble/dist/testdouble.js`
 
 ## Configuring testdouble.js Setting up in your test suite
 
