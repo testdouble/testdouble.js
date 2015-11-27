@@ -340,3 +340,9 @@ sort of meaningful primer on the goals and benefits of doing outside-in isolatio
 TDD at all. If you're interested in that topic, we've prepared a [screencast
 series](http://is.gd/discovery_testing) introducing one approach to outside-in
 called Discovery Testing.
+
+Further reading that documents the features shown off in this tutorial include:
+
+* [Creating test doubles with `function()` and `object()`](4-creating-test-doubles.md)
+* [Stubbing responses with `when()`](5-stubbing-results.md)
+* [Verifying invocations with `verify()`](6-verifying-invocations.md)
