@@ -1,6 +1,6 @@
 # testdouble.js
 
-[![Build Status](https://secure.travis-ci.org/testdouble/testdouble.js.svg)](http://travis-ci.org/testdouble/testdouble.js) [![npmjs](https://img.shields.io/badge/npmjs.svg)](https://www.npmjs.com/package/testdouble)
+[![Build Status](https://secure.travis-ci.org/testdouble/testdouble.js.svg)](http://travis-ci.org/testdouble/testdouble.js) [![npmjs](https://img.shields.io/badge/npm-testdouble-red.svg)](https://www.npmjs.com/package/testdouble)
 
 Welcome! Are you writing JavaScript tests and in the market for a mocking library to
 fake out real things for you? testdouble.js is an opinionated, carefully-designed
