@@ -1,0 +1,16 @@
+{
+  "name": "getting-started",
+  "description": "An HTML/JS/CSS app",
+  "version": "0.0.1",
+  "private": true,
+  "author": "Test Double, LLC",
+  "devDependencies": {
+    "lineman": "~0.36.6"
+  },
+  "scripts": {
+    "start": "lineman run",
+    "test:dev": "lineman spec",
+    "test": "lineman spec-ci",
+    "production": "lineman clean build && npm i express@3 && node -e \"var e = require('express'), a = e(); a.use(e.static('dist/')); a.listen(process.env.PORT)\""
+  }
+}
