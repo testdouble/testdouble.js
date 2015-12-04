@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "lodash": "^3.10.1",
-    "quibble": "^0.2.1"
+    "quibble": "^0.3.0"
   },
   "devDependencies": {
     "browserify": "^11.0.1",
