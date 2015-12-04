@@ -8,30 +8,29 @@
     "email": "justin@testdouble.com",
     "url": "http://testdouble.com"
   },
-  "main": "generated/testdouble.js",
+  "main": "lib/testdouble.js",
   "config": {
     "build_file": "dist/testdouble.js",
     "mocha_reporter": "spec"
   },
   "scripts": {
-    "clean": "rm -rf generated dist && git checkout -- dist",
+    "clean": "rm -rf generated dist lib && git checkout -- dist",
     "start": "testem",
-    "compile": "coffee --output generated --compile lib",
-    "compile:tests": "coffee --output generated/test --compile test",
+    "compile:node": "coffee --output lib --compile src",
+    "compile:test": "coffee --output generated/test --compile test",
+    "compile:browser": "browserify . --standalone testdouble --outfile $npm_package_config_build_file --ignore 'quibble'",
+    "compile": "npm run compile:node && npm run compile:test && npm run compile:browser",
     "test": "mocha --ui mocha-given --reporter $npm_package_config_mocha_reporter --compilers coffee:coffee-script --recursive test/node-helper.coffee test/lib",
-    "test:ci": "npm run test --testdouble:mocha_reporter=tap && testem ci",
-    "test:examples": "cd examples/node && npm i && npm test && cd ../..",
+    "test:example": "cd examples/node && npm i && npm test && cd ../..",
+    "test:ci": "npm run test --testdouble:mocha_reporter=tap && testem ci && npm run test:example",
     "test:debug": "npm test -- --debug-brk",
-    "prebuild": "npm run compile",
-    "build": "browserify . --standalone testdouble --outfile $npm_package_config_build_file --ignore 'quibble'",
-    "audit:disc": "npm run build -- --full-paths && discify $npm_package_config_build_file --open",
     "preversion": "git pull --rebase && npm run test:ci",
-    "version": "npm run build && git add dist",
+    "version": "npm run compile && git add dist",
     "postversion": "git push && git push --tags && npm publish",
     "prepublish": "npm run compile"
   },
   "browser": {
-    "./generated/replace.js": "./generated/replace.browser.js"
+    "./lib/replace.js": "./lib/replace.browser.js"
   },
   "browserify": {
     "transform": [

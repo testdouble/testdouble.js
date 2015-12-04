@@ -55,7 +55,7 @@ Error: Unsatisfied verification on test double `quack`.
 
   But was actually called:
     - called with `("QUACK")`.
-  at Object.module.exports [as verify] (/Users/justin/code/testdouble/testdouble.js/generated/verify.js:22:15)
+  at Object.module.exports [as verify] (/Users/justin/code/testdouble/testdouble.js/lib/verify.js:22:15)
 ```
 
 As you can see, the expected arguments of the failed verification are pritned
