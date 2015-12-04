@@ -14,7 +14,7 @@ module.exports = {
 
   framework: 'mocha+chai',
 
-  before_tests: "npm run compile:tests && npm run build",
+  before_tests: "npm run compile",
   //might want to add this if you do a lot of file-delete/add churn; faster w/o.
   //after_tests: "npm run clean",
 
@@ -35,7 +35,7 @@ module.exports = {
   ],
 
   watch_files: [
-    "lib/**/*",
+    "src/**/*",
     "test/**/*"
   ]
 };
