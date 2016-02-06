@@ -56,6 +56,13 @@ describe 'when', ->
       Given -> @when(@testDouble()).thenReturn('B', 'C')
       Then -> @testDouble() == 'B'
 
+  describe 'stubbing actions with `thenDo` instead of `thenReturn`', ->
+    Given -> @verify = requireSubject('lib/verify')
+    Given -> @someAction = @function()
+    Given -> @when(@testDouble(55)).thenDo(@someAction)
+    When -> @testDouble(55)
+    Then -> @verify(@someAction(55))
+
   describe 'config object', ->
     describe 'ignoring extra arguments', ->
       context 'for a no-arg stubbing', ->
