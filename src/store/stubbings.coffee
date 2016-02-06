@@ -9,7 +9,7 @@ module.exports =
 
   invoke: (testDouble, args) ->
     return unless stubbing = stubbingFor(testDouble, args)
-    _.tap stubbedValueFor(stubbing), ->
+    _.tap executePlan(stubbing, args), ->
       stubbing.callCount += 1
 
   for: (testDouble) ->
@@ -18,6 +18,12 @@ module.exports =
 stubbingFor = (testDouble, actualArgs) ->
   _(store.for(testDouble).stubbings).findLast (stubbing) ->
     isSatisfied(stubbing, actualArgs)
+
+executePlan = (stubbing, args) ->
+  value = stubbedValueFor(stubbing)
+  switch stubbing.config.plan
+    when "thenReturn" then value
+    when "thenDo" then value(args...)
 
 stubbedValueFor = (stubbing) ->
   if stubbing.callCount < stubbing.stubbedValues.length
