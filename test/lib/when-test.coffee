@@ -63,6 +63,12 @@ describe 'when', ->
     When -> @testDouble(55)
     Then -> @verify(@someAction(55))
 
+  describe 'stubbing actions with `thenThrow` instead of `thenReturn`', ->
+    Given -> @error = new Error('lol')
+    Given -> @when(@testDouble(42)).thenThrow(@error)
+    When -> try @testDouble(42) catch e then @result = e
+    Then -> @error == @result
+
   describe 'config object', ->
     describe 'ignoring extra arguments', ->
       context 'for a no-arg stubbing', ->
