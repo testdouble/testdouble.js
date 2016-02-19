@@ -77,7 +77,7 @@ Here's a rough outline:
   1. [td.explain() API](docs/9-debugging.md#testdoubleexplainsometestdouble)
 10. [Plugins](docs/A-plugins.md#plugins)
   1. [testdouble-chai](https://github.com/basecase/testdouble-chai)
-  2. [testdouble-jasmine](https://github.com/testdouble/testdouble.js/issues/41)
+  2. [testdouble-jasmine](https://github.com/BrianGenisio/testdouble-jasmine)
 11. [Frequently Asked Questions](docs/B-frequently-asked-questions.md#frequently-asked-questions)
   1. [Why doesn't `td.replace()` work with external CommonJS modules?](docs/B-frequently-asked-questions.md#why-doesnt-tdreplace-work-with-external-commonjs-modules)
 
