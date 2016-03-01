@@ -118,8 +118,11 @@
 
   stubbings = require('./store/stubbings');
 
-  module.exports = function(name) {
-    return _.tap(createTestDoubleFunction(), function(testDouble) {
+  module.exports = function(name, options) {
+    if (options == null) {
+      options = {};
+    }
+    return _.tap(createTestDoubleFunction(name, options), function(testDouble) {
       if (name != null) {
         store["for"](testDouble).name = name;
         return testDouble.toString = function() {
@@ -133,12 +136,15 @@
     });
   };
 
-  createTestDoubleFunction = function() {
+  createTestDoubleFunction = function(name, options) {
     var testDouble;
     return testDouble = function() {
       var args;
       args = 1 <= arguments.length ? slice.call(arguments, 0) : [];
       calls.log(testDouble, args, this);
+      if (options.log) {
+        console.log("Test Double Function '%s' called with: ", name, args);
+      }
       return stubbings.invoke(testDouble, args);
     };
   };
