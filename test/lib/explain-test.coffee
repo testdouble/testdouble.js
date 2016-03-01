@@ -1,6 +1,7 @@
 describe '.explain', ->
   Given -> @explain = requireSubject('lib/explain')
   Given -> @function = requireSubject('lib/function')
+  Given -> @verify = requireSubject('lib/verify')
   Given -> @when = requireSubject('lib/when')
 
   Given -> @testDouble = @function()
@@ -13,6 +14,14 @@ describe '.explain', ->
       description: """
       This test double has 0 stubbings and 0 invocations.
       """
+
+  context 'a logging test double', ->
+    afterEach -> console.log = @originalLog
+    Given -> @originalLog = console.log
+    Given -> console.log = @function()
+    Given -> @testDouble = @function("loggingDouble", {log: true})
+    When -> @testDouble("anything")
+    Then -> @verify(console.log("Test Double Function '%s' called with: ", 'loggingDouble', ["anything"]))
 
   context 'a named test double', ->
     Given -> @testDouble = @function("foobaby")
