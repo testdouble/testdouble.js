@@ -58,7 +58,7 @@ Error: Unsatisfied verification on test double `quack`.
   at Object.module.exports [as verify] (/Users/justin/code/testdouble/testdouble.js/lib/verify.js:22:15)
 ```
 
-As you can see, the expected arguments of the failed verification are pritned
+As you can see, the expected arguments of the failed verification are printed
 along with any actual invocations of the test double function.
 
 ### Arguments
