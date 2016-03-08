@@ -1,14 +1,10 @@
 describe 'testdouble.object', ->
-  Given -> @subject = requireSubject('lib/object')
-  Given -> @when = requireSubject('lib/when')
-  Given -> @verify = requireSubject('lib/verify')
-
   describe 'making a test double object based on a Prototypal thing', ->
     Given -> @someType = class Thing
       foo: ->
       bar: ->
-    Given -> @testDouble = @subject(@someType)
-    When -> @when(@testDouble.bar()).thenReturn('yay')
+    Given -> @testDouble = td.object(@someType)
+    When -> td.when(@testDouble.bar()).thenReturn('yay')
     Then -> @testDouble.bar() == 'yay'
     And -> @testDouble.toString() == '[test double object for "Thing"]'
     And -> @testDouble.foo.toString() == '[test double for "Thing#foo"]'
@@ -19,35 +15,35 @@ describe 'testdouble.object', ->
       kek: ->
       now: ->
       otherThing: 8
-    Given -> @testDouble = @subject(@funcBag)
-    When -> @when(@testDouble.kek()).thenReturn('nay!')
+    Given -> @testDouble = td.object(@funcBag)
+    When -> td.when(@testDouble.kek()).thenReturn('nay!')
     Then -> @testDouble.kek() == 'nay!'
     And -> @testDouble.toString() == '[test double object]'
     And -> @testDouble.now.toString() == '[test double for ".now"]'
     And -> @testDouble.otherThing == 8
 
   describe 'making a test double based on an array of strings', ->
-    Given -> @testDouble = @subject(['biz','bam','boo'])
-    When -> @when(@testDouble.biz()).thenReturn('zing!')
+    Given -> @testDouble = td.object(['biz','bam','boo'])
+    When -> td.when(@testDouble.biz()).thenReturn('zing!')
     Then -> @testDouble.biz() == 'zing!'
     And -> @testDouble.toString() == '[test double object]'
     And -> @testDouble.bam.toString() == '[test double for ".bam"]'
 
   if global.Proxy?
     describe 'creating a proxy object (ES2015; only supported in FF + Edge atm)', ->
-      Given -> @testDouble = @subject('Thing')
+      Given -> @testDouble = td.object('Thing')
       Given -> @testDouble.magic('sauce')
-      When -> @when(@testDouble.whateverYouWant()).thenReturn('YESS')
-      Then -> @verify(@testDouble.magic('sauce'))
+      When -> td.when(@testDouble.whateverYouWant()).thenReturn('YESS')
+      Then -> td.verify(@testDouble.magic('sauce'))
       And -> @testDouble.whateverYouWant() == 'YESS'
       And -> @testDouble.toString() == '[test double object for "Thing"]'
       And -> @testDouble.foo.toString() == '[test double for "Thing#foo"]'
 
       context 'with custom excludeMethods definitions', ->
-        Given -> @testDouble = @subject('Stuff', excludeMethods: ['then', 'fun'])
+        Given -> @testDouble = td.object('Stuff', excludeMethods: ['then', 'fun'])
         Then -> @testDouble.fun == undefined
 
       context 'unnamed double', ->
-        Given -> @testDouble = @subject()
+        Given -> @testDouble = td.object()
         Then -> @testDouble.toString() == '[test double object]'
         Then -> @testDouble.lol.toString() == '[test double for "#lol"]'

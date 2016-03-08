@@ -1,10 +1,6 @@
 describe '.explain', ->
-  Given -> @explain = requireSubject('lib/explain')
-  Given -> @function = requireSubject('lib/function')
-  Given -> @when = requireSubject('lib/when')
-
-  Given -> @testDouble = @function()
-  When -> @result = @explain(@testDouble)
+  Given -> @testDouble = td.function()
+  When -> @result = td.explain(@testDouble)
 
   context 'a brand new test double', ->
     Then -> expect(@result).to.deep.eq
@@ -15,14 +11,14 @@ describe '.explain', ->
       """
 
   context 'a named test double', ->
-    Given -> @testDouble = @function("foobaby")
+    Given -> @testDouble = td.function("foobaby")
     Then -> expect(@result.description).to.deep.eq """
       This test double `foobaby` has 0 stubbings and 0 invocations.
       """
 
   context 'a double with some interactions', ->
-    Given -> @when(@testDouble(88)).thenReturn(5)
-    Given -> @when(@testDouble("two things!")).thenReturn("woah", "such")
+    Given -> td.when(@testDouble(88)).thenReturn(5)
+    Given -> td.when(@testDouble("two things!")).thenReturn("woah", "such")
     Given -> @testDouble(88)
     Given -> @testDouble("not 88", 44)
 

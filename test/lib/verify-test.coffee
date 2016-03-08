@@ -1,15 +1,12 @@
 describe '.verify', ->
-  Given -> @verify = requireSubject('lib/verify')
-  Given -> @function = requireSubject('lib/function')
-  Given -> @object = requireSubject('lib/object')
-  Given -> @testDouble = @function()
+  Given -> @testDouble = td.function()
 
   context 'a satisfied verification', ->
     When -> @testDouble("dogs", "cats")
-    Then -> @verify(@testDouble("dogs", "cats"))
+    Then -> td.verify(@testDouble("dogs", "cats"))
 
   context 'an unsatisfied verification - no interactions', ->
-    Then -> shouldThrow (=> @verify(@testDouble("WOAH"))), """
+    Then -> shouldThrow (=> td.verify(@testDouble("WOAH"))), """
       Unsatisfied verification on test double.
 
         Wanted:
@@ -20,7 +17,7 @@ describe '.verify', ->
 
   context 'unsatisfied verify - other interactions', ->
     When -> @testDouble("the wrong WOAH")
-    Then -> shouldThrow (=> @verify(@testDouble("WOAH"))), """
+    Then -> shouldThrow (=> td.verify(@testDouble("WOAH"))), """
       Unsatisfied verification on test double.
 
         Wanted:
@@ -32,7 +29,7 @@ describe '.verify', ->
 
   context 'unsatisfied verify - wrong arg count', ->
     When -> @testDouble("good", "bad")
-    Then -> shouldThrow (=> @verify(@testDouble("good"))), """
+    Then -> shouldThrow (=> td.verify(@testDouble("good"))), """
       Unsatisfied verification on test double.
 
         Wanted:
@@ -43,8 +40,8 @@ describe '.verify', ->
       """
 
   context 'with a named double', ->
-    Given -> @testDouble = @function("#footime")
-    When -> @result = (shouldThrow => @verify(@testDouble()))
+    Given -> @testDouble = td.function("#footime")
+    When -> @result = (shouldThrow => td.verify(@testDouble()))
     Then -> expect(@result).to.contain("verification on test double `#footime`.")
 
   context 'with a prototype-modeling double', ->
@@ -52,25 +49,25 @@ describe '.verify', ->
     Given -> @SomeType::bar = ->
     Given -> @SomeType::baz = ->
     Given -> @SomeType::biz = "not a function!"
-    Given -> @testDoubleObj = @object(@SomeType)
-    When -> @result = (shouldThrow => @verify(@testDoubleObj.baz()))
+    Given -> @testDoubleObj = td.object(@SomeType)
+    When -> @result = (shouldThrow => td.verify(@testDoubleObj.baz()))
     Then -> expect(@result).to.contain("verification on test double `Foo#baz`.")
     Then -> @testDoubleObj.biz == "not a function!"
 
   context 'with a test double *as an arg* to another', ->
-    Given -> @testDouble = @function()
-    When -> @result = (shouldThrow => @verify(@testDouble(@someTestDoubleArg)))
+    Given -> @testDouble = td.function()
+    When -> @result = (shouldThrow => td.verify(@testDouble(@someTestDoubleArg)))
 
     context 'with an unnamed double _as an arg_', ->
-      Given -> @someTestDoubleArg = @function()
+      Given -> @someTestDoubleArg = td.function()
       Then -> expect(@result).to.contain("- called with `([test double (unnamed)])`.")
 
     context 'with a named double _as an arg_', ->
-      Given -> @someTestDoubleArg = @function("#foo")
+      Given -> @someTestDoubleArg = td.function("#foo")
       Then -> expect(@result).to.contain("- called with `([test double for \"#foo\"])`.")
 
   context 'a double-free verification error', ->
-    Then -> shouldThrow (=> @verify()), """
+    Then -> shouldThrow (=> td.verify()), """
       No test double invocation detected for `verify()`.
 
         Usage:
@@ -78,28 +75,27 @@ describe '.verify', ->
       """
 
   context 'using matchers', ->
-    Given -> @matchers = requireSubject('lib/matchers')
     When -> @testDouble(55)
 
     context 'satisfied', ->
-      Then -> shouldNotThrow(=> @verify(@testDouble(@matchers.isA(Number))))
+      Then -> shouldNotThrow(=> td.verify(@testDouble(td.matchers.isA(Number))))
 
     context 'unsatisfied', ->
-      Then -> shouldThrow(=> @verify(@testDouble(@matchers.isA(String))))
+      Then -> shouldThrow(=> td.verify(@testDouble(td.matchers.isA(String))))
 
   describe 'configuration', ->
 
     describe 'ignoring extra arguments (more thoroughly tested via when())', ->
       When -> @testDouble('matters', 'not')
-      Then -> shouldNotThrow(=> @verify(@testDouble('matters'), ignoreExtraArgs: true))
+      Then -> shouldNotThrow(=> td.verify(@testDouble('matters'), ignoreExtraArgs: true))
 
     describe 'number of times an invocation is satisfied', ->
       context '0 times, satisfied', ->
-        Then -> shouldNotThrow(=> @verify(@testDouble(), times: 0))
+        Then -> shouldNotThrow(=> td.verify(@testDouble(), times: 0))
 
       context '0 times, unsatisfied', ->
         When -> @testDouble()
-        Then -> shouldThrow (=> @verify(@testDouble(), times: 0)), """
+        Then -> shouldThrow (=> td.verify(@testDouble(), times: 0)), """
           Unsatisfied verification on test double.
 
             Wanted:
@@ -111,12 +107,12 @@ describe '.verify', ->
 
       context '1 time, satisfied', ->
         When -> @testDouble()
-        Then -> shouldNotThrow(=> @verify(@testDouble(), times: 1))
+        Then -> shouldNotThrow(=> td.verify(@testDouble(), times: 1))
 
       context '1 time, unsatisfied (with 2)', ->
         When -> @testDouble()
         And -> @testDouble()
-        Then -> shouldThrow (=> @verify(@testDouble(), times: 1)), """
+        Then -> shouldThrow (=> td.verify(@testDouble(), times: 1)), """
           Unsatisfied verification on test double.
 
             Wanted:
@@ -132,13 +128,13 @@ describe '.verify', ->
         And -> @testDouble()
         And -> @testDouble()
         And -> @testDouble()
-        Then -> shouldNotThrow(=> @verify(@testDouble(), times: 4))
+        Then -> shouldNotThrow(=> td.verify(@testDouble(), times: 4))
 
       context '4 times, unsatisfied (with 3)', ->
         When -> @testDouble()
         And -> @testDouble()
         And -> @testDouble()
-        Then -> shouldThrow (=> @verify(@testDouble(), times: 4)), """
+        Then -> shouldThrow (=> td.verify(@testDouble(), times: 4)), """
           Unsatisfied verification on test double.
 
             Wanted:
@@ -149,8 +145,3 @@ describe '.verify', ->
               - called with `()`.
               - called with `()`.
           """
-
-
-
-
-
