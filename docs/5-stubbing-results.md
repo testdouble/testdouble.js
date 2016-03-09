@@ -243,6 +243,102 @@ pet({length: 81}) // 'goood'
 If you find yourself needing a matcher that isn't defined above, you can
 [define your own custom matchers](8-custom-matchers.md) as well.
 
+### Stubbing callback APIs
+
+Callback APIs are very common, especially in Node.js, and for terseness and
+convenience sake, testdouble.js provides conveniences for stubbing functions
+that expect a callback argument.
+
+Suppose you'd like to test-drive a function like this:
+
+``` js
+function deleteFiles(pattern, glob, rm) {
+  glob(pattern, function(er, files) {
+    files.forEach(function(file){
+      rm(file)
+    })
+  })
+}
+```
+
+You could write a test for `deleteFiles` using `td.when`'s `thenCallback` API:
+
+``` js
+var glob = td.function()
+var rm = td.function()
+td.when(glob('some/pattern/**')).thenCallback(null, ['foo', 'bar'])
+
+deleteFiles('some/pattern/**', glob, rm)
+
+td.verify(rm('foo'))
+td.verify(rm('bar'))
+```
+
+The above is very terse and gets the job done, but it makes some assumptions that
+may not apply to every situation. The above assumes:
+
+* that `glob`'s callback argument is the last argument users will pass to it
+(which is a pretty common convention)
+* that the return value of `glob` is not significant
+
+Note that **all callbacks are invoked synchronously**, which makes unit testing
+functions which are only incidentally asynchronous much simpler.
+
+#### Callback APIs with a callback argument at an arbitrary position
+
+Take the same example above, but suppose that `glob`'s arguments were reversed:
+the callback was in the first position and the string pattern was passed second.
+This can be done by placing a reference to `td.callback` as a marker for its
+argument position to the stubbing:
+
+``` js
+td.when(glob(td.callback, 'some/pattern/**')).thenCallback(null, ['foo', 'bar'])
+```
+
+#### Callback APIs with meaningful return values
+
+Suppose in the above example that `glob`'s return value was also significant,
+in that case we can trade terseness for some added explicitness by treating
+`td.callback` as an argument matcher and chaining `td.when` with `thenReturn`
+as we might normally do:
+
+``` js
+td.when(glob('some/pattern/**', td.callback(null, ['foo', 'bar']))).thenReturn(8)
+```
+
+Now, calls that satisfy the above stubbing on `glob` will both invoke the callback
+with the parameters provided to `td.callback` and also return `8`.
+
+#### Callback APIs with multiple callback arguments
+
+Some APIs have multiple callback functions, all of which need to be invoked to
+properly exercise the subject. Suppose your code depends on
+`doWork(onStart, onEnd)`, and both callback arguments should be invoked in a
+single test, you could:
+
+``` js
+var doWork = td.function()
+td.when(doWork(td.callback(null, 42), td.callback(null, 58))).thenReturn()
+
+var percent = 0
+doWork(function(er, progress) {
+  percent += progress
+}, function(er, progress) {
+  percent += progress
+})
+
+assert.equal(percent, 100)
+```
+
+Remember, not every test needs to invoke every callback; it's fine to specify
+them separately, especially if it would lead to more focused tests. You could
+break up the above into two tests by matching the other function argument with
+an `isA(Function)` matcher:
+
+``` js
+td.when(doWork(td.callback(null, 42), td.matchers.isA(Function))).thenReturn()
+```
+
 ### Configuring stubbings
 
 So far, we've seen `td.when()` only invoked with one argument, but it sports a
