@@ -1,6 +1,6 @@
 return unless NODE_JS
 
-describe "testdouble.js", ->
+describe "td.*", ->
   describe "where all the functions are", ->
     Then -> td.when == require('../../src/when')
     Then -> td.verify == require('../../src/verify')

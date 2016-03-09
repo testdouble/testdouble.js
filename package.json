@@ -17,7 +17,7 @@
     "clean": "rm -rf generated dist lib && git checkout -- dist",
     "compile:node": "coffee --output lib --compile src",
     "compile:test": "coffee --output generated/test --compile test",
-    "compile:browser": "browserify . --standalone testdouble --outfile $npm_package_config_build_file --ignore 'quibble' -p headerify",
+    "compile:browser": "browserify . --standalone td --outfile $npm_package_config_build_file --ignore 'quibble' -p headerify",
     "compile": "npm run compile:node && npm run compile:test && npm run compile:browser",
     "test": "mocha --ui mocha-given --reporter $npm_package_config_mocha_reporter --compilers coffee:coffee-script --recursive test/node-helper.coffee test/lib",
     "test:browser": "npm run compile && testem ci",
@@ -31,7 +31,8 @@
     "prepublish": "npm run compile"
   },
   "browser": {
-    "./lib/replace.js": "./lib/replace.browser.js"
+    "./lib/replace.js": "./lib/replace.browser.js",
+    "./lib/browser-side-effects.js": "./lib/browser-side-effects.browser.js"
   },
   "browserify": {
     "transform": [
