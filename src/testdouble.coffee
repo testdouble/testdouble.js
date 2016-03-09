@@ -4,6 +4,7 @@ module.exports =
   when: require('./when')
   verify: require('./verify')
   matchers: require('./matchers/index')
+  callback: require('./matchers/callback')
   explain: require('./explain')
   replace: require('./replace')
   reset: require('./reset')

@@ -1,10 +1,4 @@
 global.expect = chai.expect
-global.requireSubject = (path) ->
-  return testdouble unless path?
-  [lib, pathComponents...] = path.split('/')
-  _.reduce pathComponents, (memo, nextProp) ->
-    memo[nextProp]
-  , testdouble
 
 global.xThen = ->
 
@@ -12,7 +6,7 @@ global.shouldNotThrow = (func) ->
   func()
 
 afterEach ->
-  testdouble.reset()
+  td.reset()
 
 global.shouldThrow = (func, expectedMessage) ->
   threw = null
