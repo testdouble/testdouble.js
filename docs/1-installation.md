@@ -66,22 +66,15 @@ such as [QUnit](http://qunitjs.com), [Mocha](https://mochajs.org),
 [Jasmine](http://jasmine.github.io), or any other. In fact, you can use it
 without any test library at all.
 
-### Naming test double
+### Naming testdouble.js
 
-In browsers, testdouble.js will be set as a global variable at `window.testdouble`.
-In Node.js, the library is available via `require('testdouble')` like any other
-module.
+Our browser distribution sets the library on a global variable named `window.td`.
+In Node.js, the library is loaded via `require('testdouble')`, as you might
+expect (though we recommend assigning it to `global.td` in a test helper, for
+terseness sake).
 
-However, because the risk of global variables wreaking havoc on the universe is
-less extraordinary for test-scoped code, and because typing `testdouble` or
-`require('testdouble')` thousands of times in a test suite seems like a bummer,
-we typically will alias the library a test helper to
-`window.td = window.testdouble` for browsers or
-`global.td = require('testdouble')` for Node.js.
-
-You're welcome to address testdouble or any of its functions however you prefer,
-but all of this documentation will assume that you've aliased it to `td` for the
-sake of terseness.
+You're welcome to address testdouble.js or any of its functions however you prefer,
+but all of this documentation will assume that it's available globally as `td`.
 
 ### Resetting state between test runs
 
