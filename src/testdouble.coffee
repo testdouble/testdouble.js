@@ -9,3 +9,6 @@ module.exports =
   replace: require('./replace')
   reset: require('./reset')
   version: process.env.npm_package_version || require('../package.json').version
+
+require('./browser-side-effects')(module.exports)
+

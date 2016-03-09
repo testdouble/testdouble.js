@@ -1,4 +1,4 @@
-describe 'testdouble.object', ->
+describe 'td.object', ->
   describe 'making a test double object based on a Prototypal thing', ->
     Given -> @someType = class Thing
       foo: ->
