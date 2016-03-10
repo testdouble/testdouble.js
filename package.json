@@ -33,8 +33,7 @@
     "prepublish": "npm run compile"
   },
   "browser": {
-    "./lib/replace.js": "./lib/replace.browser.js",
-    "./lib/browser-side-effects.js": "./lib/browser-side-effects.browser.js"
+    "./lib/replace.js": "./lib/replace.browser.js"
   },
   "browserify": {
     "transform": [
