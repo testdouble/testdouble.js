@@ -9,6 +9,7 @@ describe '.explain', ->
       description: """
       This test double has 0 stubbings and 0 invocations.
       """
+      isTestDouble: true
 
   context 'a named test double', ->
     Given -> @testDouble = td.function("foobaby")
@@ -39,3 +40,13 @@ describe '.explain', ->
         - called with `(88)`.
         - called with `("not 88", 44)`.
       """
+      isTestDouble: true
+
+  context 'passed a non-test double', ->
+    Given -> @testDouble = 42
+    Then -> expect(@result).to.deep.eq
+      calls: []
+      callCount: 0
+      description: "This is not a test double."
+      isTestDouble: false
+
