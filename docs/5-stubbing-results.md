@@ -339,6 +339,50 @@ an `isA(Function)` matcher:
 td.when(doWork(td.callback(null, 42), td.matchers.isA(Function))).thenReturn()
 ```
 
+### Stub exceptions with thenThrow
+
+In addition to `thenReturn`, you can stub a method to throw an exception when
+invoked in a certain way.
+
+``` js
+var save = td.function()
+td.when(save('bob')).thenThrow(new Error('Name taken'))
+
+save('bob') // throws error 'Name taken'
+```
+
+### Stub side effects with thenDo
+
+This shouldn't be needed very frequently, but when a depended-on method needs to
+have a side effect, you can stub that side effect by passing a function to
+`thenDo` in a stubbing.
+
+For instance, if you were testing a function like this:
+
+``` js
+function numbers(upTo, append) {
+  for(var i=0; i < upTo; i++) {
+    append(i)
+  }
+}
+```
+
+You could design a test to ensure the provided `append` function is invoked as
+you'd expect by simulating the side effect in the test using `thenDo`:
+
+``` js
+var items = []
+var append = td.function()
+td.when(append(td.matchers.anything())).thenDo(function(x){ items.push(x) })
+
+numbers(5, append)
+
+assert.deepEqual(items, [0,1,2,3,4])
+```
+
+Note that the above verification could also be done with `td.verify`, but might
+be more straightforward in some situations.
+
 ### Configuring stubbings
 
 So far, we've seen `td.when()` only invoked with one argument, but it sports a
