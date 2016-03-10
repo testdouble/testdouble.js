@@ -6,14 +6,22 @@ stubbingsStore = require('./store/stubbings')
 stringifyArgs = require('./stringify-args')
 
 module.exports = (testDouble) ->
+  return nullDescription() unless store.for(testDouble, false)?
   calls = callsStore.for(testDouble)
   stubs = stubbingsStore.for(testDouble)
 
   callCount: calls.length
   calls: calls
   description: """
-  This test double #{stringifyName(testDouble)}has #{stubs.length} stubbings and #{calls.length} invocations.
-  """ + stubbingDescription(stubs) + callDescription(calls)
+    This test double #{stringifyName(testDouble)}has #{stubs.length} stubbings and #{calls.length} invocations.
+    """ + stubbingDescription(stubs) + callDescription(calls)
+  isTestDouble: true
+
+nullDescription = ->
+  callCount: 0
+  calls: []
+  description: "This is not a test double."
+  isTestDouble: false
 
 stubbingDescription = (stubs) ->
   return "" if stubs.length == 0

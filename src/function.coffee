@@ -5,8 +5,9 @@ stubbings = require('./store/stubbings')
 
 module.exports = (name) ->
   _.tap createTestDoubleFunction(), (testDouble) ->
+    entry = store.for(testDouble, true)
     if name?
-      store.for(testDouble).name = name
+      entry.name = name
       testDouble.toString = -> "[test double for \"#{name}\"]"
     else
       testDouble.toString = -> "[test double (unnamed)]"
