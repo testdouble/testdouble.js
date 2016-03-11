@@ -16,7 +16,7 @@ the current configuration and state of the test double.
 
 The examples in this document assume you've aliased `testdouble` to `td`.
 
-## testdouble.explain(someTestDouble)
+## td.explain(someTestDouble)
 
 
 ``` javascript

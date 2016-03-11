@@ -2,11 +2,11 @@
 
 In test double parlance, to "stub" a method or function is to configure it to return a particular response for  a given set of inputs. When used as a noun or referred to as a "stubbing", a person could be referring to the configured test double itself or the act of returning an artificial response. When the code that you're testing depends on other units of code to do its job, the (hopefully, vast) majority of those units are invoked with a set of inputs to return some useful output. As a result, when practicing an outside-in test-driven-development workflow, being able to specify that type of interaction in a readable and specific way is very important.
 
-In testdouble.js, we stub behavior with the `testdouble.when()` function. In this chapter, we'll discuss simple stubbings, matching inexact arguments, and advanced configuration options that testdouble.js supports.
+In testdouble.js, we stub behavior with the `td.when()` function. In this chapter, we'll discuss simple stubbings, matching inexact arguments, and advanced configuration options that testdouble.js supports.
 
 All of the examples in this document presume the reader has aliased `testdouble` to `td`.
 
-## testdouble.when()
+## td.when()
 
 The basic structure of a stubbing configuration follows:
 
@@ -133,7 +133,7 @@ An "argument matcher" is a special function which, when passed to a test double 
 
 Out of the box, testdouble.js ships with a handful of matchers. They are:
 
-#### testdouble.matchers.anything()
+#### td.matchers.anything()
 
 When passed `td.matchers.anything()`, any invocation of that test double function will ignore that parameter when determining whether an invocation satisfies the stubbing. For example:
 
@@ -148,7 +148,7 @@ bark() // undefined
 bark(2, 'other stuff') // undefined
 ```
 
-#### testdouble.matchers.isA()
+#### td.matchers.isA()
 
 When passed `td.matchers.isA(someType)`, then invocations of the test double function will satisfy the stubbing when the actual type matches what is passed to `isA`. For example:
 
@@ -164,7 +164,7 @@ eatBiscuit() // undefined
 
 While `Number` is shown above, it will work for any built-in type (e.g. `String` or `Date`) or any named custom prototypal constructors defined by the user.
 
-#### testdouble.matchers.contains()
+#### td.matchers.contains()
 
 When passed `td.matchers.contains()`, then a stubbed argument can be loosened to be satisfied by any invocations that simply contain the portion of the argument. This works for several types, including strings, arrays, and objects.
 
@@ -224,7 +224,7 @@ brew({ingredient: 'beans', container: { type: 'cup', size: 'L'}}) // undefined
 brew({}) // undefined
 ```
 
-#### testdouble.matchers.argThat()
+#### td.matchers.argThat()
 
 If the other built-in matchers don't serve your needs and you don't want to roll
 your own custom matcher, you can use `argThat()` to pass a truth test function

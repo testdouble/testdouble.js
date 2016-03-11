@@ -4,7 +4,7 @@ Unlike most classical or functional langauges, JavaScript under test might depen
 
 The examples below will walk through the different ways to create new test doubles. Each example assumes you've aliased `testdouble` to `td`.
 
-## testdouble.function([name])
+## td.function([name])
 
 To create a fake function with test double, we use the `function` function. At its simplest, invoking:
 
@@ -20,7 +20,7 @@ To provide yourself with better messages, we recommend assigning a name to the f
 var woof = td.function('.woof')
 ```
 
-## testdouble.object()
+## td.object()
 
 Creating a one-off function is really easy, but often our subjects will depend on objects with functions as properties. Because we don't want to encourage the use of [partial mocks](https://github.com/testdouble/contributing-tests/wiki/Partial-Mock),  test double offers a number of ways to create objects whose function properties have all been replaced with fake functions.
 

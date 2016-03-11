@@ -28,7 +28,7 @@ happened exactly as you expected it. Here's how to use it.
 
 The examples in this document assume you've aliased `testdouble` to `td`.
 
-## testdouble.verify()
+## td.verify()
 
 A basic verification looks like this:
 
@@ -85,7 +85,7 @@ Each of the [argument matchers supported when
 stubbing](5-stubbing-results.md#what-are-argument-matchers) also work when
 verifying an interaction. Below are simple examples of each built-in matcher
 
-#### testdouble.matchers.anything()
+#### td.matchers.anything()
 
 The `anything()` matcher will only ensure that an argument was passed, but will
 ignore whatever its value was.
@@ -101,7 +101,7 @@ td.verify(bark(td.matchers.anything(), td.matchers.anything())) // throws - was 
 td.verify(bark()) // throws - 1 arg needed
 ```
 
-#### testdouble.matchers.isA()
+#### td.matchers.isA()
 
 The `isA()` matcher can be used to verify a matching type for a given argument.
 
@@ -121,7 +121,7 @@ argument matcher mis-match is not very informative. If you'd like to help out,
 see this issue to [improve the argument
 matcher](https://github.com/testdouble/testdouble.js/issues/59) API.
 
-#### testdouble.matchers.contains()
+#### td.matchers.contains()
 
 The contains matcher is satisified if the passed-in portion of a string, array,
 or object is found on an actual invocation of the test double.
@@ -166,7 +166,7 @@ td.verify(brew(td.matchers.contains({temperature: 'hot'}))) // throws - wa cold
 And, just like when stubbing, `contains()` can be used to [match deeply-nested
 object properties](5-stubbing-results.md#objects).
 
-#### testdouble.matchers.argThat()
+#### td.matchers.argThat()
 
 When the argument match needed is more complex than can be described above, one
 option is to pass a truth test to `argThat()`, like so:
