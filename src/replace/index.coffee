@@ -2,7 +2,7 @@ _ = require('lodash')
 replaceModule = require('./module')
 replaceProperty = require('./property')
 
-require('quibble').ignoreCallsFromThisFile()
+require('quibble')?.ignoreCallsFromThisFile?()
 
 module.exports = (target) ->
   if _.isString(target)
