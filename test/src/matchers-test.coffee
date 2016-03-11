@@ -63,4 +63,10 @@ describe '.matchers', ->
     Then -> td.matchers.argThat((arg) -> arg > 5).__matches(6) == true
     Then -> td.matchers.argThat((arg) -> arg > 5).__matches(5) == false
 
+  describe 'not', ->
+    Then -> td.matchers.not(5).__matches(6) == true
+    Then -> td.matchers.not(5).__matches(5) == false
+    Then -> td.matchers.not(['hi']).__matches(['hi']) == false
+
+
 

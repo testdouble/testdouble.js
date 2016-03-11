@@ -243,6 +243,19 @@ pet({length: 81}) // 'goood'
 If you find yourself needing a matcher that isn't defined above, you can
 [define your own custom matchers](8-custom-matchers.md) as well.
 
+#### td.matchers.not()
+
+When you only care that a test double function _isn't_ passed a certain value,
+you can use the `not` matcher:
+
+``` js
+var didSucceed = td.function()
+
+didSucceed(true)
+
+td.verify(didSucceed(td.matchers.not(false)))
+```
+
 ### Stubbing callback APIs
 
 Callback APIs are very common, especially in Node.js, and for terseness and
