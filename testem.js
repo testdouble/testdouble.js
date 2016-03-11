@@ -19,6 +19,6 @@ module.exports = {
     "generated/test/browser-helper.js",
 
     // tests
-    "generated/test/lib/**/*.js"
+    "generated/test/src/**/*.js"
   ]
 };
