@@ -1,7 +1,7 @@
 _ = require('lodash')
 quibble = require('quibble')
-object = require('./object')
-tdFunction = require('./function')
+object = require('../object')
+tdFunction = require('../function')
 
 quibble.ignoreCallsFromThisFile()
 

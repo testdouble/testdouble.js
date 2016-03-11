@@ -10,5 +10,5 @@ describe "td.*", ->
     Then -> td.callback == require('../../src/matchers/callback')
     Then -> td.explain == require('../../src/explain')
     Then -> td.reset == require('../../src/reset')
-    Then -> td.replace == require('../../src/replace')
+    Then -> td.replace == require('../../src/replace/index')
     Then -> td.version == require('../../package').version

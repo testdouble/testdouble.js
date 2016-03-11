@@ -6,7 +6,7 @@ module.exports =
   matchers: require('./matchers/index')
   callback: require('./matchers/callback')
   explain: require('./explain')
-  replace: require('./replace')
+  replace: require('./replace/index')
   reset: require('./reset')
   version: process.env.npm_package_version || require('../package.json').version
 
