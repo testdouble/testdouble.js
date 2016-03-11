@@ -49,7 +49,9 @@ describe 'td.replace', ->
       Then -> @error.message == 'td.replace error: No "notAThing" property was found.'
 
     describe 'Manually specifying the override', ->
-      # can literally be anything passed in
+      When -> @myDouble = td.replace(@dependency, 'honk', 'FAKE THING')
+      Then -> @myDouble == 'FAKE THING'
+      And -> @myDouble == @dependency.honk
 
   describe 'Node.js-specific module replacement', ->
     return unless require('lodash').isFunction(require('quibble'))

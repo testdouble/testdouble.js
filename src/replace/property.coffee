@@ -7,7 +7,7 @@ reset = require('../reset')
 module.exports = (object, property, manualReplacement) ->
   ensurePropertyExists(object, property)
   realThing = object[property]
-  fakeThing = imitate(realThing, property)
+  fakeThing = if arguments.length > 2 then manualReplacement else imitate(realThing, property)
   reset.onNextReset -> object[property] = realThing
   object[property] = wrapIfNeeded(fakeThing, realThing)
   return fakeThing
@@ -15,7 +15,6 @@ module.exports = (object, property, manualReplacement) ->
 ensurePropertyExists = (object, property) ->
   if !object.hasOwnProperty(property)
     throw new Error("td.replace error: No \"#{property}\" property was found.")
-
 
 wrapIfNeeded = (fakeThing, realThing) ->
   if isConstructor(realThing)
