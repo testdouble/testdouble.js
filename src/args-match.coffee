@@ -12,7 +12,10 @@ equalsWithMatchers = (expectedArgs, actualArgs) ->
     argumentMatchesExpectation(expectedArg, actualArgs[i])
 
 argumentMatchesExpectation = (expectedArg, actualArg) ->
-  _.eq(expectedArg, actualArg) || matcherFor(expectedArg)?(actualArg)
+  if matcher = matcherFor(expectedArg)
+    matcher(actualArg)
+  else
+    _.eq(expectedArg, actualArg)
 
 matcherFor = (expectedArg) ->
   if _.isFunction(expectedArg?.__matches)
