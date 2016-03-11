@@ -8,9 +8,8 @@ arityMismatch =  (expectedArgs, actualArgs, config) ->
   expectedArgs.length != actualArgs.length && !config.ignoreExtraArgs
 
 equalsWithMatchers = (expectedArgs, actualArgs) ->
-  _.eq expectedArgs, actualArgs, (expected, actual) ->
-    _.all expectedArgs, (expectedArg, i) ->
-      argumentMatchesExpectation(expectedArg, actualArgs[i])
+  _.all expectedArgs, (expectedArg, i) ->
+    argumentMatchesExpectation(expectedArg, actualArgs[i])
 
 argumentMatchesExpectation = (expectedArg, actualArg) ->
   _.eq(expectedArg, actualArg) || matcherFor(expectedArg)?(actualArg)
