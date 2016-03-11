@@ -1,3 +1,4 @@
+_ = require('lodash')
 object = require('../object')
 tdFunction = require('../function')
 isConstructor = require('./is-constructor')

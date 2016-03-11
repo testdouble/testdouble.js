@@ -1,4 +1,3 @@
-_ = require('lodash')
 quibble = require('quibble')
 imitate = require('./imitate')
 isConstructor = require('./is-constructor')
