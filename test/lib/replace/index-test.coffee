@@ -22,12 +22,32 @@ describe 'td.replace', ->
         And -> @dependency.honk() == 'og honk'
 
     describe 'Replacing a constructor function', ->
-      # still constructable
-      #
+      When -> @doubleBag = td.replace(@dependency, 'thingConstructor')
+      Then -> td.explain(@doubleBag.foo).isTestDouble == true
+      Then -> td.explain(@doubleBag.bar).isTestDouble == true
+      And -> @doubleBag.foo == new @dependency.thingConstructor().foo
+      And -> @doubleBag.bar == new @dependency.thingConstructor().bar
+
+      describe 'reset restores it', ->
+        When -> td.reset()
+        Then -> td.explain(new @dependency.thingConstructor().foo).isTestDouble == false
+        And -> new @dependency.thingConstructor().foo() == 'og foo'
+
     describe 'Replacing an object / function bag', ->
-      # age is still there
+      When -> @doubleBag = td.replace(@dependency, 'dog')
+      Then -> td.explain(@doubleBag.bark).isTestDouble == true
+      Then -> td.explain(@doubleBag.woof).isTestDouble == true
+      And -> @doubleBag.bark == @dependency.dog.bark
+      And -> @doubleBag.woof == @dependency.dog.woof
+      And -> @doubleBag.age == 18
+
     describe 'Replacing a non-existent property', ->
-      # raises error
+      When -> try
+          td.replace(@dependency, 'notAThing')
+        catch e
+          @error = e
+      Then -> @error.message == 'td.replace error: No "notAThing" property was found.'
+
     describe 'Manually specifying the override', ->
       # can literally be anything passed in
 

@@ -5,11 +5,17 @@ wrapWithConstructor = require('./wrap-with-constructor')
 reset = require('../reset')
 
 module.exports = (object, property, manualReplacement) ->
+  ensurePropertyExists(object, property)
   realThing = object[property]
   fakeThing = imitate(realThing, property)
   reset.onNextReset -> object[property] = realThing
   object[property] = wrapIfNeeded(fakeThing, realThing)
   return fakeThing
+
+ensurePropertyExists = (object, property) ->
+  if !object.hasOwnProperty(property)
+    throw new Error("td.replace error: No \"#{property}\" property was found.")
+
 
 wrapIfNeeded = (fakeThing, realThing) ->
   if isConstructor(realThing)
