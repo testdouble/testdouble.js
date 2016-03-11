@@ -21,4 +21,4 @@ module.exports = {
     // tests
     "generated/test/src/**/*.js"
   ]
-};
+}
