@@ -13,14 +13,8 @@ equalsWithMatchers = (expectedArgs, actualArgs) ->
       argumentMatchesExpectation(expectedArg, actualArgs[i])
 
 argumentMatchesExpectation = (expectedArg, actualArg) ->
-  if _.eq(expectedArg, actualArg)
-    true
-  else if matcher = matcherFor(expectedArg)
-    matcher(actualArg)
-  else
-    false
+  _.eq(expectedArg, actualArg) || matcherFor(expectedArg)?(actualArg)
 
-# This is literally all that's needed to implement argument matchers & captors
 matcherFor = (expectedArg) ->
   if _.isFunction(expectedArg?.__matches)
     expectedArg.__matches
