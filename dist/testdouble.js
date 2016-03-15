@@ -1,5 +1,5 @@
 /*
- * testdouble@1.1.0
+ * testdouble@1.1.1
  *
  *   A minimal test double library for TDD with JavaScript
  *
@@ -13259,7 +13259,7 @@
     explain: require('./explain'),
     replace: require('./replace/index'),
     reset: require('./reset'),
-    version: "1.1.0"
+    version: "1.1.1"
   };
 
 }).call(this);
