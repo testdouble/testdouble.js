@@ -12,6 +12,14 @@ terse, clear, and easy-to-understand tests. There's an awful lot to cover, so
 please take some time and enjoy our documentation, which itself is designed to
 show you how to make the most out of test doubles in your tests.
 
+## Coming from Sinon.js?
+
+Right now, Sinon.js is the test double incumbent in JavaScript, with over 1.7
+million downloads in the last month. If you've got experience with Sinon, [check
+out our side-by-side
+comparison](http://blog.testdouble.com/posts/2016-03-13-testdouble-vs-sinon.html)
+to see why we wrote testdouble.js and how some of the API translates.
+
 ## Docs
 
 All of our docs are in the [docs/](docs/) directory inside this repository and
