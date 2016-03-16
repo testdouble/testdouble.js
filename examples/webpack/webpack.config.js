@@ -1,5 +1,3 @@
-var path = require('path')
-
 module.exports = {
   entry: './test/math-problem-test.js',
   output: {

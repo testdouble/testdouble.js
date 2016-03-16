@@ -28,13 +28,15 @@
     "test:all": "npm run test --testdouble:mocha_reporter=tap && testem ci && npm run test:example",
     "test:ci": "npm run clean && npm run compile && npm run test:all",
     "test:debug": "npm test -- --debug-brk",
+    "version:write": "echo \"module.exports = '$npm_package_version'\" > src/version.coffee",
     "preversion": "git pull --rebase && npm run test:ci",
-    "version": "npm run compile && git add dist",
     "postversion": "git push && git push --tags && npm publish",
+    "version": "npm run version:write && npm run compile && git add dist src/version.coffee",
     "prepublish": "npm run compile"
   },
   "browser": {
-    "./lib/replace/module.js": "./lib/replace/module.browser.js"
+    "./lib/replace/module.js": "./lib/replace/module.browser.js",
+    "quibble": "./lib/quibble.browser.js"
   },
   "browserify": {
     "transform": [
@@ -78,6 +80,5 @@
   "engines": {
     "node": ">= 0.12.0",
     "iojs": ">= 1.0.0"
-  },
-  "webpack": "dist/testdouble.js"
+  }
 }
