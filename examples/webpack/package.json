@@ -1,19 +1,13 @@
 {
-  "name": "tdjs",
+  "name": "testdouble-webpack-example",
   "private": true,
   "scripts": {
-    "test": "webpack",
-    "test:debug": "webpack-dev-server --inline"
+    "test": "testem ci -P 10",
+    "test:dev": "testem"
   },
   "devDependencies": {
-    "babel-core": "^6.7.2",
-    "babel-loader": "^6.2.4",
-    "chai": "^3.5.0",
-    "json-loader": "^0.5.4",
-    "mocha": "^2.4.5",
-    "mocha-loader": "^0.7.1",
     "testdouble": "*",
-    "webpack": "^1.12.14",
-    "webpack-dev-server": "^1.14.1"
+    "testem": "^1.5.0",
+    "webpack": "^1.12.14"
   }
 }

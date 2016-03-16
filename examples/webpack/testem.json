@@ -1,0 +1,10 @@
+{
+  "framework": "jasmine2",
+  "serve_files": [
+    "built/test-bundle.js"
+  ],
+  "before_tests": "webpack",
+  "launch_in_dev": ["PhantomJS", "Chrome"],
+  "launch_in_ci": ["PhantomJS"]
+}
+
