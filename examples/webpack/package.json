@@ -1,0 +1,13 @@
+{
+  "name": "testdouble-webpack-example",
+  "private": true,
+  "scripts": {
+    "test": "testem ci",
+    "test:dev": "testem"
+  },
+  "devDependencies": {
+    "testdouble": "*",
+    "testem": "^1.5.0",
+    "webpack": "^1.12.14"
+  }
+}

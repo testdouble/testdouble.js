@@ -8,5 +8,5 @@ module.exports =
   explain: require('./explain')
   replace: require('./replace/index')
   reset: require('./reset')
-  version: process.env.npm_package_version || require('../package.json').version
+  version: require('./version')
 

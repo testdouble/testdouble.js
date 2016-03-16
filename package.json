@@ -21,19 +21,22 @@
     "compile": "npm run compile:node && npm run compile:test && npm run compile:browser",
     "test": "mocha --ui mocha-given --reporter $npm_package_config_mocha_reporter --compilers coffee:coffee-script --recursive test/node-helper.coffee test/lib",
     "test:browser": "npm run compile && testem ci",
+    "test:example:webpack": "cd examples/webpack && npm i && npm test & cd ../..",
     "test:example:node": "cd examples/node && npm i && npm test && cd ../..",
-    "test:example:browser": "cd examples/getting-started && npm i && npm test && cd ../..",
-    "test:example": "npm run test:example:node && npm run test:example:browser",
+    "test:example:lineman": "cd examples/lineman && npm i && npm test && cd ../..",
+    "test:example": "npm run test:example:node && npm run test:example:lineman && npm run test:example:webpack",
     "test:all": "npm run test --testdouble:mocha_reporter=tap && testem ci && npm run test:example",
     "test:ci": "npm run clean && npm run compile && npm run test:all",
     "test:debug": "npm test -- --debug-brk",
+    "version:write": "echo \"module.exports = '$npm_package_version'\" > src/version.coffee",
     "preversion": "git pull --rebase && npm run test:ci",
-    "version": "npm run compile && git add dist",
     "postversion": "git push && git push --tags && npm publish",
+    "version": "npm run version:write && npm run compile && git add dist src/version.coffee",
     "prepublish": "npm run compile"
   },
   "browser": {
-    "./lib/replace/module.js": "./lib/replace/module.browser.js"
+    "./lib/replace/module.js": "./lib/replace/module.browser.js",
+    "quibble": "./lib/quibble.browser.js"
   },
   "browserify": {
     "transform": [
@@ -77,6 +80,5 @@
   "engines": {
     "node": ">= 0.12.0",
     "iojs": ">= 1.0.0"
-  },
-  "webpack": "dist/testdouble.js"
+  }
 }
