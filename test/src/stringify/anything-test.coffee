@@ -12,6 +12,26 @@ describe 'stringify/anything', ->
   context 'short strings of objects should be one-lined', ->
     Then -> expect(@subject({userId: 42, name: 'Jane'})).to.eq('{userId: 42, name: "Jane"}')
 
+  context.only 'long strings of objects should be multi-lined', ->
+    Given -> @object =
+      userId: 42,
+      name: 'Jane'
+      details:
+        kids: ['jack', 'jill']
+
+    Given -> @object.circular = @object
+
+    Then -> expect(@subject(@object)).to.eq """
+      {
+        userId: 42,
+        name: "Jane",
+        details: {
+          kids: ["jack", "jill"]
+        },
+        circular: "[Circular]"
+      }
+    """
+
   context 'a long weird string should be left-be', ->
     Given -> @longString = """
       ojsaodjasiodjsaodijsado asj asodjaosdj asodjsaoidjsa odjasoidjasodjas
