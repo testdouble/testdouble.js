@@ -1,8 +1,8 @@
-module.exports = (arg) ->
-  return 'undefined' if arg == undefined
+stringifyObject = require('stringify-object')
 
-  try
-    JSON.stringify(arg) || arg?.toString?()
-  catch e
-    "[Circular Object]"
-
+module.exports = (anything) ->
+  string = stringifyObject(anything, indent: '  ', singleQuotes: false)
+  if string.length < 40
+    string.replace(/\n+\s*/g, '').replace(/,(\w)/g, ', $1')
+  else
+    string
