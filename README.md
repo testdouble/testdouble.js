@@ -20,7 +20,7 @@ out our side-by-side
 comparison](http://blog.testdouble.com/posts/2016-03-13-testdouble-vs-sinon.html)
 to see why we wrote testdouble.js and how some of the API translates.
 
-## The Basics
+## The Very Basics
 
 Before diving into our in-depth docs, here are a couple demo GIFs of the basic
 uses:
@@ -28,6 +28,10 @@ uses:
 ### Stubbing return values for functions
 
 ![simple stubbing example animation](docs/img/stub.gif)
+
+### Verifying a function was invoked
+
+![simple verification of a function invocation](docs/img/verify.gif)
 
 ## Docs
 
