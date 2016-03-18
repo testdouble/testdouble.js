@@ -1,7 +1,7 @@
 _ = require('lodash')
 store = require('./store')
 callsStore = require('./store/calls')
-stringifyArgs = require('./stringify-args')
+stringifyArgs = require('./stringify/arguments')
 
 module.exports = (__userDoesPretendInvocationHere__, config = {}) ->
   if last = callsStore.pop()
