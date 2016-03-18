@@ -20,6 +20,15 @@ out our side-by-side
 comparison](http://blog.testdouble.com/posts/2016-03-13-testdouble-vs-sinon.html)
 to see why we wrote testdouble.js and how some of the API translates.
 
+## The Basics
+
+Before diving into our in-depth docs, here are a couple demo GIFs of the basic
+uses:
+
+### Stubbing return values for functions
+
+![simple stubbing example animation](docs/img/stub.gif)
+
 ## Docs
 
 All of our docs are in the [docs/](docs/) directory inside this repository and
