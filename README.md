@@ -67,6 +67,7 @@ Here's a rough outline:
       2. [matching arrays](docs/5-stubbing-results.md#arrays)
       3. [matching objects](docs/5-stubbing-results.md#objects)
     4. [td.matchers.argThat()](docs/5-stubbing-results.md#tdmatchersargthat)
+    5. [td.matchers.not()](docs/5-stubbing-results.md#tdmatchersnot)
   6. [Stubbing callback APIs](docs/5-stubbing-results.md#stubbing-callback-apis)
   7. [Stub exceptions with thenThrow](docs/5-stubbing-results.md#stub-exceptions-with-thenthrow)
   8. [Stub side effects with thenDo](docs/5-stubbing-results.md#stub-side-effects-with-thendo)

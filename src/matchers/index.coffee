@@ -43,3 +43,6 @@ module.exports =
     __matches: (actual) ->
       predicate(actual)
 
+  not: (expected) ->
+    __matches: (actual) ->
+      !_.eq(expected, actual)
