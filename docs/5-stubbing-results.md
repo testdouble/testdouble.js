@@ -22,7 +22,7 @@ As JavaScript APIs go, this should strike readers as unusual, but it's an intent
 
 > If the above is still bothering you, note that the implementation of testdouble.js doesn't care what is "passed" into `td.when()`'s first argument position. In fact, what the library will actually do is simply pop the most recent call to _any test double_ off its global call stack whenever `when()` is invoked and presume that it was a "rehearsal" invocation for the next stubbing.
 
-The `when()` function returns an object containing the function `thenReturn`, which is used to specify the value the test double should return if it's invoked as specified in the `when()` call. For now, only `thenReturn` is supported as a response type. For whatever reason, we haven't found an urgent need to implement two other typical responses, `thenDo` (to invoke a function that has some side effect, [#8](https://github.com/testdouble/testdouble.js/issues/8)) and `thenThrow` (to throw some error, [#7](https://github.com/testdouble/testdouble.js/issues/7)), but we'd gladly accept pull requests for either.
+The `when()` function returns an object containing the function `thenReturn`, which is used to specify the value the test double should return if it's invoked as specified in the `when()` call. There are also a `thenDo` and `thenThrow` response type which are described below.
 
 ## Simple, precise argument stubbing
 
