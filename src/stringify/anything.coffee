@@ -1,11 +1,14 @@
 _ = require('lodash')
-stringifyObject = require('stringify-object')
+stringifyObject = require('stringify-object-with-one-liners')
 
 module.exports = (anything) ->
-  string = stringifyObject(anything, indent: '  ', singleQuotes: false)
   if _.isString(anything)
-    "\"#{anything}\""
-  else if string.length < 40
-    string.replace(/\n+\s*/g, '').replace(/,(\w)/g, ', $1')
+    if _.contains(anything, '\n')
+      "\"\"\"\n#{anything}\n\"\"\""
+    else
+      "\"#{anything.replace(new RegExp('"', 'g'), '\\"')}\""
   else
-    string
+    stringifyObject anything,
+      indent: '  '
+      singleQuotes: false
+      inlineCharacterLimit: 40
