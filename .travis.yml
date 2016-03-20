@@ -3,3 +3,9 @@ node_js:
   - "4.1"
   - "0.12"
 script: npm run test:ci
+after_script:
+  - npm run test:cover
+  - npm run test:cover:report
+addons:
+  code_climate:
+    repo_token: c92188dcdeaca7d9732f8ea38fdd41d6bff18dc27a8d6f8b64a5b1311b7b6c21
