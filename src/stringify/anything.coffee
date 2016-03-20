@@ -11,4 +11,4 @@ module.exports = (anything) ->
     stringifyObject anything,
       indent: '  '
       singleQuotes: false
-      inlineCharacterLimit: 40
+      inlineCharacterLimit: 65
