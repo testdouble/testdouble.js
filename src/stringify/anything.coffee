@@ -7,6 +7,8 @@ module.exports = (anything) ->
       "\"\"\"\n#{anything}\n\"\"\""
     else
       "\"#{anything.replace(new RegExp('"', 'g'), '\\"')}\""
+  else if anything?.__matches?
+    anything.__name
   else
     stringifyObject anything,
       indent: '  '

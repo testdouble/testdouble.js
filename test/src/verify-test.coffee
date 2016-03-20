@@ -83,7 +83,15 @@ describe '.verify', ->
       Then -> shouldNotThrow(=> td.verify(@testDouble(td.matchers.isA(Number))))
 
     context 'unsatisfied', ->
-      Then -> shouldThrow(=> td.verify(@testDouble(td.matchers.isA(String))))
+      Then -> shouldThrow (=> td.verify(@testDouble(td.matchers.isA(String)))), """
+      Unsatisfied verification on test double.
+
+        Wanted:
+          - called with `(isA(String))`.
+
+        But was actually called:
+          - called with `(55)`.
+      """
 
   describe 'configuration', ->
 
