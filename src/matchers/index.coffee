@@ -1,11 +1,21 @@
 _ = require('lodash')
+create = require('./create')
+stringifyArguments = require('../stringify/arguments')
 
 module.exports =
-  create: require('./create')
+  create: create
   captor: require('./captor')
 
-  isA: (type) ->
-    __matches: (actual) ->
+  isA: create
+    name: (matcherArgs) ->
+      s = if matcherArgs[0]?.name?
+          matcherArgs[0].name
+        else
+          stringifyArguments(matcherArgs)
+      "isA(#{s})"
+    matches: (matcherArgs, actual) ->
+      type = matcherArgs[0]
+
       if type == Number
         _.isNumber(actual)
       else if type == String
@@ -15,34 +25,40 @@ module.exports =
       else
         actual instanceof type
 
-  anything: ->
-    __matches: -> true
+  anything: create
+    name: 'anything'
+    matches: -> true
 
-  contains: (containings...) ->
-    containsAllSpecified = (containing, actual) ->
-      _.all containing, (val, key) ->
-        return false unless actual?
-        if _.isPlainObject(val)
-          containsAllSpecified(val, actual[key])
-        else
-          _.eq(val, actual[key])
+  contains: create
+    name: 'contains'
+    matches: (containings, actualArg) ->
+      containsAllSpecified = (containing, actual) ->
+        _.all containing, (val, key) ->
+          return false unless actual?
+          if _.isPlainObject(val)
+            containsAllSpecified(val, actual[key])
+          else
+            _.eq(val, actual[key])
 
-    __matches: (actual) ->
       _.all containings, (containing) ->
         if _.isString(containing)
-          _.include(actual, containing)
+          _.include(actualArg, containing)
         else if _.isArray(containing)
-          _.any actual, (actualElement) ->
+          _.any actualArg, (actualElement) ->
             _.eq(actualElement, containing)
         else if _.isPlainObject(containing)
-          containsAllSpecified(containing, actual)
+          containsAllSpecified(containing, actualArg)
         else
           throw new Error("the contains() matcher only supports strings, arrays, and plain objects")
 
-  argThat: (predicate) ->
-    __matches: (actual) ->
+  argThat: create
+    name: 'argThat'
+    matches: (matcherArgs, actual) ->
+      predicate = matcherArgs[0]
       predicate(actual)
 
-  not: (expected) ->
-    __matches: (actual) ->
+  not: create
+    name: 'not'
+    matches: (matcherArgs, actual) ->
+      expected = matcherArgs[0]
       !_.eq(expected, actual)

@@ -24,10 +24,10 @@ describe '.matchers', ->
     context 'name is a function', ->
       Given -> @matcher = td.matchers.create
         name: (matcherArgs) ->
-          "isA(#{matcherArgs[0].name})"
+          "isThing(#{matcherArgs[0].name})"
         matches: -> true
       When -> @matcherInstance = @matcher(String)
-      Then -> @matcherInstance.__name == 'isA(String)'
+      Then -> @matcherInstance.__name == 'isThing(String)'
 
 
     context 'no name or onCreate given', ->
@@ -65,6 +65,10 @@ describe '.matchers', ->
       Then -> @matches(td.matchers.isA(Object), []) == true
       Then -> @matches(td.matchers.isA(Date), new Date()) == true
       Then -> @matches(td.matchers.isA(Date), new Object()) == false
+
+    context 'names', ->
+      Then -> td.matchers.isA({name: 'Poo'}).__name == 'isA(Poo)'
+      Then -> td.matchers.isA({nope: 'foo'}).__name == 'isA({nope: "foo"})'
 
   describe '.anything', ->
     Then -> @matches(td.matchers.anything(), null) == true
