@@ -7,6 +7,34 @@ matches = (expected, actual) ->
 describe '.matchers', ->
   Given -> @matches = matches
 
+  describe '.create', ->
+    Given -> @matcher = td.matchers.create
+      name: 'isSame'
+      matches: (matcherArgs, actual) ->
+        matcherArgs[0] == actual
+      onCreate: (matcherInstance, matcherArgs) ->
+        matcherInstance.__args = matcherArgs
+
+    When -> @matcherInstance = @matcher('foo')
+    Then -> @matcherInstance.__name == 'isSame("foo")'
+    And -> @matcherInstance.__matches('foo') == true
+    And -> @matcherInstance.__matches('bar') == false
+    And -> expect(@matcherInstance.__args).to.deep.eq ['foo']
+
+    context 'name is a function', ->
+      Given -> @matcher = td.matchers.create
+        name: (matcherArgs) ->
+          "isThing(#{matcherArgs[0].name})"
+        matches: -> true
+      When -> @matcherInstance = @matcher(String)
+      Then -> @matcherInstance.__name == 'isThing(String)'
+
+
+    context 'no name or onCreate given', ->
+      Given -> @matcher = td.matchers.create(matches: -> true)
+      When -> @matcherInstance = @matcher('bar')
+      Then -> @matcherInstance.__name == '[Matcher for ("bar")]'
+
   describe '.isA', ->
     context 'numbers', ->
       Given -> @matcher = td.matchers.isA(Number)
@@ -37,6 +65,10 @@ describe '.matchers', ->
       Then -> @matches(td.matchers.isA(Object), []) == true
       Then -> @matches(td.matchers.isA(Date), new Date()) == true
       Then -> @matches(td.matchers.isA(Date), new Object()) == false
+
+    context 'names', ->
+      Then -> td.matchers.isA({name: 'Poo'}).__name == 'isA(Poo)'
+      Then -> td.matchers.isA({nope: 'foo'}).__name == 'isA({nope: "foo"})'
 
   describe '.anything', ->
     Then -> @matches(td.matchers.anything(), null) == true

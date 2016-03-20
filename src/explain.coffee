@@ -3,7 +3,7 @@ _ = require('lodash')
 store = require('./store')
 callsStore = require('./store/calls')
 stubbingsStore = require('./store/stubbings')
-stringifyArgs = require('./stringify-args')
+stringifyArgs = require('./stringify/arguments')
 
 module.exports = (testDouble) ->
   return nullDescription() unless store.for(testDouble, false)?

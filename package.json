@@ -40,7 +40,8 @@
   },
   "dependencies": {
     "lodash": "^3.10.1",
-    "quibble": "^0.3.0"
+    "quibble": "^0.3.0",
+    "stringify-object-with-one-liners": "^1.0.0"
   },
   "devDependencies": {
     "browserify": "^11.0.1",

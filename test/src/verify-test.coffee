@@ -6,11 +6,13 @@ describe '.verify', ->
     Then -> td.verify(@testDouble("dogs", "cats"))
 
   context 'an unsatisfied verification - no interactions', ->
-    Then -> shouldThrow (=> td.verify(@testDouble("WOAH"))), """
+    Given -> @arg = joe: 5, jill: [1,'2',3]
+    Given -> @arg.circ = @arg
+    Then -> shouldThrow (=> td.verify(@testDouble("WOAH", @arg))), """
       Unsatisfied verification on test double.
 
         Wanted:
-          - called with `("WOAH")`.
+          - called with `("WOAH", {joe: 5, jill: [1, "2", 3], circ: "[Circular]"})`.
 
         But there were no invocations of the test double.
       """
@@ -81,7 +83,15 @@ describe '.verify', ->
       Then -> shouldNotThrow(=> td.verify(@testDouble(td.matchers.isA(Number))))
 
     context 'unsatisfied', ->
-      Then -> shouldThrow(=> td.verify(@testDouble(td.matchers.isA(String))))
+      Then -> shouldThrow (=> td.verify(@testDouble(td.matchers.isA(String)))), """
+      Unsatisfied verification on test double.
+
+        Wanted:
+          - called with `(isA(String))`.
+
+        But was actually called:
+          - called with `(55)`.
+      """
 
   describe 'configuration', ->
 
