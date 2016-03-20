@@ -21,6 +21,15 @@ describe '.matchers', ->
     And -> @matcherInstance.__matches('bar') == false
     And -> expect(@matcherInstance.__args).to.deep.eq ['foo']
 
+    context 'name is a function', ->
+      Given -> @matcher = td.matchers.create
+        name: (matcherArgs) ->
+          "isA(#{matcherArgs[0].name})"
+        matches: -> true
+      When -> @matcherInstance = @matcher(String)
+      Then -> @matcherInstance.__name == 'isA(String)'
+
+
     context 'no name or onCreate given', ->
       Given -> @matcher = td.matchers.create(matches: -> true)
       When -> @matcherInstance = @matcher('bar')
