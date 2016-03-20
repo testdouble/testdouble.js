@@ -7,6 +7,25 @@ matches = (expected, actual) ->
 describe '.matchers', ->
   Given -> @matches = matches
 
+  describe '.create', ->
+    Given -> @matcher = td.matchers.create
+      name: 'isSame'
+      matches: (matcherArgs, actual) ->
+        matcherArgs[0] == actual
+      onCreate: (matcherInstance, matcherArgs) ->
+        matcherInstance.__args = matcherArgs
+
+    When -> @matcherInstance = @matcher('foo')
+    Then -> @matcherInstance.__name == 'isSame("foo")'
+    And -> @matcherInstance.__matches('foo') == true
+    And -> @matcherInstance.__matches('bar') == false
+    And -> expect(@matcherInstance.__args).to.deep.eq ['foo']
+
+    context 'no name or onCreate given', ->
+      Given -> @matcher = td.matchers.create(matches: -> true)
+      When -> @matcherInstance = @matcher('bar')
+      Then -> @matcherInstance.__name == '[Matcher for ("bar")]'
+
   describe '.isA', ->
     context 'numbers', ->
       Given -> @matcher = td.matchers.isA(Number)

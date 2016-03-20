@@ -1,8 +1,8 @@
 _ = require('lodash')
-captor = require('./captor')
 
 module.exports =
-  captor: captor
+  create: require('./create')
+  captor: require('./captor')
 
   isA: (type) ->
     __matches: (actual) ->
