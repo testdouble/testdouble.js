@@ -1,3 +1,11 @@
+engines:
+  coffeelint:
+    enabled: true
+  fixme:
+    enabled: true
+  duplication:
+    enabled: true
+
 ratings:
   paths:
     - src/**
