@@ -33,6 +33,17 @@ describe 'td.replace', ->
         Then -> td.explain(new @dependency.thingConstructor().foo).isTestDouble == false
         And -> new @dependency.thingConstructor().foo() == 'og foo'
 
+    describe 'Replacing an object method', ->
+      Given -> @thing = new @dependency.thingConstructor()
+      When -> @doubleFoo = td.replace(@thing, 'foo')
+      Then -> td.explain(@thing.foo).isTestDouble == true
+      And -> @thing.foo() == undefined
+
+      describe 'reset restores it', ->
+        When -> td.reset()
+        Then -> td.explain(@thing.foo).isTestDouble == false
+        And -> @thing.foo() == 'og foo'
+
     describe 'Replacing an object / function bag', ->
       When -> @doubleBag = td.replace(@dependency, 'dog')
       Then -> td.explain(@doubleBag.bark).isTestDouble == true
