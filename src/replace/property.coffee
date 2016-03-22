@@ -13,7 +13,7 @@ module.exports = (object, property, manualReplacement) ->
   return fakeThing
 
 ensurePropertyExists = (object, property) ->
-  if !object.hasOwnProperty(property)
+  if !object[property]
     throw new Error("td.replace error: No \"#{property}\" property was found.")
 
 wrapIfNeeded = (fakeThing, realThing) ->
