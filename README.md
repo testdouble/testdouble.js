@@ -23,16 +23,37 @@ to see why we wrote testdouble.js and how some of the API translates.
 
 ## The Very Basics
 
-Before diving into our in-depth docs, here are a couple demo GIFs of the basic
-uses:
+Before diving into our in-depth docs, here is a quick intro of the basic uses:
 
 ### Stubbing return values for functions
 
-![simple stubbing example animation](docs/img/stub.gif)
+```js
+var td = require('testdouble');
+
+var fetch = td.function();
+td.when(fetch(42)).thenReturn('Jane User');
+
+fetch(42); // -> 'Jane User'
+```
 
 ### Verifying a function was invoked
 
-![simple verification of a function invocation](docs/img/verify.gif)
+```js
+var td = require('testdouble');
+
+var save = td.function('.save');
+save(41, 'Jane');
+
+td.verify(save(41, 'Jill'));
+//
+// Error: Unsatisfied verification on test double `.save`.
+//
+//   Wanted:
+//     - called with `(41, "Jill")`.
+//
+//   But was actually called:
+//     - called with `(41, "Jane")`.
+```
 
 ## Docs
 
