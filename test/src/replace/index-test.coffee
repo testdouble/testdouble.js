@@ -33,6 +33,17 @@ describe 'td.replace', ->
         Then -> td.explain(new @dependency.thingConstructor().foo).isTestDouble == false
         And -> new @dependency.thingConstructor().foo() == 'og foo'
 
+    describe 'Replacing a method on an object instantiated with `new`', ->
+      Given -> @thing = new @dependency.thingConstructor()
+      When -> @doubleFoo = td.replace(@thing, 'foo')
+      Then -> td.explain(@thing.foo).isTestDouble == true
+      And -> @thing.foo() == undefined
+
+      describe 'reset restores it', ->
+        When -> td.reset()
+        Then -> td.explain(@thing.foo).isTestDouble == false
+        And -> @thing.foo() == 'og foo'
+
     describe 'Replacing an object / function bag', ->
       When -> @doubleBag = td.replace(@dependency, 'dog')
       Then -> td.explain(@doubleBag.bark).isTestDouble == true
@@ -42,16 +53,33 @@ describe 'td.replace', ->
       And -> @doubleBag.age == 18
 
     describe 'Replacing a non-existent property', ->
-      When -> try
-          td.replace(@dependency, 'notAThing')
-        catch e
-          @error = e
-      Then -> @error.message == 'td.replace error: No "notAThing" property was found.'
+      context 'using automatic replacement', ->
+        When -> try
+            td.replace(@dependency, 'notAThing')
+          catch e
+            @error = e
+        Then -> @error.message == 'td.replace error: No "notAThing" property was found.'
+
+      context 'with manual replacement', ->
+        Given -> @myFake = td.replace(@dependency, 'notAThing', 'MY FAKE')
+        Then -> @myFake == 'MY FAKE'
+        And -> @myFake == @dependency.notAThing
+
+        context 'is deleted following a reset', ->
+          Given -> td.reset()
+          Then -> @dependency.hasOwnProperty('notAThing') == false
 
     describe 'Manually specifying the override', ->
+      Given -> @originalHonk = @dependency.honk
       When -> @myDouble = td.replace(@dependency, 'honk', 'FAKE THING')
       Then -> @myDouble == 'FAKE THING'
       And -> @myDouble == @dependency.honk
+
+      context 'is restored following a reset', ->
+        When -> td.reset()
+        Then -> @dependency.honk == @originalHonk
+
+
 
   describe 'Node.js-specific module replacement', ->
     return unless require('lodash').isFunction(require('quibble'))
