@@ -52,6 +52,29 @@ describe 'td.replace', ->
       And -> @doubleBag.woof == @dependency.dog.woof
       And -> @doubleBag.age == 18
 
+    describe 'Replacing a property that is not an object/function', ->
+      Given -> @message = 'td.replace error: "badType" property was found, but test double only knows how to replace functions, constructors, & objects containing functions (its value was '
+      When -> try
+          td.replace(@dependency, 'badType')
+        catch e
+          @error = e
+
+      context 'a number', ->
+        Given -> @dependency.badType = 5
+        Then -> @error.message == @message + '5).'
+
+      context 'a string', ->
+        Given -> @dependency.badType = "hello"
+        Then -> @error.message == @message + '"hello").'
+
+      context 'null', ->
+        Given -> @dependency.badType = null
+        Then -> @error.message == @message + 'null).'
+
+      context 'undefined', ->
+        Given -> @dependency.badType = undefined
+        Then -> @error.message == @message + 'undefined).'
+
     describe 'Replacing a non-existent property', ->
       context 'using automatic replacement', ->
         When -> try
@@ -78,6 +101,7 @@ describe 'td.replace', ->
       context 'is restored following a reset', ->
         When -> td.reset()
         Then -> @dependency.honk == @originalHonk
+
 
 
 
