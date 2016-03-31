@@ -7,6 +7,7 @@ global.shouldNotThrow = (func) ->
 
 afterEach ->
   td.reset()
+  td.config.reset()
 
 global.shouldThrow = (func, expectedMessage) ->
   threw = null

@@ -4,9 +4,10 @@ module.exports =
   when: require('./when')
   verify: require('./verify')
   matchers: require('./matchers/index')
-  callback: require('./matchers/callback')
-  explain: require('./explain')
   replace: require('./replace/index')
+  explain: require('./explain')
   reset: require('./reset')
+  config: require('./config')
+  callback: require('./matchers/callback')
   version: require('./version')
 
