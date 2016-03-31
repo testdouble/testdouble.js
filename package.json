@@ -14,7 +14,8 @@
     "mocha_reporter": "dot"
   },
   "scripts": {
-    "clean": "rm -rf generated dist lib .coverage && git checkout -- dist",
+    "clean:dist": "git checkout -- dist",
+    "clean": "rm -rf generated dist lib .coverage && npm run clean:dist",
     "compile:node": "coffee --output lib --compile src",
     "compile:test": "coffee --output generated/test --compile test",
     "compile:browser": "browserify . --standalone td --outfile $npm_package_config_build_file --ignore 'quibble' -p headerify",
@@ -30,7 +31,7 @@
     "test:example:lineman": "cd examples/lineman && npm i && npm test && cd ../..",
     "test:example": "npm run test:example:node && npm run test:example:lineman && npm run test:example:webpack",
     "test:all": "npm run test --testdouble:mocha_reporter=tap && testem ci && npm run test:example",
-    "test:ci": "npm run clean && npm run compile && npm run test:all",
+    "test:ci": "npm run clean && npm run compile && npm run test:all && npm run clean:dist",
     "test:debug": "npm test -- --debug-brk",
     "version:write": "echo \"module.exports = '$npm_package_version'\" > src/version.coffee",
     "preversion": "git pull --rebase && npm run test:ci",
