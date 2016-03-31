@@ -82,7 +82,7 @@ describe 'td.replace', ->
 
 
   describe 'Node.js-specific module replacement', ->
-    return unless require('lodash').isFunction(require('quibble'))
+    return unless NODE_JS
 
     Given -> @passenger = td.replace('../../fixtures/passenger') #<-- a constructor func
     Given -> @honk = td.replace('../../fixtures/honk') #<-- a plain ol' func
