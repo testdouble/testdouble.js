@@ -81,7 +81,7 @@ describe '.matchers', ->
       Then -> @matches(td.matchers.contains('bar'), 'foobarbaz') == true
       Then -> @matches(td.matchers.contains('biz'), 'foobarbaz') == false
       Then -> shouldThrow (=> td.matchers.contains(48).__matches()), """
-        the contains() matcher only supports strings, arrays, and plain objects
+        Error: td.matchers.contains - this matcher only supports strings, arrays, and plain objects
         """
 
     context 'arrays', ->

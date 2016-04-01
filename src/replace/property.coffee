@@ -9,7 +9,7 @@ module.exports = (object, property, manualReplacement) ->
   realThingExists = object[property] || object.hasOwnProperty(property)
 
   if !isManual && !realThingExists
-    throw new Error("td.replace error: No \"#{property}\" property was found.")
+    throw new Error("Error: td.replace - No \"#{property}\" property was found.")
 
   realThing = object[property]
   fakeThing = if isManual then manualReplacement else imitate(realThing, property)

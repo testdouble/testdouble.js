@@ -49,7 +49,7 @@ module.exports =
         else if _.isPlainObject(containing)
           containsAllSpecified(containing, actualArg)
         else
-          throw new Error("the contains() matcher only supports strings, arrays, and plain objects")
+          throw new Error("Error: td.matchers.contains - this matcher only supports strings, arrays, and plain objects")
 
   argThat: create
     name: 'argThat'

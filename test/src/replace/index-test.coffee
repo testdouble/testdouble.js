@@ -81,7 +81,7 @@ describe 'td.replace', ->
             td.replace(@dependency, 'notAThing')
           catch e
             @error = e
-        Then -> @error.message == 'td.replace error: No "notAThing" property was found.'
+        Then -> @error.message == 'Error: td.replace - No "notAThing" property was found.'
 
       context 'with manual replacement', ->
         Given -> @myFake = td.replace(@dependency, 'notAThing', 'MY FAKE')
