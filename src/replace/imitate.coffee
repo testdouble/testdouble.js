@@ -11,4 +11,4 @@ module.exports = (realThing, optionalName) ->
   else if _.isFunction(realThing)
     tdFunction(if realThing?.name then realThing.name else optionalName)
   else
-    throw new Error("td.replace error: \"#{optionalName}\" property was found, but test double only knows how to replace functions, constructors, & objects containing functions (its value was #{stringifyAnything(realThing)}).")
+    throw new Error("Error: td.replace - \"#{optionalName}\" property was found, but test double only knows how to replace functions, constructors, & objects containing functions (its value was #{stringifyAnything(realThing)}).")

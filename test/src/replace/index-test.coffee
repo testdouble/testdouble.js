@@ -53,7 +53,7 @@ describe 'td.replace', ->
       And -> @doubleBag.age == 18
 
     describe 'Replacing a property that is not an object/function', ->
-      Given -> @message = 'td.replace error: "badType" property was found, but test double only knows how to replace functions, constructors, & objects containing functions (its value was '
+      Given -> @message = 'Error: td.replace - "badType" property was found, but test double only knows how to replace functions, constructors, & objects containing functions (its value was '
       When -> try
           td.replace(@dependency, 'badType')
         catch e
