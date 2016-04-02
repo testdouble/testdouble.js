@@ -1,9 +1,16 @@
 _ = require('lodash')
+EventEmitter = require('events')
 
+storeEmitter = new EventEmitter()
 globalStore = []
 
 module.exports =
-  reset: -> globalStore = []
+  onReset: (func) ->
+    storeEmitter.on('reset', func)
+
+  reset: ->
+    globalStore = []
+    storeEmitter.emit('reset')
 
   for: (testDouble, createIfNew = true) ->
     return entry if entry = _(globalStore).find({testDouble})

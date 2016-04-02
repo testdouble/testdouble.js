@@ -3,6 +3,7 @@ store = require('./index')
 argsMatch = require('./../args-match')
 
 lastCall = null #<-- remember this to pop our DSL of when(<call>)/verify(<call>)
+store.onReset -> lastCall = null
 
 module.exports =
 

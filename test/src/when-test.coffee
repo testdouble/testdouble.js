@@ -65,6 +65,19 @@ describe 'when', ->
     When -> try @testDouble(42) catch e then @result = e
     Then -> @error == @result
 
+  describe 'stubbing error, no invocation found', ->
+    Given -> td.reset()
+    Given -> try
+        td.when().thenReturn('hi')
+      catch e
+        @error = e
+    Then -> @error.message == """
+      Error: testdouble.js - td.when - No test double invocation call detected for `when()`.
+
+        Usage:
+          when(myTestDouble('foo')).thenReturn('bar')
+      """
+
   describe 'config object', ->
     describe 'ignoring extra arguments', ->
       context 'for a no-arg stubbing', ->
