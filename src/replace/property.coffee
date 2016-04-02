@@ -1,7 +1,7 @@
 imitate = require('./imitate')
 isConstructor = require('./is-constructor')
 wrapWithConstructor = require('./wrap-with-constructor')
-
+log = require('../log')
 reset = require('../reset')
 
 module.exports = (object, property, manualReplacement) ->
@@ -9,7 +9,7 @@ module.exports = (object, property, manualReplacement) ->
   realThingExists = object[property] || object.hasOwnProperty(property)
 
   if !isManual && !realThingExists
-    throw new Error("Error: td.replace - No \"#{property}\" property was found.")
+    log.error("td.replace", "No \"#{property}\" property was found.")
 
   realThing = object[property]
   fakeThing = if isManual then manualReplacement else imitate(realThing, property)

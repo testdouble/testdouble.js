@@ -53,7 +53,7 @@ describe 'td.replace', ->
       And -> @doubleBag.age == 18
 
     describe 'Replacing a property that is not an object/function', ->
-      Given -> @message = 'Error: td.replace - "badType" property was found, but test double only knows how to replace functions, constructors, & objects containing functions (its value was '
+      Given -> @message = 'Error: testdouble.js - td.replace - "badType" property was found, but test double only knows how to replace functions, constructors, & objects containing functions (its value was '
       When -> try
           td.replace(@dependency, 'badType')
         catch e
@@ -81,7 +81,7 @@ describe 'td.replace', ->
             td.replace(@dependency, 'notAThing')
           catch e
             @error = e
-        Then -> @error.message == 'Error: td.replace - No "notAThing" property was found.'
+        Then -> @error.message == 'Error: testdouble.js - td.replace - No "notAThing" property was found.'
 
       context 'with manual replacement', ->
         Given -> @myFake = td.replace(@dependency, 'notAThing', 'MY FAKE')

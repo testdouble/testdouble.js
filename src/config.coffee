@@ -3,6 +3,7 @@ stringifyAnything = require('./stringify/anything')
 
 DEFAULTS =
   ignoreWarnings: false
+  suppressErrors: false
 
 config = _.extend({}, DEFAULTS)
 
@@ -16,4 +17,4 @@ module.exports.reset = ->
 ensureOverridesExist = (overrides) ->
   _.each overrides, (val, key) ->
     if !config.hasOwnProperty(key)
-      throw new Error("Error: td.config - \"#{key}\" is not a valid configuration key (valid keys are: #{stringifyAnything(_.keys(config))})")
+      require('./log').error("td.config", "\"#{key}\" is not a valid configuration key (valid keys are: #{stringifyAnything(_.keys(config))})")

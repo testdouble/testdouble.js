@@ -1,6 +1,7 @@
 _ = require('lodash')
 object = require('../object')
 tdFunction = require('../function')
+log = require('../log')
 isConstructor = require('./is-constructor')
 wrapWithConstructor = require('./wrap-with-constructor')
 stringifyAnything = require('../stringify/anything')
@@ -11,4 +12,4 @@ module.exports = (realThing, optionalName) ->
   else if _.isFunction(realThing)
     tdFunction(if realThing?.name then realThing.name else optionalName)
   else
-    throw new Error("Error: td.replace - \"#{optionalName}\" property was found, but test double only knows how to replace functions, constructors, & objects containing functions (its value was #{stringifyAnything(realThing)}).")
+    log.error("td.replace", "\"#{optionalName}\" property was found, but test double only knows how to replace functions, constructors, & objects containing functions (its value was #{stringifyAnything(realThing)}).")

@@ -2,6 +2,7 @@ _ = require('lodash')
 calls = require('./store/calls')
 stubbings = require('./store/stubbings')
 callback = require('./matchers/callback')
+log = require('./log')
 
 module.exports = (__userDoesPretendInvocationHere__, config = {}) ->
   thenReturn: (stubbedValues...) ->
@@ -19,7 +20,7 @@ addStubbing = (stubbedValues, config, plan) ->
     stubbings.add(last.testDouble, concatImpliedCallback(last.args, config), stubbedValues, config)
     last.testDouble
   else
-    throw new Error """
+    log.error "td.when", """
       No test double invocation call detected for `when()`.
 
         Usage:

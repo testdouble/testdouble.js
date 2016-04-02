@@ -1,4 +1,5 @@
 _ = require('lodash')
+log = require('../log')
 create = require('./create')
 stringifyArguments = require('../stringify/arguments')
 
@@ -49,7 +50,7 @@ module.exports =
         else if _.isPlainObject(containing)
           containsAllSpecified(containing, actualArg)
         else
-          throw new Error("Error: td.matchers.contains - this matcher only supports strings, arrays, and plain objects")
+          log.error("td.matchers.contains", "this matcher only supports strings, arrays, and plain objects")
 
   argThat: create
     name: 'argThat'

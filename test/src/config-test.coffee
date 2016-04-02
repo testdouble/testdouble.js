@@ -3,6 +3,7 @@ describe 'td.config', ->
     Given -> @config = td.config()
     Then -> expect(@config).to.deep.equal
       ignoreWarnings: false
+      suppressErrors: false
 
   context 'overriding', ->
     Given -> @config = td.config(ignoreWarnings: true)
@@ -14,4 +15,4 @@ describe 'td.config', ->
         @config = td.config(wat: 'wat?')
       catch e
         @error = e
-    Then -> @error.message == 'Error: td.config - "wat" is not a valid configuration key (valid keys are: ["ignoreWarnings"])'
+    Then -> @error.message == 'Error: testdouble.js - td.config - "wat" is not a valid configuration key (valid keys are: ["ignoreWarnings", "suppressErrors"])'
