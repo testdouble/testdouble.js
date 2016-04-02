@@ -93,17 +93,26 @@ describe 'td.replace', ->
           Then -> @dependency.hasOwnProperty('notAThing') == false
 
     describe 'Manually specifying the override', ->
-      Given -> @originalHonk = @dependency.honk
-      When -> @myDouble = td.replace(@dependency, 'honk', 'FAKE THING')
-      Then -> @myDouble == 'FAKE THING'
-      And -> @myDouble == @dependency.honk
+      Given -> @ogWarn = console.warn
+      Given -> @warnings = []
+      Given -> console.warn = (msg) => @warnings.push(msg)
+      afterEach -> console.warn = @ogWarn
 
-      context 'is restored following a reset', ->
-        When -> td.reset()
-        Then -> @dependency.honk == @originalHonk
+      context 'with a matching type', ->
+        Given -> @originalHonk = @dependency.honk
+        When -> @myDouble = td.replace(@dependency, 'honk', -> 'FAKE THING')
+        Then -> @myDouble() == 'FAKE THING'
+        And -> @myDouble == @dependency.honk
+        And -> @warnings.length == 0
 
+        context 'is restored following a reset', ->
+          When -> td.reset()
+          Then -> @dependency.honk == @originalHonk
 
-
+      context 'with mismatched types', ->
+        Given -> @dependency.lol = 5
+        When -> td.replace(@dependency, 'lol', 'foo')
+        Then -> @warnings[0] == "Warning: testdouble.js - td.replace - property \"lol\" 5 (Number) was replaced with \"foo\", a value of a different type (String)."
 
   describe 'Node.js-specific module replacement', ->
     return unless NODE_JS
