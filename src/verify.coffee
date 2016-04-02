@@ -2,15 +2,16 @@ _ = require('lodash')
 store = require('./store')
 callsStore = require('./store/calls')
 stringifyArgs = require('./stringify/arguments')
+log = require('./log')
 
 module.exports = (__userDoesPretendInvocationHere__, config = {}) ->
   if last = callsStore.pop()
     if callsStore.wasInvoked(last.testDouble, last.args, config)
       # Do nothing! We're verified! :-D
     else
-      throw new Error(unsatisfiedErrorMessage(last.testDouble, last.args, config))
+      log.fail(unsatisfiedErrorMessage(last.testDouble, last.args, config))
   else
-    throw new Error """
+    log.error "td.verify", """
       No test double invocation detected for `verify()`.
 
         Usage:

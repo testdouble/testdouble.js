@@ -57,3 +57,9 @@ describe 'log', ->
       Then -> @error.message = "Error: testdouble.js - td.lol - oops (see: ftp:)"
 
 
+  describe '.fail', ->
+    When -> try
+        @subject.fail('boom. failed.')
+      catch e
+        @error = e
+    Then -> @error.message == 'boom. failed.'

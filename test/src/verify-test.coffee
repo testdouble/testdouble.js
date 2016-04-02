@@ -70,7 +70,7 @@ describe '.verify', ->
 
   context 'a double-free verification error', ->
     Then -> shouldThrow (=> td.verify()), """
-      No test double invocation detected for `verify()`.
+      Error: testdouble.js - td.verify - No test double invocation detected for `verify()`.
 
         Usage:
           verify(myTestDouble('foo'))
