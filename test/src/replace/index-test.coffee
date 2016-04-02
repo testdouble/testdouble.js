@@ -112,7 +112,11 @@ describe 'td.replace', ->
       context 'with mismatched types', ->
         Given -> @dependency.lol = 5
         When -> td.replace(@dependency, 'lol', 'foo')
-        Then -> @warnings[0] == "Warning: testdouble.js - td.replace - property \"lol\" 5 (Number) was replaced with \"foo\", a value of a different type (String)."
+        Then -> @warnings[0] == "Warning: testdouble.js - td.replace - property \"lol\" 5 (Number) was replaced with \"foo\", which has a different type (String)."
+
+      context 'where the actual is not defined', ->
+        When -> td.replace(@dependency, 'naw', 'lol')
+        Then -> @warnings.length == 0
 
   describe 'Node.js-specific module replacement', ->
     return unless NODE_JS

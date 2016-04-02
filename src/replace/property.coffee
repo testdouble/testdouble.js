@@ -3,6 +3,8 @@ isConstructor = require('./is-constructor')
 wrapWithConstructor = require('./wrap-with-constructor')
 log = require('../log')
 reset = require('../reset')
+stringifyAnything = require('../stringify/anything')
+_ = require('lodash')
 
 module.exports = (object, property, manualReplacement) ->
   isManual = arguments.length > 2
@@ -10,9 +12,12 @@ module.exports = (object, property, manualReplacement) ->
 
   if !isManual && !realThingExists
     log.error("td.replace", "No \"#{property}\" property was found.")
-
   realThing = object[property]
-  fakeThing = if isManual then manualReplacement else imitate(realThing, property)
+  fakeThing = if isManual
+    warnIfTypeMismatch(property, manualReplacement, realThing)
+    manualReplacement
+  else
+    imitate(realThing, property)
   object[property] = wrapIfNeeded(fakeThing, realThing)
 
   reset.onNextReset ->
@@ -28,3 +33,14 @@ wrapIfNeeded = (fakeThing, realThing) ->
     wrapWithConstructor(fakeThing)
   else
     fakeThing
+
+warnIfTypeMismatch = (property, fakeThing, realThing) ->
+  return if realThing == undefined
+  fakeType = typeof fakeThing
+  realType = typeof realThing
+  if fakeType != realType
+    log.warn "td.replace", """
+    property "#{property}" #{stringifyAnything(realThing)} (#{_.capitalize(realType)}) was replaced with #{stringifyAnything(fakeThing)}, which has a different type (#{_.capitalize(fakeType)}).
+    """
+
+
