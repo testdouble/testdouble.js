@@ -78,6 +78,22 @@ example project](../examples/node/test/lib/car-test.js) found in the
 testdouble.js repository. For a more formal discussion of the `replace()`
 API, read on.
 
+### How module replacement works
+
+Under the hood, testdouble.js uses a module called
+[quibble](https://github.com/testdouble/quibble) that facilitates `td.replace`'s
+behavior by monkey-patching Node's `require` function (specifically,
+`Module._load`). When `td.replace` is invoked for a module, quibble will begin
+intercepting any `require` calls made in that file and—bypassing the Node.js
+module cache—return a test double instead of the actual module that resolves to
+the same absolute path as whatever path was passed to `td.replace`.
+
+As a result, keep in mind that you must **call `td.replace` for each of your
+subject's dependencies before you `require` your subject itself**. If you
+`require` your subject before calling `td.replace`, it will load normally
+(potentially from the module cache) and any calls to `td.replace` will be too
+late to have their intended effect).
+
 ### Aside: third-party modules
 
 If you're curious why testdouble.js doesn't support replacing third-party
