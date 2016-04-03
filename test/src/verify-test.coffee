@@ -155,3 +155,25 @@ describe '.verify', ->
               - called with `()`.
               - called with `()`.
           """
+
+  describe 'warning when verifying a stubbed invocation', ->
+    Given -> @ogWarn = console.warn
+    Given -> @warnings = []
+    Given -> console.warn = (msg) => @warnings.push(msg)
+    afterEach = console.warn = @ogWarn
+    Given -> @td = td.function('.foo')
+
+    context 'an exact match in calls', ->
+      Given -> td.when(@td(1)).thenReturn(5)
+      Given -> @td(1)
+      When -> td.verify(@td(1))
+      Then -> @warnings[0] == """
+        Warning: testdouble.js - td.verify - test double `.foo` was both stubbed and verified with arguments (1), which is redundant and probably unnecessary. (see: https://github.com/testdouble/testdouble.js/blob/master/docs/B-frequently-asked-questions.md#why-shouldnt-i-call-both-tdwhen-and-tdverify-for-a-single-interaction-with )
+        """
+
+    context 'matchers are used', ->
+      Given -> td.when(@td(td.matchers.isA(Number))).thenReturn(5)
+      Given -> @td(1)
+      When -> td.verify(@td(1))
+      Then -> @warnings.length == 0
+
