@@ -123,4 +123,5 @@ Here's a rough outline:
   2. [testdouble-jasmine](https://github.com/BrianGenisio/testdouble-jasmine)
 11. [Frequently Asked Questions](docs/B-frequently-asked-questions.md#frequently-asked-questions)
   1. [Why doesn't `td.replace()` work with external CommonJS modules?](docs/B-frequently-asked-questions.md#why-doesnt-tdreplace-work-with-external-commonjs-modules)
-
+12. [Configuration](docs/C-configuration.md)
+  1. [td.config](docs/C-configuration.md#tdconfig)
