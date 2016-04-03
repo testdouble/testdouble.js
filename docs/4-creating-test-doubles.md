@@ -6,6 +6,8 @@ The examples below will walk through the different ways to create new test doubl
 
 ## td.function([name])
 
+**Note that `td.func` is available as an alias of `td.function`.**
+
 To create a fake function with test double, we use the `function` function. At its simplest, invoking:
 
 ``` javascript
