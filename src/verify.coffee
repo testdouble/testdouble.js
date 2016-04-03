@@ -26,7 +26,7 @@ warnIfStubbed = (testDouble, actualArgs) ->
     if argsMatch(stubbing.args, actualArgs, allowMatchers: false)
       log.warn 'td.verify', """
       test double#{stringifyName(testDouble)} was both stubbed and verified with arguments (#{stringifyArgs(actualArgs)}), which is redundant and probably unnecessary.
-      """, "https://github.com/testdouble/testdouble.js/blob/master/docs/B-frequently-asked-questions.md#why-shouldnt-i-call-both-tdwhen-and-tdverify-for-a-single-interaction-with"
+      """, "https://github.com/testdouble/testdouble.js/blob/master/docs/B-frequently-asked-questions.md#why-shouldnt-i-call-both-tdwhen-and-tdverify-for-a-single-interaction-with-a-test-double"
       true
 
 

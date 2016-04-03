@@ -168,7 +168,7 @@ describe '.verify', ->
       Given -> @td(1)
       When -> td.verify(@td(1))
       Then -> @warnings[0] == """
-        Warning: testdouble.js - td.verify - test double `.foo` was both stubbed and verified with arguments (1), which is redundant and probably unnecessary. (see: https://github.com/testdouble/testdouble.js/blob/master/docs/B-frequently-asked-questions.md#why-shouldnt-i-call-both-tdwhen-and-tdverify-for-a-single-interaction-with )
+        Warning: testdouble.js - td.verify - test double `.foo` was both stubbed and verified with arguments (1), which is redundant and probably unnecessary. (see: https://github.com/testdouble/testdouble.js/blob/master/docs/B-frequently-asked-questions.md#why-shouldnt-i-call-both-tdwhen-and-tdverify-for-a-single-interaction-with-a-test-double )
         """
 
     context 'matchers are used', ->
