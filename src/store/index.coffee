@@ -1,5 +1,5 @@
 _ = require('lodash')
-EventEmitter = require('events')
+EventEmitter = require('events').EventEmitter
 
 storeEmitter = new EventEmitter()
 globalStore = []
