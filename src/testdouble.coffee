@@ -1,5 +1,6 @@
 module.exports =
   function: require('./function')
+  func: require('./function')
   object: require('./object')
   when: require('./when')
   verify: require('./verify')

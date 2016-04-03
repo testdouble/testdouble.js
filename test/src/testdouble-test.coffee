@@ -5,6 +5,7 @@ describe "td.*", ->
     Then -> td.when == requireSource('when')
     Then -> td.verify == requireSource('verify')
     Then -> td.function == requireSource('function')
+    Then -> td.func == requireSource('function')
     Then -> td.object == requireSource('object')
     Then -> td.matchers == requireSource('matchers')
     Then -> td.callback == requireSource('matchers/callback')
