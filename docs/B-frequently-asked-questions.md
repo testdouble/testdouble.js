@@ -44,8 +44,7 @@ dependencies.
 As a result, we aren't planning to go out of our way to support replacing modules
 with quibble / td.js
 
-## Why shouldn't I call both td.when and td.verify for a single interaction with
-a test double?
+## Why shouldn't I call both td.when and td.verify for a single interaction with a test double?
 
 It's a common mistake to call `td.verify` for an invocation that's already been
 stubbed with `td.when`. Some users might feel like this is appropriate,
@@ -76,7 +75,7 @@ td.verify(load(42))
 The assertion that `result` is `"Jane"` is sufficient to specify the behavior
 of the function. The additional `td.verify` call is redundant, because if `load`
 had not been invoked with `42`, then there's no way that `getName` could have
-returned `"Jane"`, since the stubbing wouldn't have been satisfied. Worse, it 
+returned `"Jane"`, since the stubbing wouldn't have been satisfied. Worse, it
 further couples the test to the subject's implementation—if, hypothetically, the
 `getName` function were able to determine the correct return value without
 calling `load`, the test would start failing even though there would
