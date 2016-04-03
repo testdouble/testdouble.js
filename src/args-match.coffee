@@ -2,7 +2,10 @@ _ = require('lodash')
 
 module.exports = (expectedArgs, actualArgs, config) ->
   return false if arityMismatch(expectedArgs, actualArgs, config)
-  equalsWithMatchers(expectedArgs, actualArgs)
+  if config?.allowMatchers != false
+    equalsWithMatchers(expectedArgs, actualArgs)
+  else
+    _.eq(expectedArgs, actualArgs)
 
 arityMismatch =  (expectedArgs, actualArgs, config) ->
   expectedArgs.length != actualArgs.length && !config.ignoreExtraArgs
