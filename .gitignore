@@ -9,3 +9,5 @@ npm-debug.log*
 /generated
 /lib
 /.coverage
+
+.node-version
