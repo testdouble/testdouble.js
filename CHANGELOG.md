@@ -1,5 +1,16 @@
 # Change Log
 
+## [v1.4.1](https://github.com/testdouble/testdouble.js/tree/v1.4.1) (2016-04-05)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.4.0...v1.4.1)
+
+**Closed issues:**
+
+- Changelog [\#97](https://github.com/testdouble/testdouble.js/issues/97)
+
+**Merged pull requests:**
+
+- Generate a changelog whenever we pubish [\#98](https://github.com/testdouble/testdouble.js/pull/98) ([searls](https://github.com/searls))
+
 ## [v1.4.0](https://github.com/testdouble/testdouble.js/tree/v1.4.0) (2016-04-03)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.3.1...v1.4.0)
 
