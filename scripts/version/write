@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+echo "module.exports = '$npm_package_version'" > src/version.coffee

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -e
+
+cd examples/webpack
+npm i
+npm test
+cd ../..

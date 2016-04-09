@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+coffee --output lib --compile src

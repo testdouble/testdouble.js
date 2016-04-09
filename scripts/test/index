@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+mocha --ui mocha-given --reporter $npm_package_config_mocha_reporter --compilers coffee:coffee-script $EXTRA_MOCHA_ARGS --recursive test/node-helper.coffee test/src

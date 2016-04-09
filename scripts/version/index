@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -e
+
+npm run version:write
+npm run compile
+git add dist src/version.coffee

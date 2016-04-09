@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+istanbul instrument lib -o .coverage/lib

@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+EXTRA_MOCHA_ARGS="--reporter mocha-istanbul" COVER=.coverage/lib ISTANBUL_REPORT_DIR=.coverage ISTANBUL_REPORTERS=lcov,html npm run test
