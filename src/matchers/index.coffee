@@ -33,6 +33,8 @@ module.exports =
   contains: create
     name: 'contains'
     matches: (containings, actualArg) ->
+      return false if containings.length == 0
+
       containsAllSpecified = (containing, actual) ->
         _.all containing, (val, key) ->
           return false unless actual?
@@ -42,15 +44,13 @@ module.exports =
             _.eq(val, actual[key])
 
       _.all containings, (containing) ->
-        if _.isString(containing)
-          _.include(actualArg, containing)
-        else if _.isArray(containing)
+        if _.isArray(containing)
           _.any actualArg, (actualElement) ->
             _.eq(actualElement, containing)
-        else if _.isPlainObject(containing)
+        else if _.isPlainObject(containing) && _.isPlainObject(actualArg)
           containsAllSpecified(containing, actualArg)
         else
-          log.error("td.matchers.contains", "this matcher only supports strings, arrays, and plain objects")
+          _.include(actualArg, containing)
 
   argThat: create
     name: 'argThat'
