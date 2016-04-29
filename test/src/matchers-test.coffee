@@ -80,9 +80,6 @@ describe '.matchers', ->
     context 'strings', ->
       Then -> @matches(td.matchers.contains('bar'), 'foobarbaz') == true
       Then -> @matches(td.matchers.contains('biz'), 'foobarbaz') == false
-      Then -> shouldThrow (=> td.matchers.contains(48).__matches()), """
-        Error: testdouble.js - td.matchers.contains - this matcher only supports strings, arrays, and plain objects
-        """
 
     context 'arrays', ->
       Then -> @matches(td.matchers.contains('a'), ['a','b','c']) == true
@@ -90,6 +87,8 @@ describe '.matchers', ->
       Then -> @matches(td.matchers.contains(['a','c']), ['a','b','c']) == false
       Then -> @matches(td.matchers.contains(['a','c']), [1, ['a','c'], 4]) == true
       Then -> @matches(td.matchers.contains(['a','c']), ['a','b','z']) == false
+      Then -> @matches(td.matchers.contains(true, 5, null, undefined), [true, 5, undefined, null]) == true
+      Then -> @matches(td.matchers.contains(true, 5, null, undefined), [true, 5, null]) == false
 
     context 'objects', ->
       Then -> @matches(td.matchers.contains(foo: 'bar', baz: 42), foo: 'bar', baz: 42, stuff: this) == true
@@ -98,6 +97,12 @@ describe '.matchers', ->
       Then -> @matches(td.matchers.contains(deep: {thing: 'stuff'}), {}) == false
       Then -> @matches(td.matchers.contains(deep: {thing: 'stuff'}), deep: {thing: 'stuff', shallow: 5}) == true
       Then -> @matches(td.matchers.contains({container: {size: 'S'}}), {ingredient: 'beans', container: { type: 'cup', size: 'S'}}) == true
+
+    context 'nonsense', ->
+      Then -> @matches(td.matchers.contains(42), 42) == false
+      Then -> @matches(td.matchers.contains(null), 'shoo') == false
+      Then -> @matches(td.matchers.contains(), 'shoo') == false
+      Then -> @matches(td.matchers.contains({}), undefined) == false
 
   describe 'argThat', ->
     Then -> @matches(td.matchers.argThat((arg) -> arg > 5), 6) == true
