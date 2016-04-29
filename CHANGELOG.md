@@ -1,5 +1,16 @@
 # Change Log
 
+## [v1.4.2](https://github.com/testdouble/testdouble.js/tree/v1.4.2) (2016-04-29)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.4.1...v1.4.2)
+
+**Closed issues:**
+
+- matchers.contains\(number\) support [\#102](https://github.com/testdouble/testdouble.js/issues/102)
+
+**Merged pull requests:**
+
+- Fix contains\(\) behavior for arrays [\#104](https://github.com/testdouble/testdouble.js/pull/104) ([searls](https://github.com/searls))
+
 ## [v1.4.1](https://github.com/testdouble/testdouble.js/tree/v1.4.1) (2016-04-05)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.4.0...v1.4.1)
 
