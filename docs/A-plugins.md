@@ -11,6 +11,7 @@ Plugins developed by the community:
 * [testdouble-chai](https://github.com/basecase/testdouble-chai) - Chai assertions
 * [testdouble-jasmine](https://github.com/testdouble/testdouble.js/issues/41) -
 Jasmine `expect` matchers (WIP by @BrianGenisio)
+* [testdouble-timers](https://github.com/kuy/testdouble-timers) - Fake timers API
 
 If you're interested in developing a testdouble.js plugin, we'd love if you
 [opened an issue](https://github.com/testdouble/testdouble.js/issues/new) to
