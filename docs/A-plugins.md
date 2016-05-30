@@ -23,6 +23,15 @@ Thes plugins developed by the community:
 * [testdouble-jasmine](https://github.com/testdouble/testdouble.js/issues/41) -
 Jasmine `expect` matchers (WIP by @BrianGenisio)
 
+## Build Plugins
+
+Sometimes, it can be handy to have a ready-made shim to pull in and configure the 
+library for various build tools. Here's what testdouble.js has so far:
+
+* [ember-cli-testdouble](https://github.com/isleofcode/ember-cli-testdouble) by 
+[@AlexBlom](https://github.com/AlexBlom) provides a shim for easy importing of 
+testdouble.js by Ember projects that using Ember CLI
+
 ## Fake Timers
 
 One popular feature of Sinon.js is its [fake timer
