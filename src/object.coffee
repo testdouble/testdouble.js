@@ -57,4 +57,5 @@ nameOf = (nameOrType) ->
     ''
 
 description = (nameOrType) ->
-  "[test double object#{if name = nameOf(nameOrType) then " for \"#{name}\"" else ''}]"
+  name = nameOf(nameOrType)
+  "[test double object#{if name then " for \"#{name}\"" else ''}]"
