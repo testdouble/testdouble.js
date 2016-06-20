@@ -51,6 +51,8 @@ withDefaults = (config) ->
 nameOf = (nameOrType) ->
   if _.isFunction(nameOrType) && nameOrType.name?
     nameOrType.name
+  else if _.isString(nameOrType)
+    nameOrType
   else
     ''
 
