@@ -1,5 +1,21 @@
 # Change Log
 
+## [v1.4.3](https://github.com/testdouble/testdouble.js/tree/v1.4.3) (2016-06-22)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.4.2...v1.4.3)
+
+**Closed issues:**
+
+- Build with Travis on Node 6.x [\#114](https://github.com/testdouble/testdouble.js/issues/114)
+- Wrong test double name for proxies [\#112](https://github.com/testdouble/testdouble.js/issues/112)
+- Improve error output message [\#111](https://github.com/testdouble/testdouble.js/issues/111)
+- Flexible parameters [\#110](https://github.com/testdouble/testdouble.js/issues/110)
+- How can I install and use this in an ember/ember-cli project? [\#105](https://github.com/testdouble/testdouble.js/issues/105)
+- td.replace breaks subsequent require calls [\#103](https://github.com/testdouble/testdouble.js/issues/103)
+
+**Merged pull requests:**
+
+- Generate test double name for a Proxy test double [\#113](https://github.com/testdouble/testdouble.js/pull/113) ([mgryszko](https://github.com/mgryszko))
+
 ## [v1.4.2](https://github.com/testdouble/testdouble.js/tree/v1.4.2) (2016-04-29)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.4.1...v1.4.2)
 
@@ -10,6 +26,7 @@
 **Merged pull requests:**
 
 - Fix contains\(\) behavior for arrays [\#104](https://github.com/testdouble/testdouble.js/pull/104) ([searls](https://github.com/searls))
+- Add testdouble-timers as plugin to docs [\#101](https://github.com/testdouble/testdouble.js/pull/101) ([kuy](https://github.com/kuy))
 
 ## [v1.4.1](https://github.com/testdouble/testdouble.js/tree/v1.4.1) (2016-04-05)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.4.0...v1.4.1)
