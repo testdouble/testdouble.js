@@ -51,8 +51,11 @@ withDefaults = (config) ->
 nameOf = (nameOrType) ->
   if _.isFunction(nameOrType) && nameOrType.name?
     nameOrType.name
+  else if _.isString(nameOrType)
+    nameOrType
   else
     ''
 
 description = (nameOrType) ->
-  "[test double object#{if name = nameOf(nameOrType) then " for \"#{name}\"" else ''}]"
+  name = nameOf(nameOrType)
+  "[test double object#{if name then " for \"#{name}\"" else ''}]"
