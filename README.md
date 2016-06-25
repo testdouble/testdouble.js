@@ -13,6 +13,14 @@ terse, clear, and easy-to-understand tests. There's an awful lot to cover, so
 please take some time and enjoy our documentation, which itself is designed to
 show you how to make the most out of test doubles in your tests.
 
+## The pitch
+
+Interested in learning what testdouble.js is, why it exists, and what the API
+offers? The quickest path is this fast-paced 20-minute talk:
+
+[<img width="633" alt="screenshot of testdouble.js talk" src="https://cloud.githubusercontent.com/assets/79303/16356401/1a9d7ffc-3aa4-11e6-833f-9d6094547297.png">
+](https://vimeo.com/169413322)
+
 ## Coming from Sinon.js?
 
 Right now, Sinon.js is the test double incumbent in JavaScript, with over 1.7
