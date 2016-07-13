@@ -1,5 +1,17 @@
 # Change Log
 
+## [v1.5.0](https://github.com/testdouble/testdouble.js/tree/v1.5.0) (2016-07-13)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.4.3...v1.5.0)
+
+**Closed issues:**
+
+- support promises resolve/reject [\#46](https://github.com/testdouble/testdouble.js/issues/46)
+
+**Merged pull requests:**
+
+- Use stringify-object now that my change is merged [\#116](https://github.com/testdouble/testdouble.js/pull/116) ([searls](https://github.com/searls))
+- Promise stubbing sugar [\#115](https://github.com/testdouble/testdouble.js/pull/115) ([searls](https://github.com/searls))
+
 ## [v1.4.3](https://github.com/testdouble/testdouble.js/tree/v1.4.3) (2016-06-22)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.4.2...v1.4.3)
 
