@@ -399,13 +399,16 @@ to run asynchronously.
 #### Using non-native Promise libraries
 
 If your runtime doesn't support native promises, or if your application depends
-on a particular promise library, you'll first need to point testdouble.js to it:
+on a particular promise library, you'll first need to point testdouble.js to it.
+This only needs to be done once (perhaps in a global test helper).
 
 ``` js
 td.config({
   promiseConstructor: require('bluebird')
 })
 ```
+
+For more on configuration, read [the appendix on td.config](C-configuration.md).
 
 ### Stub side effects with thenDo
 
