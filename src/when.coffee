@@ -3,6 +3,7 @@ calls = require('./store/calls')
 stubbings = require('./store/stubbings')
 callback = require('./matchers/callback')
 log = require('./log')
+tdConfig = require('./config')
 
 module.exports = (__userDoesPretendInvocationHere__, config = {}) ->
   thenReturn: (stubbedValues...) ->
@@ -13,6 +14,12 @@ module.exports = (__userDoesPretendInvocationHere__, config = {}) ->
     addStubbing(stubbedValues, config, 'thenDo')
   thenThrow: (stubbedValues...) ->
     addStubbing(stubbedValues, config, 'thenThrow')
+  thenResolve: (stubbedValues...) ->
+    warnIfPromiseless()
+    addStubbing(stubbedValues, config, 'thenResolve')
+  thenReject: (stubbedValues...) ->
+    warnIfPromiseless()
+    addStubbing(stubbedValues, config, 'thenReject')
 
 addStubbing = (stubbedValues, config, plan) ->
   _.assign(config, {plan})
@@ -34,3 +41,15 @@ concatImpliedCallback = (args, config) ->
     args.concat(callback)
   else
     args
+
+warnIfPromiseless = ->
+  return if tdConfig().promiseConstructor?
+  log.warn "td.when", """
+    no promise constructor is set, so this `thenResolve` or `thenReject` stubbing
+    will fail if it's satisfied by an invocation on the test double. You can tell
+    testdouble.js which promise constructor to use with `td.config`, like so:
+
+      td.config({
+        promiseConstructor: require('bluebird')
+      })
+    """
