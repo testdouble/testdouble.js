@@ -364,6 +364,52 @@ td.when(save('bob')).thenThrow(new Error('Name taken'))
 save('bob') // throws error 'Name taken'
 ```
 
+### Stub promises with thenResolve and thenReject
+
+As a little touch of shorthand, you can stub a method to return an immediately
+resolved or rejected promise.
+
+To stub a resolved Promise, use `thenResolve`:
+
+``` js
+var fetch = td.function()
+td.when(fetch('/user')).thenResolve('Jane')
+
+fetch('/user').then(function (value) {
+  console.log(value) // prints "Jane"
+})
+```
+
+To stub a rejected Promise, use `thenReject`:
+
+``` js
+var fetch = td.function()
+td.when(fetch('/user')).thenReject('Joe')
+
+fetch('/user').catch(function (value) {
+  console.log(value) // prints "Joe"
+})
+```
+
+Note that while the testdouble.js API is itself entirely synchronous, most
+Promise implementations will ensure that `then` is invoked on a subsequent tick
+of the event loop, which will in turn require any tests that use Promise objects
+to run asynchronously.
+
+#### Using non-native Promise libraries
+
+If your runtime doesn't support native promises, or if your application depends
+on a particular promise library, you'll first need to point testdouble.js to it.
+This only needs to be done once (perhaps in a global test helper).
+
+``` js
+td.config({
+  promiseConstructor: require('bluebird')
+})
+```
+
+For more on configuration, read [the appendix on td.config](C-configuration.md).
+
 ### Stub side effects with thenDo
 
 This shouldn't be needed very frequently, but when a depended-on method needs to

@@ -54,16 +54,84 @@ describe 'when', ->
       Then -> @testDouble() == 'B'
 
   describe 'stubbing actions with `thenDo` instead of `thenReturn`', ->
-    Given -> @someAction = td.function()
+    Given -> @someAction = td.when(td.function()(55)).thenReturn('yatta')
     Given -> td.when(@testDouble(55)).thenDo(@someAction)
-    When -> @testDouble(55)
-    Then -> td.verify(@someAction(55))
+    When -> @result = @testDouble(55)
+    And -> @result == 'yatta'
 
   describe 'stubbing actions with `thenThrow` instead of `thenReturn`', ->
     Given -> @error = new Error('lol')
     Given -> td.when(@testDouble(42)).thenThrow(@error)
     When -> try @testDouble(42) catch e then @result = e
     Then -> @error == @result
+
+  describe 'stubbing promises', ->
+    context 'with a native promise', ->
+      return unless typeof Promise == 'function'
+
+      describe 'td.when…thenResolve', ->
+        Given -> td.when(@testDouble(10)).thenResolve('pants')
+        When (done) -> @testDouble(10).then((@resolved) => done())
+        Then -> @resolved == 'pants'
+
+      describe 'td.when…thenReject', ->
+        Given -> td.when(@testDouble(10)).thenReject('oops')
+        When (done) -> @testDouble(10).then null, (@rejected) => done()
+        Then -> @rejected == 'oops'
+
+    context 'with an alternative promise constructor', ->
+      class FakePromise
+        constructor: (executor) ->
+          executor(((@resolved) =>), ((@rejected) =>))
+
+        then: (success, failure) ->
+          if @resolved?
+            success(@resolved + '!')
+          else
+            failure(@rejected + '?')
+
+      Given -> td.config({promiseConstructor: FakePromise})
+      describe 'td.when…thenResolve', ->
+        Given -> td.when(@testDouble(10)).thenResolve('pants')
+        When (done) -> @testDouble(10).then((@resolved) => done())
+        Then -> @resolved == 'pants!'
+
+      describe 'td.when…thenReject', ->
+        Given -> td.when(@testDouble(10)).thenReject('oops')
+        When (done) -> @testDouble(10).then null, (@rejected) => done()
+        Then -> @rejected == 'oops?'
+
+    context 'with no promise constructor', ->
+      Given -> @warnings = []
+      Given -> @errors = []
+      Given -> console.warn = (m) => @warnings.push(m)
+      Given -> console.error = (m) => @errors.push(m)
+      Given -> td.config({promiseConstructor: undefined})
+
+      describe 'td.when…thenResolve', ->
+        Given -> td.when(@testDouble(10)).thenResolve('pants')
+        Then -> @warnings[0] == """
+          Warning: testdouble.js - td.when - no promise constructor is set, so this `thenResolve` or `thenReject` stubbing
+          will fail if it's satisfied by an invocation on the test double. You can tell
+          testdouble.js which promise constructor to use with `td.config`, like so:
+
+            td.config({
+              promiseConstructor: require('bluebird')
+            })
+          """
+
+        describe 'actually invoking it', ->
+          When -> try @testDouble(10) catch e then @error = e
+          Then -> @error.message == """
+              Error: testdouble.js - td.when - no promise constructor is set (perhaps this runtime lacks a native Promise
+              function?), which means this stubbing can't return a promise to your
+              subject under test, resulting in this error. To resolve the issue, set
+              a promise constructor with `td.config`, like this:
+
+                td.config({
+                  promiseConstructor: require('bluebird')
+                })
+            """
 
   describe 'stubbing error, no invocation found', ->
     Given -> td.reset()

@@ -2,6 +2,7 @@ _ = require('lodash')
 stringifyAnything = require('./stringify/anything')
 
 DEFAULTS =
+  promiseConstructor: global.Promise
   ignoreWarnings: false
   suppressErrors: false
 

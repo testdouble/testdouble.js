@@ -2,6 +2,7 @@ describe 'td.config', ->
   context 'defaults', ->
     Given -> @config = td.config()
     Then -> expect(@config).to.deep.equal
+      promiseConstructor: global.Promise
       ignoreWarnings: false
       suppressErrors: false
 
@@ -15,4 +16,4 @@ describe 'td.config', ->
         @config = td.config(wat: 'wat?')
       catch e
         @error = e
-    Then -> @error.message == 'Error: testdouble.js - td.config - "wat" is not a valid configuration key (valid keys are: ["ignoreWarnings", "suppressErrors"])'
+    Then -> @error.message == 'Error: testdouble.js - td.config - "wat" is not a valid configuration key (valid keys are: ["promiseConstructor", "ignoreWarnings", "suppressErrors"])'
