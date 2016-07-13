@@ -54,10 +54,10 @@ describe 'when', ->
       Then -> @testDouble() == 'B'
 
   describe 'stubbing actions with `thenDo` instead of `thenReturn`', ->
-    Given -> @someAction = td.function()
+    Given -> @someAction = td.when(td.function()(55)).thenReturn('yatta')
     Given -> td.when(@testDouble(55)).thenDo(@someAction)
-    When -> @testDouble(55)
-    Then -> td.verify(@someAction(55))
+    When -> @result = @testDouble(55)
+    And -> @result == 'yatta'
 
   describe 'stubbing actions with `thenThrow` instead of `thenReturn`', ->
     Given -> @error = new Error('lol')
