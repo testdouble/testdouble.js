@@ -1,5 +1,5 @@
 _ = require('lodash')
-stringifyObject = require('stringify-object-with-one-liners')
+stringifyObject = require('stringify-object')
 
 module.exports = (anything) ->
   if _.isString(anything)
