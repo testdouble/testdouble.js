@@ -180,3 +180,10 @@ describe 'when', ->
         When -> @result = [@testDouble(), @testDouble(), @testDouble()]
         Then -> expect(@result).to.deep.equal(['YES', 'NO', 'NO'])
 
+  describe 'nested whens', ->
+    Given -> @knob = td.function()
+    Given -> @door = td.function()
+    Given -> td.when(@knob('twist')).thenReturn
+      door: td.when(@door('push')).thenReturn('open')
+    When -> @result = @knob('twist').door('push')
+    Then -> @result == 'open'
