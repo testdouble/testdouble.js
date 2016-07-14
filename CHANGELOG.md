@@ -1,5 +1,16 @@
 # Change Log
 
+## [v1.6.0](https://github.com/testdouble/testdouble.js/tree/v1.6.0) (2016-07-14)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.5.0...v1.6.0)
+
+**Closed issues:**
+
+- Nested stubbing doesn't work [\#117](https://github.com/testdouble/testdouble.js/issues/117)
+
+**Merged pull requests:**
+
+- Allow nested stubbing configuration [\#118](https://github.com/testdouble/testdouble.js/pull/118) ([searls](https://github.com/searls))
+
 ## [v1.5.0](https://github.com/testdouble/testdouble.js/tree/v1.5.0) (2016-07-13)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.4.3...v1.5.0)
 
