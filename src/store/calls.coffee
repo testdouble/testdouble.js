@@ -2,18 +2,17 @@ _ = require('lodash')
 store = require('./index')
 argsMatch = require('./../args-match')
 
-lastCall = null #<-- remember this to pop our DSL of when(<call>)/verify(<call>)
-store.onReset -> lastCall = null
+callHistory = [] #<-- remember this to pop our DSL of when(<call>)/verify(<call>)
+store.onReset -> callHistory = []
 
 module.exports =
 
   log: (testDouble, args, context) ->
     store.for(testDouble).calls.push({args, context})
-    lastCall = {testDouble, args, context}
+    callHistory.push({testDouble, args, context})
 
   pop: ->
-    _.tap (call = lastCall), (call) ->
-      lastCall = null #<-- no double-dipping since it's global & destructive
+    _.tap (callHistory.pop()), (call) ->
       store.for(call.testDouble).calls.pop() if call?
 
   wasInvoked: (testDouble, args, config) ->
