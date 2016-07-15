@@ -10,6 +10,7 @@ describe 'td.replace', ->
       thingConstructor: class Thing
         foo: -> 'og foo'
         bar: -> 'og bar'
+      es6constructor: require('./es6class')
 
     describe 'Replacing a function', ->
       When -> @double = td.replace(@dependency, 'honk')
@@ -32,6 +33,18 @@ describe 'td.replace', ->
         When -> td.reset()
         Then -> td.explain(new @dependency.thingConstructor().foo).isTestDouble == false
         And -> new @dependency.thingConstructor().foo() == 'og foo'
+
+    describe 'Replacing an ES6 constructor function', ->
+      When -> @doubleBag = td.replace(@dependency, 'es6constructor')
+      Then -> td.explain(@doubleBag.foo).isTestDouble == true
+      Then -> td.explain(@doubleBag.bar).isTestDouble == true
+      And -> @doubleBag.foo == new @dependency.es6constructor().foo
+      And -> @doubleBag.bar == new @dependency.es6constructor().bar
+
+      describe 'reset restores it', ->
+        When -> td.reset()
+        Then -> td.explain(new @dependency.es6constructor().foo).isTestDouble == false
+        And -> new @dependency.es6constructor().foo() == 'og foo'
 
     describe 'Replacing a method on an object instantiated with `new`', ->
       Given -> @thing = new @dependency.thingConstructor()

@@ -4,4 +4,5 @@ _ =
 
 module.exports = (thing) ->
   return unless thing?.prototype?
-  _.some(_.functions(thing.prototype))
+  _.some Object.getOwnPropertyNames(thing.prototype), (property) ->
+    props != 'constructor' && _.isFunction(thing.prototype[property])
