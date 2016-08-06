@@ -31,7 +31,7 @@ library for various build tools. Here's what testdouble.js has so far:
 * [ember-cli-testdouble](https://github.com/isleofcode/ember-cli-testdouble) by 
 [@AlexBlom](https://github.com/AlexBlom) provides a shim for easy importing of 
 testdouble.js by Ember projects that using Ember CLI
-* [karam-testdouble](https://github.com/kahwee/karma-testdouble) by 
+* [karma-testdouble](https://github.com/kahwee/karma-testdouble) by 
 [@kahwee](https://github.com/kahwee) will configure 
 [Karma](https://karma-runner.github.io) to load test double's browser
 distribution
