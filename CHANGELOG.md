@@ -1,5 +1,21 @@
 # Change Log
 
+## [v1.6.1](https://github.com/testdouble/testdouble.js/tree/v1.6.1) (2016-08-31)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.6.0...v1.6.1)
+
+**Closed issues:**
+
+- td.explain should indicate thenCallback / thenResolve / thenReject from thenReturn [\#126](https://github.com/testdouble/testdouble.js/issues/126)
+- td.when and td.verify warning [\#125](https://github.com/testdouble/testdouble.js/issues/125)
+- td.callback, when given a td.object, raises a TypeError [\#124](https://github.com/testdouble/testdouble.js/issues/124)
+- not matcher and calling function multiple times [\#122](https://github.com/testdouble/testdouble.js/issues/122)
+- Verify of a specific call when multiple calls happen [\#120](https://github.com/testdouble/testdouble.js/issues/120)
+
+**Merged pull requests:**
+
+- explain plan better in stubbing description [\#127](https://github.com/testdouble/testdouble.js/pull/127) ([Moeriki](https://github.com/Moeriki))
+- Fix typo in plugin name [\#123](https://github.com/testdouble/testdouble.js/pull/123) ([hanneskaeufler](https://github.com/hanneskaeufler))
+
 ## [v1.6.0](https://github.com/testdouble/testdouble.js/tree/v1.6.0) (2016-07-14)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.5.0...v1.6.0)
 
