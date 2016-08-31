@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+browserify . --standalone td --outfile $npm_package_config_build_file --ignore 'quibble' -p headerify

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -e
+
+cd examples/lineman
+npm i
+npm test
+cd ../..

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -e
+
+git pull --rebase
+npm run test:ci

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -e
+
+npm run compile:node
+npm run test:cover:instrument
+npm run test:cover:run

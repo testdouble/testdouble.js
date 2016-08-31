@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -e
+
+git push --tags
+npm run version:changelog
+git push
+npm publish

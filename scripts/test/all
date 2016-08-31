@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -e
+
+npm run test --testdouble:mocha_reporter=tap
+testem ci
+npm run test:example

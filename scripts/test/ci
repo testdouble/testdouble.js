@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -e
+
+npm run clean
+npm run compile
+npm run test:all
+npm run clean:dist

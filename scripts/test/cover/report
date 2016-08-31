@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+codeclimate-test-reporter < .coverage/lcov.info

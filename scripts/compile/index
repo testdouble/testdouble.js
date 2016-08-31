@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -e
+
+npm run compile:node
+npm run compile:test
+npm run compile:browser
+
