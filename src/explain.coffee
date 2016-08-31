@@ -32,7 +32,15 @@ testdoubleDescription = (testDouble, stubs, calls) ->
 stubbingDescription = (stubs) ->
   return "" if stubs.length == 0
   _.reduce stubs, (desc, stub) ->
-    desc + "\n  - when called with `(#{stringifyArgs(stub.args)})`, then return #{stringifyArgs(stub.stubbedValues, ", then ", "`")}."
+    plan = switch stub.config.plan
+      when 'thenCallback' then 'callback'
+      when 'thenResolve' then 'resolve'
+      when 'thenReject' then 'reject'
+      else 'return'
+    args = switch stub.config.plan
+      when 'thenCallback' then "`(#{stringifyArgs(stub.stubbedValues, ", ")})`"
+      else stringifyArgs(stub.stubbedValues, ", then ", "`")
+    desc + "\n  - when called with `(#{stringifyArgs(stub.args)})`, then #{plan} #{args}."
   , "\n\nStubbings:"
 
 callDescription = (calls) ->

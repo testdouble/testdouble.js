@@ -42,6 +42,45 @@ describe '.explain', ->
       """
       isTestDouble: true
 
+  context 'a double with callback', ->
+    Given -> td.when(@testDouble(14)).thenCallback(null, 8)
+    Then -> expect(@result).to.deep.eq
+      calls: []
+      callCount: 0
+      description: """
+      This test double has 1 stubbings and 0 invocations.
+
+      Stubbings:
+        - when called with `(14, callback)`, then callback `(null, 8)`.
+      """
+      isTestDouble: true
+
+  context 'a double with resolve', ->
+    Given -> td.when(@testDouble(14)).thenResolve(8)
+    Then -> expect(@result).to.deep.eq
+      calls: []
+      callCount: 0
+      description: """
+      This test double has 1 stubbings and 0 invocations.
+
+      Stubbings:
+        - when called with `(14)`, then resolve `8`.
+      """
+      isTestDouble: true
+
+  context 'a double with reject', ->
+    Given -> td.when(@testDouble(14)).thenReject(8)
+    Then -> expect(@result).to.deep.eq
+      calls: []
+      callCount: 0
+      description: """
+      This test double has 1 stubbings and 0 invocations.
+
+      Stubbings:
+        - when called with `(14)`, then reject `8`.
+      """
+      isTestDouble: true
+
   context 'passed a non-test double', ->
     Given -> @testDouble = 42
     Then -> expect(@result).to.deep.eq
@@ -49,4 +88,3 @@ describe '.explain', ->
       callCount: 0
       description: "This is not a test double."
       isTestDouble: false
-
