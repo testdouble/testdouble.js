@@ -17,8 +17,15 @@ createTestDoubleObject = (nameOrType, config) ->
   else
     createTestDoubleViaProxy(nameOrType, config)
 
+getAllPropertyNames = (type) ->
+  props = []
+  while true
+    props = _.union(props, Object.getOwnPropertyNames(type))
+    break unless type = Object.getPrototypeOf(type)
+  props
+
 createTestDoublesForPrototype = (type) ->
-  _.reduce Object.getOwnPropertyNames(type.prototype), (memo, name) ->
+  _.reduce getAllPropertyNames(type.prototype), (memo, name) ->
     memo[name] = if _.isFunction(type.prototype[name])
       tdFunction("#{nameOf(type)}##{name}")
     else

@@ -1,0 +1,13 @@
+{
+  "name": "testdouble-babel-example",
+  "private": true,
+  "scripts": {
+    "test": "mocha --compilers js:babel-register -R spec --recursive test/helper.js test/lib/"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.14.0",
+    "babel-register": "^6.14.0",
+    "mocha": "^3.0.2",
+    "testdouble": "*"
+  }
+}

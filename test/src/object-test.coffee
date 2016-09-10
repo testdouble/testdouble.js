@@ -29,6 +29,17 @@ describe 'td.object', ->
     And -> @testDouble.toString() == '[test double object]'
     And -> @testDouble.bam.toString() == '[test double for ".bam"]'
 
+  describe 'making a test double on a subtype', ->
+    Given -> @someSuperType = class SuperType
+      foo: ->
+    Given -> @someSubType = class SubType extends @someSuperType
+      bar: ->
+    Given -> @testDouble = td.object(@someSubType)
+    When -> td.when(@testDouble.foo()).thenReturn('yay')
+    When -> td.when(@testDouble.bar()).thenReturn('yay')
+    Then -> @testDouble.foo() == 'yay'
+    Then -> @testDouble.bar() == 'yay'
+
   if global.Proxy?
     describe 'creating a proxy object (ES2015; only supported in FF + Edge atm)', ->
       Given -> @testDouble = td.object('Thing')
