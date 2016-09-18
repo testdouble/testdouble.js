@@ -1,4 +1,9 @@
-_ = require('lodash')
+_ =
+  each: require('lodash/each')
+  findLast: require('lodash/findLast')
+  last: require('lodash/last')
+  some: require('lodash/some')
+
 store = require('./index')
 callsStore = require('./calls')
 argsMatch = require('../args-match')

@@ -1,4 +1,7 @@
-_ = require('lodash')
+_ =
+  includes: require('lodash/includes')
+  isString: require('lodash/isString')
+
 stringifyObject = require('stringify-object')
 
 module.exports = (anything) ->

@@ -1,7 +1,9 @@
-_ = require('lodash')
+_ =
+  map: require('lodash/map')
+
 stringifyAnything = require('./anything')
 
 module.exports = (args, joiner = ", ", wrapper = "") ->
-  _(args).map (arg) ->
+  _.map args, (arg) ->
     "#{wrapper}#{stringifyAnything(arg)}#{wrapper}"
   .join(joiner)

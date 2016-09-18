@@ -1,4 +1,7 @@
-_ = require('lodash')
+_ =
+  assign: require('lodash/assign')
+  some: require('lodash/some')
+
 calls = require('./store/calls')
 stubbings = require('./store/stubbings')
 callback = require('./matchers/callback')
@@ -37,7 +40,7 @@ addStubbing = (stubbedValues, config, plan) ->
 concatImpliedCallback = (args, config) ->
   return args unless config.plan == 'thenCallback'
 
-  if !_(args).some(callback.isCallback)
+  if !_.some(args, callback.isCallback)
     args.concat(callback)
   else
     args

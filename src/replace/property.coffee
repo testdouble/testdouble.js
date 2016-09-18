@@ -1,10 +1,12 @@
+_ =
+  capitalize: require('lodash/capitalize')
+
 imitate = require('./imitate')
 isConstructor = require('./is-constructor')
 wrapWithConstructor = require('./wrap-with-constructor')
 log = require('../log')
 reset = require('../reset')
 stringifyAnything = require('../stringify/anything')
-_ = require('lodash')
 
 module.exports = (object, property, manualReplacement) ->
   isManual = arguments.length > 2
@@ -42,5 +44,3 @@ warnIfTypeMismatch = (property, fakeThing, realThing) ->
     log.warn "td.replace", """
     property "#{property}" #{stringifyAnything(realThing)} (#{_.capitalize(realType)}) was replaced with #{stringifyAnything(fakeThing)}, which has a different type (#{_.capitalize(fakeType)}).
     """
-
-

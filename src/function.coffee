@@ -1,4 +1,6 @@
-_ = require('lodash')
+_ =
+  tap: require('lodash/tap')
+
 store = require('./store')
 calls = require('./store/calls')
 stubbings = require('./store/stubbings')

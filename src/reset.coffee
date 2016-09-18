@@ -1,4 +1,5 @@
-_ = require('lodash')
+_ =
+  each: require('lodash/each')
 quibble = require('quibble')
 
 resetHandlers = []
@@ -10,4 +11,3 @@ module.exports = ->
 
 module.exports.onNextReset = (func) ->
   resetHandlers.push(func)
-

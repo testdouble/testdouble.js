@@ -1,4 +1,5 @@
-_ = require('lodash')
+_ =
+  reduce: require('lodash/reduce')
 
 store = require('./store')
 callsStore = require('./store/calls')

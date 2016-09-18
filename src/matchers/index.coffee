@@ -1,4 +1,14 @@
-_ = require('lodash')
+_ =
+  every: require('lodash/every')
+  includes: require('lodash/includes')
+  isArray: require('lodash/isArray')
+  isBoolean: require('lodash/isBoolean')
+  isEqual: require('lodash/isEqual')
+  isNumber: require('lodash/isNumber')
+  isPlainObject: require('lodash/isPlainObject')
+  isString: require('lodash/isString')
+  some: require('lodash/some')
+
 log = require('../log')
 create = require('./create')
 stringifyArguments = require('../stringify/arguments')

@@ -1,4 +1,6 @@
-_ = require('lodash')
+_ =
+  isFunction: require('lodash/isFunction')
+
 stringifyArguments = require('../stringify/arguments')
 
 module.exports = (config) ->

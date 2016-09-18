@@ -1,4 +1,7 @@
-_ = require('lodash')
+_ =
+  find: require('lodash/find')
+  tap: require('lodash/tap')
+
 EventEmitter = require('events').EventEmitter
 
 storeEmitter = new EventEmitter()
@@ -20,4 +23,3 @@ module.exports =
 
 initialEntryFor = (testDouble) ->
   {testDouble, stubbings: [], calls: [], verifications: []}
-

@@ -1,4 +1,15 @@
-_ = require('lodash')
+_ =
+  extend: require('lodash/extend')
+  functions: require('lodash/functions')
+  includes: require('lodash/includes')
+  isArray: require('lodash/isArray')
+  isFunction: require('lodash/isFunction')
+  isPlainObject: require('lodash/isPlainObject')
+  isString: require('lodash/isString')
+  reduce: require('lodash/reduce')
+  tap: require('lodash/tap')
+  union: require('lodash/union')
+
 tdFunction = require('./function')
 
 DEFAULT_OPTIONS = excludeMethods: ['then']
@@ -34,13 +45,13 @@ createTestDoublesForPrototype = (type) ->
   , {}
 
 createTestDoublesForFunctionBag = (bag) ->
-  _(bag).functions().reduce (memo, functionName) ->
+  _.reduce _.functions(bag), (memo, functionName) ->
     memo[functionName] = tdFunction(".#{functionName}")
     memo
   , _.extend({}, bag)
 
 createTestDoublesForFunctionNames = (names) ->
-  _(names).reduce (memo, functionName) ->
+  _.reduce names, (memo, functionName) ->
     memo[functionName] = tdFunction(".#{functionName}")
     memo
   , {}
