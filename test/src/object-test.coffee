@@ -1,5 +1,5 @@
 describe 'td.object', ->
-  describe.only 'making a test double object based on a Prototypal thing', ->
+  describe 'making a test double object based on a Prototypal thing', ->
     Given -> @someType = class Thing
       foo: ->
       bar: ->
