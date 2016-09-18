@@ -1,5 +1,12 @@
 # Change Log
 
+## [v1.7.0](https://github.com/testdouble/testdouble.js/tree/v1.7.0) (2016-09-18)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.6.2...v1.7.0)
+
+**Merged pull requests:**
+
+- Upgrade to lodash 4.15.0 [\#132](https://github.com/testdouble/testdouble.js/pull/132) ([searls](https://github.com/searls))
+
 ## [v1.6.2](https://github.com/testdouble/testdouble.js/tree/v1.6.2) (2016-09-18)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.6.1...v1.6.2)
 
