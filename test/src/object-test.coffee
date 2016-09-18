@@ -1,13 +1,15 @@
 describe 'td.object', ->
-  describe 'making a test double object based on a Prototypal thing', ->
+  describe.only 'making a test double object based on a Prototypal thing', ->
     Given -> @someType = class Thing
       foo: ->
       bar: ->
+      notAFunc: 11
     Given -> @testDouble = td.object(@someType)
     When -> td.when(@testDouble.bar()).thenReturn('yay')
     Then -> @testDouble.bar() == 'yay'
     And -> @testDouble.toString() == '[test double object for "Thing"]'
     And -> @testDouble.foo.toString() == '[test double for "Thing#foo"]'
+    And -> @testDouble.notAFunc == 11
 
   describe 'making a test double based on a plain object funcbag', ->
     Given -> @funcBag =
