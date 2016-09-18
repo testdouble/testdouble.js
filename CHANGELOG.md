@@ -1,5 +1,17 @@
 # Change Log
 
+## [v1.6.2](https://github.com/testdouble/testdouble.js/tree/v1.6.2) (2016-09-18)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.6.1...v1.6.2)
+
+**Closed issues:**
+
+- Add support for concurrent test runners \(ava\)? [\#131](https://github.com/testdouble/testdouble.js/issues/131)
+- Async use of verify results in timeout [\#129](https://github.com/testdouble/testdouble.js/issues/129)
+
+**Merged pull requests:**
+
+- Should methods on super types be stubbed in td.object? [\#130](https://github.com/testdouble/testdouble.js/pull/130) ([paultyng](https://github.com/paultyng))
+
 ## [v1.6.1](https://github.com/testdouble/testdouble.js/tree/v1.6.1) (2016-08-31)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.6.0...v1.6.1)
 
