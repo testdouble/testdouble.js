@@ -36,21 +36,21 @@ module.exports =
       return false if containings.length == 0
 
       containsAllSpecified = (containing, actual) ->
-        _.all containing, (val, key) ->
+        _.every containing, (val, key) ->
           return false unless actual?
           if _.isPlainObject(val)
             containsAllSpecified(val, actual[key])
           else
-            _.eq(val, actual[key])
+            _.isEqual(val, actual[key])
 
-      _.all containings, (containing) ->
+      _.every containings, (containing) ->
         if _.isArray(containing)
-          _.any actualArg, (actualElement) ->
-            _.eq(actualElement, containing)
+          _.some actualArg, (actualElement) ->
+            _.isEqual(actualElement, containing)
         else if _.isPlainObject(containing) && _.isPlainObject(actualArg)
           containsAllSpecified(containing, actualArg)
         else
-          _.include(actualArg, containing)
+          _.includes(actualArg, containing)
 
   argThat: create
     name: 'argThat'
@@ -62,4 +62,4 @@ module.exports =
     name: 'not'
     matches: (matcherArgs, actual) ->
       expected = matcherArgs[0]
-      !_.eq(expected, actual)
+      !_.isEqual(expected, actual)

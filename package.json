@@ -46,7 +46,7 @@
     "quibble": "./lib/quibble.browser.js"
   },
   "dependencies": {
-    "lodash": "^3.10.1",
+    "lodash": "^4.15.0",
     "quibble": "^0.3.0",
     "stringify-object": "^2.4.0"
   },

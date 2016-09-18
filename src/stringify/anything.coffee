@@ -3,7 +3,7 @@ stringifyObject = require('stringify-object')
 
 module.exports = (anything) ->
   if _.isString(anything)
-    if _.contains(anything, '\n')
+    if _.includes(anything, '\n')
       "\"\"\"\n#{anything}\n\"\"\""
     else
       "\"#{anything.replace(new RegExp('"', 'g'), '\\"')}\""

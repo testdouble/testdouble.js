@@ -48,7 +48,7 @@ createTestDoublesForFunctionNames = (names) ->
 createTestDoubleViaProxy = (name, config) ->
   proxy = new Proxy obj = {},
     get: (target, propKey, receiver) ->
-      if !obj.hasOwnProperty(propKey) && !_.include(config.excludeMethods, propKey)
+      if !obj.hasOwnProperty(propKey) && !_.includes(config.excludeMethods, propKey)
         obj[propKey] = proxy[propKey] = tdFunction("#{nameOf(name)}##{propKey}")
       obj[propKey]
 

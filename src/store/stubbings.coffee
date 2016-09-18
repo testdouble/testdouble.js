@@ -18,7 +18,7 @@ module.exports =
     store.for(testDouble).stubbings
 
 stubbingFor = (testDouble, actualArgs) ->
-  _(store.for(testDouble).stubbings).findLast (stubbing) ->
+  _.findLast store.for(testDouble).stubbings, (stubbing) ->
     isSatisfied(stubbing, actualArgs)
 
 executePlan = (stubbing, actualArgs) ->
