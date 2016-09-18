@@ -1,4 +1,9 @@
-_ = require('lodash')
+_ =
+  each: require('lodash/each')
+  findLast: require('lodash/findLast')
+  last: require('lodash/last')
+  some: require('lodash/some')
+
 store = require('./index')
 callsStore = require('./calls')
 argsMatch = require('../args-match')
@@ -18,7 +23,7 @@ module.exports =
     store.for(testDouble).stubbings
 
 stubbingFor = (testDouble, actualArgs) ->
-  _(store.for(testDouble).stubbings).findLast (stubbing) ->
+  _.findLast store.for(testDouble).stubbings, (stubbing) ->
     isSatisfied(stubbing, actualArgs)
 
 executePlan = (stubbing, actualArgs) ->

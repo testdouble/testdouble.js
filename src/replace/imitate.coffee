@@ -1,4 +1,7 @@
-_ = require('lodash')
+_ =
+  isFunction: require('lodash/isFunction')
+  isPlainObject: require('lodash/isPlainObject')
+
 object = require('../object')
 tdFunction = require('../function')
 log = require('../log')

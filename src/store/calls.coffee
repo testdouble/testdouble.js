@@ -1,4 +1,7 @@
-_ = require('lodash')
+_ =
+  filter: require('lodash/filter')
+  tap: require('lodash/tap')
+
 store = require('./index')
 argsMatch = require('./../args-match')
 
@@ -23,9 +26,8 @@ module.exports =
       matchingInvocationCount > 0
 
   where: (testDouble, args, config) ->
-    _.select store.for(testDouble).calls, (call) ->
+    _.filter store.for(testDouble).calls, (call) ->
       argsMatch(args, call.args, config)
 
   for: (testDouble) ->
     store.for(testDouble).calls
-

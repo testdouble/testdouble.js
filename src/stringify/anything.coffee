@@ -1,9 +1,12 @@
-_ = require('lodash')
+_ =
+  includes: require('lodash/includes')
+  isString: require('lodash/isString')
+
 stringifyObject = require('stringify-object')
 
 module.exports = (anything) ->
   if _.isString(anything)
-    if _.contains(anything, '\n')
+    if _.includes(anything, '\n')
       "\"\"\"\n#{anything}\n\"\"\""
     else
       "\"#{anything.replace(new RegExp('"', 'g'), '\\"')}\""

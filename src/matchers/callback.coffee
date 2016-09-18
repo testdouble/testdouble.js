@@ -1,4 +1,6 @@
-_ = require('lodash')
+_ =
+  isFunction: require('lodash/isFunction')
+
 create = require('./create')
 
 module.exports = callback = create
