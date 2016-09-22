@@ -95,8 +95,6 @@ cat.meow // a test double function named 'meow'
 
 ### object([objectName])
 
-> **Warning [2015-11-22]:** This feature is currently only supported on a handful of JavaScript runtimes, most notably FireFox and Microsoft Edge.
-
 If passed either a string name or no arguments at all, `td.object` will return an [ES2015 Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) object designed to forward any property access as if it was a test double function. By using `Proxy`, testdouble.js is able to intercept calls to properties that don't exist, immediately create a new test double function, and invoke that function for use in either stubbing or verifying behavior.
 
 ``` javascript
