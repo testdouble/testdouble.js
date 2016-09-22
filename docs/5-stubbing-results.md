@@ -71,7 +71,7 @@ td.when(woof()).thenReturn('bark')
 Is equivalent to this:
 
 ``` javascript
-var woof = td.when(td.function()).thenReturn('bark')
+var woof = td.when(td.function()()).thenReturn('bark')
 ```
 
 ### Stubbing sequential return values
