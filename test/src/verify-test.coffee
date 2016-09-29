@@ -93,6 +93,23 @@ describe '.verify', ->
           - called with `(55)`.
       """
 
+  context 'using deep matchers', ->
+    When -> @testDouble({value: 55})
+
+    context 'satisfied', ->
+      Then -> shouldNotThrow(=> td.verify(@testDouble({ value: td.matchers.isA(Number) })))
+
+    context 'unsatisfied', ->
+      Then -> shouldThrow (=> td.verify(@testDouble({ value: td.matchers.isA(String) }))), """
+      Unsatisfied verification on test double.
+
+        Wanted:
+          - called with `({ value: isA(String) })`.
+
+        But was actually called:
+          - called with `(55)`.
+      """
+
   describe 'configuration', ->
 
     describe 'ignoring extra arguments (more thoroughly tested via when())', ->
