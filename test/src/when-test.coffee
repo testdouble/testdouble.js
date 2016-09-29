@@ -39,7 +39,7 @@ describe 'when', ->
     Then -> @testDouble(44, 5) == undefined
     Then -> @testDouble(88, "five") == undefined
 
-  describe 'using buried matcher', ->
+  describe 'using deep matcher', ->
     Given -> td.when(@testDouble({ key: td.matchers.isA(String) })).thenReturn("yay")
     Then -> @testDouble({ key: "testytest" }) == "yay"
     Then -> @testDouble({ key: true }) == undefined
