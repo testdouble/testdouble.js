@@ -107,7 +107,7 @@ describe '.verify', ->
           - called with `({ value: isA(String) })`.
 
         But was actually called:
-          - called with `(55)`.
+          - called with `({ value: 55 })`.
       """
 
   describe 'configuration', ->
