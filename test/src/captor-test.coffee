@@ -12,5 +12,13 @@ describe 'argument captors (a special sub-type of matchers)', ->
     Given -> @testDouble("SHIRTS!")
     When -> td.verify(@testDouble(@captor.capture()))
     Then -> @captor.value == "SHIRTS!"
+    And -> expect(@captor.values).to.deep.eq ["SHIRTS!"]
+
+  describe 'when verifying multiple', ->
+    Given -> @testDouble("SHIRTS!")
+    And -> @testDouble("SHIRTS AGAIN!")
+    When -> td.verify(@testDouble(@captor.capture()))
+    Then -> @captor.value == "SHIRTS AGAIN!"
+    And -> expect(@captor.values).to.deep.eq ["SHIRTS!", "SHIRTS AGAIN!"]
 
 
