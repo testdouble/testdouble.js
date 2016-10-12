@@ -299,7 +299,7 @@ called [Boundaries](https://www.destroyallsoftware.com/talks/boundaries).
 
 In some cases you may want to capture multiple invocations of the same function or
 method in one test. A common usecase for this is subscription based APIs where a
-callback will be invoked for each message. To handle this usecase,  `captors` expose
+callback will be invoked for each message. To handle this usecase, `captors` expose
 a `values` array which will hold each argument passed during every invocation of the
 callback:
 
