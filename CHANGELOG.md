@@ -1,5 +1,22 @@
 # Change Log
 
+## [v1.8.0](https://github.com/testdouble/testdouble.js/tree/v1.8.0) (2016-10-12)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.7.0...v1.8.0)
+
+**Closed issues:**
+
+- Feature request: Partial object matchers [\#141](https://github.com/testdouble/testdouble.js/issues/141)
+- Drop CoffeeScript [\#140](https://github.com/testdouble/testdouble.js/issues/140)
+- Question with verifications [\#138](https://github.com/testdouble/testdouble.js/issues/138)
+- td.reset\(\) it´s working has expected? [\#133](https://github.com/testdouble/testdouble.js/issues/133)
+
+**Merged pull requests:**
+
+- Docs for multiple captor values.  [\#145](https://github.com/testdouble/testdouble.js/pull/145) ([marchaos](https://github.com/marchaos))
+- Allow for multiple captor invocations [\#144](https://github.com/testdouble/testdouble.js/pull/144) ([marchaos](https://github.com/marchaos))
+- Remove warning of implementations of ES2015 proxy [\#136](https://github.com/testdouble/testdouble.js/pull/136) ([mgryszko](https://github.com/mgryszko))
+- Fix shorthand notation for stubbing [\#135](https://github.com/testdouble/testdouble.js/pull/135) ([mgryszko](https://github.com/mgryszko))
+
 ## [v1.7.0](https://github.com/testdouble/testdouble.js/tree/v1.7.0) (2016-09-18)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.6.2...v1.7.0)
 
