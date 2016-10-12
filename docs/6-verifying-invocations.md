@@ -295,6 +295,25 @@ argument captors or the perceived need for asynchronous behavior in unit tests.
 For related conversation, check out Gary Bernhardt's excellent talk on this topic
 called [Boundaries](https://www.destroyallsoftware.com/talks/boundaries).
 
+#### Capturing multiple invocations with td.matchers.captor()
+
+In some cases you may want to capture multiple invocations of the same function or
+method in one test. A common usecase for this is subscription based APIs where a
+callback will be invoked for each message. To handle this usecase, a captor exposes
+a `values` array which will hold each argument passed during every invocation of the
+callback:
+
+``` javascript
+var captor = td.matchers.captor(),
+    responseCallback = td.function();
+
+subscribe('/chat', responseCallback); // subscribe() will call responseCallback twice
+td.verify(responseCallback('/chat', captor.capture()))
+
+assert.equal(captor.values[0], 'first message');
+assert.equal(captor.values[1], 'second message');
+````
+
 ### Configuring verifications
 
 Verifications can be configured in [the exact same ways that stubbings
