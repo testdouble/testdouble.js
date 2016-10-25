@@ -38,7 +38,7 @@ unsatisfiedErrorMessage = (testDouble, args, config) ->
   Unsatisfied verification on test double#{stringifyName(testDouble)}.
 
     Wanted:
-      - called with `(#{stringifyArgs(args)})`#{timesMessage(config)}.
+      - called with `(#{stringifyArgs(args)})`#{timesMessage(config)}#{ignoreMessage(config)}.
   """ + invocationSummary(testDouble)
 
 stringifyName = (testDouble) ->
@@ -58,3 +58,7 @@ invocationSummary = (testDouble) ->
 timesMessage = (config) ->
   return "" unless config.times?
   " #{config.times} time#{if config.times == 1 then '' else 's'}"
+
+ignoreMessage = (config) ->
+  return "" unless config.ignoreExtraArgs?
+  ", ignoring any additional arguments"
