@@ -1,5 +1,21 @@
 # Change Log
 
+## [v1.9.0](https://github.com/testdouble/testdouble.js/tree/v1.9.0) (2016-10-25)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.8.0...v1.9.0)
+
+**Implemented enhancements:**
+
+- Note when `ignoreExtraArgs` is used for a failed verification [\#60](https://github.com/testdouble/testdouble.js/issues/60)
+
+**Closed issues:**
+
+- td.replace multiple property names at once [\#146](https://github.com/testdouble/testdouble.js/issues/146)
+- Consider ignoreExtraArgs method instead of parameter [\#143](https://github.com/testdouble/testdouble.js/issues/143)
+
+**Merged pull requests:**
+
+- Gives better hint when verification fails while ignoring extra args [\#150](https://github.com/testdouble/testdouble.js/pull/150) ([samjonester](https://github.com/samjonester))
+
 ## [v1.8.0](https://github.com/testdouble/testdouble.js/tree/v1.8.0) (2016-10-12)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.7.0...v1.8.0)
 
