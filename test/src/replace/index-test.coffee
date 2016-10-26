@@ -150,6 +150,7 @@ describe 'td.replace', ->
     Given -> @passenger = td.replace('../../fixtures/passenger') #<-- a constructor func
     Given -> @honk = td.replace('../../fixtures/honk') #<-- a plain ol' func
     Given -> @turn = td.replace('../../fixtures/turn') #<-- a named func
+    Given -> @shift = td.replace('../../fixtures/shift') #<-- a named func with property DIRECTION
     Given -> @brake = td.replace('../../fixtures/brake', 'ANYTHING I WANT') #<-- a manual stub bc brake does not exist
     Given -> @lights = td.replace('../../fixtures/lights') #<- a plain object of funcs
     Given -> @car = require('../../fixtures/car')
@@ -166,6 +167,14 @@ describe 'td.replace', ->
       Given -> td.when(@car.turn()).thenReturn('wee')
       Then -> @car.turn() == 'wee'
       And -> @car.turn.toString() == "[test double for \"turn\"]"
+
+    describe 'faking main function when property is also exported', ->
+      Given -> td.when(@car.shift()).thenReturn('Vroom')
+      Then -> @car.shift() == 'Vroom'
+
+    describe 'faking property on exported function', ->
+      Given -> td.when(@car.shift.neutral()).thenReturn('Clunk')
+      Then -> @car.shift.neutral() == 'Clunk'
 
     describe 'manually stubbing an entry', ->
       Then -> @car.brake == 'ANYTHING I WANT'
