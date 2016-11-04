@@ -148,3 +148,7 @@ describe 'td.replace', ->
       Then -> @car.lights.headlight.toString() == '[test double for ".headlight"]'
       And -> @car.lights.turnSignal.toString() == '[test double for ".turnSignal"]'
       And -> @car.lights.count == 4
+
+    describe 'post-reset usage', ->
+      Given -> td.reset()
+      Then -> @car.honk.toString() == "throw 'honk'"
