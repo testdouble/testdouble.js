@@ -1,6 +1,6 @@
 {
   "name": "testdouble",
-  "version": "1.9.0",
+  "version": "1.9.1",
   "description": "A minimal test double library for TDD with JavaScript",
   "homepage": "https://github.com/testdouble/testdouble.js",
   "author": {
