@@ -34,7 +34,7 @@ describe 'td.replace', ->
         And -> new @dependency.thingConstructor().foo() == 'og foo'
 
     describe 'Replacing an ES6 constructor function', ->
-      return unless NODE_JS
+      return unless NODE_JS && require('semver')(process.version).major >= 6
       Given -> @dependency.es6constructor = require('../../fixtures/es6class')
       Given -> @doubleBag = td.replace(@dependency, 'es6constructor')
       Given -> @es6Thing = new @dependency.es6constructor()
