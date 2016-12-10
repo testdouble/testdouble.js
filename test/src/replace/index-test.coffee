@@ -10,7 +10,6 @@ describe 'td.replace', ->
       thingConstructor: class Thing
         foo: -> 'og foo'
         bar: -> 'og bar'
-      es6constructor: require('./es6class')
 
     describe 'Replacing a function', ->
       When -> @double = td.replace(@dependency, 'honk')
@@ -35,11 +34,18 @@ describe 'td.replace', ->
         And -> new @dependency.thingConstructor().foo() == 'og foo'
 
     describe 'Replacing an ES6 constructor function', ->
-      When -> @doubleBag = td.replace(@dependency, 'es6constructor')
+      return unless NODE_JS
+      Given -> @dependency.es6constructor = require('../../fixtures/es6class')
+      Given -> @doubleBag = td.replace(@dependency, 'es6constructor')
+      Given -> @es6Thing = new @dependency.es6constructor()
       Then -> td.explain(@doubleBag.foo).isTestDouble == true
       Then -> td.explain(@doubleBag.bar).isTestDouble == true
-      And -> @doubleBag.foo == new @dependency.es6constructor().foo
-      And -> @doubleBag.bar == new @dependency.es6constructor().bar
+      And -> @doubleBag.foo == @es6Thing.foo
+      And -> @doubleBag.bar == @es6Thing.bar
+
+      describe 'the member td functions actually work', ->
+        Given -> td.when(@doubleBag.foo('cat')).thenReturn('dog')
+        Then -> @es6Thing.foo('cat') == 'dog'
 
       describe 'reset restores it', ->
         When -> td.reset()

@@ -5,7 +5,7 @@ describe('Calculator', () => {
   beforeEach(() => {
     adder = td.replace('../../lib/adder')
     subtractor = td.replace('../../lib/subtractor')
-    multiplier = td.replace('../../lib/multiplier')
+    multiplier = td.replace('../../lib/multiplier').default
     divider = td.replace('../../lib/divider')
     const Calculator = require('../../lib/calculator').default
     subject = new Calculator
@@ -26,6 +26,14 @@ describe('Calculator', () => {
       result = subject.calculate('subtract', 9, 8)
 
       assert.equal(result, 'minus math!')
+    })
+
+    it('delegates to a Multiplier', () => {
+      td.when(multiplier.multiply(1, 4)).thenReturn('times math!')
+
+      result = subject.calculate('multiply', 1, 4)
+
+      assert.equal(result, 'times math!')
     })
   })
 })

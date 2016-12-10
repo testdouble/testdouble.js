@@ -1,4 +1,4 @@
-_ = 
+_ =
   each: require('lodash/each')
   extend: require('lodash/extend')
   keys: require('lodash/keys')

@@ -1,0 +1,15 @@
+module.exports =
+  clone: require('lodash/clone')
+  each: require('lodash/each')
+  extend: require('lodash/extend')
+  functions: require('lodash/functions')
+  includes: require('lodash/includes')
+  isArray: require('lodash/isArray')
+  isFunction: require('lodash/isFunction')
+  isPlainObject: require('lodash/isPlainObject')
+  isString: require('lodash/isString')
+  reduce: require('lodash/reduce')
+  reject: require('lodash/reject')
+  tap: require('lodash/tap')
+  union: require('lodash/union')
+
