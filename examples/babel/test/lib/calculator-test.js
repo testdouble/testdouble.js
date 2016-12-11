@@ -1,12 +1,11 @@
 import assert from 'assert'
 
-let subject, adder, subtractor, multiplier, divider, result
+let subject, adder, subtractor, multiplier, result
 describe('Calculator', () => {
   beforeEach(() => {
     adder = td.replace('../../lib/adder')
     subtractor = td.replace('../../lib/subtractor')
     multiplier = td.replace('../../lib/multiplier').default
-    divider = td.replace('../../lib/divider')
     const Calculator = require('../../lib/calculator').default
     subject = new Calculator
   })
