@@ -174,3 +174,7 @@ describe 'td.replace', ->
       Then -> @car.lights.headlight.toString() == '[test double for ".headlight"]'
       And -> @car.lights.turnSignal.toString() == '[test double for ".turnSignal"]'
       And -> @car.lights.count == 4
+
+      describe 'and classes on objects on funcs', ->
+        When -> td.when(@lights.brights.beBright(1)).thenReturn('yow')
+        Then -> (new @car.lights.brights).beBright(1) == 'yow'
