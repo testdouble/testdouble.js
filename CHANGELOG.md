@@ -1,5 +1,34 @@
 # Change Log
 
+## [v1.10.0](https://github.com/testdouble/testdouble.js/tree/v1.10.0) (2016-12-11)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.9.1...v1.10.0)
+
+**Implemented enhancements:**
+
+- td.replace doesn't properly detect ES6 classes [\#119](https://github.com/testdouble/testdouble.js/issues/119)
+
+**Closed issues:**
+
+- Mocking a Class [\#157](https://github.com/testdouble/testdouble.js/issues/157)
+- Matcher for a specific position [\#156](https://github.com/testdouble/testdouble.js/issues/156)
+
+**Merged pull requests:**
+
+- Sort out replacement of especially 6+ Classes [\#158](https://github.com/testdouble/testdouble.js/pull/158) ([searls](https://github.com/searls))
+
+## [v1.9.1](https://github.com/testdouble/testdouble.js/tree/v1.9.1) (2016-12-03)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.9.0...v1.9.1)
+
+**Closed issues:**
+
+- Is testdouble.js not compatible with PhantomJS? [\#154](https://github.com/testdouble/testdouble.js/issues/154)
+- Model instance creation assistance [\#149](https://github.com/testdouble/testdouble.js/issues/149)
+- Excessive warn "was both stubbed and verified" [\#148](https://github.com/testdouble/testdouble.js/issues/148)
+
+**Merged pull requests:**
+
+- typo [\#152](https://github.com/testdouble/testdouble.js/pull/152) ([ghedamat](https://github.com/ghedamat))
+
 ## [v1.9.0](https://github.com/testdouble/testdouble.js/tree/v1.9.0) (2016-10-25)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.8.0...v1.9.0)
 
