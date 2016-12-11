@@ -30,7 +30,7 @@ describe 'td.replace', ->
         And -> new @dependency.thingConstructor().foo() == 'og foo'
 
     describe 'Replacing an ES6 constructor function', ->
-      return unless NODE_JS && require('semver')(process.version).major >= 6
+      return unless NODE_JS?.AT_LEAST_6
       Given -> @dependency.es6constructor = require('../../fixtures/es6class')
       Given -> @doubleBag = td.replace(@dependency, 'es6constructor')
       Given -> @es6Thing = new @dependency.es6constructor()
@@ -176,5 +176,6 @@ describe 'td.replace', ->
       And -> @car.lights.count == 4
 
       describe 'and classes on objects on funcs', ->
+        return unless NODE_JS.AT_LEAST_0_11
         When -> td.when(@lights.brights.beBright(1)).thenReturn('yow')
         Then -> (new @car.lights.brights).beBright(1) == 'yow'

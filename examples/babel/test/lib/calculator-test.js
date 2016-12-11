@@ -12,6 +12,8 @@ describe('Calculator', () => {
   })
 
   describe('#calculate', () => {
+    if (!NODE_JS.AT_LEAST_0_11) return 'module replacement is not supported!'
+
     it('delegates to an Adder', () => {
       td.when(adder.add(4,9)).thenReturn('yay math!')
 
