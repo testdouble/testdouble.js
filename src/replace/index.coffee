@@ -1,5 +1,4 @@
-_ =
-  isString: require('lodash/isString')
+_ = require('../util/lodash-wrap')
 replaceModule = require('./module')
 replaceProperty = require('./property')
 

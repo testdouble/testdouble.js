@@ -1,6 +1,4 @@
-_ =
-  assign: require('lodash/assign')
-  some: require('lodash/some')
+_ = require('./util/lodash-wrap')
 
 calls = require('./store/calls')
 stubbings = require('./store/stubbings')

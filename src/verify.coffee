@@ -1,6 +1,4 @@
-_ =
-  find: require('lodash/find')
-  reduce: require('lodash/reduce')
+_ = require('./util/lodash-wrap')
 
 store = require('./store')
 callsStore = require('./store/calls')

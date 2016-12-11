@@ -1,5 +1,4 @@
-_ =
-  each: require('lodash/each')
+_ = require('./util/lodash-wrap')
 quibble = require('quibble')
 
 resetHandlers = []

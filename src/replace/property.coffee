@@ -1,9 +1,8 @@
-_ =
-  capitalize: require('lodash/capitalize')
+_ = require('../util/lodash-wrap')
 
 imitate = require('./imitate')
 isConstructor = require('./is-constructor')
-wrapWithConstructor = require('./wrap-with-constructor')
+wrapIfNeeded = require('./wrap-if-needed')
 log = require('../log')
 reset = require('../reset')
 stringifyAnything = require('../stringify/anything')
@@ -29,12 +28,6 @@ module.exports = (object, property, manualReplacement) ->
       delete object[property]
 
   return fakeThing
-
-wrapIfNeeded = (fakeThing, realThing) ->
-  if isConstructor(realThing)
-    wrapWithConstructor(fakeThing)
-  else
-    fakeThing
 
 warnIfTypeMismatch = (property, fakeThing, realThing) ->
   return if realThing == undefined

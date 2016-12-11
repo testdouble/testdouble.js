@@ -1,7 +1,4 @@
-_ =
-  every: require('lodash/every')
-  isEqual: require('lodash/isEqual')
-  isFunction: require('lodash/isFunction')
+_ = require('./util/lodash-wrap')
 
 module.exports = (expectedArgs, actualArgs, config) ->
   return false if arityMismatch(expectedArgs, actualArgs, config)

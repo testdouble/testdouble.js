@@ -3,10 +3,6 @@ describe 'td.replace', ->
   describe 'Replacing properties on objects and restoring them with reset', ->
     Given -> @dependency =
       honk: -> 'og honk'
-      dog:
-        bark: -> 'og bark'
-        woof: -> 'og woof'
-        age: 18
       thingConstructor: class Thing
         foo: -> 'og foo'
         bar: -> 'og bar'
@@ -33,6 +29,25 @@ describe 'td.replace', ->
         Then -> td.explain(new @dependency.thingConstructor().foo).isTestDouble == false
         And -> new @dependency.thingConstructor().foo() == 'og foo'
 
+    describe 'Replacing an ES6 constructor function', ->
+      return unless NODE_JS?.AT_LEAST_6
+      Given -> @dependency.es6constructor = require('../../fixtures/es6class')
+      Given -> @doubleBag = td.replace(@dependency, 'es6constructor')
+      Given -> @es6Thing = new @dependency.es6constructor()
+      Then -> td.explain(@doubleBag.foo).isTestDouble == true
+      Then -> td.explain(@doubleBag.bar).isTestDouble == true
+      And -> @doubleBag.foo == @es6Thing.foo
+      And -> @doubleBag.bar == @es6Thing.bar
+
+      describe 'the member td functions actually work', ->
+        Given -> td.when(@doubleBag.foo('cat')).thenReturn('dog')
+        Then -> @es6Thing.foo('cat') == 'dog'
+
+      describe 'reset restores it', ->
+        When -> td.reset()
+        Then -> td.explain(new @dependency.es6constructor().foo).isTestDouble == false
+        And -> new @dependency.es6constructor().foo() == 'og foo'
+
     describe 'Replacing a method on an object instantiated with `new`', ->
       Given -> @thing = new @dependency.thingConstructor()
       When -> @doubleFoo = td.replace(@thing, 'foo')
@@ -45,12 +60,23 @@ describe 'td.replace', ->
         And -> @thing.foo() == 'og foo'
 
     describe 'Replacing an object / function bag', ->
-      When -> @doubleBag = td.replace(@dependency, 'dog')
+      Given -> @horseClass = ->
+      Given -> @horseClass::nay = -> 'nay'
+      Given -> @dependency.animals =
+        bark: -> 'og bark'
+        woof: -> 'og woof'
+        age: 18
+        horse: @horseClass
+      When -> @doubleBag = td.replace(@dependency, 'animals')
       Then -> td.explain(@doubleBag.bark).isTestDouble == true
       Then -> td.explain(@doubleBag.woof).isTestDouble == true
-      And -> @doubleBag.bark == @dependency.dog.bark
-      And -> @doubleBag.woof == @dependency.dog.woof
+      And -> @doubleBag.bark == @dependency.animals.bark
+      And -> @doubleBag.woof == @dependency.animals.woof
       And -> @doubleBag.age == 18
+
+      describe 'instantiable types work too', ->
+        When -> td.when(@doubleBag.horse.nay('hay')).thenReturn('no way')
+        Then -> (new @dependency.animals.horse()).nay('hay') == 'no way'
 
     describe 'Replacing a property that is not an object/function', ->
       Given -> @message = 'Error: testdouble.js - td.replace - "badType" property was found, but test double only knows how to replace functions, constructors, & objects containing functions (its value was '
@@ -148,3 +174,8 @@ describe 'td.replace', ->
       Then -> @car.lights.headlight.toString() == '[test double for ".headlight"]'
       And -> @car.lights.turnSignal.toString() == '[test double for ".turnSignal"]'
       And -> @car.lights.count == 4
+
+      describe 'and classes on objects on funcs', ->
+        return unless NODE_JS.AT_LEAST_0_11
+        When -> td.when(@lights.brights.beBright(1)).thenReturn('yow')
+        Then -> (new @car.lights.brights).beBright(1) == 'yow'
