@@ -3,10 +3,6 @@ describe 'td.replace', ->
   describe 'Replacing properties on objects and restoring them with reset', ->
     Given -> @dependency =
       honk: -> 'og honk'
-      dog:
-        bark: -> 'og bark'
-        woof: -> 'og woof'
-        age: 18
       thingConstructor: class Thing
         foo: -> 'og foo'
         bar: -> 'og bar'
@@ -64,12 +60,23 @@ describe 'td.replace', ->
         And -> @thing.foo() == 'og foo'
 
     describe 'Replacing an object / function bag', ->
-      When -> @doubleBag = td.replace(@dependency, 'dog')
+      Given -> @horseClass = ->
+      Given -> @horseClass::nay = -> 'nay'
+      Given -> @dependency.animals =
+        bark: -> 'og bark'
+        woof: -> 'og woof'
+        age: 18
+        horse: @horseClass
+      When -> @doubleBag = td.replace(@dependency, 'animals')
       Then -> td.explain(@doubleBag.bark).isTestDouble == true
       Then -> td.explain(@doubleBag.woof).isTestDouble == true
-      And -> @doubleBag.bark == @dependency.dog.bark
-      And -> @doubleBag.woof == @dependency.dog.woof
+      And -> @doubleBag.bark == @dependency.animals.bark
+      And -> @doubleBag.woof == @dependency.animals.woof
       And -> @doubleBag.age == 18
+
+      describe 'instantiable types work too', ->
+        When -> td.when(@doubleBag.horse.nay('hay')).thenReturn('no way')
+        Then -> (new @dependency.animals.horse()).nay('hay') == 'no way'
 
     describe 'Replacing a property that is not an object/function', ->
       Given -> @message = 'Error: testdouble.js - td.replace - "badType" property was found, but test double only knows how to replace functions, constructors, & objects containing functions (its value was '
