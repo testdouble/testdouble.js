@@ -1,5 +1,4 @@
-_ =
-  each: require('lodash/each')
+_ = require('../util/lodash-wrap')
 
 module.exports = (testDoubleFunctionBag) ->
   constructor = (class TestDoubleConstructor)

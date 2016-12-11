@@ -1,6 +1,4 @@
-_ =
-  includes: require('lodash/includes')
-  isString: require('lodash/isString')
+_ = require('../util/lodash-wrap')
 
 stringifyObject = require('stringify-object')
 

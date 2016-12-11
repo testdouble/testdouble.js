@@ -1,9 +1,4 @@
-_ =
-  each: require('lodash/each')
-  isObject: require('lodash/isObject')
-  functions: require('lodash/functions')
-  some: require('lodash/some')
-  transform: require('lodash/transform')
+_ = require('../util/lodash-wrap')
 
 quibble = require('quibble')
 imitate = require('./imitate')
@@ -29,7 +24,7 @@ wrapIfNeeded = (fakeThing, realThing) ->
     fakeThing
 
 plainObjectContainingConstructors = (realThing) ->
-  _.isObject(realThing) && _.some(realThing, isConstructor)
+  _.isPlainObject(realThing) && _.some(realThing, isConstructor)
 
 wrapThoseConstructors = (fakeThing, realThing) ->
   fakeThing = cloneWithNonEnumerableProperties(fakeThing)

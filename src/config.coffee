@@ -1,8 +1,4 @@
-_ =
-  each: require('lodash/each')
-  extend: require('lodash/extend')
-  keys: require('lodash/keys')
-
+_ = require('./util/lodash-wrap')
 stringifyAnything = require('./stringify/anything')
 
 DEFAULTS =

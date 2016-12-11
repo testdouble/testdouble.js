@@ -1,5 +1,4 @@
-_ =
-  isFunction: require('lodash/isFunction')
+_ = require('../util/lodash-wrap')
 
 create = require('./create')
 

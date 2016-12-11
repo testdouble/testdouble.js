@@ -1,5 +1,4 @@
-_ =
-  capitalize: require('lodash/capitalize')
+_ = require('../util/lodash-wrap')
 
 imitate = require('./imitate')
 isConstructor = require('./is-constructor')

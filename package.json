@@ -32,7 +32,7 @@
     "test:example:babel": "cd examples/babel && npm i && npm test && cd ../..",
     "test:example": "npm run test:example:node && npm run test:example:lineman && npm run test:example:webpack && npm run test:example:babel",
     "test:all": "npm test && testem ci && npm run test:example",
-    "test:ci": "npm run clean && npm run compile && npm run test:all && npm run clean:dist",
+    "test:ci": "npm run clean && npm run compile && npm run test:all && npm run clean:dist && echo \"All done!\"",
     "test:debug": "npm test -- --debug-brk",
     "version:write": "echo \"module.exports = '$npm_package_version'\" > src/version.coffee",
     "version:changelog": "if command -v github_changelog_generator &>/dev/null; then github_changelog_generator; git commit -m \"Changelog for $npm_package_version\" CHANGELOG.md; else echo Versioning requires you first run 'gem install github_changelog_generator' >&2; fi",

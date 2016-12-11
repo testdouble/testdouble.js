@@ -1,7 +1,4 @@
-_ =
-  functions: require('lodash/functions')
-  isFunction: require('lodash/isFunction')
-  some: require('lodash/some')
+_ = require('../util/lodash-wrap')
 
 module.exports = (thing) ->
   return unless thing?.prototype?

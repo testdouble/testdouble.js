@@ -1,6 +1,4 @@
-_ =
-  isFunction: require('lodash/isFunction')
-  isPlainObject: require('lodash/isPlainObject')
+_ = require('../util/lodash-wrap')
 
 object = require('../object')
 tdFunction = require('../function')
