@@ -1,8 +1,4 @@
-_ =
-  each: require('lodash/each')
-  findLast: require('lodash/findLast')
-  last: require('lodash/last')
-  some: require('lodash/some')
+_ = require('../util/lodash-wrap')
 
 store = require('./index')
 callsStore = require('./calls')

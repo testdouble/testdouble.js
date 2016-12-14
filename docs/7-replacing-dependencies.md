@@ -20,11 +20,11 @@ appropriate fake:
 
   * Plain functions are replaced with test double functions of the same name
   * Plain objects are shallow-cloned and their top-level functions are replaced
-  with test double functions
-  * Constructor functions with at least one prototypal function defined will
-  _return_ a plain object of test double functions but will be _replaced by_ an
-  artificial constructor that, when instantiated, will delegate to those same
-  test double functions
+    with test double functions
+  * Constructor functions and ES classes with at least one prototypal function
+    defined will _return_ a plain object of test double functions but will be
+    _replaced by_ an artificial constructor that, when instantiated, will
+    delegate to those same test double functions
 
 After the next call to `td.reset()` (which you should have in an `afterEach` hook
 somewhere in your test suite), the real dependencies will all be restored.
@@ -77,6 +77,13 @@ If you'd like to kick the tires on this, you can play with a [more involved
 example project](../examples/node/test/lib/car-test.js) found in the
 testdouble.js repository. For a more formal discussion of the `replace()`
 API, read on.
+
+If you'd like an example of replacing ES classes that use the `export` keyword,
+check out the [babel example
+project](../examples/babel/test/lib/calculator-test.js). (Note that the test
+itself must fall back to CommonJS-style `require` statements, since module
+replacement requires the dependency be loaded after the replacements are
+configured, which precludes the use of the static `import` statement.)
 
 ### How module replacement works
 

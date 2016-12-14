@@ -1,6 +1,6 @@
 # Creating Test Doubles
 
-Unlike most classical or functional langauges, JavaScript under test might depend on many sorts of things: plain objects, instantiable constructor functions, ES2015 classes, or regular old functions. As a result, any good test double library needs to provide terse and convenient ways to create fake versions of all of these things.
+Unlike most classical or functional languages, JavaScript under test might depend on many sorts of things: plain objects, instantiable constructor functions, ES2015 classes, or regular old functions. As a result, any good test double library needs to provide terse and convenient ways to create fake versions of all of these things.
 
 The examples below will walk through the different ways to create new test doubles. Each example assumes you've aliased `testdouble` to `td`.
 

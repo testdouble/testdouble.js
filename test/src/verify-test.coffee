@@ -41,6 +41,18 @@ describe '.verify', ->
           - called with `("good", "bad")`.
       """
 
+  context 'unsatisfied verify - wrong arg count with ignored args', ->
+    When -> @testDouble("good", "bad", "more", "args")
+    Then -> shouldThrow (=> td.verify(@testDouble("good", "gooder"), {ignoreExtraArgs: true})), """
+      Unsatisfied verification on test double.
+
+        Wanted:
+          - called with `("good", "gooder")`, ignoring any additional arguments.
+
+        But was actually called:
+          - called with `("good", "bad", "more", "args")`.
+      """
+
   context 'with a named double', ->
     Given -> @testDouble = td.function("#footime")
     When -> @result = (shouldThrow => td.verify(@testDouble()))

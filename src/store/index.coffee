@@ -1,6 +1,4 @@
-_ =
-  find: require('lodash/find')
-  tap: require('lodash/tap')
+_ = require('../util/lodash-wrap')
 
 EventEmitter = require('events').EventEmitter
 

@@ -1,5 +1,4 @@
-_ =
-  tap: require('lodash/tap')
+_ = require('./util/lodash-wrap')
 
 store = require('./store')
 calls = require('./store/calls')

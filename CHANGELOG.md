@@ -1,5 +1,67 @@
 # Change Log
 
+## [v1.10.0](https://github.com/testdouble/testdouble.js/tree/v1.10.0) (2016-12-11)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.9.1...v1.10.0)
+
+**Implemented enhancements:**
+
+- td.replace doesn't properly detect ES6 classes [\#119](https://github.com/testdouble/testdouble.js/issues/119)
+
+**Closed issues:**
+
+- Mocking a Class [\#157](https://github.com/testdouble/testdouble.js/issues/157)
+- Matcher for a specific position [\#156](https://github.com/testdouble/testdouble.js/issues/156)
+
+**Merged pull requests:**
+
+- Sort out replacement of especially 6+ Classes [\#158](https://github.com/testdouble/testdouble.js/pull/158) ([searls](https://github.com/searls))
+
+## [v1.9.1](https://github.com/testdouble/testdouble.js/tree/v1.9.1) (2016-12-03)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.9.0...v1.9.1)
+
+**Closed issues:**
+
+- Is testdouble.js not compatible with PhantomJS? [\#154](https://github.com/testdouble/testdouble.js/issues/154)
+- Model instance creation assistance [\#149](https://github.com/testdouble/testdouble.js/issues/149)
+- Excessive warn "was both stubbed and verified" [\#148](https://github.com/testdouble/testdouble.js/issues/148)
+
+**Merged pull requests:**
+
+- typo [\#152](https://github.com/testdouble/testdouble.js/pull/152) ([ghedamat](https://github.com/ghedamat))
+
+## [v1.9.0](https://github.com/testdouble/testdouble.js/tree/v1.9.0) (2016-10-25)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.8.0...v1.9.0)
+
+**Implemented enhancements:**
+
+- Note when `ignoreExtraArgs` is used for a failed verification [\#60](https://github.com/testdouble/testdouble.js/issues/60)
+
+**Closed issues:**
+
+- td.replace multiple property names at once [\#146](https://github.com/testdouble/testdouble.js/issues/146)
+- Consider ignoreExtraArgs method instead of parameter [\#143](https://github.com/testdouble/testdouble.js/issues/143)
+
+**Merged pull requests:**
+
+- Gives better hint when verification fails while ignoring extra args [\#150](https://github.com/testdouble/testdouble.js/pull/150) ([samjonester](https://github.com/samjonester))
+
+## [v1.8.0](https://github.com/testdouble/testdouble.js/tree/v1.8.0) (2016-10-12)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.7.0...v1.8.0)
+
+**Closed issues:**
+
+- Feature request: Partial object matchers [\#141](https://github.com/testdouble/testdouble.js/issues/141)
+- Drop CoffeeScript [\#140](https://github.com/testdouble/testdouble.js/issues/140)
+- Question with verifications [\#138](https://github.com/testdouble/testdouble.js/issues/138)
+- td.reset\(\) it´s working has expected? [\#133](https://github.com/testdouble/testdouble.js/issues/133)
+
+**Merged pull requests:**
+
+- Docs for multiple captor values.  [\#145](https://github.com/testdouble/testdouble.js/pull/145) ([marchaos](https://github.com/marchaos))
+- Allow for multiple captor invocations [\#144](https://github.com/testdouble/testdouble.js/pull/144) ([marchaos](https://github.com/marchaos))
+- Remove warning of implementations of ES2015 proxy [\#136](https://github.com/testdouble/testdouble.js/pull/136) ([mgryszko](https://github.com/mgryszko))
+- Fix shorthand notation for stubbing [\#135](https://github.com/testdouble/testdouble.js/pull/135) ([mgryszko](https://github.com/mgryszko))
+
 ## [v1.7.0](https://github.com/testdouble/testdouble.js/tree/v1.7.0) (2016-09-18)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.6.2...v1.7.0)
 

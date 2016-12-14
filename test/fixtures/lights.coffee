@@ -4,3 +4,6 @@ module.exports =
     throw 'headlight'
   turnSignal: ->
     throw 'turnSignal'
+  brights: class Brights
+    beBright: ->
+      throw 'too bright!'

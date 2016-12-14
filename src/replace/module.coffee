@@ -1,7 +1,6 @@
 quibble = require('quibble')
 imitate = require('./imitate')
-isConstructor = require('./is-constructor')
-wrapWithConstructor = require('./wrap-with-constructor')
+wrapIfNeeded = require('./wrap-if-needed')
 
 quibble.ignoreCallsFromThisFile()
 
@@ -12,8 +11,4 @@ module.exports = (path, stub) ->
   quibble(path, wrapIfNeeded(fakeThing, realThing))
   return fakeThing
 
-wrapIfNeeded = (fakeThing, realThing) ->
-  if isConstructor(realThing)
-    wrapWithConstructor(fakeThing)
-  else
-    fakeThing
+

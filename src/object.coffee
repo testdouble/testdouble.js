@@ -1,15 +1,6 @@
-_ =
-  extend: require('lodash/extend')
-  functions: require('lodash/functions')
-  includes: require('lodash/includes')
-  isArray: require('lodash/isArray')
-  isFunction: require('lodash/isFunction')
-  isPlainObject: require('lodash/isPlainObject')
-  isString: require('lodash/isString')
-  reduce: require('lodash/reduce')
-  tap: require('lodash/tap')
-  union: require('lodash/union')
-
+_ = require('./util/lodash-wrap')
+cloneWithNonEnumerableProperties = require('./util/clone-with-non-enumerable-properties')
+isConstructor = require('./replace/is-constructor')
 tdFunction = require('./function')
 
 DEFAULT_OPTIONS = excludeMethods: ['then']
@@ -19,10 +10,10 @@ module.exports = (nameOrType, config) ->
     obj.toString = -> description(nameOrType)
 
 createTestDoubleObject = (nameOrType, config) ->
-  if _.isFunction(nameOrType)
+  if isConstructor(nameOrType)
     createTestDoublesForPrototype(nameOrType)
   else if _.isPlainObject(nameOrType)
-    createTestDoublesForFunctionBag(nameOrType)
+    createTestDoublesForPlainObject(nameOrType)
   else if _.isArray(nameOrType)
     createTestDoublesForFunctionNames(nameOrType)
   else
@@ -44,11 +35,15 @@ createTestDoublesForPrototype = (type) ->
     memo
   , {}
 
-createTestDoublesForFunctionBag = (bag) ->
-  _.reduce _.functions(bag), (memo, functionName) ->
-    memo[functionName] = tdFunction(".#{functionName}")
+createTestDoublesForPlainObject = (obj) ->
+  _.reduce _.functions(obj), (memo, functionName) ->
+    memo[functionName] = if isConstructor(obj[functionName])
+      createTestDoublesForPrototype(obj[functionName])
+    else
+      tdFunction(".#{functionName}")
+
     memo
-  , _.extend({}, bag)
+  , cloneWithNonEnumerableProperties(obj)
 
 createTestDoublesForFunctionNames = (names) ->
   _.reduce names, (memo, functionName) ->

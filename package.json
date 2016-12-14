@@ -1,6 +1,6 @@
 {
   "name": "testdouble",
-  "version": "1.7.0",
+  "version": "1.10.0",
   "description": "A minimal test double library for TDD with JavaScript",
   "homepage": "https://github.com/testdouble/testdouble.js",
   "author": {
@@ -31,8 +31,8 @@
     "test:example:lineman": "cd examples/lineman && npm i && npm test && cd ../..",
     "test:example:babel": "cd examples/babel && npm i && npm test && cd ../..",
     "test:example": "npm run test:example:node && npm run test:example:lineman && npm run test:example:webpack && npm run test:example:babel",
-    "test:all": "npm run test --testdouble:mocha_reporter=tap && testem ci && npm run test:example",
-    "test:ci": "npm run clean && npm run compile && npm run test:all && npm run clean:dist",
+    "test:all": "npm test && testem ci && npm run test:example",
+    "test:ci": "npm run clean && npm run compile && npm run test:all && npm run clean:dist && echo \"All done!\"",
     "test:debug": "npm test -- --debug-brk",
     "version:write": "echo \"module.exports = '$npm_package_version'\" > src/version.coffee",
     "version:changelog": "if command -v github_changelog_generator &>/dev/null; then github_changelog_generator; git commit -m \"Changelog for $npm_package_version\" CHANGELOG.md; else echo Versioning requires you first run 'gem install github_changelog_generator' >&2; fi",
@@ -47,7 +47,7 @@
   },
   "dependencies": {
     "lodash": "^4.15.0",
-    "quibble": "^0.3.0",
+    "quibble": "^0.4.0",
     "stringify-object": "^2.4.0"
   },
   "devDependencies": {
@@ -61,6 +61,8 @@
     "mocha": "^2.3.1",
     "mocha-given": "^0.1.3",
     "mocha-istanbul": "arikon/mocha-istanbul",
+    "pryjs": "^1.0.3",
+    "semver": "^5.3.0",
     "testem": "^0.9.4"
   },
   "keywords": [

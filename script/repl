@@ -1,0 +1,11 @@
+#!/usr/bin/env node
+
+require('coffee-script/register')
+var repl = require('repl')
+
+console.log('💚  Let\'s play with testdouble.js!  💚')
+global.td = require('../src/testdouble')
+global._ = require('lodash')
+repl.start('td > ')
+
+

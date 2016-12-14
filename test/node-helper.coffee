@@ -8,7 +8,12 @@ global.requireSource = (path) ->
 
 global.td = requireSource('testdouble')
 global.chai = require('chai')
-global.NODE_JS = true
+
+nodeVersion = require('semver')(process.version)
+
+global.NODE_JS =
+  AT_LEAST_0_11: nodeVersion.major > 0 || nodeVersion.minor >= 11
+  AT_LEAST_6: nodeVersion.major >= 6
 
 
 require('./general-helper')

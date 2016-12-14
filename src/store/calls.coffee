@@ -1,6 +1,4 @@
-_ =
-  filter: require('lodash/filter')
-  tap: require('lodash/tap')
+_ = require('../util/lodash-wrap')
 
 store = require('./index')
 argsMatch = require('./../args-match')
