@@ -271,7 +271,7 @@ steps at the top, a one-liner to invoke the code under test, and then our
 verification.
 
 Speaking of verification, the API of `td.verify` should look familiar, as it is
-symmetrical  to `when`. By saying `td.verify(submitProblem('saved problem')`,
+symmetrical  to `when`. By saying `td.verify(submitProblem('saved problem'))`,
 we're telling testdouble.js to throw an error unless `submitProblem` is invoked
 with exactly one argument: `'saved problem'`.
 
