@@ -17,7 +17,7 @@
       return false;
     }
     if ((config != null ? config.allowMatchers : void 0) !== false) {
-      return equalsWithMatchers(expectedArgs, actualArgs);
+      return equalsWithMatchers(expectedArgs, actualArgs, config);
     } else {
       return _.isEqual(expectedArgs, actualArgs);
     }
@@ -27,16 +27,20 @@
     return expectedArgs.length !== actualArgs.length && !config.ignoreExtraArgs;
   };
 
-  equalsWithMatchers = function(expectedArgs, actualArgs) {
-    return _.every(expectedArgs, function(expectedArg, i) {
-      return argumentMatchesExpectation(expectedArg, actualArgs[i]);
+  equalsWithMatchers = function(expectedArgs, actualArgs, config) {
+    return _.every(expectedArgs, function(expectedArg, key) {
+      return argumentMatchesExpectation(expectedArg, actualArgs[key], config);
     });
   };
 
-  argumentMatchesExpectation = function(expectedArg, actualArg) {
+  argumentMatchesExpectation = function(expectedArg, actualArg, config) {
     var matcher;
     if (matcher = matcherFor(expectedArg)) {
       return matcher(actualArg);
+    } else if (_.isArray(expectedArg) && _.isArray(actualArg)) {
+      return !arityMismatch(expectedArg, actualArg, config) && equalsWithMatchers(expectedArg, actualArg, config);
+    } else if (_.isPlainObject(expectedArg) && _.isPlainObject(actualArg)) {
+      return (Object.keys(expectedArg).length === Object.keys(actualArg).length || config.ignoreExtraArgs) && equalsWithMatchers(expectedArg, actualArg, config);
     } else {
       return _.isEqual(expectedArg, actualArg);
     }

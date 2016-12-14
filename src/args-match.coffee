@@ -20,7 +20,7 @@ argumentMatchesExpectation = (expectedArg, actualArg, config) ->
     matcher(actualArg)
   else if _.isArray(expectedArg) && _.isArray(actualArg)
     !arityMismatch(expectedArg, actualArg, config) && equalsWithMatchers(expectedArg, actualArg, config)
-  else if _.isObject(expectedArg) && _.isObject(actualArg)
+  else if _.isPlainObject(expectedArg) && _.isPlainObject(actualArg)
     (Object.keys(expectedArg).length == Object.keys(actualArg).length || config.ignoreExtraArgs) && equalsWithMatchers(expectedArg, actualArg, config)
   else
     _.isEqual(expectedArg, actualArg)
