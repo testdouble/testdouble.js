@@ -26,12 +26,13 @@
     "test:cover:report": "codeclimate-test-reporter < .coverage/lcov.info",
     "test:cover": "npm run compile:node && npm run test:cover:instrument && npm run test:cover:run",
     "test:browser": "npm run compile && testem ci",
+    "test:typescript": "tsc --noEmit -p ./test/src/typescript",
     "test:example:webpack": "cd examples/webpack && npm i && npm test & cd ../..",
     "test:example:node": "cd examples/node && npm i && npm test && cd ../..",
     "test:example:lineman": "cd examples/lineman && npm i && npm test && cd ../..",
     "test:example:babel": "cd examples/babel && npm i && npm test && cd ../..",
     "test:example": "npm run test:example:node && npm run test:example:lineman && npm run test:example:webpack && npm run test:example:babel",
-    "test:all": "npm test && testem ci && npm run test:example",
+    "test:all": "npm test && testem ci && npm run test:example && npm run test:typescript",
     "test:ci": "npm run clean && npm run compile && npm run test:all && npm run clean:dist && echo \"All done!\"",
     "test:debug": "npm test -- --debug-brk",
     "version:write": "echo \"module.exports = '$npm_package_version'\" > src/version.coffee",
@@ -63,8 +64,10 @@
     "mocha-istanbul": "arikon/mocha-istanbul",
     "pryjs": "^1.0.3",
     "semver": "^5.3.0",
-    "testem": "^0.9.4"
+    "testem": "^0.9.4",
+    "typescript": "^2.1.4"
   },
+  "typings": "./index.d.ts",
   "keywords": [
     "tdd",
     "bdd",
