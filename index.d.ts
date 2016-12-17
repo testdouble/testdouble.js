@@ -40,3 +40,28 @@ export type Matchers = {
 };
 
 export const matchers: Matchers;
+
+export function replace(path: string, f?: any): void;
+export function replace(path: {}, property: string, f?: any): void;
+
+export function reset(): void;
+
+export type VerificationConfig = {
+  ignoreExtraArgs?: boolean;
+  times?: number;
+};
+
+export function verify(a: any, check?: VerificationConfig): void;
+
+type Call = {
+  context: {};
+  args: any[];
+};
+
+export type Explanation = {
+  callCount: number;
+  calls: Call[];
+  description: string;
+}
+
+export function explain(f: TestDouble): Explanation;

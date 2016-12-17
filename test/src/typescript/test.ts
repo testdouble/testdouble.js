@@ -19,3 +19,20 @@ td.when(cat.meow()).thenReturn("meow!");
 
 const bird = td.object({ fly: function(){} });
 td.when(bird.fly()).thenReturn("fly!");
+
+td.replace({}, "prop");
+td.replace({}, "prop", 42);
+td.replace("../../..");
+td.replace("../../../", 42);
+
+td.verify(f());
+td.verify(f(), { times: 1 });
+td.verify(f(), { ignoreExtraArgs: false });
+td.verify(f(), { ignoreExtraArgs: true, times: 2 });
+
+const explanation = td.explain(f);
+console.log(
+  explanation.description,
+  explanation.calls.length,
+  explanation.callCount
+);
