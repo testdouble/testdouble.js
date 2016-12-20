@@ -1,5 +1,30 @@
 # Change Log
 
+## [v1.10.1](https://github.com/testdouble/testdouble.js/tree/v1.10.1) (2016-12-20)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.10.0...v1.10.1)
+
+**Implemented enhancements:**
+
+- Make the `constructor` property of td.replaced\(\) instantiable types useful [\#121](https://github.com/testdouble/testdouble.js/issues/121)
+- Improve output for `times` verification failures [\#85](https://github.com/testdouble/testdouble.js/issues/85)
+- Allow argument matchers to enhance failure messages [\#59](https://github.com/testdouble/testdouble.js/issues/59)
+- td.constructor\(\) feature for creating fake constructors [\#54](https://github.com/testdouble/testdouble.js/issues/54)
+
+**Closed issues:**
+
+- typings for typescript [\#167](https://github.com/testdouble/testdouble.js/issues/167)
+- A little typo in Getting Started documentation [\#165](https://github.com/testdouble/testdouble.js/issues/165)
+- Unable to stub static method on ES6 classes [\#164](https://github.com/testdouble/testdouble.js/issues/164)
+- transcribe unusual spending kata from ES5 to ES6/babel  [\#163](https://github.com/testdouble/testdouble.js/issues/163)
+- Classes with overridden methods not doubling properly since 1.10.0 [\#159](https://github.com/testdouble/testdouble.js/issues/159)
+- `td.replace\(\)` doesn't work with `import`? [\#147](https://github.com/testdouble/testdouble.js/issues/147)
+- Support multiple capture invocations [\#139](https://github.com/testdouble/testdouble.js/issues/139)
+- Constructor replacements will fail instanceof checks [\#107](https://github.com/testdouble/testdouble.js/issues/107)
+
+**Merged pull requests:**
+
+- Typings for typescript [\#169](https://github.com/testdouble/testdouble.js/pull/169) ([mkusher](https://github.com/mkusher))
+
 ## [v1.10.0](https://github.com/testdouble/testdouble.js/tree/v1.10.0) (2016-12-11)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.9.1...v1.10.0)
 
