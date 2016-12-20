@@ -1,8 +1,6 @@
 export type TestDouble = Function;
 
-export type DoubledObjectWithKey<Key extends string> = {
-  [P in Key]: TestDouble;
-};
+export type DoubledObjectWithKey<Key extends string> = {};
 
 export type DoubledObject<Subject> = Subject;
 

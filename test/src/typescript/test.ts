@@ -14,9 +14,6 @@ class Dog {
 const dog = td.object(Dog);
 td.when(dog.bark()).thenReturn("bark!");
 
-const cat = td.object(["meow"]);
-td.when(cat.meow()).thenReturn("meow!");
-
 const bird = td.object({ fly: function(){} });
 td.when(bird.fly()).thenReturn("fly!");
 
