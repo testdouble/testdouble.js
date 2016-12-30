@@ -39,8 +39,8 @@ export type Matchers = {
 
 export const matchers: Matchers;
 
-export function replace(path: string, f?: any): void;
-export function replace(path: {}, property: string, f?: any): void;
+export function replace(path: string, f?: any): any;
+export function replace(path: {}, property: string, f?: any): any;
 
 export function reset(): void;
 
