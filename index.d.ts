@@ -35,6 +35,13 @@ export interface Matchers {
   contains(a: string|any[]|{}): any;
   argThat(matcher: Function): any;
   not(v: any): any;
+  captor(): Captor
+}
+
+export interface Captor {
+  capture(): any;
+  value?: any;
+  values?: any[];
 }
 
 export const matchers: Matchers;
