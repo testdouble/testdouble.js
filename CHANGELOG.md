@@ -1,5 +1,19 @@
 # Change Log
 
+## [v1.10.2](https://github.com/testdouble/testdouble.js/tree/v1.10.2) (2016-12-31)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.10.1...v1.10.2)
+
+**Closed issues:**
+
+- Possible pollution issue \(2 tests work individually, but fails when run together\) [\#171](https://github.com/testdouble/testdouble.js/issues/171)
+- td.verify and td.when redundency warning [\#170](https://github.com/testdouble/testdouble.js/issues/170)
+- Does not work with jest [\#128](https://github.com/testdouble/testdouble.js/issues/128)
+
+**Merged pull requests:**
+
+- Captor typings [\#174](https://github.com/testdouble/testdouble.js/pull/174) ([danielmoore](https://github.com/danielmoore))
+- Align TS replace\(\) signuatrue return with implementaiton [\#173](https://github.com/testdouble/testdouble.js/pull/173) ([danielmoore](https://github.com/danielmoore))
+
 ## [v1.10.1](https://github.com/testdouble/testdouble.js/tree/v1.10.1) (2016-12-20)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.10.0...v1.10.1)
 
