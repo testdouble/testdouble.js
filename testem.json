@@ -1,0 +1,14 @@
+{
+  "launch_in_dev": [],
+  "launch_in_ci": ["phantomjs"],
+
+  "framework": "mocha+chai",
+
+  "serve_files": [
+    "dist/testdouble.js",
+    "node_modules/mocha-given/browser/mocha-given.js",
+    "generated/test/browser-helper.js",
+    "generated/test/general-helper.js",
+    "generated/test/src/**/*.js"
+  ]
+}
