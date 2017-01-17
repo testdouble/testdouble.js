@@ -184,7 +184,7 @@ yell('ARG') // undefined
 
 ###### Regular Expressions
 
-Using `contains` with regexps on string arguments is supported as of v1.11.0 and is also pretty straightforward:
+Using `contains` with regular expressions on string arguments is also supported:
 
 ``` javascript
 var yell = td.function()
