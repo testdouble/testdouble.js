@@ -182,6 +182,21 @@ yell('ARGHHHHHHH') // 'AYE'
 yell('ARG') // undefined
 ```
 
+###### Regular Expressions
+
+Using `contains` with regexps on string arguments is supported as of v1.11.0 and is also pretty straightforward:
+
+``` javascript
+var yell = td.function()
+
+td.when(yell(td.matchers.contains(/ARGH$/i))).thenReturn('AYE')
+
+yell('ARGH') // 'AYE'
+yell('ARGHHHHHHH') // 'undefined'
+yell('argh') // 'AYE'
+yell('ARG') // undefined
+```
+
 ##### Arrays
 
 Here's how to use `contains` with an array argument:

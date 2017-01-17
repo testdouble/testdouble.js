@@ -50,6 +50,8 @@ module.exports =
             _.isEqual(actualElement, containing)
         else if _.isPlainObject(containing) && _.isPlainObject(actualArg)
           containsAllSpecified(containing, actualArg)
+        else if _.isRegExp(containing)
+          containing.test(actualArg)
         else
           _.includes(actualArg, containing)
 

@@ -16,6 +16,7 @@ module.exports =
   isFunction: require('lodash/isFunction')
   isNumber: require('lodash/isNumber')
   isPlainObject: require('lodash/isPlainObject')
+  isRegExp: require('lodash/isRegExp')
   isString: require('lodash/isString')
   keys: require('lodash/keys')
   last: require('lodash/last')
@@ -24,4 +25,3 @@ module.exports =
   some: require('lodash/some')
   tap: require('lodash/tap')
   union: require('lodash/union')
-

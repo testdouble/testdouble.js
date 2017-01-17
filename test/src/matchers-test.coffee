@@ -98,6 +98,11 @@ describe '.matchers', ->
       Then -> @matches(td.matchers.contains(deep: {thing: 'stuff'}), deep: {thing: 'stuff', shallow: 5}) == true
       Then -> @matches(td.matchers.contains({container: {size: 'S'}}), {ingredient: 'beans', container: { type: 'cup', size: 'S'}}) == true
 
+    context 'regexp', ->
+      Then -> @matches(td.matchers.contains(/abc/), 'abc') == true
+      Then -> @matches(td.matchers.contains(/abc/), foo: 'bar') == false
+      Then -> @matches(td.matchers.contains(/abc/), ['foo', 'bar']) == false
+
     context 'nonsense', ->
       Then -> @matches(td.matchers.contains(42), 42) == false
       Then -> @matches(td.matchers.contains(null), 'shoo') == false
@@ -112,6 +117,3 @@ describe '.matchers', ->
     Then -> @matches(td.matchers.not(5), 6) == true
     Then -> @matches(td.matchers.not(5), 5) == false
     Then -> @matches(td.matchers.not(['hi']), ['hi']) == false
-
-
-
