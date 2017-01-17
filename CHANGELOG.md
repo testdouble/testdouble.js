@@ -1,5 +1,16 @@
 # Change Log
 
+## [v1.11.0](https://github.com/testdouble/testdouble.js/tree/v1.11.0) (2017-01-17)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.10.2...v1.11.0)
+
+**Closed issues:**
+
+- Having something like "verifyNoFurtherInvocations\(mock\)" would be nice \(feature request\) [\#176](https://github.com/testdouble/testdouble.js/issues/176)
+
+**Merged pull requests:**
+
+- feat: contains allows for regexps against strings [\#178](https://github.com/testdouble/testdouble.js/pull/178) ([JaKXz](https://github.com/JaKXz))
+
 ## [v1.10.2](https://github.com/testdouble/testdouble.js/tree/v1.10.2) (2016-12-31)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.10.1...v1.10.2)
 
