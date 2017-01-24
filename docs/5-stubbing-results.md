@@ -258,6 +258,11 @@ pet({length: 81}) // 'goood'
 If you find yourself needing a matcher that isn't defined above, you can
 [define your own custom matchers](8-custom-matchers.md) as well.
 
+Keep in mind that any side effects in an `argThat` predicate function will be
+invoked when you set up subsequent stubbings, so plan accordingly to ensure that
+they are free of test-altering side effects and will behave appropriately for
+whatever input they might be passed by both the test and the subject.
+
 #### td.matchers.not()
 
 When you only care that a test double function _isn't_ passed a certain value,
