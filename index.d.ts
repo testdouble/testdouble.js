@@ -8,7 +8,7 @@ declare function functionDouble(name?: string): TestDouble;
 export { functionDouble as function };
 
 // When passed class or constructor function
-export function object<T>(constructor: { new (): T }): DoubledObject<T>;
+export function object<T>(constructor: { new (...args: any[]): T }): DoubledObject<T>;
 
 // When passed array of props
 export function object<Key extends string>(props: Key[]): DoubledObjectWithKey<Key>;
