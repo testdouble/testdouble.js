@@ -1,5 +1,17 @@
 # Change Log
 
+## [v1.11.1](https://github.com/testdouble/testdouble.js/tree/v1.11.1) (2017-01-27)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.11.0...v1.11.1)
+
+**Closed issues:**
+
+- Is it possible to `thenReturn` the receiver? [\#182](https://github.com/testdouble/testdouble.js/issues/182)
+- Multiple stubbings with argThat causes unexpected behavior [\#180](https://github.com/testdouble/testdouble.js/issues/180)
+
+**Merged pull requests:**
+
+- Update type definition [\#185](https://github.com/testdouble/testdouble.js/pull/185) ([caseyhoward](https://github.com/caseyhoward))
+
 ## [v1.11.0](https://github.com/testdouble/testdouble.js/tree/v1.11.0) (2017-01-17)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.10.2...v1.11.0)
 
