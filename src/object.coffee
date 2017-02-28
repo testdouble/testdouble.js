@@ -52,6 +52,13 @@ createTestDoublesForFunctionNames = (names) ->
   , {}
 
 createTestDoubleViaProxy = (name, config) ->
+  if typeof Proxy == 'undefined'
+    throw new Error("""
+      The current runtime does not have Proxy support.
+
+      Did you mean `td.object([#{name}])`?
+    """)
+
   proxy = new Proxy obj = {},
     get: (target, propKey, receiver) ->
       if !obj.hasOwnProperty(propKey) && !_.includes(config.excludeMethods, propKey)
