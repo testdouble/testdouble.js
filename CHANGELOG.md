@@ -1,5 +1,15 @@
 # Change Log
 
+## [v1.11.2](https://github.com/testdouble/testdouble.js/tree/v1.11.2) (2017-02-28)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.11.1...v1.11.2)
+
+**Closed issues:**
+
+- Stubbing promises with thenResolve does not actually provide for anything in the callback [\#189](https://github.com/testdouble/testdouble.js/issues/189)
+- sinon.sandbox analog? [\#188](https://github.com/testdouble/testdouble.js/issues/188)
+- Shortcut for new stub returning args [\#187](https://github.com/testdouble/testdouble.js/issues/187)
+-  Can't find variable: Proxy [\#186](https://github.com/testdouble/testdouble.js/issues/186)
+
 ## [v1.11.1](https://github.com/testdouble/testdouble.js/tree/v1.11.1) (2017-01-27)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.11.0...v1.11.1)
 
