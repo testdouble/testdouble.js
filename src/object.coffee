@@ -53,11 +53,15 @@ createTestDoublesForFunctionNames = (names) ->
 
 createTestDoubleViaProxy = (name, config) ->
   if typeof Proxy == 'undefined'
-    throw new Error("""
-      The current runtime does not have Proxy support.
+    throw new Error """
+      The current runtime does not have Proxy support, which is what
+      testdouble.js depends on when a string name is passed to `td.object()`.
 
-      Did you mean `td.object([#{name}])`?
-    """)
+      More details here:
+        https://github.com/testdouble/testdouble.js/blob/master/docs/4-creating-test-doubles.md#objectobjectname
+
+      Did you mean `td.object(['#{name}'])`?
+    """
 
   proxy = new Proxy obj = {},
     get: (target, propKey, receiver) ->

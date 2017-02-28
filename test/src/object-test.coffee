@@ -60,3 +60,18 @@ describe 'td.object', ->
         Given -> @testDouble = td.object()
         Then -> @testDouble.toString() == '[test double object]'
         Then -> @testDouble.lol.toString() == '[test double for "#lol"]'
+  else
+    describe 'getting an error message', ->
+      When -> try
+          td.object('Woah')
+        catch error
+          @error = error
+      Then -> @error.message == """
+        The current runtime does not have Proxy support, which is what
+        testdouble.js depends on when a string name is passed to `td.object()`.
+
+        More details here:
+          https://github.com/testdouble/testdouble.js/blob/master/docs/4-creating-test-doubles.md#objectobjectname
+
+        Did you mean `td.object(['Woah'])`?
+      """
