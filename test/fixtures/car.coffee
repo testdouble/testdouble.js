@@ -6,3 +6,4 @@ module.exports =
   turn: require('./turn')
   brake: require('./brake')
   lights: require('./lights')
+  shift: require('./shift')
