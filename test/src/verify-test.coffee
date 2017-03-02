@@ -124,7 +124,7 @@ describe '.verify', ->
               - called with `()` 0 times.
 
             But was actually called:
-              - called with `()`.
+              - called with `()` 1 time.
           """
 
       context '1 time, satisfied', ->
@@ -141,8 +141,7 @@ describe '.verify', ->
               - called with `()` 1 time.
 
             But was actually called:
-              - called with `()`.
-              - called with `()`.
+              - called with `()` 2 times.
           """
 
       context '4 times, satisfied', ->
@@ -163,9 +162,7 @@ describe '.verify', ->
               - called with `()` 4 times.
 
             But was actually called:
-              - called with `()`.
-              - called with `()`.
-              - called with `()`.
+              - called with `()` 3 times.
           """
 
   describe 'warning when verifying a stubbed invocation', ->

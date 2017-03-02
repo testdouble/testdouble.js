@@ -37,17 +37,19 @@ unsatisfiedErrorMessage = (testDouble, args, config) ->
 
     Wanted:
       - called with `(#{stringifyArgs(args)})`#{timesMessage(config)}#{ignoreMessage(config)}.
-  """ + invocationSummary(testDouble)
+  """ + invocationSummary(testDouble, config)
 
 stringifyName = (testDouble) ->
   if name = store.for(testDouble).name
     " `#{name}`"
   else
     ""
-invocationSummary = (testDouble) ->
+invocationSummary = (testDouble, config) ->
   calls = callsStore.for(testDouble)
   if calls.length == 0
     "\n\n  But there were no invocations of the test double."
+  else if config.times? && config.times != calls.length
+    "\n\n  But was actually called:\n    - called with `(#{stringifyArgs(calls[0].args)})` #{calls.length} time#{if calls.length == 1 then '' else 's'}."
   else
     _.reduce calls, (desc, call) ->
       desc + "\n    - called with `(#{stringifyArgs(call.args)})`."
