@@ -40,7 +40,7 @@ createFakeObject = (nameOrType, config) ->
 createTestDoublesForPlainObject = (obj) ->
   _.reduce _.functions(obj), (memo, functionName) ->
     memo[functionName] = if isConstructor(obj[functionName])
-      createTestDoublesForPrototype(obj[functionName])
+      createFakePrototype(obj[functionName])
     else
       tdFunction(".#{functionName}")
 
