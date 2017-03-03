@@ -17,16 +17,16 @@ MathProblem.prototype.generate = function(){
 
 var td = require('testdouble')
 describe('MathProblem', function(){
-  var subject, createRandomProblem, savesProblem, submitProblem;
+  var subject, createRandomProblem, FakeSavesProblem, submitProblem;
   beforeEach(function(){
     createRandomProblem = td.function('createRandomProblem')
-    savesProblem = td.object(SavesProblem)
+    FakeSavesProblem = td.object(SavesProblem)
     submitProblem = td.function('submitProblem')
-    subject = new MathProblem(createRandomProblem, savesProblem, submitProblem)
+    subject = new MathProblem(createRandomProblem, new FakeSavesProblem(), submitProblem)
   })
   it('POSTs a random problem', function(){
     td.when(createRandomProblem()).thenReturn('some problem')
-    td.when(savesProblem.save('some problem')).thenReturn('saved problem')
+    td.when(FakeSavesProblem.prototype.save('some problem')).thenReturn('saved problem')
 
     subject.generate()
 
