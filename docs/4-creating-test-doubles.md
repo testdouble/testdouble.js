@@ -42,18 +42,18 @@ Suppose you have a constructor function:
 ``` javascript
 function Dog(){}
 Dog.prototype.bark = function(){}
-Dog.prototype.woof = function(){}
+Dog.woof = function(){}
 ```
 
-To create a test double object that has functions `bark` and `woof`, simply pass `Dog` to `object()`
+To create a test double of the constructor that has prototypal function `bark`
+and "static" function `woof`, simply pass `Dog` to `td.object()`
 
 ``` javascript
-var dog = td.object(Dog)
+var Dog = td.object(Dog)
 
-dog.bark // a test double function named 'Dog#bark'
+Dog.prototype.bark // a test double function named 'Dog#bark'
+Dog.woof // a test double function named 'Dog.woof'
 ```
-
-At this point, you can pass the fake `dog` object to your subject. If you'd prefer for your subject to instantiate its own `Dog` and still receive the same test doubles visible in your test, consider helping us implement a `td.constructor` API as described in [this issue](https://github.com/testdouble/testdouble.js/issues/54).
 
 #### object(someObjectWithFunctions)
 

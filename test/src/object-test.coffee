@@ -1,15 +1,45 @@
 describe 'td.object', ->
-  describe 'making a test double object based on a Prototypal thing', ->
-    Given -> @someType = class Thing
-      foo: ->
-      bar: ->
-      notAFunc: 11
-    Given -> @testDouble = td.object(@someType)
-    When -> td.when(@testDouble.bar()).thenReturn('yay')
-    Then -> @testDouble.bar() == 'yay'
-    And -> @testDouble.toString() == '[test double object for "Thing"]'
-    And -> @testDouble.foo.toString() == '[test double for "Thing#foo"]'
-    And -> @testDouble.notAFunc == 11
+  describe.only 'making a test double object based on a Prototypal thing', ->
+    Thing = SuperThing = null
+    Given -> class SuperThing
+      biz: -> 1
+    Given -> class Thing extends SuperThing
+    Given -> Thing::foo = -> 2
+    Given -> Thing.bar = -> 3
+    Given -> Thing::instanceAttr = 'baz'
+    Given -> Thing.staticAttr = 'qux'
+    Given -> @fakeType = td.object(Thing)
+    Given -> @fakeInstance = new @fakeType('pants')
+
+    # The constructor can be verified
+    # ### but like how…
+    #Then -> td.verify(@fakeType('pants'))
+
+    Then -> td.when(@fakeInstance.foo()).thenReturn(7)() == 7
+
+    describe 'stub method on prototype, use from any instance', ->
+      When -> td.when(@fakeType.prototype.foo()).thenReturn(4)
+      Then -> @fakeType.prototype.foo() == 4
+      Then -> @fakeInstance.foo() == 4
+
+    # The static method can be stubbed
+    Then -> td.when(@fakeType.bar()).thenReturn(5)() == 5
+
+    # Super type's methods can be stubbed, too
+    Then -> td.when(@fakeInstance.biz()).thenReturn(6)() == 6
+
+    # Things print OK
+    Then -> @fakeType.toString() == '[test double constructor for "Thing"]'
+    Then -> @fakeType.prototype.foo.toString() == '[test double for "Thing#foo"]'
+    Then -> @fakeType.bar.toString() == '[test double for "Thing.bar"]'
+
+    # Fake things pass instanceof checks
+    Then -> @fakeInstance instanceof Thing
+
+    # Original attributes are carried over
+    Then -> @fakeType.prototype.instanceAttr == 'baz'
+    Then -> @fakeInstance.instanceAttr == 'baz'
+    Then -> @fakeType.staticAttr == 'qux'
 
   describe 'making a test double based on a plain object funcbag', ->
     Given -> @funcBag =

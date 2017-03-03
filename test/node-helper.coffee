@@ -8,6 +8,7 @@ global.requireSource = (path) ->
 
 global.td = requireSource('testdouble')
 global.chai = require('chai')
+global.pry = require('pryjs')
 
 nodeVersion = require('semver')(process.version)
 

@@ -1,39 +1,38 @@
 _ = require('./util/lodash-wrap')
 cloneWithNonEnumerableProperties = require('./util/clone-with-non-enumerable-properties')
+getAllCustomPrototypalFunctionNames = require('./util/get-all-custom-prototypal-function-names')
 isConstructor = require('./replace/is-constructor')
 tdFunction = require('./function')
 
 DEFAULT_OPTIONS = excludeMethods: ['then']
 
 module.exports = (nameOrType, config) ->
-  _.tap createTestDoubleObject(nameOrType, withDefaults(config)), (obj) ->
-    obj.toString = -> description(nameOrType)
-
-createTestDoubleObject = (nameOrType, config) ->
   if isConstructor(nameOrType)
-    createTestDoublesForPrototype(nameOrType)
-  else if _.isPlainObject(nameOrType)
+    createFakePrototype(nameOrType)
+  else
+    createFakeObject(nameOrType, config)
+
+createFakePrototype = (type) ->
+  _.tap (class TestDoubleConstructor extends type), (fakeType) ->
+    # Override "static" functions with instance test doubles
+    _.each _.functions(type), (funcName) ->
+      fakeType[funcName] = tdFunction("#{nameOf(type)}.#{funcName}")
+
+    # Override prototypal functions with instance test doubles
+    _.each getAllCustomPrototypalFunctionNames(type), (funcName) ->
+      fakeType.prototype[funcName] = tdFunction("#{nameOf(type)}##{funcName}")
+
+    addToStringToDouble(fakeType, "constructor", type)
+
+createFakeObject = (nameOrType, config) ->
+  fakeObject = if _.isPlainObject(nameOrType)
     createTestDoublesForPlainObject(nameOrType)
   else if _.isArray(nameOrType)
     createTestDoublesForFunctionNames(nameOrType)
   else
-    createTestDoubleViaProxy(nameOrType, config)
+    createTestDoubleViaProxy(nameOrType, withDefaults(config))
 
-getAllPropertyNames = (type) ->
-  props = []
-  while true
-    props = _.union(props, Object.getOwnPropertyNames(type))
-    break unless type = Object.getPrototypeOf(type)
-  props
-
-createTestDoublesForPrototype = (type) ->
-  _.reduce getAllPropertyNames(type.prototype), (memo, name) ->
-    memo[name] = if _.isFunction(type.prototype[name])
-      tdFunction("#{nameOf(type)}##{name}")
-    else
-      type.prototype[name]
-    memo
-  , {}
+  addToStringToDouble(fakeObject, "object", nameOrType)
 
 createTestDoublesForPlainObject = (obj) ->
   _.reduce _.functions(obj), (memo, functionName) ->
@@ -72,6 +71,12 @@ createTestDoubleViaProxy = (name, config) ->
 withDefaults = (config) ->
   _.extend({}, DEFAULT_OPTIONS, config)
 
+addToStringToDouble = (fakeObject, type, nameOrType) ->
+  name = nameOf(nameOrType)
+  fakeObject.toString = ->
+    "[test double #{type}#{if name then " for \"#{name}\"" else ''}]"
+  return fakeObject
+
 nameOf = (nameOrType) ->
   if _.isFunction(nameOrType) && nameOrType.name?
     nameOrType.name
@@ -79,7 +84,3 @@ nameOf = (nameOrType) ->
     nameOrType
   else
     ''
-
-description = (nameOrType) ->
-  name = nameOf(nameOrType)
-  "[test double object#{if name then " for \"#{name}\"" else ''}]"
