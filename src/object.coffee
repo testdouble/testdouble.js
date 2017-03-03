@@ -13,7 +13,10 @@ module.exports = (nameOrType, config) ->
     createFakeObject(nameOrType, config)
 
 createFakePrototype = (type) ->
-  _.tap (class TestDoubleConstructor extends type), (fakeType) ->
+  class TestDoubleConstructor extends type
+    constructor: td.function("#{nameOf(type)} constructor")
+
+  _.tap TestDoubleConstructor, (fakeType) ->
     # Override "static" functions with instance test doubles
     _.each _.functions(type), (funcName) ->
       fakeType[funcName] = tdFunction("#{nameOf(type)}.#{funcName}")

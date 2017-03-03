@@ -11,9 +11,14 @@ describe 'td.object', ->
     Given -> @fakeType = td.object(Thing)
     Given -> @fakeInstance = new @fakeType('pants')
 
-    # The constructor can be verified
-    # ### but like how…
-    #Then -> td.verify(@fakeType('pants'))
+    describe 'the constructor function itself', ->
+      Then -> td.verify(@fakeType('pants'))
+
+      describe 'stubbing it (with an error, return makes no sense)', ->
+        Given -> td.when(new @fakeType('!')).thenThrow('¡')
+        Given -> @error = null
+        When -> try new @fakeType('!') catch e then @error = e
+        Then -> @error == '¡'
 
     Then -> td.when(@fakeInstance.foo()).thenReturn(7)() == 7
 
