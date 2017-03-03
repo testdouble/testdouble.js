@@ -64,9 +64,9 @@ describe '.verify', ->
     Given -> @SomeType::baz = ->
     Given -> @SomeType::biz = "not a function!"
     Given -> @testDoubleObj = td.object(@SomeType)
-    When -> @result = (shouldThrow => td.verify(@testDoubleObj.baz()))
+    When -> @result = (shouldThrow => td.verify(@testDoubleObj.prototype.baz()))
     Then -> expect(@result).to.contain("verification on test double `Foo#baz`.")
-    Then -> @testDoubleObj.biz == "not a function!"
+    Then -> @testDoubleObj.prototype.biz == "not a function!"
 
   context 'with a test double *as an arg* to another', ->
     Given -> @testDouble = td.function()
