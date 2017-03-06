@@ -1,2 +1,4 @@
-mocha.setup('mocha-given')
+window.global = window
 window.NODE_JS = false
+
+mocha.setup('mocha-given')
