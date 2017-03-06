@@ -175,17 +175,34 @@ describe '.verify', ->
     afterEach = console.warn = @ogWarn
     Given -> @td = td.function('.foo')
 
-    context 'an exact match in calls', ->
-      Given -> td.when(@td(1)).thenReturn(5)
-      Given -> @td(1)
-      When -> td.verify(@td(1))
-      Then -> @warnings[0] == """
-        Warning: testdouble.js - td.verify - test double `.foo` was both stubbed and verified with arguments (1), which is redundant and probably unnecessary. (see: https://github.com/testdouble/testdouble.js/blob/master/docs/B-frequently-asked-questions.md#why-shouldnt-i-call-both-tdwhen-and-tdverify-for-a-single-interaction-with-a-test-double )
-        """
+    context 'warn user for', ->
+      context 'an exact match in calls', ->
+        Given -> td.when(@td(1)).thenReturn(5)
+        Given -> @td(1)
+        When -> td.verify(@td(1))
+        Then -> @warnings[0] == """
+          Warning: testdouble.js - td.verify - test double `.foo` was both stubbed and verified with arguments (1), which is redundant and probably unnecessary. (see: https://github.com/testdouble/testdouble.js/blob/master/docs/B-frequently-asked-questions.md#why-shouldnt-i-call-both-tdwhen-and-tdverify-for-a-single-interaction-with-a-test-double )
+          """
 
-    context 'matchers are used', ->
-      Given -> td.when(@td(td.matchers.isA(Number))).thenReturn(5)
-      Given -> @td(1)
-      When -> td.verify(@td(1))
-      Then -> @warnings.length == 0
+      context 'a match where stub ignores extra arguments', ->
+        Given -> td.when(@td(1), {ignoreExtraArgs: true}).thenReturn()
+        Given -> @td(1, 2, 3)
+        When -> td.verify(@td(1, 2, 3))
+        Then -> @warnings[0] == """
+          Warning: testdouble.js - td.verify - test double `.foo` was both stubbed and verified with arguments (1, 2, 3), which is redundant and probably unnecessary. (see: https://github.com/testdouble/testdouble.js/blob/master/docs/B-frequently-asked-questions.md#why-shouldnt-i-call-both-tdwhen-and-tdverify-for-a-single-interaction-with-a-test-double )
+          """
 
+      context 'a match where stub uses a matcher', ->
+        Given -> td.when(@td(td.matchers.isA(Number))).thenReturn(5)
+        Given -> @td(1)
+        When -> td.verify(@td(1))
+        Then -> @warnings[0] == """
+          Warning: testdouble.js - td.verify - test double `.foo` was both stubbed and verified with arguments (1), which is redundant and probably unnecessary. (see: https://github.com/testdouble/testdouble.js/blob/master/docs/B-frequently-asked-questions.md#why-shouldnt-i-call-both-tdwhen-and-tdverify-for-a-single-interaction-with-a-test-double )
+          """
+
+    context "don't warn user when", ->
+      context "verify doesn't match the stub", ->
+        Given -> td.when(@td(1)).thenReturn()
+        Given -> @td()
+        When -> td.verify(@td())
+        Then -> @warnings.length == 0
