@@ -1,6 +1,14 @@
 # Getting Started
 
-Let's kick things off with an example, shall we?
+This document provides a walk-through of _one way_ to use testdouble.js, but
+some folks have indicated to us that it was not a very effective introduction
+into the library or how to use it (it turns out that test doubles can be used in
+a variety of contexts and for numerous purposes, so a narrowly focused getting
+started guide like this one has understandably thrown a few people off).  We
+[want to take another stab at this
+guide](https://github.com/testdouble/testdouble.js/issues/63) but just haven't
+gotten around to it yet. If this document isn't clicking with you, we'd
+encourage you to check out the other documents to learn how to get started!
 
 ## The problem
 
