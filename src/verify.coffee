@@ -32,30 +32,51 @@ warnIfStubbed = (testDouble, actualArgs) ->
 
 
 unsatisfiedErrorMessage = (testDouble, args, config) ->
-  """
-  Unsatisfied verification on test double#{stringifyName(testDouble)}.
-
-    Wanted:
-      - called with `(#{stringifyArgs(args)})`#{timesMessage(config)}#{ignoreMessage(config)}.
-  """ + invocationSummary(testDouble)
+  baseSummary(testDouble, args, config) +
+  matchedInvocationSummary(testDouble, args, config) +
+  invocationSummary(testDouble, args, config)
 
 stringifyName = (testDouble) ->
   if name = store.for(testDouble).name
     " `#{name}`"
   else
     ""
-invocationSummary = (testDouble) ->
+
+baseSummary = (testDouble, args, config) ->
+  """
+  Unsatisfied verification on test double#{stringifyName(testDouble)}.
+
+    Wanted:
+      - called with `(#{stringifyArgs(args)})`#{timesMessage(config)}#{ignoreMessage(config)}.
+  """
+
+invocationSummary = (testDouble, args, config) ->
   calls = callsStore.for(testDouble)
   if calls.length == 0
     "\n\n  But there were no invocations of the test double."
   else
     _.reduce calls, (desc, call) ->
       desc + "\n    - called with `(#{stringifyArgs(call.args)})`."
-    , "\n\n  But was actually called:"
+    , "\n\n  All calls of the test double, in order were:"
+
+matchedInvocationSummary = (testDouble, args, config) ->
+  calls = callsStore.where(testDouble, args, config)
+  expectedCalls = config.times || 0
+
+  if calls.length == 0 || calls.length > expectedCalls
+    ''
+  else
+    groups = _.groupBy calls, 'args'
+    _.reduce groups, (desc, callsMatchingArgs, args) ->
+      desc + "\n    - called #{pluralize callsMatchingArgs.length, 'time'} with `(#{stringifyArgs(callsMatchingArgs[0].args)})`."
+    , "\n\n  #{pluralize calls.length, 'call'} that satisfied this verification:"
+
+pluralize = (x, msg) ->
+  "#{x} #{msg}#{if x == 1 then '' else 's'}"
 
 timesMessage = (config) ->
   return "" unless config.times?
-  " #{config.times} time#{if config.times == 1 then '' else 's'}"
+  " #{pluralize config.times, 'time'}"
 
 ignoreMessage = (config) ->
   return "" unless config.ignoreExtraArgs?

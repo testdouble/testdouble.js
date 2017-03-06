@@ -10,6 +10,7 @@ module.exports =
   findLast: require('lodash/findLast')
   flatten: require('lodash/flatten')
   functions: require('lodash/functions')
+  groupBy: require('lodash/groupBy')
   includes: require('lodash/includes')
   isArray: require('lodash/isArray')
   isBoolean: require('lodash/isBoolean')
