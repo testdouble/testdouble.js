@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "test": "mocha -R spec --recursive test/helper.js test/lib/",
-    "test:debug": "npm test -- --debug-brk"
+    "test:debug": "yarn test -- --debug-brk"
   },
   "devDependencies": {
     "chai": "^3.3.0",
