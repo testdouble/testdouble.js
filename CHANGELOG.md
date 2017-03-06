@@ -1,5 +1,19 @@
 # Change Log
 
+## [v2.0.0-pre.1](https://github.com/testdouble/testdouble.js/tree/v2.0.0-pre.1) (2017-03-06)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.11.2...v2.0.0-pre.1)
+
+**Closed issues:**
+
+- td.verify not returning true when true [\#191](https://github.com/testdouble/testdouble.js/issues/191)
+- Typing definition for td.object doesn't support constructors with arguments [\#184](https://github.com/testdouble/testdouble.js/issues/184)
+- Replacing methods on `window.location` [\#183](https://github.com/testdouble/testdouble.js/issues/183)
+- \[BREAKING\] Return constructor for `td.replace\(\)` [\#166](https://github.com/testdouble/testdouble.js/issues/166)
+
+**Merged pull requests:**
+
+- Replace constructors with constructors [\#193](https://github.com/testdouble/testdouble.js/pull/193) ([searls](https://github.com/searls))
+
 ## [v1.11.2](https://github.com/testdouble/testdouble.js/tree/v1.11.2) (2017-02-28)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.11.1...v1.11.2)
 
@@ -9,6 +23,10 @@
 - sinon.sandbox analog? [\#188](https://github.com/testdouble/testdouble.js/issues/188)
 - Shortcut for new stub returning args [\#187](https://github.com/testdouble/testdouble.js/issues/187)
 -  Can't find variable: Proxy [\#186](https://github.com/testdouble/testdouble.js/issues/186)
+
+**Merged pull requests:**
+
+- Improve the error message when using Proxy incorrectly. [\#190](https://github.com/testdouble/testdouble.js/pull/190) ([Schoonology](https://github.com/Schoonology))
 
 ## [v1.11.1](https://github.com/testdouble/testdouble.js/tree/v1.11.1) (2017-01-27)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.11.0...v1.11.1)
