@@ -13,7 +13,7 @@ to `someObject.nameOfProperty`, and replace it during your test
 * **Node.js module replacement.** By passing
 `td.replace('../path/to/dependency')`, testdouble.js will intercept calls to
 `require` that `dependency` module and ensure your subject is handed a fake
-instead (requires Node.js 0.11 or greater)
+instead
 
 In both cases, `td.replace` will grab the real dependency and imitate it with an
 appropriate fake:

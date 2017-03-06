@@ -1,9 +1,7 @@
 language: node_js
 node_js:
-  - "6"
   - "4"
-  - "0.12"
-  - "0.10"
+  - "6"
 script: npm run test:ci
 after_script:
   - npm run test:cover

@@ -176,6 +176,5 @@ describe 'td.replace', ->
       And -> @car.lights.count == 4
 
       describe 'and classes on objects on funcs', ->
-        return unless NODE_JS.AT_LEAST_0_11
         When -> td.when(@lights.brights.prototype.beBright(1)).thenReturn('yow')
         Then -> (new @car.lights.brights).beBright(1) == 'yow'

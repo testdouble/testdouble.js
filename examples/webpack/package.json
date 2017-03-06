@@ -8,6 +8,6 @@
   "devDependencies": {
     "testdouble": "*",
     "testem": "^1.15.0",
-    "webpack": "^1.*"
+    "webpack": "^2.2.1"
   }
 }
