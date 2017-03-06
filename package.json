@@ -27,7 +27,7 @@
     "test:cover": "npm run compile:node && npm run test:cover:instrument && npm run test:cover:run",
     "test:browser": "npm run compile && testem ci",
     "test:typescript": "tsc --noEmit -p ./test/src/typescript",
-    "test:example:webpack": "cd examples/webpack && npm i && npm test & cd ../..",
+    "test:example:webpack": "cd examples/webpack && npm i && npm test && cd ../..",
     "test:example:node": "cd examples/node && npm i && npm test && cd ../..",
     "test:example:lineman": "cd examples/lineman && npm i && npm test && cd ../..",
     "test:example:babel": "cd examples/babel && npm i && npm test && cd ../..",
