@@ -39,7 +39,7 @@
     "version:write": "echo \"module.exports = '$npm_package_version'\" > src/version.coffee",
     "version:changelog": "if command -v github_changelog_generator &>/dev/null; then github_changelog_generator; git commit -m \"Changelog for $npm_package_version\" CHANGELOG.md; else echo Versioning requires you first run 'gem install github_changelog_generator' >&2; fi",
     "preversion": "git pull --rebase && yarn run test:ci",
-    "postversion": "git push --tags && yarn run version:changelog && git push && yarn publish --tag=next",
+    "postversion": "git push --tags && yarn run version:changelog && git push && npm publish --tag=next",
     "version": "yarn run version:write && yarn run compile && git add dist src/version.coffee",
     "prepublish": "yarn run compile"
   },
