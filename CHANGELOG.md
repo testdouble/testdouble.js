@@ -1,5 +1,12 @@
 # Change Log
 
+## [v2.0.0-pre.2](https://github.com/testdouble/testdouble.js/tree/v2.0.0-pre.2) (2017-03-06)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v2.0.0-pre.1...v2.0.0-pre.2)
+
+**Merged pull requests:**
+
+- Yarn [\#195](https://github.com/testdouble/testdouble.js/pull/195) ([searls](https://github.com/searls))
+
 ## [v2.0.0-pre.1](https://github.com/testdouble/testdouble.js/tree/v2.0.0-pre.1) (2017-03-06)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.11.2...v2.0.0-pre.1)
 
@@ -12,6 +19,7 @@
 
 **Merged pull requests:**
 
+- Creates Better Verification Message [\#194](https://github.com/testdouble/testdouble.js/pull/194) ([samjonester](https://github.com/samjonester))
 - Replace constructors with constructors [\#193](https://github.com/testdouble/testdouble.js/pull/193) ([searls](https://github.com/searls))
 
 ## [v1.11.2](https://github.com/testdouble/testdouble.js/tree/v1.11.2) (2017-02-28)
