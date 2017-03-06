@@ -2,7 +2,6 @@ _ = require('../util/lodash-wrap')
 
 imitate = require('./imitate')
 isConstructor = require('./is-constructor')
-wrapIfNeeded = require('./wrap-if-needed')
 log = require('../log')
 reset = require('../reset')
 stringifyAnything = require('../stringify/anything')
@@ -19,7 +18,7 @@ module.exports = (object, property, manualReplacement) ->
     manualReplacement
   else
     imitate(realThing, property)
-  object[property] = wrapIfNeeded(fakeThing, realThing)
+  object[property] = fakeThing
 
   reset.onNextReset ->
     if realThingExists

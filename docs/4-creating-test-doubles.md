@@ -4,6 +4,11 @@ Unlike most classical or functional languages, JavaScript under test might depen
 
 The examples below will walk through the different ways to create new test doubles. Each example assumes you've aliased `testdouble` to `td`.
 
+This document discusses all the ways to manual create test doubles, but keep in
+mind that in practice many developers will lean on `td.replace`, which performs
+this duty on your behalf. Read more about `td.replace` on [its doc
+page](7-replacing-dependencies.md).
+
 ## td.function([name])
 
 **Note that `td.func` is available as an alias of `td.function`.**
@@ -42,18 +47,18 @@ Suppose you have a constructor function:
 ``` javascript
 function Dog(){}
 Dog.prototype.bark = function(){}
-Dog.prototype.woof = function(){}
+Dog.woof = function(){}
 ```
 
-To create a test double object that has functions `bark` and `woof`, simply pass `Dog` to `object()`
+To create a test double of the constructor that has prototypal function `bark`
+and "static" function `woof`, simply pass `Dog` to `td.object()`
 
 ``` javascript
-var dog = td.object(Dog)
+var FakeDog = td.object(Dog)
 
-dog.bark // a test double function named 'Dog#bark'
+FakeDog.prototype.bark // a test double function named 'Dog#bark'
+FakeDog.woof // a test double function named 'Dog.woof'
 ```
-
-At this point, you can pass the fake `dog` object to your subject. If you'd prefer for your subject to instantiate its own `Dog` and still receive the same test doubles visible in your test, consider helping us implement a `td.constructor` API as described in [this issue](https://github.com/testdouble/testdouble.js/issues/54).
 
 #### object(someObjectWithFunctions)
 

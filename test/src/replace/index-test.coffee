@@ -18,11 +18,11 @@ describe 'td.replace', ->
         And -> @dependency.honk() == 'og honk'
 
     describe 'Replacing a constructor function', ->
-      When -> @doubleBag = td.replace(@dependency, 'thingConstructor')
-      Then -> td.explain(@doubleBag.foo).isTestDouble == true
-      Then -> td.explain(@doubleBag.bar).isTestDouble == true
-      And -> @doubleBag.foo == new @dependency.thingConstructor().foo
-      And -> @doubleBag.bar == new @dependency.thingConstructor().bar
+      When -> @fakeConstructor = td.replace(@dependency, 'thingConstructor')
+      Then -> td.explain(@fakeConstructor.prototype.foo).isTestDouble == true
+      Then -> td.explain(@fakeConstructor.prototype.bar).isTestDouble == true
+      And -> @fakeConstructor.prototype.foo == new @dependency.thingConstructor().foo
+      And -> @fakeConstructor.prototype.bar == new @dependency.thingConstructor().bar
 
       describe 'reset restores it', ->
         When -> td.reset()
@@ -32,15 +32,15 @@ describe 'td.replace', ->
     describe 'Replacing an ES6 constructor function', ->
       return unless NODE_JS?.AT_LEAST_6
       Given -> @dependency.es6constructor = require('../../fixtures/es6class')
-      Given -> @doubleBag = td.replace(@dependency, 'es6constructor')
+      Given -> @fakeConstructor = td.replace(@dependency, 'es6constructor')
       Given -> @es6Thing = new @dependency.es6constructor()
-      Then -> td.explain(@doubleBag.foo).isTestDouble == true
-      Then -> td.explain(@doubleBag.bar).isTestDouble == true
-      And -> @doubleBag.foo == @es6Thing.foo
-      And -> @doubleBag.bar == @es6Thing.bar
+      Then -> td.explain(@fakeConstructor.prototype.foo).isTestDouble == true
+      Then -> td.explain(@fakeConstructor.prototype.bar).isTestDouble == true
+      And -> @fakeConstructor.prototype.foo == @es6Thing.foo
+      And -> @fakeConstructor.prototype.bar == @es6Thing.bar
 
       describe 'the member td functions actually work', ->
-        Given -> td.when(@doubleBag.foo('cat')).thenReturn('dog')
+        Given -> td.when(@fakeConstructor.prototype.foo('cat')).thenReturn('dog')
         Then -> @es6Thing.foo('cat') == 'dog'
 
       describe 'reset restores it', ->
@@ -75,7 +75,7 @@ describe 'td.replace', ->
       And -> @doubleBag.age == 18
 
       describe 'instantiable types work too', ->
-        When -> td.when(@doubleBag.horse.nay('hay')).thenReturn('no way')
+        When -> td.when(@doubleBag.horse.prototype.nay('hay')).thenReturn('no way')
         Then -> (new @dependency.animals.horse()).nay('hay') == 'no way'
 
     describe 'Replacing a property that is not an object/function', ->
@@ -155,7 +155,7 @@ describe 'td.replace', ->
     Given -> @car = require('../../fixtures/car')
 
     describe 'quibbling prototypal constructors get created with td.object(Type)', ->
-      Given -> td.when(@passenger.sit()).thenReturn('ow')
+      Given -> td.when(@passenger.prototype.sit()).thenReturn('ow')
       When -> @result = @car.seatPassenger()
       Then -> @result == 'ow'
 
@@ -177,5 +177,5 @@ describe 'td.replace', ->
 
       describe 'and classes on objects on funcs', ->
         return unless NODE_JS.AT_LEAST_0_11
-        When -> td.when(@lights.brights.beBright(1)).thenReturn('yow')
+        When -> td.when(@lights.brights.prototype.beBright(1)).thenReturn('yow')
         Then -> (new @car.lights.brights).beBright(1) == 'yow'

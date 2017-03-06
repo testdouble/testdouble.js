@@ -1,15 +1,50 @@
 describe 'td.object', ->
   describe 'making a test double object based on a Prototypal thing', ->
-    Given -> @someType = class Thing
-      foo: ->
-      bar: ->
-      notAFunc: 11
-    Given -> @testDouble = td.object(@someType)
-    When -> td.when(@testDouble.bar()).thenReturn('yay')
-    Then -> @testDouble.bar() == 'yay'
-    And -> @testDouble.toString() == '[test double object for "Thing"]'
-    And -> @testDouble.foo.toString() == '[test double for "Thing#foo"]'
-    And -> @testDouble.notAFunc == 11
+    Thing = SuperThing = null
+    Given -> class SuperThing
+      biz: -> 1
+    Given -> class Thing extends SuperThing
+    Given -> Thing::foo = -> 2
+    Given -> Thing.bar = -> 3
+    Given -> Thing::instanceAttr = 'baz'
+    Given -> Thing.staticAttr = 'qux'
+    Given -> @fakeType = td.object(Thing)
+    Given -> @fakeInstance = new @fakeType('pants')
+
+    describe 'the constructor function itself', ->
+      Then -> td.verify(@fakeType('pants'))
+
+      describe 'stubbing it (with an error, return makes no sense)', ->
+        Given -> td.when(new @fakeType('!')).thenThrow('¡')
+        Given -> @error = null
+        When -> try new @fakeType('!') catch e then @error = e
+        Then -> @error == '¡'
+
+    Then -> td.when(@fakeInstance.foo()).thenReturn(7)() == 7
+
+    describe 'stub method on prototype, use from any instance', ->
+      When -> td.when(@fakeType.prototype.foo()).thenReturn(4)
+      Then -> @fakeType.prototype.foo() == 4
+      Then -> @fakeInstance.foo() == 4
+
+    # The static method can be stubbed
+    Then -> td.when(@fakeType.bar()).thenReturn(5)() == 5
+
+    # Super type's methods can be stubbed, too
+    Then -> td.when(@fakeInstance.biz()).thenReturn(6)() == 6
+
+    # Things print OK
+    Then -> @fakeType.toString() == '[test double constructor for "Thing"]'
+    Then -> @fakeType.prototype.foo.toString() == '[test double for "Thing#foo"]'
+    Then -> @fakeType.bar.toString() == '[test double for "Thing.bar"]'
+
+    # Fake things pass instanceof checks
+    Then -> @fakeInstance instanceof Thing
+
+    # Original attributes are carried over
+    Then -> @fakeType.prototype.instanceAttr == 'baz'
+    Then -> @fakeInstance.instanceAttr == 'baz'
+    Then -> @fakeType.staticAttr == 'qux'
 
   describe 'making a test double based on a plain object funcbag', ->
     Given -> @funcBag =
@@ -30,17 +65,6 @@ describe 'td.object', ->
     Then -> @testDouble.biz() == 'zing!'
     And -> @testDouble.toString() == '[test double object]'
     And -> @testDouble.bam.toString() == '[test double for ".bam"]'
-
-  describe 'making a test double on a subtype', ->
-    Given -> @someSuperType = class SuperType
-      foo: ->
-    Given -> @someSubType = class SubType extends @someSuperType
-      bar: ->
-    Given -> @testDouble = td.object(@someSubType)
-    When -> td.when(@testDouble.foo()).thenReturn('yay')
-    When -> td.when(@testDouble.bar()).thenReturn('yay')
-    Then -> @testDouble.foo() == 'yay'
-    Then -> @testDouble.bar() == 'yay'
 
   if global.Proxy?
     describe 'creating a proxy object (ES2015; only supported in FF + Edge atm)', ->

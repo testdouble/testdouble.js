@@ -22,9 +22,9 @@ appropriate fake:
   * Plain objects are shallow-cloned and their top-level functions are replaced
     with test double functions
   * Constructor functions and ES classes with at least one prototypal function
-    defined will _return_ a plain object of test double functions but will be
-    _replaced by_ an artificial constructor that, when instantiated, will
-    delegate to those same test double functions
+    defined will be extended by an artificial constructor that will have all the
+    original constructor/class's static & prototypal functions overwritten with
+    test double functions
 
 After the next call to `td.reset()` (which you should have in an `afterEach` hook
 somewhere in your test suite), the real dependencies will all be restored.
