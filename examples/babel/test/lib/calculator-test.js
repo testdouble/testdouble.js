@@ -11,7 +11,7 @@ describe('Calculator', () => {
   })
 
   describe('#calculate', () => {
-    if !NODE_JS return 'module replacement is not supported!'
+    if (!NODE_JS) return 'module replacement is not supported!'
 
     it('delegates to an Adder', () => {
       td.when(Adder.prototype.add(4,9)).thenReturn('yay math!')
