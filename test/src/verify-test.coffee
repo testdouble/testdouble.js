@@ -25,7 +25,7 @@ describe '.verify', ->
         Wanted:
           - called with `("WOAH")`.
 
-        But was actually called:
+        All calls of the test double, in order were:
           - called with `("the wrong WOAH")`.
       """
 
@@ -37,7 +37,7 @@ describe '.verify', ->
         Wanted:
           - called with `("good")`.
 
-        But was actually called:
+        All calls of the test double, in order were:
           - called with `("good", "bad")`.
       """
 
@@ -49,7 +49,7 @@ describe '.verify', ->
         Wanted:
           - called with `("good", "gooder")`, ignoring any additional arguments.
 
-        But was actually called:
+        All calls of the test double, in order were:
           - called with `("good", "bad", "more", "args")`.
       """
 
@@ -101,7 +101,7 @@ describe '.verify', ->
         Wanted:
           - called with `(isA(String))`.
 
-        But was actually called:
+        All calls of the test double, in order were:
           - called with `(55)`.
       """
 
@@ -123,7 +123,7 @@ describe '.verify', ->
             Wanted:
               - called with `()` 0 times.
 
-            But was actually called:
+            All calls of the test double, in order were:
               - called with `()`.
           """
 
@@ -140,7 +140,7 @@ describe '.verify', ->
             Wanted:
               - called with `()` 1 time.
 
-            But was actually called:
+            All calls of the test double, in order were:
               - called with `()`.
               - called with `()`.
           """
@@ -162,10 +162,35 @@ describe '.verify', ->
             Wanted:
               - called with `()` 4 times.
 
-            But was actually called:
+            3 calls that satisfied this verification:
+              - called 3 times with `()`.
+
+            All calls of the test double, in order were:
               - called with `()`.
               - called with `()`.
               - called with `()`.
+          """
+
+      context '4 times, unsatisfied (with 3)', ->
+        When -> @testDouble(1)
+        And -> @testDouble(2)
+        And -> @testDouble(2)
+        And -> @testDouble('x')
+        Then -> shouldThrow (=> td.verify(@testDouble(td.matchers.isA(Number)), times: 4)), """
+          Unsatisfied verification on test double.
+
+            Wanted:
+              - called with `(isA(Number))` 4 times.
+
+            3 calls that satisfied this verification:
+              - called 1 time with `(1)`.
+              - called 2 times with `(2)`.
+
+            All calls of the test double, in order were:
+              - called with `(1)`.
+              - called with `(2)`.
+              - called with `(2)`.
+              - called with `("x")`.
           """
 
   describe 'warning when verifying a stubbed invocation', ->
