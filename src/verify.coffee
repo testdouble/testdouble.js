@@ -68,15 +68,15 @@ matchedInvocationSummary = (testDouble, args, config) ->
   else
     groups = _.groupBy calls, 'args'
     _.reduce groups, (desc, callsMatchingArgs, args) ->
-      desc + "\n    - called #{pluralize callsMatchingArgs.length, 'time'} with `(#{stringifyArgs(callsMatchingArgs[0].args)})`."
-    , "\n\n  #{pluralize calls.length, 'call'} that satisfied this verification:"
+      desc + "\n    - called #{pluralize(callsMatchingArgs.length, 'time')} with `(#{stringifyArgs(callsMatchingArgs[0].args)})`."
+    , "\n\n  #{pluralize(calls.length, 'call')} that satisfied this verification:"
 
 pluralize = (x, msg) ->
   "#{x} #{msg}#{if x == 1 then '' else 's'}"
 
 timesMessage = (config) ->
   return "" unless config.times?
-  " #{pluralize config.times, 'time'}"
+  " #{pluralize(config.times, 'time')}"
 
 ignoreMessage = (config) ->
   return "" unless config.ignoreExtraArgs?
