@@ -42,15 +42,24 @@ invokeCallbackFor = (stubbing, actualArgs) ->
   return unless _.some(stubbing.args, callback.isCallback)
   _.each stubbing.args, (expectedArg, i) ->
     return unless callback.isCallback(expectedArg)
-    callbackArgs = if expectedArg.args?
-      expectedArg.args
-    else if stubbing.config.plan == 'thenCallback'
-      stubbing.stubbedValues
-    else
-      []
+    args = callbackArgs stubbing, expectedArg
+    callCallback stubbing.config, actualArgs[i], args
 
-    actualArgs[i](callbackArgs...)
+callbackArgs = (stubbing, expectedArg) ->
+  if expectedArg.args?
+    expectedArg.args
+  else if stubbing.config.plan == 'thenCallback'
+    stubbing.stubbedValues
+  else
+    []
 
+callCallback = ({defer, delay}, callback, args) ->
+  if defer
+    _.defer(callback, args...)
+  else if delay
+    _.delay(callback, delay, args...)
+  else
+    callback(args...)
 
 stubbedValueFor = (stubbing) ->
   if stubbing.callCount < stubbing.stubbedValues.length
