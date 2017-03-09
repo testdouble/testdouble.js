@@ -17,11 +17,15 @@
     "env": "printenv",
     "clean:dist": "git checkout -- dist",
     "clean": "rm -rf generated dist lib .coverage && yarn run clean:dist",
-    "compile:node": "coffee --output lib --compile src",
-    "compile:test": "coffee --output generated/test --compile test",
+    "compile:node:coffee": "coffee --output lib --compile src",
+    "compile:node:babel": "babel src -d lib",
+    "compile:node": "yarn run compile:node:coffee && yarn run compile:node:babel",
+    "compile:test:coffee": "coffee --output generated/test --compile test",
+    "compile:test:babel": "babel test -d generated/test",
+    "compile:test": "yarn run compile:test:coffee && yarn run compile:test:babel",
     "compile:browser": "browserify . --standalone td --outfile $npm_package_config_build_file --ignore 'quibble' -p headerify",
     "compile": "yarn run compile:node && yarn run compile:test && yarn run compile:browser",
-    "test": "mocha --ui mocha-given --reporter $npm_package_config_mocha_reporter --compilers coffee:coffee-script $EXTRA_MOCHA_ARGS --recursive test/node-helper.coffee test/src",
+    "test": "mocha --ui mocha-given --reporter $npm_package_config_mocha_reporter --compilers js:babel-core/register,coffee:coffee-script $EXTRA_MOCHA_ARGS --recursive test/node-helper.coffee test/src",
     "test:cover:instrument": "istanbul instrument lib -o .coverage/lib",
     "test:cover:run": "EXTRA_MOCHA_ARGS=\"--reporter mocha-istanbul\" COVER=.coverage/lib ISTANBUL_REPORT_DIR=.coverage ISTANBUL_REPORTERS=lcov,html yarn run test",
     "test:cover:report": "codeclimate-test-reporter < .coverage/lcov.info",
@@ -43,6 +47,9 @@
     "version": "yarn run version:write && yarn run compile && git add dist src/version.coffee",
     "prepublish": "yarn run compile"
   },
+  "babel": {
+    "presets": ["env"]
+  },
   "browser": {
     "./lib/replace/module.js": "./lib/replace/module.browser.js",
     "quibble": "./lib/quibble.browser.js"
@@ -53,6 +60,8 @@
     "stringify-object": "^2.4.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.23.0",
+    "babel-preset-env": "^1.2.1",
     "browserify": "^11.0.1",
     "chai": "^3.2.0",
     "codeclimate-test-reporter": "^0.3.1",
@@ -67,6 +76,12 @@
     "semver": "^5.3.0",
     "testem": "^0.9.4",
     "typescript": "^2.1.4"
+  },
+  "directories":{
+    "doc": "./docs",
+    "example": "./examples",
+    "lib": "./lib",
+    "src": "./src"
   },
   "typings": "./index.d.ts",
   "keywords": [
