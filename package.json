@@ -47,6 +47,9 @@
     "version": "yarn run version:write && yarn run compile && git add dist src/version.coffee",
     "prepublish": "yarn run compile"
   },
+  "babel": {
+    "presets": ["env"]
+  },
   "browser": {
     "./lib/replace/module.js": "./lib/replace/module.browser.js",
     "quibble": "./lib/quibble.browser.js"
