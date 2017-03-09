@@ -77,6 +77,12 @@
     "testem": "^0.9.4",
     "typescript": "^2.1.4"
   },
+  "directories":{
+    "doc": "./docs",
+    "example": "./examples",
+    "lib": "./lib",
+    "src": "./src"
+  },
   "typings": "./index.d.ts",
   "keywords": [
     "tdd",
