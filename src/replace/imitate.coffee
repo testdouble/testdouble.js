@@ -1,14 +1,17 @@
 _ = require('../util/lodash-wrap')
 
-object = require('../object')
+tdConstructor = require('../constructor')
+tdObject = require('../object')
 tdFunction = require('../function')
 log = require('../log')
 isConstructor = require('./is-constructor')
 stringifyAnything = require('../stringify/anything')
 
 module.exports = (realThing, optionalName) ->
-  if isConstructor(realThing) || _.isPlainObject(realThing)
-    object(realThing)
+  if isConstructor(realThing)
+    tdConstructor(realThing)
+  else if _.isPlainObject(realThing)
+    tdObject(realThing)
   else if _.isFunction(realThing)
     tdFunction(if realThing?.name then realThing.name else optionalName)
   else

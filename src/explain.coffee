@@ -10,6 +10,7 @@ module.exports = (testDouble) ->
   calls = callsStore.for(testDouble)
   stubs = stubbingsStore.for(testDouble)
 
+  name: store.for(testDouble).name
   callCount: calls.length
   calls: calls
   description:
@@ -19,6 +20,7 @@ module.exports = (testDouble) ->
   isTestDouble: true
 
 nullDescription = ->
+  name: undefined
   callCount: 0
   calls: []
   description: "This is not a test double."

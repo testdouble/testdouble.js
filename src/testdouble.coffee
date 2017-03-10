@@ -2,6 +2,7 @@ module.exports =
   function: require('./function')
   func: require('./function')
   object: require('./object')
+  constructor: require('./constructor')
   when: require('./when')
   verify: require('./verify')
   matchers: require('./matchers/index')

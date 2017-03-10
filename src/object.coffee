@@ -1,46 +1,28 @@
 _ = require('./util/lodash-wrap')
-cloneWithNonEnumerableProperties = require('./util/clone-with-non-enumerable-properties')
-getAllCustomPrototypalFunctionNames = require('./util/get-all-custom-prototypal-function-names')
-isConstructor = require('./replace/is-constructor')
 tdFunction = require('./function')
+tdConstructor = require('./constructor')
+cloneWithNonEnumerableProperties = require('./util/clone-with-non-enumerable-properties')
+isConstructor = require('./replace/is-constructor')
+log = require('./log')
 
 DEFAULT_OPTIONS = excludeMethods: ['then']
 
 module.exports = (nameOrType, config) ->
-  if isConstructor(nameOrType)
-    createFakePrototype(nameOrType)
-  else
-    createFakeObject(nameOrType, config)
-
-createFakePrototype = (type) ->
-  class TestDoubleConstructor extends type
-    constructor: tdFunction("#{nameOf(type)} constructor")
-
-  _.tap TestDoubleConstructor, (fakeType) ->
-    # Override "static" functions with instance test doubles
-    _.each _.functions(type), (funcName) ->
-      fakeType[funcName] = tdFunction("#{nameOf(type)}.#{funcName}")
-
-    # Override prototypal functions with instance test doubles
-    _.each getAllCustomPrototypalFunctionNames(type), (funcName) ->
-      fakeType.prototype[funcName] = tdFunction("#{nameOf(type)}##{funcName}")
-
-    addToStringToDouble(fakeType, "constructor", type)
-
-createFakeObject = (nameOrType, config) ->
   fakeObject = if _.isPlainObject(nameOrType)
     createTestDoublesForPlainObject(nameOrType)
   else if _.isArray(nameOrType)
     createTestDoublesForFunctionNames(nameOrType)
+  else if isConstructor(nameOrType)
+    blowUpForConstructors()
   else
     createTestDoubleViaProxy(nameOrType, withDefaults(config))
 
-  addToStringToDouble(fakeObject, "object", nameOrType)
+  addToStringToDouble(fakeObject, nameOrType)
 
 createTestDoublesForPlainObject = (obj) ->
   _.reduce _.functions(obj), (memo, functionName) ->
     memo[functionName] = if isConstructor(obj[functionName])
-      createFakePrototype(obj[functionName])
+      tdConstructor(obj[functionName])
     else
       tdFunction(".#{functionName}")
 
@@ -74,16 +56,21 @@ createTestDoubleViaProxy = (name, config) ->
 withDefaults = (config) ->
   _.extend({}, DEFAULT_OPTIONS, config)
 
-addToStringToDouble = (fakeObject, type, nameOrType) ->
+addToStringToDouble = (fakeObject, nameOrType) ->
   name = nameOf(nameOrType)
   fakeObject.toString = ->
-    "[test double #{type}#{if name then " for \"#{name}\"" else ''}]"
+    "[test double object#{if name then " for \"#{name}\"" else ''}]"
   return fakeObject
 
 nameOf = (nameOrType) ->
-  if _.isFunction(nameOrType) && nameOrType.name?
-    nameOrType.name
-  else if _.isString(nameOrType)
+  if _.isString(nameOrType)
     nameOrType
   else
     ''
+
+blowUpForConstructors = ->
+  log.error "td.object", """
+    Constructor functions are not valid arguments to `td.object` (as of
+    testdouble@2.0.0). Please use the `td.constructor()` method instead for
+    creating fake constructors.
+    """

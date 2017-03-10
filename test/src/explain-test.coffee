@@ -4,6 +4,7 @@ describe '.explain', ->
 
   context 'a brand new test double', ->
     Then -> expect(@result).to.deep.eq
+      name: undefined
       calls: []
       callCount: 0
       description: """
@@ -16,6 +17,7 @@ describe '.explain', ->
     Then -> expect(@result.description).to.deep.eq """
       This test double `foobaby` has 0 stubbings and 0 invocations.
       """
+    And -> @result.name == "foobaby"
 
   context 'a double with some interactions', ->
     Given -> td.when(@testDouble(88)).thenReturn(5)
@@ -24,6 +26,7 @@ describe '.explain', ->
     Given -> @testDouble("not 88", 44)
 
     Then -> expect(@result).to.deep.eq
+      name: undefined
       calls: [
         {context: this, args: [88]},
         {context: this, args: ["not 88", 44]}
@@ -45,6 +48,7 @@ describe '.explain', ->
   context 'a double with callback', ->
     Given -> td.when(@testDouble(14)).thenCallback(null, 8)
     Then -> expect(@result).to.deep.eq
+      name: undefined
       calls: []
       callCount: 0
       description: """
@@ -58,6 +62,7 @@ describe '.explain', ->
   context 'a double with resolve', ->
     Given -> td.when(@testDouble(14)).thenResolve(8)
     Then -> expect(@result).to.deep.eq
+      name: undefined
       calls: []
       callCount: 0
       description: """
@@ -71,6 +76,7 @@ describe '.explain', ->
   context 'a double with reject', ->
     Given -> td.when(@testDouble(14)).thenReject(8)
     Then -> expect(@result).to.deep.eq
+      name: undefined
       calls: []
       callCount: 0
       description: """
@@ -84,6 +90,7 @@ describe '.explain', ->
   context 'passed a non-test double', ->
     Given -> @testDouble = 42
     Then -> expect(@result).to.deep.eq
+      name: undefined
       calls: []
       callCount: 0
       description: "This is not a test double."

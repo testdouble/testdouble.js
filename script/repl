@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 require('coffee-script/register')
+require('babel-core/register')
 var repl = require('repl')
 
 console.log('💚  Let\'s play with testdouble.js!  💚')

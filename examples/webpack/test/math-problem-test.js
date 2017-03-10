@@ -20,7 +20,7 @@ describe('MathProblem', function(){
   var subject, createRandomProblem, FakeSavesProblem, submitProblem;
   beforeEach(function(){
     createRandomProblem = td.function('createRandomProblem')
-    FakeSavesProblem = td.object(SavesProblem)
+    FakeSavesProblem = td.constructor(SavesProblem)
     submitProblem = td.function('submitProblem')
     subject = new MathProblem(createRandomProblem, new FakeSavesProblem(), submitProblem)
   })
