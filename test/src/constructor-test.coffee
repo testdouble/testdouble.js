@@ -36,6 +36,7 @@ describe 'td.constructor', ->
   Then -> @fakeType.toString() == '[test double constructor for "Thing"]'
   Then -> @fakeType.prototype.foo.toString() == '[test double for "Thing#foo"]'
   Then -> @fakeType.bar.toString() == '[test double for "Thing.bar"]'
+  Then -> @fakeInstance.toString() == '[test double instance of constructor "Thing"]'
 
   # Fake things pass instanceof checks
   Then -> @fakeInstance instanceof Thing
