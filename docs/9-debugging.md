@@ -20,10 +20,11 @@ The examples in this document assume you've aliased `testdouble` to `td`.
 
 
 ``` javascript
-var myTestDouble = td.function()
+var myTestDouble = td.function('.someFunction')
 
 td.explain(myTestDouble) /*
   {
+    name: '.someFunction',
     callCount: 0,
     calls: [],
     description: 'This test double has 0 stubbings and 0 invocations.'
@@ -40,9 +41,10 @@ td.when(myTestDouble(5)).thenReturn(10)
 
 td.explain(myTestDouble) /*
   {
+    name: 'someFunction',
     callCount: 0,
     calls: [],
-    description: 'This test double has 1 stubbings and 0 invocations.
+    description: 'This test double `.someFunction` has 1 stubbings and 0 invocations.
 
       Stubbings:
       - when called with `(5)`, then return `10`.'
@@ -60,6 +62,7 @@ myTestDouble(7) // undefined
 
 td.explain(myTestDouble) /*
   {
+    name: '.someFunction',
     callCount: 1,
     calls: [ { args: [7], context: window } ],
     description: 'This test double has 1 stubbings and 1 invocations.
