@@ -105,6 +105,60 @@ describe '.verify', ->
           - called with `(55)`.
       """
 
+  context 'using deep matchers', ->
+
+    context 'single level', ->
+      When -> @testDouble({ value: 55 })
+
+      context 'satisfied', ->
+        Then -> shouldNotThrow(=> td.verify(@testDouble({ value: td.matchers.isA(Number) })))
+
+      context 'unsatisfied', ->
+        Then -> shouldThrow (=> td.verify(@testDouble({ value: td.matchers.isA(String) }))), """
+      Unsatisfied verification on test double.
+
+        Wanted:
+          - called with `({ value: isA(String) })`.
+
+        But was actually called:
+          - called with `({ value: 55 })`.
+      """
+
+    context 'deeply nested', ->
+      When -> @testDouble({ value: { value: 55 } })
+
+      context 'satisfied', ->
+        Then -> shouldNotThrow(=> td.verify(@testDouble({ value: { value: td.matchers.isA(Number) } })))
+
+      context 'unsatisfied', ->
+        Then -> shouldThrow (=> td.verify(@testDouble({ value: { value: td.matchers.isA(String) } }))), """
+      Unsatisfied verification on test double.
+
+        Wanted:
+          - called with `({ value: { value: isA(String) } })`.
+
+        But was actually called:
+          - called with `({ value: { value: 55 } })`.
+      """
+
+    context 'array values', ->
+      When -> @testDouble([ 55 ])
+
+      context 'satisfied', ->
+        Then -> shouldNotThrow(=> td.verify(@testDouble([ td.matchers.isA(Number) ])))
+
+      context 'unsatisfied', ->
+        Then -> shouldThrow (=> td.verify(@testDouble([ td.matchers.isA(String) ]))), """
+      Unsatisfied verification on test double.
+
+        Wanted:
+          - called with `([ isA(String) ])`.
+
+        But was actually called:
+          - called with `([ 55 ])`.
+      """
+
+
   describe 'configuration', ->
 
     describe 'ignoring extra arguments (more thoroughly tested via when())', ->
