@@ -7,6 +7,7 @@ describe "td.*", ->
     Then -> td.function == requireSource('function')
     Then -> td.func == requireSource('function')
     Then -> td.object == requireSource('object')
+    Then -> td.constructor == requireSource('constructor')
     Then -> td.matchers == requireSource('matchers')
     Then -> td.callback == requireSource('matchers/callback')
     Then -> td.explain == requireSource('explain')
