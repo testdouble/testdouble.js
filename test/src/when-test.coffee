@@ -39,6 +39,13 @@ describe 'when', ->
     Then -> @testDouble(44, 5) == undefined
     Then -> @testDouble(88, "five") == undefined
 
+  describe 'using buried matcher', ->
+    Given -> td.when(@testDouble({ key: td.matchers.isA(String) })).thenReturn("yay")
+    Then -> @testDouble({ key: "testytest" }) == "yay"
+    Then -> @testDouble({ key: true }) == undefined
+    Then -> @testDouble({}) == undefined
+    Then -> @testDouble(42) == undefined
+
   describe 'stubbing sequential returns', ->
     context 'a single stubbing', ->
       Given -> td.when(@testDouble()).thenReturn(10,9)
