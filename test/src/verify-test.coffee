@@ -118,14 +118,14 @@ describe '.verify', ->
       Unsatisfied verification on test double.
 
         Wanted:
-          - called with `({ value: isA(String) })`.
+          - called with `({value: isA(String)})`.
 
-        But was actually called:
-          - called with `({ value: 55 })`.
+        All calls of the test double, in order were:
+          - called with `({value: 55})`.
       """
 
     context 'deeply nested', ->
-      When -> @testDouble({ value: { value: 55 } })
+      When -> @testDouble({value:{ value: 55 }})
 
       context 'satisfied', ->
         Then -> shouldNotThrow(=> td.verify(@testDouble({ value: { value: td.matchers.isA(Number) } })))
@@ -135,10 +135,10 @@ describe '.verify', ->
       Unsatisfied verification on test double.
 
         Wanted:
-          - called with `({ value: { value: isA(String) } })`.
+          - called with `({value: {value: isA(String)}})`.
 
-        But was actually called:
-          - called with `({ value: { value: 55 } })`.
+        All calls of the test double, in order were:
+          - called with `({value: {value: 55}})`.
       """
 
     context 'array values', ->
@@ -152,10 +152,10 @@ describe '.verify', ->
       Unsatisfied verification on test double.
 
         Wanted:
-          - called with `([ isA(String) ])`.
+          - called with `([isA(String)])`.
 
-        But was actually called:
-          - called with `([ 55 ])`.
+        All calls of the test double, in order were:
+          - called with `([55])`.
       """
 
 

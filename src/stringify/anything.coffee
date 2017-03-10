@@ -15,3 +15,8 @@ module.exports = (anything) ->
       indent: '  '
       singleQuotes: false
       inlineCharacterLimit: 65
+      transform: (obj, prop, originalResult) ->
+        if obj[prop]?.__matches?
+          obj[prop].__name
+        else
+          originalResult

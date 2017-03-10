@@ -14,6 +14,8 @@ module.exports = (config) ->
       __matches: (actualArg) ->
         config.matches(matcherArgs, actualArg)
 
+    matcherInstance.toString = ->  matcherInstance.__name
+
     config.onCreate?(matcherInstance, matcherArgs)
 
     return matcherInstance
