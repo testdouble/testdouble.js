@@ -3,6 +3,7 @@ tdFunction = require('./function')
 tdConstructor = require('./constructor')
 cloneWithNonEnumerableProperties = require('./util/clone-with-non-enumerable-properties')
 isConstructor = require('./replace/is-constructor')
+log = require('./log')
 
 DEFAULT_OPTIONS = excludeMethods: ['then']
 
@@ -11,6 +12,8 @@ module.exports = (nameOrType, config) ->
     createTestDoublesForPlainObject(nameOrType)
   else if _.isArray(nameOrType)
     createTestDoublesForFunctionNames(nameOrType)
+  else if isConstructor(nameOrType)
+    blowUpForConstructors()
   else
     createTestDoubleViaProxy(nameOrType, withDefaults(config))
 
@@ -64,3 +67,10 @@ nameOf = (nameOrType) ->
     nameOrType
   else
     ''
+
+blowUpForConstructors = ->
+  log.error "td.object", """
+    Constructor functions are not valid arguments to `td.object` (as of
+    testdouble@2.0.0). Please use the `td.constructor()` method instead for
+    creating fake constructors.
+    """

@@ -1,8 +1,15 @@
 _ = require('./util/lodash-wrap')
 tdFunction = require('./function')
+isConstructor = require('./replace/is-constructor')
 getAllCustomPrototypalFunctionNames = require('./util/get-all-custom-prototypal-function-names')
 
-module.exports = (type) ->
+module.exports = (typeOrNames) ->
+  if isConstructor(typeOrNames)
+    fakeConstructorFromType(typeOrNames)
+  else
+    fakeConstructorFromNames(typeOrNames)
+
+fakeConstructorFromType = (type) ->
   name = type.name || ''
   class TestDoubleConstructor extends type
     constructor: tdFunction("#{name} constructor")
@@ -16,9 +23,22 @@ module.exports = (type) ->
     _.each getAllCustomPrototypalFunctionNames(type), (funcName) ->
       fakeType.prototype[funcName] = tdFunction("#{name}##{funcName}")
 
-    fakeType.toString = ->
-      "[test double constructor#{if name then " for \"#{name}\"" else ''}]"
+    addToStringMethodsToFakeType(fakeType, name)
 
-    fakeType.prototype.toString = ->
-      "[test double instance of constructor#{if name then " \"#{name}\"" else ''}]"
+fakeConstructorFromNames = (funcNames) ->
+  class TestDoubleConstructor
+
+  _.each funcNames, (funcName) ->
+    TestDoubleConstructor.prototype[funcName] = tdFunction("##{funcName}")
+
+  addToStringMethodsToFakeType(TestDoubleConstructor)
+
+  return TestDoubleConstructor
+
+addToStringMethodsToFakeType = (fakeType, name) ->
+  fakeType.toString = ->
+    "[test double constructor#{if name then " for \"#{name}\"" else ''}]"
+
+  fakeType.prototype.toString = ->
+    "[test double instance of constructor#{if name then " \"#{name}\"" else ''}]"
 

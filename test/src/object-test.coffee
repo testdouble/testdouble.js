@@ -19,6 +19,14 @@ describe 'td.object', ->
     And -> @testDouble.toString() == '[test double object]'
     And -> @testDouble.bam.toString() == '[test double for ".bam"]'
 
+  describe 'passing a constructor function to td.object erroneously (1.x)', ->
+    Given -> @someConstructor = class LolTypes
+      foo: ->
+    When -> try td.object(@someConstructor) catch e then @result = e
+    Then -> expect(@result.message).to.contain(
+      "Please use the `td.constructor()` method instead")
+
+
   if global.Proxy?
     describe 'creating a proxy object (ES2015; only supported in FF + Edge atm)', ->
       Given -> @testDouble = td.object('Thing')
