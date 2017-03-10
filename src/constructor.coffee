@@ -20,6 +20,6 @@ module.exports = (type) ->
       "[test double constructor#{if name then " for \"#{name}\"" else ''}]"
 
     # TODO: add a prototype one too
-    #fakeType.toString = ->
-      #"[test double constructor#{if name then " for \"#{name}\"" else ''}]"
+    #fakeType.prototype.toString = ->
+      #"[test double instance of constructor#{if name then " for \"#{name}\"" else ''}]"
 
