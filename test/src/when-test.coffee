@@ -39,7 +39,7 @@ describe 'when', ->
     Then -> @testDouble(44, 5) == undefined
     Then -> @testDouble(88, "five") == undefined
 
-  describe 'using deep matcher', ->
+  describe 'using deep matchers', ->
     context 'single level', ->
       Given -> td.when(@testDouble(key: td.matchers.isA(String))).thenReturn("yay")
       Then -> @testDouble(key: "testytest") == "yay"
@@ -59,6 +59,16 @@ describe 'when', ->
       Then -> @testDouble([5, 6]) == undefined
       Then -> @testDouble([5]) == undefined
       Then -> @testDouble([]) == undefined
+
+    context 'arguments with circular structures', ->
+      Given -> @arg =
+        foo: 'bar'
+      Given -> @arg.baz = @arg
+      Given -> td.when(@testDouble(@arg)).thenReturn("yay")
+      Then -> @testDouble(@arg) == "yay"
+      Then -> @testDouble('no') == undefined
+
+
 
   describe 'stubbing sequential returns', ->
     context 'a single stubbing', ->
