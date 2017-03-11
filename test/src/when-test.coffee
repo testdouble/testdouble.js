@@ -41,26 +41,24 @@ describe 'when', ->
 
   describe 'using deep matcher', ->
     context 'single level', ->
-      Given -> td.when(@testDouble({ key: td.matchers.isA(String) })).thenReturn("yay")
-      Then -> @testDouble({ key: "testytest" }) == "yay"
-      Then -> @testDouble({ key: true }) == undefined
+      Given -> td.when(@testDouble(key: td.matchers.isA(String))).thenReturn("yay")
+      Then -> @testDouble(key: "testytest") == "yay"
+      Then -> @testDouble(key: 42) == undefined
       Then -> @testDouble({}) == undefined
-      Then -> @testDouble(42) == undefined
+      Then -> @testDouble("i am a string") == undefined
 
     context 'deeply nested', ->
-      Given -> td.when(@testDouble({ key: { key: td.matchers.isA(String) } })).thenReturn("yay")
-      Then -> @testDouble({ key: { key: "testytest" } }) == "yay"
-      Then -> @testDouble({ key: { key: true } }) == undefined
-      Then -> @testDouble({ key: "testytest" }) == undefined
-      Then -> @testDouble({}) == undefined
-      Then -> @testDouble(42) == undefined
+      Given -> td.when(@testDouble(a: {b: td.matchers.isA(String)})).thenReturn("yay")
+      Then -> @testDouble(a: {b: "testytest"}) == "yay"
+      Then -> @testDouble(a: {b: 42}) == undefined
+      Then -> @testDouble(a: "testytest") == undefined
 
     context 'array values', ->
-      Given -> td.when(@testDouble([ td.matchers.isA(String) ])).thenReturn("yay")
-      Then -> @testDouble([ "testytest" ]) == "yay"
-      Then -> @testDouble([ true ]) == undefined
+      Given -> td.when(@testDouble([5, td.matchers.isA(String)])).thenReturn("yay")
+      Then -> @testDouble([5, "testytest"]) == "yay"
+      Then -> @testDouble([5, 6]) == undefined
+      Then -> @testDouble([5]) == undefined
       Then -> @testDouble([]) == undefined
-      Then -> @testDouble(42) == undefined
 
   describe 'stubbing sequential returns', ->
     context 'a single stubbing', ->
