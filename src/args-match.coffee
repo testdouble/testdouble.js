@@ -1,6 +1,5 @@
 _ = require('./util/lodash-wrap')
 
-
 module.exports = (expectedArgs, actualArgs, config) ->
   return false if arityMismatch(expectedArgs, actualArgs, config)
   if config?.allowMatchers != false
@@ -18,12 +17,9 @@ equalsWithMatchers = (expectedArgs, actualArgs, config) ->
 argumentMatchesExpectation = (expectedArg, actualArg, config) ->
   if matcher = matcherFor(expectedArg)
     matcher(actualArg)
-  else if _.isArray(expectedArg) && _.isArray(actualArg)
-    !arityMismatch(expectedArg, actualArg, config) && equalsWithMatchers(expectedArg, actualArg, config)
-  else if _.isPlainObject(expectedArg) && _.isPlainObject(actualArg)
-    (Object.keys(expectedArg).length == Object.keys(actualArg).length || config.ignoreExtraArgs) && equalsWithMatchers(expectedArg, actualArg, config)
   else
-    _.isEqual(expectedArg, actualArg)
+    _.isEqualWith expectedArg, actualArg, (expectedEl, actualEl) ->
+      matcherFor(expectedEl)?(actualEl)
 
 matcherFor = (expectedArg) ->
   if _.isFunction(expectedArg?.__matches)
