@@ -538,6 +538,83 @@ nextToken(3) // 'bar'
 nextToken(3) // 'foo'
 ```
 
+#### defer
+
+[Note: you probably don't need this option. Using it everywhere smells of overly
+defensive specifications.]
+
+By default, callback stubbings (whether configured via the `td.callback` matcher
+or by invoking `thenCallback`) are invoked synchronously. Since testdouble.js is
+designed for isolated unit tests, this is usually what you want, because
+comprehending and troubleshooting synchronous test scripts will always be much
+simpler than asynchronous ones. However, in the event that you want to ensure
+the subject isn't inadvertently relying on this synchronous execution of
+callbacks, you can ensure those callbacks are scheduled to a later execution
+stack by setting the `defer` option to `true`.
+
+Take this example of an erroneously passing test:
+
+```js
+// Subject under test
+function printBalance (id, fetchBalance, print) {
+  var balance;
+  fetchBalance(id, function (er, amount) {
+    balance = amount
+  })
+  print('Your balance is ' + balance)
+}
+
+// Test body
+var fetchBalance = td.function('.fetchBalance')
+var print = td.function('.print')
+td.when(fetchBalance(42)).thenCallback(null, 1337)
+
+printBalance(42, fetchBalance, print)
+
+td.verify(print('Your balance is 1337'))
+```
+
+The above passes, but suppose that in practice `fetchBalance` is going to
+invoke the callback asynchronously—if that's the case, then this passing test
+will be lying to us! To guard against this category of test smells, you can set
+the `defer` option when stubbing the async dependency, like so:
+
+```
+td.when(fetchBalance(42), {defer: true}).thenCallback(null, 1337)
+```
+
+Now the test above will fail—shiny! Keep in mind that you'll have to make the
+overall test asynchronous (e.g. a `done` callback in Mocha/Jasmine) when using
+the `defer` option.
+
+[Note: while this option is also supported for the Promise stubbings
+`thenResolve` and `thenReject`, all standard Promise implementations will
+already ensure your event handlers will fire asynchronously on a later call
+stack.]
+
+#### delay
+
+[Note: you _really_ probably don't need this. You might need `defer` above, but
+only reach for this `delay` option when your subject's behavior depends on the
+order in which various async operations are completed.]
+
+When using `td.callback`, `thenCallback`, `thenResolve`, or `thenReject`, you
+can use the `delay` option to wait a set number of milliseconds before the
+operation completes.
+
+Here's a quick and silly example of what this option entails:
+
+```js
+var fetch td.function('.fetch')
+td.when(fetch('/A'), {delay: 20}).thenCallback(null, 1)
+td.when(fetch('/B'), {delay: 10}).thenCallback(null, 2)
+td.when(fetch('/C'), {delay: 5}).thenResolve(3)
+
+fetch('/A', function (er, result) {}) // will be invoked 3rd
+fetch('/B', function (er, result) {}) // will be invoked 2nd
+fetch('/C').then(function (result) {}) // will be invoked 1st
+```
+
 ## Congratulations!
 
 And that's about all there is to say about stubbing. Great news, because the

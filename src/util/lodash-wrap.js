@@ -2,6 +2,8 @@ export {
   assign,
   capitalize,
   clone,
+  delay,
+  defer,
   each,
   every,
   extend,

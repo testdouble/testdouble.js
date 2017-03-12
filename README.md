@@ -109,6 +109,8 @@ Here's a rough outline:
   10. [Configuring stubbings](docs/5-stubbing-results.md#configuring-stubbings)
     1. [ignoreExtraArgs](docs/5-stubbing-results.md#ignoreextraargs)
     2. [times](docs/5-stubbing-results.md#times)
+    3. [times](docs/5-stubbing-results.md#defer)
+    4. [times](docs/5-stubbing-results.md#delay)
 6. [Verifying invocations](docs/6-verifying-invocations.md#verifying-interactions)
   1. [td.verify() API](docs/6-verifying-invocations.md#tdverify)
   2. [equality argument matching](docs/6-verifying-invocations.md#arguments)
