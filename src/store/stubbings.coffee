@@ -23,7 +23,6 @@ stubbingFor = (testDouble, actualArgs) ->
     isSatisfied(stubbing, actualArgs)
 
 executePlan = (stubbing, actualArgs) ->
-  Promise = config().promiseConstructor
   value = stubbedValueFor(stubbing)
   stubbing.callCount += 1
   invokeCallbackFor(stubbing, actualArgs)
@@ -31,19 +30,15 @@ executePlan = (stubbing, actualArgs) ->
     when "thenReturn" then value
     when "thenDo" then value(actualArgs...)
     when "thenThrow" then throw value
-    when "thenResolve"
-      ensurePromise(Promise)
-      new Promise((resolve) -> resolve(value))
-    when "thenReject"
-      ensurePromise(Promise)
-      new Promise((resolve, reject) -> reject(value))
+    when "thenResolve" then createPromise(stubbing, value, true)
+    when "thenReject" then createPromise(stubbing, value, false)
 
 invokeCallbackFor = (stubbing, actualArgs) ->
   return unless _.some(stubbing.args, callback.isCallback)
   _.each stubbing.args, (expectedArg, i) ->
     return unless callback.isCallback(expectedArg)
     args = callbackArgs(stubbing, expectedArg)
-    callCallback(stubbing.config, actualArgs[i], args)
+    callCallback(stubbing, actualArgs[i], args)
 
 callbackArgs = (stubbing, expectedArg) ->
   if expectedArg.args?
@@ -53,13 +48,21 @@ callbackArgs = (stubbing, expectedArg) ->
   else
     []
 
-callCallback = (config, callback, args) ->
-  if config.defer
+callCallback = (stubbing, callback, args) ->
+  if stubbing.config.delay
+    _.delay(callback, stubbing.config.delay, args...)
+  else if stubbing.config.defer
     _.defer(callback, args...)
-  else if config.delay
-    _.delay(callback, config.delay, args...)
   else
     callback(args...)
+
+createPromise = (stubbing, value, willResolve)  ->
+  Promise = config().promiseConstructor
+  ensurePromise(Promise)
+  return new Promise (resolve, reject) ->
+    callCallback stubbing, ->
+      if willResolve then resolve(value) else reject(value)
+    , [value]
 
 stubbedValueFor = (stubbing) ->
   if stubbing.callCount < stubbing.stubbedValues.length

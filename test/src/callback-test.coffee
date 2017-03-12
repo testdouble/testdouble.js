@@ -68,21 +68,31 @@ describe 'td.callback', ->
 
 
       describe 'using the delay option', ->
-        it 'does stuff in the right order', (done) ->
+        it 'wraps callbacks and promises in the right order', (done) ->
           td.when(@testDouble('/A'), {delay: 20}).thenCallback(null, 'B')
           td.when(@testDouble('/C'), {delay: 10}).thenCallback(null, 'D')
+          td.when(@testDouble('/E'), {delay: 15}).thenResolve('F')
+          td.when(@testDouble('/G'), {delay: 5}).thenReject('H')
           @results = []
 
           @testDouble '/A', (er, result) =>
             @results.push(result)
-            done() if @results.length == 2
+            done() if @results.length == 4
 
           @testDouble '/C', (er, result) =>
             @results.push(result)
-            done() if @results.length == 2
+            done() if @results.length == 4
+
+          @testDouble('/E').then (result) =>
+            @results.push(result)
+            done() if @results.length == 4
+
+          @testDouble('/G').catch (error) =>
+            @results.push(error)
+            done() if @results.length == 4
 
           @invokedSynchronously = true if @results.length > 0
 
         afterEach ->
-          expect(@results).to.deep.eq(['D','B'])
+          expect(@results).to.deep.eq(['H', 'D', 'F', 'B'])
           expect(@invokedSynchronously).not.to.eq(true)
