@@ -2,6 +2,7 @@ _ = require('./util/lodash-wrap')
 store = require('./store')
 calls = require('./store/calls')
 stubbings = require('./store/stubbings')
+copyProperties = require('./util/copy-properties')
 
 module.exports = (nameOrFunc, __optionalName) ->
   if _.isFunction(nameOrFunc)
@@ -10,7 +11,7 @@ module.exports = (nameOrFunc, __optionalName) ->
     createTestDoubleNamed(nameOrFunc || __optionalName)
 
 createTestDoubleForFunction = (func, optionalName) ->
-  _.tap createTestDoubleNamed(func.name || optionalName), (testDouble) ->
+  _.tap copyProperties(func, createTestDoubleNamed(func.name || optionalName)), (testDouble) ->
     _.each _.functions(func), (funcName) ->
       testDouble[funcName] = createTestDoubleNamed("#{func.name || optionalName || ''}.#{funcName}")
 

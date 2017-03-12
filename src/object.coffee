@@ -1,7 +1,7 @@
 _ = require('./util/lodash-wrap')
 tdFunction = require('./function')
 tdConstructor = require('./constructor')
-cloneWithNonEnumerableProperties = require('./util/clone-with-non-enumerable-properties')
+copyProperties = require('./util/copy-properties')
 isConstructor = require('./replace/is-constructor')
 log = require('./log')
 
@@ -27,7 +27,7 @@ createTestDoublesForPlainObject = (obj) ->
       tdFunction(".#{functionName}")
 
     memo
-  , cloneWithNonEnumerableProperties(obj)
+  , copyProperties(obj, _.clone(obj))
 
 createTestDoublesForFunctionNames = (names) ->
   _.reduce names, (memo, functionName) ->
