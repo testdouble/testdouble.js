@@ -57,7 +57,7 @@ callCallback = (config, callback, args) ->
   if config.defer
     _.defer(callback, args...)
   else if config.delay
-    _.delay(callback, delay, args...)
+    _.delay(callback, config.delay, args...)
   else
     callback(args...)
 

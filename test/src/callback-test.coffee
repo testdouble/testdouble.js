@@ -51,38 +51,38 @@ describe 'td.callback', ->
         Then -> @result == 'o_O'
 
     context 'callback is asynchronous', ->
-      When (done) -> @returnValue = @testDouble '/foo', (er, results) =>
-        @callbackInvoked = true
-        @er = er
-        @results = results
-        done()
+      describe 'using the defer option', ->
+        it 'does not invoke synchronously', (done) ->
+          td.when(@testDouble('/A'), {defer: true}).thenCallback(null, 'B')
 
-      context 'DELAYED VERBOSE: using td.callback() as a matcher with a thenReturn chain', ->
-        Given -> td.when(@testDouble('/foo', td.callback(null, 'some results')), {delay: 10}).thenReturn('pandas')
-        Then -> @er == null
-        And -> @results == 'some results'
-        And -> @returnValue == 'pandas'
+          @testDouble '/A', (er, result) =>
+            @callbackInvoked = true
+            @result = result
+            done()
+          @invokedSynchronously = true if @result?
 
-      context 'DEFERRED VERBOSE: using td.callback() as a matcher with a thenReturn chain', ->
-        Given -> td.when(@testDouble('/foo', td.callback(null, 'some results')), {defer: true}).thenReturn('pandas')
-        Then -> @er == null
-        And -> @results == 'some results'
-
-      context 'DELAYED TERSE: use thenCallback chain with td.callback implied as last arg', ->
-        Given -> td.when(@testDouble('/foo'), {delay: 10}).thenCallback(null, 'some results')
-        Then -> @callbackInvoked = true
-        And -> @er == null
-        And -> @results == 'some results'
-        And -> @returnValue == undefined
-
-      context 'DEFERRED TERSE: use thenCallback chain with td.callback implied as last arg', ->
-        Given -> td.when(@testDouble('/foo'), {defer: true}).thenCallback(null, 'some results')
-        Then -> @callbackInvoked = true
-        And -> @er == null
-        And -> @results == 'some results'
-        And -> @returnValue == undefined
+        afterEach ->
+          expect(@callbackInvoked).to.eq(true)
+          expect(@result).to.eq('B')
+          expect(@invokedSynchronously).not.to.eq(true)
 
 
+      describe 'using the delay option', ->
+        it 'does stuff in the right order', (done) ->
+          td.when(@testDouble('/A'), {delay: 20}).thenCallback(null, 'B')
+          td.when(@testDouble('/C'), {delay: 10}).thenCallback(null, 'D')
+          @results = []
 
-  describe 'verify???? what would that mean', ->
+          @testDouble '/A', (er, result) =>
+            @results.push(result)
+            done() if @results.length == 2
 
+          @testDouble '/C', (er, result) =>
+            @results.push(result)
+            done() if @results.length == 2
+
+          @invokedSynchronously = true if @results.length > 0
+
+        afterEach ->
+          expect(@results).to.deep.eq(['D','B'])
+          expect(@invokedSynchronously).not.to.eq(true)
