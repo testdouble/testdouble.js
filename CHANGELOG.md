@@ -1,5 +1,21 @@
 # Change Log
 
+## [v2.0.0-pre.4](https://github.com/testdouble/testdouble.js/tree/v2.0.0-pre.4) (2017-03-12)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v2.0.0-pre.3...v2.0.0-pre.4)
+
+**Closed issues:**
+
+- How can I write a test for such situation? [\#199](https://github.com/testdouble/testdouble.js/issues/199)
+- stub also verified warning when using ignoreExtraArgs [\#181](https://github.com/testdouble/testdouble.js/issues/181)
+
+**Merged pull requests:**
+
+- Create test double functions and copy/fake their properties [\#204](https://github.com/testdouble/testdouble.js/pull/204) ([searls](https://github.com/searls))
+- Support deep matchers [\#203](https://github.com/testdouble/testdouble.js/pull/203) ([searls](https://github.com/searls))
+- introduce td.constructor\(\) as top-level API sibling to td.object\(\) & td.function\(\) [\#201](https://github.com/testdouble/testdouble.js/pull/201) ([searls](https://github.com/searls))
+- Allow Babel compilation [\#197](https://github.com/testdouble/testdouble.js/pull/197) ([searls](https://github.com/searls))
+- Improves warning when verifying a stub [\#196](https://github.com/testdouble/testdouble.js/pull/196) ([samjonester](https://github.com/samjonester))
+
 ## [v2.0.0-pre.3](https://github.com/testdouble/testdouble.js/tree/v2.0.0-pre.3) (2017-03-06)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v2.0.0-pre.2...v2.0.0-pre.3)
 
@@ -119,6 +135,10 @@
 
 ## [v1.9.1](https://github.com/testdouble/testdouble.js/tree/v1.9.1) (2016-12-03)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.9.0...v1.9.1)
+
+**Implemented enhancements:**
+
+- td.replace for functions that have additional function properties [\#99](https://github.com/testdouble/testdouble.js/issues/99)
 
 **Closed issues:**
 
