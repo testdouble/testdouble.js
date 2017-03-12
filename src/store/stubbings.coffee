@@ -42,8 +42,8 @@ invokeCallbackFor = (stubbing, actualArgs) ->
   return unless _.some(stubbing.args, callback.isCallback)
   _.each stubbing.args, (expectedArg, i) ->
     return unless callback.isCallback(expectedArg)
-    args = callbackArgs stubbing, expectedArg
-    callCallback stubbing.config, actualArgs[i], args
+    args = callbackArgs(stubbing, expectedArg)
+    callCallback(stubbing.config, actualArgs[i], args)
 
 callbackArgs = (stubbing, expectedArg) ->
   if expectedArg.args?
@@ -53,10 +53,10 @@ callbackArgs = (stubbing, expectedArg) ->
   else
     []
 
-callCallback = ({defer, delay}, callback, args) ->
-  if defer
+callCallback = (config, callback, args) ->
+  if config.defer
     _.defer(callback, args...)
-  else if delay
+  else if config.delay
     _.delay(callback, delay, args...)
   else
     callback(args...)
