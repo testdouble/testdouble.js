@@ -9,10 +9,10 @@ module.exports = (nameOrFunc, __optionalName) ->
   else
     createTestDoubleNamed(nameOrFunc || __optionalName)
 
-createTestDoubleForFunction = (func, optionalName = '') ->
+createTestDoubleForFunction = (func, optionalName) ->
   _.tap createTestDoubleNamed(func.name || optionalName), (testDouble) ->
     _.each _.functions(func), (funcName) ->
-      testDouble[funcName] = createTestDoubleNamed("#{func.name || optionalName}.#{funcName}")
+      testDouble[funcName] = createTestDoubleNamed("#{func.name || optionalName || ''}.#{funcName}")
 
 createTestDoubleNamed = (name) ->
   _.tap createTestDoubleFunction(), (testDouble) ->
