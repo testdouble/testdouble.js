@@ -3,18 +3,18 @@ _ = require('./util/lodash-wrap')
 module.exports = (expectedArgs, actualArgs, config) ->
   return false if arityMismatch(expectedArgs, actualArgs, config)
   if config?.allowMatchers != false
-    equalsWithMatchers(expectedArgs, actualArgs, config)
+    equalsWithMatchers(expectedArgs, actualArgs)
   else
     _.isEqual(expectedArgs, actualArgs)
 
 arityMismatch =  (expectedArgs, actualArgs, config) ->
   expectedArgs.length != actualArgs.length && !config.ignoreExtraArgs
 
-equalsWithMatchers = (expectedArgs, actualArgs, config) ->
+equalsWithMatchers = (expectedArgs, actualArgs) ->
   _.every expectedArgs, (expectedArg, key) ->
-    argumentMatchesExpectation(expectedArg, actualArgs[key], config)
+    argumentMatchesExpectation(expectedArg, actualArgs[key])
 
-argumentMatchesExpectation = (expectedArg, actualArg, config) ->
+argumentMatchesExpectation = (expectedArg, actualArg) ->
   if matcher = matcherFor(expectedArg)
     matcher(actualArg)
   else
