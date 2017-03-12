@@ -15,6 +15,7 @@ export {
   isArray,
   isBoolean,
   isEqual,
+  isEqualWith,
   isFunction,
   isNumber,
   isPlainObject,

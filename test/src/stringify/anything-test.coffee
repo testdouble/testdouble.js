@@ -12,6 +12,11 @@ describe 'stringify/anything', ->
   context 'short strings of objects should be one-lined', ->
     Then -> expect(@subject({userId: 42, name: 'Jane'})).to.eq('{userId: 42, name: "Jane"}')
 
+  context 'matchers', ->
+    Then -> @subject(td.matchers.isA(Number)) == 'isA(Number)'
+    Then -> expect(@subject({val: td.matchers.isA(Number)})).
+      to.eq('{val: isA(Number)}')
+
   context 'long strings of objects should be multi-lined', ->
     Given -> @object =
       userId: 42,

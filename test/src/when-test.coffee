@@ -39,6 +39,37 @@ describe 'when', ->
     Then -> @testDouble(44, 5) == undefined
     Then -> @testDouble(88, "five") == undefined
 
+  describe 'using deep matchers', ->
+    context 'single level', ->
+      Given -> td.when(@testDouble(key: td.matchers.isA(String))).thenReturn("yay")
+      Then -> @testDouble(key: "testytest") == "yay"
+      Then -> @testDouble(key: 42) == undefined
+      Then -> @testDouble({}) == undefined
+      Then -> @testDouble("i am a string") == undefined
+
+    context 'deeply nested', ->
+      Given -> td.when(@testDouble(a: {b: td.matchers.isA(String)})).thenReturn("yay")
+      Then -> @testDouble(a: {b: "testytest"}) == "yay"
+      Then -> @testDouble(a: {b: 42}) == undefined
+      Then -> @testDouble(a: "testytest") == undefined
+
+    context 'array values', ->
+      Given -> td.when(@testDouble([5, td.matchers.isA(String)])).thenReturn("yay")
+      Then -> @testDouble([5, "testytest"]) == "yay"
+      Then -> @testDouble([5, 6]) == undefined
+      Then -> @testDouble([5]) == undefined
+      Then -> @testDouble([]) == undefined
+
+    context 'arguments with circular structures', ->
+      Given -> @arg =
+        foo: 'bar'
+      Given -> @arg.baz = @arg
+      Given -> td.when(@testDouble(@arg)).thenReturn("yay")
+      Then -> @testDouble(@arg) == "yay"
+      Then -> @testDouble('no') == undefined
+
+
+
   describe 'stubbing sequential returns', ->
     context 'a single stubbing', ->
       Given -> td.when(@testDouble()).thenReturn(10,9)

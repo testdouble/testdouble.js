@@ -48,7 +48,9 @@
     "prepublish": "yarn run compile"
   },
   "babel": {
-    "presets": ["env"]
+    "presets": [
+      "env"
+    ]
   },
   "browser": {
     "./lib/replace/module.js": "./lib/replace/module.browser.js",
@@ -57,7 +59,7 @@
   "dependencies": {
     "lodash": "^4.15.0",
     "quibble": "^0.4.0",
-    "stringify-object": "^2.4.0"
+    "stringify-object-es5": "^2.5.0"
   },
   "devDependencies": {
     "babel-cli": "^6.23.0",
@@ -77,7 +79,7 @@
     "testem": "^0.9.4",
     "typescript": "^2.1.4"
   },
-  "directories":{
+  "directories": {
     "doc": "./docs",
     "example": "./examples",
     "lib": "./lib",

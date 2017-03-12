@@ -11,14 +11,15 @@ arityMismatch =  (expectedArgs, actualArgs, config) ->
   expectedArgs.length != actualArgs.length && !config.ignoreExtraArgs
 
 equalsWithMatchers = (expectedArgs, actualArgs) ->
-  _.every expectedArgs, (expectedArg, i) ->
-    argumentMatchesExpectation(expectedArg, actualArgs[i])
+  _.every expectedArgs, (expectedArg, key) ->
+    argumentMatchesExpectation(expectedArg, actualArgs[key])
 
 argumentMatchesExpectation = (expectedArg, actualArg) ->
   if matcher = matcherFor(expectedArg)
     matcher(actualArg)
   else
-    _.isEqual(expectedArg, actualArg)
+    _.isEqualWith expectedArg, actualArg, (expectedEl, actualEl) ->
+      matcherFor(expectedEl)?(actualEl)
 
 matcherFor = (expectedArg) ->
   if _.isFunction(expectedArg?.__matches)
