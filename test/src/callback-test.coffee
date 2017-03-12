@@ -68,6 +68,7 @@ describe 'td.callback', ->
 
 
       describe 'using the delay option', ->
+        return unless typeof Promise == 'function'
         it 'wraps callbacks and promises in the right order', (done) ->
           td.when(@testDouble('/A'), {delay: 20}).thenCallback(null, 'B')
           td.when(@testDouble('/C'), {delay: 10}).thenCallback(null, 'D')
