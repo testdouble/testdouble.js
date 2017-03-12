@@ -1,4 +1,3 @@
-wrapIfNeeded = require('./wrap-if-needed')
 imitate = require('./imitate')
 _ =
   isFunction: require('lodash/isFunction')
@@ -15,7 +14,4 @@ imitatableKeys = (realThing) ->
     _.isFunction(realThing[key])
 
 wrapKey = (realThing) -> (newThing, key) ->
-  _.set(newThing, key, wrapIfNeeded(
-    imitate(realThing[key], '.'+key),
-    realThing[key]
-  ))
+  _.set(newThing, key, imitate(realThing[key], '.'+key), realThing[key])
