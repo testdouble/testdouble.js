@@ -1,6 +1,6 @@
 _ = require('../util/lodash-wrap')
 
-stringifyObject = require('stringify-object')
+stringifyObject = require('stringify-object-es5')
 
 module.exports = (anything) ->
   if _.isString(anything)

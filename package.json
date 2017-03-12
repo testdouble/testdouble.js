@@ -59,7 +59,7 @@
   "dependencies": {
     "lodash": "^4.15.0",
     "quibble": "^0.4.0",
-    "stringify-object": "searls/stringify-object#transform-es5"
+    "stringify-object-es5": "^2.5.0"
   },
   "devDependencies": {
     "babel-cli": "^6.23.0",
