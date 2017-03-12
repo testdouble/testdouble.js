@@ -14,14 +14,14 @@ in mind that in practice many developers will lean on `td.replace`, which
 performs this duty on your behalf. Read more about `td.replace` on [its doc
 page](7-replacing-dependencies.md).
 
-## td.function([name])
+## td.function
 
 **Note that `td.func` is available as an alias of `td.function`.**
 
 To create a fake function with test double, we use the `function` function. At its simplest, invoking:
 
 ``` javascript
-var bark = td.function()
+var bark = td.function() // '[test double (unnamed)]'
 ```
 
 `bark` is now a test double function, meaning it can be configured to stub a particular response with `td.when`, its invocations can be verified with `td.verify`, and its current state can be introspected with `td.explain`.
@@ -29,10 +29,31 @@ var bark = td.function()
 To provide yourself with better messages, we recommend assigning a name to the function; this is particularly important whenever a test will have more than one double in use at a time:
 
 ``` javascript
-var woof = td.function('.woof')
+var woof = td.function('.woof') // test double for ".woof"
 ```
 
-## td.object()
+### Creating a test double function from a real function
+
+If you're replacing an actual function with a test double, you can also pass it
+to `td.function` and all of its properties will be copied over. If any of its
+properties are functions, those functions will be replaced with test double
+functions as well.
+
+```js
+function meow () { throw 'unimplemented' }
+meow.volume = 'loud'
+meow.stop = function () {}
+
+var fakeMeow = td.function(meow) // test double for "meow"
+fakeMeow.volume // 'loud'
+fakeMeow.stop // test double for "meow.stop"
+```
+
+This can be handy when you're replacing a dependency that is a function but also
+has significant properties defined (imagine a module that exports a function as
+well as a synchronous version exposed via a `sync` property).
+
+## td.object
 
 Creating a one-off function is really easy, but often our subjects will depend
 on objects with functions as properties. Because we don't want to encourage the

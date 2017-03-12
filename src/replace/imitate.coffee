@@ -13,6 +13,6 @@ module.exports = (realThing, optionalName) ->
   else if _.isPlainObject(realThing)
     tdObject(realThing)
   else if _.isFunction(realThing)
-    tdFunction(if realThing?.name then realThing.name else optionalName)
+    tdFunction(realThing, optionalName)
   else
     log.error("td.replace", "\"#{optionalName}\" property was found, but test double only knows how to replace functions, constructors, & objects containing functions (its value was #{stringifyAnything(realThing)}).")

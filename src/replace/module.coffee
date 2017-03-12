@@ -9,5 +9,3 @@ module.exports = (path, stub) ->
   fakeThing = imitate(realThing, path)
   quibble(path, fakeThing)
   return fakeThing
-
-
