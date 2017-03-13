@@ -12,7 +12,7 @@ describe 'td.constructor', ->
     Given -> @fakeInstance = new @fakeConstructor('pants')
 
     describe 'the constructor function itself', ->
-      Then -> td.verify(@fakeConstructor('pants'))
+      Then -> td.verify(new @fakeConstructor('pants'))
 
       describe 'stubbing it (with an error, return makes no sense)', ->
         Given -> td.when(new @fakeConstructor('!')).thenThrow('¡')

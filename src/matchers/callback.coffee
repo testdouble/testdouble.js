@@ -2,7 +2,7 @@ _ = require('../util/lodash-wrap')
 
 create = require('./create')
 
-module.exports = callback = create
+module.exports = create
   name: 'callback'
   matches: (matcherArgs, actual) ->
     _.isFunction(actual)
@@ -11,8 +11,8 @@ module.exports = callback = create
     matcherInstance.__testdouble_callback = true
 
 # Make callback itself quack like a matcher for its non-invoked use case.
-callback.__name = 'callback'
-callback.__matches = _.isFunction
+module.exports.__name = 'callback'
+module.exports.__matches = _.isFunction
 
-callback.isCallback = (obj) ->
+module.exports.isCallback = (obj) ->
   obj == callback || obj?.__testdouble_callback == true
