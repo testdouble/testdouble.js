@@ -1,55 +1,15 @@
 # Change Log
 
 ## [v2.0.1](https://github.com/testdouble/testdouble.js/tree/v2.0.1) (2017-03-13)
-[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v2.0.0...v2.0.1)
-
-## [v2.0.0](https://github.com/testdouble/testdouble.js/tree/v2.0.0) (2017-03-13)
-[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v2.0.0-pre.5...v2.0.0)
-
-## [v2.0.0-pre.5](https://github.com/testdouble/testdouble.js/tree/v2.0.0-pre.5) (2017-03-13)
-[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v2.0.0-pre.4...v2.0.0-pre.5)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.11.2...v2.0.1)
 
 **Closed issues:**
 
 - contains not working against IIFE objects [\#192](https://github.com/testdouble/testdouble.js/issues/192)
 - Allow matchers inside objects [\#160](https://github.com/testdouble/testdouble.js/issues/160)
 - Support invoking callbacks with arbitrary timing [\#106](https://github.com/testdouble/testdouble.js/issues/106)
-
-**Merged pull requests:**
-
-- Async callbacks [\#205](https://github.com/testdouble/testdouble.js/pull/205) ([searls](https://github.com/searls))
-
-## [v2.0.0-pre.4](https://github.com/testdouble/testdouble.js/tree/v2.0.0-pre.4) (2017-03-12)
-[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v2.0.0-pre.3...v2.0.0-pre.4)
-
-**Closed issues:**
-
 - How can I write a test for such situation? [\#199](https://github.com/testdouble/testdouble.js/issues/199)
 - stub also verified warning when using ignoreExtraArgs [\#181](https://github.com/testdouble/testdouble.js/issues/181)
-
-**Merged pull requests:**
-
-- Create test double functions and copy/fake their properties [\#204](https://github.com/testdouble/testdouble.js/pull/204) ([searls](https://github.com/searls))
-- Support deep matchers [\#203](https://github.com/testdouble/testdouble.js/pull/203) ([searls](https://github.com/searls))
-- introduce td.constructor\(\) as top-level API sibling to td.object\(\) & td.function\(\) [\#201](https://github.com/testdouble/testdouble.js/pull/201) ([searls](https://github.com/searls))
-- Allow Babel compilation [\#197](https://github.com/testdouble/testdouble.js/pull/197) ([searls](https://github.com/searls))
-- Improves warning when verifying a stub [\#196](https://github.com/testdouble/testdouble.js/pull/196) ([samjonester](https://github.com/samjonester))
-
-## [v2.0.0-pre.3](https://github.com/testdouble/testdouble.js/tree/v2.0.0-pre.3) (2017-03-06)
-[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v2.0.0-pre.2...v2.0.0-pre.3)
-
-## [v2.0.0-pre.2](https://github.com/testdouble/testdouble.js/tree/v2.0.0-pre.2) (2017-03-06)
-[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v2.0.0-pre.1...v2.0.0-pre.2)
-
-**Merged pull requests:**
-
-- Yarn [\#195](https://github.com/testdouble/testdouble.js/pull/195) ([searls](https://github.com/searls))
-
-## [v2.0.0-pre.1](https://github.com/testdouble/testdouble.js/tree/v2.0.0-pre.1) (2017-03-06)
-[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.11.2...v2.0.0-pre.1)
-
-**Closed issues:**
-
 - td.verify not returning true when true [\#191](https://github.com/testdouble/testdouble.js/issues/191)
 - Typing definition for td.object doesn't support constructors with arguments [\#184](https://github.com/testdouble/testdouble.js/issues/184)
 - Replacing methods on `window.location` [\#183](https://github.com/testdouble/testdouble.js/issues/183)
@@ -57,6 +17,13 @@
 
 **Merged pull requests:**
 
+- Async callbacks [\#205](https://github.com/testdouble/testdouble.js/pull/205) ([searls](https://github.com/searls))
+- Create test double functions and copy/fake their properties [\#204](https://github.com/testdouble/testdouble.js/pull/204) ([searls](https://github.com/searls))
+- Support deep matchers [\#203](https://github.com/testdouble/testdouble.js/pull/203) ([searls](https://github.com/searls))
+- introduce td.constructor\(\) as top-level API sibling to td.object\(\) & td.function\(\) [\#201](https://github.com/testdouble/testdouble.js/pull/201) ([searls](https://github.com/searls))
+- Allow Babel compilation [\#197](https://github.com/testdouble/testdouble.js/pull/197) ([searls](https://github.com/searls))
+- Improves warning when verifying a stub [\#196](https://github.com/testdouble/testdouble.js/pull/196) ([samjonester](https://github.com/samjonester))
+- Yarn [\#195](https://github.com/testdouble/testdouble.js/pull/195) ([searls](https://github.com/searls))
 - Creates Better Verification Message [\#194](https://github.com/testdouble/testdouble.js/pull/194) ([samjonester](https://github.com/samjonester))
 - Replace constructors with constructors [\#193](https://github.com/testdouble/testdouble.js/pull/193) ([searls](https://github.com/searls))
 
