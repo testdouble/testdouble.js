@@ -1,5 +1,18 @@
 # Change Log
 
+## [v2.0.0-pre.5](https://github.com/testdouble/testdouble.js/tree/v2.0.0-pre.5) (2017-03-13)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v2.0.0-pre.4...v2.0.0-pre.5)
+
+**Closed issues:**
+
+- contains not working against IIFE objects [\#192](https://github.com/testdouble/testdouble.js/issues/192)
+- Allow matchers inside objects [\#160](https://github.com/testdouble/testdouble.js/issues/160)
+- Support invoking callbacks with arbitrary timing [\#106](https://github.com/testdouble/testdouble.js/issues/106)
+
+**Merged pull requests:**
+
+- Async callbacks [\#205](https://github.com/testdouble/testdouble.js/pull/205) ([searls](https://github.com/searls))
+
 ## [v2.0.0-pre.4](https://github.com/testdouble/testdouble.js/tree/v2.0.0-pre.4) (2017-03-12)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v2.0.0-pre.3...v2.0.0-pre.4)
 
