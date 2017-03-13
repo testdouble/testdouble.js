@@ -1,19 +1,22 @@
 # Change Log
 
 ## [v2.0.1](https://github.com/testdouble/testdouble.js/tree/v2.0.1) (2017-03-13)
-[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.11.2...v2.0.1)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v2.0.0...v2.0.1)
+
+## [v2.0.0](https://github.com/testdouble/testdouble.js/tree/v2.0.0) (2017-03-13)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.11.2...v2.0.0)
 
 **Closed issues:**
 
-- contains not working against IIFE objects [\#192](https://github.com/testdouble/testdouble.js/issues/192)
-- Allow matchers inside objects [\#160](https://github.com/testdouble/testdouble.js/issues/160)
-- Support invoking callbacks with arbitrary timing [\#106](https://github.com/testdouble/testdouble.js/issues/106)
 - How can I write a test for such situation? [\#199](https://github.com/testdouble/testdouble.js/issues/199)
-- stub also verified warning when using ignoreExtraArgs [\#181](https://github.com/testdouble/testdouble.js/issues/181)
+- contains not working against IIFE objects [\#192](https://github.com/testdouble/testdouble.js/issues/192)
 - td.verify not returning true when true [\#191](https://github.com/testdouble/testdouble.js/issues/191)
 - Typing definition for td.object doesn't support constructors with arguments [\#184](https://github.com/testdouble/testdouble.js/issues/184)
 - Replacing methods on `window.location` [\#183](https://github.com/testdouble/testdouble.js/issues/183)
+- stub also verified warning when using ignoreExtraArgs [\#181](https://github.com/testdouble/testdouble.js/issues/181)
 - \[BREAKING\] Return constructor for `td.replace\(\)` [\#166](https://github.com/testdouble/testdouble.js/issues/166)
+- Allow matchers inside objects [\#160](https://github.com/testdouble/testdouble.js/issues/160)
+- Support invoking callbacks with arbitrary timing [\#106](https://github.com/testdouble/testdouble.js/issues/106)
 
 **Merged pull requests:**
 
