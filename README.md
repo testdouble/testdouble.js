@@ -3,13 +3,6 @@
 [![Build Status](https://secure.travis-ci.org/testdouble/testdouble.js.svg)](http://travis-ci.org/testdouble/testdouble.js) [![npmjs](https://img.shields.io/badge/npm-testdouble-red.svg)](https://www.npmjs.com/package/testdouble)
 [![Test Coverage](https://codeclimate.com/github/testdouble/testdouble.js/badges/coverage.svg)](https://codeclimate.com/github/testdouble/testdouble.js/coverage)
 
-**Heads up: master is tracking work-in-progress [testdouble
-2.x](https://github.com/testdouble/testdouble.js/projects/1). If you're using
-the 1.x release, you may want to peruse its [release
-branch](https://github.com/testdouble/testdouble.js/tree/release-1.x) instead.
-To install prerelease versions of testdouble 2.x, `npm install
-testdouble@next`.**
-
 Welcome! Are you writing JavaScript tests and in the market for a mocking library to
 fake out real things for you? testdouble.js is an opinionated, carefully-designed
 test double library maintained by, oddly enough, a software agency that's also
