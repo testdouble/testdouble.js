@@ -33,4 +33,4 @@ module.exports = {
   union: require('lodash/union'),
   uniq: require('lodash/uniq'),
   without: require('lodash/without')
-};
+}

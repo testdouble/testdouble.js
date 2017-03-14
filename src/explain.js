@@ -1,14 +1,14 @@
-let _ = require('./util/lodash-wrap');
+let _ = require('./util/lodash-wrap')
 
-let store = require('./store');
-let callsStore = require('./store/calls');
-let stubbingsStore = require('./store/stubbings');
-let stringifyArgs = require('./stringify/arguments');
+let store = require('./store')
+let callsStore = require('./store/calls')
+let stubbingsStore = require('./store/stubbings')
+let stringifyArgs = require('./stringify/arguments')
 
-module.exports = function(testDouble) {
-  if (store.for(testDouble, false) == null) { return nullDescription(); }
-  let calls = callsStore.for(testDouble);
-  let stubs = stubbingsStore.for(testDouble);
+module.exports = function (testDouble) {
+  if (store.for(testDouble, false) == null) { return nullDescription() }
+  let calls = callsStore.for(testDouble)
+  let stubs = stubbingsStore.for(testDouble)
 
   return {
     name: store.for(testDouble).name,
@@ -19,54 +19,56 @@ module.exports = function(testDouble) {
       stubbingDescription(stubs) +
       callDescription(calls),
     isTestDouble: true
-  };
-};
+  }
+}
 
 var nullDescription = () =>
   ({
     name: undefined,
     callCount: 0,
     calls: [],
-    description: "This is not a test double.",
+    description: 'This is not a test double.',
     isTestDouble: false
   })
-;
 
 var testdoubleDescription = (testDouble, stubs, calls) =>
   `\
 This test double ${stringifyName(testDouble)}has ${stubs.length} stubbings and ${calls.length} invocations.\
 `
-;
 
-var stubbingDescription = function(stubs) {
-  if (stubs.length === 0) { return ""; }
-  return _.reduce(stubs, function(desc, stub) {
-    let plan = (() => { switch (stub.config.plan) {
-      case 'thenCallback': return 'callback';
-      case 'thenResolve': return 'resolve';
-      case 'thenReject': return 'reject';
-      default: return 'return';
-    } })();
-    let args = (() => { switch (stub.config.plan) {
-      case 'thenCallback': return `\`(${stringifyArgs(stub.stubbedValues, ", ")})\``;
-      default: return stringifyArgs(stub.stubbedValues, ", then ", "`");
-    } })();
-    return desc + `\n  - when called with \`(${stringifyArgs(stub.args)})\`, then ${plan} ${args}.`;
+var stubbingDescription = function (stubs) {
+  if (stubs.length === 0) { return '' }
+  return _.reduce(stubs, function (desc, stub) {
+    let plan = (() => {
+      switch (stub.config.plan) {
+        case 'thenCallback': return 'callback'
+        case 'thenResolve': return 'resolve'
+        case 'thenReject': return 'reject'
+        default: return 'return'
+      }
+    })()
+    let args = (() => {
+      switch (stub.config.plan) {
+        case 'thenCallback': return `\`(${stringifyArgs(stub.stubbedValues, ', ')})\``
+        default: return stringifyArgs(stub.stubbedValues, ', then ', '`')
+      }
+    })()
+    return desc + `\n  - when called with \`(${stringifyArgs(stub.args)})\`, then ${plan} ${args}.`
   }
-  , "\n\nStubbings:");
-};
+  , '\n\nStubbings:')
+}
 
-var callDescription = function(calls) {
-  if (calls.length === 0) { return ""; }
+var callDescription = function (calls) {
+  if (calls.length === 0) { return '' }
   return _.reduce(calls, (desc, call) => desc + `\n  - called with \`(${stringifyArgs(call.args)})\`.`
-  , "\n\nInvocations:");
-};
+  , '\n\nInvocations:')
+}
 
-var stringifyName = function(testDouble) {
-  let name;
+var stringifyName = function (testDouble) {
+  let name
   if ((name = store.for(testDouble).name)) {
-    return `\`${name}\` `;
+    return `\`${name}\` `
   } else {
-    return "";
+    return ''
   }
-};
+}

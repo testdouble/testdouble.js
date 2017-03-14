@@ -12,5 +12,4 @@ module.exports = {
   config: require('./config'),
   callback: require('./matchers/callback'),
   version: require('./version')
-};
-
+}

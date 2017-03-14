@@ -1,47 +1,43 @@
-let _ = require('./util/lodash-wrap');
-let tdFunction = require('./function');
-let tdConstructor = require('./constructor');
-let copyProperties = require('./util/copy-properties');
-let isConstructor = require('./replace/is-constructor');
-let log = require('./log');
+let _ = require('./util/lodash-wrap')
+let tdFunction = require('./function')
+let tdConstructor = require('./constructor')
+let copyProperties = require('./util/copy-properties')
+let isConstructor = require('./replace/is-constructor')
+let log = require('./log')
 
-let DEFAULT_OPTIONS = {excludeMethods: ['then']};
+let DEFAULT_OPTIONS = {excludeMethods: ['then']}
 
-module.exports = function(nameOrType, config) {
-  let fakeObject = _.isPlainObject(nameOrType) ?
-    createTestDoublesForPlainObject(nameOrType)
-  : _.isArray(nameOrType) ?
-    createTestDoublesForFunctionNames(nameOrType)
-  : isConstructor(nameOrType) ?
-    blowUpForConstructors()
-  :
-    createTestDoubleViaProxy(nameOrType, withDefaults(config));
+module.exports = function (nameOrType, config) {
+  let fakeObject = _.isPlainObject(nameOrType)
+    ? createTestDoublesForPlainObject(nameOrType)
+  : _.isArray(nameOrType)
+    ? createTestDoublesForFunctionNames(nameOrType)
+  : isConstructor(nameOrType)
+    ? blowUpForConstructors()
+  : createTestDoubleViaProxy(nameOrType, withDefaults(config))
 
-  return addToStringToDouble(fakeObject, nameOrType);
-};
+  return addToStringToDouble(fakeObject, nameOrType)
+}
 
 var createTestDoublesForPlainObject = obj =>
-  _.reduce(_.functions(obj), function(memo, functionName) {
-    memo[functionName] = isConstructor(obj[functionName]) ?
-      tdConstructor(obj[functionName])
-    :
-      tdFunction(`.${functionName}`);
+  _.reduce(_.functions(obj), function (memo, functionName) {
+    memo[functionName] = isConstructor(obj[functionName])
+      ? tdConstructor(obj[functionName])
+    : tdFunction(`.${functionName}`)
 
-    return memo;
+    return memo
   }
   , copyProperties(obj, _.clone(obj)))
-;
 
 var createTestDoublesForFunctionNames = names =>
-  _.reduce(names, function(memo, functionName) {
-    memo[functionName] = tdFunction(`.${functionName}`);
-    return memo;
+  _.reduce(names, function (memo, functionName) {
+    memo[functionName] = tdFunction(`.${functionName}`)
+    return memo
   }
   , {})
-;
 
-var createTestDoubleViaProxy = function(name, config) {
-  let obj, proxy;
+var createTestDoubleViaProxy = function (name, config) {
+  let obj, proxy
   if (typeof Proxy === 'undefined') {
     throw new Error(`\
 The current runtime does not have Proxy support, which is what
@@ -52,40 +48,39 @@ More details here:
 
 Did you mean \`td.object(['${name}'])\`?\
 `
-    );
+    )
   }
 
   return proxy = new Proxy((obj = {}), {
-    get(target, propKey, receiver) {
+    get (target, propKey, receiver) {
       if (!obj.hasOwnProperty(propKey) && !_.includes(config.excludeMethods, propKey)) {
-        obj[propKey] = (proxy[propKey] = tdFunction(`${nameOf(name)}#${propKey}`));
+        obj[propKey] = (proxy[propKey] = tdFunction(`${nameOf(name)}#${propKey}`))
       }
-      return obj[propKey];
+      return obj[propKey]
     }
-  });
-};
+  })
+}
 
-var withDefaults = config => _.extend({}, DEFAULT_OPTIONS, config);
+var withDefaults = config => _.extend({}, DEFAULT_OPTIONS, config)
 
-var addToStringToDouble = function(fakeObject, nameOrType) {
-  let name = nameOf(nameOrType);
-  fakeObject.toString = () => `[test double object${name ? ` for \"${name}\"` : ''}]`;
-  return fakeObject;
-};
+var addToStringToDouble = function (fakeObject, nameOrType) {
+  let name = nameOf(nameOrType)
+  fakeObject.toString = () => `[test double object${name ? ` for \"${name}\"` : ''}]`
+  return fakeObject
+}
 
-var nameOf = function(nameOrType) {
+var nameOf = function (nameOrType) {
   if (_.isString(nameOrType)) {
-    return nameOrType;
+    return nameOrType
   } else {
-    return '';
+    return ''
   }
-};
+}
 
 var blowUpForConstructors = () =>
-  log.error("td.object", `\
+  log.error('td.object', `\
 Constructor functions are not valid arguments to \`td.object\` (as of
 testdouble@2.0.0). Please use the \`td.constructor()\` method instead for
 creating fake constructors.\
 `
   )
-;
