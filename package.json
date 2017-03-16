@@ -24,7 +24,7 @@
     "compile:browser": "browserify . --standalone td --outfile $npm_package_config_build_file -p headerify",
     "compile": "yarn run compile:node && yarn run compile:test && yarn run compile:browser",
     "style": "standard \"./src/**/*\" --fix",
-    "test": "mocha --ui mocha-given --reporter $npm_package_config_mocha_reporter --compilers coffee:coffee-script $EXTRA_MOCHA_ARGS --recursive test/node-helper.coffee test/src",
+    "test": "mocha --ui mocha-given --reporter $npm_package_config_mocha_reporter --compilers js:babel-core/register,coffee:coffee-script $EXTRA_MOCHA_ARGS --recursive test/node-helper.coffee test/src",
     "test:cover:instrument": "istanbul instrument lib -o .coverage/lib",
     "test:cover:run": "EXTRA_MOCHA_ARGS=\"--reporter mocha-istanbul\" COVER=.coverage/lib ISTANBUL_REPORT_DIR=.coverage ISTANBUL_REPORTERS=lcov,html yarn run test",
     "test:cover:report": "codeclimate-test-reporter < .coverage/lcov.info",
