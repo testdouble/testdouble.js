@@ -1,5 +1,4 @@
 let _ = require('../util/lodash-wrap')
-
 let stringifyObject = require('stringify-object-es5')
 
 module.exports = function (anything) {
@@ -9,7 +8,7 @@ module.exports = function (anything) {
     } else {
       return `"${anything.replace(new RegExp('"', 'g'), '\\"')}"`
     }
-  } else if ((anything != null ? anything.__matches : undefined) != null) {
+  } else if (isMatcher(anything)) {
     return anything.__name
   } else {
     return stringifyObject(anything, {
@@ -17,13 +16,15 @@ module.exports = function (anything) {
       singleQuotes: false,
       inlineCharacterLimit: 65,
       transform (obj, prop, originalResult) {
-        if ((obj[prop] != null ? obj[prop].__matches : undefined) != null) {
+        if (isMatcher(obj[prop])) {
           return obj[prop].__name
         } else {
           return originalResult
         }
       }
-    }
-    )
+    })
   }
 }
+
+var isMatcher = (thing) =>
+  thing && thing.__matches

@@ -1,10 +1,7 @@
-let _ =
-  {map: require('lodash/map')}
-
+let _ = require('../util/lodash-wrap')
 let stringifyAnything = require('./anything')
 
-module.exports = function (args, joiner, wrapper) {
-  if (joiner == null) { joiner = ', ' }
-  if (wrapper == null) { wrapper = '' }
-  return _.map(args, arg => `${wrapper}${stringifyAnything(arg)}${wrapper}`).join(joiner)
-}
+module.exports = (args, joiner = ', ', wrapper = '') =>
+  _.map(args, arg =>
+    `${wrapper}${stringifyAnything(arg)}${wrapper}`
+  ).join(joiner)
