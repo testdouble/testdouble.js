@@ -17,14 +17,13 @@
     "env": "printenv",
     "clean:dist": "git checkout -- dist",
     "clean": "rm -rf generated dist lib .coverage && yarn run clean:dist",
-    "compile:node:coffee": "coffee --output lib --compile src",
-    "compile:node:babel": "babel src -d lib",
-    "compile:node": "yarn run compile:node:coffee && yarn run compile:node:babel",
+    "compile:node": "babel src -d lib",
     "compile:test:coffee": "coffee --output generated/test --compile test",
     "compile:test:babel": "babel test -d generated/test",
     "compile:test": "yarn run compile:test:coffee && yarn run compile:test:babel",
-    "compile:browser": "browserify . --standalone td --outfile $npm_package_config_build_file --ignore 'quibble' -p headerify",
+    "compile:browser": "browserify . --standalone td --outfile $npm_package_config_build_file -p headerify",
     "compile": "yarn run compile:node && yarn run compile:test && yarn run compile:browser",
+    "style": "standard \"./src/**/*\" --fix",
     "test": "mocha --ui mocha-given --reporter $npm_package_config_mocha_reporter --compilers js:babel-core/register,coffee:coffee-script $EXTRA_MOCHA_ARGS --recursive test/node-helper.coffee test/src",
     "test:cover:instrument": "istanbul instrument lib -o .coverage/lib",
     "test:cover:run": "EXTRA_MOCHA_ARGS=\"--reporter mocha-istanbul\" COVER=.coverage/lib ISTANBUL_REPORT_DIR=.coverage ISTANBUL_REPORTERS=lcov,html yarn run test",
@@ -38,13 +37,13 @@
     "test:example:babel": "cd examples/babel && yarn install && yarn test && cd ../..",
     "test:example": "yarn run test:example:node && yarn run test:example:lineman && yarn run test:example:webpack && yarn run test:example:babel",
     "test:all": "yarn test && testem ci && yarn run test:example && yarn run test:typescript",
-    "test:ci": "yarn run clean && yarn run compile && yarn run test:all && yarn run clean:dist && echo \"All done!\"",
+    "test:ci": "yarn run clean && yarn run compile && yarn run style && yarn run test:all && yarn run clean:dist && echo \"All done!\"",
     "test:debug": "yarn test -- --debug-brk",
-    "version:write": "echo \"module.exports = '$npm_package_version'\" > src/version.coffee",
+    "version:write": "echo \"module.exports = '$npm_package_version'\" > src/version.js",
     "version:changelog": "if command -v github_changelog_generator &>/dev/null; then github_changelog_generator; git commit -m \"Changelog for $npm_package_version\" CHANGELOG.md; else echo Versioning requires you first run 'gem install github_changelog_generator' >&2; fi",
     "preversion": "git pull --rebase && yarn run test:ci",
     "postversion": "git push --tags && yarn run version:changelog && git push && npm publish",
-    "version": "yarn run version:write && yarn run compile && git add dist src/version.coffee",
+    "version": "yarn run version:write && yarn run compile && git add dist src/version.js",
     "prepublish": "yarn run compile"
   },
   "babel": {
@@ -55,6 +54,14 @@
   "browser": {
     "./lib/replace/module.js": "./lib/replace/module.browser.js",
     "quibble": "./lib/quibble.browser.js"
+  },
+  "standard": {
+    "globals": [
+      "describe",
+      "it",
+      "expect",
+      "td"
+    ]
   },
   "dependencies": {
     "lodash": "^4.15.0",
@@ -76,6 +83,7 @@
     "mocha-istanbul": "arikon/mocha-istanbul",
     "pryjs": "^1.0.3",
     "semver": "^5.3.0",
+    "standard": "^9.0.1",
     "testem": "^0.9.4",
     "typescript": "^2.1.4"
   },

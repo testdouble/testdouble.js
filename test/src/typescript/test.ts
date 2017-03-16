@@ -11,7 +11,7 @@ class Dog {
   bark() {}
 }
 
-const dog = td.object(Dog);
+const dog = td.constructor(Dog);
 td.when(dog.bark()).thenReturn("bark!");
 
 const bird = td.object({ fly: function(){} });

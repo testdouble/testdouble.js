@@ -1,7 +1,7 @@
 var pkg = require('./package.json');
 
 module.exports = {
-  launch_in_dev: [],
+  launch_in_dev: ['chrome'],
   launch_in_ci: ['phantomjs'],
 
   framework: 'mocha+chai',
