@@ -1,1 +1,5 @@
-module.exports = {}
+module.exports = {
+  absolutify () {},
+  ignoreCallsFromThisFile () {},
+  reset () {}
+}

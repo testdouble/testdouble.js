@@ -23,7 +23,7 @@
     "compile:test:coffee": "coffee --output generated/test --compile test",
     "compile:test:babel": "babel test -d generated/test",
     "compile:test": "yarn run compile:test:coffee && yarn run compile:test:babel",
-    "compile:browser": "browserify . --standalone td --outfile $npm_package_config_build_file --ignore 'quibble' -p headerify",
+    "compile:browser": "browserify . --standalone td --outfile $npm_package_config_build_file -p headerify",
     "compile": "yarn run compile:node && yarn run compile:test && yarn run compile:browser",
     "style": "standard \"./src/**/*\" --fix",
     "test": "mocha --ui mocha-given --reporter $npm_package_config_mocha_reporter --compilers js:babel-core/register,coffee:coffee-script $EXTRA_MOCHA_ARGS --recursive test/node-helper.coffee test/src",

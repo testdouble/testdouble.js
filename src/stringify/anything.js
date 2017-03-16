@@ -1,5 +1,6 @@
 let _ = require('../util/lodash-wrap')
 let stringifyObject = require('stringify-object-es5')
+let isMatcher = require('../matchers/is-matcher')
 
 module.exports = function (anything) {
   if (_.isString(anything)) {
@@ -25,6 +26,3 @@ module.exports = function (anything) {
     })
   }
 }
-
-var isMatcher = (thing) =>
-  thing && thing.__matches

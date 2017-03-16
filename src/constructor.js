@@ -11,14 +11,13 @@ module.exports = (typeOrNames) =>
 var fakeConstructorFromType = (type) => {
   let name = type.name || ''
   let fauxConstructor = tdFunction(`${name} constructor`)
-  class TestDoubleConstructor extends type {
+
+  return _.tap(class TestDoubleConstructor extends type {
     constructor () {
       super(...arguments)
       fauxConstructor(...arguments)
     }
-  }
-
-  return _.tap(TestDoubleConstructor, (fakeType) => {
+  }, (fakeType) => {
     // Override "static" functions with instance test doubles
     _.each(_.functions(type), funcName => {
       fakeType[funcName] = tdFunction(`${name}.${funcName}`)
@@ -29,20 +28,18 @@ var fakeConstructorFromType = (type) => {
       fakeType.prototype[funcName] = tdFunction(`${name}#${funcName}`)
     })
 
-    return addToStringMethodsToFakeType(fakeType, name)
+    addToStringMethodsToFakeType(fakeType, name)
   })
 }
 
 var fakeConstructorFromNames = (funcNames) => {
-  class TestDoubleConstructor {}
+  return _.tap(class TestDoubleConstructor {}, (cls) => {
+    _.each(funcNames, (funcName) => {
+      cls.prototype[funcName] = tdFunction(`#${funcName}`)
+    })
 
-  _.each(funcNames, funcName => {
-    TestDoubleConstructor.prototype[funcName] = tdFunction(`#${funcName}`)
+    addToStringMethodsToFakeType(cls)
   })
-
-  addToStringMethodsToFakeType(TestDoubleConstructor)
-
-  return TestDoubleConstructor
 }
 
 var addToStringMethodsToFakeType = (fakeType, name) => {

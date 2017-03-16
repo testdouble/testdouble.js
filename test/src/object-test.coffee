@@ -19,12 +19,10 @@ describe 'td.object', ->
     And -> @testDouble.toString() == '[test double object]'
     And -> @testDouble.bam.toString() == '[test double for ".bam"]'
 
-  describe 'passing a constructor function to td.object erroneously (1.x)', ->
-    Given -> @someConstructor = class LolTypes
-      foo: ->
-    When -> try td.object(@someConstructor) catch e then @result = e
+  describe 'passing a function to td.object erroneously (1.x)', ->
+    When -> try td.object(->) catch e then @result = e
     Then -> expect(@result.message).to.contain(
-      "Please use the `td.constructor()` method instead")
+      "Please use `td.function()` or `td.constructor()` instead")
 
 
   if global.Proxy?
@@ -52,7 +50,7 @@ describe 'td.object', ->
         catch error
           @error = error
       Then -> @error.message == """
-        The current runtime does not have Proxy support, which is what
+        Error: testdouble.js - td.object - The current runtime does not have Proxy support, which is what
         testdouble.js depends on when a string name is passed to `td.object()`.
 
         More details here:

@@ -17,7 +17,7 @@ var createTestDoubleForFunction = (func, optionalName) =>
     })
   )
 
-var createTestDoubleNamed = name =>
+var createTestDoubleNamed = (name) =>
   _.tap(createTestDoubleFunction(), (testDouble) => {
     let entry = store.for(testDouble, true)
     if (name != null) {
@@ -28,9 +28,8 @@ var createTestDoubleNamed = name =>
     }
   })
 
-var createTestDoubleFunction = () => {
-  return function testDouble (...args) {
+var createTestDoubleFunction = () =>
+  function testDouble (...args) {
     calls.log(testDouble, args, this)
     return stubbings.invoke(testDouble, args)
   }
-}

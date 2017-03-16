@@ -1,13 +1,11 @@
 let _ = require('./util/lodash-wrap')
-
 let calls = require('./store/calls')
 let stubbings = require('./store/stubbings')
 let callback = require('./matchers/callback')
 let log = require('./log')
 let tdConfig = require('./config')
 
-module.exports = function (__userDoesPretendInvocationHere__, config) {
-  if (config == null) { config = {} }
+module.exports = function (__userDoesPretendInvocationHere__, config = {}) {
   return {
     thenReturn (...stubbedValues) {
       return addStubbing(stubbedValues, config, 'thenReturn')
@@ -32,13 +30,16 @@ module.exports = function (__userDoesPretendInvocationHere__, config) {
   }
 }
 
-var addStubbing = function (stubbedValues, config, plan) {
-  let last
+var addStubbing = (stubbedValues, config, plan) => {
+  let last = calls.pop()
+  ensureRehearsalOccurred(last)
   _.assign(config, {plan})
-  if ((last = calls.pop())) {
-    stubbings.add(last.testDouble, concatImpliedCallback(last.args, config), stubbedValues, config)
-    return last.testDouble
-  } else {
+  stubbings.add(last.testDouble, concatImpliedCallback(last.args, config), stubbedValues, config)
+  return last.testDouble
+}
+
+var ensureRehearsalOccurred = (last) => {
+  if (!last) {
     return log.error('td.when', `\
 No test double invocation call detected for \`when()\`.
 
@@ -49,19 +50,19 @@ No test double invocation call detected for \`when()\`.
   }
 }
 
-var concatImpliedCallback = function (args, config) {
-  if (config.plan !== 'thenCallback') { return args }
-
-  if (!_.some(args, callback.isCallback)) {
+var concatImpliedCallback = (args, config) => {
+  if (config.plan !== 'thenCallback') {
+    return args
+  } else if (!_.some(args, callback.isCallback)) {
     return args.concat(callback)
   } else {
     return args
   }
 }
 
-var warnIfPromiseless = function () {
-  if (tdConfig().promiseConstructor != null) { return }
-  return log.warn('td.when', `\
+var warnIfPromiseless = () => {
+  if (tdConfig().promiseConstructor == null) {
+    log.warn('td.when', `\
 no promise constructor is set, so this \`thenResolve\` or \`thenReject\` stubbing
 will fail if it's satisfied by an invocation on the test double. You can tell
 testdouble.js which promise constructor to use with \`td.config\`, like so:
@@ -69,6 +70,6 @@ testdouble.js which promise constructor to use with \`td.config\`, like so:
   td.config({
     promiseConstructor: require('bluebird')
   })\
-`
-  )
+`)
+  }
 }

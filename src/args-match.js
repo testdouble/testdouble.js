@@ -1,34 +1,34 @@
 let _ = require('./util/lodash-wrap')
+let isMatcher = require('./matchers/is-matcher')
 
-module.exports = function (expectedArgs, actualArgs, config) {
-  if (arityMismatch(expectedArgs, actualArgs, config)) { return false }
-  if ((config != null ? config.allowMatchers : undefined) !== false) {
+module.exports = function (expectedArgs, actualArgs, config = {}) {
+  if (arityMismatch(expectedArgs, actualArgs, config)) {
+    return false
+  } else if (config.allowMatchers !== false) {
     return equalsWithMatchers(expectedArgs, actualArgs)
   } else {
     return _.isEqual(expectedArgs, actualArgs)
   }
 }
 
-var arityMismatch = (expectedArgs, actualArgs, config) => (expectedArgs.length !== actualArgs.length) && !config.ignoreExtraArgs
+var arityMismatch = (expectedArgs, actualArgs, config) =>
+  expectedArgs.length !== actualArgs.length && !config.ignoreExtraArgs
 
 var equalsWithMatchers = (expectedArgs, actualArgs) =>
-  _.every(expectedArgs, (expectedArg, key) => argumentMatchesExpectation(expectedArg, actualArgs[key]))
+  _.every(expectedArgs, (expectedArg, key) =>
+    argumentMatchesExpectation(expectedArg, actualArgs[key]))
 
-var argumentMatchesExpectation = function (expectedArg, actualArg) {
-  let matcher
-  if ((matcher = matcherFor(expectedArg))) {
-    return matcher(actualArg)
+var argumentMatchesExpectation = (expectedArg, actualArg) => {
+  if (isMatcher(expectedArg)) {
+    return matcherTestFor(expectedArg)(actualArg)
   } else {
-    return _.isEqualWith(expectedArg, actualArg, (expectedEl, actualEl) => __guardFunc__(matcherFor(expectedEl), f => f(actualEl)))
+    return _.isEqualWith(expectedArg, actualArg, (expectedEl, actualEl) => {
+      if (isMatcher(expectedEl)) {
+        return matcherTestFor(expectedEl)(actualEl)
+      }
+    })
   }
 }
 
-var matcherFor = function (expectedArg) {
-  if (_.isFunction(expectedArg != null ? expectedArg.__matches : undefined)) {
-    return expectedArg.__matches
-  }
-}
-
-function __guardFunc__ (func, transform) {
-  return typeof func === 'function' ? transform(func) : undefined
-}
+var matcherTestFor = (matcher) =>
+  matcher.__matches

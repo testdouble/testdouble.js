@@ -6,23 +6,22 @@ const DEFAULTS = {
   ignoreWarnings: false,
   suppressErrors: false
 }
+let configData = _.extend({}, DEFAULTS)
 
-let config = _.extend({}, DEFAULTS)
-
-module.exports = (overrides) => {
+module.exports = _.tap((overrides) => {
   ensureOverridesExist(overrides)
-  return _.extend(config, overrides)
-}
+  return _.extend(configData, overrides)
+}, (config) => {
+  config.reset = () => {
+    configData = _.extend({}, DEFAULTS)
+  }
+})
 
-module.exports.reset = () => {
-  config = _.extend({}, DEFAULTS)
-}
-
-function ensureOverridesExist (overrides) {
+var ensureOverridesExist = (overrides) => {
   _.each(overrides, (val, key) => {
-    if (!config.hasOwnProperty(key)) {
+    if (!configData.hasOwnProperty(key)) {
       require('./log').error('td.config',
-        `"${key}" is not a valid configuration key (valid keys are: ${stringifyAnything(_.keys(config))})`)
+        `"${key}" is not a valid configuration key (valid keys are: ${stringifyAnything(_.keys(configData))})`)
     }
   })
 }
