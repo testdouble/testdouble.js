@@ -98,7 +98,7 @@ var hasTimesRemaining = (stubbing) =>
     ? true
     : stubbing.callCount < stubbing.config.times
 
-var ensurePromise = function (Promise) {
+var ensurePromise = (Promise) => {
   if (Promise == null) {
     return log.error('td.when', `\
 no promise constructor is set (perhaps this runtime lacks a native Promise

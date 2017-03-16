@@ -1,7 +1,7 @@
 const _ = require('./util/lodash-wrap')
 const isMatcher = require('./matchers/is-matcher')
 
-module.exports = function (expectedArgs, actualArgs, config = {}) {
+module.exports = (expectedArgs, actualArgs, config = {}) => {
   if (arityMismatch(expectedArgs, actualArgs, config)) {
     return false
   } else if (config.allowMatchers !== false) {

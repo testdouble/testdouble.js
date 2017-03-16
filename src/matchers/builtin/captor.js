@@ -1,6 +1,6 @@
 const create = require('../create')
 
-module.exports = function () {
+module.exports = () => {
   const captor = {
     capture: create({
       name: 'captor.capture',

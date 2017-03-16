@@ -2,13 +2,9 @@ const _ = require('../util/lodash-wrap')
 const stringifyObject = require('stringify-object-es5')
 const isMatcher = require('../matchers/is-matcher')
 
-module.exports = function (anything) {
+module.exports = (anything) => {
   if (_.isString(anything)) {
-    if (_.includes(anything, '\n')) {
-      return `"""\n${anything}\n"""`
-    } else {
-      return `"${anything.replace(new RegExp('"', 'g'), '\\"')}"`
-    }
+    return stringifyString(anything)
   } else if (isMatcher(anything)) {
     return anything.__name
   } else {
@@ -26,3 +22,8 @@ module.exports = function (anything) {
     })
   }
 }
+
+var stringifyString = (string) =>
+  _.includes(string, '\n')
+    ? `"""\n${string}\n"""`
+    : `"${string.replace(new RegExp('"', 'g'), '\\"')}"`

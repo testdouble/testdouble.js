@@ -5,8 +5,8 @@ const callback = require('./matchers/callback')
 const log = require('./log')
 const tdConfig = require('./config')
 
-module.exports = function (__userDoesPretendInvocationHere__, config = {}) {
-  return {
+module.exports = (__userDoesRehearsalInvocationHere__, config = {}) =>
+  ({
     thenReturn (...stubbedValues) {
       return addStubbing(stubbedValues, config, 'thenReturn')
     },
@@ -27,8 +27,7 @@ module.exports = function (__userDoesPretendInvocationHere__, config = {}) {
       warnIfPromiseless()
       return addStubbing(stubbedValues, config, 'thenReject')
     }
-  }
-}
+  })
 
 var addStubbing = (stubbedValues, config, plan) => {
   const last = calls.pop()

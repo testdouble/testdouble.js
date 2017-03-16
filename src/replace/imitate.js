@@ -6,7 +6,7 @@ const tdFunction = require('../function')
 const log = require('../log')
 const stringifyAnything = require('../stringify/anything')
 
-module.exports = function (realThing, optionalName) {
+module.exports = (realThing, optionalName) => {
   if (isConstructor(realThing)) {
     return tdConstructor(realThing)
   } else if (_.isPlainObject(realThing)) {

@@ -33,13 +33,12 @@ var nullDescription = () =>
 var testdoubleDescription = (testDouble, stubs, calls) =>
 `This test double ${stringifyName(testDouble)}has ${stubs.length} stubbings and ${calls.length} invocations.`
 
-var stubbingDescription = function (stubs) {
-  if (stubs.length === 0) { return '' }
-  return _.reduce(stubs, function (desc, stub) {
-    return desc + `\n  - when called with \`(${stringifyArgs(stub.args)})\`, then ${planFor(stub)} ${argsFor(stub)}.`
-  }
-  , '\n\nStubbings:')
-}
+var stubbingDescription = (stubs) =>
+  stubs.length > 0
+    ? _.reduce(stubs, (desc, stub) =>
+        desc + `\n  - when called with \`(${stringifyArgs(stub.args)})\`, then ${planFor(stub)} ${argsFor(stub)}.`
+      , '\n\nStubbings:')
+    : ''
 
 var planFor = (stub) => {
   switch (stub.config.plan) {
@@ -57,13 +56,12 @@ var argsFor = (stub) => {
   }
 }
 
-var callDescription = function (calls) {
-  if (calls.length === 0) { return '' }
-  return _.reduce(calls, (desc, call) => desc + `\n  - called with \`(${stringifyArgs(call.args)})\`.`
-  , '\n\nInvocations:')
-}
+var callDescription = (calls) =>
+  calls.length > 0
+    ? _.reduce(calls, (desc, call) => desc + `\n  - called with \`(${stringifyArgs(call.args)})\`.`, '\n\nInvocations:')
+    : ''
 
-var stringifyName = function (testDouble) {
+var stringifyName = (testDouble) => {
   const name = store.for(testDouble).name
   return name ? `\`${name}\` ` : ''
 }

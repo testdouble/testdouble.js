@@ -34,14 +34,10 @@ var getFake = (isManual, property, manualReplacement, realThing) => {
   }
 }
 
-var warnIfTypeMismatch = function (property, fakeThing, realThing) {
-  if (realThing === undefined) { return }
+var warnIfTypeMismatch = (property, fakeThing, realThing) => {
   const fakeType = typeof fakeThing
   const realType = typeof realThing
-  if (fakeType !== realType) {
-    return log.warn('td.replace', `\
-property "${property}" ${stringifyAnything(realThing)} (${_.capitalize(realType)}) was replaced with ${stringifyAnything(fakeThing)}, which has a different type (${_.capitalize(fakeType)}).\
-`
-    )
+  if (realThing !== undefined && fakeType !== realType) {
+    log.warn('td.replace', `property "${property}" ${stringifyAnything(realThing)} (${_.capitalize(realType)}) was replaced with ${stringifyAnything(fakeThing)}, which has a different type (${_.capitalize(fakeType)}).`)
   }
 }

@@ -6,7 +6,7 @@ const stringifyArgs = require('./stringify/arguments')
 const log = require('./log')
 const argsMatch = require('./args-match')
 
-module.exports = function (__userDoesPretendInvocationHere__, config = {}) {
+module.exports = (__userDoesRehearsalInvocationHere__, config = {}) => {
   const last = callsStore.pop()
   ensureRehearsalOccurred(last)
   if (callsStore.wasInvoked(last.testDouble, last.args, config)) {

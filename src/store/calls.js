@@ -12,8 +12,10 @@ module.exports = {
   },
 
   pop () {
-    return _.tap(callHistory.pop(), function (call) {
-      if (call != null) store.for(call.testDouble).calls.pop()
+    return _.tap(callHistory.pop(), (call) => {
+      if (call != null) {
+        store.for(call.testDouble).calls.pop()
+      }
     })
   },
 
