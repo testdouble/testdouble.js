@@ -1,4 +1,4 @@
-let create = require('./create')
+let create = require('../create')
 
 module.exports = function () {
   let captor = {
