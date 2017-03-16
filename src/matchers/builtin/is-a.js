@@ -4,10 +4,8 @@ let stringifyArguments = require('../../stringify/arguments')
 
 module.exports = create({
   name (matcherArgs) {
-    let s = ((matcherArgs[0] != null ? matcherArgs[0].name : undefined) != null)
-      ? matcherArgs[0].name
-      : stringifyArguments(matcherArgs)
-    return `isA(${s})`
+    let desc = _.get(matcherArgs[0], 'name') || stringifyArguments(matcherArgs)
+    return `isA(${desc})`
   },
   matches (matcherArgs, actual) {
     let type = matcherArgs[0]

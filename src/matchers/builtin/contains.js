@@ -4,19 +4,9 @@ let create = require('../create')
 module.exports = create({
   name: 'contains',
   matches (containings, actualArg) {
-    if (containings.length === 0) { return false }
+    if (containings.length === 0) return false
 
-    var containsAllSpecified = (containing, actual) =>
-      _.every(containing, function (val, key) {
-        if (actual == null) { return false }
-        if (_.isPlainObject(val)) {
-          return containsAllSpecified(val, actual[key])
-        } else {
-          return _.isEqual(val, actual[key])
-        }
-      })
-
-    return _.every(containings, function (containing) {
+    return _.every(containings, (containing) => {
       if (_.isArray(containing)) {
         return _.some(actualArg, actualElement => _.isEqual(actualElement, containing))
       } else if (_.isPlainObject(containing) && _.isPlainObject(actualArg)) {
@@ -29,3 +19,9 @@ module.exports = create({
     })
   }
 })
+
+var containsAllSpecified = (containing, actual) =>
+  actual != null && _.every(containing, (val, key) =>
+    _.isPlainObject(val)
+      ? containsAllSpecified(val, actual[key])
+      : _.isEqual(val, actual[key]))

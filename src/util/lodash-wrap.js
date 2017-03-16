@@ -12,6 +12,7 @@ module.exports = {
   findLast: require('lodash/findLast'),
   flatten: require('lodash/flatten'),
   functions: require('lodash/functions'),
+  get: require('lodash/get'),
   groupBy: require('lodash/groupBy'),
   includes: require('lodash/includes'),
   invoke: require('lodash/invoke'),
