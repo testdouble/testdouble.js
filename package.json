@@ -58,7 +58,12 @@
     "quibble": "./lib/quibble.browser.js"
   },
   "standard": {
-    "globals": ["describe", "it", "expect", "td"]
+    "globals": [
+      "describe",
+      "it",
+      "expect",
+      "td"
+    ]
   },
   "dependencies": {
     "lodash": "^4.15.0",
