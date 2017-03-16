@@ -1,13 +1,13 @@
-let _ = require('./util/lodash-wrap')
-let store = require('./store')
-let callsStore = require('./store/calls')
-let stubbingsStore = require('./store/stubbings')
-let stringifyArgs = require('./stringify/arguments')
+const _ = require('./util/lodash-wrap')
+const store = require('./store')
+const callsStore = require('./store/calls')
+const stubbingsStore = require('./store/stubbings')
+const stringifyArgs = require('./stringify/arguments')
 
 module.exports = (testDouble) => {
   if (store.for(testDouble, false) == null) { return nullDescription() }
-  let calls = callsStore.for(testDouble)
-  let stubs = stubbingsStore.for(testDouble)
+  const calls = callsStore.for(testDouble)
+  const stubs = stubbingsStore.for(testDouble)
 
   return {
     name: store.for(testDouble).name,
@@ -64,10 +64,6 @@ var callDescription = function (calls) {
 }
 
 var stringifyName = function (testDouble) {
-  let name
-  if ((name = store.for(testDouble).name)) {
-    return `\`${name}\` `
-  } else {
-    return ''
-  }
+  const name = store.for(testDouble).name
+  return name ? `\`${name}\` ` : ''
 }

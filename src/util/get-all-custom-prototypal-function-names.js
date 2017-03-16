@@ -1,4 +1,4 @@
-let _ = require('./lodash-wrap')
+const _ = require('./lodash-wrap')
 
 module.exports = (type) =>
   _.uniq(_.without(allPrototypeFunctionNames(type), 'constructor'))

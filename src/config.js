@@ -1,5 +1,5 @@
-let _ = require('./util/lodash-wrap')
-let stringifyAnything = require('./stringify/anything')
+const _ = require('./util/lodash-wrap')
+const stringifyAnything = require('./stringify/anything')
 
 const DEFAULTS = {
   promiseConstructor: global.Promise,

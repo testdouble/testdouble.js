@@ -1,6 +1,6 @@
-let _ = require('../util/lodash-wrap')
-let stringifyObject = require('stringify-object-es5')
-let isMatcher = require('../matchers/is-matcher')
+const _ = require('../util/lodash-wrap')
+const stringifyObject = require('stringify-object-es5')
+const isMatcher = require('../matchers/is-matcher')
 
 module.exports = function (anything) {
   if (_.isString(anything)) {

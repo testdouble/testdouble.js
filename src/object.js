@@ -1,11 +1,11 @@
-let _ = require('./util/lodash-wrap')
-let tdFunction = require('./function')
-let tdConstructor = require('./constructor')
-let copyProperties = require('./util/copy-properties')
-let isConstructor = require('./replace/is-constructor')
-let log = require('./log')
+const _ = require('./util/lodash-wrap')
+const tdFunction = require('./function')
+const tdConstructor = require('./constructor')
+const copyProperties = require('./util/copy-properties')
+const isConstructor = require('./replace/is-constructor')
+const log = require('./log')
 
-let DEFAULT_OPTIONS = {excludeMethods: ['then']}
+const DEFAULT_OPTIONS = {excludeMethods: ['then']}
 
 module.exports = (nameOrType, config) =>
   _.tap(fakeObject(nameOrType, config), (obj) => {
@@ -38,7 +38,7 @@ var createTestDoublesForFunctionNames = (names) =>
 
 var createTestDoubleViaProxy = (name, config) => {
   ensureProxySupport(name)
-  let obj = {}
+  const obj = {}
   return new Proxy(obj, {
     get (target, propKey, receiver) {
       if (!obj.hasOwnProperty(propKey) && !_.includes(config.excludeMethods, propKey)) {
@@ -67,7 +67,7 @@ var withDefaults = (config) =>
   _.extend({}, DEFAULT_OPTIONS, config)
 
 var addToStringToDouble = (fakeObject, nameOrType) => {
-  let name = nameOf(nameOrType)
+  const name = nameOf(nameOrType)
   fakeObject.toString = () => `[test double object${name ? ` for "${name}"` : ''}]`
 }
 

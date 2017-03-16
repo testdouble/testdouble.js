@@ -1,5 +1,5 @@
-let _ = require('../util/lodash-wrap')
-let stringifyAnything = require('./anything')
+const _ = require('../util/lodash-wrap')
+const stringifyAnything = require('./anything')
 
 module.exports = (args, joiner = ', ', wrapper = '') =>
   _.map(args, arg =>

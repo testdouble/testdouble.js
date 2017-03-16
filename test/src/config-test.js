@@ -8,7 +8,7 @@ describe('td.config', () => {
   })
 
   it('overriding a real property', () => {
-    let config = td.config({ignoreWarnings: true})
+    const config = td.config({ignoreWarnings: true})
 
     expect(config.ignoreWarnings).to.eq(true)
     expect(td.config().ignoreWarnings).to.eq(true)

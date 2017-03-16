@@ -1,9 +1,9 @@
-let _ = require('../util/lodash-wrap')
-let store = require('./index')
-let argsMatch = require('../args-match')
-let callback = require('../matchers/callback')
-let config = require('../config')
-let log = require('../log')
+const _ = require('../util/lodash-wrap')
+const store = require('./index')
+const argsMatch = require('../args-match')
+const callback = require('../matchers/callback')
+const config = require('../config')
+const log = require('../log')
 
 module.exports = {
   add (testDouble, args, stubbedValues, config) {
@@ -16,7 +16,7 @@ module.exports = {
   },
 
   invoke (testDouble, actualArgs) {
-    let stubbing = stubbingFor(testDouble, actualArgs)
+    const stubbing = stubbingFor(testDouble, actualArgs)
     if (stubbing) {
       return executePlan(stubbing, actualArgs)
     }
@@ -32,7 +32,7 @@ var stubbingFor = (testDouble, actualArgs) =>
     isSatisfied(stubbing, actualArgs))
 
 var executePlan = (stubbing, actualArgs) => {
-  let value = stubbedValueFor(stubbing)
+  const value = stubbedValueFor(stubbing)
   stubbing.callCount += 1
   invokeCallbackFor(stubbing, actualArgs)
   switch (stubbing.config.plan) {
@@ -75,7 +75,7 @@ var callCallback = (stubbing, callback, args) => {
 }
 
 var createPromise = (stubbing, value, willResolve) => {
-  let Promise = config().promiseConstructor
+  const Promise = config().promiseConstructor
   ensurePromise(Promise)
   return new Promise((resolve, reject) => {
     callCallback(stubbing, () =>

@@ -1,6 +1,6 @@
-let _ = require('./util/lodash-wrap')
-let quibble = require('quibble')
-let store = require('./store')
+const _ = require('./util/lodash-wrap')
+const quibble = require('quibble')
+const store = require('./store')
 
 let resetHandlers = []
 

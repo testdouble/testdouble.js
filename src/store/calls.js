@@ -1,6 +1,6 @@
-let _ = require('../util/lodash-wrap')
-let store = require('./index')
-let argsMatch = require('./../args-match')
+const _ = require('../util/lodash-wrap')
+const store = require('./index')
+const argsMatch = require('./../args-match')
 
 let callHistory = [] // <-- remember this to pop our DSL of when(<call>)/verify(<call>)
 store.onReset(() => { callHistory = [] })
@@ -18,7 +18,7 @@ module.exports = {
   },
 
   wasInvoked (testDouble, args, config) {
-    let matchingInvocationCount = this.where(testDouble, args, config).length
+    const matchingInvocationCount = this.where(testDouble, args, config).length
     if (config.times != null) {
       return matchingInvocationCount === config.times
     } else {

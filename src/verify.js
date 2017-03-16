@@ -1,13 +1,13 @@
-let _ = require('./util/lodash-wrap')
-let store = require('./store')
-let callsStore = require('./store/calls')
-let stubbingsStore = require('./store/stubbings')
-let stringifyArgs = require('./stringify/arguments')
-let log = require('./log')
-let argsMatch = require('./args-match')
+const _ = require('./util/lodash-wrap')
+const store = require('./store')
+const callsStore = require('./store/calls')
+const stubbingsStore = require('./store/stubbings')
+const stringifyArgs = require('./stringify/arguments')
+const log = require('./log')
+const argsMatch = require('./args-match')
 
 module.exports = function (__userDoesPretendInvocationHere__, config = {}) {
-  let last = callsStore.pop()
+  const last = callsStore.pop()
   ensureRehearsalOccurred(last)
   if (callsStore.wasInvoked(last.testDouble, last.args, config)) {
     // Do nothing! We're verified! :-D
@@ -45,7 +45,7 @@ var unsatisfiedErrorMessage = (testDouble, args, config) =>
   invocationSummary(testDouble, args, config)
 
 var stringifyName = (testDouble) => {
-  let name = store.for(testDouble).name
+  const name = store.for(testDouble).name
   return name ? ` \`${name}\`` : ''
 }
 
@@ -58,7 +58,7 @@ Unsatisfied verification on test double${stringifyName(testDouble)}.
 `
 
 var invocationSummary = (testDouble, args, config) => {
-  let calls = callsStore.for(testDouble)
+  const calls = callsStore.for(testDouble)
   if (calls.length === 0) {
     return '\n\n  But there were no invocations of the test double.'
   } else {
@@ -69,8 +69,8 @@ var invocationSummary = (testDouble, args, config) => {
 }
 
 var matchedInvocationSummary = (testDouble, args, config) => {
-  let calls = callsStore.where(testDouble, args, config)
-  let expectedCalls = config.times || 0
+  const calls = callsStore.where(testDouble, args, config)
+  const expectedCalls = config.times || 0
 
   if (calls.length === 0 || calls.length > expectedCalls) {
     return ''

@@ -1,5 +1,5 @@
-let _ = require('./util/lodash-wrap')
-let isMatcher = require('./matchers/is-matcher')
+const _ = require('./util/lodash-wrap')
+const isMatcher = require('./matchers/is-matcher')
 
 module.exports = function (expectedArgs, actualArgs, config = {}) {
   if (arityMismatch(expectedArgs, actualArgs, config)) {

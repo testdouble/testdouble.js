@@ -1,7 +1,7 @@
-let quibble = require('quibble')
-let _ = require('../util/lodash-wrap')
-let replaceModule = require('./module')
-let replaceProperty = require('./property')
+const quibble = require('quibble')
+const _ = require('../util/lodash-wrap')
+const replaceModule = require('./module')
+const replaceProperty = require('./property')
 
 quibble.ignoreCallsFromThisFile()
 

@@ -1,4 +1,4 @@
-let _ = require('./lodash-wrap')
+const _ = require('./lodash-wrap')
 const defineProps = Object.defineProperties
 const getProps = Object.getOwnPropertyNames
 

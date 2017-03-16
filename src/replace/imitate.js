@@ -1,10 +1,10 @@
-let _ = require('../util/lodash-wrap')
-let isConstructor = require('./is-constructor')
-let tdConstructor = require('../constructor')
-let tdObject = require('../object')
-let tdFunction = require('../function')
-let log = require('../log')
-let stringifyAnything = require('../stringify/anything')
+const _ = require('../util/lodash-wrap')
+const isConstructor = require('./is-constructor')
+const tdConstructor = require('../constructor')
+const tdObject = require('../object')
+const tdFunction = require('../function')
+const log = require('../log')
+const stringifyAnything = require('../stringify/anything')
 
 module.exports = function (realThing, optionalName) {
   if (isConstructor(realThing)) {

@@ -1,5 +1,5 @@
-let _ = require('../util/lodash-wrap')
-let create = require('./create')
+const _ = require('../util/lodash-wrap')
+const create = require('./create')
 
 module.exports = _.tap(create({
   name: 'callback',

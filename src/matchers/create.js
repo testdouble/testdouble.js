@@ -1,5 +1,5 @@
-let _ = require('../util/lodash-wrap')
-let stringifyArguments = require('../stringify/arguments')
+const _ = require('../util/lodash-wrap')
+const stringifyArguments = require('../stringify/arguments')
 
 module.exports = config =>
   (...matcherArgs) =>

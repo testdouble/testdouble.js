@@ -1,7 +1,7 @@
-let _ = require('../util/lodash-wrap')
-let { EventEmitter } = require('events')
+const _ = require('../util/lodash-wrap')
+const { EventEmitter } = require('events')
 
-let storeEmitter = new EventEmitter()
+const storeEmitter = new EventEmitter()
 let globalStore = []
 
 module.exports = {
@@ -15,7 +15,7 @@ module.exports = {
   },
 
   for (testDouble, createIfNew = true) {
-    let entry = _.find(globalStore, {testDouble})
+    const entry = _.find(globalStore, {testDouble})
     if (entry) {
       return entry
     } else if (createIfNew) {

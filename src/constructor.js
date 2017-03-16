@@ -1,7 +1,7 @@
-let _ = require('./util/lodash-wrap')
-let tdFunction = require('./function')
-let isConstructor = require('./replace/is-constructor')
-let getAllCustomPrototypalFunctionNames = require('./util/get-all-custom-prototypal-function-names')
+const _ = require('./util/lodash-wrap')
+const tdFunction = require('./function')
+const isConstructor = require('./replace/is-constructor')
+const getAllCustomPrototypalFunctionNames = require('./util/get-all-custom-prototypal-function-names')
 
 module.exports = (typeOrNames) =>
   isConstructor(typeOrNames)
@@ -9,8 +9,8 @@ module.exports = (typeOrNames) =>
     : fakeConstructorFromNames(typeOrNames)
 
 var fakeConstructorFromType = (type) => {
-  let name = type.name || ''
-  let fauxConstructor = tdFunction(`${name} constructor`)
+  const name = type.name || ''
+  const fauxConstructor = tdFunction(`${name} constructor`)
 
   return _.tap(class TestDoubleConstructor extends type {
     constructor () {

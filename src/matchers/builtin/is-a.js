@@ -1,14 +1,14 @@
-let _ = require('../../util/lodash-wrap')
-let create = require('../create')
-let stringifyArguments = require('../../stringify/arguments')
+const _ = require('../../util/lodash-wrap')
+const create = require('../create')
+const stringifyArguments = require('../../stringify/arguments')
 
 module.exports = create({
   name (matcherArgs) {
-    let desc = _.get(matcherArgs[0], 'name') || stringifyArguments(matcherArgs)
+    const desc = _.get(matcherArgs[0], 'name') || stringifyArguments(matcherArgs)
     return `isA(${desc})`
   },
   matches (matcherArgs, actual) {
-    let type = matcherArgs[0]
+    const type = matcherArgs[0]
 
     if (type === Number) {
       return _.isNumber(actual)

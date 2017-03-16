@@ -1,9 +1,9 @@
-let _ = require('./util/lodash-wrap')
-let calls = require('./store/calls')
-let stubbings = require('./store/stubbings')
-let callback = require('./matchers/callback')
-let log = require('./log')
-let tdConfig = require('./config')
+const _ = require('./util/lodash-wrap')
+const calls = require('./store/calls')
+const stubbings = require('./store/stubbings')
+const callback = require('./matchers/callback')
+const log = require('./log')
+const tdConfig = require('./config')
 
 module.exports = function (__userDoesPretendInvocationHere__, config = {}) {
   return {
@@ -31,7 +31,7 @@ module.exports = function (__userDoesPretendInvocationHere__, config = {}) {
 }
 
 var addStubbing = (stubbedValues, config, plan) => {
-  let last = calls.pop()
+  const last = calls.pop()
   ensureRehearsalOccurred(last)
   _.assign(config, {plan})
   stubbings.add(last.testDouble, concatImpliedCallback(last.args, config), stubbedValues, config)
