@@ -5,7 +5,7 @@ module.exports = function () {
     capture: create({
       name: 'captor.capture',
       matches (matcherArgs, actual) {
-        if (!captor.values) { captor.values = [] }
+        captor.values = captor.values || []
         captor.values.push(actual)
         captor.value = actual
         return true

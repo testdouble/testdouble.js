@@ -1,5 +1,4 @@
 let _ = require('../util/lodash-wrap')
-
 let create = require('./create')
 
 module.exports = _.tap(create({

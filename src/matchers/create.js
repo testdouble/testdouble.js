@@ -1,23 +1,23 @@
 let _ = require('../util/lodash-wrap')
-
 let stringifyArguments = require('../stringify/arguments')
 
 module.exports = config =>
-  function (...matcherArgs) {
-    let matcherInstance = {
-      __name: _.isFunction(config.name)
-          ? config.name(matcherArgs)
-        : (config.name != null)
-          ? `${config.name}(${stringifyArguments(matcherArgs)})`
-        : `[Matcher for (${stringifyArguments(matcherArgs)})]`,
+  (...matcherArgs) =>
+    _.tap({
+      __name: nameFor(config, matcherArgs),
       __matches (actualArg) {
         return config.matches(matcherArgs, actualArg)
       }
-    }
+    }, (matcherInstance) =>
+      _.invoke(config, 'onCreate', matcherInstance, matcherArgs)
+    )
 
-    if (typeof config.onCreate === 'function') {
-      config.onCreate(matcherInstance, matcherArgs)
-    }
-
-    return matcherInstance
+var nameFor = (config, matcherArgs) => {
+  if (_.isFunction(config.name)) {
+    return config.name(matcherArgs)
+  } else if (config.name != null) {
+    return `${config.name}(${stringifyArguments(matcherArgs)})`
+  } else {
+    return `[Matcher for (${stringifyArguments(matcherArgs)})]`
   }
+}

@@ -1,5 +1,4 @@
 let _ = require('../util/lodash-wrap')
-
 let create = require('./create')
 let stringifyArguments = require('../stringify/arguments')
 

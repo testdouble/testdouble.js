@@ -14,6 +14,7 @@ module.exports = {
   functions: require('lodash/functions'),
   groupBy: require('lodash/groupBy'),
   includes: require('lodash/includes'),
+  invoke: require('lodash/invoke'),
   isArray: require('lodash/isArray'),
   isBoolean: require('lodash/isBoolean'),
   isEqual: require('lodash/isEqual'),
