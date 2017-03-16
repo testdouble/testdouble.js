@@ -1,3 +1,5 @@
+import oneLine from 'common-tags/lib/oneLine'
+
 let _ = require('./util/lodash-wrap')
 let stringifyAnything = require('./stringify/anything')
 
@@ -9,16 +11,21 @@ const DEFAULTS = {
 
 let config = _.extend({}, DEFAULTS)
 
-module.exports = function (overrides) {
+module.exports = (overrides) => {
   ensureOverridesExist(overrides)
   return _.extend(config, overrides)
 }
 
-module.exports.reset = () => config = _.extend({}, DEFAULTS)
+module.exports.reset = () => {
+  config = _.extend({}, DEFAULTS)
+}
 
-var ensureOverridesExist = overrides =>
-  _.each(overrides, function (val, key) {
+function ensureOverridesExist (overrides) {
+  _.each(overrides, (val, key) => {
     if (!config.hasOwnProperty(key)) {
-      return require('./log').error('td.config', `\"${key}\" is not a valid configuration key (valid keys are: ${stringifyAnything(_.keys(config))})`)
+      require('./log').error('td.config',
+        oneLine`"${key}" is not a valid configuration key
+          (valid keys are: ${stringifyAnything(_.keys(config))})`)
     }
   })
+}

@@ -5,9 +5,9 @@ let stringifyObject = require('stringify-object-es5')
 module.exports = function (anything) {
   if (_.isString(anything)) {
     if (_.includes(anything, '\n')) {
-      return `\"\"\"\n${anything}\n\"\"\"`
+      return `"""\n${anything}\n"""`
     } else {
-      return `\"${anything.replace(new RegExp('"', 'g'), '\\"')}\"`
+      return `"${anything.replace(new RegExp('"', 'g'), '\\"')}"`
     }
   } else if ((anything != null ? anything.__matches : undefined) != null) {
     return anything.__name

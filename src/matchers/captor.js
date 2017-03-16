@@ -1,8 +1,7 @@
 let create = require('./create')
 
 module.exports = function () {
-  let captor
-  return captor = {
+  let captor = {
     capture: create({
       name: 'captor.capture',
       matches (matcherArgs, actual) {
@@ -13,4 +12,5 @@ module.exports = function () {
       }
     })
   }
+  return captor
 }

@@ -8,7 +8,7 @@ module.exports = function () {
     quibble.reset()
   }
   _.each(resetHandlers, f => f())
-  return resetHandlers = []
+  resetHandlers = []
 }
 
 module.exports.onNextReset = func => resetHandlers.push(func)

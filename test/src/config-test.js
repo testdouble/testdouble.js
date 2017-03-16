@@ -17,7 +17,7 @@ describe('td.config', () => {
   it('overriding a non-existent property', () => {
     let error
 
-    try { td.config({wat: 'wat?'}) } catch(e) { error = e }
+    try { td.config({wat: 'wat?'}) } catch (e) { error = e }
 
     expect(error.message).to.eq(
       'Error: testdouble.js - td.config - "wat" is not a valid configuration ' +

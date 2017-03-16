@@ -15,6 +15,6 @@ module.exports = function (realThing, optionalName) {
   } else if (_.isFunction(realThing)) {
     return tdFunction(realThing, optionalName)
   } else {
-    return log.error('td.replace', `\"${optionalName}\" property was found, but test double only knows how to replace functions, constructors, & objects containing functions (its value was ${stringifyAnything(realThing)}).`)
+    return log.error('td.replace', `"${optionalName}" property was found, but test double only knows how to replace functions, constructors, & objects containing functions (its value was ${stringifyAnything(realThing)}).`)
   }
 }

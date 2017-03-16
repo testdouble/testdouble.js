@@ -1,7 +1,6 @@
 let _ = require('../util/lodash-wrap')
 
 let imitate = require('./imitate')
-let isConstructor = require('./is-constructor')
 let log = require('../log')
 let reset = require('../reset')
 let stringifyAnything = require('../stringify/anything')
@@ -11,7 +10,7 @@ module.exports = function (object, property, manualReplacement) {
   let realThingExists = object[property] || object.hasOwnProperty(property)
 
   if (!isManual && !realThingExists) {
-    log.error('td.replace', `No \"${property}\" property was found.`)
+    log.error('td.replace', `No "${property}" property was found.`)
   }
   let realThing = object[property]
   let fakeThing = isManual
@@ -20,12 +19,10 @@ module.exports = function (object, property, manualReplacement) {
   : imitate(realThing, property)
   object[property] = fakeThing
 
-  reset.onNextReset(function () {
-    if (realThingExists) {
-      return object[property] = realThing
-    } else {
-      return delete object[property]
-    }
+  reset.onNextReset(() => {
+    realThingExists
+      ? object[property] = realThing
+      : delete object[property]
   })
 
   return fakeThing

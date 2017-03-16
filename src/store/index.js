@@ -7,20 +7,21 @@ let globalStore = []
 
 module.exports = {
   onReset (func) {
-    return storeEmitter.on('reset', func)
+    storeEmitter.on('reset', func)
   },
 
   reset () {
     globalStore = []
-    return storeEmitter.emit('reset')
+    storeEmitter.emit('reset')
   },
 
-  for (testDouble, createIfNew) {
-    let entry
-    if (createIfNew == null) { createIfNew = true }
-    if (entry = _.find(globalStore, {testDouble})) { return entry }
-    if (!createIfNew) { return }
-    return _.tap(initialEntryFor(testDouble), newEntry => globalStore.push(newEntry))
+  for (testDouble, createIfNew = true) {
+    let entry = _.find(globalStore, {testDouble})
+    if (entry) {
+      return entry
+    } else if (createIfNew) {
+      return _.tap(initialEntryFor(testDouble), newEntry => globalStore.push(newEntry))
+    }
   }
 }
 

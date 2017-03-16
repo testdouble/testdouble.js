@@ -4,33 +4,32 @@ let calls = require('./store/calls')
 let stubbings = require('./store/stubbings')
 let copyProperties = require('./util/copy-properties')
 
-module.exports = function (nameOrFunc, __optionalName) {
-  if (_.isFunction(nameOrFunc)) {
-    return createTestDoubleForFunction(nameOrFunc, __optionalName)
-  } else {
-    return createTestDoubleNamed(nameOrFunc || __optionalName)
-  }
-}
+module.exports = (nameOrFunc, __optionalName) =>
+  _.isFunction(nameOrFunc)
+    ? createTestDoubleForFunction(nameOrFunc, __optionalName)
+    : createTestDoubleNamed(nameOrFunc || __optionalName)
 
 var createTestDoubleForFunction = (func, optionalName) =>
   _.tap(copyProperties(func, createTestDoubleNamed(func.name || optionalName)), testDouble =>
-    _.each(_.functions(func), funcName => testDouble[funcName] = createTestDoubleNamed(`${func.name || optionalName || ''}.${funcName}`))
+    _.each(_.functions(func), funcName => {
+      let tdName = `${func.name || optionalName || ''}.${funcName}`
+      testDouble[funcName] = createTestDoubleNamed(tdName)
+    })
   )
 
 var createTestDoubleNamed = name =>
-  _.tap(createTestDoubleFunction(), function (testDouble) {
+  _.tap(createTestDoubleFunction(), (testDouble) => {
     let entry = store.for(testDouble, true)
     if (name != null) {
       entry.name = name
-      return testDouble.toString = () => `[test double for \"${name}\"]`
+      testDouble.toString = () => `[test double for "${name}"]`
     } else {
-      return testDouble.toString = () => '[test double (unnamed)]'
+      testDouble.toString = () => '[test double (unnamed)]'
     }
   })
 
-var createTestDoubleFunction = function () {
-  let testDouble
-  return testDouble = function (...args) {
+var createTestDoubleFunction = () => {
+  return function testDouble (...args) {
     calls.log(testDouble, args, this)
     return stubbings.invoke(testDouble, args)
   }

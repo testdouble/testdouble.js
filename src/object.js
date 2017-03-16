@@ -37,7 +37,6 @@ var createTestDoublesForFunctionNames = names =>
   , {})
 
 var createTestDoubleViaProxy = function (name, config) {
-  let obj, proxy
   if (typeof Proxy === 'undefined') {
     throw new Error(`\
 The current runtime does not have Proxy support, which is what
@@ -51,7 +50,8 @@ Did you mean \`td.object(['${name}'])\`?\
     )
   }
 
-  return proxy = new Proxy((obj = {}), {
+  let obj = {}
+  let proxy = new Proxy(obj, {
     get (target, propKey, receiver) {
       if (!obj.hasOwnProperty(propKey) && !_.includes(config.excludeMethods, propKey)) {
         obj[propKey] = (proxy[propKey] = tdFunction(`${nameOf(name)}#${propKey}`))
@@ -59,13 +59,14 @@ Did you mean \`td.object(['${name}'])\`?\
       return obj[propKey]
     }
   })
+  return proxy
 }
 
 var withDefaults = config => _.extend({}, DEFAULT_OPTIONS, config)
 
 var addToStringToDouble = function (fakeObject, nameOrType) {
   let name = nameOf(nameOrType)
-  fakeObject.toString = () => `[test double object${name ? ` for \"${name}\"` : ''}]`
+  fakeObject.toString = () => `[test double object${name ? ` for "${name}"` : ''}]`
   return fakeObject
 }
 

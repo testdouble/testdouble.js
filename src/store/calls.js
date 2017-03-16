@@ -4,7 +4,7 @@ let store = require('./index')
 let argsMatch = require('./../args-match')
 
 let callHistory = [] // <-- remember this to pop our DSL of when(<call>)/verify(<call>)
-store.onReset(() => callHistory = [])
+store.onReset(() => { callHistory = [] })
 
 module.exports = {
 

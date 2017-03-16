@@ -1,7 +1,6 @@
 let _ = require('../util/lodash-wrap')
 
 let store = require('./index')
-let callsStore = require('./calls')
 let argsMatch = require('../args-match')
 let callback = require('../matchers/callback')
 let config = require('../config')
