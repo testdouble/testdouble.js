@@ -1,5 +1,4 @@
 let _ = require('../util/lodash-wrap')
-
 let imitate = require('./imitate')
 let log = require('../log')
 let reset = require('../reset')
@@ -9,23 +8,30 @@ module.exports = function (object, property, manualReplacement) {
   let isManual = arguments.length > 2
   let realThingExists = object[property] || object.hasOwnProperty(property)
 
-  if (!isManual && !realThingExists) {
+  if (isManual || realThingExists) {
+    let realThing = object[property]
+    return _.tap(getFake(isManual, property, manualReplacement, realThing), (fakeThing) => {
+      object[property] = fakeThing
+      reset.onNextReset(() => {
+        if (realThingExists) {
+          object[property] = realThing
+        } else {
+          delete object[property]
+        }
+      })
+    })
+  } else {
     log.error('td.replace', `No "${property}" property was found.`)
   }
-  let realThing = object[property]
-  let fakeThing = isManual
-    ? (warnIfTypeMismatch(property, manualReplacement, realThing),
-    manualReplacement)
-  : imitate(realThing, property)
-  object[property] = fakeThing
+}
 
-  reset.onNextReset(() => {
-    realThingExists
-      ? object[property] = realThing
-      : delete object[property]
-  })
-
-  return fakeThing
+var getFake = (isManual, property, manualReplacement, realThing) => {
+  if (isManual) {
+    warnIfTypeMismatch(property, manualReplacement, realThing)
+    return manualReplacement
+  } else {
+    return imitate(realThing, property)
+  }
 }
 
 var warnIfTypeMismatch = function (property, fakeThing, realThing) {
