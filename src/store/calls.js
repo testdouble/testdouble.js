@@ -1,5 +1,4 @@
 let _ = require('../util/lodash-wrap')
-
 let store = require('./index')
 let argsMatch = require('./../args-match')
 
@@ -7,15 +6,14 @@ let callHistory = [] // <-- remember this to pop our DSL of when(<call>)/verify(
 store.onReset(() => { callHistory = [] })
 
 module.exports = {
-
   log (testDouble, args, context) {
     store.for(testDouble).calls.push({args, context})
     return callHistory.push({testDouble, args, context})
   },
 
   pop () {
-    return _.tap((callHistory.pop()), function (call) {
-      if (call != null) { return store.for(call.testDouble).calls.pop() }
+    return _.tap(callHistory.pop(), function (call) {
+      if (call != null) store.for(call.testDouble).calls.pop()
     })
   },
 
@@ -29,7 +27,8 @@ module.exports = {
   },
 
   where (testDouble, args, config) {
-    return _.filter(store.for(testDouble).calls, call => argsMatch(args, call.args, config))
+    return _.filter(store.for(testDouble).calls, call =>
+      argsMatch(args, call.args, config))
   },
 
   for (testDouble) {
