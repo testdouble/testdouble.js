@@ -32,6 +32,7 @@ module.exports = {
   reject: require('lodash/reject'),
   some: require('lodash/some'),
   tap: require('lodash/tap'),
+  transform: require('lodash/transform'),
   union: require('lodash/union'),
   uniq: require('lodash/uniq'),
   without: require('lodash/without')

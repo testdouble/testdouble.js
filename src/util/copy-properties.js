@@ -1,20 +1,20 @@
 let _ = require('./lodash-wrap')
+const defineProps = Object.defineProperties
+const getProps = Object.getOwnPropertyNames
 
-module.exports = function (original, target) {
-  let properties = Object.getOwnPropertyNames(original)
-
-  Object.defineProperties(target, _.reduce(properties, function (memo, p) {
-    if (!target.hasOwnProperty(p)) {
-      memo[p] = {
-        configurable: true,
-        writable: true,
-        value: original[p],
-        enumerable: original.propertyIsEnumerable(p)
+module.exports = (original, target) =>
+  _.tap(target, (target) => {
+    defineProps(target, _.transform(getProps(original), (acc, p) => {
+      if (!target.hasOwnProperty(p)) {
+        acc[p] = propertyDefinitionFor(original, p)
       }
-    }
-    return memo
-  }
-  , {}))
+    }))
+  })
 
-  return target
-}
+var propertyDefinitionFor = (original, p) =>
+  ({
+    configurable: true,
+    writable: true,
+    value: original[p],
+    enumerable: original.propertyIsEnumerable(p)
+  })
