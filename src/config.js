@@ -1,5 +1,3 @@
-import oneLine from 'common-tags/lib/oneLine'
-
 let _ = require('./util/lodash-wrap')
 let stringifyAnything = require('./stringify/anything')
 
@@ -24,8 +22,7 @@ function ensureOverridesExist (overrides) {
   _.each(overrides, (val, key) => {
     if (!config.hasOwnProperty(key)) {
       require('./log').error('td.config',
-        oneLine`"${key}" is not a valid configuration key
-          (valid keys are: ${stringifyAnything(_.keys(config))})`)
+        `"${key}" is not a valid configuration key (valid keys are: ${stringifyAnything(_.keys(config))})`)
     }
   })
 }

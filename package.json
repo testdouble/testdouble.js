@@ -61,7 +61,6 @@
     "globals": ["describe", "it", "expect", "td"]
   },
   "dependencies": {
-    "common-tags": "^1.4.0",
     "lodash": "^4.15.0",
     "quibble": "^0.4.0",
     "stringify-object-es5": "^2.5.0"
