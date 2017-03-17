@@ -56,3 +56,9 @@ describe 'td.constructor', ->
     And -> @fakeConstructor.toString() == '[test double constructor]'
     And -> @fakeInstance.toString() == '[test double instance of constructor]'
     And -> @fakeInstance.foo.toString() == '[test double for "#foo"]'
+
+  describe 'edge case: being given a function without prototypal methods', ->
+    Given -> @boringFunc = ->
+    Given -> @boringFunc.foo = ->
+    When -> @fakeFunc = td.constructor(@boringFunc)
+    Then -> td.explain(@fakeFunc.foo).isTestDouble == true

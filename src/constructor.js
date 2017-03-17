@@ -1,10 +1,9 @@
 const _ = require('./util/lodash-wrap')
 const tdFunction = require('./function')
-const isConstructor = require('./replace/is-constructor')
 const getAllCustomPrototypalFunctionNames = require('./util/get-all-custom-prototypal-function-names')
 
 module.exports = (typeOrNames) =>
-  isConstructor(typeOrNames)
+  _.isFunction(typeOrNames)
     ? fakeConstructorFromType(typeOrNames)
     : fakeConstructorFromNames(typeOrNames)
 
