@@ -85,7 +85,7 @@
     "semver": "^5.3.0",
     "standard": "^9.0.1",
     "testem": "^0.9.4",
-    "typescript": "^2.1.4"
+    "typescript": "^2.2.1"
   },
   "directories": {
     "doc": "./docs",
