@@ -1,5 +1,18 @@
 # Change Log
 
+## [v2.0.2](https://github.com/testdouble/testdouble.js/tree/v2.0.2) (2017-03-17)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v2.0.1...v2.0.2)
+
+**Closed issues:**
+
+- Mocking a constructor function with no prototypes does not correctly mock static methods [\#208](https://github.com/testdouble/testdouble.js/issues/208)
+- Test td.function\(\) after other td fuction\(\) [\#202](https://github.com/testdouble/testdouble.js/issues/202)
+- How do I stub a function that being promisify'd by bluebird? [\#200](https://github.com/testdouble/testdouble.js/issues/200)
+
+**Merged pull requests:**
+
+- Decaffeinate [\#206](https://github.com/testdouble/testdouble.js/pull/206) ([searls](https://github.com/searls))
+
 ## [v2.0.1](https://github.com/testdouble/testdouble.js/tree/v2.0.1) (2017-03-13)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v2.0.0...v2.0.1)
 
