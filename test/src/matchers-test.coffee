@@ -1,8 +1,5 @@
 matches = (expected, actual) ->
-  if NODE_JS
-    requireSource('args-match')([expected], [actual], {})
-  else
-    expected.__matches(actual)
+   require('../../src/args-match')([expected], [actual], {})
 
 describe '.matchers', ->
   Given -> @matches = matches

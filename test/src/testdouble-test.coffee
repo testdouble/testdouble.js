@@ -1,16 +1,14 @@
-return unless NODE_JS
-
 describe "td.*", ->
   describe "where all the functions are", ->
-    Then -> td.when == requireSource('when')
-    Then -> td.verify == requireSource('verify')
-    Then -> td.function == requireSource('function')
-    Then -> td.func == requireSource('function')
-    Then -> td.object == requireSource('object')
-    Then -> td.constructor == requireSource('constructor')
-    Then -> td.matchers == requireSource('matchers')
-    Then -> td.callback == requireSource('matchers/callback')
-    Then -> td.explain == requireSource('explain')
-    Then -> td.reset == requireSource('reset')
-    Then -> td.replace == requireSource('replace/index')
+    Then -> td.when == require('../../src/when')
+    Then -> td.verify == require('../../src/verify')
+    Then -> td.function == require('../../src/function')
+    Then -> td.func == require('../../src/function')
+    Then -> td.object == require('../../src/object')
+    Then -> td.constructor == require('../../src/constructor')
+    Then -> td.matchers == require('../../src/matchers')
+    Then -> td.callback == require('../../src/matchers/callback')
+    Then -> td.explain == require('../../src/explain')
+    Then -> td.reset == require('../../src/reset')
+    Then -> td.replace == require('../../src/replace/index')
     Then -> td.version == require('../../package').version

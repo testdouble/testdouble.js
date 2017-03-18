@@ -8,6 +8,6 @@ npm-debug.log*
 
 /generated
 /lib
-/.coverage
+/coverage
 
 .node-version

@@ -1,7 +1,5 @@
-return unless NODE_JS
-
 describe 'log', ->
-  Given -> @subject = requireSource('log')
+  Given -> @subject = require('../../src/log')
 
   describe '.warn', ->
     Given -> @ogWarn = console.warn

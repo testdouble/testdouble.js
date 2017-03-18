@@ -1,7 +1,5 @@
-return unless NODE_JS
-
 describe 'args-match', ->
-  Given -> @subject = requireSource('args-match')
+  Given -> @subject = require('../../src/args-match')
 
   context 'allow matchers', ->
     When -> @result =  @subject([td.matchers.anything()], [5])
