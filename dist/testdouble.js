@@ -1,5 +1,5 @@
 /*
- * testdouble@2.0.2
+ * testdouble@2.0.3
  *
  *   A minimal test double library for TDD with JavaScript
  *
@@ -271,7 +271,7 @@ var createTestDoubleFunction = function createTestDoubleFunction() {
     }
 
     calls.log(testDouble, args, this);
-    return stubbings.invoke(testDouble, args);
+    return stubbings.invoke(testDouble, args, this);
   };
 };
 },{"./store":26,"./store/calls":25,"./store/stubbings":27,"./util/copy-properties":30,"./util/lodash-wrap":32}],6:[function(require,module,exports){
@@ -797,10 +797,10 @@ module.exports = {
       config: config
     });
   },
-  invoke: function invoke(testDouble, actualArgs) {
+  invoke: function invoke(testDouble, actualArgs, actualContext) {
     var stubbing = stubbingFor(testDouble, actualArgs);
     if (stubbing) {
-      return executePlan(stubbing, actualArgs);
+      return executePlan(stubbing, actualArgs, actualContext);
     }
   },
   for: function _for(testDouble) {
@@ -814,7 +814,7 @@ var stubbingFor = function stubbingFor(testDouble, actualArgs) {
   });
 };
 
-var executePlan = function executePlan(stubbing, actualArgs) {
+var executePlan = function executePlan(stubbing, actualArgs, actualContext) {
   var value = stubbedValueFor(stubbing);
   stubbing.callCount += 1;
   invokeCallbackFor(stubbing, actualArgs);
@@ -822,7 +822,7 @@ var executePlan = function executePlan(stubbing, actualArgs) {
     case 'thenReturn':
       return value;
     case 'thenDo':
-      return value.apply(undefined, _toConsumableArray(actualArgs));
+      return value.apply(actualContext, actualArgs);
     case 'thenThrow':
       throw value;
     case 'thenResolve':
@@ -1115,7 +1115,7 @@ var ignoreMessage = function ignoreMessage(config) {
 },{"./args-match":1,"./log":6,"./store":26,"./store/calls":25,"./store/stubbings":27,"./stringify/arguments":29,"./util/lodash-wrap":32}],34:[function(require,module,exports){
 'use strict';
 
-module.exports = '2.0.2';
+module.exports = '2.0.3';
 },{}],35:[function(require,module,exports){
 'use strict';
 
@@ -1267,8 +1267,12 @@ EventEmitter.prototype.emit = function(type) {
       er = arguments[1];
       if (er instanceof Error) {
         throw er; // Unhandled 'error' event
+      } else {
+        // At least give some kind of context to the user
+        var err = new Error('Uncaught, unspecified "error" event. (' + er + ')');
+        err.context = er;
+        throw err;
       }
-      throw TypeError('Uncaught, unspecified "error" event.');
     }
   }
 
@@ -1291,18 +1295,11 @@ EventEmitter.prototype.emit = function(type) {
         break;
       // slower
       default:
-        len = arguments.length;
-        args = new Array(len - 1);
-        for (i = 1; i < len; i++)
-          args[i - 1] = arguments[i];
+        args = Array.prototype.slice.call(arguments, 1);
         handler.apply(this, args);
     }
   } else if (isObject(handler)) {
-    len = arguments.length;
-    args = new Array(len - 1);
-    for (i = 1; i < len; i++)
-      args[i - 1] = arguments[i];
-
+    args = Array.prototype.slice.call(arguments, 1);
     listeners = handler.slice();
     len = listeners.length;
     for (i = 0; i < len; i++)
@@ -1340,7 +1337,6 @@ EventEmitter.prototype.addListener = function(type, listener) {
 
   // Check for listener leak
   if (isObject(this._events[type]) && !this._events[type].warned) {
-    var m;
     if (!isUndefined(this._maxListeners)) {
       m = this._maxListeners;
     } else {
@@ -1462,7 +1458,7 @@ EventEmitter.prototype.removeAllListeners = function(type) {
 
   if (isFunction(listeners)) {
     this.removeListener(type, listeners);
-  } else {
+  } else if (listeners) {
     // LIFO order
     while (listeners.length)
       this.removeListener(type, listeners[listeners.length - 1]);
@@ -1483,15 +1479,20 @@ EventEmitter.prototype.listeners = function(type) {
   return ret;
 };
 
+EventEmitter.prototype.listenerCount = function(type) {
+  if (this._events) {
+    var evlistener = this._events[type];
+
+    if (isFunction(evlistener))
+      return 1;
+    else if (evlistener)
+      return evlistener.length;
+  }
+  return 0;
+};
+
 EventEmitter.listenerCount = function(emitter, type) {
-  var ret;
-  if (!emitter._events || !emitter._events[type])
-    ret = 0;
-  else if (isFunction(emitter._events[type]))
-    ret = 1;
-  else
-    ret = emitter._events[type].length;
-  return ret;
+  return emitter.listenerCount(type);
 };
 
 function isFunction(arg) {
