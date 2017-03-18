@@ -189,7 +189,7 @@ To create a test double of the constructor that has prototypal function `bark`
 and "static" function `woof`, simply pass `Dog` to `td.constructor()`
 
 ``` javascript
-var FakeDog = td.object(Dog)
+var FakeDog = td.constructor(Dog)
 
 FakeDog.prototype.bark // a test double function named 'Dog#bark'
 FakeDog.woof // a test double function named 'Dog.woof'
