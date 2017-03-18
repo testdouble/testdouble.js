@@ -1,5 +1,4 @@
 describe 'getAllCustomPrototypalFunctionNames', ->
-  return unless NODE_JS
   Given -> @subject = require('../../../src/util/get-all-custom-prototypal-function-names')
 
   describe 'a simple case', ->

@@ -1,6 +1,5 @@
 describe 'store', ->
-  return unless NODE_JS
-  Given -> @subject = requireSource('store/index')
+  Given -> @subject = require('../../../src/store')
 
   describe '.onReset', ->
     Given -> @subject.onReset => @result = 'yay'
