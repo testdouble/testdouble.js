@@ -1,11 +1,11 @@
-const _ = require('../util/lodash-wrap')
-const store = require('./index')
-const argsMatch = require('./../args-match')
+import _ from '../util/lodash-wrap'
+import argsMatch from '../args-match'
+import store from './index'
 
 let callHistory = [] // <-- remember this to pop our DSL of when(<call>)/verify(<call>)
 store.onReset(() => { callHistory = [] })
 
-module.exports = {
+export default {
   log (testDouble, args, context) {
     store.for(testDouble).calls.push({args, context})
     return callHistory.push({testDouble, args, context})

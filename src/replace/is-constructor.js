@@ -1,5 +1,5 @@
-const _ = require('../util/lodash-wrap')
+import _ from '../util/lodash-wrap'
 
-module.exports = (thing) =>
+export default (thing) =>
   thing && thing.prototype && _.some(Object.getOwnPropertyNames(thing.prototype), property =>
     property !== 'constructor' && _.isFunction(thing.prototype[property]))

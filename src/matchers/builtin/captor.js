@@ -1,6 +1,6 @@
-const create = require('../create')
+import create from '../create'
 
-module.exports = () => {
+export default () => {
   const captor = {
     capture: create({
       name: 'captor.capture',

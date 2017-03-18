@@ -1,10 +1,10 @@
-const _ = require('./util/lodash-wrap')
-const quibble = require('quibble')
-const store = require('./store')
+import _ from './util/lodash-wrap'
+import quibble from 'quibble'
+import store from './store'
 
 let resetHandlers = []
 
-module.exports = _.tap(() => {
+export default _.tap(() => {
   store.reset()
   quibble.reset()
   _.each(resetHandlers, (resetHandler) =>

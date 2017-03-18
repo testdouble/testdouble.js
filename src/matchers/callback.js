@@ -1,7 +1,7 @@
-const _ = require('../util/lodash-wrap')
-const create = require('./create')
+import _ from '../util/lodash-wrap'
+import create from './create'
 
-module.exports = _.tap(create({
+export default _.tap(create({
   name: 'callback',
   matches (matcherArgs, actual) {
     return _.isFunction(actual)

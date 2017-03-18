@@ -1,12 +1,12 @@
-const _ = require('./util/lodash-wrap')
-const store = require('./store')
-const callsStore = require('./store/calls')
-const stubbingsStore = require('./store/stubbings')
-const stringifyArgs = require('./stringify/arguments')
-const log = require('./log')
-const argsMatch = require('./args-match')
+import _ from './util/lodash-wrap'
+import argsMatch from './args-match'
+import callsStore from './store/calls'
+import log from './log'
+import store from './store'
+import stringifyArgs from './stringify/arguments'
+import stubbingsStore from './store/stubbings'
 
-module.exports = (__userDoesRehearsalInvocationHere__, config = {}) => {
+export default (__userDoesRehearsalInvocationHere__, config = {}) => {
   const last = callsStore.pop()
   ensureRehearsalOccurred(last)
   if (callsStore.wasInvoked(last.testDouble, last.args, config)) {

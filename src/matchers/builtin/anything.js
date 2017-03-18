@@ -1,6 +1,6 @@
-const create = require('../create')
+import create from '../create'
 
-module.exports = create({
+export default create({
   name: 'anything',
   matches () { return true }
 })

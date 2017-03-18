@@ -1,2 +1,2 @@
-module.exports = (thing) =>
+export default (thing) =>
   thing && thing.__matches

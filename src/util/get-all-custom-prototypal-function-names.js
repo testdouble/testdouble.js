@@ -1,6 +1,6 @@
-const _ = require('./lodash-wrap')
+import _ from './lodash-wrap'
 
-module.exports = (type) =>
+export default (type) =>
   _.uniq(_.without(allPrototypeFunctionNames(type), 'constructor'))
 
 var allPrototypeFunctionNames = (type) =>

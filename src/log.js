@@ -1,6 +1,6 @@
-const config = require('./config')
+import config from './config'
 
-module.exports = {
+export default {
   warn (func, msg, url) {
     if (!config().ignoreWarnings && typeof console === 'object' && console.warn) {
       console.warn(`Warning: testdouble.js - ${func} - ${msg}${withUrl(url)}`)

@@ -1,11 +1,11 @@
-const _ = require('../util/lodash-wrap')
-const store = require('./index')
-const argsMatch = require('../args-match')
-const callback = require('../matchers/callback')
-const config = require('../config')
-const log = require('../log')
+import _ from '../util/lodash-wrap'
+import argsMatch from '../args-match'
+import callback from '../matchers/callback'
+import config from '../config'
+import log from '../log'
+import store from './index'
 
-module.exports = {
+export default {
   add (testDouble, args, stubbedValues, config) {
     return store.for(testDouble).stubbings.push({
       callCount: 0,

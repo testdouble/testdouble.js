@@ -1,10 +1,10 @@
-const _ = require('../util/lodash-wrap')
-const { EventEmitter } = require('events')
+import _ from '../util/lodash-wrap'
+import { EventEmitter } from 'events'
 
 const storeEmitter = new EventEmitter()
 let globalStore = []
 
-module.exports = {
+export default {
   onReset (func) {
     storeEmitter.on('reset', func)
   },

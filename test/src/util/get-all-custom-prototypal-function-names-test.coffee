@@ -1,5 +1,5 @@
 describe 'getAllCustomPrototypalFunctionNames', ->
-  Given -> @subject = require('../../../src/util/get-all-custom-prototypal-function-names')
+  Given -> @subject = require('../../../src/util/get-all-custom-prototypal-function-names').default
 
   describe 'a simple case', ->
     class Fruit

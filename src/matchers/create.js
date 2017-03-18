@@ -1,7 +1,7 @@
-const _ = require('../util/lodash-wrap')
-const stringifyArguments = require('../stringify/arguments')
+import _ from '../util/lodash-wrap'
+import stringifyArguments from '../stringify/arguments'
 
-module.exports = config =>
+export default config =>
   (...matcherArgs) =>
     _.tap({
       __name: nameFor(config, matcherArgs),

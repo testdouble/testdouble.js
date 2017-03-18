@@ -1,10 +1,10 @@
-const _ = require('./util/lodash-wrap')
-const store = require('./store')
-const calls = require('./store/calls')
-const stubbings = require('./store/stubbings')
-const copyProperties = require('./util/copy-properties')
+import _ from './util/lodash-wrap'
+import calls from './store/calls'
+import copyProperties from './util/copy-properties'
+import store from './store'
+import stubbings from './store/stubbings'
 
-module.exports = (nameOrFunc, __optionalName) =>
+export default (nameOrFunc, __optionalName) =>
   _.isFunction(nameOrFunc)
     ? createTestDoubleForFunction(nameOrFunc, __optionalName)
     : createTestDoubleNamed(nameOrFunc || __optionalName)

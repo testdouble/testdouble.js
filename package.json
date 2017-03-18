@@ -34,7 +34,7 @@
     "test:example:lineman": "cd examples/lineman && yarn install && yarn test && cd ../..",
     "test:example:babel": "cd examples/babel && yarn install && yarn test && cd ../..",
     "test:example": "yarn run test:example:node && yarn run test:example:lineman && yarn run test:example:webpack && yarn run test:example:babel",
-    "version:write": "echo \"module.exports = '$npm_package_version'\" > src/version.js",
+    "version:write": "echo \"export default '$npm_package_version'\" > src/version.js",
     "version:changelog": "if command -v github_changelog_generator &>/dev/null; then github_changelog_generator; git commit -m \"Changelog for $npm_package_version\" CHANGELOG.md; else echo Versioning requires you first run 'gem install github_changelog_generator' >&2; fi",
     "preversion": "git pull --rebase && yarn run test:ci",
     "version": "yarn run version:write && yarn run compile && git add dist src/version.js",

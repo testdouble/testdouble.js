@@ -1,5 +1,6 @@
-const _ = require('./util/lodash-wrap')
-const stringifyAnything = require('./stringify/anything')
+import _ from './util/lodash-wrap'
+import log from './log'
+import stringifyAnything from './stringify/anything'
 
 const DEFAULTS = {
   promiseConstructor: global.Promise,
@@ -8,7 +9,7 @@ const DEFAULTS = {
 }
 let configData = _.extend({}, DEFAULTS)
 
-module.exports = _.tap((overrides) => {
+export default _.tap((overrides) => {
   ensureOverridesExist(overrides)
   return _.extend(configData, overrides)
 }, (config) => {
@@ -20,7 +21,7 @@ module.exports = _.tap((overrides) => {
 var ensureOverridesExist = (overrides) => {
   _.each(overrides, (val, key) => {
     if (!configData.hasOwnProperty(key)) {
-      require('./log').error('td.config',
+      log.error('td.config',
         `"${key}" is not a valid configuration key (valid keys are: ${stringifyAnything(_.keys(configData))})`)
     }
   })

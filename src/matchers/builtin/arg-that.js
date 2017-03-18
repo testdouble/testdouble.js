@@ -1,6 +1,6 @@
-const create = require('../create')
+import create from '../create'
 
-module.exports = create({
+export default create({
   name: 'argThat',
   matches (matcherArgs, actual) {
     const predicate = matcherArgs[0]

@@ -1,7 +1,7 @@
-const _ = require('../../util/lodash-wrap')
-const create = require('../create')
+import _ from '../../util/lodash-wrap'
+import create from '../create'
 
-module.exports = create({
+export default create({
   name: 'contains',
   matches (containings, actualArg) {
     if (containings.length === 0) return false

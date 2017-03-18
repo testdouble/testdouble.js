@@ -1,5 +1,5 @@
 describe 'log', ->
-  Given -> @subject = require('../../src/log')
+  Given -> @subject = require('../../src/log').default
 
   describe '.warn', ->
     Given -> @ogWarn = console.warn

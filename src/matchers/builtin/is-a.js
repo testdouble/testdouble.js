@@ -1,8 +1,8 @@
-const _ = require('../../util/lodash-wrap')
-const create = require('../create')
-const stringifyArguments = require('../../stringify/arguments')
+import _ from '../../util/lodash-wrap'
+import create from '../create'
+import stringifyArguments from '../../stringify/arguments'
 
-module.exports = create({
+export default create({
   name (matcherArgs) {
     const desc = _.get(matcherArgs[0], 'name') || stringifyArguments(matcherArgs)
     return `isA(${desc})`

@@ -1,5 +1,5 @@
 matches = (expected, actual) ->
-   require('../../src/args-match')([expected], [actual], {})
+   require('../../src/args-match').default([expected], [actual], {})
 
 describe '.matchers', ->
   Given -> @matches = matches

@@ -1,8 +1,9 @@
-const _ = require('./lodash-wrap')
+import _ from './lodash-wrap'
+
 const defineProps = Object.defineProperties
 const getProps = Object.getOwnPropertyNames
 
-module.exports = (original, target) =>
+export default (original, target) =>
   _.tap(target, (target) => {
     defineProps(target, _.transform(getProps(original), (acc, p) => {
       if (!target.hasOwnProperty(p)) {

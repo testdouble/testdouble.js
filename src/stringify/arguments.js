@@ -1,7 +1,7 @@
-const _ = require('../util/lodash-wrap')
-const stringifyAnything = require('./anything')
+import _ from '../util/lodash-wrap'
+import stringifyAnything from './anything'
 
-module.exports = (args, joiner = ', ', wrapper = '') =>
+export default (args, joiner = ', ', wrapper = '') =>
   _.map(args, arg =>
     `${wrapper}${stringifyAnything(arg)}${wrapper}`
   ).join(joiner)

@@ -1,8 +1,8 @@
-const _ = require('./util/lodash-wrap')
-const tdFunction = require('./function')
-const getAllCustomPrototypalFunctionNames = require('./util/get-all-custom-prototypal-function-names')
+import _ from './util/lodash-wrap'
+import getAllCustomPrototypalFunctionNames from './util/get-all-custom-prototypal-function-names'
+import tdFunction from './function'
 
-module.exports = (typeOrNames) =>
+export default (typeOrNames) =>
   _.isFunction(typeOrNames)
     ? fakeConstructorFromType(typeOrNames)
     : fakeConstructorFromNames(typeOrNames)

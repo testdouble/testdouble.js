@@ -1,10 +1,10 @@
-const _ = require('./util/lodash-wrap')
-const store = require('./store')
-const callsStore = require('./store/calls')
-const stubbingsStore = require('./store/stubbings')
-const stringifyArgs = require('./stringify/arguments')
+import _ from './util/lodash-wrap'
+import callsStore from './store/calls'
+import store from './store'
+import stringifyArgs from './stringify/arguments'
+import stubbingsStore from './store/stubbings'
 
-module.exports = (testDouble) => {
+export default (testDouble) => {
   if (store.for(testDouble, false) == null) { return nullDescription() }
   const calls = callsStore.for(testDouble)
   const stubs = stubbingsStore.for(testDouble)

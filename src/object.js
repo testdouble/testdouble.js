@@ -1,13 +1,13 @@
-const _ = require('./util/lodash-wrap')
-const tdFunction = require('./function')
-const tdConstructor = require('./constructor')
-const copyProperties = require('./util/copy-properties')
-const isConstructor = require('./replace/is-constructor')
-const log = require('./log')
+import _ from './util/lodash-wrap'
+import copyProperties from './util/copy-properties'
+import isConstructor from './replace/is-constructor'
+import log from './log'
+import tdConstructor from './constructor'
+import tdFunction from './function'
 
 const DEFAULT_OPTIONS = {excludeMethods: ['then']}
 
-module.exports = (nameOrType, config) =>
+export default (nameOrType, config) =>
   _.tap(fakeObject(nameOrType, config), (obj) => {
     addToStringToDouble(obj, nameOrType)
   })

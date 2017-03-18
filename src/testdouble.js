@@ -1,15 +1,28 @@
+import callback from './matchers/callback'
+import config from './config'
+import constructor from './constructor'
+import explain from './explain'
+import matchers from './matchers'
+import object from './object'
+import replace from './replace'
+import reset from './reset'
+import tdFunction from './function'
+import verify from './verify'
+import version from './version'
+import when from './when'
+
 module.exports = {
-  function: require('./function'),
-  func: require('./function'),
-  object: require('./object'),
-  constructor: require('./constructor'),
-  when: require('./when'),
-  verify: require('./verify'),
-  matchers: require('./matchers'),
-  replace: require('./replace'),
-  explain: require('./explain'),
-  reset: require('./reset'),
-  config: require('./config'),
-  callback: require('./matchers/callback'),
-  version: require('./version')
+  function: tdFunction,
+  func: tdFunction,
+  object,
+  constructor,
+  when,
+  verify,
+  matchers,
+  replace,
+  explain,
+  reset,
+  config,
+  callback,
+  version
 }

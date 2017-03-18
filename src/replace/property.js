@@ -1,10 +1,10 @@
-const _ = require('../util/lodash-wrap')
-const imitate = require('./imitate')
-const log = require('../log')
-const reset = require('../reset')
-const stringifyAnything = require('../stringify/anything')
+import _ from '../util/lodash-wrap'
+import imitate from './imitate'
+import log from '../log'
+import reset from '../reset'
+import stringifyAnything from '../stringify/anything'
 
-module.exports = function (object, property, manualReplacement) {
+export default function (object, property, manualReplacement) {
   const isManual = arguments.length > 2
   const realThingExists = object[property] || object.hasOwnProperty(property)
 

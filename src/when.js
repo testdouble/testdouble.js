@@ -1,11 +1,11 @@
-const _ = require('./util/lodash-wrap')
-const calls = require('./store/calls')
-const stubbings = require('./store/stubbings')
-const callback = require('./matchers/callback')
-const log = require('./log')
-const tdConfig = require('./config')
+import _ from './util/lodash-wrap'
+import callback from './matchers/callback'
+import calls from './store/calls'
+import log from './log'
+import stubbings from './store/stubbings'
+import tdConfig from './config'
 
-module.exports = (__userDoesRehearsalInvocationHere__, config = {}) =>
+export default (__userDoesRehearsalInvocationHere__, config = {}) =>
   ({
     thenReturn (...stubbedValues) {
       return addStubbing(stubbedValues, config, 'thenReturn')

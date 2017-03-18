@@ -1,7 +1,7 @@
-const _ = require('../../util/lodash-wrap')
-const create = require('../create')
+import _ from '../../util/lodash-wrap'
+import create from '../create'
 
-module.exports = create({
+export default create({
   name: 'not',
   matches (matcherArgs, actual) {
     const expected = matcherArgs[0]
