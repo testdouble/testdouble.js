@@ -16,8 +16,7 @@ before_install:
   - if [ $(phantomjs --version) != '2.1.1' ]; then $PWD/script/travis_get_updated_phantomjs; hash -d phantomjs || true; echo "updated phantomjs version is $(phantomjs --version)"; fi
 script: yarn run test:ci
 after_script:
-  - yarn run test:cover
-  - yarn run test:cover:report
+  - node -v | grep "v6" && yarn run test:cover && yarn run test:cover:report
 addons:
   code_climate:
     repo_token: c92188dcdeaca7d9732f8ea38fdd41d6bff18dc27a8d6f8b64a5b1311b7b6c21
