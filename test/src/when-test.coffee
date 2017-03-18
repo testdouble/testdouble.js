@@ -102,12 +102,12 @@ describe 'when', ->
 
       describe 'td.when…thenResolve', ->
         Given -> td.when(@testDouble(10)).thenResolve('pants')
-        When (done) -> @testDouble(10).then((@resolved) => done())
+        When (done) -> @testDouble(10).then((@resolved) => done()); undefined
         Then -> @resolved == 'pants'
 
       describe 'td.when…thenReject', ->
         Given -> td.when(@testDouble(10)).thenReject('oops')
-        When (done) -> @testDouble(10).then null, (@rejected) => done()
+        When (done) -> @testDouble(10).then(null, (@rejected) => done()); undefined
         Then -> @rejected == 'oops'
 
     context 'with an alternative promise constructor', ->
