@@ -1,6 +1,5 @@
-return unless NODE_JS
-
 describe "td.*", ->
+  return unless NODE_JS
   describe "where all the functions are", ->
     Then -> td.when == requireSource('when')
     Then -> td.verify == requireSource('verify')

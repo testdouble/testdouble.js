@@ -1,6 +1,5 @@
-return unless NODE_JS
-
 describe 'log', ->
+  return unless NODE_JS
   Given -> @subject = requireSource('log')
 
   describe '.warn', ->

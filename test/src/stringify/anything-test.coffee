@@ -1,7 +1,5 @@
-return unless NODE_JS
-
-
 describe 'stringify/anything', ->
+  return unless NODE_JS
   Given -> @subject = requireSource('stringify/anything')
   Then -> @subject(undefined) == "undefined"
   And -> @subject(null) == "null"

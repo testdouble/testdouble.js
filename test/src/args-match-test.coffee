@@ -1,6 +1,5 @@
-return unless NODE_JS
-
 describe 'args-match', ->
+  return unless NODE_JS
   Given -> @subject = requireSource('args-match')
 
   context 'allow matchers', ->

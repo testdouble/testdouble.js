@@ -1,6 +1,5 @@
-return unless NODE_JS
-
 describe 'store', ->
+  return unless NODE_JS
   Given -> @subject = requireSource('store/index')
 
   describe '.onReset', ->
