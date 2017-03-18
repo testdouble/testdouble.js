@@ -31,5 +31,5 @@ var createTestDoubleNamed = (name) =>
 var createTestDoubleFunction = () =>
   function testDouble (...args) {
     calls.log(testDouble, args, this)
-    return stubbings.invoke(testDouble, args)
+    return stubbings.invoke(this, testDouble, args)
   }

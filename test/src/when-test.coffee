@@ -89,6 +89,11 @@ describe 'when', ->
     When -> @testDouble(55)
     And -> @result == 'yatta'
 
+  describe 'stubbing actions with `thenDo` preserves function context', ->
+    Given -> td.when(@testDouble(55)).thenDo(-> this.result)
+    When -> @result = @testDouble.call({ result: 'yatta' }, 55)
+    Then -> @result == 'yatta'
+
   describe 'stubbing actions with `thenThrow` instead of `thenReturn`', ->
     Given -> @error = new Error('lol')
     Given -> td.when(@testDouble(42)).thenThrow(@error)
