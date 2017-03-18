@@ -1,5 +1,12 @@
 # Change Log
 
+## [v2.0.3](https://github.com/testdouble/testdouble.js/tree/v2.0.3) (2017-03-18)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v2.0.2...v2.0.3)
+
+**Merged pull requests:**
+
+- Rework test build [\#211](https://github.com/testdouble/testdouble.js/pull/211) ([searls](https://github.com/searls))
+
 ## [v2.0.2](https://github.com/testdouble/testdouble.js/tree/v2.0.2) (2017-03-17)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v2.0.1...v2.0.2)
 
@@ -11,6 +18,7 @@
 
 **Merged pull requests:**
 
+- Preserve function context when calling thenDo [\#209](https://github.com/testdouble/testdouble.js/pull/209) ([connor4312](https://github.com/connor4312))
 - Decaffeinate [\#206](https://github.com/testdouble/testdouble.js/pull/206) ([searls](https://github.com/searls))
 
 ## [v2.0.1](https://github.com/testdouble/testdouble.js/tree/v2.0.1) (2017-03-13)
