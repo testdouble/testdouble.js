@@ -15,10 +15,10 @@ module.exports = {
     })
   },
 
-  invoke (context, testDouble, actualArgs) {
+  invoke (testDouble, actualArgs, actualContext) {
     const stubbing = stubbingFor(testDouble, actualArgs)
     if (stubbing) {
-      return executePlan(context, stubbing, actualArgs)
+      return executePlan(stubbing, actualArgs, actualContext)
     }
   },
 
@@ -31,13 +31,13 @@ var stubbingFor = (testDouble, actualArgs) =>
   _.findLast(store.for(testDouble).stubbings, stubbing =>
     isSatisfied(stubbing, actualArgs))
 
-var executePlan = (context, stubbing, actualArgs) => {
+var executePlan = (stubbing, actualArgs, actualContext) => {
   const value = stubbedValueFor(stubbing)
   stubbing.callCount += 1
   invokeCallbackFor(stubbing, actualArgs)
   switch (stubbing.config.plan) {
     case 'thenReturn': return value
-    case 'thenDo': return value.apply(context, actualArgs)
+    case 'thenDo': return value.apply(actualContext, actualArgs)
     case 'thenThrow': throw value
     case 'thenResolve': return createPromise(stubbing, value, true)
     case 'thenReject': return createPromise(stubbing, value, false)
