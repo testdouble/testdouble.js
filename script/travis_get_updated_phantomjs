@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+# Script to ensure we're using an updated version of PhantomJS when testing on Travis
+set -e
+
+if [ -z "$TRAVIS_PHANTOMJS_INSTALL_PATH" ]; then
+  echo "must set env var TRAVIS_PHANTOMJS_INSTALL_PATH"
+  exit 1
+fi
+if [ -z "$TRAVIS_PHANTOMJS_VERSION_NAME" ]; then
+  echo "must set env var TRAVIS_PHANTOMJS_VERSION_NAME"
+  exit 1
+fi
+
+BINARY_FILENAME="$TRAVIS_PHANTOMJS_VERSION_NAME.tar.bz2"
+DOWNLOAD_FILENAME="$TRAVIS_PHANTOMJS_INSTALL_PATH/$BINARY_FILENAME"
+BIN_PATH="$TRAVIS_PHANTOMJS_INSTALL_PATH/$TRAVIS_PHANTOMJS_VERSION_NAME/bin"
+EXPECTED_SHA512="039b62ecf2fa4196357e129727871a53b046948e17b21900c78a1af4d0b523e41b9d4137e7454b0a638333d7fc27e65d14f4af8c665e982a504c12f828525419"
+
+rm -rf $TRAVIS_PHANTOMJS_INSTALL_PATH
+mkdir -p $TRAVIS_PHANTOMJS_INSTALL_PATH
+
+echo "downloading requested phantomjs binary '$BINARY_FILENAME'"
+
+# download from official location, or failing that, a mirror
+# wget is availabile on MacOS via `brew install wget`
+wget "https://bitbucket.org/ariya/phantomjs/downloads/$BINARY_FILENAME" -O $DOWNLOAD_FILENAME || wget "https://assets.membergetmember.co/software/$BINARY_FILENAME" -O $DOWNLOAD_FILENAME
+
+# gsha512sum is available on MacOS via `brew install coreutils`
+DOWNLOADED_SHA512=$((sha512sum $DOWNLOAD_FILENAME || gsha512sum $DOWNLOAD_FILENAME) | cut -d ' ' -f 1)
+
+if [ "$DOWNLOADED_SHA512" == "$EXPECTED_SHA512" ]; then
+  echo "download SHA confirmed - unpacking"
+  tar -xvf "$DOWNLOAD_FILENAME" -C $TRAVIS_PHANTOMJS_INSTALL_PATH
+  echo "sucessfully installed phantomjs in $TRAVIS_PHANTOMJS_INSTALL_PATH"
+else
+  echo "downloaded file had unexpected SHA512 $DOWNLOADED_SHA512"
+  exit 1
+fi
+
+set +e
