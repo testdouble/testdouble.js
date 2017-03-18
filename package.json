@@ -20,7 +20,7 @@
     "clean": "rm -rf generated dist lib .coverage && yarn run clean:dist",
     "compile:node": "babel src -d lib",
     "compile:browser": "browserify . --standalone td --outfile $npm_package_config_build_file -p headerify",
-    "compile:browser:test": "browserify test/browserify.js --outfile $npm_package_config_test_bundle -t babelify -t coffeeify --extension=\".coffee\" -t require-globify --ignore-missing",
+    "compile:browser:test": "mkdir -p generated && browserify test/browserify.js --outfile $npm_package_config_test_bundle -t babelify -t coffeeify --extension=\".coffee\" -t require-globify --ignore-missing",
     "compile": "yarn run compile:node && yarn run compile:browser && yarn run compile:browser:test",
     "style": "standard \"./src/**/*\" --fix",
     "test": "mocha --ui mocha-given --reporter $npm_package_config_mocha_reporter --compilers js:babel-core/register,coffee:coffee-script $EXTRA_MOCHA_ARGS --recursive test/node-helper.coffee test/src",
