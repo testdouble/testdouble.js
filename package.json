@@ -8,7 +8,8 @@
     "email": "justin@testdouble.com",
     "url": "http://testdouble.com"
   },
-  "main": "lib/testdouble.js",
+  "main": "lib/testdouble.cjs.js",
+  "jsnext:main": "lib/testdouble.es.js",
   "config": {
     "build_file": "dist/testdouble.js",
     "test_bundle": "generated/tests.js",
@@ -17,7 +18,8 @@
   "scripts": {
     "clean": "rm -rf generated dist lib coverage && yarn run clean:dist",
     "clean:dist": "git checkout -- dist",
-    "compile:browser": "browserify src/testdouble.js --standalone td --outfile $npm_package_config_build_file -p headerify -t babelify",
+    "compile:browser": "rollup --format iife src/testdouble.js --standalone td --output $npm_package_config_build_file -p headerify -t babelify",
+    "xxxcompile:browser": "browserify src/testdouble.js --standalone td --outfile $npm_package_config_build_file -p headerify -t babelify",
     "compile:browser:test": "mkdir -p generated && browserify test/browser-helper.js --outfile $npm_package_config_test_bundle -t babelify -t coffeeify --extension=\".coffee\" -t require-globify --ignore-missing",
     "compile:node": "babel src -d lib",
     "compile": "yarn run compile:node && yarn run compile:browser && yarn run compile:browser:test",
@@ -80,6 +82,8 @@
     "nyc": "^10.1.2",
     "pryjs": "^1.0.3",
     "require-globify": "^1.4.1",
+    "rollup": "^0.41.6",
+    "rollup-plugin-node-resolve": "^2.0.0",
     "standard": "^9.0.2",
     "testem": "^1.15.0",
     "typescript": "^2.2.1"
