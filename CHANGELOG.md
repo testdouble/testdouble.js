@@ -1,5 +1,16 @@
 # Change Log
 
+## [v2.0.4](https://github.com/testdouble/testdouble.js/tree/v2.0.4) (2017-03-23)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v2.0.3...v2.0.4)
+
+**Closed issues:**
+
+- `constructor\(someConstructorFunction\)` not referenced in associated example [\#213](https://github.com/testdouble/testdouble.js/issues/213)
+
+**Merged pull requests:**
+
+- Improve main build [\#212](https://github.com/testdouble/testdouble.js/pull/212) ([searls](https://github.com/searls))
+
 ## [v2.0.3](https://github.com/testdouble/testdouble.js/tree/v2.0.3) (2017-03-18)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v2.0.2...v2.0.3)
 
