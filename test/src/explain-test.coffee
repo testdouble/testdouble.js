@@ -95,3 +95,17 @@ describe '.explain', ->
       callCount: 0
       description: "This is not a test double."
       isTestDouble: false
+
+  context 'a bag of doubles', ->
+    Given -> @testDouble = td.object(['example'])
+    Then ->
+      console.log @result
+      expect(@result).to.deep.eq
+        name: undefined
+        callCount: 0
+        description: """
+        This is a bag of the following doubles:
+
+        - example (0 stubbings and 0 invocations)
+        """
+        isTestDouble: true
