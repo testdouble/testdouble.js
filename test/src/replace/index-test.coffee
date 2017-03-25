@@ -186,3 +186,8 @@ describe 'td.replace', ->
       describe 'and classes on objects on funcs', ->
         When -> td.when(@lights.brights.prototype.beBright(1)).thenReturn('yow')
         Then -> (new @car.lights.brights).beBright(1) == 'yow'
+
+    describe 'post-reset usage', ->
+      Given -> td.reset()
+      When -> try require('../../fixtures/car') catch e then @error = e
+      Then -> @error.message == "Cannot find module './brake'"

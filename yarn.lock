@@ -3471,9 +3471,9 @@ querystring@0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/querystring/-/querystring-0.2.0.tgz#b209849203bb25df820da756e747005878521620"
 
-quibble@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/quibble/-/quibble-0.4.0.tgz#a1535c4a80b3d3617d23c5d770f1ec2c7b5523a1"
+quibble@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/quibble/-/quibble-0.4.1.tgz#6107cf39f584233b3220724965ed6bb6e42d4d9b"
   dependencies:
     lodash "^4.17.2"
 
