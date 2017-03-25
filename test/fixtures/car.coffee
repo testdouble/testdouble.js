@@ -7,3 +7,5 @@ module.exports =
   brake: require('./brake')
   lights: require('./lights')
   shift: require('./shift')
+  isASpeed: (thing) ->
+    require('is-number')(thing)

@@ -103,9 +103,43 @@ late to have their intended effect).
 
 ### Aside: third-party modules
 
-If you're curious why testdouble.js doesn't support replacing third-party
-modules, you can see our commentary on why we "[don't mock what we don't
-own](B-frequently-asked-questions.md#why-doesnt-tdreplace-work-with-external-commonjs-modules)".
+testdouble.js can also replace third-party npm modules. For instance, if you
+depend on the module [is-number](https://npmjs.org/package/is-number), you can,
+in your test:
+
+```js
+var isNumber = td.replace('is-number')
+var numbersOnly = require('./numbers-only')
+td.when(isNumber('a string')).thenReturn(true) // tee-hee, this is silly
+
+var result = numbersOnly('a string')
+
+assert.equal(result, true)
+```
+
+Should pass for a subject:
+
+```js
+var isNumber = require('is-number')
+
+module.exports = function (thing) {
+  if (!isNumber(thing)) {
+    throw new Error('numbers only!')
+  }
+  return true
+}
+```
+
+Even though testdouble.js does support replacing third-party npm modules, it is
+not recommended unless you own the module! Typically, when practicing the sort
+of outside-in test-driven development that testdouble.js is designed to
+facilitate, you should keep third-party dependencies at arms-length by only
+[mocking what you
+own](http://github.com/testdouble/contributing-tests/wiki/Don%27t-mock-what-you-don%27t-own).
+But if you're managing lots of internal modules and they're all in a consistent
+style such that the line between first-party & third-party code is blurred, then
+`td.replace` has you covered and should be able to replace third-party modules
+or npm packages just like it can for local paths.
 
 ## Browser
 

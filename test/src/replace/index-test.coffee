@@ -152,6 +152,7 @@ describe 'td.replace', ->
     Given -> @shift = td.replace('../../fixtures/shift') #<-- a named func with property DIRECTION
     Given -> @brake = td.replace('../../fixtures/brake', 'ANYTHING I WANT') #<-- a manual stub bc brake does not exist
     Given -> @lights = td.replace('../../fixtures/lights') #<- a plain object of funcs
+    Given -> @isNumber = td.replace('is-number') #<-- a 3rd party module
     Given -> @car = require('../../fixtures/car')
 
     describe 'quibbling prototypal constructors get created with td.object(Type)', ->
@@ -186,6 +187,10 @@ describe 'td.replace', ->
       describe 'and classes on objects on funcs', ->
         When -> td.when(@lights.brights.prototype.beBright(1)).thenReturn('yow')
         Then -> (new @car.lights.brights).beBright(1) == 'yow'
+
+    describe 'faking a 3rd party module', ->
+      Given -> td.when(@isNumber('a speed')).thenReturn(true)
+      Then -> @car.isASpeed('a speed') == true
 
     describe 'post-reset usage', ->
       Given -> td.reset()
