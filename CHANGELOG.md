@@ -1,5 +1,16 @@
 # Change Log
 
+## [v2.1.0](https://github.com/testdouble/testdouble.js/tree/v2.1.0) (2017-03-25)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v2.0.5...v2.1.0)
+
+**Closed issues:**
+
+- Using td.replace\(\) with external modules [\#51](https://github.com/testdouble/testdouble.js/issues/51)
+
+**Merged pull requests:**
+
+- Add support for third party modules [\#220](https://github.com/testdouble/testdouble.js/pull/220) ([searls](https://github.com/searls))
+
 ## [v2.0.5](https://github.com/testdouble/testdouble.js/tree/v2.0.5) (2017-03-25)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v2.0.4...v2.0.5)
 
@@ -439,10 +450,6 @@
 **Fixed bugs:**
 
 - td.matchers.contains does not work on sparse object trees [\#58](https://github.com/testdouble/testdouble.js/issues/58)
-
-**Closed issues:**
-
-- Using td.replace\(\) with external modules [\#51](https://github.com/testdouble/testdouble.js/issues/51)
 
 **Merged pull requests:**
 
