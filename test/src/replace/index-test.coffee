@@ -189,4 +189,5 @@ describe 'td.replace', ->
 
     describe 'post-reset usage', ->
       Given -> td.reset()
-      Then -> @car.honk.toString() == "throw 'honk'"
+      When -> try require('../../fixtures/car') catch e then @error = e
+      Then -> @error.message == "Cannot find module './brake'"
