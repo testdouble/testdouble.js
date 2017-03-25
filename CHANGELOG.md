@@ -1,5 +1,8 @@
 # Change Log
 
+## [v2.0.5](https://github.com/testdouble/testdouble.js/tree/v2.0.5) (2017-03-25)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v2.0.4...v2.0.5)
+
 ## [v2.0.4](https://github.com/testdouble/testdouble.js/tree/v2.0.4) (2017-03-23)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v2.0.3...v2.0.4)
 
@@ -169,6 +172,7 @@
 
 **Merged pull requests:**
 
+- Add failing test for resetting replaced modules. [\#215](https://github.com/testdouble/testdouble.js/pull/215) ([Schoonology](https://github.com/Schoonology))
 - typo [\#152](https://github.com/testdouble/testdouble.js/pull/152) ([ghedamat](https://github.com/ghedamat))
 
 ## [v1.9.0](https://github.com/testdouble/testdouble.js/tree/v1.9.0) (2016-10-25)
