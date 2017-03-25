@@ -61,7 +61,7 @@
   "dependencies": {
     "lodash": "^4.15.0",
     "nyc": "^10.1.2",
-    "quibble": "^0.4.0",
+    "quibble": "^0.4.1",
     "stringify-object-es5": "^2.5.0"
   },
   "devDependencies": {
