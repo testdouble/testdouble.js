@@ -1,5 +1,5 @@
 /*
- * testdouble@2.1.0
+ * testdouble@2.1.1
  *
  *   A minimal test double library for TDD with JavaScript
  *
@@ -10433,7 +10433,7 @@ var ignoreMessage = function ignoreMessage(config) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = '2.1.0';
+exports.default = '2.1.1';
 
 },{}],291:[function(require,module,exports){
 'use strict';
