@@ -4,6 +4,13 @@ export type DoubledObjectWithKey<Key extends string> = {};
 
 export type DoubledObject<Subject> = Subject;
 
+export interface TestdoubleConfig {
+  promiseConstructor?: any;
+  ignoreWarnings?: boolean;
+  suppressErrors?: boolean;
+}
+export function config(config: TestdoubleConfig): void;
+
 declare function functionDouble(name?: string): TestDouble;
 export { functionDouble as function };
 
