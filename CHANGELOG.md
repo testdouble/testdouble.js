@@ -1,5 +1,17 @@
 # Change Log
 
+## [v2.1.1](https://github.com/testdouble/testdouble.js/tree/v2.1.1) (2017-03-28)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v2.1.0...v2.1.1)
+
+**Closed issues:**
+
+- Add td.config\(\) to index.d.ts [\#222](https://github.com/testdouble/testdouble.js/issues/222)
+- Mocking external dependencies in Express app [\#221](https://github.com/testdouble/testdouble.js/issues/221)
+
+**Merged pull requests:**
+
+- Add typings for config function [\#223](https://github.com/testdouble/testdouble.js/pull/223) ([lumaxis](https://github.com/lumaxis))
+
 ## [v2.1.0](https://github.com/testdouble/testdouble.js/tree/v2.1.0) (2017-03-25)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v2.0.5...v2.1.0)
 
