@@ -1,5 +1,14 @@
 # Change Log
 
+## [v2.1.2](https://github.com/testdouble/testdouble.js/tree/v2.1.2) (2017-03-29)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v2.1.1...v2.1.2)
+
+**Closed issues:**
+
+- TypeError when used with node -r flag [\#226](https://github.com/testdouble/testdouble.js/issues/226)
+- When replacing a node library calling it from other modules does not work as expected [\#225](https://github.com/testdouble/testdouble.js/issues/225)
+- Consider using \_.isObjectLike rather than \_.isPlainObject within td.object [\#224](https://github.com/testdouble/testdouble.js/issues/224)
+
 ## [v2.1.1](https://github.com/testdouble/testdouble.js/tree/v2.1.1) (2017-03-28)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v2.1.0...v2.1.1)
 
