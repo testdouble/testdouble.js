@@ -60,7 +60,7 @@
   },
   "dependencies": {
     "lodash": "^4.15.0",
-    "quibble": "^0.4.1",
+    "quibble": "^0.5.0",
     "resolve": "^1.3.2",
     "stringify-object-es5": "^2.5.0"
   },
