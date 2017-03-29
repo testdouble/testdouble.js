@@ -1,5 +1,5 @@
 /*
- * testdouble@2.1.1
+ * testdouble@2.1.2
  *
  *   A minimal test double library for TDD with JavaScript
  *
@@ -9358,10 +9358,12 @@ var fakeObject = function fakeObject(nameOrType, config) {
     return createTestDoublesForPlainObject(nameOrType);
   } else if (_lodashWrap2.default.isArray(nameOrType)) {
     return createTestDoublesForFunctionNames(nameOrType);
-  } else if (_lodashWrap2.default.isFunction(nameOrType)) {
-    return ensureFunctionIsNotPassed();
-  } else {
+  } else if (_lodashWrap2.default.isString(nameOrType) || nameOrType === undefined) {
     return createTestDoubleViaProxy(nameOrType, withDefaults(config));
+  } else if (_lodashWrap2.default.isFunction(nameOrType)) {
+    ensureFunctionIsNotPassed();
+  } else {
+    ensureOtherGarbageIsNotPassed();
   }
 };
 
@@ -9396,6 +9398,14 @@ var ensureProxySupport = function ensureProxySupport(name) {
   }
 };
 
+var ensureFunctionIsNotPassed = function ensureFunctionIsNotPassed() {
+  return _log2.default.error('td.object', 'Functions are not valid arguments to `td.object` (as of testdouble@2.0.0). Please use `td.function()` or `td.constructor()` instead for creating fake functions.');
+};
+
+var ensureOtherGarbageIsNotPassed = function ensureOtherGarbageIsNotPassed() {
+  return _log2.default.error('td.object', 'To create a fake object with td.object(), pass it a plain object that contains\nfunctions, an array of function names, or (if your runtime supports ES Proxy\nobjects) a string name.\n\nIf you passed td.object an instance of a custom type, consider passing the\ntype\'s constructor to `td.constructor()` instead.\n');
+};
+
 var withDefaults = function withDefaults(config) {
   return _lodashWrap2.default.extend({}, DEFAULT_OPTIONS, config);
 };
@@ -9409,10 +9419,6 @@ var addToStringToDouble = function addToStringToDouble(fakeObject, nameOrType) {
 
 var nameOf = function nameOf(nameOrType) {
   return _lodashWrap2.default.isString(nameOrType) ? nameOrType : '';
-};
-
-var ensureFunctionIsNotPassed = function ensureFunctionIsNotPassed() {
-  return _log2.default.error('td.object', 'Functions are not valid arguments to `td.object` (as of testdouble@2.0.0). Please use `td.function()` or `td.constructor()` instead for creating fake functions.');
 };
 
 },{"./constructor":259,"./function":261,"./log":262,"./replace/is-constructor":276,"./util/copy-properties":286,"./util/lodash-wrap":288}],274:[function(require,module,exports){
@@ -10433,7 +10439,7 @@ var ignoreMessage = function ignoreMessage(config) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = '2.1.1';
+exports.default = '2.1.2';
 
 },{}],291:[function(require,module,exports){
 'use strict';
