@@ -17,10 +17,12 @@ var fakeObject = (nameOrType, config) => {
     return createTestDoublesForPlainObject(nameOrType)
   } else if (_.isArray(nameOrType)) {
     return createTestDoublesForFunctionNames(nameOrType)
-  } else if (_.isFunction(nameOrType)) {
-    return ensureFunctionIsNotPassed()
-  } else {
+  } else if (_.isString(nameOrType) || nameOrType === undefined) {
     return createTestDoubleViaProxy(nameOrType, withDefaults(config))
+  } else if (_.isFunction(nameOrType)) {
+    ensureFunctionIsNotPassed()
+  } else {
+    ensureOtherGarbageIsNotPassed()
   }
 }
 
@@ -63,6 +65,20 @@ Did you mean \`td.object(['${name}'])\`?\
   }
 }
 
+var ensureFunctionIsNotPassed = () =>
+  log.error('td.object', `Functions are not valid arguments to \`td.object\` (as of testdouble@2.0.0). Please use \`td.function()\` or \`td.constructor()\` instead for creating fake functions.`)
+
+var ensureOtherGarbageIsNotPassed = () =>
+    log.error('td.object', `\
+To create a fake object with td.object(), pass it a plain object that contains
+functions, an array of function names, or (if your runtime supports ES Proxy
+objects) a string name.
+
+If you passed td.object an instance of a custom type, consider passing the
+type's constructor to \`td.constructor()\` instead.
+`)
+
+
 var withDefaults = (config) =>
   _.extend({}, DEFAULT_OPTIONS, config)
 
@@ -75,6 +91,3 @@ var nameOf = (nameOrType) =>
   _.isString(nameOrType)
     ? nameOrType
     : ''
-
-var ensureFunctionIsNotPassed = () =>
-  log.error('td.object', `Functions are not valid arguments to \`td.object\` (as of testdouble@2.0.0). Please use \`td.function()\` or \`td.constructor()\` instead for creating fake functions.`)
