@@ -1,6 +1,5 @@
 describe 'args-match', ->
-  Given -> @subject = require('../../src/args-match').default
-
+  Given -> @subject = require('../../src/args-match')
   context 'allow matchers', ->
     When -> @result =  @subject([td.matchers.anything()], [5])
     Then -> @result == true

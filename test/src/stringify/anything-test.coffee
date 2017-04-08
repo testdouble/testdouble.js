@@ -1,5 +1,5 @@
 describe 'stringify/anything', ->
-  Given -> @subject = require('../../../src/stringify/anything').default
+  Given -> @subject = require('../../../src/stringify/anything')
   Then -> @subject(undefined) == "undefined"
   And -> @subject(null) == "null"
   And -> @subject(0) == "0"

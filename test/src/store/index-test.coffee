@@ -1,5 +1,5 @@
 describe 'store', ->
-  Given -> @subject = require('../../../src/store').default
+  Given -> @subject = require('../../../src/store')
 
   describe '.onReset', ->
     Given -> @subject.onReset => @result = 'yay'
