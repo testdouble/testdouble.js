@@ -3,9 +3,18 @@ import json from 'rollup-plugin-json'
 import builtins from 'rollup-plugin-node-builtins'
 import resolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
+import globals from 'rollup-plugin-node-globals'
 
 export default config => {
   return {
+    banner: `/*
+ * testdouble@${require('../package').version}
+ *
+ *   A minimal test double library for TDD with JavaScript
+ *
+ *   https://github.com/testdouble/testdouble.js
+ */
+ `,
     entry: 'src/testdouble.js',
     format: config.format,
     moduleName: 'testdouble',
@@ -18,7 +27,8 @@ export default config => {
       }),
       json(),
       buble(),
-      commonjs()
+      commonjs(),
+      globals()
     ]
   }
 }
