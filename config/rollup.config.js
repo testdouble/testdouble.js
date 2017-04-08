@@ -15,20 +15,22 @@ export default config => {
  *   https://github.com/testdouble/testdouble.js
  */
  `,
-    entry: 'src/testdouble.js',
+    entry: config.entry || 'src/testdouble.js',
     format: config.format,
     moduleName: 'td',
     dest: config.dest,
-    plugins: [
+    plugins: (config.plugins || []).concat(
       builtins(),
       resolve({
         browser: config.browser,
-        extensions: ['.js', '.json']
+        extensions: ['.js', '.json', '.coffee']
       }),
       json(),
       buble(),
-      commonjs(),
+      commonjs({
+        extensions: ['.js', '.coffee']
+      }),
       globals()
-    ]
+    )
   }
 }
