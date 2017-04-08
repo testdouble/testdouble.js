@@ -12,7 +12,7 @@ describe 'td.object', ->
     And -> @testDouble.now.toString() == '[test double for ".now"]'
     And -> @testDouble.otherThing == 8
 
-  describe.only 'creating an object that is an instance of a prototypal thing', ->
+  describe 'creating an object that is an instance of a prototypal thing', ->
     Given -> @type = class Thing
       foo: -> 'bar'
     When -> try td.object(new @type()) catch e then @error = e
