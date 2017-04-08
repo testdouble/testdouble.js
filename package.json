@@ -18,9 +18,12 @@
   "scripts": {
     "clean": "rm -rf generated dist lib coverage && yarn run clean:dist",
     "clean:dist": "git checkout -- dist",
-    "compile:browser": "rollup --format iife src/testdouble.js --standalone td --output $npm_package_config_build_file -p headerify -t babelify",
-    "xxxcompile:browser": "browserify src/testdouble.js --standalone td --outfile $npm_package_config_build_file -p headerify -t babelify",
-    "compile:browser:test": "mkdir -p generated && browserify test/browser-helper.js --outfile $npm_package_config_test_bundle -t babelify -t coffeeify --extension=\".coffee\" -t require-globify --ignore-missing",
+    "rollup-cjs": "rollup -c config/rollup.config.cjs.js && rollup -c config/rollup.config.browser.cjs.js",
+    "rollup-es": "rollup -c config/rollup.config.es.js && rollup -c config/rollup.config.browser.es.js",
+    "rollup-iife": "rollup -c config/rollup.config.iife.js",
+    "rollup": "yarn run rollup-cjs && yarn run rollup-es && yarn run rollup-iife",
+    "compile:browser": "# browserify src/testdouble.js --standalone td --outfile $npm_package_config_build_file -p headerify -t babelify",
+    "compile:browser:test": "# mkdir -p generated && browserify test/browser-helper.js --outfile $npm_package_config_test_bundle -t babelify -t coffeeify --extension=\".coffee\" -t require-globify --ignore-missing",
     "compile:node": "babel src -d lib",
     "compile": "yarn run compile:node && yarn run compile:browser && yarn run compile:browser:test",
     "cover": "nyc --reporter=lcov --reporter=text-summary --require babel-core/register _mocha --ui mocha-given --reporter $npm_package_config_mocha_reporter --compilers coffee:coffee-script --recursive test/node-helper.coffee test/src",
@@ -43,11 +46,6 @@
     "postversion": "git push --tags && yarn run version:changelog && git push && npm publish",
     "prepublish": "yarn run compile"
   },
-  "babel": {
-    "presets": [
-      "env"
-    ]
-  },
   "browser": {
     "./lib/replace/module.js": "./lib/replace/module.browser.js",
     "quibble": "./lib/quibble.browser.js"
@@ -68,9 +66,10 @@
   },
   "devDependencies": {
     "babel-cli": "^6.23.0",
+    "babel-plugin-external-helpers": "^6.22.0",
     "babel-preset-env": "^1.2.1",
+    "babel-preset-es2015-rollup": "^3.0.0",
     "babelify": "^7.3.0",
-    "browserify": "^14.1.0",
     "chai": "^3.2.0",
     "codeclimate-test-reporter": "^0.4.1",
     "coffee-script": "^1.10.0",
@@ -83,6 +82,10 @@
     "pryjs": "^1.0.3",
     "require-globify": "^1.4.1",
     "rollup": "^0.41.6",
+    "rollup-plugin-buble": "^0.15.0",
+    "rollup-plugin-commonjs": "^8.0.2",
+    "rollup-plugin-json": "^2.1.0",
+    "rollup-plugin-node-builtins": "^2.1.0",
     "rollup-plugin-node-resolve": "^2.0.0",
     "standard": "^9.0.2",
     "testem": "^1.15.0",
