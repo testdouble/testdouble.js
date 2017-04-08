@@ -11,9 +11,9 @@ import verify from './verify'
 import version from './version'
 import when from './when'
 
-module.exports = {
-  function: tdFunction,
-  func: tdFunction,
+export {
+  tdFunction as function,
+  tdFunction as func,
   object,
   constructor,
   when,
