@@ -17,7 +17,7 @@ export default config => {
  `,
     entry: 'src/testdouble.js',
     format: config.format,
-    moduleName: 'testdouble',
+    moduleName: 'td',
     dest: config.dest,
     plugins: [
       builtins(),
