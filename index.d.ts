@@ -1,4 +1,3 @@
-
 //
 // types and interfaces
 // ----------------------------------------------------------------------------
@@ -81,7 +80,7 @@ export function reset(): void;
 
 /**
  * Takes a test double function as an argument and will describe the current
- * configuration and state of the test double
+ * configuration and state of the test double.
  *
  * @export
  * @template T
