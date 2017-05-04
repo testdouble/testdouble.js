@@ -61,10 +61,33 @@ export interface VerificationConfig {
 // general
 // ----------------------------------------------------------------------------
 
+/**
+ * Update the configuration. Configuration will perist through the lifetime of
+ * of the entire test. If you need to change a configuration property for a
+ * single test, you'll need to manage undoing the change yourself (e.g. in
+ * beforeEach and afterEach hooks).
+ *
+ * @export
+ * @param {TestdoubleConfig} config
+ */
 export function config(config: TestdoubleConfig): void;
 
+/**
+ * Reset the state.
+ *
+ * @export
+ */
 export function reset(): void;
 
+/**
+ * Takes a test double function as an argument and will describe the current
+ * configuration and state of the test double
+ *
+ * @export
+ * @template T
+ * @param {TestDouble<T>} f
+ * @returns {Explanation}
+ */
 export function explain<T>(f: TestDouble<T>): Explanation;
 
 
@@ -76,8 +99,21 @@ export function explain<T>(f: TestDouble<T>): Explanation;
 // fake: functions
 // ----------------------------------------------------------------------------
 
+/**
+ * Create a fake function.
+ *
+ * @param {string} [name] Name of function for better messages.
+ * @returns {TestDouble<Function>}
+ */
 declare function functionDouble(name?: string): TestDouble<Function>;
 
+/**
+ * Create a fake function.
+ *
+ * @template T
+ * @param {T} [name] Name of function to copy.
+ * @returns {TestDouble<T>}
+ */
 declare function functionDouble<T>(name?: T): TestDouble<T>;
 
 export { functionDouble as function };
@@ -87,24 +123,98 @@ export { functionDouble as func };
 // fake: objects
 // ----------------------------------------------------------------------------
 
+/**
+ * Create a fake object that is deep copy of the given object.
+ *
+ * @export
+ * @template T
+ * @param {{ new (...args: any[]): T }} constructor
+ * @returns {DoubledObject<T>}
+ */
 export function object<T>(constructor: { new (...args: any[]): T }): DoubledObject<T>;
 
+/**
+ * Create a fake object that has the given list of properties.
+ *
+ * @export
+ * @template Key
+ * @param {Key[]} props Array of properties.
+ * @returns {DoubledObjectWithKey<Key>}
+ */
 export function object<Key extends string>(props: Key[]): DoubledObjectWithKey<Key>;
 
+/**
+ * Create a fake empty object that is cast as the generic using a Proxy object.
+ *
+ * @export
+ * @template T
+ * @param {T} object Name of object.
+ * @returns {DoubledObject<T>}
+ */
 export function object<T>(object: string): DoubledObject<T>;
 
+/**
+ * Create a fake object that is deep copy of the given object.
+ *
+ * @export
+ * @template T
+ * @param {T} object Object to copy.
+ * @returns {DoubledObject<T>}
+ */
 export function object<T>(object: T): DoubledObject<T>;
 
 //
 // stubbing
 // ----------------------------------------------------------------------------
 
+
+/**
+ * Callback marker.
+ *
+ * @export
+ * @param {...any[]} args
+ */
 export function callback(...args: any[]): void;
 
+
+/**
+ * Swap out real dependenencies with fake one. Intercept calls to `require`
+ * that dependency module and ensure your subject is handed a fake instead.
+ *
+ * @export
+ * @param {string} path
+ * @param {*} [f]
+ * @returns {*}
+ */
 export function replace(path: string, f?: any): any;
 
+/**
+ * Swap out real dependenencies with fake one. Reference to the property will
+ * be replace it during your test.
+ *
+ * @export
+ * @param {{}} path
+ * @param {string} property
+ * @param {*} [f]
+ * @returns {*}
+ */
 export function replace(path: {}, property: string, f?: any): any;
 
+
+/**
+ * Stub a specific function call.
+ *
+ * @export
+ * @param {...any[]} args
+ * @returns {Stubber}
+ */
 export function when(...args: any[]): Stubber;
 
+/**
+ * Verify a specific function call to a stubbed function.
+ *
+ * @export
+ * @param {...any[]} args
+ * @returns {Stubber}
+ */
 export function verify(a: any, check?: VerificationConfig): void;
