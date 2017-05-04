@@ -17,6 +17,10 @@ td.when(dog.bark()).thenReturn("bark!");
 const bird = td.object({ fly: function(){} });
 td.when(bird.fly()).thenReturn("fly!");
 
+class Bear { constructor() {}; sleep() {}; };
+const bear = td.object<Bear>("Bear");
+td.when(bear.sleep()).thenReturn("zzz");
+
 td.replace({}, "prop");
 td.replace({}, "prop", 42);
 td.replace("../../..");

@@ -20,6 +20,9 @@ export function object<T>(constructor: { new (...args: any[]): T }): DoubledObje
 // When passed array of props
 export function object<Key extends string>(props: Key[]): DoubledObjectWithKey<Key>;
 
+// When passed class or constuctor function name as string value
+export function object<T>(object: string): DoubledObject<T>;
+
 // When passed general object
 export function object<T>(object: T): DoubledObject<T>;
 
