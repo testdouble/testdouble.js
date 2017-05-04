@@ -23,9 +23,6 @@ td.when(f(td.matchers.not(false))).thenReject(new Error("rejected"));
 const fakeSum = td.function(sum);
 td.when(fakeSum(1, 2)).thenReturn(3);
 
-const fakerSum = td.function("sum");
-td.when(fakerSum(1, 2)).thenReturn(3);
-
 const fakestSum = td.function("sum");
 td.when(fakestSum(1, 2)).thenReturn(3);
 
@@ -40,7 +37,8 @@ td.when(ff(td.matchers.not(false))).thenReject(new Error("rejected"));
 
 // td.constructor()
 
-const dog = td.constructor(Dog);
+const DogFake = td.constructor(Dog);
+const dog = new DogFake()
 td.when(dog.bark()).thenReturn("bark!");
 
 // td.object()

@@ -8,9 +8,15 @@ export type DoubledObjectWithKey<Key extends string> = {};
 
 export type TestDouble<Function> = Function;
 
+export type TestDoubleConstructor<T> = Constructor<T>;
+
 interface Call {
   context: {};
   args: any[];
+}
+
+interface Constructor<T> {
+  new (...args: any[]): T
 }
 
 export interface Captor {
@@ -94,6 +100,16 @@ export function explain<T>(f: TestDouble<T>): Explanation;
 // fake: constructors
 // ----------------------------------------------------------------------------
 
+/**
+ * Create a fake object constructor the given class.
+ *
+ * @export
+ * @template T
+ * @param {{ new (...args: any[]): T }} constructor
+ * @returns {DoubledObject<T>}
+ */
+export function constructor<T>(constructor: Constructor<T>): TestDoubleConstructor<T>;
+
 //
 // fake: functions
 // ----------------------------------------------------------------------------
@@ -130,7 +146,7 @@ export { functionDouble as func };
  * @param {{ new (...args: any[]): T }} constructor
  * @returns {DoubledObject<T>}
  */
-export function object<T>(constructor: { new (...args: any[]): T }): DoubledObject<T>;
+export function object<T>(constructor: Constructor<T> ): DoubledObject<T>;
 
 /**
  * Create a fake object that has the given list of properties.
