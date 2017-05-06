@@ -13,8 +13,9 @@ var fakeConstructorFromType = (type) => {
 
   return _.tap(class TestDoubleConstructor extends type {
     constructor () {
-      super(...arguments)
+//      super(...arguments)
       fauxConstructor(...arguments)
+      return Object.create(new.target.prototype, {})
     }
   }, (fakeType) => {
     // Override "static" functions with instance test doubles
