@@ -4,7 +4,7 @@
 
 export type DoubledObject<Subject> = Subject;
 
-export type DoubledObjectWithKey<Key extends string> = {};
+export type DoubledObjectWithKey<Key extends string> = { [K in Key] };
 
 export type TestDouble<Function> = Function;
 
@@ -148,6 +148,7 @@ export { functionDouble as func };
  */
 export function object<T>(constructor: Constructor<T> ): DoubledObject<T>;
 
+
 /**
  * Create a fake object that has the given list of properties.
  *
@@ -156,7 +157,7 @@ export function object<T>(constructor: Constructor<T> ): DoubledObject<T>;
  * @param {Key[]} props Array of properties.
  * @returns {DoubledObjectWithKey<Key>}
  */
-export function object<Key extends string>(props: Key[]): DoubledObjectWithKey<Key>;
+export function object<T extends string>(props: T[]): DoubledObjectWithKey<T>;
 
 /**
  * Create a fake empty object that is cast as the generic using a Proxy object.

@@ -43,6 +43,10 @@ td.when(dog.bark()).thenReturn("bark!");
 
 // td.object()
 
+const cat = td.object(["scratch","meow"]);
+td.when(cat.scratch()).thenReturn("scratch!");
+td.when(cat.meow()).thenReturn("meow!");
+
 const bird = td.object({ fly: function(){} });
 td.when(bird.fly()).thenReturn("fly!");
 
