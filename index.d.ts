@@ -2,11 +2,11 @@
 // types and interfaces
 // ----------------------------------------------------------------------------
 
-export type DoubledObject<Subject> = Subject;
+export type DoubledObject<T> = T;
 
-export type DoubledObjectWithKey<Key extends string> = {};
+export type DoubledObjectWithKey<T extends string> = { [K in T] };
 
-export type TestDouble<Function> = Function;
+export type TestDouble<T> = T;
 
 export type TestDoubleConstructor<T> = Constructor<T>;
 
@@ -156,7 +156,7 @@ export function object<T>(constructor: Constructor<T> ): DoubledObject<T>;
  * @param {Key[]} props Array of properties.
  * @returns {DoubledObjectWithKey<Key>}
  */
-export function object<Key extends string>(props: Key[]): DoubledObjectWithKey<Key>;
+export function object<T extends string>(props: T[]): DoubledObjectWithKey<T>;
 
 /**
  * Create a fake empty object that is cast as the generic using a Proxy object.
