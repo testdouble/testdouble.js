@@ -17,7 +17,7 @@ var fakeObject = (nameOrType, config) => {
     return createTestDoublesForPlainObject(nameOrType)
   } else if (_.isArray(nameOrType)) {
     return createTestDoublesForFunctionNames(nameOrType)
-  } else if (_.isString(nameOrType) || nameOrType === undefined) {
+  } else if (_.isString(nameOrType) || nameOrType === undefined || isClass(nameOrType)) {
     return createTestDoubleViaProxy(nameOrType, withDefaults(config))
   } else if (_.isFunction(nameOrType)) {
     ensureFunctionIsNotPassed()
@@ -78,6 +78,22 @@ If you passed td.object an instance of a custom type, consider passing the
 type's constructor to \`td.constructor()\` instead.
 `)
 
+/* From Stack Overflow
+Answer: https://stackoverflow.com/a/43197340/1675295
+Author: https://stackoverflow.com/users/76840/aikeru
+*/
+var isClass = (obj) => {
+  const isCtorClass = obj.constructor &&
+    obj.constructor.toString().substring(0, 5) === 'class'
+
+  if (obj.prototype === undefined) return isCtorClass
+
+  const isPrototypeCtorClass = obj.prototype.constructor &&
+    obj.prototype.constructor.toString &&
+    obj.prototype.constructor.toString().substring(0, 5) === 'class'
+
+  return isCtorClass || isPrototypeCtorClass
+}
 
 var withDefaults = (config) =>
   _.extend({}, DEFAULT_OPTIONS, config)
