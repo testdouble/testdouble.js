@@ -78,7 +78,6 @@ If you passed td.object an instance of a custom type, consider passing the
 type's constructor to \`td.constructor()\` instead.
 `)
 
-
 var withDefaults = (config) =>
   _.extend({}, DEFAULT_OPTIONS, config)
 
