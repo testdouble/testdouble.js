@@ -1,3 +1,5 @@
-module.exports = function Brake(){}
+module.exports = function Brake () {}
 
-module.exports.prototype.engage = function(){ throw 'unimplemented' }
+module.exports.prototype.engage = function () {
+  throw new Error('unimplemented')
+}
