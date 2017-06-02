@@ -1,7 +1,8 @@
-global.expect = require('chai').expect;
-global.context = describe;
-global.td = require('testdouble');
+global.td = require('testdouble')
+global.assert = require('core-assert')
 
-afterEach(function(){
-  td.reset();
-});
+module.exports = {
+  afterEach: function () {
+    td.reset()
+  }
+}
