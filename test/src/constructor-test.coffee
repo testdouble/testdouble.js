@@ -45,8 +45,7 @@ describe 'td.constructor', ->
 
     context 'extendWhenReplacingConstructors enabled', ->
       Given -> td.config(extendWhenReplacingConstructors: true)
-      # Fake things pass instanceof checks
-      Then -> td.config().extendWhenReplacingConstructors == true
+      Given -> @fakeInstance = new (td.constructor(Thing))()
       Then -> @fakeInstance instanceof Thing
 
     # Original attributes are carried over
