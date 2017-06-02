@@ -28,7 +28,6 @@ var fakeConstructorFromType = (type) =>
     addToStringMethodsToFakeType(fakeType, name)
   })
 
-
 var createFakeType = (type) => {
   const fauxConstructor = tdFunction(`${type.name || 'anonymous'} constructor`)
 
