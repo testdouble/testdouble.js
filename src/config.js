@@ -3,8 +3,9 @@ import log from './log'
 import stringifyAnything from './stringify/anything'
 
 const DEFAULTS = {
-  promiseConstructor: global.Promise,
+  extendWhenReplacingConstructors: false,
   ignoreWarnings: false,
+  promiseConstructor: global.Promise,
   suppressErrors: false
 }
 let configData = _.extend({}, DEFAULTS)

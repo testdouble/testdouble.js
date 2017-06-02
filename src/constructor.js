@@ -1,22 +1,17 @@
 import _ from './util/lodash-wrap'
 import getAllCustomPrototypalFunctionNames from './util/get-all-custom-prototypal-function-names'
 import tdFunction from './function'
+import config from './config'
 
 export default (typeOrNames) =>
   _.isFunction(typeOrNames)
     ? fakeConstructorFromType(typeOrNames)
     : fakeConstructorFromNames(typeOrNames)
 
-var fakeConstructorFromType = (type) => {
-  const name = type.name || ''
-  const fauxConstructor = tdFunction(`${name} constructor`)
+var fakeConstructorFromType = (type) =>
+  _.tap(createFakeType(type), (fakeType) => {
+    const name = type.name || ''
 
-  return _.tap(class TestDoubleConstructor extends type {
-    constructor () {
-      super(...arguments)
-      fauxConstructor(...arguments)
-    }
-  }, (fakeType) => {
     // Override "static" functions with instance test doubles
     _.each(_.functions(type), funcName => {
       fakeType[funcName] = tdFunction(`${name}.${funcName}`)
@@ -29,6 +24,25 @@ var fakeConstructorFromType = (type) => {
 
     addToStringMethodsToFakeType(fakeType, name)
   })
+
+
+var createFakeType = (type) => {
+  const fauxConstructor = tdFunction(`${type.name || 'anonymous'} constructor`)
+
+  if (config().extendWhenReplacingConstructors) {
+    return class TestDoubleConstructorExtendingRealType extends type {
+      constructor () {
+        super(...arguments)
+        fauxConstructor(...arguments)
+      }
+    }
+  } else {
+    return class TestDoubleConstructor {
+      constructor () {
+        fauxConstructor(...arguments)
+      }
+    }
+  }
 }
 
 var fakeConstructorFromNames = (funcNames) => {
