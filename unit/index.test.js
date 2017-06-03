@@ -1,8 +1,7 @@
-
 module.exports = () => {
   // Creation
-  const object = td.replace('../src/object').default
   const func = td.replace('../src/function').default
+  const object = td.replace('../src/object').default
   const constructor = td.replace('../src/constructor').default
   const replace = td.replace('../src/replace').default
   // Stubbing & Verifying
