@@ -8,7 +8,7 @@ import replace from './replace'
 import explain from './explain'
 import reset from './reset'
 import config from './config'
-import callback from './matchers/callback'
+import callback from './callback'
 import version from './version'
 
 module.exports = {

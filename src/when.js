@@ -1,5 +1,5 @@
 import _ from './util/lodash-wrap'
-import callback from './matchers/callback'
+import callback from './callback'
 import calls from './store/calls'
 import log from './log'
 import stubbings from './store/stubbings'
