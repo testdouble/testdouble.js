@@ -2,7 +2,7 @@ require('mocha-given/browser/mocha-given')
 mocha.setup('mocha-given')
 global.NODE_JS = false
 
-global.td = require('../src/testdouble')
+global.td = require('../src')
 require('./general-helper')
 
 // Require all the tests so they're included in the browserify build:

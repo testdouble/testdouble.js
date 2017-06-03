@@ -1,5 +1,5 @@
-import _ from '../util/lodash-wrap'
-import create from './create'
+import _ from './util/lodash-wrap'
+import create from './matchers/create'
 
 export default _.tap(create({
   name: 'callback',

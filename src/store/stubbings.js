@@ -1,6 +1,6 @@
 import _ from '../util/lodash-wrap'
 import argsMatch from '../args-match'
-import callback from '../matchers/callback'
+import callback from '../callback'
 import config from '../config'
 import log from '../log'
 import store from './index'

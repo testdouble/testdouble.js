@@ -7,7 +7,7 @@ describe "td.*", ->
     Then -> td.object == require('../../src/object').default
     Then -> td.constructor == require('../../src/constructor').default
     Then -> td.matchers == require('../../src/matchers').default
-    Then -> td.callback == require('../../src/matchers/callback').default
+    Then -> td.callback == require('../../src/callback').default
     Then -> td.explain == require('../../src/explain').default
     Then -> td.reset == require('../../src/reset').default
     Then -> td.replace == require('../../src/replace').default
