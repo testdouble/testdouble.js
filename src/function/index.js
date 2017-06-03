@@ -4,7 +4,11 @@ import create from './create'
 import imitate from './imitate'
 import remember from './remember'
 
-export default (nameOrFunc) =>
-  _.isFunction(nameOrFunc)
-    ? remember(imitate(nameOrFunc, create(nameOrFunc.name)), nameOrFunc.name)
-    : remember(create(nameOrFunc), nameOrFunc)
+export default (nameOrFunc) => {
+  const double = create(nameOrFunc)
+  if (_.isFunction(nameOrFunc)) {
+    imitate(double)
+  }
+  remember(double)
+  return double
+}

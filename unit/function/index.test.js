@@ -14,20 +14,20 @@ module.exports = {
   },
   'pass in a name': () => {
     td.when(create('foo')).thenReturn('a fake foo')
-    td.when(remember('a fake foo', 'foo')).thenReturn('a remembered foo')
 
     const result = subject('foo')
 
-    assert.equal(result, 'a remembered foo')
+    assert.equal(result, 'a fake foo')
+    td.verify(remember('a fake foo'))
   },
   'pass in a function': () => {
     const bar = function bar () {}
-    td.when(create('bar')).thenReturn('a fake bar')
-    td.when(imitate(bar, 'a fake bar')).thenReturn('an imitated bar')
-    td.when(remember('an imitated bar', 'bar')).thenReturn('a remembered bar')
+    td.when(create(bar)).thenReturn('a fake bar')
 
     const result = subject(bar)
 
-    assert.equal(result, 'a remembered bar')
+    assert.equal(result, 'a fake bar')
+    td.verify(imitate('a fake bar'))
+    td.verify(remember('a fake bar'))
   }
 }
