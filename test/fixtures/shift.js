@@ -1,8 +1,8 @@
-function shift() {
+function shift () {
   return 'Faster'
 }
 
-shift.neutral = function() {
+shift.neutral = function () {
   return 'Coast'
 }
 

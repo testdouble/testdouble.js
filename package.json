@@ -23,7 +23,7 @@
     "compile": "yarn run compile:node && yarn run compile:browser && yarn run compile:browser:test",
     "cover": "nyc --reporter=lcov --reporter=text-summary --require babel-core/register _mocha --ui mocha-given --reporter $npm_package_config_mocha_reporter --compilers coffee:coffee-script --recursive test/node-helper.coffee test/src",
     "cover:report": "codeclimate-test-reporter < coverage/lcov.info",
-    "style": "standard \"./src/**/*\" --fix",
+    "style": "standard --fix",
     "test": "mocha --ui mocha-given --reporter $npm_package_config_mocha_reporter --compilers js:babel-core/register,coffee:coffee-script --recursive test/node-helper.coffee test/src",
     "test:all": "yarn test:unit && yarn test && yarn run test:browser && yarn run test:example && yarn run test:typescript",
     "test:browser": "testem ci",
@@ -60,7 +60,14 @@
       "describe",
       "it",
       "expect",
-      "td"
+      "td",
+      "assert"
+    ],
+    "ignore": [
+      "dist",
+      "examples",
+      "generated",
+      "lib"
     ]
   },
   "dependencies": {
