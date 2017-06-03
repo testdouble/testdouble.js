@@ -11,9 +11,9 @@ import config from './config'
 import callback from './matchers/callback'
 import version from './version'
 
-module.exports = {
-  function: tdFunction,
-  func: tdFunction,
+export {
+  tdFunction as function,
+  tdFunction as func,
   object,
   constructor,
   when,

@@ -1,5 +1,5 @@
 describe 'log', ->
-  Given -> @subject = require('../../src/log').default
+  Given -> @subject = require('../../src/log')
 
   describe '.warn', ->
     Given -> @ogWarn = console.warn
@@ -28,6 +28,7 @@ describe 'log', ->
       Then -> #nothing explodes
 
     context 'when console does not exist', ->
+      return unless NODE_JS
       Given -> @ogConsole = console
       Given -> delete global.console
       When -> @subject.warn('lolololol', 'lol')
