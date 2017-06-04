@@ -10,5 +10,5 @@ export default (nameOrFunc) => {
     imitate(double)
   }
   remember(double)
-  return double
+  return double.fake
 }

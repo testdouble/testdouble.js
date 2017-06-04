@@ -1,3 +1,5 @@
+import Double from '../../src/value/double'
+
     // 1. create the function
     //    - tack on a tostring method that prints the name
     // 2. (if passed a func), copy-props & shallow td-ify
@@ -13,21 +15,23 @@ module.exports = {
     subject = require('../../src/function/index').default
   },
   'pass in a name': () => {
-    td.when(create('foo')).thenReturn('a fake foo')
+    const double = new Double(null,null,'fake thing')
+    td.when(create('foo')).thenReturn(double)
 
     const result = subject('foo')
 
-    assert.equal(result, 'a fake foo')
-    td.verify(remember('a fake foo'))
+    assert.equal(result, double.fake)
+    td.verify(remember(double))
   },
   'pass in a function': () => {
-    const bar = function bar () {}
-    td.when(create(bar)).thenReturn('a fake bar')
+    function bar () {}
+    const double = new Double(null,null,'fake thing')
+    td.when(create(bar)).thenReturn(double)
 
     const result = subject(bar)
 
-    assert.equal(result, 'a fake bar')
-    td.verify(imitate('a fake bar'))
-    td.verify(remember('a fake bar'))
+    assert.equal(result, double.fake)
+    td.verify(imitate(double))
+    td.verify(remember(double))
   }
 }
