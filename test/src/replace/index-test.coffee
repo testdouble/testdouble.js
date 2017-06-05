@@ -146,6 +146,7 @@ describe 'td.replace', ->
   describe 'Node.js-specific module replacement', ->
     return unless NODE_JS
 
+    Given -> @realPassengerFunction = require('../../fixtures/passenger')
     Given -> @passenger = td.replace('../../fixtures/passenger') #<-- a constructor func
     Given -> @honk = td.replace('../../fixtures/honk') #<-- a plain ol' func
     Given -> @turn = td.replace('../../fixtures/turn') #<-- a named func
@@ -159,6 +160,11 @@ describe 'td.replace', ->
       Given -> td.when(@passenger.prototype.sit()).thenReturn('ow')
       When -> @result = @car.seatPassenger()
       Then -> @result == 'ow'
+
+      describe 'replaced prototypal constructors pass instanceof checks', ->
+        Given -> @fakePassengerFunction = require('../../fixtures/passenger')
+        Then -> new @fakePassengerFunction() instanceof @realPassengerFunction
+
 
     describe 'quibbling plain old functions with td.function()', ->
       Then -> @car.honk.toString() == "[test double for \"../../fixtures/honk\"]"
