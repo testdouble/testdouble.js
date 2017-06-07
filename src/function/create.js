@@ -23,4 +23,3 @@ const deriveName = (nameOrFunc) => {
   const name = _.isFunction(nameOrFunc) ? nameOrFunc.name : nameOrFunc
   return _.isEmpty(name) ? null : name
 }
-

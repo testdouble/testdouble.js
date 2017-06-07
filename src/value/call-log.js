@@ -1,5 +1,3 @@
-import Call from './call'
-
 let instance = null
 
 export default class CallLog {

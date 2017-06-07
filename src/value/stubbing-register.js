@@ -25,4 +25,3 @@ export default class StubbingRegister {
     return satisfy(call, this.stubbings.get(double))
   }
 }
-
