@@ -17,6 +17,7 @@ import includes from 'lodash/includes'
 import invoke from 'lodash/invoke'
 import isArray from 'lodash/isArray'
 import isBoolean from 'lodash/isBoolean'
+import isEmpty from 'lodash/isEmpty'
 import isEqual from 'lodash/isEqual'
 import isEqualWith from 'lodash/isEqualWith'
 import isFunction from 'lodash/isFunction'
@@ -56,6 +57,7 @@ export default {
   invoke,
   isArray,
   isBoolean,
+  isEmpty,
   isEqual,
   isEqualWith,
   isFunction,

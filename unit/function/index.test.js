@@ -1,7 +1,5 @@
 import Double from '../../src/value/double'
 
-    // 1. create the function
-    //    - tack on a tostring method that prints the name
     // 2. (if passed a func), copy-props & shallow td-ify
     // 3 throws it in the "store"
     //   - assigns the name to the entry in the store (if it exists)
@@ -15,7 +13,7 @@ module.exports = {
     subject = require('../../src/function/index').default
   },
   'pass in a name': () => {
-    const double = new Double(null,null,'fake thing')
+    const double = new Double(null, null, 'fake thing')
     td.when(create('foo')).thenReturn(double)
 
     const result = subject('foo')
@@ -25,7 +23,7 @@ module.exports = {
   },
   'pass in a function': () => {
     function bar () {}
-    const double = new Double(null,null,'fake thing')
+    const double = new Double(null, null, 'fake thing')
     td.when(create(bar)).thenReturn(double)
 
     const result = subject(bar)
