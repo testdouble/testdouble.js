@@ -15,13 +15,10 @@ export default class Double {
   }
 
   get fullName () {
-    if (_.some(_.map(this.ancestors, 'name'))) {
-      return _.map(this.ancestors.concat(this), (ancestor) =>
-        ancestor.name == null ? '(unnamed)' : ancestor.name
-      ).join('.')
-    } else {
-      return this.name
-    }
+    if (!_.some(_.map(this.ancestors, 'name'))) return this.name
+    return _.map(this.ancestors.concat(this), (ancestor) =>
+      ancestor.name == null ? '(unnamed)' : ancestor.name
+    ).join('.')
   }
 
   get ancestors () {
