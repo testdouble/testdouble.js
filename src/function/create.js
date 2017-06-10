@@ -14,7 +14,7 @@ export default (nameOrFunc) => {
     return StubbingRegister.instance.satisfy(double, call)
   }, (fakeFunction) => {
     fakeFunction.toString = () =>
-      double.name == null ? '[test double (unnamed)]' : `[test double for "${double.name}"]`
+      double.fullName == null ? '[test double (unnamed)]' : `[test double for "${double.fullName}"]`
   }))
   return double
 }
