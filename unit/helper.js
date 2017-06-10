@@ -6,6 +6,8 @@ global.td = require('testdouble') // <-- a known previous devDep version!!!!
 module.exports = {
   beforeAll: function () {},
   beforeEach: function () {},
-  afterEach: function () {},
+  afterEach: function () {
+    td.reset()
+  },
   afterAll: function () {}
 }
