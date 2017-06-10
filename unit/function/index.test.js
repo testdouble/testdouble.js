@@ -1,6 +1,5 @@
 import Double from '../../src/value/double'
 
-    // 2. (if passed a func), copy-props & shallow td-ify
     // 3 throws it in the "store"
     //   - assigns the name to the entry in the store (if it exists)
 let create, imitate, remember, subject
@@ -29,7 +28,7 @@ module.exports = {
     const result = subject(bar)
 
     assert.equal(result, double.fake)
-    td.verify(imitate(double))
+    td.verify(imitate(bar, double))
     td.verify(remember(double))
   }
 }

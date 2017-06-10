@@ -39,16 +39,16 @@ module.exports = {
     'logs calls': () => {
       const double = subject()
 
-      double.fake.call('fake this', 1,2,3)
+      double.fake.call('fake this', 1, 2, 3)
 
       var calls = CallLog.instance.for(double)
       assert.equal(calls.length, 1)
       assert.equal(calls[0].context, 'fake this')
-      assert.deepEqual(calls[0].args, [1,2,3])
+      assert.deepEqual(calls[0].args, [1, 2, 3])
     },
     'registers stubbing': () => {
       const double = subject()
-      const stubbing = new Stubbing('return', ['a','b'], ['c'])
+      const stubbing = new Stubbing('return', ['a', 'b'], ['c'])
       StubbingRegister.instance.add(double, stubbing)
 
       const result = double.fake('a', 'b')
