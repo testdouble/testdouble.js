@@ -55,5 +55,13 @@ module.exports = {
 
       assert.equal(result, 'c')
     }
+  },
+  'toString supports mutation (necessary sometimes for td.replace() to depend on td.func()': () => {
+    const double = subject()
+
+    double.name = 'new name'
+
+    assert.equal(double.name, 'new name')
+    assert.equal(double.fake.toString(), '[test double for "new name"]')
   }
 }
