@@ -8,7 +8,7 @@ import StubbingRegister from '../value/stubbing-register'
 export default (nameOrFunc) => {
   const name = deriveName(nameOrFunc)
   const real = _.isFunction(nameOrFunc) ? nameOrFunc : null
-  let double = new Double(name, real, _.tap(function testDouble (...args) {
+  const double = new Double(name, real, _.tap(function testDouble (...args) {
     const call = new Call(this, args)
     CallLog.instance.log(double, call)
     return StubbingRegister.instance.satisfy(double, call)
