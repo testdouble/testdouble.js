@@ -48,6 +48,5 @@ module.exports = {
     const first = subject.pop()
     assert.deepEqual(first, {double: double1, call: call1})
     assert.deepEqual(subject.for(double1), [])
-
   }
 }

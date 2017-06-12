@@ -4,5 +4,14 @@ export default class Stubbing {
     this.args = args
     this.outcomes = outcomes
     this.options = options
+    this.satisfactionCount = 0
+  }
+
+  get timesSatisfied () {
+    return this.satisfactionCount
+  }
+
+  incrementSatisfactions () {
+    this.satisfactionCount++
   }
 }

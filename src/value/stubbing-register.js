@@ -9,6 +9,10 @@ export default class StubbingRegister {
     return instance
   }
 
+  static reset () {
+    instance = null
+  }
+
   constructor () {
     this.stubbings = new Map()
   }
@@ -23,5 +27,9 @@ export default class StubbingRegister {
 
   satisfy (double, call) {
     return satisfy(call, this.stubbings.get(double))
+  }
+
+  get (double) {
+    return this.stubbings.get(double)
   }
 }
