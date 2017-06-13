@@ -39,8 +39,14 @@ describe 'td.constructor', ->
     Then -> @fakeConstructor.bar.toString() == '[test double for "Thing.bar"]'
     Then -> @fakeInstance.toString() == '[test double instance of constructor "Thing"]'
 
-    # Fake things pass instanceof checks
-    Then -> @fakeInstance instanceof Thing
+    context 'extendWhenReplacingConstructors disabled (default)', ->
+      Then -> td.config().extendWhenReplacingConstructors == false
+      Then -> !(@fakeInstance instanceof Thing)
+
+    context 'extendWhenReplacingConstructors enabled', ->
+      Given -> td.config(extendWhenReplacingConstructors: true)
+      Given -> @fakeInstance = new (td.constructor(Thing))()
+      Then -> @fakeInstance instanceof Thing
 
     # Original attributes are carried over
     Then -> @fakeConstructor.prototype.instanceAttr == 'baz'

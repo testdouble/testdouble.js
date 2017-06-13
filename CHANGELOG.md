@@ -1,5 +1,35 @@
 # Change Log
 
+## [v3.0.0](https://github.com/testdouble/testdouble.js/tree/v3.0.0) (2017-06-02)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v2.1.2...v3.0.0)
+
+**Fixed bugs:**
+
+- Figure out babel+instanceof+constructor problems with class extension  [\#241](https://github.com/testdouble/testdouble.js/issues/241)
+- Mocking a Class [\#157](https://github.com/testdouble/testdouble.js/issues/157)
+
+**Closed issues:**
+
+- `td.verify` reporting after resolving promises [\#250](https://github.com/testdouble/testdouble.js/issues/250)
+- Replacing dependency with td.replace\(path, replacement\) doesn't work [\#249](https://github.com/testdouble/testdouble.js/issues/249)
+- Verify constructor [\#248](https://github.com/testdouble/testdouble.js/issues/248)
+- td.replace \(\) breaks the cache in require [\#244](https://github.com/testdouble/testdouble.js/issues/244)
+- Faking internal calls [\#243](https://github.com/testdouble/testdouble.js/issues/243)
+- ECMAScript 2015 Classes with td.constructor\(\) [\#240](https://github.com/testdouble/testdouble.js/issues/240)
+- TypeScript: Better Generic Support for td.object\(\) [\#236](https://github.com/testdouble/testdouble.js/issues/236)
+- How to Replace Imported Constructor in Another File [\#235](https://github.com/testdouble/testdouble.js/issues/235)
+- Mocha Spec Reporter [\#234](https://github.com/testdouble/testdouble.js/issues/234)
+- TypeError: 'x' is not a function [\#233](https://github.com/testdouble/testdouble.js/issues/233)
+- Inifinite recursion problem [\#231](https://github.com/testdouble/testdouble.js/issues/231)
+- Invoke callback within object [\#230](https://github.com/testdouble/testdouble.js/issues/230)
+- Testing Constructor invocations [\#229](https://github.com/testdouble/testdouble.js/issues/229)
+- Stubbing chained API objects yields a warning [\#228](https://github.com/testdouble/testdouble.js/issues/228)
+
+**Merged pull requests:**
+
+- Stop extending types when replacing constructors [\#254](https://github.com/testdouble/testdouble.js/pull/254) ([searls](https://github.com/searls))
+- Fix \#236; Add another overload and its test [\#237](https://github.com/testdouble/testdouble.js/pull/237) ([sgtoj](https://github.com/sgtoj))
+
 ## [v2.1.2](https://github.com/testdouble/testdouble.js/tree/v2.1.2) (2017-03-29)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v2.1.1...v2.1.2)
 
@@ -182,7 +212,6 @@
 
 **Closed issues:**
 
-- Mocking a Class [\#157](https://github.com/testdouble/testdouble.js/issues/157)
 - Matcher for a specific position [\#156](https://github.com/testdouble/testdouble.js/issues/156)
 
 **Merged pull requests:**

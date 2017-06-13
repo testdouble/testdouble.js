@@ -1,5 +1,5 @@
 /*
- * testdouble@2.1.2
+ * testdouble@3.0.0
  *
  *   A minimal test double library for TDD with JavaScript
  *
@@ -8681,8 +8681,9 @@ var _anything2 = _interopRequireDefault(_anything);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var DEFAULTS = {
-  promiseConstructor: global.Promise,
+  extendWhenReplacingConstructors: false,
   ignoreWarnings: false,
+  promiseConstructor: global.Promise,
   suppressErrors: false
 };
 var configData = _lodashWrap2.default.extend({}, DEFAULTS);
@@ -8725,6 +8726,14 @@ var _function = require('./function');
 
 var _function2 = _interopRequireDefault(_function);
 
+var _config = require('./config');
+
+var _config2 = _interopRequireDefault(_config);
+
+var _copyProperties = require('./util/copy-properties');
+
+var _copyProperties2 = _interopRequireDefault(_copyProperties);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -8738,23 +8747,11 @@ exports.default = function (typeOrNames) {
 };
 
 var fakeConstructorFromType = function fakeConstructorFromType(type) {
-  var name = type.name || '';
-  var fauxConstructor = (0, _function2.default)(name + ' constructor');
+  return _lodashWrap2.default.tap(createFakeType(type), function (fakeType) {
+    var name = type.name || '';
+    (0, _copyProperties2.default)(type, fakeType);
+    (0, _copyProperties2.default)(type.prototype, fakeType.prototype);
 
-  return _lodashWrap2.default.tap(function (_type) {
-    _inherits(TestDoubleConstructor, _type);
-
-    function TestDoubleConstructor() {
-      _classCallCheck(this, TestDoubleConstructor);
-
-      var _this = _possibleConstructorReturn(this, (TestDoubleConstructor.__proto__ || Object.getPrototypeOf(TestDoubleConstructor)).apply(this, arguments));
-
-      fauxConstructor.apply(undefined, arguments);
-      return _this;
-    }
-
-    return TestDoubleConstructor;
-  }(type), function (fakeType) {
     // Override "static" functions with instance test doubles
     _lodashWrap2.default.each(_lodashWrap2.default.functions(type), function (funcName) {
       fakeType[funcName] = (0, _function2.default)(name + '.' + funcName);
@@ -8767,6 +8764,33 @@ var fakeConstructorFromType = function fakeConstructorFromType(type) {
 
     addToStringMethodsToFakeType(fakeType, name);
   });
+};
+
+var createFakeType = function createFakeType(type) {
+  var fauxConstructor = (0, _function2.default)((type.name || 'anonymous') + ' constructor');
+
+  if ((0, _config2.default)().extendWhenReplacingConstructors) {
+    return function (_type) {
+      _inherits(TestDoubleConstructorExtendingRealType, _type);
+
+      function TestDoubleConstructorExtendingRealType() {
+        _classCallCheck(this, TestDoubleConstructorExtendingRealType);
+
+        var _this = _possibleConstructorReturn(this, (TestDoubleConstructorExtendingRealType.__proto__ || Object.getPrototypeOf(TestDoubleConstructorExtendingRealType)).apply(this, arguments));
+
+        fauxConstructor.apply(undefined, arguments);
+        return _this;
+      }
+
+      return TestDoubleConstructorExtendingRealType;
+    }(type);
+  } else {
+    return function TestDoubleConstructor() {
+      _classCallCheck(this, TestDoubleConstructor);
+
+      fauxConstructor.apply(undefined, arguments);
+    };
+  }
 };
 
 var fakeConstructorFromNames = function fakeConstructorFromNames(funcNames) {
@@ -8791,7 +8815,7 @@ var addToStringMethodsToFakeType = function addToStringMethodsToFakeType(fakeTyp
   };
 };
 
-},{"./function":261,"./util/get-all-custom-prototypal-function-names":287,"./util/lodash-wrap":288}],260:[function(require,module,exports){
+},{"./config":258,"./function":261,"./util/copy-properties":286,"./util/get-all-custom-prototypal-function-names":287,"./util/lodash-wrap":288}],260:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9987,53 +10011,53 @@ exports.default = function (args) {
 },{"../util/lodash-wrap":288,"./anything":283}],285:[function(require,module,exports){
 'use strict';
 
-var _callback = require('./matchers/callback');
+var _function = require('./function');
 
-var _callback2 = _interopRequireDefault(_callback);
-
-var _config = require('./config');
-
-var _config2 = _interopRequireDefault(_config);
-
-var _constructor = require('./constructor');
-
-var _constructor2 = _interopRequireDefault(_constructor);
-
-var _explain = require('./explain');
-
-var _explain2 = _interopRequireDefault(_explain);
-
-var _matchers = require('./matchers');
-
-var _matchers2 = _interopRequireDefault(_matchers);
+var _function2 = _interopRequireDefault(_function);
 
 var _object = require('./object');
 
 var _object2 = _interopRequireDefault(_object);
 
-var _replace = require('./replace');
+var _constructor = require('./constructor');
 
-var _replace2 = _interopRequireDefault(_replace);
+var _constructor2 = _interopRequireDefault(_constructor);
 
-var _reset = require('./reset');
+var _when = require('./when');
 
-var _reset2 = _interopRequireDefault(_reset);
-
-var _function = require('./function');
-
-var _function2 = _interopRequireDefault(_function);
+var _when2 = _interopRequireDefault(_when);
 
 var _verify = require('./verify');
 
 var _verify2 = _interopRequireDefault(_verify);
 
+var _matchers = require('./matchers');
+
+var _matchers2 = _interopRequireDefault(_matchers);
+
+var _replace = require('./replace');
+
+var _replace2 = _interopRequireDefault(_replace);
+
+var _explain = require('./explain');
+
+var _explain2 = _interopRequireDefault(_explain);
+
+var _reset = require('./reset');
+
+var _reset2 = _interopRequireDefault(_reset);
+
+var _config = require('./config');
+
+var _config2 = _interopRequireDefault(_config);
+
+var _callback = require('./matchers/callback');
+
+var _callback2 = _interopRequireDefault(_callback);
+
 var _version = require('./version');
 
 var _version2 = _interopRequireDefault(_version);
-
-var _when = require('./when');
-
-var _when2 = _interopRequireDefault(_when);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -10439,7 +10463,7 @@ var ignoreMessage = function ignoreMessage(config) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = '2.1.2';
+exports.default = '3.0.0';
 
 },{}],291:[function(require,module,exports){
 'use strict';
