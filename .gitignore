@@ -13,6 +13,4 @@ npm-debug.log*
 
 .node-version
 
-dist/testdouble.js
-
 test/src/typescript/test.js
