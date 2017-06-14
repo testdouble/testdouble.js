@@ -1,7 +1,7 @@
 import _ from './util/lodash-wrap'
 import callback from './callback'
 import calls from './store/calls'
-import log from './log'
+import log from './wrap/log'
 import stubbings from './store/stubbings'
 import tdConfig from './config'
 

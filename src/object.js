@@ -1,5 +1,5 @@
 import _ from './util/lodash-wrap'
-import log from './log'
+import log from './wrap/log'
 import tdFunction from './function'
 import imitate from './imitate'
 

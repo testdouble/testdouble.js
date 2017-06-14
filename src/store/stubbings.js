@@ -2,7 +2,7 @@ import _ from '../util/lodash-wrap'
 import argsMatch from '../args-match'
 import callback from '../callback'
 import config from '../config'
-import log from '../log'
+import log from '../wrap/log'
 import store from './index'
 
 export default {

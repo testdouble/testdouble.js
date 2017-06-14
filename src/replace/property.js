@@ -1,6 +1,6 @@
 import _ from '../util/lodash-wrap'
 import imitate from '../imitate'
-import log from '../log'
+import log from '../wrap/log'
 import reset from '../reset'
 import stringifyAnything from '../stringify/anything'
 
