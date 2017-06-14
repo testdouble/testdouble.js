@@ -14,9 +14,11 @@ td.when(dog.prototype.bark()).thenReturn("woof!");
 const bird = td.object({ fly: function(){} });
 td.when(bird.fly()).thenReturn("swoosh!");
 
-class Bear { constructor() {}; sleep() {}; };
-const bear = td.object<Bear>("Bear");
-td.when(bear.sleep()).thenReturn("zzzzzz");
+if (eval("typeof Proxy") !== "undefined") {
+  class Bear { constructor() {}; sleep() {}; };
+  const bear = td.object<Bear>("A bear");
+  td.when(bear.sleep()).thenReturn("zzzzzz");
+}
 
 const testObject = {
   funk: function() {}
