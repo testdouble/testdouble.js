@@ -12,3 +12,4 @@ npm-debug.log*
 /coverage
 
 .node-version
+.vscode
