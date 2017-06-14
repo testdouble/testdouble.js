@@ -12,3 +12,7 @@ npm-debug.log*
 /coverage
 
 .node-version
+
+dist/testdouble.js
+
+test/src/typescript/test.js

@@ -29,7 +29,7 @@
     "test:browser": "testem ci",
     "test:unit": "teenytest",
     "test:ci": "yarn run clean && yarn run compile && yarn run style && yarn run test:all && yarn run clean:dist && echo \"All done!\"",
-    "test:typescript": "tsc --noEmit -p ./test/src/typescript",
+    "test:typescript": "tsc -p ./test/src/typescript && node ./test/src/typescript/test.js && rm ./test/src/typescript/test.js",
     "test:example:webpack": "cd examples/webpack && yarn install && yarn test && cd ../..",
     "test:example:node": "cd examples/node && yarn install && yarn test && cd ../..",
     "test:example:lineman": "cd examples/lineman && yarn install && yarn test && cd ../..",
@@ -77,6 +77,8 @@
     "stringify-object-es5": "^2.5.0"
   },
   "devDependencies": {
+    "@types/chai": "^4.0.0",
+    "@types/mocha": "^2.2.41",
     "babel-cli": "^6.23.0",
     "babel-preset-env": "^1.2.1",
     "babel-preset-power-assert": "^1.0.0",
