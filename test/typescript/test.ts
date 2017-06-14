@@ -2,7 +2,7 @@
 import { assert } from 'chai'
 
 //td library under test
-import * as td from "../../../";
+import * as td from "../..";
 
 class Dog {
   bark() {}
@@ -26,8 +26,8 @@ const testObject = {
 
 td.replace(testObject, "funk");
 td.replace(testObject, "funk", () => 42);
-td.replace("../../..");
-td.replace("../../../", 42);
+td.replace("../..");
+td.replace("../../", 42);
 
 const f = td.function();
 td.when(f(10)).thenReturn(10);
