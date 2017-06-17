@@ -1,4 +1,4 @@
-import _ from '../../wrap/lodash'
+import _ from '../wrap/lodash'
 
 export default (thing) => {
   const originalThing = thing
