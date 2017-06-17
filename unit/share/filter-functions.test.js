@@ -14,7 +14,7 @@ module.exports = {
       f: Number
     }
 
-    const result = subject(target, ['a','b','c','d','e','f'])
+    const result = subject(target, ['a', 'b', 'c', 'd', 'e', 'f'])
 
     assert.deepEqual(result, ['a', 'b', 'f'])
   },
@@ -30,7 +30,7 @@ module.exports = {
     SubThing.prototype.d = /hiiii/
     SubThing.prototype.b = () => true
 
-    const result = subject(new SubThing(), ['a','b','c','d','e','f'])
+    const result = subject(new SubThing(), ['a', 'b', 'c', 'd', 'e', 'f'])
 
     assert.deepEqual(result, ['a', 'b', 'e'])
   }

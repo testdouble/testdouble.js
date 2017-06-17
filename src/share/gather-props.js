@@ -4,7 +4,7 @@ export default (thing) => {
   const originalThing = thing
   const propNames = []
 
-  while(!isNativePrototype(thing)) {
+  while (!isNativePrototype(thing)) {
     Object.getOwnPropertyNames(thing).forEach((propName) => {
       if (propNames.indexOf(propName) === -1 && propName !== 'constructor') {
         propNames.push(propName)
@@ -23,4 +23,3 @@ const isNativePrototype = (thing) => {
 
 const excludePropertiesNotOnThing = (propNames, originalThing) =>
   _.filter(propNames, (name) => name in originalThing)
-

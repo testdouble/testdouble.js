@@ -42,7 +42,6 @@ module.exports = {
     assert.strictEqual(targetPropDescriptor.enumerable, false)
   },
   'only copies props passed to it (and silently drops nonexistant ones)': () => {
-    const thing = {}
     const original = {a: 1, b: 2, c: 3}
     const target = {d: 4}
 
@@ -53,5 +52,5 @@ module.exports = {
     assert.equal(target.c, 3)
     assert.equal(target.d, 4)
     assert.ok(!('e' in target))
-  },
+  }
 }
