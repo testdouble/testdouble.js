@@ -3,6 +3,8 @@ import calls from './store/calls'
 import copyProperties from './util/copy-properties'
 import store from './store'
 import stubbings from './store/stubbings'
+import gatherProps from './share/gather-props'
+import filterFunctions from './share/filter-functions'
 
 export default (nameOrFunc, __optionalName) =>
   _.isFunction(nameOrFunc)
@@ -11,7 +13,7 @@ export default (nameOrFunc, __optionalName) =>
 
 var createTestDoubleForFunction = (func, optionalName) =>
   _.tap(copyProperties(func, createTestDoubleNamed(func.name || optionalName)), testDouble =>
-    _.each(_.functions(func), funcName => {
+    _.each(filterFunctions(func, gatherProps(func)), funcName => {
       const tdName = `${func.name || optionalName || ''}.${funcName}`
       testDouble[funcName] = createTestDoubleNamed(tdName)
     })
