@@ -1,4 +1,4 @@
-import subject from '../../../src/function/imitate/copy-props'
+import subject from '../../src/share/copy-props'
 
 module.exports = {
   'copies basic props retaining existing': () => {

@@ -1,4 +1,4 @@
-import _ from '../../wrap/lodash'
+import _ from '../wrap/lodash'
 
 export default (original, target, props) => {
   Object.defineProperties(target, _.transform(props, (acc, name) => {
