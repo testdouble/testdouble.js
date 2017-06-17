@@ -22,6 +22,7 @@ import isEqual from 'lodash/isEqual'
 import isEqualWith from 'lodash/isEqualWith'
 import isFunction from 'lodash/isFunction'
 import isNumber from 'lodash/isNumber'
+import isObjectLike from 'lodash/isObjectLike'
 import isPlainObject from 'lodash/isPlainObject'
 import isRegExp from 'lodash/isRegExp'
 import isString from 'lodash/isString'
@@ -62,6 +63,7 @@ export default {
   isEqualWith,
   isFunction,
   isNumber,
+  isObjectLike,
   isPlainObject,
   isRegExp,
   isString,
