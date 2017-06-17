@@ -77,6 +77,11 @@ describe 'td.replace', ->
         When -> td.when(@doubleBag.horse.prototype.nay('hay')).thenReturn('no way')
         Then -> (new @dependency.animals.horse()).nay('hay') == 'no way'
 
+    describe 'Replacing an object with Object.create', ->
+      Given -> @dependency = { foo: Object.create(bar: ->) }
+      When -> td.replace(@dependency, 'foo')
+      Then -> td.explain(@dependency.foo.bar).isTestDouble == true
+
     describe 'Replacing a property that is not an object/function', ->
       Given -> @message = 'Error: testdouble.js - td.replace - "badType" property was found, but test double only knows how to replace functions, constructors, & objects containing functions (its value was '
       When -> try
