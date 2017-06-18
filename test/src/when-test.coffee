@@ -109,10 +109,24 @@ describe 'when', ->
         When (done) -> @testDouble(10).then((@resolved) => done()); undefined
         Then -> @resolved == 'pants'
 
+        context 'multiple values', ->
+          Given -> td.when(@testDouble(5)).thenResolve('shirts', 'ties')
+          When (done) -> @testDouble(5).then((@resolvedFirst) => done()); undefined
+          When (done) -> @testDouble(5).then((@resolvedSecond) => done()); undefined
+          Then -> @resolvedFirst == 'shirts'
+          Then -> @resolvedSecond == 'ties'
+
       describe 'td.when…thenReject', ->
         Given -> td.when(@testDouble(10)).thenReject('oops')
         When (done) -> @testDouble(10).then(null, (@rejected) => done()); undefined
         Then -> @rejected == 'oops'
+
+        context 'multiple values', ->
+          Given -> td.when(@testDouble(5)).thenReject('darn', 'dang')
+          When (done) -> @testDouble(5).then(null, (@rejectedFirst) => done()); undefined
+          When (done) -> @testDouble(5).then(null, (@rejectedSecond) => done()); undefined
+          Then -> @rejectedFirst == 'darn'
+          Then -> @rejectedSecond == 'dang'
 
     context 'with an alternative promise constructor', ->
       class FakePromise
