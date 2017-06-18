@@ -1,9 +1,9 @@
 import _ from './util/lodash-wrap'
-import getAllCustomPrototypalFunctionNames from './util/get-all-custom-prototypal-function-names'
 import tdFunction from './function'
 import config from './config'
 import copyProps from './share/copy-props'
 import gatherProps from './share/gather-props'
+import filterFunctions from './share/filter-functions'
 
 export default (typeOrNames) =>
   _.isFunction(typeOrNames)
@@ -13,16 +13,18 @@ export default (typeOrNames) =>
 var fakeConstructorFromType = (type) =>
   _.tap(createFakeType(type), (fakeType) => {
     const name = type.name || ''
-    copyProps(type, fakeType, gatherProps(type))
-    copyProps(type.prototype, fakeType.prototype, gatherProps(type.prototype))
+    const staticProps = gatherProps(type)
+    const instanceProps = gatherProps(type.prototype)
+    copyProps(type, fakeType, staticProps)
+    copyProps(type.prototype, fakeType.prototype, instanceProps)
 
     // Override "static" functions with instance test doubles
-    _.each(_.functions(type), funcName => {
+    _.each(filterFunctions(type, staticProps), funcName => {
       fakeType[funcName] = tdFunction(`${name}.${funcName}`)
     })
 
     // Override prototypal functions with instance test doubles
-    _.each(getAllCustomPrototypalFunctionNames(type), funcName => {
+    _.each(filterFunctions(type.prototype, instanceProps), funcName => {
       fakeType.prototype[funcName] = tdFunction(`${name}#${funcName}`)
     })
 

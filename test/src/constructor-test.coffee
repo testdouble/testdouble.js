@@ -8,6 +8,16 @@ describe 'td.constructor', ->
     Given -> Thing.bar = -> 3
     Given -> Thing::instanceAttr = 'baz'
     Given -> Thing.staticAttr = 'qux'
+    Given -> Object.defineProperties Thing,
+      secretStaticFunc:
+        value: ->
+        enumerable: false
+        writable: true
+    Given -> Object.defineProperties SuperThing.prototype,
+      secretFunc:
+        value: ->
+        enumerable: false
+        writable: true
     Given -> @fakeConstructor = td.constructor(Thing)
     Given -> @fakeInstance = new @fakeConstructor('pants')
 
@@ -38,6 +48,10 @@ describe 'td.constructor', ->
     Then -> @fakeConstructor.prototype.foo.toString() == '[test double for "Thing#foo"]'
     Then -> @fakeConstructor.bar.toString() == '[test double for "Thing.bar"]'
     Then -> @fakeInstance.toString() == '[test double instance of constructor "Thing"]'
+
+    # Non-enumerables are covered
+    Then -> td.explain(@fakeConstructor.secretStaticFunc).isTestDouble == true
+    Then -> td.explain(@fakeInstance.secretFunc).isTestDouble == true
 
     context 'extendWhenReplacingConstructors disabled (default)', ->
       Then -> td.config().extendWhenReplacingConstructors == false

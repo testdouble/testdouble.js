@@ -30,13 +30,14 @@ describe 'td.replace', ->
         And -> new @dependency.thingConstructor().foo() == 'og foo'
 
     describe 'Replacing an ES6 constructor function', ->
+      return unless ES_CLASS_SUPPORT
       Given -> @dependency.es6constructor = require('../../fixtures/es6class')
       Given -> @fakeConstructor = td.replace(@dependency, 'es6constructor')
       Given -> @es6Thing = new @dependency.es6constructor()
       Then -> td.explain(@fakeConstructor.prototype.foo).isTestDouble == true
       Then -> td.explain(@fakeConstructor.prototype.bar).isTestDouble == true
-      And -> @fakeConstructor.prototype.foo == @es6Thing.foo
-      And -> @fakeConstructor.prototype.bar == @es6Thing.bar
+      Then -> @fakeConstructor.prototype.foo == @es6Thing.foo
+      Then -> @fakeConstructor.prototype.bar == @es6Thing.bar
 
       describe 'the member td functions actually work', ->
         Given -> td.when(@fakeConstructor.prototype.foo('cat')).thenReturn('dog')
