@@ -30,10 +30,10 @@ td.replace("../..");
 td.replace("../../", 42);
 
 const f = td.function();
-td.when(f(10)).thenReturn(10);
+td.when(f(10)).thenReturn(10, 11);
 td.when(f(1)).thenThrow(new Error("ok"));
 td.when(f(td.matchers.isA(String))).thenDo(function(s: string) { return s; });
-td.when(f(td.matchers.not(true))).thenResolve("value");
+td.when(f(td.matchers.not(true))).thenResolve("value1", "value2");
 td.when(f(td.matchers.not(false))).thenReject(new Error("rejected"));
 
 f()

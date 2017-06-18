@@ -30,7 +30,7 @@ export interface Stubber {
   thenReturn(...args: any[]): TestDouble;
   thenDo(f: Function): TestDouble;
   thenThrow(e: Error): TestDouble;
-  thenResolve(v: any): TestDouble;
+  thenResolve(...args: any[]): TestDouble;
   thenReject(e: Error): TestDouble;
   thenCallback(...args: any[]): TestDouble;
 }
