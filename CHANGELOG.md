@@ -1,5 +1,26 @@
 # Change Log
 
+## [v3.1.0](https://github.com/testdouble/testdouble.js/tree/v3.1.0) (2017-06-18)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.0.0...v3.1.0)
+
+**Fixed bugs:**
+
+- td.replace throws with objects created with Object.create [\#257](https://github.com/testdouble/testdouble.js/issues/257)
+- getters are executed when using td.constructor\(\) [\#218](https://github.com/testdouble/testdouble.js/issues/218)
+
+**Closed issues:**
+
+- Verify that constructor is passed certain values [\#256](https://github.com/testdouble/testdouble.js/issues/256)
+- Is there any sample code that mock aws sdk? [\#251](https://github.com/testdouble/testdouble.js/issues/251)
+- Cannot use `td.object` with "callable objects" [\#232](https://github.com/testdouble/testdouble.js/issues/232)
+
+**Merged pull requests:**
+
+- Allow stubbing of custom instances & Object.create\(\) [\#264](https://github.com/testdouble/testdouble.js/pull/264) ([searls](https://github.com/searls))
+- Enable tsc in ci pipeline take 2 [\#260](https://github.com/testdouble/testdouble.js/pull/260) ([duluca](https://github.com/duluca))
+- TypeScript typing thenResolve takes variable args [\#258](https://github.com/testdouble/testdouble.js/pull/258) ([miyu](https://github.com/miyu))
+- Test testdouble.js with testdouble.js! [\#255](https://github.com/testdouble/testdouble.js/pull/255) ([searls](https://github.com/searls))
+
 ## [v3.0.0](https://github.com/testdouble/testdouble.js/tree/v3.0.0) (2017-06-02)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v2.1.2...v3.0.0)
 
@@ -37,7 +58,6 @@
 
 - TypeError when used with node -r flag [\#226](https://github.com/testdouble/testdouble.js/issues/226)
 - When replacing a node library calling it from other modules does not work as expected [\#225](https://github.com/testdouble/testdouble.js/issues/225)
-- Consider using \_.isObjectLike rather than \_.isPlainObject within td.object [\#224](https://github.com/testdouble/testdouble.js/issues/224)
 
 ## [v2.1.1](https://github.com/testdouble/testdouble.js/tree/v2.1.1) (2017-03-28)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v2.1.0...v2.1.1)
