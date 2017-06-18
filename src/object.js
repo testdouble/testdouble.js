@@ -1,9 +1,11 @@
 import _ from './util/lodash-wrap'
-import copyProperties from './util/copy-properties'
 import isConstructor from './replace/is-constructor'
 import log from './log'
 import tdConstructor from './constructor'
 import tdFunction from './function'
+import gatherProps from './share/gather-props'
+import copyProps from './share/copy-props'
+import filterFunctions from './share/filter-functions'
 
 const DEFAULT_OPTIONS = {excludeMethods: ['then']}
 
@@ -13,10 +15,10 @@ export default (nameOrType, config) =>
   })
 
 var fakeObject = (nameOrType, config) => {
-  if (_.isPlainObject(nameOrType)) {
-    return createTestDoublesForPlainObject(nameOrType)
-  } else if (_.isArray(nameOrType)) {
+  if (_.isArray(nameOrType)) {
     return createTestDoublesForFunctionNames(nameOrType)
+  } else if (_.isObjectLike(nameOrType)) {
+    return createTestDoublesForPlainObject(nameOrType)
   } else if (_.isString(nameOrType) || nameOrType === undefined) {
     return createTestDoubleViaProxy(nameOrType, withDefaults(config))
   } else if (_.isFunction(nameOrType)) {
@@ -26,12 +28,16 @@ var fakeObject = (nameOrType, config) => {
   }
 }
 
-var createTestDoublesForPlainObject = (obj) =>
-  _.transform(_.functions(obj), (acc, funcName) => {
+var createTestDoublesForPlainObject = (obj) => {
+  const propNames = gatherProps(obj)
+  const fakeObj = {}
+  copyProps(obj, fakeObj, propNames)
+  return _.transform(filterFunctions(obj, propNames), (acc, funcName) => {
     acc[funcName] = isConstructor(obj[funcName])
       ? tdConstructor(obj[funcName])
       : tdFunction(`.${funcName}`)
-  }, copyProperties(obj, _.clone(obj)))
+  }, fakeObj)
+}
 
 var createTestDoublesForFunctionNames = (names) =>
   _.transform(names, (acc, funcName) => {

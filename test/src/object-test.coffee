@@ -15,8 +15,8 @@ describe 'td.object', ->
   describe 'creating an object that is an instance of a prototypal thing', ->
     Given -> @type = class Thing
       foo: -> 'bar'
-    When -> try td.object(new @type()) catch e then @error = e
-    Then -> expect(@error.message).to.contain('To create a fake object')
+    When -> @testDouble = td.object(new @type())
+    Then -> td.explain(@testDouble.foo).isTestDouble == true
 
   describe 'making a test double based on an array of strings', ->
     Given -> @testDouble = td.object(['biz','bam','boo'])
@@ -30,6 +30,9 @@ describe 'td.object', ->
     Then -> expect(@result.message).to.contain(
       "Please use `td.function()` or `td.constructor()` instead")
 
+  describe 'passing an Object.create()d thing', ->
+    When -> @testDouble = td.object(Object.create(respond: -> 'no'))
+    Then -> td.explain(@testDouble.respond).isTestDouble == true
 
   if global.Proxy?
     describe 'creating a proxy object (ES2015; only supported in FF + Edge atm)', ->

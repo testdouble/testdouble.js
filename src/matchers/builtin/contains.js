@@ -9,10 +9,10 @@ export default create({
     return _.every(containings, (containing) => {
       if (_.isArray(containing)) {
         return _.some(actualArg, actualElement => _.isEqual(actualElement, containing))
-      } else if (_.isPlainObject(containing) && _.isPlainObject(actualArg)) {
-        return containsAllSpecified(containing, actualArg)
       } else if (_.isRegExp(containing)) {
         return containing.test(actualArg)
+      } else if (_.isObjectLike(containing) && _.isObjectLike(actualArg)) {
+        return containsAllSpecified(containing, actualArg)
       } else {
         return _.includes(actualArg, containing)
       }
@@ -22,6 +22,6 @@ export default create({
 
 var containsAllSpecified = (containing, actual) =>
   actual != null && _.every(containing, (val, key) =>
-    _.isPlainObject(val)
+    _.isObjectLike(val)
       ? containsAllSpecified(val, actual[key])
       : _.isEqual(val, actual[key]))

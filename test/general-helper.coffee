@@ -21,3 +21,9 @@ global.shouldThrow = (func, expectedMessage) ->
     threw = true
   expect(threw, "Expected function to throw an error").to.be.true
   actualMessage
+
+global.ES_CLASS_SUPPORT = try
+  eval('"use strict"; class SomeStupidButUniqueClassName {}')
+  true
+catch e
+  false

@@ -30,13 +30,14 @@ describe 'td.replace', ->
         And -> new @dependency.thingConstructor().foo() == 'og foo'
 
     describe 'Replacing an ES6 constructor function', ->
+      return unless ES_CLASS_SUPPORT
       Given -> @dependency.es6constructor = require('../../fixtures/es6class')
       Given -> @fakeConstructor = td.replace(@dependency, 'es6constructor')
       Given -> @es6Thing = new @dependency.es6constructor()
       Then -> td.explain(@fakeConstructor.prototype.foo).isTestDouble == true
       Then -> td.explain(@fakeConstructor.prototype.bar).isTestDouble == true
-      And -> @fakeConstructor.prototype.foo == @es6Thing.foo
-      And -> @fakeConstructor.prototype.bar == @es6Thing.bar
+      Then -> @fakeConstructor.prototype.foo == @es6Thing.foo
+      Then -> @fakeConstructor.prototype.bar == @es6Thing.bar
 
       describe 'the member td functions actually work', ->
         Given -> td.when(@fakeConstructor.prototype.foo('cat')).thenReturn('dog')
@@ -76,6 +77,11 @@ describe 'td.replace', ->
       describe 'instantiable types work too', ->
         When -> td.when(@doubleBag.horse.prototype.nay('hay')).thenReturn('no way')
         Then -> (new @dependency.animals.horse()).nay('hay') == 'no way'
+
+    describe 'Replacing an object with Object.create', ->
+      Given -> @dependency = { foo: Object.create(bar: ->) }
+      When -> td.replace(@dependency, 'foo')
+      Then -> td.explain(@dependency.foo.bar).isTestDouble == true
 
     describe 'Replacing a property that is not an object/function', ->
       Given -> @message = 'Error: testdouble.js - td.replace - "badType" property was found, but test double only knows how to replace functions, constructors, & objects containing functions (its value was '
