@@ -1,5 +1,5 @@
 /*
- * testdouble@3.0.0
+ * testdouble@3.1.0
  *
  *   A minimal test double library for TDD with JavaScript
  *
@@ -1218,7 +1218,7 @@ function baseClone(value, bitmask, customizer, key, object, stack) {
 
 module.exports = baseClone;
 
-},{"./_Stack":14,"./_arrayEach":22,"./_assignValue":33,"./_baseAssign":36,"./_baseAssignIn":37,"./_cloneBuffer":88,"./_copyArray":95,"./_copySymbols":97,"./_copySymbolsIn":98,"./_getAllKeys":112,"./_getAllKeysIn":113,"./_getTag":121,"./_initCloneArray":130,"./_initCloneByTag":131,"./_initCloneObject":132,"./isArray":205,"./isBuffer":209,"./isObject":215,"./keys":222}],40:[function(require,module,exports){
+},{"./_Stack":14,"./_arrayEach":22,"./_assignValue":33,"./_baseAssign":36,"./_baseAssignIn":37,"./_cloneBuffer":88,"./_copyArray":95,"./_copySymbols":97,"./_copySymbolsIn":98,"./_getAllKeys":112,"./_getAllKeysIn":113,"./_getTag":121,"./_initCloneArray":130,"./_initCloneByTag":131,"./_initCloneObject":132,"./isArray":205,"./isBuffer":209,"./isObject":216,"./keys":222}],40:[function(require,module,exports){
 var isObject = require('./isObject');
 
 /** Built-in value references. */
@@ -1250,7 +1250,7 @@ var baseCreate = (function() {
 
 module.exports = baseCreate;
 
-},{"./isObject":215}],41:[function(require,module,exports){
+},{"./isObject":216}],41:[function(require,module,exports){
 /** Error message constants. */
 var FUNC_ERROR_TEXT = 'Expected a function';
 
@@ -1527,7 +1527,7 @@ function baseFunctions(object, props) {
 
 module.exports = baseFunctions;
 
-},{"./_arrayFilter":24,"./isFunction":212}],51:[function(require,module,exports){
+},{"./_arrayFilter":24,"./isFunction":213}],51:[function(require,module,exports){
 var castPath = require('./_castPath'),
     toKey = require('./_toKey');
 
@@ -1688,7 +1688,7 @@ function baseIsArguments(value) {
 
 module.exports = baseIsArguments;
 
-},{"./_baseGetTag":53,"./isObjectLike":216}],58:[function(require,module,exports){
+},{"./_baseGetTag":53,"./isObjectLike":217}],58:[function(require,module,exports){
 var baseIsEqualDeep = require('./_baseIsEqualDeep'),
     isObjectLike = require('./isObjectLike');
 
@@ -1718,7 +1718,7 @@ function baseIsEqual(value, other, bitmask, customizer, stack) {
 
 module.exports = baseIsEqual;
 
-},{"./_baseIsEqualDeep":59,"./isObjectLike":216}],59:[function(require,module,exports){
+},{"./_baseIsEqualDeep":59,"./isObjectLike":217}],59:[function(require,module,exports){
 var Stack = require('./_Stack'),
     equalArrays = require('./_equalArrays'),
     equalByTag = require('./_equalByTag'),
@@ -1930,7 +1930,7 @@ function baseIsNative(value) {
 
 module.exports = baseIsNative;
 
-},{"./_isMasked":138,"./_toSource":177,"./isFunction":212,"./isObject":215}],63:[function(require,module,exports){
+},{"./_isMasked":138,"./_toSource":177,"./isFunction":213,"./isObject":216}],63:[function(require,module,exports){
 var baseGetTag = require('./_baseGetTag'),
     isObjectLike = require('./isObjectLike');
 
@@ -1950,7 +1950,7 @@ function baseIsRegExp(value) {
 
 module.exports = baseIsRegExp;
 
-},{"./_baseGetTag":53,"./isObjectLike":216}],64:[function(require,module,exports){
+},{"./_baseGetTag":53,"./isObjectLike":217}],64:[function(require,module,exports){
 var baseGetTag = require('./_baseGetTag'),
     isLength = require('./isLength'),
     isObjectLike = require('./isObjectLike');
@@ -2012,7 +2012,7 @@ function baseIsTypedArray(value) {
 
 module.exports = baseIsTypedArray;
 
-},{"./_baseGetTag":53,"./isLength":213,"./isObjectLike":216}],65:[function(require,module,exports){
+},{"./_baseGetTag":53,"./isLength":214,"./isObjectLike":217}],65:[function(require,module,exports){
 var baseMatches = require('./_baseMatches'),
     baseMatchesProperty = require('./_baseMatchesProperty'),
     identity = require('./identity'),
@@ -2112,7 +2112,7 @@ function baseKeysIn(object) {
 
 module.exports = baseKeysIn;
 
-},{"./_isPrototype":139,"./_nativeKeysIn":156,"./isObject":215}],68:[function(require,module,exports){
+},{"./_isPrototype":139,"./_nativeKeysIn":156,"./isObject":216}],68:[function(require,module,exports){
 var baseEach = require('./_baseEach'),
     isArrayLike = require('./isArrayLike');
 
@@ -3738,7 +3738,7 @@ function hasPath(object, path, hasFunc) {
 
 module.exports = hasPath;
 
-},{"./_castPath":85,"./_isIndex":134,"./_toKey":176,"./isArguments":204,"./isArray":205,"./isLength":213}],124:[function(require,module,exports){
+},{"./_castPath":85,"./_isIndex":134,"./_toKey":176,"./isArguments":204,"./isArray":205,"./isLength":214}],124:[function(require,module,exports){
 /** Used to compose unicode character classes. */
 var rsAstralRange = '\\ud800-\\udfff',
     rsComboMarksRange = '\\u0300-\\u036f',
@@ -4092,7 +4092,7 @@ function isIterateeCall(value, index, object) {
 
 module.exports = isIterateeCall;
 
-},{"./_isIndex":134,"./eq":187,"./isArrayLike":206,"./isObject":215}],136:[function(require,module,exports){
+},{"./_isIndex":134,"./eq":187,"./isArrayLike":206,"./isObject":216}],136:[function(require,module,exports){
 var isArray = require('./isArray'),
     isSymbol = require('./isSymbol');
 
@@ -4199,7 +4199,7 @@ function isStrictComparable(value) {
 
 module.exports = isStrictComparable;
 
-},{"./isObject":215}],141:[function(require,module,exports){
+},{"./isObject":216}],141:[function(require,module,exports){
 /**
  * Removes all key-value entries from the list cache.
  *
@@ -5995,7 +5995,7 @@ var isArguments = baseIsArguments(function() { return arguments; }()) ? baseIsAr
 
 module.exports = isArguments;
 
-},{"./_baseIsArguments":57,"./isObjectLike":216}],205:[function(require,module,exports){
+},{"./_baseIsArguments":57,"./isObjectLike":217}],205:[function(require,module,exports){
 /**
  * Checks if `value` is classified as an `Array` object.
  *
@@ -6058,7 +6058,7 @@ function isArrayLike(value) {
 
 module.exports = isArrayLike;
 
-},{"./isFunction":212,"./isLength":213}],207:[function(require,module,exports){
+},{"./isFunction":213,"./isLength":214}],207:[function(require,module,exports){
 var isArrayLike = require('./isArrayLike'),
     isObjectLike = require('./isObjectLike');
 
@@ -6093,7 +6093,7 @@ function isArrayLikeObject(value) {
 
 module.exports = isArrayLikeObject;
 
-},{"./isArrayLike":206,"./isObjectLike":216}],208:[function(require,module,exports){
+},{"./isArrayLike":206,"./isObjectLike":217}],208:[function(require,module,exports){
 var baseGetTag = require('./_baseGetTag'),
     isObjectLike = require('./isObjectLike');
 
@@ -6124,7 +6124,7 @@ function isBoolean(value) {
 
 module.exports = isBoolean;
 
-},{"./_baseGetTag":53,"./isObjectLike":216}],209:[function(require,module,exports){
+},{"./_baseGetTag":53,"./isObjectLike":217}],209:[function(require,module,exports){
 var root = require('./_root'),
     stubFalse = require('./stubFalse');
 
@@ -6165,6 +6165,85 @@ var isBuffer = nativeIsBuffer || stubFalse;
 module.exports = isBuffer;
 
 },{"./_root":162,"./stubFalse":234}],210:[function(require,module,exports){
+var baseKeys = require('./_baseKeys'),
+    getTag = require('./_getTag'),
+    isArguments = require('./isArguments'),
+    isArray = require('./isArray'),
+    isArrayLike = require('./isArrayLike'),
+    isBuffer = require('./isBuffer'),
+    isPrototype = require('./_isPrototype'),
+    isTypedArray = require('./isTypedArray');
+
+/** `Object#toString` result references. */
+var mapTag = '[object Map]',
+    setTag = '[object Set]';
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * Checks if `value` is an empty object, collection, map, or set.
+ *
+ * Objects are considered empty if they have no own enumerable string keyed
+ * properties.
+ *
+ * Array-like values such as `arguments` objects, arrays, buffers, strings, or
+ * jQuery-like collections are considered empty if they have a `length` of `0`.
+ * Similarly, maps and sets are considered empty if they have a `size` of `0`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is empty, else `false`.
+ * @example
+ *
+ * _.isEmpty(null);
+ * // => true
+ *
+ * _.isEmpty(true);
+ * // => true
+ *
+ * _.isEmpty(1);
+ * // => true
+ *
+ * _.isEmpty([1, 2, 3]);
+ * // => false
+ *
+ * _.isEmpty({ 'a': 1 });
+ * // => false
+ */
+function isEmpty(value) {
+  if (value == null) {
+    return true;
+  }
+  if (isArrayLike(value) &&
+      (isArray(value) || typeof value == 'string' || typeof value.splice == 'function' ||
+        isBuffer(value) || isTypedArray(value) || isArguments(value))) {
+    return !value.length;
+  }
+  var tag = getTag(value);
+  if (tag == mapTag || tag == setTag) {
+    return !value.size;
+  }
+  if (isPrototype(value)) {
+    return !baseKeys(value).length;
+  }
+  for (var key in value) {
+    if (hasOwnProperty.call(value, key)) {
+      return false;
+    }
+  }
+  return true;
+}
+
+module.exports = isEmpty;
+
+},{"./_baseKeys":66,"./_getTag":121,"./_isPrototype":139,"./isArguments":204,"./isArray":205,"./isArrayLike":206,"./isBuffer":209,"./isTypedArray":221}],211:[function(require,module,exports){
 var baseIsEqual = require('./_baseIsEqual');
 
 /**
@@ -6201,7 +6280,7 @@ function isEqual(value, other) {
 
 module.exports = isEqual;
 
-},{"./_baseIsEqual":58}],211:[function(require,module,exports){
+},{"./_baseIsEqual":58}],212:[function(require,module,exports){
 var baseIsEqual = require('./_baseIsEqual');
 
 /**
@@ -6244,7 +6323,7 @@ function isEqualWith(value, other, customizer) {
 
 module.exports = isEqualWith;
 
-},{"./_baseIsEqual":58}],212:[function(require,module,exports){
+},{"./_baseIsEqual":58}],213:[function(require,module,exports){
 var baseGetTag = require('./_baseGetTag'),
     isObject = require('./isObject');
 
@@ -6283,7 +6362,7 @@ function isFunction(value) {
 
 module.exports = isFunction;
 
-},{"./_baseGetTag":53,"./isObject":215}],213:[function(require,module,exports){
+},{"./_baseGetTag":53,"./isObject":216}],214:[function(require,module,exports){
 /** Used as references for various `Number` constants. */
 var MAX_SAFE_INTEGER = 9007199254740991;
 
@@ -6320,7 +6399,7 @@ function isLength(value) {
 
 module.exports = isLength;
 
-},{}],214:[function(require,module,exports){
+},{}],215:[function(require,module,exports){
 var baseGetTag = require('./_baseGetTag'),
     isObjectLike = require('./isObjectLike');
 
@@ -6360,7 +6439,7 @@ function isNumber(value) {
 
 module.exports = isNumber;
 
-},{"./_baseGetTag":53,"./isObjectLike":216}],215:[function(require,module,exports){
+},{"./_baseGetTag":53,"./isObjectLike":217}],216:[function(require,module,exports){
 /**
  * Checks if `value` is the
  * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
@@ -6393,7 +6472,7 @@ function isObject(value) {
 
 module.exports = isObject;
 
-},{}],216:[function(require,module,exports){
+},{}],217:[function(require,module,exports){
 /**
  * Checks if `value` is object-like. A value is object-like if it's not `null`
  * and has a `typeof` result of "object".
@@ -6424,71 +6503,7 @@ function isObjectLike(value) {
 
 module.exports = isObjectLike;
 
-},{}],217:[function(require,module,exports){
-var baseGetTag = require('./_baseGetTag'),
-    getPrototype = require('./_getPrototype'),
-    isObjectLike = require('./isObjectLike');
-
-/** `Object#toString` result references. */
-var objectTag = '[object Object]';
-
-/** Used for built-in method references. */
-var funcProto = Function.prototype,
-    objectProto = Object.prototype;
-
-/** Used to resolve the decompiled source of functions. */
-var funcToString = funcProto.toString;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/** Used to infer the `Object` constructor. */
-var objectCtorString = funcToString.call(Object);
-
-/**
- * Checks if `value` is a plain object, that is, an object created by the
- * `Object` constructor or one with a `[[Prototype]]` of `null`.
- *
- * @static
- * @memberOf _
- * @since 0.8.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a plain object, else `false`.
- * @example
- *
- * function Foo() {
- *   this.a = 1;
- * }
- *
- * _.isPlainObject(new Foo);
- * // => false
- *
- * _.isPlainObject([1, 2, 3]);
- * // => false
- *
- * _.isPlainObject({ 'x': 0, 'y': 0 });
- * // => true
- *
- * _.isPlainObject(Object.create(null));
- * // => true
- */
-function isPlainObject(value) {
-  if (!isObjectLike(value) || baseGetTag(value) != objectTag) {
-    return false;
-  }
-  var proto = getPrototype(value);
-  if (proto === null) {
-    return true;
-  }
-  var Ctor = hasOwnProperty.call(proto, 'constructor') && proto.constructor;
-  return typeof Ctor == 'function' && Ctor instanceof Ctor &&
-    funcToString.call(Ctor) == objectCtorString;
-}
-
-module.exports = isPlainObject;
-
-},{"./_baseGetTag":53,"./_getPrototype":117,"./isObjectLike":216}],218:[function(require,module,exports){
+},{}],218:[function(require,module,exports){
 var baseIsRegExp = require('./_baseIsRegExp'),
     baseUnary = require('./_baseUnary'),
     nodeUtil = require('./_nodeUtil');
@@ -6549,7 +6564,7 @@ function isString(value) {
 
 module.exports = isString;
 
-},{"./_baseGetTag":53,"./isArray":205,"./isObjectLike":216}],220:[function(require,module,exports){
+},{"./_baseGetTag":53,"./isArray":205,"./isObjectLike":217}],220:[function(require,module,exports){
 var baseGetTag = require('./_baseGetTag'),
     isObjectLike = require('./isObjectLike');
 
@@ -6580,7 +6595,7 @@ function isSymbol(value) {
 
 module.exports = isSymbol;
 
-},{"./_baseGetTag":53,"./isObjectLike":216}],221:[function(require,module,exports){
+},{"./_baseGetTag":53,"./isObjectLike":217}],221:[function(require,module,exports){
 var baseIsTypedArray = require('./_baseIsTypedArray'),
     baseUnary = require('./_baseUnary'),
     nodeUtil = require('./_nodeUtil');
@@ -7309,7 +7324,7 @@ function toNumber(value) {
 
 module.exports = toNumber;
 
-},{"./isObject":215,"./isSymbol":220}],239:[function(require,module,exports){
+},{"./isObject":216,"./isSymbol":220}],239:[function(require,module,exports){
 var baseToString = require('./_baseToString');
 
 /**
@@ -7406,7 +7421,7 @@ function transform(object, iteratee, accumulator) {
 
 module.exports = transform;
 
-},{"./_arrayEach":22,"./_baseCreate":40,"./_baseForOwn":49,"./_baseIteratee":65,"./_getPrototype":117,"./isArray":205,"./isBuffer":209,"./isFunction":212,"./isObject":215,"./isTypedArray":221}],241:[function(require,module,exports){
+},{"./_arrayEach":22,"./_baseCreate":40,"./_baseForOwn":49,"./_baseIteratee":65,"./_getPrototype":117,"./isArray":205,"./isBuffer":209,"./isFunction":213,"./isObject":216,"./isTypedArray":221}],241:[function(require,module,exports){
 var baseFlatten = require('./_baseFlatten'),
     baseRest = require('./_baseRest'),
     baseUniq = require('./_baseUniq'),
@@ -8658,7 +8673,43 @@ var matcherTestFor = function matcherTestFor(matcher) {
   return matcher.__matches;
 };
 
-},{"./matchers/is-matcher":272,"./util/lodash-wrap":288}],258:[function(require,module,exports){
+},{"./matchers/is-matcher":273,"./util/lodash-wrap":292}],258:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _lodashWrap = require('./util/lodash-wrap');
+
+var _lodashWrap2 = _interopRequireDefault(_lodashWrap);
+
+var _create = require('./matchers/create');
+
+var _create2 = _interopRequireDefault(_create);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _lodashWrap2.default.tap((0, _create2.default)({
+  name: 'callback',
+  matches: function matches(matcherArgs, actual) {
+    return _lodashWrap2.default.isFunction(actual);
+  },
+  onCreate: function onCreate(matcherInstance, matcherArgs) {
+    matcherInstance.args = matcherArgs;
+    matcherInstance.__testdouble_callback = true;
+  }
+}), function (callback) {
+  // Make callback itself quack like a matcher for its non-invoked use case.
+  callback.__name = 'callback';
+  callback.__matches = _lodashWrap2.default.isFunction;
+
+  callback.isCallback = function (obj) {
+    return obj && (obj === callback || obj.__testdouble_callback === true);
+  };
+});
+
+},{"./matchers/create":271,"./util/lodash-wrap":292}],259:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -8707,7 +8758,7 @@ var ensureOverridesExist = function ensureOverridesExist(overrides) {
 };
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./log":262,"./stringify/anything":283,"./util/lodash-wrap":288}],259:[function(require,module,exports){
+},{"./log":264,"./stringify/anything":287,"./util/lodash-wrap":292}],260:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -8718,10 +8769,6 @@ var _lodashWrap = require('./util/lodash-wrap');
 
 var _lodashWrap2 = _interopRequireDefault(_lodashWrap);
 
-var _getAllCustomPrototypalFunctionNames = require('./util/get-all-custom-prototypal-function-names');
-
-var _getAllCustomPrototypalFunctionNames2 = _interopRequireDefault(_getAllCustomPrototypalFunctionNames);
-
 var _function = require('./function');
 
 var _function2 = _interopRequireDefault(_function);
@@ -8730,9 +8777,17 @@ var _config = require('./config');
 
 var _config2 = _interopRequireDefault(_config);
 
-var _copyProperties = require('./util/copy-properties');
+var _copyProps = require('./share/copy-props');
 
-var _copyProperties2 = _interopRequireDefault(_copyProperties);
+var _copyProps2 = _interopRequireDefault(_copyProps);
+
+var _gatherProps = require('./share/gather-props');
+
+var _gatherProps2 = _interopRequireDefault(_gatherProps);
+
+var _filterFunctions = require('./share/filter-functions');
+
+var _filterFunctions2 = _interopRequireDefault(_filterFunctions);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -8749,16 +8804,18 @@ exports.default = function (typeOrNames) {
 var fakeConstructorFromType = function fakeConstructorFromType(type) {
   return _lodashWrap2.default.tap(createFakeType(type), function (fakeType) {
     var name = type.name || '';
-    (0, _copyProperties2.default)(type, fakeType);
-    (0, _copyProperties2.default)(type.prototype, fakeType.prototype);
+    var staticProps = (0, _gatherProps2.default)(type);
+    var instanceProps = (0, _gatherProps2.default)(type.prototype);
+    (0, _copyProps2.default)(type, fakeType, staticProps);
+    (0, _copyProps2.default)(type.prototype, fakeType.prototype, instanceProps);
 
     // Override "static" functions with instance test doubles
-    _lodashWrap2.default.each(_lodashWrap2.default.functions(type), function (funcName) {
+    _lodashWrap2.default.each((0, _filterFunctions2.default)(type, staticProps), function (funcName) {
       fakeType[funcName] = (0, _function2.default)(name + '.' + funcName);
     });
 
     // Override prototypal functions with instance test doubles
-    _lodashWrap2.default.each((0, _getAllCustomPrototypalFunctionNames2.default)(type), function (funcName) {
+    _lodashWrap2.default.each((0, _filterFunctions2.default)(type.prototype, instanceProps), function (funcName) {
       fakeType.prototype[funcName] = (0, _function2.default)(name + '#' + funcName);
     });
 
@@ -8815,7 +8872,7 @@ var addToStringMethodsToFakeType = function addToStringMethodsToFakeType(fakeTyp
   };
 };
 
-},{"./config":258,"./function":261,"./util/copy-properties":286,"./util/get-all-custom-prototypal-function-names":287,"./util/lodash-wrap":288}],260:[function(require,module,exports){
+},{"./config":259,"./function":262,"./share/copy-props":281,"./share/filter-functions":282,"./share/gather-props":283,"./util/lodash-wrap":292}],261:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -8913,7 +8970,7 @@ var stringifyName = function stringifyName(testDouble) {
   return name ? '`' + name + '` ' : '';
 };
 
-},{"./store":281,"./store/calls":280,"./store/stubbings":282,"./stringify/arguments":284,"./util/lodash-wrap":288}],261:[function(require,module,exports){
+},{"./store":285,"./store/calls":284,"./store/stubbings":286,"./stringify/arguments":288,"./util/lodash-wrap":292}],262:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -8928,10 +8985,6 @@ var _calls = require('./store/calls');
 
 var _calls2 = _interopRequireDefault(_calls);
 
-var _copyProperties = require('./util/copy-properties');
-
-var _copyProperties2 = _interopRequireDefault(_copyProperties);
-
 var _store = require('./store');
 
 var _store2 = _interopRequireDefault(_store);
@@ -8940,6 +8993,18 @@ var _stubbings = require('./store/stubbings');
 
 var _stubbings2 = _interopRequireDefault(_stubbings);
 
+var _gatherProps = require('./share/gather-props');
+
+var _gatherProps2 = _interopRequireDefault(_gatherProps);
+
+var _copyProps = require('./share/copy-props');
+
+var _copyProps2 = _interopRequireDefault(_copyProps);
+
+var _filterFunctions = require('./share/filter-functions');
+
+var _filterFunctions2 = _interopRequireDefault(_filterFunctions);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = function (nameOrFunc, __optionalName) {
@@ -8947,12 +9012,14 @@ exports.default = function (nameOrFunc, __optionalName) {
 };
 
 var createTestDoubleForFunction = function createTestDoubleForFunction(func, optionalName) {
-  return _lodashWrap2.default.tap((0, _copyProperties2.default)(func, createTestDoubleNamed(func.name || optionalName)), function (testDouble) {
-    return _lodashWrap2.default.each(_lodashWrap2.default.functions(func), function (funcName) {
-      var tdName = (func.name || optionalName || '') + '.' + funcName;
-      testDouble[funcName] = createTestDoubleNamed(tdName);
-    });
+  var testDouble = createTestDoubleNamed(func.name || optionalName);
+  var propNames = (0, _gatherProps2.default)(func);
+  (0, _copyProps2.default)(func, testDouble, propNames);
+  _lodashWrap2.default.each((0, _filterFunctions2.default)(func, propNames), function (funcName) {
+    var tdName = (func.name || optionalName || '') + '.' + funcName;
+    testDouble[funcName] = createTestDoubleNamed(tdName);
   });
+  return testDouble;
 };
 
 var createTestDoubleNamed = function createTestDoubleNamed(name) {
@@ -8982,7 +9049,76 @@ var createTestDoubleFunction = function createTestDoubleFunction() {
   };
 };
 
-},{"./store":281,"./store/calls":280,"./store/stubbings":282,"./util/copy-properties":286,"./util/lodash-wrap":288}],262:[function(require,module,exports){
+},{"./share/copy-props":281,"./share/filter-functions":282,"./share/gather-props":283,"./store":285,"./store/calls":284,"./store/stubbings":286,"./util/lodash-wrap":292}],263:[function(require,module,exports){
+'use strict';
+
+var _function = require('./function');
+
+var _function2 = _interopRequireDefault(_function);
+
+var _object = require('./object');
+
+var _object2 = _interopRequireDefault(_object);
+
+var _constructor = require('./constructor');
+
+var _constructor2 = _interopRequireDefault(_constructor);
+
+var _when = require('./when');
+
+var _when2 = _interopRequireDefault(_when);
+
+var _verify = require('./verify');
+
+var _verify2 = _interopRequireDefault(_verify);
+
+var _matchers = require('./matchers');
+
+var _matchers2 = _interopRequireDefault(_matchers);
+
+var _replace = require('./replace');
+
+var _replace2 = _interopRequireDefault(_replace);
+
+var _explain = require('./explain');
+
+var _explain2 = _interopRequireDefault(_explain);
+
+var _reset = require('./reset');
+
+var _reset2 = _interopRequireDefault(_reset);
+
+var _config = require('./config');
+
+var _config2 = _interopRequireDefault(_config);
+
+var _callback = require('./callback');
+
+var _callback2 = _interopRequireDefault(_callback);
+
+var _version = require('./version');
+
+var _version2 = _interopRequireDefault(_version);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+module.exports = {
+  function: _function2.default,
+  func: _function2.default,
+  object: _object2.default,
+  constructor: _constructor2.default,
+  when: _when2.default,
+  verify: _verify2.default,
+  matchers: _matchers2.default,
+  replace: _replace2.default,
+  explain: _explain2.default,
+  reset: _reset2.default,
+  config: _config2.default,
+  callback: _callback2.default,
+  version: _version2.default
+};
+
+},{"./callback":258,"./config":259,"./constructor":260,"./explain":261,"./function":262,"./matchers":272,"./object":274,"./replace":276,"./reset":280,"./verify":289,"./version":290,"./when":291}],264:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9018,7 +9154,7 @@ var withUrl = function withUrl(url) {
   return url != null ? ' (see: ' + url + ' )' : '';
 };
 
-},{"./config":258}],263:[function(require,module,exports){
+},{"./config":259}],265:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9038,7 +9174,7 @@ exports.default = (0, _create2.default)({
   }
 });
 
-},{"../create":270}],264:[function(require,module,exports){
+},{"../create":271}],266:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9059,7 +9195,7 @@ exports.default = (0, _create2.default)({
   }
 });
 
-},{"../create":270}],265:[function(require,module,exports){
+},{"../create":271}],267:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9087,7 +9223,7 @@ exports.default = function () {
   return captor;
 };
 
-},{"../create":270}],266:[function(require,module,exports){
+},{"../create":271}],268:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9114,10 +9250,10 @@ exports.default = (0, _create2.default)({
         return _lodashWrap2.default.some(actualArg, function (actualElement) {
           return _lodashWrap2.default.isEqual(actualElement, containing);
         });
-      } else if (_lodashWrap2.default.isPlainObject(containing) && _lodashWrap2.default.isPlainObject(actualArg)) {
-        return containsAllSpecified(containing, actualArg);
       } else if (_lodashWrap2.default.isRegExp(containing)) {
         return containing.test(actualArg);
+      } else if (_lodashWrap2.default.isObjectLike(containing) && _lodashWrap2.default.isObjectLike(actualArg)) {
+        return containsAllSpecified(containing, actualArg);
       } else {
         return _lodashWrap2.default.includes(actualArg, containing);
       }
@@ -9128,11 +9264,11 @@ exports.default = (0, _create2.default)({
 
 var containsAllSpecified = function containsAllSpecified(containing, actual) {
   return actual != null && _lodashWrap2.default.every(containing, function (val, key) {
-    return _lodashWrap2.default.isPlainObject(val) ? containsAllSpecified(val, actual[key]) : _lodashWrap2.default.isEqual(val, actual[key]);
+    return _lodashWrap2.default.isObjectLike(val) ? containsAllSpecified(val, actual[key]) : _lodashWrap2.default.isEqual(val, actual[key]);
   });
 };
 
-},{"../../util/lodash-wrap":288,"../create":270}],267:[function(require,module,exports){
+},{"../../util/lodash-wrap":292,"../create":271}],269:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9173,7 +9309,7 @@ exports.default = (0, _create2.default)({
   }
 });
 
-},{"../../stringify/arguments":284,"../../util/lodash-wrap":288,"../create":270}],268:[function(require,module,exports){
+},{"../../stringify/arguments":288,"../../util/lodash-wrap":292,"../create":271}],270:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9198,43 +9334,7 @@ exports.default = (0, _create2.default)({
   }
 });
 
-},{"../../util/lodash-wrap":288,"../create":270}],269:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _lodashWrap = require('../util/lodash-wrap');
-
-var _lodashWrap2 = _interopRequireDefault(_lodashWrap);
-
-var _create = require('./create');
-
-var _create2 = _interopRequireDefault(_create);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = _lodashWrap2.default.tap((0, _create2.default)({
-  name: 'callback',
-  matches: function matches(matcherArgs, actual) {
-    return _lodashWrap2.default.isFunction(actual);
-  },
-  onCreate: function onCreate(matcherInstance, matcherArgs) {
-    matcherInstance.args = matcherArgs;
-    matcherInstance.__testdouble_callback = true;
-  }
-}), function (callback) {
-  // Make callback itself quack like a matcher for its non-invoked use case.
-  callback.__name = 'callback';
-  callback.__matches = _lodashWrap2.default.isFunction;
-
-  callback.isCallback = function (obj) {
-    return obj && (obj === callback || obj.__testdouble_callback === true);
-  };
-});
-
-},{"../util/lodash-wrap":288,"./create":270}],270:[function(require,module,exports){
+},{"../../util/lodash-wrap":292,"../create":271}],271:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9278,7 +9378,7 @@ var nameFor = function nameFor(config, matcherArgs) {
   }
 };
 
-},{"../stringify/arguments":284,"../util/lodash-wrap":288}],271:[function(require,module,exports){
+},{"../stringify/arguments":288,"../util/lodash-wrap":292}],272:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9325,7 +9425,7 @@ exports.default = {
   not: _not2.default
 };
 
-},{"./builtin/anything":263,"./builtin/arg-that":264,"./builtin/captor":265,"./builtin/contains":266,"./builtin/is-a":267,"./builtin/not":268,"./create":270}],272:[function(require,module,exports){
+},{"./builtin/anything":265,"./builtin/arg-that":266,"./builtin/captor":267,"./builtin/contains":268,"./builtin/is-a":269,"./builtin/not":270,"./create":271}],273:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -9336,7 +9436,7 @@ exports.default = function (thing) {
   return thing && thing.__matches;
 };
 
-},{}],273:[function(require,module,exports){
+},{}],274:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9346,10 +9446,6 @@ Object.defineProperty(exports, "__esModule", {
 var _lodashWrap = require('./util/lodash-wrap');
 
 var _lodashWrap2 = _interopRequireDefault(_lodashWrap);
-
-var _copyProperties = require('./util/copy-properties');
-
-var _copyProperties2 = _interopRequireDefault(_copyProperties);
 
 var _isConstructor = require('./replace/is-constructor');
 
@@ -9367,6 +9463,18 @@ var _function = require('./function');
 
 var _function2 = _interopRequireDefault(_function);
 
+var _gatherProps = require('./share/gather-props');
+
+var _gatherProps2 = _interopRequireDefault(_gatherProps);
+
+var _copyProps = require('./share/copy-props');
+
+var _copyProps2 = _interopRequireDefault(_copyProps);
+
+var _filterFunctions = require('./share/filter-functions');
+
+var _filterFunctions2 = _interopRequireDefault(_filterFunctions);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var DEFAULT_OPTIONS = { excludeMethods: ['then'] };
@@ -9378,10 +9486,10 @@ exports.default = function (nameOrType, config) {
 };
 
 var fakeObject = function fakeObject(nameOrType, config) {
-  if (_lodashWrap2.default.isPlainObject(nameOrType)) {
-    return createTestDoublesForPlainObject(nameOrType);
-  } else if (_lodashWrap2.default.isArray(nameOrType)) {
+  if (_lodashWrap2.default.isArray(nameOrType)) {
     return createTestDoublesForFunctionNames(nameOrType);
+  } else if (_lodashWrap2.default.isObjectLike(nameOrType)) {
+    return createTestDoublesForPlainObject(nameOrType);
   } else if (_lodashWrap2.default.isString(nameOrType) || nameOrType === undefined) {
     return createTestDoubleViaProxy(nameOrType, withDefaults(config));
   } else if (_lodashWrap2.default.isFunction(nameOrType)) {
@@ -9392,9 +9500,12 @@ var fakeObject = function fakeObject(nameOrType, config) {
 };
 
 var createTestDoublesForPlainObject = function createTestDoublesForPlainObject(obj) {
-  return _lodashWrap2.default.transform(_lodashWrap2.default.functions(obj), function (acc, funcName) {
+  var propNames = (0, _gatherProps2.default)(obj);
+  var fakeObj = {};
+  (0, _copyProps2.default)(obj, fakeObj, propNames);
+  return _lodashWrap2.default.transform((0, _filterFunctions2.default)(obj, propNames), function (acc, funcName) {
     acc[funcName] = (0, _isConstructor2.default)(obj[funcName]) ? (0, _constructor2.default)(obj[funcName]) : (0, _function2.default)('.' + funcName);
-  }, (0, _copyProperties2.default)(obj, _lodashWrap2.default.clone(obj)));
+  }, fakeObj);
 };
 
 var createTestDoublesForFunctionNames = function createTestDoublesForFunctionNames(names) {
@@ -9445,7 +9556,7 @@ var nameOf = function nameOf(nameOrType) {
   return _lodashWrap2.default.isString(nameOrType) ? nameOrType : '';
 };
 
-},{"./constructor":259,"./function":261,"./log":262,"./replace/is-constructor":276,"./util/copy-properties":286,"./util/lodash-wrap":288}],274:[function(require,module,exports){
+},{"./constructor":260,"./function":262,"./log":264,"./replace/is-constructor":277,"./share/copy-props":281,"./share/filter-functions":282,"./share/gather-props":283,"./util/lodash-wrap":292}],275:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9485,16 +9596,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = function (realThing, optionalName) {
   if ((0, _isConstructor2.default)(realThing)) {
     return (0, _constructor2.default)(realThing);
-  } else if (_lodashWrap2.default.isPlainObject(realThing)) {
-    return (0, _object2.default)(realThing);
   } else if (_lodashWrap2.default.isFunction(realThing)) {
     return (0, _function2.default)(realThing, optionalName);
+  } else if (_lodashWrap2.default.isObjectLike(realThing)) {
+    return (0, _object2.default)(realThing);
   } else {
     return _log2.default.error('td.replace', '"' + optionalName + '" property was found, but test double only knows how to replace functions, constructors, & objects containing functions (its value was ' + (0, _anything2.default)(realThing) + ').');
   }
 };
 
-},{"../constructor":259,"../function":261,"../log":262,"../object":273,"../stringify/anything":283,"../util/lodash-wrap":288,"./is-constructor":276}],275:[function(require,module,exports){
+},{"../constructor":260,"../function":262,"../log":264,"../object":274,"../stringify/anything":287,"../util/lodash-wrap":292,"./is-constructor":277}],276:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9529,7 +9640,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 _quibble2.default.ignoreCallsFromThisFile();
 
-},{"../util/lodash-wrap":288,"./module":277,"./property":278,"quibble":1}],276:[function(require,module,exports){
+},{"../util/lodash-wrap":292,"./module":278,"./property":279,"quibble":1}],277:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9548,7 +9659,7 @@ exports.default = function (thing) {
   });
 };
 
-},{"../util/lodash-wrap":288}],277:[function(require,module,exports){
+},{"../util/lodash-wrap":292}],278:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -9593,7 +9704,7 @@ var requireAt = function requireAt(path) {
 };
 
 }).call(this,require('_process'))
-},{"./imitate":274,"_process":248,"quibble":1,"resolve":249}],278:[function(require,module,exports){
+},{"./imitate":275,"_process":248,"quibble":1,"resolve":249}],279:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9662,7 +9773,7 @@ var warnIfTypeMismatch = function warnIfTypeMismatch(property, fakeThing, realTh
   }
 };
 
-},{"../log":262,"../reset":279,"../stringify/anything":283,"../util/lodash-wrap":288,"./imitate":274}],279:[function(require,module,exports){
+},{"../log":264,"../reset":280,"../stringify/anything":287,"../util/lodash-wrap":292,"./imitate":275}],280:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9698,7 +9809,93 @@ exports.default = _lodashWrap2.default.tap(function () {
   };
 });
 
-},{"./store":281,"./util/lodash-wrap":288,"quibble":1}],280:[function(require,module,exports){
+},{"./store":285,"./util/lodash-wrap":292,"quibble":1}],281:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _lodash = require('../wrap/lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (original, target, props) {
+  Object.defineProperties(target, _lodash2.default.transform(props, function (acc, name) {
+    if (!(name in original) || name in target) return;
+    acc[name] = {
+      configurable: true,
+      writable: true,
+      value: original[name],
+      enumerable: Object.propertyIsEnumerable(original, name)
+    };
+  }));
+};
+
+},{"../wrap/lodash":292}],282:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _lodash = require('../wrap/lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (thing, propNames) {
+  return _lodash2.default.filter(propNames, function (propName) {
+    return _lodash2.default.isFunction(thing[propName]);
+  });
+};
+
+},{"../wrap/lodash":292}],283:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _lodash = require('../wrap/lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (thing) {
+  var originalThing = thing;
+  var propNames = [];
+
+  while (!isNativePrototype(thing)) {
+    Object.getOwnPropertyNames(thing).forEach(function (propName) {
+      if (propNames.indexOf(propName) === -1 && propName !== 'constructor') {
+        propNames.push(propName);
+      }
+    });
+    thing = Object.getPrototypeOf(thing);
+  }
+
+  return excludePropertiesNotOnThing(propNames, originalThing);
+};
+
+var isNativePrototype = function isNativePrototype(thing) {
+  if (!_lodash2.default.isFunction(thing.isPrototypeOf)) return false;
+  return _lodash2.default.some([Object, Function], function (nativeType) {
+    return thing.isPrototypeOf(nativeType);
+  });
+};
+
+var excludePropertiesNotOnThing = function excludePropertiesNotOnThing(propNames, originalThing) {
+  return _lodash2.default.filter(propNames, function (name) {
+    return name in originalThing;
+  });
+};
+
+},{"../wrap/lodash":292}],284:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9754,7 +9951,7 @@ exports.default = {
   }
 };
 
-},{"../args-match":257,"../util/lodash-wrap":288,"./index":281}],281:[function(require,module,exports){
+},{"../args-match":257,"../util/lodash-wrap":292,"./index":285}],285:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9799,7 +9996,7 @@ exports.default = {
   }
 };
 
-},{"../util/lodash-wrap":288,"events":3}],282:[function(require,module,exports){
+},{"../util/lodash-wrap":292,"events":3}],286:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9814,7 +10011,7 @@ var _argsMatch = require('../args-match');
 
 var _argsMatch2 = _interopRequireDefault(_argsMatch);
 
-var _callback = require('../matchers/callback');
+var _callback = require('../callback');
 
 var _callback2 = _interopRequireDefault(_callback);
 
@@ -9937,7 +10134,7 @@ var ensurePromise = function ensurePromise(Promise) {
   }
 };
 
-},{"../args-match":257,"../config":258,"../log":262,"../matchers/callback":269,"../util/lodash-wrap":288,"./index":281}],283:[function(require,module,exports){
+},{"../args-match":257,"../callback":258,"../config":259,"../log":264,"../util/lodash-wrap":292,"./index":285}],287:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9983,7 +10180,7 @@ var stringifyString = function stringifyString(string) {
   return _lodashWrap2.default.includes(string, '\n') ? '"""\n' + string + '\n"""' : '"' + string.replace(new RegExp('"', 'g'), '\\"') + '"';
 };
 
-},{"../matchers/is-matcher":272,"../util/lodash-wrap":288,"stringify-object-es5":256}],284:[function(require,module,exports){
+},{"../matchers/is-matcher":273,"../util/lodash-wrap":292,"stringify-object-es5":256}],288:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10008,343 +10205,7 @@ exports.default = function (args) {
   }).join(joiner);
 };
 
-},{"../util/lodash-wrap":288,"./anything":283}],285:[function(require,module,exports){
-'use strict';
-
-var _function = require('./function');
-
-var _function2 = _interopRequireDefault(_function);
-
-var _object = require('./object');
-
-var _object2 = _interopRequireDefault(_object);
-
-var _constructor = require('./constructor');
-
-var _constructor2 = _interopRequireDefault(_constructor);
-
-var _when = require('./when');
-
-var _when2 = _interopRequireDefault(_when);
-
-var _verify = require('./verify');
-
-var _verify2 = _interopRequireDefault(_verify);
-
-var _matchers = require('./matchers');
-
-var _matchers2 = _interopRequireDefault(_matchers);
-
-var _replace = require('./replace');
-
-var _replace2 = _interopRequireDefault(_replace);
-
-var _explain = require('./explain');
-
-var _explain2 = _interopRequireDefault(_explain);
-
-var _reset = require('./reset');
-
-var _reset2 = _interopRequireDefault(_reset);
-
-var _config = require('./config');
-
-var _config2 = _interopRequireDefault(_config);
-
-var _callback = require('./matchers/callback');
-
-var _callback2 = _interopRequireDefault(_callback);
-
-var _version = require('./version');
-
-var _version2 = _interopRequireDefault(_version);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-module.exports = {
-  function: _function2.default,
-  func: _function2.default,
-  object: _object2.default,
-  constructor: _constructor2.default,
-  when: _when2.default,
-  verify: _verify2.default,
-  matchers: _matchers2.default,
-  replace: _replace2.default,
-  explain: _explain2.default,
-  reset: _reset2.default,
-  config: _config2.default,
-  callback: _callback2.default,
-  version: _version2.default
-};
-
-},{"./config":258,"./constructor":259,"./explain":260,"./function":261,"./matchers":271,"./matchers/callback":269,"./object":273,"./replace":275,"./reset":279,"./verify":289,"./version":290,"./when":291}],286:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _lodashWrap = require('./lodash-wrap');
-
-var _lodashWrap2 = _interopRequireDefault(_lodashWrap);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var defineProps = Object.defineProperties;
-var getProps = Object.getOwnPropertyNames;
-
-exports.default = function (original, target) {
-  return _lodashWrap2.default.tap(target, function (target) {
-    defineProps(target, _lodashWrap2.default.transform(getProps(original), function (acc, p) {
-      if (!target.hasOwnProperty(p)) {
-        acc[p] = propertyDefinitionFor(original, p);
-      }
-    }));
-  });
-};
-
-var propertyDefinitionFor = function propertyDefinitionFor(original, p) {
-  return {
-    configurable: true,
-    writable: true,
-    value: original[p],
-    enumerable: original.propertyIsEnumerable(p)
-  };
-};
-
-},{"./lodash-wrap":288}],287:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _lodashWrap = require('./lodash-wrap');
-
-var _lodashWrap2 = _interopRequireDefault(_lodashWrap);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = function (type) {
-  return _lodashWrap2.default.uniq(_lodashWrap2.default.without(allPrototypeFunctionNames(type), 'constructor'));
-};
-
-var allPrototypeFunctionNames = function allPrototypeFunctionNames(type) {
-  return _lodashWrap2.default.filter(allPrototypePropertyNames(type), function (propName) {
-    return _lodashWrap2.default.isFunction(type.prototype[propName]);
-  });
-};
-
-var allPrototypePropertyNames = function allPrototypePropertyNames(type) {
-  return _lodashWrap2.default.flatten(_lodashWrap2.default.map(prototypeChain(type.prototype), Object.getOwnPropertyNames));
-};
-
-var prototypeChain = function prototypeChain(proto) {
-  return isBuiltIn(proto) ? [] : [proto].concat(prototypeChain(Object.getPrototypeOf(proto)));
-};
-
-var isBuiltIn = function isBuiltIn(proto) {
-  return proto == null || proto === Function.prototype || proto === Object.prototype;
-};
-
-},{"./lodash-wrap":288}],288:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _assign = require('lodash/assign');
-
-var _assign2 = _interopRequireDefault(_assign);
-
-var _capitalize = require('lodash/capitalize');
-
-var _capitalize2 = _interopRequireDefault(_capitalize);
-
-var _clone = require('lodash/clone');
-
-var _clone2 = _interopRequireDefault(_clone);
-
-var _defer = require('lodash/defer');
-
-var _defer2 = _interopRequireDefault(_defer);
-
-var _delay = require('lodash/delay');
-
-var _delay2 = _interopRequireDefault(_delay);
-
-var _each = require('lodash/each');
-
-var _each2 = _interopRequireDefault(_each);
-
-var _every = require('lodash/every');
-
-var _every2 = _interopRequireDefault(_every);
-
-var _extend = require('lodash/extend');
-
-var _extend2 = _interopRequireDefault(_extend);
-
-var _filter = require('lodash/filter');
-
-var _filter2 = _interopRequireDefault(_filter);
-
-var _find = require('lodash/find');
-
-var _find2 = _interopRequireDefault(_find);
-
-var _findLast = require('lodash/findLast');
-
-var _findLast2 = _interopRequireDefault(_findLast);
-
-var _flatten = require('lodash/flatten');
-
-var _flatten2 = _interopRequireDefault(_flatten);
-
-var _functions = require('lodash/functions');
-
-var _functions2 = _interopRequireDefault(_functions);
-
-var _get = require('lodash/get');
-
-var _get2 = _interopRequireDefault(_get);
-
-var _groupBy = require('lodash/groupBy');
-
-var _groupBy2 = _interopRequireDefault(_groupBy);
-
-var _includes = require('lodash/includes');
-
-var _includes2 = _interopRequireDefault(_includes);
-
-var _invoke = require('lodash/invoke');
-
-var _invoke2 = _interopRequireDefault(_invoke);
-
-var _isArray = require('lodash/isArray');
-
-var _isArray2 = _interopRequireDefault(_isArray);
-
-var _isBoolean = require('lodash/isBoolean');
-
-var _isBoolean2 = _interopRequireDefault(_isBoolean);
-
-var _isEqual = require('lodash/isEqual');
-
-var _isEqual2 = _interopRequireDefault(_isEqual);
-
-var _isEqualWith = require('lodash/isEqualWith');
-
-var _isEqualWith2 = _interopRequireDefault(_isEqualWith);
-
-var _isFunction = require('lodash/isFunction');
-
-var _isFunction2 = _interopRequireDefault(_isFunction);
-
-var _isNumber = require('lodash/isNumber');
-
-var _isNumber2 = _interopRequireDefault(_isNumber);
-
-var _isPlainObject = require('lodash/isPlainObject');
-
-var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
-
-var _isRegExp = require('lodash/isRegExp');
-
-var _isRegExp2 = _interopRequireDefault(_isRegExp);
-
-var _isString = require('lodash/isString');
-
-var _isString2 = _interopRequireDefault(_isString);
-
-var _keys = require('lodash/keys');
-
-var _keys2 = _interopRequireDefault(_keys);
-
-var _last = require('lodash/last');
-
-var _last2 = _interopRequireDefault(_last);
-
-var _map = require('lodash/map');
-
-var _map2 = _interopRequireDefault(_map);
-
-var _reduce = require('lodash/reduce');
-
-var _reduce2 = _interopRequireDefault(_reduce);
-
-var _reject = require('lodash/reject');
-
-var _reject2 = _interopRequireDefault(_reject);
-
-var _some = require('lodash/some');
-
-var _some2 = _interopRequireDefault(_some);
-
-var _tap = require('lodash/tap');
-
-var _tap2 = _interopRequireDefault(_tap);
-
-var _transform = require('lodash/transform');
-
-var _transform2 = _interopRequireDefault(_transform);
-
-var _union = require('lodash/union');
-
-var _union2 = _interopRequireDefault(_union);
-
-var _uniq = require('lodash/uniq');
-
-var _uniq2 = _interopRequireDefault(_uniq);
-
-var _without = require('lodash/without');
-
-var _without2 = _interopRequireDefault(_without);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = {
-  assign: _assign2.default,
-  capitalize: _capitalize2.default,
-  clone: _clone2.default,
-  defer: _defer2.default,
-  delay: _delay2.default,
-  each: _each2.default,
-  every: _every2.default,
-  extend: _extend2.default,
-  filter: _filter2.default,
-  find: _find2.default,
-  findLast: _findLast2.default,
-  flatten: _flatten2.default,
-  functions: _functions2.default,
-  get: _get2.default,
-  groupBy: _groupBy2.default,
-  includes: _includes2.default,
-  invoke: _invoke2.default,
-  isArray: _isArray2.default,
-  isBoolean: _isBoolean2.default,
-  isEqual: _isEqual2.default,
-  isEqualWith: _isEqualWith2.default,
-  isFunction: _isFunction2.default,
-  isNumber: _isNumber2.default,
-  isPlainObject: _isPlainObject2.default,
-  isRegExp: _isRegExp2.default,
-  isString: _isString2.default,
-  keys: _keys2.default,
-  last: _last2.default,
-  map: _map2.default,
-  reduce: _reduce2.default,
-  reject: _reject2.default,
-  some: _some2.default,
-  tap: _tap2.default,
-  transform: _transform2.default,
-  union: _union2.default,
-  uniq: _uniq2.default,
-  without: _without2.default
-};
-
-},{"lodash/assign":179,"lodash/capitalize":181,"lodash/clone":182,"lodash/defer":184,"lodash/delay":185,"lodash/each":186,"lodash/every":188,"lodash/extend":189,"lodash/filter":190,"lodash/find":191,"lodash/findLast":193,"lodash/flatten":195,"lodash/functions":197,"lodash/get":198,"lodash/groupBy":199,"lodash/includes":202,"lodash/invoke":203,"lodash/isArray":205,"lodash/isBoolean":208,"lodash/isEqual":210,"lodash/isEqualWith":211,"lodash/isFunction":212,"lodash/isNumber":214,"lodash/isPlainObject":217,"lodash/isRegExp":218,"lodash/isString":219,"lodash/keys":222,"lodash/last":224,"lodash/map":225,"lodash/reduce":230,"lodash/reject":231,"lodash/some":232,"lodash/tap":235,"lodash/transform":240,"lodash/union":241,"lodash/uniq":242,"lodash/without":245}],289:[function(require,module,exports){
+},{"../util/lodash-wrap":292,"./anything":287}],289:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10457,13 +10318,13 @@ var ignoreMessage = function ignoreMessage(config) {
   return config.ignoreExtraArgs != null ? ', ignoring any additional arguments' : '';
 };
 
-},{"./args-match":257,"./log":262,"./store":281,"./store/calls":280,"./store/stubbings":282,"./stringify/arguments":284,"./util/lodash-wrap":288}],290:[function(require,module,exports){
+},{"./args-match":257,"./log":264,"./store":285,"./store/calls":284,"./store/stubbings":286,"./stringify/arguments":288,"./util/lodash-wrap":292}],290:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = '3.0.0';
+exports.default = '3.1.0';
 
 },{}],291:[function(require,module,exports){
 'use strict';
@@ -10476,7 +10337,7 @@ var _lodashWrap = require('./util/lodash-wrap');
 
 var _lodashWrap2 = _interopRequireDefault(_lodashWrap);
 
-var _callback = require('./matchers/callback');
+var _callback = require('./callback');
 
 var _callback2 = _interopRequireDefault(_callback);
 
@@ -10580,5 +10441,207 @@ var warnIfPromiseless = function warnIfPromiseless() {
   }
 };
 
-},{"./config":258,"./log":262,"./matchers/callback":269,"./store/calls":280,"./store/stubbings":282,"./util/lodash-wrap":288}]},{},[285])(285)
+},{"./callback":258,"./config":259,"./log":264,"./store/calls":284,"./store/stubbings":286,"./util/lodash-wrap":292}],292:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _assign = require('lodash/assign');
+
+var _assign2 = _interopRequireDefault(_assign);
+
+var _capitalize = require('lodash/capitalize');
+
+var _capitalize2 = _interopRequireDefault(_capitalize);
+
+var _clone = require('lodash/clone');
+
+var _clone2 = _interopRequireDefault(_clone);
+
+var _defer = require('lodash/defer');
+
+var _defer2 = _interopRequireDefault(_defer);
+
+var _delay = require('lodash/delay');
+
+var _delay2 = _interopRequireDefault(_delay);
+
+var _each = require('lodash/each');
+
+var _each2 = _interopRequireDefault(_each);
+
+var _every = require('lodash/every');
+
+var _every2 = _interopRequireDefault(_every);
+
+var _extend = require('lodash/extend');
+
+var _extend2 = _interopRequireDefault(_extend);
+
+var _filter = require('lodash/filter');
+
+var _filter2 = _interopRequireDefault(_filter);
+
+var _find = require('lodash/find');
+
+var _find2 = _interopRequireDefault(_find);
+
+var _findLast = require('lodash/findLast');
+
+var _findLast2 = _interopRequireDefault(_findLast);
+
+var _flatten = require('lodash/flatten');
+
+var _flatten2 = _interopRequireDefault(_flatten);
+
+var _functions = require('lodash/functions');
+
+var _functions2 = _interopRequireDefault(_functions);
+
+var _get = require('lodash/get');
+
+var _get2 = _interopRequireDefault(_get);
+
+var _groupBy = require('lodash/groupBy');
+
+var _groupBy2 = _interopRequireDefault(_groupBy);
+
+var _includes = require('lodash/includes');
+
+var _includes2 = _interopRequireDefault(_includes);
+
+var _invoke = require('lodash/invoke');
+
+var _invoke2 = _interopRequireDefault(_invoke);
+
+var _isArray = require('lodash/isArray');
+
+var _isArray2 = _interopRequireDefault(_isArray);
+
+var _isBoolean = require('lodash/isBoolean');
+
+var _isBoolean2 = _interopRequireDefault(_isBoolean);
+
+var _isEmpty = require('lodash/isEmpty');
+
+var _isEmpty2 = _interopRequireDefault(_isEmpty);
+
+var _isEqual = require('lodash/isEqual');
+
+var _isEqual2 = _interopRequireDefault(_isEqual);
+
+var _isEqualWith = require('lodash/isEqualWith');
+
+var _isEqualWith2 = _interopRequireDefault(_isEqualWith);
+
+var _isFunction = require('lodash/isFunction');
+
+var _isFunction2 = _interopRequireDefault(_isFunction);
+
+var _isNumber = require('lodash/isNumber');
+
+var _isNumber2 = _interopRequireDefault(_isNumber);
+
+var _isObjectLike = require('lodash/isObjectLike');
+
+var _isObjectLike2 = _interopRequireDefault(_isObjectLike);
+
+var _isRegExp = require('lodash/isRegExp');
+
+var _isRegExp2 = _interopRequireDefault(_isRegExp);
+
+var _isString = require('lodash/isString');
+
+var _isString2 = _interopRequireDefault(_isString);
+
+var _keys = require('lodash/keys');
+
+var _keys2 = _interopRequireDefault(_keys);
+
+var _last = require('lodash/last');
+
+var _last2 = _interopRequireDefault(_last);
+
+var _map = require('lodash/map');
+
+var _map2 = _interopRequireDefault(_map);
+
+var _reduce = require('lodash/reduce');
+
+var _reduce2 = _interopRequireDefault(_reduce);
+
+var _reject = require('lodash/reject');
+
+var _reject2 = _interopRequireDefault(_reject);
+
+var _some = require('lodash/some');
+
+var _some2 = _interopRequireDefault(_some);
+
+var _tap = require('lodash/tap');
+
+var _tap2 = _interopRequireDefault(_tap);
+
+var _transform = require('lodash/transform');
+
+var _transform2 = _interopRequireDefault(_transform);
+
+var _union = require('lodash/union');
+
+var _union2 = _interopRequireDefault(_union);
+
+var _uniq = require('lodash/uniq');
+
+var _uniq2 = _interopRequireDefault(_uniq);
+
+var _without = require('lodash/without');
+
+var _without2 = _interopRequireDefault(_without);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+  assign: _assign2.default,
+  capitalize: _capitalize2.default,
+  clone: _clone2.default,
+  defer: _defer2.default,
+  delay: _delay2.default,
+  each: _each2.default,
+  every: _every2.default,
+  extend: _extend2.default,
+  filter: _filter2.default,
+  find: _find2.default,
+  findLast: _findLast2.default,
+  flatten: _flatten2.default,
+  functions: _functions2.default,
+  get: _get2.default,
+  groupBy: _groupBy2.default,
+  includes: _includes2.default,
+  invoke: _invoke2.default,
+  isArray: _isArray2.default,
+  isBoolean: _isBoolean2.default,
+  isEmpty: _isEmpty2.default,
+  isEqual: _isEqual2.default,
+  isEqualWith: _isEqualWith2.default,
+  isFunction: _isFunction2.default,
+  isNumber: _isNumber2.default,
+  isObjectLike: _isObjectLike2.default,
+  isRegExp: _isRegExp2.default,
+  isString: _isString2.default,
+  keys: _keys2.default,
+  last: _last2.default,
+  map: _map2.default,
+  reduce: _reduce2.default,
+  reject: _reject2.default,
+  some: _some2.default,
+  tap: _tap2.default,
+  transform: _transform2.default,
+  union: _union2.default,
+  uniq: _uniq2.default,
+  without: _without2.default
+};
+
+},{"lodash/assign":179,"lodash/capitalize":181,"lodash/clone":182,"lodash/defer":184,"lodash/delay":185,"lodash/each":186,"lodash/every":188,"lodash/extend":189,"lodash/filter":190,"lodash/find":191,"lodash/findLast":193,"lodash/flatten":195,"lodash/functions":197,"lodash/get":198,"lodash/groupBy":199,"lodash/includes":202,"lodash/invoke":203,"lodash/isArray":205,"lodash/isBoolean":208,"lodash/isEmpty":210,"lodash/isEqual":211,"lodash/isEqualWith":212,"lodash/isFunction":213,"lodash/isNumber":215,"lodash/isObjectLike":217,"lodash/isRegExp":218,"lodash/isString":219,"lodash/keys":222,"lodash/last":224,"lodash/map":225,"lodash/reduce":230,"lodash/reject":231,"lodash/some":232,"lodash/tap":235,"lodash/transform":240,"lodash/union":241,"lodash/uniq":242,"lodash/without":245}]},{},[263])(263)
 });
