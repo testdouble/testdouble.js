@@ -1,4 +1,4 @@
-module.exports = (done) => {
+module.exports = () => {
   // Creation
   const func = td.replace('../src/function').default
   const object = td.replace('../src/object').default
@@ -32,5 +32,4 @@ module.exports = (done) => {
     config: config,
     version: version
   })
-  done()
 }
