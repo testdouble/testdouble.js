@@ -52,5 +52,15 @@ module.exports = {
     assert.equal(target.c, 3)
     assert.equal(target.d, 4)
     assert.ok(!('e' in target))
+  },
+  'does not try to overwrite its own reserved props': () => {
+    const original = {a: 1, includes: 3}
+    const target = {b: 2}
+
+    subject(original, target, ['a', 'b', 'includes'])
+
+    assert.equal(target.a, 1)
+    assert.ok(!('includes' in target))
+    assert.equal(target.b, 2)
   }
 }

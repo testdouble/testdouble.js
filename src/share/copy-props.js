@@ -2,7 +2,7 @@ import _ from '../wrap/lodash'
 
 export default (original, target, props) => {
   Object.defineProperties(target, _.transform(props, (acc, name) => {
-    if (!(name in original) || name in target) return
+    if (!(name in original) || name in target || name in acc) return
     acc[name] = {
       configurable: true,
       writable: true,
