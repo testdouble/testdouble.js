@@ -50,6 +50,35 @@ describe 'td.callback', ->
         When -> @result = @testDouble('/bar')
         Then -> @result == 'o_O'
 
+      context 'TERSE MISS: Missing a stub should warn the user', ->
+        Given -> td.when(@testDouble('/foo')).thenCallback(null, 'some results')
+        When -> @testDouble('/typo')
+        Then -> ; # Something, maybe?
+
+      context 'VERBOSE MISS: Missing a stub should hit a fallback', ->
+        Given -> td.when(@testDouble(), { ignoreExtraArgs: true }).thenThrow(new Error('Wrong args!'))
+        Given -> td.when(@testDouble('/foo')).thenCallback(null, 'some results')
+        Then -> shouldThrow(=>
+          @testDouble('/typo')
+        , 'Wrong args!')
+
+      context 'VERBOSE HIT: Hitting a stub should not hit a fallback', ->
+        Given -> td.when(@testDouble(), { ignoreExtraArgs: true }).thenThrow(new Error('Wrong args!'))
+        Given -> td.when(@testDouble('/foo')).thenCallback(null, 'some results')
+        Then -> shouldNotThrow(=> @testDouble('/foo'))
+
+      describe 'FALLBACK', ->
+        Given -> td.when(@testDouble(), { ignoreExtraArgs: true }).thenThrow(new Error('Wrong args!'))
+        Given -> td.when(@testDouble('/foo')).thenCallback(null, 'some results')
+
+        it 'MISS: Missing a stub should hit a fallback', ->
+          Then -> shouldThrow(=>
+            @testDouble('/typo')
+          , 'Wrong args!')
+
+        it 'HIT: Hitting a stub should not hit a fallback', ->
+          Then -> shouldNotThrow(=> @testDouble('/foo'))
+
     context 'callback is asynchronous', ->
       describe 'using the defer option', ->
         it 'does not invoke synchronously', (done) ->
