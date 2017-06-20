@@ -7,7 +7,7 @@ export default (original, target, props) => {
       configurable: true,
       writable: true,
       value: original[name],
-      enumerable: Object.propertyIsEnumerable(original, name)
+      enumerable: Object.propertyIsEnumerable.call(original, name)
     }
   }))
 }

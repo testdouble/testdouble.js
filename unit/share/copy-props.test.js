@@ -41,6 +41,28 @@ module.exports = {
     assert.strictEqual(targetPropDescriptor.writable, true)
     assert.strictEqual(targetPropDescriptor.enumerable, false)
   },
+  'copies enumerable props and marks them enumerable': () => {
+    const foo = () => {}
+    const original = { a: 42, b: foo}
+    const target = {}
+
+    subject(original, target, ['a', 'b'])
+
+    assert.equal(target.a, 42)
+    assert.strictEqual(Object.getOwnPropertyDescriptor(target, 'a').enumerable, true)
+    assert.equal(target.b, foo)
+    assert.strictEqual(Object.getOwnPropertyDescriptor(target, 'b').enumerable, true)
+  },
+  'does not blow up if propertyIsEnumerable has been axed': () => {
+    const original = {a: 42}
+    const target = {}
+    original.propertyIsEnumerable = undefined
+
+    subject(original, target, ['a'])
+
+    assert.equal(target.a, 42)
+    assert.strictEqual(Object.getOwnPropertyDescriptor(target, 'a').enumerable, true)
+  },
   'only copies props passed to it (and silently drops nonexistant ones)': () => {
     const original = {a: 1, b: 2, c: 3}
     const target = {d: 4}
