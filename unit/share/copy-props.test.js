@@ -43,7 +43,7 @@ module.exports = {
   },
   'copies enumerable props and marks them enumerable': () => {
     const foo = () => {}
-    const original = { a: 42, b: foo}
+    const original = {a: 42, b: foo}
     const target = {}
 
     subject(original, target, ['a', 'b'])
