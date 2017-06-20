@@ -1,5 +1,8 @@
 # Change Log
 
+## [v3.1.1](https://github.com/testdouble/testdouble.js/tree/v3.1.1) (2017-06-20)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.1.0...v3.1.1)
+
 ## [v3.1.0](https://github.com/testdouble/testdouble.js/tree/v3.1.0) (2017-06-18)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.0.0...v3.1.0)
 
