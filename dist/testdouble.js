@@ -1,5 +1,5 @@
 /*
- * testdouble@3.1.0
+ * testdouble@3.1.1
  *
  *   A minimal test double library for TDD with JavaScript
  *
@@ -9829,7 +9829,7 @@ exports.default = function (original, target, props) {
       configurable: true,
       writable: true,
       value: original[name],
-      enumerable: Object.propertyIsEnumerable(original, name)
+      enumerable: Object.propertyIsEnumerable.call(original, name)
     };
   }));
 };
@@ -10324,7 +10324,7 @@ var ignoreMessage = function ignoreMessage(config) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = '3.1.0';
+exports.default = '3.1.1';
 
 },{}],291:[function(require,module,exports){
 'use strict';
