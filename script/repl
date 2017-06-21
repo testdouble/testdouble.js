@@ -7,6 +7,6 @@ var repl = require('repl')
 console.log('💚  Let\'s play with testdouble.js!  💚')
 global.td = require('../src')
 global._ = require('lodash')
-repl.start('td > ')
+repl.start({prompt: 'td > ', useGlobal: true})
 
 
