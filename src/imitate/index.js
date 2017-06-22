@@ -34,6 +34,6 @@ const blacklistedValueType = (thing) =>
     Number,
     RegExp,
     String,
-    Symbol,
+    Symbol
   ].some(type => thing instanceof type)
 

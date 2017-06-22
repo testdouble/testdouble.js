@@ -31,6 +31,7 @@ module.exports = {
       [new String('pants'), new String('pants')],
       [new Date(38), new Date(38)],
       [/foo/, /foo/],
+      [new Error('pants'), new Error('pants')],
       [[1,2,3], [1,2,3]],
       [(function() { return arguments })(4,5,6), [4,5,6]]
     ].forEach(entry => {
@@ -39,6 +40,7 @@ module.exports = {
       assert.deepEqual(subject(original), expected)
       assert.notStrictEqual(subject(original), expected)
     })
+    assert.equal(subject(new Error('foo')).message, 'foo')
   },
   'skips encountered objects': () => {
     const foo = {a: 1, b: 2}
