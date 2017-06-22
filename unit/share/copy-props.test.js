@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 import subject from '../../src/share/copy-props'
 
 module.exports = {
@@ -6,7 +8,11 @@ module.exports = {
     const original = {a: 1, b: 'foo', c: thing}
     const target = {d: 5}
 
-    subject(original, target, ['a', 'b', 'c'])
+    subject(original, target, {
+      a: basicPropDescriptorFor(1),
+      b: basicPropDescriptorFor('foo'),
+      c: basicPropDescriptorFor(thing),
+    })
 
     assert.equal(target.a, 1)
     assert.equal(target.b, 'foo')
@@ -17,36 +23,41 @@ module.exports = {
     const original = {a: 1}
     const target = {a: 2}
 
-    subject(original, target, ['a'])
+    subject(original, target, {
+      a: basicPropDescriptorFor(1)
+    })
 
     assert.equal(target.a, 2)
   },
   'copies non-enumerable props and leaves them non-enumerable': () => {
     const original = {}
+    const lolDescriptor = basicPropDescriptorFor(42, {enumerable: false})
     Object.defineProperties(original, {
-      lol: {
-        configurable: false,
-        writable: false,
-        value: 42,
-        enumerable: false
-      }
+      lol: lolDescriptor
     })
     const target = {}
 
-    subject(original, target, ['lol'])
+    subject(original, target, {
+      lol: lolDescriptor
+    })
 
     assert.equal(target.lol, 42)
-    const targetPropDescriptor = Object.getOwnPropertyDescriptor(target, 'lol')
-    assert.strictEqual(targetPropDescriptor.configurable, true)
-    assert.strictEqual(targetPropDescriptor.writable, true)
-    assert.strictEqual(targetPropDescriptor.enumerable, false)
+    assert.deepEqual(Object.getOwnPropertyDescriptor(target, 'lol'), {
+      value: 42,
+      enumerable: false,
+      writable: true,
+      configurable: true
+    })
   },
   'copies enumerable props and marks them enumerable': () => {
     const foo = () => {}
     const original = {a: 42, b: foo}
     const target = {}
 
-    subject(original, target, ['a', 'b'])
+    subject(original, target, {
+      a: basicPropDescriptorFor(42, {enumerable: true}),
+      b: basicPropDescriptorFor(foo, {enumerable: true})
+    })
 
     assert.equal(target.a, 42)
     assert.strictEqual(Object.getOwnPropertyDescriptor(target, 'a').enumerable, true)
@@ -58,7 +69,7 @@ module.exports = {
     const target = {}
     original.propertyIsEnumerable = undefined
 
-    subject(original, target, ['a'])
+    subject(original, target, {a: basicPropDescriptorFor(42)})
 
     assert.equal(target.a, 42)
     assert.strictEqual(Object.getOwnPropertyDescriptor(target, 'a').enumerable, true)
@@ -67,7 +78,11 @@ module.exports = {
     const original = {a: 1, b: 2, c: 3}
     const target = {d: 4}
 
-    subject(original, target, ['a', 'c', 'e'])
+    subject(original, target, {
+      a: basicPropDescriptorFor(1),
+      c: basicPropDescriptorFor(3),
+      e: basicPropDescriptorFor(5)
+    })
 
     assert.equal(target.a, 1)
     assert.ok(!('b' in target))
@@ -76,3 +91,11 @@ module.exports = {
     assert.ok(!('e' in target))
   }
 }
+
+const basicPropDescriptorFor = (val, except = {}) =>
+  _.extend({}, {
+    value: val,
+    writable: true,
+    configurable: true,
+    enumerable: true
+  }, except)

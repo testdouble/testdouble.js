@@ -19,12 +19,12 @@ var fakeConstructorFromType = (type) =>
     copyProps(type.prototype, fakeType.prototype, instanceProps)
 
     // Override "static" functions with instance test doubles
-    _.each(filterFunctions(type, staticProps), funcName => {
+    _.each(filterFunctions(staticProps), funcName => {
       fakeType[funcName] = tdFunction(`${name}.${funcName}`)
     })
 
     // Override prototypal functions with instance test doubles
-    _.each(filterFunctions(type.prototype, instanceProps), funcName => {
+    _.each(filterFunctions(instanceProps), funcName => {
       fakeType.prototype[funcName] = tdFunction(`${name}#${funcName}`)
     })
 

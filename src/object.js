@@ -32,7 +32,7 @@ var createTestDoublesForPlainObject = (obj) => {
   const propNames = gatherProps(obj)
   const fakeObj = {}
   copyProps(obj, fakeObj, propNames)
-  return _.transform(filterFunctions(obj, propNames), (acc, funcName) => {
+  return _.transform(filterFunctions(propNames), (acc, funcName) => {
     acc[funcName] = isConstructor(obj[funcName])
       ? tdConstructor(obj[funcName])
       : tdFunction(`.${funcName}`)

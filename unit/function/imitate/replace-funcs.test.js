@@ -15,7 +15,7 @@ module.exports = {
     foo.a = bar
     foo.b = 42
     const childDouble = new Double(null, null, 'fake FOO.bar')
-    td.when(filterFunctions('real thing', 'prop names')).thenReturn(['a'])
+    td.when(filterFunctions('prop names')).thenReturn(['a'])
     td.when(create(bar)).thenReturn(childDouble)
 
     subject(parentDouble, 'prop names')

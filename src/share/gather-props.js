@@ -2,18 +2,18 @@ import _ from '../wrap/lodash'
 
 export default (thing) => {
   const originalThing = thing
-  const propNames = []
+  const props = {}
 
   while (!isNativePrototype(thing)) {
     Object.getOwnPropertyNames(thing).forEach((propName) => {
-      if (propNames.indexOf(propName) === -1 && propName !== 'constructor') {
-        propNames.push(propName)
+      if (!props[propName] && propName !== 'constructor') {
+        props[propName] = Object.getOwnPropertyDescriptor(thing, propName)
       }
     })
     thing = Object.getPrototypeOf(thing)
   }
-
-  return excludePropertiesNotOnThing(propNames, originalThing)
+  removeAbsentProperties(props, originalThing)
+  return props
 }
 
 const isNativePrototype = (thing) => {
@@ -21,5 +21,10 @@ const isNativePrototype = (thing) => {
   return _.some([Object, Function], (nativeType) => thing.isPrototypeOf(nativeType))
 }
 
-const excludePropertiesNotOnThing = (propNames, originalThing) =>
-  _.filter(propNames, (name) => name in originalThing)
+const removeAbsentProperties = (props, originalThing) => {
+  _.each(props, (value, name) => {
+    if(!(name in originalThing)) {
+      delete props[name]
+    }
+  })
+}
