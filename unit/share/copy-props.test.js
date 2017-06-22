@@ -19,15 +19,23 @@ module.exports = {
     assert.equal(target.c, thing)
     assert.equal(target.d, 5)
   },
-  'does not overwrite existing props': () => {
-    const original = {a: 1}
-    const target = {a: 2}
-
-    subject(original, target, {
-      a: basicPropDescriptorFor(1)
+  'overwrites only writable and configurable existing props': () => {
+    const original = {a: 1, b: 2, c: 3}
+    const target = Object.defineProperties({}, {
+      a: basicPropDescriptorFor(4),
+      b: basicPropDescriptorFor(5, {writable: false}),
+      c: basicPropDescriptorFor(6, {configurable: false})
     })
 
-    assert.equal(target.a, 2)
+    subject(original, target, {
+      a: basicPropDescriptorFor(1),
+      b: basicPropDescriptorFor(2),
+      c: basicPropDescriptorFor(3)
+    })
+
+    assert.equal(target.a, 1)
+    assert.equal(target.b, 5)
+    assert.equal(target.c, 6)
   },
   'copies non-enumerable props and leaves them non-enumerable': () => {
     const original = {}

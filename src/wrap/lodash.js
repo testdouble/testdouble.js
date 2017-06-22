@@ -35,6 +35,7 @@ import reduce from 'lodash/reduce'
 import reject from 'lodash/reject'
 import some from 'lodash/some'
 import tap from 'lodash/tap'
+import toArray from 'lodash/toArray'
 import transform from 'lodash/transform'
 import union from 'lodash/union'
 import uniq from 'lodash/uniq'
@@ -78,6 +79,7 @@ export default {
   reject,
   some,
   tap,
+  toArray,
   transform,
   union,
   uniq,
