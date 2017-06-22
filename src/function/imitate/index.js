@@ -4,6 +4,6 @@ import replaceFuncs from './replace-funcs'
 
 export default (original, double) => {
   const props = gatherProps(original)
-  copyProps(original, double.fake, props)
+  copyProps(double.fake, props)
   replaceFuncs(double.fake, props)
 }

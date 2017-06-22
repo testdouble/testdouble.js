@@ -10,6 +10,6 @@ module.exports = () => {
 
   subject('original thing', double)
 
-  td.verify(copyProps('original thing', 'fake thing', 'prop names'))
+  td.verify(copyProps('fake thing', 'prop names'))
   td.verify(replaceFuncs('fake thing', 'prop names'))
 }

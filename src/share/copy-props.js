@@ -1,8 +1,7 @@
 import _ from '../wrap/lodash'
 
-export default (original, target, props, visitor) => {
+export default (target, props, visitor) => {
   Object.defineProperties(target, _.transform(props, (acc, descriptor, name) => {
-    if (!(name in original)) return
     if (propOnTargetAndNotWritable(target, name, descriptor)) return
     acc[name] = {
       configurable: true,

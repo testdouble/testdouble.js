@@ -5,10 +5,9 @@ import subject from '../../src/share/copy-props'
 module.exports = {
   'copies basic props retaining existing': () => {
     const thing = {}
-    const original = {a: 1, b: 'foo', c: thing}
     const target = {d: 5}
 
-    subject(original, target, {
+    subject(target, {
       a: basicPropDescriptorFor(1),
       b: basicPropDescriptorFor('foo'),
       c: basicPropDescriptorFor(thing),
@@ -20,14 +19,13 @@ module.exports = {
     assert.equal(target.d, 5)
   },
   'overwrites only writable and configurable existing props': () => {
-    const original = {a: 1, b: 2, c: 3}
     const target = Object.defineProperties({}, {
       a: basicPropDescriptorFor(4),
       b: basicPropDescriptorFor(5, {writable: false}),
       c: basicPropDescriptorFor(6, {configurable: false})
     })
 
-    subject(original, target, {
+    subject(target, {
       a: basicPropDescriptorFor(1),
       b: basicPropDescriptorFor(2),
       c: basicPropDescriptorFor(3)
@@ -38,15 +36,10 @@ module.exports = {
     assert.equal(target.c, 6)
   },
   'copies non-enumerable props and leaves them non-enumerable': () => {
-    const original = {}
-    const lolDescriptor = basicPropDescriptorFor(42, {enumerable: false})
-    Object.defineProperties(original, {
-      lol: lolDescriptor
-    })
     const target = {}
 
-    subject(original, target, {
-      lol: lolDescriptor
+    subject(target, {
+      lol: basicPropDescriptorFor(42, {enumerable: false})
     })
 
     assert.equal(target.lol, 42)
@@ -59,10 +52,9 @@ module.exports = {
   },
   'copies enumerable props and marks them enumerable': () => {
     const foo = () => {}
-    const original = {a: 42, b: foo}
     const target = {}
 
-    subject(original, target, {
+    subject(target, {
       a: basicPropDescriptorFor(42, {enumerable: true}),
       b: basicPropDescriptorFor(foo, {enumerable: true})
     })
@@ -72,21 +64,10 @@ module.exports = {
     assert.equal(target.b, foo)
     assert.strictEqual(Object.getOwnPropertyDescriptor(target, 'b').enumerable, true)
   },
-  'does not blow up if propertyIsEnumerable has been axed': () => {
-    const original = {a: 42}
-    const target = {}
-    original.propertyIsEnumerable = undefined
-
-    subject(original, target, {a: basicPropDescriptorFor(42)})
-
-    assert.equal(target.a, 42)
-    assert.strictEqual(Object.getOwnPropertyDescriptor(target, 'a').enumerable, true)
-  },
-  'only copies props passed to it (and silently drops nonexistant ones)': () => {
-    const original = {a: 1, b: 2, c: 3}
+  'only copies props passed to it': () => {
     const target = {d: 4}
 
-    subject(original, target, {
+    subject(target, {
       a: basicPropDescriptorFor(1),
       c: basicPropDescriptorFor(3),
       e: basicPropDescriptorFor(5)
@@ -96,17 +77,13 @@ module.exports = {
     assert.ok(!('b' in target))
     assert.equal(target.c, 3)
     assert.equal(target.d, 4)
-    assert.ok(!('e' in target))
+    assert.equal(target.e, 5)
+
   },
   'provides visitor function parameter for altering values': () => {
-    const original = {
-      a: 1,
-      b: 2,
-      c: 3
-    }
     const target = {}
 
-    subject(original, target, {
+    subject(target, {
       a: basicPropDescriptorFor(1),
       b: basicPropDescriptorFor(2),
       c: basicPropDescriptorFor(3),

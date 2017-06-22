@@ -15,8 +15,8 @@ var fakeConstructorFromType = (type) =>
     const name = type.name || ''
     const staticProps = gatherProps(type)
     const instanceProps = gatherProps(type.prototype)
-    copyProps(type, fakeType, staticProps)
-    copyProps(type.prototype, fakeType.prototype, instanceProps)
+    copyProps(fakeType, staticProps)
+    copyProps(fakeType.prototype, instanceProps)
 
     // Override "static" functions with instance test doubles
     _.each(filterFunctions(staticProps), funcName => {

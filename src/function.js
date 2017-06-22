@@ -14,7 +14,7 @@ export default (nameOrFunc, __optionalName) =>
 var createTestDoubleForFunction = (func, optionalName) => {
   const testDouble = createTestDoubleNamed(func.name || optionalName)
   const propNames = gatherProps(func)
-  copyProps(func, testDouble, propNames)
+  copyProps(testDouble, propNames)
   _.each(filterFunctions(propNames), funcName => {
     const tdName = `${func.name || optionalName || ''}.${funcName}`
     testDouble[funcName] = createTestDoubleNamed(tdName)
