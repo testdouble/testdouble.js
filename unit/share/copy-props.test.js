@@ -35,6 +35,20 @@ module.exports = {
     assert.equal(target.b, 5)
     assert.equal(target.c, 6)
   },
+  'if the non-configurable prop is named prototype, copy that too': () => {
+    const target = Object.defineProperties({}, {
+      prototype: basicPropDescriptorFor({}, {
+        configurable: false
+      }),
+    })
+    const fakePrototype = {}
+
+    subject(target, {
+      prototype: basicPropDescriptorFor(fakePrototype),
+    })
+
+    assert.equal(target.prototype, fakePrototype)
+  },
   'copies non-enumerable props and leaves them non-enumerable': () => {
     const target = {}
 
@@ -86,12 +100,12 @@ module.exports = {
       a: basicPropDescriptorFor(1),
       b: basicPropDescriptorFor(2),
       c: basicPropDescriptorFor(3)
-    }, value => value + 10)
+    }, (name, value) => `${name}: ${value + 10}`)
 
     assert.deepEqual(target, {
-      a: 11,
-      b: 12,
-      c: 13
+      a: 'a: 11',
+      b: 'b: 12',
+      c: 'c: 13'
     })
   }
 }

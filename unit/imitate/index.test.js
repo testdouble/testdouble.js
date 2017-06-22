@@ -1,4 +1,6 @@
 import _ from 'lodash'
+
+import explain from '../../src/explain'
 import subject from '../../src/imitate'
 
 // WARNING: this is not a unit test! This is a functional test to prove out an
@@ -83,5 +85,54 @@ module.exports = {
     assert.ok(result.item instanceof Thing)
     assert.notStrictEqual(result.item, thing)
     assert.equal(calls, 1)
+  },
+  'any functions are converted to test doubles with prefixed names': () => {
+    const original = function pants() {}
+    original.shirt = function () {}
+    original.shirt.tie = function () {}
+
+    const result = subject(original)
+
+    assert.equal(explain(result).name, 'pants')
+    assert.equal(explain(result.shirt).name, 'pants.shirt')
+    assert.equal(explain(result.shirt.tie).name, 'pants.shirt.tie')
+  },
+  'names prototypal things okay': () => {
+    class Thing {
+      doStuff () {}
+    }
+    Thing.prototype.doStuff.bar = { baz: function () {} }
+
+    const result = subject(Thing)
+
+    assert.equal(explain(result).name, 'Thing')
+    assert.equal(explain(result.prototype.doStuff).name, 'Thing#doStuff')
+    assert.equal(explain(result.prototype.doStuff.bar.baz).name, 'Thing#doStuff.bar.baz')
+  },
+  'name array things okay': () => {
+    const original = {
+      items: [
+        function () {},
+        function withName () {},
+        () => false,
+        {
+          biz: function () {}
+        }
+      ]
+    }
+
+    const result = subject(original)
+
+    assert.equal(explain(result.items[0]).name, '.items[0]')
+    assert.equal(explain(result.items[1]).name, '.items[1]')
+    assert.equal(explain(result.items[2]).name, '.items[2]')
+    assert.equal(explain(result.items[3].biz).name, '.items[3].biz')
+  },
+  'other top level things are named fine': () => {
+    assert.equal(explain(subject([()=>1])[0]).name, '[0]')
+    const foo = (function () { return function (){}})()
+    foo.bar = function () {}
+    assert.equal(explain(subject(foo)).name, '(anonymous function)')
+    assert.equal(explain(subject(foo).bar).name, '(anonymous function).bar')
   }
 }
