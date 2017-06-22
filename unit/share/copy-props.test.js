@@ -89,6 +89,26 @@ module.exports = {
     assert.equal(target.c, 3)
     assert.equal(target.d, 4)
     assert.ok(!('e' in target))
+  },
+  'provides visitor function parameter for altering values': () => {
+    const original = {
+      a: 1,
+      b: 2,
+      c: 3
+    }
+    const target = {}
+
+    subject(original, target, {
+      a: basicPropDescriptorFor(1),
+      b: basicPropDescriptorFor(2),
+      c: basicPropDescriptorFor(3),
+    }, value => value + 10)
+
+    assert.deepEqual(target, {
+      a: 11,
+      b: 12,
+      c: 13
+    })
   }
 }
 
