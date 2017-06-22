@@ -19,7 +19,7 @@ module.exports = {
     assert.deepEqual(result.bar.value, thing.bar)
   },
   'on a function': () => {
-    const thing = function someName (a,b,c) {}
+    const thing = function someName (a, b, c) {}
     thing.foo = () => {}
     thing.bar = 42
 

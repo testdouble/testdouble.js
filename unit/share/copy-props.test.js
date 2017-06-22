@@ -10,7 +10,7 @@ module.exports = {
     subject(target, {
       a: basicPropDescriptorFor(1),
       b: basicPropDescriptorFor('foo'),
-      c: basicPropDescriptorFor(thing),
+      c: basicPropDescriptorFor(thing)
     })
 
     assert.equal(target.a, 1)
@@ -78,7 +78,6 @@ module.exports = {
     assert.equal(target.c, 3)
     assert.equal(target.d, 4)
     assert.equal(target.e, 5)
-
   },
   'provides visitor function parameter for altering values': () => {
     const target = {}
@@ -86,7 +85,7 @@ module.exports = {
     subject(target, {
       a: basicPropDescriptorFor(1),
       b: basicPropDescriptorFor(2),
-      c: basicPropDescriptorFor(3),
+      c: basicPropDescriptorFor(3)
     }, value => value + 10)
 
     assert.deepEqual(target, {

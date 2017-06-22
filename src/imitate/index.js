@@ -3,7 +3,7 @@ import gatherProps from '../share/gather-props'
 import copyProps from '../share/copy-props'
 import tdFunction from '../function'
 
-export default function imitate(original, encounteredObjects = new Map()) {
+export default function imitate (original, encounteredObjects = new Map()) {
   if (!_.isObject(original)) return original
   if (encounteredObjects.has(original)) return encounteredObjects.get(original)
   if (_.isArguments(original)) original = _.toArray(original)
@@ -19,7 +19,7 @@ export default function imitate(original, encounteredObjects = new Map()) {
     target = _.clone(original)
   }
   encounteredObjects.set(original, target)
-  if(!blacklistedValueType(original)) {
+  if (!blacklistedValueType(original)) {
     copyProps(target, gatherProps(original), (value) => {
       return imitate(value, encounteredObjects)
     })
@@ -36,4 +36,3 @@ const blacklistedValueType = (thing) =>
     String,
     Symbol
   ].some(type => thing instanceof type)
-

@@ -23,7 +23,7 @@ const isNativePrototype = (thing) => {
 
 const removeAbsentProperties = (props, originalThing) => {
   _.each(props, (value, name) => {
-    if(!(name in originalThing)) {
+    if (!(name in originalThing)) {
       delete props[name]
     }
   })

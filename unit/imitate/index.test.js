@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import subject from '../../src/imitate'
 
-//WARNING: this is not a unit test! This is a functional test to prove out an
+// WARNING: this is not a unit test! This is a functional test to prove out an
 //         algorithm. Ideally I would have broken this up, but I really
 //         struggled at first and wanted to prove it out wired up to the td@3 impl
 
@@ -26,14 +26,14 @@ module.exports = {
   },
   'deep equal but not strict equal stuff': () => {
     [
-      [new Boolean(true), new Boolean(true)],
-      [new Number(8), new Number(8)],
-      [new String('pants'), new String('pants')],
+      [new Boolean(true), new Boolean(true)], // eslint-disable-line
+      [new Number(8), new Number(8)], // eslint-disable-line
+      [new String('pants'), new String('pants')], // eslint-disable-line
       [new Date(38), new Date(38)],
       [/foo/, /foo/],
       [new Error('pants'), new Error('pants')],
-      [[1,2,3], [1,2,3]],
-      [(function() { return arguments })(4,5,6), [4,5,6]]
+      [[1, 2, 3], [1, 2, 3]],
+      [(function () { return arguments })(4, 5, 6), [4, 5, 6]]
     ].forEach(entry => {
       const [original, expected] = entry
 
@@ -57,7 +57,7 @@ module.exports = {
         b: 2,
         bar: {
           c: 3,
-          foo: foo //<- and so on
+          foo: foo // <- and so on
         }
       }
     }))
