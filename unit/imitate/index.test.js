@@ -6,7 +6,7 @@ import subject from '../../src/imitate'
 //         struggled at first and wanted to prove it out wired up to the td@3 impl
 
 module.exports = {
-  'strict equal stuff': () => {
+  'strict equal stuff (not objects typically)': () => {
     [
       [null, null],
       [undefined, undefined],
@@ -22,6 +22,7 @@ module.exports = {
 
       assert.strictEqual(subject(original), expected)
     })
+    assert.ok(isNaN(subject(NaN)))
   },
   'deep equal but not strict equal stuff': () => {
     [
@@ -29,6 +30,7 @@ module.exports = {
       [new Number(8), new Number(8)],
       [new String('pants'), new String('pants')],
       [new Date(38), new Date(38)],
+      [/foo/, /foo/],
       [[1,2,3], [1,2,3]],
       [(function() { return arguments })(4,5,6), [4,5,6]]
     ].forEach(entry => {
@@ -47,7 +49,7 @@ module.exports = {
     const result = subject(original)
 
     assert.notStrictEqual(result, original)
-    assert.deepEqual(result, {
+    assert.ok(_.isEqual(result, {
       item: {
         a: 1,
         b: 2,
@@ -56,7 +58,7 @@ module.exports = {
           foo: foo //<- and so on
         }
       }
-    })
+    }))
     assert.notStrictEqual(result.item, foo)
     assert.notStrictEqual(result.item.bar, bar)
 
@@ -80,5 +82,4 @@ module.exports = {
     assert.notStrictEqual(result.item, thing)
     assert.equal(calls, 1)
   }
-
 }
