@@ -45,7 +45,7 @@ describe 'td.constructor', ->
 
     # Things print OK
     Then -> @fakeConstructor.toString() == '[test double for "Thing"]'
-    Then -> @fakeConstructor.prototype.foo.toString() == '[test double for "Thing#foo"]'
+    Then -> @fakeConstructor.prototype.foo.toString() == '[test double for "Thing.prototype.foo"]'
     Then -> @fakeConstructor.bar.toString() == '[test double for "Thing.bar"]'
 
     # Non-enumerables are covered

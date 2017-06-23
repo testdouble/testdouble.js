@@ -36,13 +36,13 @@ describe 'td.object', ->
 
   if global.Proxy?
     describe 'creating a proxy object (ES2015; only supported in FF + Edge atm)', ->
-      Given -> @testDouble = td.object('Thing')
+      Given -> @testDouble = td.object('thing')
       Given -> @testDouble.magic('sauce')
       When -> td.when(@testDouble.whateverYouWant()).thenReturn('YESS')
       Then -> td.verify(@testDouble.magic('sauce'))
       And -> @testDouble.whateverYouWant() == 'YESS'
-      And -> @testDouble.toString() == '[test double object for "Thing"]'
-      And -> @testDouble.foo.toString() == '[test double for "Thing#foo"]'
+      And -> @testDouble.toString() == '[test double object for "thing"]'
+      And -> @testDouble.foo.toString() == '[test double for "thing.foo"]'
 
       context 'with custom excludeMethods definitions', ->
         Given -> @testDouble = td.object('Stuff', excludeMethods: ['then', 'fun'])
@@ -51,7 +51,7 @@ describe 'td.object', ->
       context 'unnamed double', ->
         Given -> @testDouble = td.object()
         Then -> @testDouble.toString() == '[test double object]'
-        Then -> @testDouble.lol.toString() == '[test double for "#lol"]'
+        Then -> @testDouble.lol.toString() == '[test double for ".lol"]'
   else
     describe 'getting an error message', ->
       When -> try

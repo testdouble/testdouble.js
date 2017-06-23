@@ -39,7 +39,7 @@ var createTestDoubleViaProxy = (name, config) => {
   return new Proxy(obj, {
     get (target, propKey, receiver) {
       if (!obj.hasOwnProperty(propKey) && !_.includes(config.excludeMethods, propKey)) {
-        obj[propKey] = tdFunction(`${nameOf(name)}#${propKey}`)
+        obj[propKey] = tdFunction(`${nameOf(name)}.${propKey}`)
       }
       return obj[propKey]
     }

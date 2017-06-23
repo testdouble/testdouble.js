@@ -10,42 +10,47 @@ export default function imitate (original, names, encounteredObjects = new Map()
   if (encounteredObjects.has(original)) return encounteredObjects.get(original)
   if (_.isArguments(original)) original = _.toArray(original)
 
+  // Initialize name array
+  if (names == null) {
+    if (_.isArray(original)) {
+      names = []
+    } else if (_.isFunction(original)) {
+      names = [original.name]
+    } else {
+      let name = original.name || _.invoke(original, 'toString') || ''
+      if (name === ({}).toString()) {
+        name = ''
+      }
+      names = [name]
+    }
+  }
+
   let target
   if (_.isArray(original)) {
-    if (names == null) names = []
-    target = _.map(original, (item, index) => {
-      return imitate(item, names.concat(`[${index}]`), encounteredObjects)
-    })
+    target = []
   } else if (_.isFunction(original)) {
-    if (names == null) names = [original.name]
     target = tdFunction(_.compact(names).join('') || '(anonymous function)')
   } else {
-    if (names == null) names = [nameFromObject(original)]
     target = _.clone(original)
   }
   encounteredObjects.set(original, target)
-  if (!blacklistedValueType(original)) {
-    copyProps(target, gatherProps(original), (name, value) => {
-      if (name === 'prototype' && _.isFunction(original) && Object.hasOwnProperty.call(original, 'prototype')) {
-        const extendedPrototype = imitate(Object.create(value), concatName(names, name), encounteredObjects)
-        extendedPrototype.constructor = target
-        return extendedPrototype
-      } else {
-        return imitate(value, concatName(names, name), encounteredObjects)
-      }
-    })
+  if (!blacklistedValueType(target)) {
+    if (_.isArray(target)) {
+      _.each(original, (item, index) =>
+        target.push(imitate(item, names.concat(`[${index}]`), encounteredObjects))
+      )
+    } else {
+      copyProps(target, gatherProps(original), (name, originalValue) => {
+        const targetValue = imitate(originalValue, names.concat('.', name), encounteredObjects)
+        if (name === 'prototype' && _.isFunction(original) && Object.hasOwnProperty.call(original, 'prototype')) {
+          targetValue.__proto__ = originalValue // eslint-disable-line
+          targetValue.constructor = target
+        }
+        return targetValue
+      })
+    }
   }
   return target
-}
-
-const concatName = (names, name) => {
-  if (name === 'prototype') {
-    return names.concat('#')
-  } else if (_.last(names) === '#') {
-    return names.concat(name)
-  } else {
-    return names.concat('.', name)
-  }
 }
 
 const blacklistedValueType = (thing) =>
@@ -57,12 +62,3 @@ const blacklistedValueType = (thing) =>
     String,
     global.Symbol
   ]).some(type => thing instanceof type)
-
-const nameFromObject = (obj) => {
-  const name = obj.name || _.invoke(obj, 'toString') || ''
-  if (name === ({}).toString()) {
-    return ''
-  } else {
-    return name
-  }
-}

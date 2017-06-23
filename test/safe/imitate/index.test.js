@@ -106,8 +106,8 @@ module.exports = {
     const result = subject(Thing)
 
     assert.equal(explain(result).name, 'Thing')
-    assert.equal(explain(result.prototype.doStuff).name, 'Thing#doStuff')
-    assert.equal(explain(result.prototype.doStuff.bar.baz).name, 'Thing#doStuff.bar.baz')
+    assert.equal(explain(result.prototype.doStuff).name, 'Thing.prototype.doStuff')
+    assert.equal(explain(result.prototype.doStuff.bar.baz).name, 'Thing.prototype.doStuff.bar.baz')
   },
   'name array things okay': () => {
     const original = {
