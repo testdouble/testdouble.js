@@ -1,3 +1,5 @@
+import Map from 'es6-map'
+
 import satisfy from '../satisfy'
 
 let instance = null

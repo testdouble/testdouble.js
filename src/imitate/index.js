@@ -1,4 +1,5 @@
 import _ from '../wrap/lodash'
+import Map from 'es6-map'
 
 import gatherProps from '../share/gather-props'
 import copyProps from '../share/copy-props'
@@ -48,14 +49,14 @@ const concatName = (names, name) => {
 }
 
 const blacklistedValueType = (thing) =>
-  [
+  _.compact([
     Boolean,
     Date,
     Number,
     RegExp,
     String,
-    Symbol
-  ].some(type => thing instanceof type)
+    global.Symbol
+  ]).some(type => thing instanceof type)
 
 const nameFromObject = (obj) => {
   const name = obj.name || _.invoke(obj, 'toString') || ''

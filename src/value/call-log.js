@@ -1,3 +1,5 @@
+import Map from 'es6-map'
+
 let instance = null
 
 export default class CallLog {
