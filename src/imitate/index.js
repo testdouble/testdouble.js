@@ -1,8 +1,8 @@
 import _ from '../wrap/lodash'
 import Map from 'es6-map'
 
-import gatherProps from '../share/gather-props'
-import copyProps from '../share/copy-props'
+import gatherProps from './gather-props'
+import copyProps from './copy-props'
 import tdFunction from '../function'
 
 export default function imitate (original, names, encounteredObjects = new Map()) {

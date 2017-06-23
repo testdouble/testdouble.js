@@ -1,6 +1,6 @@
 import _ from 'lodash'
 
-import subject from '../../src/share/copy-props'
+import subject from '../../src/imitate/copy-props'
 
 module.exports = {
   'copies basic props retaining existing': () => {
