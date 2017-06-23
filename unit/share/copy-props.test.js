@@ -39,12 +39,12 @@ module.exports = {
     const target = Object.defineProperties({}, {
       prototype: basicPropDescriptorFor({}, {
         configurable: false
-      }),
+      })
     })
     const fakePrototype = {}
 
     subject(target, {
-      prototype: basicPropDescriptorFor(fakePrototype),
+      prototype: basicPropDescriptorFor(fakePrototype)
     })
 
     assert.equal(target.prototype, fakePrototype)

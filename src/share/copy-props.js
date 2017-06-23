@@ -29,4 +29,3 @@ const propOnTargetAndNotWritable = (target, name, originalDescriptor) => {
 const newValue = (name, value, visitor) => {
   return visitor ? visitor(name, value) : value
 }
-

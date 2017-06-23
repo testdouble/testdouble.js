@@ -1,6 +1,5 @@
 import _ from '../wrap/lodash'
 
-import config from '../config'
 import gatherProps from '../share/gather-props'
 import copyProps from '../share/copy-props'
 import tdFunction from '../function'
