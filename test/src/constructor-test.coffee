@@ -44,10 +44,9 @@ describe 'td.constructor', ->
     Then -> td.when(@fakeInstance.biz()).thenReturn(6)() == 6
 
     # Things print OK
-    Then -> @fakeConstructor.toString() == '[test double constructor for "Thing"]'
+    Then -> @fakeConstructor.toString() == '[test double for "Thing"]'
     Then -> @fakeConstructor.prototype.foo.toString() == '[test double for "Thing#foo"]'
     Then -> @fakeConstructor.bar.toString() == '[test double for "Thing.bar"]'
-    Then -> @fakeInstance.toString() == '[test double instance of constructor "Thing"]'
 
     # Non-enumerables are covered
     Then -> td.explain(@fakeConstructor.secretStaticFunc).isTestDouble == true
@@ -55,7 +54,8 @@ describe 'td.constructor', ->
 
     context 'extendWhenReplacingConstructors disabled (default)', ->
       Then -> td.config().extendWhenReplacingConstructors == false
-      Then -> !(@fakeInstance instanceof Thing)
+      # TODO: remove this option if we actually work
+      #Then -> !(@fakeInstance instanceof Thing)
 
     context 'extendWhenReplacingConstructors enabled', ->
       Given -> td.config(extendWhenReplacingConstructors: true)

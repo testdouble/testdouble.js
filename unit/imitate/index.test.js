@@ -133,6 +133,6 @@ module.exports = {
     const foo = (function () { return function (){}})()
     foo.bar = function () {}
     assert.equal(explain(subject(foo)).name, '(anonymous function)')
-    assert.equal(explain(subject(foo).bar).name, '(anonymous function).bar')
+    assert.equal(explain(subject(foo).bar).name, '.bar')
   }
 }

@@ -84,27 +84,23 @@ describe 'td.replace', ->
       Then -> td.explain(@dependency.foo.bar).isTestDouble == true
 
     describe 'Replacing a property that is not an object/function', ->
-      Given -> @message = 'Error: testdouble.js - td.replace - "badType" property was found, but test double only knows how to replace functions, constructors, & objects containing functions (its value was '
-      When -> try
-          td.replace(@dependency, 'badType')
-        catch e
-          @error = e
+      When -> @result =  td.replace(@dependency, 'badType')
 
       context 'a number', ->
         Given -> @dependency.badType = 5
-        Then -> @error.message == @message + '5).'
+        Then -> @result == 5
 
       context 'a string', ->
         Given -> @dependency.badType = "hello"
-        Then -> @error.message == @message + '"hello").'
+        Then -> @result == "hello"
 
       context 'null', ->
         Given -> @dependency.badType = null
-        Then -> @error.message == @message + 'null).'
+        Then -> @result == null
 
       context 'undefined', ->
         Given -> @dependency.badType = undefined
-        Then -> @error.message == @message + 'undefined).'
+        Then -> @result == undefined
 
     describe 'Replacing a non-existent property', ->
       context 'using automatic replacement', ->
@@ -167,14 +163,12 @@ describe 'td.replace', ->
       Then -> @result == 'ow'
 
     describe 'quibbling plain old functions with td.function()', ->
-      Then -> @car.honk.toString() == "[test double for \"../../fixtures/honk\"]"
+      Then -> @car.honk.toString() == "[test double for \"../../fixtures/honk\": \"(anonymous function)\"]"
 
     describe 'naming the doubles of functions with names', ->
       Given -> td.when(@car.turn()).thenReturn('wee')
       Then -> @car.turn() == 'wee'
-      And -> @car.turn.toString() == "[test double for \"turn\"]"
-
-    describe 'faking main function when property is also exported', ->
+      And -> @car.turn.toString() == "[test double for \"../../fixtures/turn\": \"turn\"]"
       Given -> td.when(@car.shift()).thenReturn('Vroom')
       Then -> @car.shift() == 'Vroom'
 
@@ -186,8 +180,8 @@ describe 'td.replace', ->
       Then -> @car.brake == 'ANYTHING I WANT'
 
     describe 'an object of funcs', ->
-      Then -> @car.lights.headlight.toString() == '[test double for ".headlight"]'
-      And -> @car.lights.turnSignal.toString() == '[test double for ".turnSignal"]'
+      Then -> @car.lights.headlight.toString() == '[test double for "../../fixtures/lights": ".headlight"]'
+      And -> @car.lights.turnSignal.toString() == '[test double for "../../fixtures/lights": ".turnSignal"]'
       And -> @car.lights.count == 4
 
       describe 'and classes on objects on funcs', ->

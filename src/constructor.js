@@ -1,9 +1,6 @@
 import _ from './util/lodash-wrap'
 import tdFunction from './function'
-import config from './config'
-import copyProps from './share/copy-props'
-import gatherProps from './share/gather-props'
-import filterFunctions from './share/filter-functions'
+import imitate from './imitate'
 
 export default (typeOrNames) =>
   _.isFunction(typeOrNames)
@@ -11,44 +8,7 @@ export default (typeOrNames) =>
     : fakeConstructorFromNames(typeOrNames)
 
 var fakeConstructorFromType = (type) =>
-  _.tap(createFakeType(type), (fakeType) => {
-    const name = type.name || ''
-    const staticProps = gatherProps(type)
-    const instanceProps = gatherProps(type.prototype)
-    copyProps(fakeType, staticProps)
-    copyProps(fakeType.prototype, instanceProps)
-
-    // Override "static" functions with instance test doubles
-    _.each(filterFunctions(staticProps), funcName => {
-      fakeType[funcName] = tdFunction(`${name}.${funcName}`)
-    })
-
-    // Override prototypal functions with instance test doubles
-    _.each(filterFunctions(instanceProps), funcName => {
-      fakeType.prototype[funcName] = tdFunction(`${name}#${funcName}`)
-    })
-
-    addToStringMethodsToFakeType(fakeType, name)
-  })
-
-var createFakeType = (type) => {
-  const fauxConstructor = tdFunction(`${type.name || 'anonymous'} constructor`)
-
-  if (config().extendWhenReplacingConstructors) {
-    return class TestDoubleConstructorExtendingRealType extends type {
-      constructor () {
-        super(...arguments)
-        fauxConstructor(...arguments)
-      }
-    }
-  } else {
-    return class TestDoubleConstructor {
-      constructor () {
-        fauxConstructor(...arguments)
-      }
-    }
-  }
-}
+  imitate(type)
 
 var fakeConstructorFromNames = (funcNames) => {
   return _.tap(class TestDoubleConstructor {}, (cls) => {

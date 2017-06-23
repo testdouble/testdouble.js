@@ -1,4 +1,6 @@
 import _ from '../wrap/lodash'
+
+import config from '../config'
 import gatherProps from '../share/gather-props'
 import copyProps from '../share/copy-props'
 import tdFunction from '../function'
@@ -15,8 +17,8 @@ export default function imitate (original, names, encounteredObjects = new Map()
       return imitate(item, names.concat(`[${index}]`), encounteredObjects)
     })
   } else if (_.isFunction(original)) {
-    if (names == null) names = [original.name || '(anonymous function)']
-    target = tdFunction(_.compact(names).join(''))
+    if (names == null) names = [original.name]
+    target = tdFunction(_.compact(names).join('') || '(anonymous function)')
   } else {
     if (names == null) names = [nameFromObject(original)]
     target = _.clone(original)
@@ -24,7 +26,13 @@ export default function imitate (original, names, encounteredObjects = new Map()
   encounteredObjects.set(original, target)
   if (!blacklistedValueType(original)) {
     copyProps(target, gatherProps(original), (name, value) => {
-      return imitate(value, concatName(names, name), encounteredObjects)
+      if (name === 'prototype' && _.isFunction(original) && Object.hasOwnProperty.call(original, 'prototype')) {
+        const extendedPrototype = imitate(Object.create(value), concatName(names, name), encounteredObjects)
+        extendedPrototype.constructor = target
+        return extendedPrototype
+      } else {
+        return imitate(value, concatName(names, name), encounteredObjects)
+      }
     })
   }
   return target

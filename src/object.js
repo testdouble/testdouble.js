@@ -1,11 +1,7 @@
 import _ from './util/lodash-wrap'
-import isConstructor from './replace/is-constructor'
 import log from './log'
-import tdConstructor from './constructor'
 import tdFunction from './function'
-import gatherProps from './share/gather-props'
-import copyProps from './share/copy-props'
-import filterFunctions from './share/filter-functions'
+import imitate from './imitate'
 
 const DEFAULT_OPTIONS = {excludeMethods: ['then']}
 
@@ -29,14 +25,7 @@ var fakeObject = (nameOrType, config) => {
 }
 
 var createTestDoublesForPlainObject = (obj) => {
-  const propNames = gatherProps(obj)
-  const fakeObj = {}
-  copyProps(fakeObj, propNames)
-  return _.transform(filterFunctions(propNames), (acc, funcName) => {
-    acc[funcName] = isConstructor(obj[funcName])
-      ? tdConstructor(obj[funcName])
-      : tdFunction(`.${funcName}`)
-  }, fakeObj)
+  return imitate(obj)
 }
 
 var createTestDoublesForFunctionNames = (names) =>
