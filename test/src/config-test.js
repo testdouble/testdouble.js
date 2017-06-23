@@ -24,7 +24,7 @@ describe('td.config', () => {
     expect(config.extendWhenReplacingConstructors).to.eq(undefined)
     expect(td.config().extendWhenReplacingConstructors).to.eq(undefined)
     expect(warnings[0]).to.eq(
-      "Warning: testdouble.js - td.config - \"extendWhenReplacingConstructors\" is no longer a valid configuration key. Remove it from your calls to td.config() or it may throw an error in the future. For more information, try hunting around our GitHub repo for it:\n\n  https://github.com/testdouble/testdouble.js/search?q=extendWhenReplacingConstructors"
+      'Warning: testdouble.js - td.config - "extendWhenReplacingConstructors" is no longer a valid configuration key. Remove it from your calls to td.config() or it may throw an error in the future. For more information, try hunting around our GitHub repo for it:\n\n  https://github.com/testdouble/testdouble.js/search?q=extendWhenReplacingConstructors'
     )
 
     console.warn = ogWarn
