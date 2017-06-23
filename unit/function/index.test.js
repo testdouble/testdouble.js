@@ -6,7 +6,7 @@ let create, imitate, remember, subject
 module.exports = {
   beforeEach: () => {
     create = td.replace('../../src/function/create').default
-    imitate = td.replace('../../src/function/imitate').default
+    imitate = td.replace('../../src/imitate').default
     remember = td.replace('../../src/function/remember').default
 
     subject = require('../../src/function/index').default
@@ -22,13 +22,10 @@ module.exports = {
   },
   'pass in a function': () => {
     function bar () {}
-    const double = new Double(null, null, 'fake thing')
-    td.when(create(bar)).thenReturn(double)
+    td.when(imitate(bar)).thenReturn('fake bar')
 
     const result = subject(bar)
 
-    assert.equal(result, double.fake)
-    td.verify(imitate(bar, double))
-    td.verify(remember(double))
+    assert.equal(result, 'fake bar')
   }
 }
