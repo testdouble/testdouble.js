@@ -52,15 +52,8 @@ describe 'td.constructor', ->
     Then -> td.explain(@fakeConstructor.secretStaticFunc).isTestDouble == true
     Then -> td.explain(@fakeInstance.secretFunc).isTestDouble == true
 
-    context 'extendWhenReplacingConstructors disabled (default)', ->
-      Then -> td.config().extendWhenReplacingConstructors == false
-      # TODO: remove this option if we actually work
-      #Then -> !(@fakeInstance instanceof Thing)
-
-    context 'extendWhenReplacingConstructors enabled', ->
-      Given -> td.config(extendWhenReplacingConstructors: true)
-      Given -> @fakeInstance = new (td.constructor(Thing))()
-      Then -> @fakeInstance instanceof Thing
+    # instanceof checks out
+    Then -> @fakeInstance instanceof Thing
 
     # Original attributes are carried over
     Then -> @fakeConstructor.prototype.instanceAttr == 'baz'

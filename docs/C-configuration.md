@@ -7,7 +7,6 @@ global configuration options, documented with their defaults below:
 
 ```js
 td.config({
-  extendWhenReplacingConstructors: false // td.replace extends your constructors
   ignoreWarnings: false, // set to true to squelch generated console warnings
   promiseConstructor: Promise // defaults to native Promise (if available)
   suppressErrors: false // set to true to no longer throw API errors

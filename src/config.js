@@ -3,7 +3,6 @@ import log from './log'
 import stringifyAnything from './stringify/anything'
 
 const DEFAULTS = {
-  extendWhenReplacingConstructors: false,
   ignoreWarnings: false,
   promiseConstructor: global.Promise,
   suppressErrors: false

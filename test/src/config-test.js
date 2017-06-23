@@ -1,7 +1,6 @@
 describe('td.config', () => {
   it('sets some ok defaults', () => {
     expect(td.config()).to.deep.equal({
-      extendWhenReplacingConstructors: false,
       ignoreWarnings: false,
       promiseConstructor: global.Promise,
       suppressErrors: false
@@ -22,7 +21,7 @@ describe('td.config', () => {
 
     expect(error.message).to.eq(
       'Error: testdouble.js - td.config - "wat" is not a valid configuration ' +
-      'key (valid keys are: [\n  "extendWhenReplacingConstructors",\n  "ignoreWarnings",' +
-      '\n  "promiseConstructor",\n  "suppressErrors"\n])')
+      'key (valid keys are: ["ignoreWarnings", ' +
+      '"promiseConstructor", "suppressErrors"])')
   })
 })
