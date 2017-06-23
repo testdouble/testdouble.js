@@ -1,6 +1,8 @@
-module.exports = () => {
-  // This isn't an example, this is just an extra test that td.js is
-  //  working as part of the project's build
+// This isn't an example, this is just an extra test that td.js is
+//  working as part of the project's build
+module.exports = function () {
+  'use strict'
+
   class Person {
     age () {}
   }
