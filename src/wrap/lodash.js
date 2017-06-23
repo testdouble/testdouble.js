@@ -10,8 +10,6 @@ import extend from 'lodash/extend'
 import filter from 'lodash/filter'
 import find from 'lodash/find'
 import findLast from 'lodash/findLast'
-import flatten from 'lodash/flatten'
-import functions from 'lodash/functions'
 import get from 'lodash/get'
 import groupBy from 'lodash/groupBy'
 import includes from 'lodash/includes'
@@ -37,9 +35,6 @@ import some from 'lodash/some'
 import tap from 'lodash/tap'
 import toArray from 'lodash/toArray'
 import transform from 'lodash/transform'
-import union from 'lodash/union'
-import uniq from 'lodash/uniq'
-import without from 'lodash/without'
 
 export default {
   assign,
@@ -54,8 +49,6 @@ export default {
   filter,
   find,
   findLast,
-  flatten,
-  functions,
   get,
   groupBy,
   includes,
@@ -80,8 +73,5 @@ export default {
   some,
   tap,
   toArray,
-  transform,
-  union,
-  uniq,
-  without
+  transform
 }
