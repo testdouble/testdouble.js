@@ -1,4 +1,4 @@
-import Stubbing from '../../src/value/stubbing'
+import Stubbing from '../../../src/value/stubbing'
 
 module.exports = {
   'increments timesSatisfied (used for satisfaction-limits)': () => {

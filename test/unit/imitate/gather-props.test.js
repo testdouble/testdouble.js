@@ -1,5 +1,5 @@
-import _ from '../../src/wrap/lodash'
-import subject from '../../src/imitate/gather-props'
+import _ from '../../../src/wrap/lodash'
+import subject from '../../../src/imitate/gather-props'
 
 module.exports = {
   'on a plain object bag': () => {

@@ -1,4 +1,4 @@
-import Double from '../../src/value/double'
+import Double from '../../../src/value/double'
 
 module.exports = {
   'basic instantiation': () => {

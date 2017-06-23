@@ -48,8 +48,8 @@
     ]
   },
   "teenytest": {
-    "testLocator": "unit/**/*.test.js",
-    "helper": "unit/helper.js"
+    "testLocator": "test/unit/**/*.js",
+    "helper": "test/unit-helper.js"
   },
   "browser": {
     "./lib/replace/module.js": "./lib/replace/module.browser.js",

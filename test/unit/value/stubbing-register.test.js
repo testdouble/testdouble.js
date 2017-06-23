@@ -1,7 +1,7 @@
-import Double from '../../src/value/double'
-import Call from '../../src/value/call'
-import Stubbing from '../../src/value/stubbing'
-import StubbingRegister from '../../src/value/stubbing-register'
+import Double from '../../../src/value/double'
+import Call from '../../../src/value/call'
+import Stubbing from '../../../src/value/stubbing'
+import StubbingRegister from '../../../src/value/stubbing-register'
 
 let subject
 module.exports = {
@@ -23,9 +23,9 @@ module.exports = {
     const double = new Double()
     const stubbing = new Stubbing()
     const call = new Call()
-    const satisfy = td.replace('../../src/satisfy').default
+    const satisfy = td.replace('../../../src/satisfy').default
     td.when(satisfy(call, [stubbing])).thenReturn('pants')
-    subject = require('../../src/value/stubbing-register').default.instance
+    subject = require('../../../src/value/stubbing-register').default.instance
     subject.add(double, stubbing)
 
     const result = subject.satisfy(double, call)

@@ -1,7 +1,7 @@
 import _ from 'lodash'
 
-import explain from '../../src/explain'
-import subject from '../../src/imitate'
+import explain from '../../../src/explain'
+import subject from '../../../src/imitate'
 
 // WARNING: this is not a unit test! This is a functional test to prove out an
 //         algorithm. Ideally I would have broken this up, but I really

@@ -1,8 +1,8 @@
-import Double from '../../src/value/double'
-import CallLog from '../../src/value/call-log'
-import StubbingRegister from '../../src/value/stubbing-register'
-import Stubbing from '../../src/value/stubbing'
-import subject from '../../src/function/create'
+import Double from '../../../src/value/double'
+import CallLog from '../../../src/value/call-log'
+import StubbingRegister from '../../../src/value/stubbing-register'
+import Stubbing from '../../../src/value/stubbing'
+import subject from '../../../src/function/create'
 
 module.exports = {
   'passed a string name': () => {

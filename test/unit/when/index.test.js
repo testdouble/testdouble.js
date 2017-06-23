@@ -1,15 +1,15 @@
-import Double from '../../src/value/double'
-import Call from '../../src/value/call'
-import CallLog from '../../src/value/call-log'
-import StubbingRegister from '../../src/value/stubbing-register'
+import Double from '../../../src/value/double'
+import Call from '../../../src/value/call'
+import CallLog from '../../../src/value/call-log'
+import StubbingRegister from '../../../src/value/stubbing-register'
 
 let ensureRehearsal, chainStubbing, addImpliedCallbackArgIfNecessary, subject
 module.exports = {
   beforeEach: () => {
-    ensureRehearsal = td.replace('../../src/when/ensure-rehearsal').default
-    chainStubbing = td.replace('../../src/when/chain-stubbing').default
-    addImpliedCallbackArgIfNecessary = td.replace('../../src/when/add-implied-callback-arg-if-necessary').default
-    subject = require('../../src/when/index').default
+    ensureRehearsal = td.replace('../../../src/when/ensure-rehearsal').default
+    chainStubbing = td.replace('../../../src/when/chain-stubbing').default
+    addImpliedCallbackArgIfNecessary = td.replace('../../../src/when/add-implied-callback-arg-if-necessary').default
+    subject = require('../../../src/when/index').default
   },
   'adds a stubbing, returns the fake': () => {
     const double = new Double()

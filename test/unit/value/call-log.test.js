@@ -1,7 +1,7 @@
-import Double from '../../src/value/double'
-import Call from '../../src/value/call'
+import Double from '../../../src/value/double'
+import Call from '../../../src/value/call'
 
-import CallLog from '../../src/value/call-log'
+import CallLog from '../../../src/value/call-log'
 
 let subject
 module.exports = {
