@@ -17,5 +17,8 @@
   },
   "standard": {
     "globals": ["td", "assert"]
+  },
+  "teenytest": {
+    "timeout": 20000
   }
 }
