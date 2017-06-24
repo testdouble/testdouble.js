@@ -4,13 +4,6 @@ module.exports = {
   'passed a non-null names': () => {
     assert.equal(subject(null, 'foo'), 'foo')
   },
-  'an array type': () => {
-    assert.deepEqual(subject(['lol']), [])
-  },
-  'an arguments type': () => {
-    let args = (function () { return arguments })(1,2,3)
-    assert.deepEqual(subject(args), [])
-  },
   'an anon function': () => {
     assert.deepEqual(subject(function () {}), [])
   },
