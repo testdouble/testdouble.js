@@ -96,7 +96,7 @@ behavior of tests when depended-on objects change.
 
 ### object(someObjectWithFunctions)
 
-Suppose you have an object with some functions as properties (and perhaps some non-function properties). If passed to `td.object()`, testdouble.js will do a deep copy of the object and then a shallow search-and-replace of any functions found on the object while and return it.
+Suppose you have an object with some functions as properties (and perhaps some non-function properties). If passed to `td.object()`, testdouble.js will do a deep copy of the object and replace of any functions found on the object while and return it.
 
 So, given:
 
