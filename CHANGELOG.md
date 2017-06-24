@@ -1,5 +1,20 @@
 # Change Log
 
+## [v3.2.0](https://github.com/testdouble/testdouble.js/tree/v3.2.0) (2017-06-24)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.1.1...v3.2.0)
+
+**Implemented enhancements:**
+
+- Single-layer property replacement is inappropriate for ES modules [\#262](https://github.com/testdouble/testdouble.js/issues/262)
+
+**Closed issues:**
+
+- td.constructor\(\) breaks instanceof [\#267](https://github.com/testdouble/testdouble.js/issues/267)
+
+**Merged pull requests:**
+
+- imitate / replace things deeply \(instead of shallow\) [\#268](https://github.com/testdouble/testdouble.js/pull/268) ([searls](https://github.com/searls))
+
 ## [v3.1.1](https://github.com/testdouble/testdouble.js/tree/v3.1.1) (2017-06-20)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.1.0...v3.1.1)
 
