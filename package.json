@@ -100,7 +100,7 @@
     "require-globify": "^1.4.1",
     "standard": "^9.0.2",
     "teenytest": "^5.0.2",
-    "testdouble": "3.0.0",
+    "testdouble": "3.2.0",
     "testem": "^1.15.0",
     "typescript": "^2.2.1"
   },
