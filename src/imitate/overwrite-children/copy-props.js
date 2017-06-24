@@ -1,4 +1,4 @@
-import _ from '../wrap/lodash'
+import _ from '../../wrap/lodash'
 
 export default (target, props, visitor) => {
   Object.defineProperties(target, _.transform(props, (acc, descriptor, name) => {
