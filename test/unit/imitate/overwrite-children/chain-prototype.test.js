@@ -14,7 +14,7 @@ module.exports = {
     const result = subject(function og () {}, 'target', 'prototype', ogVal, targetVal)
 
     assert.equal(result, targetVal)
-    assert.equal(targetVal.__proto__, ogVal)
+    assert.equal(targetVal.__proto__, ogVal) // eslint-disable-line
     assert.equal(targetVal.constructor, 'target')
   }
 }

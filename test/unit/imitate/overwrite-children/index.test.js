@@ -41,7 +41,7 @@ module.exports = {
 
     td.verify(copyProps('target', 'props', propCaptor.capture()))
 
-    //Phase two: test the prop overwriter directly
+    // Phase two: test the prop overwriter directly
     td.when(overwriteChildren('og val', '.aName')).thenReturn('new val')
     td.when(chainPrototype('og', 'target', 'aName', 'og val', 'new val'))
       .thenReturn('wrapped val')

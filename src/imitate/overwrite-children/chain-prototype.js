@@ -7,4 +7,3 @@ export default (original, target, name, originalValue, targetValue) => {
   targetValue.constructor = target
   return targetValue
 }
-
