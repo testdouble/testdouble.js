@@ -9,7 +9,7 @@ quibble.ignoreCallsFromThisFile()
 export default function (path, stub) {
   if (arguments.length > 1) { return quibble(path, stub) }
   const realThing = requireAt(path)
-  const fakeThing = imitate(realThing, [path + '": "' + nameFor(realThing)])
+  const fakeThing = imitate(realThing, [path + ': ' + nameFor(realThing)])
   quibble(path, fakeThing)
   return fakeThing
 }

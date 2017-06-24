@@ -163,12 +163,12 @@ describe 'td.replace', ->
       Then -> @result == 'ow'
 
     describe 'quibbling plain old functions with td.function()', ->
-      Then -> @car.honk.toString() == "[test double for \"../../fixtures/honk\": \"(anonymous function)\"]"
+      Then -> @car.honk.toString() == "[test double for \"../../fixtures/honk: (anonymous function)\"]"
 
     describe 'naming the doubles of functions with names', ->
       Given -> td.when(@car.turn()).thenReturn('wee')
       Then -> @car.turn() == 'wee'
-      And -> @car.turn.toString() == "[test double for \"../../fixtures/turn\": \"turn\"]"
+      And -> @car.turn.toString() == "[test double for \"../../fixtures/turn: turn\"]"
       Given -> td.when(@car.shift()).thenReturn('Vroom')
       Then -> @car.shift() == 'Vroom'
 
@@ -180,8 +180,8 @@ describe 'td.replace', ->
       Then -> @car.brake == 'ANYTHING I WANT'
 
     describe 'an object of funcs', ->
-      Then -> @car.lights.headlight.toString() == '[test double for "../../fixtures/lights": ".headlight"]'
-      And -> @car.lights.turnSignal.toString() == '[test double for "../../fixtures/lights": ".turnSignal"]'
+      Then -> @car.lights.headlight.toString() == '[test double for "../../fixtures/lights: .headlight"]'
+      And -> @car.lights.turnSignal.toString() == '[test double for "../../fixtures/lights: .turnSignal"]'
       And -> @car.lights.count == 4
 
       describe 'and classes on objects on funcs', ->
