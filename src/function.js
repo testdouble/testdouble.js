@@ -6,12 +6,8 @@ import imitate from './imitate'
 
 export default (nameOrFunc, __optionalName) =>
   _.isFunction(nameOrFunc)
-    ? createTestDoubleForFunction(nameOrFunc, __optionalName)
+    ? imitate(nameOrFunc)
     : createTestDoubleNamed(nameOrFunc || __optionalName)
-
-var createTestDoubleForFunction = (func, optionalName) => {
-  return imitate(func)
-}
 
 var createTestDoubleNamed = (name) =>
   _.tap(createTestDoubleFunction(), (testDouble) => {

@@ -14,7 +14,7 @@ var fakeObject = (nameOrType, config) => {
   if (_.isArray(nameOrType)) {
     return createTestDoublesForFunctionNames(nameOrType)
   } else if (_.isObjectLike(nameOrType)) {
-    return createTestDoublesForPlainObject(nameOrType)
+    return imitate(nameOrType)
   } else if (_.isString(nameOrType) || nameOrType === undefined) {
     return createTestDoubleViaProxy(nameOrType, withDefaults(config))
   } else if (_.isFunction(nameOrType)) {
@@ -22,10 +22,6 @@ var fakeObject = (nameOrType, config) => {
   } else {
     ensureOtherGarbageIsNotPassed()
   }
-}
-
-var createTestDoublesForPlainObject = (obj) => {
-  return imitate(obj)
 }
 
 var createTestDoublesForFunctionNames = (names) =>

@@ -4,11 +4,8 @@ import imitate from './imitate'
 
 export default (typeOrNames) =>
   _.isFunction(typeOrNames)
-    ? fakeConstructorFromType(typeOrNames)
+    ? imitate(typeOrNames)
     : fakeConstructorFromNames(typeOrNames)
-
-var fakeConstructorFromType = (type) =>
-  imitate(type)
 
 var fakeConstructorFromNames = (funcNames) => {
   return _.tap(class TestDoubleConstructor {}, (cls) => {
