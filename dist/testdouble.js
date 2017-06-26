@@ -1,5 +1,5 @@
 /*
- * testdouble@3.2.0
+ * testdouble@3.2.1
  *
  *   A minimal test double library for TDD with JavaScript
  *
@@ -10085,13 +10085,17 @@ var _lodash = require('../../wrap/lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
+var _isPrimitiveLike = require('./is-primitive-like');
+
+var _isPrimitiveLike2 = _interopRequireDefault(_isPrimitiveLike);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = function (thing) {
   var originalThing = thing;
   var props = {};
 
-  while (!isNativePrototype(thing)) {
+  while (!(0, _isPrimitiveLike2.default)(thing) && !isNativePrototype(thing)) {
     Object.getOwnPropertyNames(thing).forEach(function (propName) {
       if (!props[propName] && propName !== 'constructor') {
         props[propName] = Object.getOwnPropertyDescriptor(thing, propName);
@@ -10118,7 +10122,7 @@ var removeAbsentProperties = function removeAbsentProperties(props, originalThin
   });
 };
 
-},{"../../wrap/lodash":336}],310:[function(require,module,exports){
+},{"../../wrap/lodash":336,"./is-primitive-like":311}],310:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11287,7 +11291,7 @@ var ignoreMessage = function ignoreMessage(config) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = '3.2.0';
+exports.default = '3.2.1';
 
 },{}],335:[function(require,module,exports){
 'use strict';
