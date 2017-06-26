@@ -1,5 +1,12 @@
 # Change Log
 
+## [v3.2.1](https://github.com/testdouble/testdouble.js/tree/v3.2.1) (2017-06-26)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.2.0...v3.2.1)
+
+**Closed issues:**
+
+- Tests failing with 'TypeError: Cannot read property 'isPrototypeOf' of null' after updating 3.2.0 [\#270](https://github.com/testdouble/testdouble.js/issues/270)
+
 ## [v3.2.0](https://github.com/testdouble/testdouble.js/tree/v3.2.0) (2017-06-24)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.1.1...v3.2.0)
 
