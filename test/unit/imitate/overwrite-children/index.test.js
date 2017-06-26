@@ -9,13 +9,11 @@ module.exports = {
 
     td.when(isPrimitiveLike(td.matchers.anything())).thenReturn(false)
   },
-  'thing is primitive-like (then do nothing)': () => {
-    const target = {}
-    td.when(isPrimitiveLike(target)).thenReturn(true)
+  'target is primitive-like (then do nothing)': () => {
+    td.when(isPrimitiveLike('some target')).thenReturn(true)
 
-    subject('some original', target, () => { throw new Error('do not fire!') })
+    subject('some original', 'some target', () => { throw new Error('do not fire!') })
 
-    assert.deepEqual(target, {})
     td.verify(gatherProps(), {ignoreExtraArgs: true, times: 0})
     td.verify(copyProps(), {ignoreExtraArgs: true, times: 0})
     td.verify(chainPrototype(), {ignoreExtraArgs: true, times: 0})

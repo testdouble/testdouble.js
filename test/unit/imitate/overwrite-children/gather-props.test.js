@@ -106,6 +106,13 @@ module.exports = {
 
     assert.deepEqual(_.keys(result), ['foo', 'bar'])
   },
+  'is primitive-y': () => {
+    assert.deepEqual(subject(null), {})
+    assert.deepEqual(subject(undefined), {})
+    assert.deepEqual(subject(false), {})
+    assert.deepEqual(subject(true), {})
+    assert.deepEqual(subject(5), {})
+  },
   'extending a native type': () => {
     const Thing = function () {}
     Thing.prototype = Object.create(Map.prototype)
