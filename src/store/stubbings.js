@@ -70,7 +70,7 @@ var callCallback = (stubbing, callback, args) => {
   } else if (stubbing.config.defer) {
     return _.defer(callback, ...args)
   } else {
-    return callback(...args)
+    return callback(...args) // eslint-disable-line
   }
 }
 
