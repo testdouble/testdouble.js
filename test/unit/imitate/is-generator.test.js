@@ -9,15 +9,15 @@ module.exports = {
     assert.strictEqual(result, false)
   },
   'returns true if passed a generator (when generators supported)': () => {
-    if (!ES_GENERATOR_SUPPORT) return
-    const func = eval('(function* () {})') //esline-disable-line
+    if (!ES_SUPPORT.GENERATORS) return
+    const func = eval('(function* () {})') // eslint-disable-line
 
     const result = subject(func)
 
     assert.strictEqual(result, true)
   },
   'returns false when generators are not supported': () => {
-    if (ES_GENERATOR_SUPPORT) return
+    if (ES_SUPPORT.GENERATORS) return
     // Not much of a test, ¯\_(ツ)_/¯
     assert.strictEqual(subject(), false)
   }

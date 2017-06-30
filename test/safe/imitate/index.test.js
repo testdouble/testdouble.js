@@ -93,42 +93,60 @@ module.exports = {
     assert.equal(explain(result.shirt).name, 'pants.shirt')
     assert.equal(explain(result.shirt.tie).name, 'pants.shirt.tie')
   },
-  'names prototypal things okay': () => {
-    class Thing {
-      doStuff () {}
-    }
-    Thing.prototype.doStuff.bar = { baz: function () {} }
-
-    const result = subject(Thing)
-
-    assert.equal(explain(result).name, 'Thing')
-    assert.equal(explain(result.prototype.doStuff).name, 'Thing.prototype.doStuff')
-    assert.equal(explain(result.prototype.doStuff.bar.baz).name, 'Thing.prototype.doStuff.bar.baz')
-  },
-  'name array things okay': () => {
+  'skips over generator functions, even their custom properties': () => {
+    // This is currently unsupported, expect to kill this test someday
+    if (!ES_SUPPORT.GENERATORS) return
     const original = {
-      items: [
-        function () {},
-        function withName () {},
-        () => false,
-        {
-          biz: function () {}
-        }
-      ]
+      func: eval('(function* () {})') // eslint-disable-line
     }
+    const otherRef = {}
+    original.func.customProp = otherRef
 
     const result = subject(original)
 
-    assert.equal(explain(result.items[0]).name, '.items[0]')
-    assert.equal(explain(result.items[1]).name, '.items[1]')
-    assert.equal(explain(result.items[2]).name, '.items[2]')
-    assert.equal(explain(result.items[3].biz).name, '.items[3].biz')
+    assert.strictEqual(result.func, original.func)
+    assert.strictEqual(result.func.customProp, otherRef) // e.g. NOT cloned
   },
-  'other top level things are named fine': () => {
-    assert.equal(explain(subject([() => 1])[0]).name, '[0]')
-    const foo = (function () { return function () {} })()
-    foo.bar = function () {}
-    assert.equal(explain(subject(foo)).name, '(anonymous function)')
-    assert.equal(explain(subject(foo).bar).name, '.bar')
+  'naming stuff': {
+    'prototypal things': () => {
+      class Thing {
+        doStuff () {}
+      }
+      Thing.prototype.doStuff.bar = { baz: function () {} }
+
+      const result = subject(Thing)
+
+      assert.equal(explain(result).name, 'Thing')
+      assert.equal(explain(result.prototype.doStuff).name,
+        'Thing.prototype.doStuff')
+      assert.equal(explain(result.prototype.doStuff.bar.baz).name,
+        'Thing.prototype.doStuff.bar.baz')
+    },
+    'array things': () => {
+      const original = {
+        items: [
+          function () {},
+          function withName () {},
+          () => false,
+          {
+            biz: function () {}
+          }
+        ]
+      }
+
+      const result = subject(original)
+
+      assert.equal(explain(result.items[0]).name, '.items[0]')
+      assert.equal(explain(result.items[1]).name, '.items[1]')
+      assert.equal(explain(result.items[2]).name, '.items[2]')
+      assert.equal(explain(result.items[3].biz).name, '.items[3].biz')
+    },
+    'other top level things': () => {
+      assert.equal(explain(subject([() => 1])[0]).name, '[0]')
+      const foo = (function () { return function () {} })()
+      foo.bar = function () {}
+      assert.equal(explain(subject(foo)).name, '(anonymous function)')
+      assert.equal(explain(subject(foo).bar).name, '.bar')
+    }
   }
 }

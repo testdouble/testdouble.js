@@ -1,12 +1,12 @@
 import _ from '../../wrap/lodash'
 
-import isPrimitiveLike from './is-primitive-like'
+import isFakeable from './is-fakeable'
 
 export default (thing) => {
   const originalThing = thing
   const props = {}
 
-  while (!isPrimitiveLike(thing) && !isNativePrototype(thing)) {
+  while (isFakeable(thing) && !isNativePrototype(thing)) {
     Object.getOwnPropertyNames(thing).forEach((propName) => {
       if (!props[propName] && propName !== 'constructor') {
         props[propName] = Object.getOwnPropertyDescriptor(thing, propName)

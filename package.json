@@ -69,7 +69,8 @@
       "it",
       "expect",
       "td",
-      "assert"
+      "assert",
+      "ES_SUPPORT"
     ],
     "ignore": [
       "dist",

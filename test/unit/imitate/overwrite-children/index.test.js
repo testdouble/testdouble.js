@@ -1,16 +1,16 @@
-let gatherProps, copyProps, isPrimitiveLike, chainPrototype, subject
+let gatherProps, copyProps, isFakeable, chainPrototype, subject
 module.exports = {
   beforeEach: () => {
     gatherProps = td.replace('../../../../src/imitate/overwrite-children/gather-props').default
     copyProps = td.replace('../../../../src/imitate/overwrite-children/copy-props').default
-    isPrimitiveLike = td.replace('../../../../src/imitate/overwrite-children/is-primitive-like').default
+    isFakeable = td.replace('../../../../src/imitate/overwrite-children/is-fakeable').default
     chainPrototype = td.replace('../../../../src/imitate/overwrite-children/chain-prototype').default
     subject = require('../../../../src/imitate/overwrite-children').default
 
-    td.when(isPrimitiveLike(td.matchers.anything())).thenReturn(false)
+    td.when(isFakeable(td.matchers.anything())).thenReturn(true)
   },
-  'target is primitive-like (then do nothing)': () => {
-    td.when(isPrimitiveLike('some target')).thenReturn(true)
+  'target is not fakeable (then do nothing)': () => {
+    td.when(isFakeable('some target')).thenReturn(false)
 
     subject('some original', 'some target', () => { throw new Error('do not fire!') })
 

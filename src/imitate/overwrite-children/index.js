@@ -1,12 +1,12 @@
 import _ from '../../wrap/lodash'
 
-import isPrimitiveLike from './is-primitive-like'
+import isFakeable from './is-fakeable'
 import gatherProps from './gather-props'
 import copyProps from './copy-props'
 import chainPrototype from './chain-prototype'
 
 export default (original, target, overwriteChild) => {
-  if (isPrimitiveLike(target)) return
+  if (!isFakeable(target)) return
 
   if (_.isArray(target)) {
     _.each(original, (item, index) =>

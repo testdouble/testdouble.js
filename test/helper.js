@@ -19,11 +19,13 @@ module.exports = {
   afterAll: function () {}
 }
 
-global.ES_GENERATOR_SUPPORT = (function () {
-  try {
-    eval('(function* () {})')
-    return true
-  } catch (e) {
-    return false
-  }
-})()
+global.ES_SUPPORT = {
+  GENERATORS: (function () {
+    try {
+      eval('(function* () {})') // eslint-disable-line
+      return true
+    } catch (e) {
+      return false
+    }
+  })()
+}
