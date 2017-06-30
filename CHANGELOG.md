@@ -1,5 +1,16 @@
 # Change Log
 
+## [v3.2.2](https://github.com/testdouble/testdouble.js/tree/v3.2.2) (2017-06-30)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.2.1...v3.2.2)
+
+**Implemented enhancements:**
+
+- Generator support [\#273](https://github.com/testdouble/testdouble.js/issues/273)
+
+**Merged pull requests:**
+
+- Don't blow up when imitating a thing with generators on it [\#274](https://github.com/testdouble/testdouble.js/pull/274) ([searls](https://github.com/searls))
+
 ## [v3.2.1](https://github.com/testdouble/testdouble.js/tree/v3.2.1) (2017-06-26)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.2.0...v3.2.1)
 
