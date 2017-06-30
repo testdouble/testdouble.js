@@ -18,3 +18,12 @@ module.exports = {
   },
   afterAll: function () {}
 }
+
+global.ES_GENERATOR_SUPPORT = (function () {
+  try {
+    eval('(function* () {})')
+    return true
+  } catch (e) {
+    return false
+  }
+})()
