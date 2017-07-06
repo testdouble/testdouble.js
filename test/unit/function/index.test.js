@@ -1,7 +1,5 @@
 import Double from '../../../src/value/double'
 
-    // 3 throws it in the "store"
-    //   - assigns the name to the entry in the store (if it exists)
 let create, imitate, remember, subject
 module.exports = {
   beforeEach: () => {
