@@ -8,19 +8,12 @@ export default (typeOrNames) =>
     : fakeConstructorFromNames(typeOrNames)
 
 var fakeConstructorFromNames = (funcNames) => {
-  return _.tap(class TestDoubleConstructor {}, (cls) => {
+  return _.tap(td.function('(unnamed constructor)'), (fakeConstructor) => {
+    fakeConstructor.prototype.toString = () =>
+      '[test double instance of constructor]'
+
     _.each(funcNames, (funcName) => {
-      cls.prototype[funcName] = tdFunction(`#${funcName}`)
+      fakeConstructor.prototype[funcName] = tdFunction(`#${funcName}`)
     })
-
-    addToStringMethodsToFakeType(cls)
   })
-}
-
-var addToStringMethodsToFakeType = (fakeType, name) => {
-  fakeType.toString = () =>
-    `[test double constructor${name ? ` for "${name}"` : ''}]`
-
-  fakeType.prototype.toString = () =>
-    `[test double instance of constructor${name ? ` "${name}"` : ''}]`
 }

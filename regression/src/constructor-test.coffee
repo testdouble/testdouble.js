@@ -62,13 +62,16 @@ describe 'td.constructor', ->
 
   describe 'being given an array of function names', ->
     Given -> @fakeConstructor = td.constructor(['foo', 'bar'])
-    Given -> @fakeInstance = new @fakeConstructor()
+    Given -> @fakeInstance = new @fakeConstructor('biz')
     Then -> @fakeConstructor.prototype.foo == @fakeInstance.foo
+    And -> td.verify(new @fakeConstructor('biz'))
     And -> td.explain(@fakeInstance.foo).isTestDouble == true
     And -> td.explain(@fakeInstance.bar).isTestDouble == true
-    And -> @fakeConstructor.toString() == '[test double constructor]'
+    And -> @fakeConstructor.toString() == '[test double for "(unnamed constructor)"]'
     And -> @fakeInstance.toString() == '[test double instance of constructor]'
     And -> @fakeInstance.foo.toString() == '[test double for "#foo"]'
+
+
 
   describe 'edge case: being given a function without prototypal methods', ->
     Given -> @boringFunc = ->
