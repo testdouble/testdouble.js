@@ -1,5 +1,5 @@
 /*
- * testdouble@3.2.2
+ * testdouble@3.2.3
  *
  *   A minimal test double library for TDD with JavaScript
  *
@@ -9748,32 +9748,20 @@ var _imitate2 = _interopRequireDefault(_imitate);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
 exports.default = function (typeOrNames) {
   return _lodashWrap2.default.isFunction(typeOrNames) ? (0, _imitate2.default)(typeOrNames) : fakeConstructorFromNames(typeOrNames);
 };
 
 var fakeConstructorFromNames = function fakeConstructorFromNames(funcNames) {
-  return _lodashWrap2.default.tap(function TestDoubleConstructor() {
-    _classCallCheck(this, TestDoubleConstructor);
-  }, function (cls) {
+  return _lodashWrap2.default.tap(td.function('(unnamed constructor)'), function (fakeConstructor) {
+    fakeConstructor.prototype.toString = function () {
+      return '[test double instance of constructor]';
+    };
+
     _lodashWrap2.default.each(funcNames, function (funcName) {
-      cls.prototype[funcName] = (0, _function2.default)('#' + funcName);
+      fakeConstructor.prototype[funcName] = (0, _function2.default)('#' + funcName);
     });
-
-    addToStringMethodsToFakeType(cls);
   });
-};
-
-var addToStringMethodsToFakeType = function addToStringMethodsToFakeType(fakeType, name) {
-  fakeType.toString = function () {
-    return '[test double constructor' + (name ? ' for "' + name + '"' : '') + ']';
-  };
-
-  fakeType.prototype.toString = function () {
-    return '[test double instance of constructor' + (name ? ' "' + name + '"' : '') + ']';
-  };
 };
 
 },{"./function":303,"./imitate":305,"./util/lodash-wrap":337}],302:[function(require,module,exports){
@@ -11343,7 +11331,7 @@ var ignoreMessage = function ignoreMessage(config) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = '3.2.2';
+exports.default = '3.2.3';
 
 },{}],336:[function(require,module,exports){
 'use strict';
