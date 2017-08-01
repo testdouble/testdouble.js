@@ -1,5 +1,17 @@
 # Change Log
 
+## [v3.2.3](https://github.com/testdouble/testdouble.js/tree/v3.2.3) (2017-08-01)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.2.2...v3.2.3)
+
+**Fixed bugs:**
+
+- Verifying a td.constructor\(\) fails [\#278](https://github.com/testdouble/testdouble.js/issues/278)
+
+**Closed issues:**
+
+- Invocation sequence testing [\#277](https://github.com/testdouble/testdouble.js/issues/277)
+- Cannot assign to read only property 'constructor' after updating to v3.2.x [\#271](https://github.com/testdouble/testdouble.js/issues/271)
+
 ## [v3.2.2](https://github.com/testdouble/testdouble.js/tree/v3.2.2) (2017-06-30)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.2.1...v3.2.2)
 
