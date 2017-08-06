@@ -8,7 +8,7 @@ export default (typeOrNames) =>
     : fakeConstructorFromNames(typeOrNames)
 
 var fakeConstructorFromNames = (funcNames) => {
-  return _.tap(td.function('(unnamed constructor)'), (fakeConstructor) => {
+  return _.tap(tdFunction('(unnamed constructor)'), (fakeConstructor) => {
     fakeConstructor.prototype.toString = () =>
       '[test double instance of constructor]'
 
