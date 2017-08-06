@@ -1,5 +1,12 @@
 # Change Log
 
+## [v3.2.4](https://github.com/testdouble/testdouble.js/tree/v3.2.4) (2017-08-06)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.2.3...v3.2.4)
+
+**Closed issues:**
+
+- td.constructor\(\) ReferenceError: td is not defined [\#279](https://github.com/testdouble/testdouble.js/issues/279)
+
 ## [v3.2.3](https://github.com/testdouble/testdouble.js/tree/v3.2.3) (2017-08-01)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.2.2...v3.2.3)
 
