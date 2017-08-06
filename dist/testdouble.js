@@ -1,5 +1,5 @@
 /*
- * testdouble@3.2.3
+ * testdouble@3.2.4
  *
  *   A minimal test double library for TDD with JavaScript
  *
@@ -9753,7 +9753,7 @@ exports.default = function (typeOrNames) {
 };
 
 var fakeConstructorFromNames = function fakeConstructorFromNames(funcNames) {
-  return _lodashWrap2.default.tap(td.function('(unnamed constructor)'), function (fakeConstructor) {
+  return _lodashWrap2.default.tap((0, _function2.default)('(unnamed constructor)'), function (fakeConstructor) {
     fakeConstructor.prototype.toString = function () {
       return '[test double instance of constructor]';
     };
@@ -11331,7 +11331,7 @@ var ignoreMessage = function ignoreMessage(config) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = '3.2.3';
+exports.default = '3.2.4';
 
 },{}],336:[function(require,module,exports){
 'use strict';
