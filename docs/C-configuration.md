@@ -17,3 +17,6 @@ Note that this config is persisted, so under normal circumstances, setting any
 configuration property will hold for the duration of the entire test suite. If
 you need to change a configuration property for a single test, you'll need to
 manage undoing the change yourself (e.g. in `beforeEach` and `afterEach` hooks).
+
+***
+Previous: [Frequently Asked Questions](B-frequently-asked-questions.md#frequently-asked-questions)

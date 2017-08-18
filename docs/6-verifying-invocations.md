@@ -373,3 +373,7 @@ td.verify(doNotCall(), {times: 0, ignoreExtraArgs: true}) // passes
 And that's everything there is to know about verifying behavior with
 testdouble.js! At this point, you know everything you need to know to be pretty
 dangerous writing isolated tests.
+
+***
+Previous: [Stubbing behavior](5-stubbing-results.md#stubbing-behavior)
+Next: [Replacing Real Dependencies with Test Doubles](7-replacing-dependencies.md#replacing-real-dependencies-with-test-doubles)
