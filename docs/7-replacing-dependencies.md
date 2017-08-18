@@ -228,4 +228,6 @@ path shouldn't exist yet, a second argument `manualReplacement` can be provided
 to short-circuit any attempts to load and imitate a module at
 `relativePathToModule`.
 
-
+***
+Previous: [Verifying interactions](6-verifying-invocations.md)
+Next: [Custom argument matchers](8-custom-matchers.md)

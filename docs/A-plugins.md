@@ -46,3 +46,7 @@ testing that a component debounces user input).
 This API has been ported for use with testdouble.js by
 [@kuy](https://github.com/kuy) as
 [testdouble-timers](https://github.com/kuy/testdouble-timers).
+
+***
+Previous: [Debugging with testdouble.js](9-debugging.md)
+Next: [Frequently Asked Questions](B-frequently-asked-questions.md)
