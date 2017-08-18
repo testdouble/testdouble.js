@@ -624,5 +624,5 @@ on about [verifying interactions with `verify()`](6-verifying-invocations.md),
 and rest easy knowing that you already know exactly how to do it.
 
 ***
-Previous: [Creating Test Doubles](4-creating-test-doubles.md)
-Next: [Verifying interactions](6-verifying-invocations.md)
+Previous: [Creating Test Doubles](4-creating-test-doubles.md#creating-test-doubles#creating-test-doubles)
+Next: [Verifying interactions](6-verifying-invocations.md#verifying-interactions)

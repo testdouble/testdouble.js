@@ -356,5 +356,5 @@ Further reading that documents the features shown off in this tutorial include:
 * [Verifying invocations with `verify()`](6-verifying-invocations.md)
 
 ***
-Previous: [Purpose](2-howto-purpose.md)
-Next: [Creating Test Doubles](4-creating-test-doubles.md)
+Previous: [Purpose](2-howto-purpose.md#purpose)
+Next: [Creating Test Doubles](4-creating-test-doubles.md#creating-test-doubles)

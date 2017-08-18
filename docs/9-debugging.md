@@ -80,5 +80,5 @@ to make [`explain` describe test double objects](https://github.com/testdouble/t
 in addition to functions.
 
 ***
-Previous: [Custom argument matchers](8-custom-matchers.md)
-Next: [Plugins](A-plugins.md)
+Previous: [Custom argument matchers](8-custom-matchers.md#custom-argument-matchers)
+Next: [Plugins](A-plugins.md#plugins)

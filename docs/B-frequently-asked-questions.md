@@ -45,5 +45,5 @@ As a result, testdouble.js will print a console warning when it detects that
 a stubbed invocation is also being verified.
 
 ***
-Previous: [Plugins](A-plugins.md)
-Next: [Configuration](C-configuration.md)
+Previous: [Plugins](A-plugins.md#plugins)
+Next: [Configuration](C-configuration.md#configuration)

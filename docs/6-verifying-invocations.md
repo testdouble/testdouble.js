@@ -375,5 +375,5 @@ testdouble.js! At this point, you know everything you need to know to be pretty
 dangerous writing isolated tests.
 
 ***
-Previous: [Stubbing behavior](5-stubbing-results.md)
-Next: [Replacing Real Dependencies with Test Doubles](7-replacing-dependencies.md)
+Previous: [Stubbing behavior](5-stubbing-results.md#stubbing-behavior)
+Next: [Replacing Real Dependencies with Test Doubles](7-replacing-dependencies.md#replacing-real-dependencies-with-test-doubles)

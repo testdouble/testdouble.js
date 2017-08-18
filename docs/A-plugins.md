@@ -25,14 +25,14 @@ Jasmine `expect` matchers (WIP by @BrianGenisio)
 
 ## Build Plugins
 
-Sometimes, it can be handy to have a ready-made shim to pull in and configure the 
+Sometimes, it can be handy to have a ready-made shim to pull in and configure the
 library for various build tools. Here's what testdouble.js has so far:
 
-* [ember-cli-testdouble](https://github.com/isleofcode/ember-cli-testdouble) by 
-[@AlexBlom](https://github.com/AlexBlom) provides a shim for easy importing of 
+* [ember-cli-testdouble](https://github.com/isleofcode/ember-cli-testdouble) by
+[@AlexBlom](https://github.com/AlexBlom) provides a shim for easy importing of
 testdouble.js by Ember projects that using Ember CLI
-* [karma-testdouble](https://github.com/kahwee/karma-testdouble) by 
-[@kahwee](https://github.com/kahwee) will configure 
+* [karma-testdouble](https://github.com/kahwee/karma-testdouble) by
+[@kahwee](https://github.com/kahwee) will configure
 [Karma](https://karma-runner.github.io) to load test double's browser
 distribution
 
@@ -48,5 +48,5 @@ This API has been ported for use with testdouble.js by
 [testdouble-timers](https://github.com/kuy/testdouble-timers).
 
 ***
-Previous: [Debugging with testdouble.js](9-debugging.md)
-Next: [Frequently Asked Questions](B-frequently-asked-questions.md)
+Previous: [Debugging with testdouble.js](9-debugging.md#debugging-with-testdoublejs)
+Next: [Frequently Asked Questions](B-frequently-asked-questions.md#frequently-asked-questions)

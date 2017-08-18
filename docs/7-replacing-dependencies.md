@@ -229,5 +229,5 @@ to short-circuit any attempts to load and imitate a module at
 `relativePathToModule`.
 
 ***
-Previous: [Verifying interactions](6-verifying-invocations.md)
-Next: [Custom argument matchers](8-custom-matchers.md)
+Previous: [Verifying interactions](6-verifying-invocations.md#verifying-interactions)
+Next: [Custom argument matchers](8-custom-matchers.md#custom-argument-matchers)

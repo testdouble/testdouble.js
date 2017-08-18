@@ -111,5 +111,5 @@ integrated test suite and afford some opportunity for responding to hard-to-test
 situations by improving the API design of your adapters.
 
 ***
-Previous: [Installing testdouble.js](1-installation.md)
-Next:  [Getting Started](3-getting-started.md)
+Previous: [Installing testdouble.js](1-installation.md#installing-testdoublejs)
+Next:  [Getting Started](3-getting-started.md#getting-started)

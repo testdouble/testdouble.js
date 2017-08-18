@@ -102,4 +102,4 @@ QUnit.testDone(function() {
 ```
 
 ***
-Next:  [Purpose](2-howto-purpose.md)
+Next:  [Purpose](2-howto-purpose.md#purpose)

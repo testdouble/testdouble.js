@@ -66,5 +66,5 @@ For some examples of `td.matchers.create()` in action, check out the
 [built-in matchers](src/matchers/index.coffee) provided by testdouble.js.
 
 ***
-Previous: [Replacing Real Dependencies with Test Doubles](7-replacing-dependencies.md)
-Next: [Debugging with testdouble.js](9-debugging.md)
+Previous: [Replacing Real Dependencies with Test Doubles](7-replacing-dependencies.md#replacing-real-dependencies-with-test-doubles)
+Next: [Debugging with testdouble.js](9-debugging.md#debugging-with-testdoublejs)
