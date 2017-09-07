@@ -1,5 +1,19 @@
 # Change Log
 
+## [v3.2.5](https://github.com/testdouble/testdouble.js/tree/v3.2.5) (2017-09-07)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.2.4...v3.2.5)
+
+**Closed issues:**
+
+- Missing support for async functions? \(Node 8\) [\#284](https://github.com/testdouble/testdouble.js/issues/284)
+- redacted [\#283](https://github.com/testdouble/testdouble.js/issues/283)
+- Stubbing priority [\#280](https://github.com/testdouble/testdouble.js/issues/280)
+
+**Merged pull requests:**
+
+- Upgrade lodash \(and support async functions\) [\#285](https://github.com/testdouble/testdouble.js/pull/285) ([rosston](https://github.com/rosston))
+- Add previous/next links to documentation files [\#282](https://github.com/testdouble/testdouble.js/pull/282) ([randycoulman](https://github.com/randycoulman))
+
 ## [v3.2.4](https://github.com/testdouble/testdouble.js/tree/v3.2.4) (2017-08-06)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.2.3...v3.2.4)
 
