@@ -130,6 +130,6 @@ Here's a rough outline:
     1. [testdouble-chai](https://github.com/basecase/testdouble-chai)
     2. [testdouble-jasmine](https://github.com/BrianGenisio/testdouble-jasmine)
 11. [Frequently Asked Questions](docs/B-frequently-asked-questions.md#frequently-asked-questions)
-    1. [Why doesn't `td.replace()` work with external CommonJS modules?](docs/B-frequently-asked-questions.md#why-doesnt-tdreplace-work-with-external-commonjs-modules)
+    1. [Why shouldn't I call both td.when and td.verify for a single interaction with a test double?](docs/B-frequently-asked-questions.md#why-shouldnt-i-call-both-tdwhen-and-tdverify-for-a-single-interaction-with-a-test-double)
 12. [Configuration](docs/C-configuration.md#configuration)
     1. [td.config](docs/C-configuration.md#tdconfig)
