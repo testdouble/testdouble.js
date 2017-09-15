@@ -46,7 +46,7 @@ export interface Stubber {
   thenReturn<T>(...args: any[]): TestDouble<T>;
   thenDo<T>(f: Function): TestDouble<T>;
   thenThrow<T>(e: Error): TestDouble<T>;
-  thenResolve<T>(v: any): TestDouble<T>;
+  thenResolve<T>(...args: any[]): TestDouble<T>;
   thenReject<T>(e: Error): TestDouble<T>;
   thenCallback<T>(...args: any[]): TestDouble<T>;
 }
