@@ -1,4 +1,4 @@
-### Custom argument matchers
+# Custom argument matchers
 
 In addition to the built-in argument matchers described along with
 [stubbing](5-stubbing-results.md#loosening-stubbings-with-argument-matchers),
@@ -17,7 +17,7 @@ actual invocation if it passes lodash's deep
 
 The examples in this document assume you've aliased `testdouble` to `td`.
 
-#### Example
+## Example
 
 Here's a naive implementation of a matcher named `isA` which will check whether
 the expected type of an argument matches the type of the argument actually passed
@@ -44,7 +44,7 @@ datePicker(new Date()) // 'good'
 datePicker(5) // undefined
 ```
 
-#### td.matchers.create API
+## td.matchers.create API
 
 The `create` function takes a configuration object with the following properties
 
@@ -64,3 +64,7 @@ opportunity to mutate the matcher instance or have some other side effect. The
 
 For some examples of `td.matchers.create()` in action, check out the
 [built-in matchers](src/matchers/index.coffee) provided by testdouble.js.
+
+***
+Previous: [Replacing Real Dependencies with Test Doubles](7-replacing-dependencies.md#replacing-real-dependencies-with-test-doubles)
+Next: [Debugging with testdouble.js](9-debugging.md#debugging-with-testdoublejs)

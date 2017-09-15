@@ -79,4 +79,6 @@ If you'd like to make `explain()` even better, consider sending a pull request
 to make [`explain` describe test double objects](https://github.com/testdouble/testdouble.js/issues/48)
 in addition to functions.
 
-
+***
+Previous: [Custom argument matchers](8-custom-matchers.md#custom-argument-matchers)
+Next: [Plugins](A-plugins.md#plugins)

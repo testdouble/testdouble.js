@@ -100,3 +100,6 @@ QUnit.testDone(function() {
   td.reset()
 })
 ```
+
+***
+Next:  [Purpose](2-howto-purpose.md#purpose)

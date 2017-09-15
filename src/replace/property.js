@@ -1,5 +1,5 @@
 import _ from '../util/lodash-wrap'
-import imitate from './imitate'
+import imitate from '../imitate'
 import log from '../log'
 import reset from '../reset'
 import stringifyAnything from '../stringify/anything'
@@ -30,7 +30,7 @@ var getFake = (isManual, property, manualReplacement, realThing) => {
     warnIfTypeMismatch(property, manualReplacement, realThing)
     return manualReplacement
   } else {
-    return imitate(realThing, property)
+    return imitate(realThing, [property])
   }
 }
 

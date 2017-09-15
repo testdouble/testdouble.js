@@ -109,3 +109,7 @@ in adapter functions to fake those adapters instead of the 3rd-party API—this
 will decrease the degree to which test doubles will leak throughout the
 integrated test suite and afford some opportunity for responding to hard-to-test
 situations by improving the API design of your adapters.
+
+***
+Previous: [Installing testdouble.js](1-installation.md#installing-testdoublejs)
+Next:  [Getting Started](3-getting-started.md#getting-started)

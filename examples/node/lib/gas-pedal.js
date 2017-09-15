@@ -1,1 +1,3 @@
-module.exports = function(){ throw 'unimplmented' }
+module.exports = function () {
+  throw new Error('unimplemented')
+}

@@ -18,8 +18,10 @@ instead
 In both cases, `td.replace` will grab the real dependency and imitate it with an
 appropriate fake:
 
-  * Plain functions are replaced with test double functions of the same name
-  * Plain objects are shallow-cloned and their top-level functions are replaced
+  * Plain functions are replaced with test double functions of the same name,
+    with all properties deep-cloned and any function properties replaced with
+    test double functions
+  * Plain objects are deep-cloned and all functions are replaced
     with test double functions
   * Constructor functions and ES classes with at least one prototypal function
     defined will be extended by an artificial constructor that will have all the
@@ -226,4 +228,6 @@ path shouldn't exist yet, a second argument `manualReplacement` can be provided
 to short-circuit any attempts to load and imitate a module at
 `relativePathToModule`.
 
-
+***
+Previous: [Verifying interactions](6-verifying-invocations.md#verifying-interactions)
+Next: [Custom argument matchers](8-custom-matchers.md#custom-argument-matchers)

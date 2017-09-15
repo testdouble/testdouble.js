@@ -1,3 +1,5 @@
 module.exports = {
-  read: function(){ throw 'unimplemented' }
+  read: function () {
+    throw new Error('unimplemented')
+  }
 }

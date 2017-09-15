@@ -1,21 +1,13 @@
 import _ from './util/lodash-wrap'
 import calls from './store/calls'
-import copyProperties from './util/copy-properties'
 import store from './store'
 import stubbings from './store/stubbings'
+import imitate from './imitate'
 
 export default (nameOrFunc, __optionalName) =>
   _.isFunction(nameOrFunc)
-    ? createTestDoubleForFunction(nameOrFunc, __optionalName)
+    ? imitate(nameOrFunc)
     : createTestDoubleNamed(nameOrFunc || __optionalName)
-
-var createTestDoubleForFunction = (func, optionalName) =>
-  _.tap(copyProperties(func, createTestDoubleNamed(func.name || optionalName)), testDouble =>
-    _.each(_.functions(func), funcName => {
-      const tdName = `${func.name || optionalName || ''}.${funcName}`
-      testDouble[funcName] = createTestDoubleNamed(tdName)
-    })
-  )
 
 var createTestDoubleNamed = (name) =>
   _.tap(createTestDoubleFunction(), (testDouble) => {

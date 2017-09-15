@@ -1,0 +1,198 @@
+describe 'td.replace', ->
+
+  describe 'Replacing properties on objects and restoring them with reset', ->
+    Given -> @dependency =
+      honk: -> 'og honk'
+      thingConstructor: class Thing
+        foo: -> 'og foo'
+        bar: -> 'og bar'
+
+    describe 'Replacing a function', ->
+      When -> @double = td.replace(@dependency, 'honk')
+      Then -> td.explain(@double).isTestDouble == true
+      And -> @double == @dependency.honk
+
+      describe 'reset restores it', ->
+        When -> td.reset()
+        Then -> td.explain(@double).isTestDouble == false
+        And -> @dependency.honk() == 'og honk'
+
+    describe 'Replacing a constructor function', ->
+      When -> @fakeConstructor = td.replace(@dependency, 'thingConstructor')
+      Then -> td.explain(@fakeConstructor.prototype.foo).isTestDouble == true
+      Then -> td.explain(@fakeConstructor.prototype.bar).isTestDouble == true
+      And -> @fakeConstructor.prototype.foo == new @dependency.thingConstructor().foo
+      And -> @fakeConstructor.prototype.bar == new @dependency.thingConstructor().bar
+
+      describe 'reset restores it', ->
+        When -> td.reset()
+        Then -> td.explain(new @dependency.thingConstructor().foo).isTestDouble == false
+        And -> new @dependency.thingConstructor().foo() == 'og foo'
+
+    describe 'Replacing an ES6 constructor function', ->
+      return unless ES_CLASS_SUPPORT
+      Given -> @dependency.es6constructor = require('../../fixtures/es6class')
+      Given -> @fakeConstructor = td.replace(@dependency, 'es6constructor')
+      Given -> @es6Thing = new @dependency.es6constructor()
+      Then -> td.explain(@fakeConstructor.prototype.foo).isTestDouble == true
+      Then -> td.explain(@fakeConstructor.prototype.bar).isTestDouble == true
+      Then -> @fakeConstructor.prototype.foo == @es6Thing.foo
+      Then -> @fakeConstructor.prototype.bar == @es6Thing.bar
+
+      describe 'the member td functions actually work', ->
+        Given -> td.when(@fakeConstructor.prototype.foo('cat')).thenReturn('dog')
+        Then -> @es6Thing.foo('cat') == 'dog'
+
+      describe 'reset restores it', ->
+        When -> td.reset()
+        Then -> td.explain(new @dependency.es6constructor().foo).isTestDouble == false
+        And -> new @dependency.es6constructor().foo() == 'og foo'
+
+    describe 'Replacing a method on an object instantiated with `new`', ->
+      Given -> @thing = new @dependency.thingConstructor()
+      When -> @doubleFoo = td.replace(@thing, 'foo')
+      Then -> td.explain(@thing.foo).isTestDouble == true
+      And -> @thing.foo() == undefined
+
+      describe 'reset restores it', ->
+        When -> td.reset()
+        Then -> td.explain(@thing.foo).isTestDouble == false
+        And -> @thing.foo() == 'og foo'
+
+    describe 'Replacing an object / function bag', ->
+      Given -> @horseClass = ->
+      Given -> @horseClass::nay = -> 'nay'
+      Given -> @dependency.animals =
+        bark: -> 'og bark'
+        woof: -> 'og woof'
+        age: 18
+        horse: @horseClass
+      When -> @doubleBag = td.replace(@dependency, 'animals')
+      Then -> td.explain(@doubleBag.bark).isTestDouble == true
+      Then -> td.explain(@doubleBag.woof).isTestDouble == true
+      And -> @doubleBag.bark == @dependency.animals.bark
+      And -> @doubleBag.woof == @dependency.animals.woof
+      And -> @doubleBag.age == 18
+
+      describe 'instantiable types work too', ->
+        When -> td.when(@doubleBag.horse.prototype.nay('hay')).thenReturn('no way')
+        Then -> (new @dependency.animals.horse()).nay('hay') == 'no way'
+
+    describe 'Replacing an object with Object.create', ->
+      Given -> @dependency = { foo: Object.create(bar: ->) }
+      When -> td.replace(@dependency, 'foo')
+      Then -> td.explain(@dependency.foo.bar).isTestDouble == true
+
+    describe 'Replacing a property that is not an object/function', ->
+      When -> @result =  td.replace(@dependency, 'badType')
+
+      context 'a number', ->
+        Given -> @dependency.badType = 5
+        Then -> @result == 5
+
+      context 'a string', ->
+        Given -> @dependency.badType = "hello"
+        Then -> @result == "hello"
+
+      context 'null', ->
+        Given -> @dependency.badType = null
+        Then -> @result == null
+
+      context 'undefined', ->
+        Given -> @dependency.badType = undefined
+        Then -> @result == undefined
+
+    describe 'Replacing a non-existent property', ->
+      context 'using automatic replacement', ->
+        When -> try
+            td.replace(@dependency, 'notAThing')
+          catch e
+            @error = e
+        Then -> @error.message == 'Error: testdouble.js - td.replace - No "notAThing" property was found.'
+
+      context 'with manual replacement', ->
+        Given -> @myFake = td.replace(@dependency, 'notAThing', 'MY FAKE')
+        Then -> @myFake == 'MY FAKE'
+        And -> @myFake == @dependency.notAThing
+
+        context 'is deleted following a reset', ->
+          Given -> td.reset()
+          Then -> @dependency.hasOwnProperty('notAThing') == false
+
+    describe 'Manually specifying the override', ->
+      Given -> @ogWarn = console.warn
+      Given -> @warnings = []
+      Given -> console.warn = (msg) => @warnings.push(msg)
+      afterEach -> console.warn = @ogWarn
+
+      context 'with a matching type', ->
+        Given -> @originalHonk = @dependency.honk
+        When -> @myDouble = td.replace(@dependency, 'honk', -> 'FAKE THING')
+        Then -> @myDouble() == 'FAKE THING'
+        And -> @myDouble == @dependency.honk
+        And -> @warnings.length == 0
+
+        context 'is restored following a reset', ->
+          When -> td.reset()
+          Then -> @dependency.honk == @originalHonk
+
+      context 'with mismatched types', ->
+        Given -> @dependency.lol = 5
+        When -> td.replace(@dependency, 'lol', 'foo')
+        Then -> @warnings[0] == "Warning: testdouble.js - td.replace - property \"lol\" 5 (Number) was replaced with \"foo\", which has a different type (String)."
+
+      context 'where the actual is not defined', ->
+        When -> td.replace(@dependency, 'naw', 'lol')
+        Then -> @warnings.length == 0
+
+  describe 'Node.js-specific module replacement', ->
+    return unless NODE_JS
+
+    Given -> @passenger = td.replace('../../fixtures/passenger') #<-- a constructor func
+    Given -> @honk = td.replace('../../fixtures/honk') #<-- a plain ol' func
+    Given -> @turn = td.replace('../../fixtures/turn') #<-- a named func
+    Given -> @shift = td.replace('../../fixtures/shift') #<-- a named func with property DIRECTION
+    Given -> @brake = td.replace('../../fixtures/brake', 'ANYTHING I WANT') #<-- a manual stub bc brake does not exist
+    Given -> @lights = td.replace('../../fixtures/lights') #<- a plain object of funcs
+    Given -> @isNumber = td.replace('is-number') #<-- a 3rd party module
+    Given -> @car = require('../../fixtures/car')
+
+    describe 'quibbling prototypal constructors get created with td.object(Type)', ->
+      Given -> td.when(@passenger.prototype.sit()).thenReturn('ow')
+      When -> @result = @car.seatPassenger()
+      Then -> @result == 'ow'
+
+    describe 'quibbling plain old functions with td.function()', ->
+      Then -> @car.honk.toString() == "[test double for \"../../fixtures/honk: (anonymous function)\"]"
+
+    describe 'naming the doubles of functions with names', ->
+      Given -> td.when(@car.turn()).thenReturn('wee')
+      Then -> @car.turn() == 'wee'
+      And -> @car.turn.toString() == "[test double for \"../../fixtures/turn: turn\"]"
+      Given -> td.when(@car.shift()).thenReturn('Vroom')
+      Then -> @car.shift() == 'Vroom'
+
+    describe 'faking property on exported function', ->
+      Given -> td.when(@car.shift.neutral()).thenReturn('Clunk')
+      Then -> @car.shift.neutral() == 'Clunk'
+
+    describe 'manually stubbing an entry', ->
+      Then -> @car.brake == 'ANYTHING I WANT'
+
+    describe 'an object of funcs', ->
+      Then -> @car.lights.headlight.toString() == '[test double for "../../fixtures/lights: .headlight"]'
+      And -> @car.lights.turnSignal.toString() == '[test double for "../../fixtures/lights: .turnSignal"]'
+      And -> @car.lights.count == 4
+
+      describe 'and classes on objects on funcs', ->
+        When -> td.when(@lights.brights.prototype.beBright(1)).thenReturn('yow')
+        Then -> (new @car.lights.brights).beBright(1) == 'yow'
+
+    describe 'faking a 3rd party module', ->
+      Given -> td.when(@isNumber('a speed')).thenReturn(true)
+      Then -> @car.isASpeed('a speed') == true
+
+    describe 'post-reset usage', ->
+      Given -> td.reset()
+      When -> try require('../../fixtures/car') catch e then @error = e
+      Then -> @error.message == "Cannot find module './brake'"

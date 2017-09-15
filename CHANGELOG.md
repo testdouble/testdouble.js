@@ -1,5 +1,125 @@
 # Change Log
 
+## [v3.2.5](https://github.com/testdouble/testdouble.js/tree/v3.2.5) (2017-09-07)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.2.4...v3.2.5)
+
+**Closed issues:**
+
+- Missing support for async functions? \(Node 8\) [\#284](https://github.com/testdouble/testdouble.js/issues/284)
+- redacted [\#283](https://github.com/testdouble/testdouble.js/issues/283)
+- Stubbing priority [\#280](https://github.com/testdouble/testdouble.js/issues/280)
+
+**Merged pull requests:**
+
+- Upgrade lodash \(and support async functions\) [\#285](https://github.com/testdouble/testdouble.js/pull/285) ([rosston](https://github.com/rosston))
+- Add previous/next links to documentation files [\#282](https://github.com/testdouble/testdouble.js/pull/282) ([randycoulman](https://github.com/randycoulman))
+
+## [v3.2.4](https://github.com/testdouble/testdouble.js/tree/v3.2.4) (2017-08-06)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.2.3...v3.2.4)
+
+**Closed issues:**
+
+- td.constructor\(\) ReferenceError: td is not defined [\#279](https://github.com/testdouble/testdouble.js/issues/279)
+
+## [v3.2.3](https://github.com/testdouble/testdouble.js/tree/v3.2.3) (2017-08-01)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.2.2...v3.2.3)
+
+**Fixed bugs:**
+
+- Verifying a td.constructor\(\) fails [\#278](https://github.com/testdouble/testdouble.js/issues/278)
+
+**Closed issues:**
+
+- Invocation sequence testing [\#277](https://github.com/testdouble/testdouble.js/issues/277)
+- Cannot assign to read only property 'constructor' after updating to v3.2.x [\#271](https://github.com/testdouble/testdouble.js/issues/271)
+
+## [v3.2.2](https://github.com/testdouble/testdouble.js/tree/v3.2.2) (2017-06-30)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.2.1...v3.2.2)
+
+**Implemented enhancements:**
+
+- Generator support [\#273](https://github.com/testdouble/testdouble.js/issues/273)
+
+**Merged pull requests:**
+
+- Don't blow up when imitating a thing with generators on it [\#274](https://github.com/testdouble/testdouble.js/pull/274) ([searls](https://github.com/searls))
+
+## [v3.2.1](https://github.com/testdouble/testdouble.js/tree/v3.2.1) (2017-06-26)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.2.0...v3.2.1)
+
+**Closed issues:**
+
+- Tests failing with 'TypeError: Cannot read property 'isPrototypeOf' of null' after updating 3.2.0 [\#270](https://github.com/testdouble/testdouble.js/issues/270)
+
+## [v3.2.0](https://github.com/testdouble/testdouble.js/tree/v3.2.0) (2017-06-24)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.1.1...v3.2.0)
+
+**Implemented enhancements:**
+
+- Single-layer property replacement is inappropriate for ES modules [\#262](https://github.com/testdouble/testdouble.js/issues/262)
+
+**Closed issues:**
+
+- td.constructor\(\) breaks instanceof [\#267](https://github.com/testdouble/testdouble.js/issues/267)
+
+**Merged pull requests:**
+
+- imitate / replace things deeply \(instead of shallow\) [\#268](https://github.com/testdouble/testdouble.js/pull/268) ([searls](https://github.com/searls))
+
+## [v3.1.1](https://github.com/testdouble/testdouble.js/tree/v3.1.1) (2017-06-20)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.1.0...v3.1.1)
+
+## [v3.1.0](https://github.com/testdouble/testdouble.js/tree/v3.1.0) (2017-06-18)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.0.0...v3.1.0)
+
+**Fixed bugs:**
+
+- td.replace throws with objects created with Object.create [\#257](https://github.com/testdouble/testdouble.js/issues/257)
+- getters are executed when using td.constructor\(\) [\#218](https://github.com/testdouble/testdouble.js/issues/218)
+
+**Closed issues:**
+
+- Verify that constructor is passed certain values [\#256](https://github.com/testdouble/testdouble.js/issues/256)
+- Is there any sample code that mock aws sdk? [\#251](https://github.com/testdouble/testdouble.js/issues/251)
+- Cannot use `td.object` with "callable objects" [\#232](https://github.com/testdouble/testdouble.js/issues/232)
+
+**Merged pull requests:**
+
+- Allow stubbing of custom instances & Object.create\(\) [\#264](https://github.com/testdouble/testdouble.js/pull/264) ([searls](https://github.com/searls))
+- Enable tsc in ci pipeline take 2 [\#260](https://github.com/testdouble/testdouble.js/pull/260) ([duluca](https://github.com/duluca))
+- TypeScript typing thenResolve takes variable args [\#258](https://github.com/testdouble/testdouble.js/pull/258) ([miyu](https://github.com/miyu))
+- Test testdouble.js with testdouble.js! [\#255](https://github.com/testdouble/testdouble.js/pull/255) ([searls](https://github.com/searls))
+
+## [v3.0.0](https://github.com/testdouble/testdouble.js/tree/v3.0.0) (2017-06-02)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v2.1.2...v3.0.0)
+
+**Fixed bugs:**
+
+- Figure out babel+instanceof+constructor problems with class extension  [\#241](https://github.com/testdouble/testdouble.js/issues/241)
+- Mocking a Class [\#157](https://github.com/testdouble/testdouble.js/issues/157)
+
+**Closed issues:**
+
+- `td.verify` reporting after resolving promises [\#250](https://github.com/testdouble/testdouble.js/issues/250)
+- Replacing dependency with td.replace\(path, replacement\) doesn't work [\#249](https://github.com/testdouble/testdouble.js/issues/249)
+- Verify constructor [\#248](https://github.com/testdouble/testdouble.js/issues/248)
+- td.replace \(\) breaks the cache in require [\#244](https://github.com/testdouble/testdouble.js/issues/244)
+- Faking internal calls [\#243](https://github.com/testdouble/testdouble.js/issues/243)
+- ECMAScript 2015 Classes with td.constructor\(\) [\#240](https://github.com/testdouble/testdouble.js/issues/240)
+- TypeScript: Better Generic Support for td.object\(\) [\#236](https://github.com/testdouble/testdouble.js/issues/236)
+- How to Replace Imported Constructor in Another File [\#235](https://github.com/testdouble/testdouble.js/issues/235)
+- Mocha Spec Reporter [\#234](https://github.com/testdouble/testdouble.js/issues/234)
+- TypeError: 'x' is not a function [\#233](https://github.com/testdouble/testdouble.js/issues/233)
+- Inifinite recursion problem [\#231](https://github.com/testdouble/testdouble.js/issues/231)
+- Invoke callback within object [\#230](https://github.com/testdouble/testdouble.js/issues/230)
+- Testing Constructor invocations [\#229](https://github.com/testdouble/testdouble.js/issues/229)
+- Stubbing chained API objects yields a warning [\#228](https://github.com/testdouble/testdouble.js/issues/228)
+
+**Merged pull requests:**
+
+- Stop extending types when replacing constructors [\#254](https://github.com/testdouble/testdouble.js/pull/254) ([searls](https://github.com/searls))
+- Fix \#236; Add another overload and its test [\#237](https://github.com/testdouble/testdouble.js/pull/237) ([sgtoj](https://github.com/sgtoj))
+
 ## [v2.1.2](https://github.com/testdouble/testdouble.js/tree/v2.1.2) (2017-03-29)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v2.1.1...v2.1.2)
 
@@ -7,7 +127,6 @@
 
 - TypeError when used with node -r flag [\#226](https://github.com/testdouble/testdouble.js/issues/226)
 - When replacing a node library calling it from other modules does not work as expected [\#225](https://github.com/testdouble/testdouble.js/issues/225)
-- Consider using \_.isObjectLike rather than \_.isPlainObject within td.object [\#224](https://github.com/testdouble/testdouble.js/issues/224)
 
 ## [v2.1.1](https://github.com/testdouble/testdouble.js/tree/v2.1.1) (2017-03-28)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v2.1.0...v2.1.1)
@@ -182,7 +301,6 @@
 
 **Closed issues:**
 
-- Mocking a Class [\#157](https://github.com/testdouble/testdouble.js/issues/157)
 - Matcher for a specific position [\#156](https://github.com/testdouble/testdouble.js/issues/156)
 
 **Merged pull requests:**

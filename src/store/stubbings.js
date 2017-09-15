@@ -1,6 +1,6 @@
 import _ from '../util/lodash-wrap'
 import argsMatch from '../args-match'
-import callback from '../matchers/callback'
+import callback from '../callback'
 import config from '../config'
 import log from '../log'
 import store from './index'
@@ -70,7 +70,7 @@ var callCallback = (stubbing, callback, args) => {
   } else if (stubbing.config.defer) {
     return _.defer(callback, ...args)
   } else {
-    return callback(...args)
+    return callback(...args) // eslint-disable-line
   }
 }
 

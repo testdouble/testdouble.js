@@ -2,14 +2,23 @@
   "name": "testdouble-nodejs-example",
   "private": true,
   "scripts": {
-    "test": "mocha -R spec --recursive test/helper.js test/lib/",
+    "test:unit": "teenytest",
+    "test:style": "standard",
+    "test": "yarn run test:unit && yarn run test:style",
     "test:debug": "yarn test -- --debug-brk"
   },
   "devDependencies": {
-    "chai": "^3.3.0",
+    "core-assert": "^0.2.1",
     "elasticsearch": "^12.1.3",
     "is-number": "^3.0.0",
-    "mocha": "^2.3.3",
+    "standard": "^10.0.2",
+    "teenytest": "^5.0.2",
     "testdouble": "*"
+  },
+  "standard": {
+    "globals": ["td", "assert"]
+  },
+  "teenytest": {
+    "timeout": 20000
   }
 }

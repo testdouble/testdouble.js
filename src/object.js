@@ -1,9 +1,7 @@
 import _ from './util/lodash-wrap'
-import copyProperties from './util/copy-properties'
-import isConstructor from './replace/is-constructor'
 import log from './log'
-import tdConstructor from './constructor'
 import tdFunction from './function'
+import imitate from './imitate'
 
 const DEFAULT_OPTIONS = {excludeMethods: ['then']}
 
@@ -13,10 +11,10 @@ export default (nameOrType, config) =>
   })
 
 var fakeObject = (nameOrType, config) => {
-  if (_.isPlainObject(nameOrType)) {
-    return createTestDoublesForPlainObject(nameOrType)
-  } else if (_.isArray(nameOrType)) {
+  if (_.isArray(nameOrType)) {
     return createTestDoublesForFunctionNames(nameOrType)
+  } else if (_.isObjectLike(nameOrType)) {
+    return imitate(nameOrType)
   } else if (_.isString(nameOrType) || nameOrType === undefined) {
     return createTestDoubleViaProxy(nameOrType, withDefaults(config))
   } else if (_.isFunction(nameOrType)) {
@@ -25,13 +23,6 @@ var fakeObject = (nameOrType, config) => {
     ensureOtherGarbageIsNotPassed()
   }
 }
-
-var createTestDoublesForPlainObject = (obj) =>
-  _.transform(_.functions(obj), (acc, funcName) => {
-    acc[funcName] = isConstructor(obj[funcName])
-      ? tdConstructor(obj[funcName])
-      : tdFunction(`.${funcName}`)
-  }, copyProperties(obj, _.clone(obj)))
 
 var createTestDoublesForFunctionNames = (names) =>
   _.transform(names, (acc, funcName) => {
@@ -44,7 +35,7 @@ var createTestDoubleViaProxy = (name, config) => {
   return new Proxy(obj, {
     get (target, propKey, receiver) {
       if (!obj.hasOwnProperty(propKey) && !_.includes(config.excludeMethods, propKey)) {
-        obj[propKey] = tdFunction(`${nameOf(name)}#${propKey}`)
+        obj[propKey] = tdFunction(`${nameOf(name)}.${propKey}`)
       }
       return obj[propKey]
     }
@@ -77,7 +68,6 @@ objects) a string name.
 If you passed td.object an instance of a custom type, consider passing the
 type's constructor to \`td.constructor()\` instead.
 `)
-
 
 var withDefaults = (config) =>
   _.extend({}, DEFAULT_OPTIONS, config)

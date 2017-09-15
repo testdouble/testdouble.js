@@ -354,3 +354,7 @@ Further reading that documents the features shown off in this tutorial include:
 * [Creating test doubles with `function()` and `object()`](4-creating-test-doubles.md)
 * [Stubbing responses with `when()`](5-stubbing-results.md)
 * [Verifying invocations with `verify()`](6-verifying-invocations.md)
+
+***
+Previous: [Purpose](2-howto-purpose.md#purpose)
+Next: [Creating Test Doubles](4-creating-test-doubles.md#creating-test-doubles)

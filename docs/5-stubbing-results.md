@@ -622,3 +622,7 @@ other major feature of any test double library—verifying an invocation took
 place—has an API that was carefully-designed to be completely symmetrical! Read
 on about [verifying interactions with `verify()`](6-verifying-invocations.md),
 and rest easy knowing that you already know exactly how to do it.
+
+***
+Previous: [Creating Test Doubles](4-creating-test-doubles.md#creating-test-doubles#creating-test-doubles)
+Next: [Verifying interactions](6-verifying-invocations.md#verifying-interactions)
