@@ -1,5 +1,13 @@
 # Change Log
 
+## [v3.2.6](https://github.com/testdouble/testdouble.js/tree/v3.2.6) (2017-09-18)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.2.5...v3.2.6)
+
+**Merged pull requests:**
+
+- Fix outline of FAQ in README [\#287](https://github.com/testdouble/testdouble.js/pull/287) ([rosston](https://github.com/rosston))
+- Improve TS Support [\#239](https://github.com/testdouble/testdouble.js/pull/239) ([sgtoj](https://github.com/sgtoj))
+
 ## [v3.2.5](https://github.com/testdouble/testdouble.js/tree/v3.2.5) (2017-09-07)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.2.4...v3.2.5)
 
