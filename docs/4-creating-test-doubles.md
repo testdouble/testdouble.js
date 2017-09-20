@@ -132,7 +132,7 @@ cat.meow // a test double function named 'meow'
 
 ### object([objectName])
 
-If passed either a string name or no arguments at all, `td.object` will return an [ES2015 Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) object designed to forward any property access as if it was a test double function. By using `Proxy`, testdouble.js is able to intercept calls to properties that don't exist, immediately create a new test double function, and invoke that function for use in either stubbing or verifying behavior.
+If passed either a string name or no arguments at all, `td.object` will return an [ES2015 Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) object designed to forward any property access as if it were a test double function. By using `Proxy`, testdouble.js is able to intercept calls to properties that don't exist, immediately create a new test double function, and invoke that function for use in either stubbing or verifying behavior.
 
 ``` javascript
 var parrot = td.object('Parrot')
