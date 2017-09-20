@@ -105,7 +105,7 @@ quack('anything','at','all')
 
 Will each return `undefined`. This differs from the default stubbings one might create with Jasmine or Sinon.js, but it's by design. When your code calls another function, the arguments it passes _probably matter_. As a result, testdouble.js defaults to assuming that the inputs passed to stubbed test doubles are necessary.
 
-For instance, if the stubbing was unconditional, we might pat ourselves on the back for writing this test:
+For instance, if the stubbing were unconditional, we might pat ourselves on the back for writing this test:
 
 ``` javascript
 function sitInTraffic(horn){
