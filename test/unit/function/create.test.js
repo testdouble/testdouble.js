@@ -1,4 +1,4 @@
-let Double, generateFakeFunction,subject
+let Double, generateFakeFunction, subject
 module.exports = {
   beforeEach: () => {
     Double = td.replace('../../../src/value/double').default
