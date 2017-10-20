@@ -1,7 +1,7 @@
-let config, subject, consoleWarn
+let config, subject
 module.exports = {
   beforeEach: () => {
-    consoleWarn = td.replace(console, 'warn')
+    td.replace(console, 'warn')
     config = td.replace('../../src/config').default
 
     subject = require('../../src/log').default
@@ -28,7 +28,7 @@ module.exports = {
 
       assert.throws(() => {
         subject.error('aFunc', 'a message', 'http://url')
-      }, /Error\: testdouble\.js \- aFunc \- a message \(see\: http\:\/\/url \)/)
+      }, /Error: testdouble\.js - aFunc - a message \(see: http:\/\/url \)/)
     },
     'suppressing errors': () => {
       td.when(config()).thenReturn({suppressErrors: true})
