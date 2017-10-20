@@ -1,7 +1,7 @@
 // import _ from '../wrap/lodash'
 
 export default (call, stubbings) => {
-  // RTODO: dummy impl to drive create feature first
+  // TODO: dummy impl to drive create feature first
   return stubbings ? stubbings[0].outcomes[0] : undefined
 
   // 1. find the last matching stubbing (args+conditions match + has values left)
