@@ -1,12 +1,20 @@
 import _ from '../wrap/lodash'
 
 export default class Double {
-  constructor (name, real, fake) {
+  static create (name, real, parent, fakeCreator) {
+    const double = new Double(name, real, parent)
+    if (fakeCreator) double.fake = fakeCreator(double)
+    return double
+  }
+
+  constructor (name, real, parent) {
     this.name = name
     this.real = real
-    this.fake = fake
-    this.parent = undefined
     this.children = new Set()
+    if (parent) {
+      this.parent = parent
+      parent.addChild(this)
+    }
   }
 
   addChild (child) {
@@ -24,5 +32,9 @@ export default class Double {
   get ancestors () {
     if (!this.parent) return []
     return this.parent.ancestors.concat(this.parent)
+  }
+
+  toString () {
+    return this.fullName == null ? '[test double (unnamed)]' : `[test double for "${this.fullName}"]`
   }
 }

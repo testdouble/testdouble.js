@@ -1,29 +1,36 @@
 import Double from '../../../src/value/double'
 
-let create, imitate, remember, subject
+let create, subject
 module.exports = {
   beforeEach: () => {
     create = td.replace('../../../src/function/create').default
-    imitate = td.replace('../../../src/imitate').default
-    remember = td.replace('../../../src/function/remember').default
 
     subject = require('../../../src/function/index').default
   },
   'pass in a name': () => {
-    const double = new Double(null, null, 'fake thing')
-    td.when(create('foo')).thenReturn(double)
+    const double = Double.create(null, null, null, () => 'fake thing')
+    td.when(create('foo', null)).thenReturn(double)
 
     const result = subject('foo')
 
-    assert.equal(result, double.fake)
-    td.verify(remember(double))
+    assert.equal(result, 'fake thing')
   },
-  'pass in a function': () => {
+  'pass in a named function': () => {
     function bar () {}
-    td.when(imitate(bar)).thenReturn('fake bar')
+    const double = Double.create(null, null, null, () => 'fake bar')
+    td.when(create('bar', bar)).thenReturn(double)
 
     const result = subject(bar)
 
     assert.equal(result, 'fake bar')
+  },
+  'pass in an unnamed function': () => {
+    const unnamedFunc = eval('(function () {})') //eslint-disable-line
+    const double = Double.create(null, null, null, () => 'fake')
+    td.when(create(null, unnamedFunc)).thenReturn(double)
+
+    const result = subject(unnamedFunc)
+
+    assert.equal(result, 'fake')
   }
 }

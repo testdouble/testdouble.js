@@ -12,7 +12,7 @@ module.exports = {
     StubbingRegister.reset()
   },
   'can add, retrieve a stubbing': () => {
-    const double = new Double()
+    const double = Double.create()
     const stubbing = new Stubbing()
 
     subject.add(double, stubbing)
@@ -20,7 +20,7 @@ module.exports = {
     assert.deepEqual(subject.get(double), [stubbing])
   },
   'delegates to another thing to satisfy': () => {
-    const double = new Double()
+    const double = Double.create()
     const stubbing = new Stubbing()
     const call = new Call()
     const satisfy = td.replace('../../../src/satisfy').default

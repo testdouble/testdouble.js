@@ -12,7 +12,7 @@ module.exports = {
     subject = require('../../../src/when/index').default
   },
   'adds a stubbing, returns the fake': () => {
-    const double = new Double()
+    const double = Double.create()
     const call = new Call(null, ['arg1', 'arg2'])
     CallLog.instance.log(double, call)
     td.when(chainStubbing(td.callback('a type', ['a stub']))).thenReturn('chained methods')
