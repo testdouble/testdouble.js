@@ -1,7 +1,5 @@
 import Map from 'es6-map'
 
-import satisfy from '../satisfy'
-
 let instance = null
 
 export default class StubbingRegister {
@@ -25,10 +23,6 @@ export default class StubbingRegister {
     } else {
       this.stubbings.set(double, [stubbing])
     }
-  }
-
-  satisfy (double, call) {
-    return satisfy(call, this.stubbings.get(double))
   }
 
   get (double) {

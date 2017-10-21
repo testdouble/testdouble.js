@@ -1,10 +1,14 @@
 import Double from '../../../src/value/double'
+import Call from '../../../src/value/call'
 import CallLog from '../../../src/value/call-log'
-import StubbingRegister from '../../../src/value/stubbing-register'
-import Stubbing from '../../../src/value/stubbing'
-import subject from '../../../src/function/generate-fake-function'
 
+let satisfy, subject
 module.exports = {
+  beforeEach: () => {
+    satisfy = td.replace('../../../src/satisfy').default
+
+    subject = require('../../../src/function/generate-fake-function').default
+  },
   'the fake function itself': {
     'logs calls': () => {
       const double = Double.create()
@@ -18,12 +22,13 @@ module.exports = {
     },
     'registers stubbing': () => {
       const double = Double.create()
-      const stubbing = new Stubbing('return', ['a', 'b'], ['c'])
-      StubbingRegister.instance.add(double, stubbing)
+      const self = {}
+      const call = new Call(self, [42])
+      td.when(satisfy(double, call)).thenReturn('woot')
 
-      const result = subject(double)('a', 'b')
+      const result = subject(double).call(self, 42)
 
-      assert.equal(result, 'c')
+      assert.equal(result, 'woot')
     }
   },
   'sets toString to that of the double': () => {

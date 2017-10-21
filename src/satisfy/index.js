@@ -1,8 +1,7 @@
 // import _ from '../wrap/lodash'
 
-export default (call, stubbings) => {
+export default function satisfy (double, call) {
   // TODO: dummy impl to drive create feature first
-  return stubbings ? stubbings[0].outcomes[0] : undefined
 
   // 1. find the last matching stubbing (args+conditions match + has values left)
   // 2. six-way switch to execute the correct plan switching on the stubbing's `type`
