@@ -1,5 +1,6 @@
 import _ from './util/lodash-wrap'
 import callback from './callback'
+import isCallback from './matchers/is-callback'
 import calls from './store/calls'
 import log from './log'
 import stubbings from './store/stubbings'
@@ -52,7 +53,7 @@ No test double invocation call detected for \`when()\`.
 var concatImpliedCallback = (args, config) => {
   if (config.plan !== 'thenCallback') {
     return args
-  } else if (!_.some(args, callback.isCallback)) {
+  } else if (!_.some(args, isCallback)) {
     return args.concat(callback)
   } else {
     return args

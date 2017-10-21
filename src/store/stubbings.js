@@ -1,6 +1,6 @@
 import _ from '../util/lodash-wrap'
 import argsMatch from '../args-match'
-import callback from '../callback'
+import isCallback from '../matchers/is-callback'
 import config from '../config'
 import log from '../log'
 import store from './index'
@@ -45,9 +45,9 @@ var executePlan = (stubbing, actualArgs, actualContext) => {
 }
 
 var invokeCallbackFor = (stubbing, actualArgs) => {
-  if (_.some(stubbing.args, callback.isCallback)) {
+  if (_.some(stubbing.args, isCallback)) {
     _.each(stubbing.args, (expectedArg, i) => {
-      if (callback.isCallback(expectedArg)) {
+      if (isCallback(expectedArg)) {
         callCallback(stubbing, actualArgs[i], callbackArgs(stubbing, expectedArg))
       }
     })

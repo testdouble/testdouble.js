@@ -14,7 +14,4 @@ export default _.tap(create({
   // Make callback itself quack like a matcher for its non-invoked use case.
   callback.__name = 'callback'
   callback.__matches = _.isFunction
-
-  callback.isCallback = obj =>
-    obj && (obj === callback || obj.__testdouble_callback === true)
 })
