@@ -7,8 +7,9 @@ export default class Stubbing {
     this.satisfactionCount = 0
   }
 
-  get timesSatisfied () {
-    return this.satisfactionCount
+  get hasTimesRemaining () {
+    if (this.options.times == null) return true
+    return this.satisfactionCount < this.options.times
   }
 
   incrementSatisfactions () {
