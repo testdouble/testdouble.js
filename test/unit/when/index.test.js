@@ -15,7 +15,7 @@ module.exports = {
     const double = Double.create()
     const call = new Call(null, ['arg1', 'arg2'])
     CallLog.instance.log(double, call)
-    td.when(chainStubbing(td.callback('a type', ['a stub']))).thenReturn('chained methods')
+    td.when(chainStubbing(double, td.callback('a type', ['a stub']))).thenReturn('chained methods')
     td.when(addImpliedCallbackArgIfNecessary('a type', ['arg1', 'arg2'])).thenReturn('good args')
 
     const result = subject('_fake rehearsal arg_', 'some options')

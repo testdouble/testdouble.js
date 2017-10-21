@@ -8,7 +8,7 @@ import Stubbing from '../value/stubbing'
 export default (__rehearseInvocationHere__, options) => {
   const rehearsal = CallLog.instance.pop()
   ensureRehearsal(rehearsal)
-  return chainStubbing((type, outcomes) => {
+  return chainStubbing(rehearsal.double, (type, outcomes) => {
     StubbingRegister.instance.add(rehearsal.double, new Stubbing(
       type,
       addImpliedCallbackArgIfNecessary(type, rehearsal.call.args),
