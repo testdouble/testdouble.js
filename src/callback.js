@@ -1,7 +1,7 @@
 import _ from './util/lodash-wrap'
 import create from './matchers/create'
 
-export default _.tap(create({
+const callback = create({
   name: 'callback',
   matches (matcherArgs, actual) {
     return _.isFunction(actual)
@@ -10,8 +10,10 @@ export default _.tap(create({
     matcherInstance.args = matcherArgs
     matcherInstance.__testdouble_callback = true
   }
-}), (callback) => {
-  // Make callback itself quack like a matcher for its non-invoked use case.
-  callback.__name = 'callback'
-  callback.__matches = _.isFunction
 })
+
+// Make callback itself quack like a matcher for its non-invoked use case.
+callback.__name = 'callback'
+callback.__matches = _.isFunction
+
+export default callback
