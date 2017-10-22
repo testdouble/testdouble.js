@@ -1,4 +1,4 @@
-import warnIfPromiseless from './warn-if-promiseless'
+import ensurePromise from '../log/ensure-promise'
 
 export default function chainStubbing (double, completeStubbing) {
   return {
@@ -19,12 +19,12 @@ export default function chainStubbing (double, completeStubbing) {
       return double.fake
     },
     thenResolve (...stubbedValues) {
-      warnIfPromiseless()
+      ensurePromise('warn')
       completeStubbing('thenResolve', stubbedValues)
       return double.fake
     },
     thenReject (...stubbedErrors) {
-      warnIfPromiseless()
+      ensurePromise('warn')
       completeStubbing('thenReject', stubbedErrors)
       return double.fake
     }

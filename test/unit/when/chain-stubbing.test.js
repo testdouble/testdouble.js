@@ -1,10 +1,10 @@
 import Double from '../../../src/value/double'
 
-let warnIfPromiseless, subject
+let ensurePromise, subject
 let double, type, outcomes, callback
 module.exports = {
   beforeEach: () => {
-    warnIfPromiseless = td.replace('../../../src/when/warn-if-promiseless').default
+    ensurePromise = td.replace('../../../src/log/ensure-promise').default
 
     subject = require('../../../src/when/chain-stubbing').default
 
@@ -49,7 +49,7 @@ module.exports = {
   '.thenResolve': () => {
     const result = subject(double, callback).thenResolve('pants')
 
-    td.verify(warnIfPromiseless())
+    td.verify(ensurePromise('warn'))
     assert.equal(result, 'a fake')
     assert.equal(type, 'thenResolve')
     assert.deepEqual(outcomes, ['pants'])
@@ -59,7 +59,7 @@ module.exports = {
 
     const result = subject(double, callback).thenReject(error)
 
-    td.verify(warnIfPromiseless())
+    td.verify(ensurePromise('warn'))
     assert.equal(result, 'a fake')
     assert.equal(type, 'thenReject')
     assert.deepEqual(outcomes, [error])
