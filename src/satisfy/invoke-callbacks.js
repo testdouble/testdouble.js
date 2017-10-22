@@ -1,6 +1,6 @@
 export default function invokeCallbacks (stubbing, call) {
 }
-
+/*
 var invokeCallbackFor = (stubbing, actualArgs) => {
   if (_.some(stubbing.args, isCallback)) {
     _.each(stubbing.args, (expectedArg, i) => {
@@ -32,4 +32,4 @@ var callCallback = (stubbing, callback, args) => {
     return callback(...args) // eslint-disable-line
   }
 }
-
+*/

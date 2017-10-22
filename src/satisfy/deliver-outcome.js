@@ -6,4 +6,3 @@ export default function executePlan (stubbing, call) {
     // case 'thenResolve': return createPromise(stubbing, value, true)
     // case 'thenReject': return createPromise(stubbing, value, false)
 }
-

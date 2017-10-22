@@ -61,4 +61,3 @@ module.exports = {
     assert.equal(result, stubbing1)
   }
 }
-
