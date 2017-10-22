@@ -66,11 +66,11 @@ var callbackArgs = (stubbing, expectedArg) => {
 
 var callCallback = (stubbing, callback, args) => {
   if (stubbing.config.delay) {
-    return _.delay(callback, stubbing.config.delay, ...args)
+    _.delay(callback, stubbing.config.delay, ...args)
   } else if (stubbing.config.defer) {
-    return _.defer(callback, ...args)
+    _.defer(callback, ...args)
   } else {
-    return callback(...args) // eslint-disable-line
+    callback(...args) // eslint-disable-line
   }
 }
 
