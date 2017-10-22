@@ -54,6 +54,6 @@ module.exports = {
 
       td.verify(rejecter('pants'))
       assert.equal(td.explain(resolver).callCount, 0)
-    },
+    }
   }
 }

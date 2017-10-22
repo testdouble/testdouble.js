@@ -6,7 +6,7 @@ module.exports = {
 
     subject = require('../../../src/log/ensure-promise').default
   },
-  'config has no promise set': () => {
+  'config has no promise set (warn)': () => {
     td.when(config()).thenReturn({promiseConstructor: null})
 
     subject('warn')
@@ -36,9 +36,10 @@ testdouble.js which promise constructor to use with \`td.config\`, like so:
     subject('error')
 
     td.verify(log.error('td.when', `\
-no promise constructor is set, so this \`thenResolve\` or \`thenReject\` stubbing
-will fail if it's satisfied by an invocation on the test double. You can tell
-testdouble.js which promise constructor to use with \`td.config\`, like so:
+no promise constructor is set (perhaps this runtime lacks a native Promise
+function?), which means this stubbing can't return a promise to your
+subject under test, resulting in this error. To resolve the issue, set
+a promise constructor with \`td.config\`, like this:
 
   td.config({
     promiseConstructor: require('bluebird')
