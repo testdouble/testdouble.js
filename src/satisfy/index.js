@@ -1,9 +1,12 @@
 import findLastStubbingMatch from './find-last-stubbing-match'
-import executePlan from './execute-plan'
+import invokeCallbacks from './invoke-callbacks'
+import deliverOutcome from './deliver-outcome'
 
 export default function satisfy (double, call) {
   const stubbing = findLastStubbingMatch(double, call)
   if (stubbing) {
-    return executePlan(double, call, stubbing)
+    stubbing.addSatisfyingCall(call)
+    invokeCallbacks(stubbing, call)
+    return deliverOutcome(stubbing, call)
   }
 }

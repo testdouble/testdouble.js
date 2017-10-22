@@ -53,8 +53,8 @@ module.exports = {
     stubbingRegister.add(double, stubbing1)
     stubbingRegister.add(double, stubbing2)
     stubbingRegister.add(double, stubbing3)
-    stubbing3.incrementSatisfactions()
-    stubbing3.incrementSatisfactions()
+    stubbing3.addSatisfyingCall(new Call())
+    stubbing3.addSatisfyingCall(new Call())
 
     const result = subject(double, call)
 

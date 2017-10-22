@@ -1,3 +1,4 @@
+import Call from '../../../src/value/call'
 import Stubbing from '../../../src/value/stubbing'
 
 module.exports = {
@@ -7,7 +8,7 @@ module.exports = {
 
       assert.equal(subject.hasTimesRemaining, true)
 
-      subject.incrementSatisfactions()
+      subject.addSatisfyingCall(new Call())
 
       assert.equal(subject.hasTimesRemaining, true)
     },
@@ -16,7 +17,7 @@ module.exports = {
 
       assert.equal(subject.hasTimesRemaining, false)
 
-      subject.incrementSatisfactions()
+      subject.addSatisfyingCall(new Call())
 
       assert.equal(subject.hasTimesRemaining, false)
     },
@@ -25,7 +26,7 @@ module.exports = {
 
       assert.equal(subject.hasTimesRemaining, true)
 
-      subject.incrementSatisfactions()
+      subject.addSatisfyingCall(new Call())
 
       assert.equal(subject.hasTimesRemaining, false)
     },
@@ -34,14 +35,61 @@ module.exports = {
 
       assert.equal(subject.hasTimesRemaining, true)
 
-      subject.incrementSatisfactions()
+      subject.addSatisfyingCall(new Call())
 
       assert.equal(subject.hasTimesRemaining, true)
 
-      subject.incrementSatisfactions()
+      subject.addSatisfyingCall(new Call())
+
+      assert.equal(subject.hasTimesRemaining, false)
+    },
+    'guards against duplicate calls (only count once)': () => {
+      const subject = new Stubbing(null, null, null, {times: 2})
+
+      assert.equal(subject.hasTimesRemaining, true)
+
+      const call = new Call()
+      subject.addSatisfyingCall(call)
+      subject.addSatisfyingCall(call)
+      subject.addSatisfyingCall(call)
+
+      assert.equal(subject.hasTimesRemaining, true)
+
+      subject.addSatisfyingCall(new Call())
 
       assert.equal(subject.hasTimesRemaining, false)
     }
+  },
+  '.currentOutcome': {
+    'one outcome set': () => {
+      const subject = new Stubbing(null, null, ['pants'])
 
+      assert.equal(subject.currentOutcome, 'pants')
+
+      subject.addSatisfyingCall(new Call())
+
+      assert.equal(subject.currentOutcome, 'pants')
+
+      subject.addSatisfyingCall(new Call())
+
+      assert.equal(subject.currentOutcome, 'pants')
+    },
+    'two outcomes set': () => {
+      const subject = new Stubbing(null, null, ['pants', 'hat'])
+
+      assert.equal(subject.currentOutcome, 'pants')
+
+      subject.addSatisfyingCall(new Call())
+
+      assert.equal(subject.currentOutcome, 'pants')
+
+      subject.addSatisfyingCall(new Call())
+
+      assert.equal(subject.currentOutcome, 'hat')
+
+      subject.addSatisfyingCall(new Call())
+
+      assert.equal(subject.currentOutcome, 'hat')
+    }
   }
 }
