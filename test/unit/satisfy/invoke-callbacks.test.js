@@ -75,6 +75,6 @@ module.exports = {
 
     subject(stubbing, call)
 
-    td.verify(callLater(realCallback, [], 42, true))
+    td.verify(callLater(realCallback, [], true, 42))
   }
 }

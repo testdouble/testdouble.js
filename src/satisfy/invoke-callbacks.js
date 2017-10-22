@@ -10,8 +10,8 @@ export default function invokeCallbacks (stubbing, call) {
       callLater(
         actualCallback,
         callbackArgs(stubbing, stubbingArg),
-        stubbing.options.delay,
-        stubbing.options.defer
+        stubbing.options.defer,
+        stubbing.options.delay
       )
     }
   })
