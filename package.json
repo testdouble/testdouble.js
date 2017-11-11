@@ -9,6 +9,12 @@
     "url": "http://testdouble.com"
   },
   "main": "lib/index.js",
+  "files": [
+    "src",
+    "lib",
+    "dist",
+    "index.d.ts"
+  ],
   "config": {
     "build_file": "dist/testdouble.js",
     "test_bundle": "generated/tests.js",
@@ -18,7 +24,7 @@
     "clean": "rm -rf generated dist lib coverage",
     "postclean": "mkdir -p generated dist",
     "compile:browser": "browserify src/index.js --standalone td --outfile $npm_package_config_build_file -p headerify -t babelify",
-    "compile:browser:test": "mkdir -p generated && browserify regression/browser-helper.js --outfile $npm_package_config_test_bundle -t babelify -t coffeeify --extension=\".coffee\" -t require-globify --ignore-missing",
+    "compile:browser:test": "browserify regression/browser-helper.js --outfile $npm_package_config_test_bundle -t babelify -t coffeeify --extension=\".coffee\" -t require-globify --ignore-missing",
     "compile:node": "babel src -d lib",
     "compile": "yarn compile:node && yarn compile:browser && yarn compile:browser:test",
     "cover": "nyc --reporter=lcov --reporter=text-summary --require babel-core/register _mocha --ui mocha-given --reporter $npm_package_config_mocha_reporter --compilers coffee:coffee-script --recursive regression/node-helper.coffee regression/src",
