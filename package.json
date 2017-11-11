@@ -41,7 +41,7 @@
     "preversion": "git pull --rebase && yarn run test:ci",
     "version": "yarn run version:write && yarn run compile && git add dist src/version.js",
     "postversion": "git push --tags && yarn run version:changelog && git push && npm publish",
-    "prepublish": "yarn run compile"
+    "prepare": "yarn compile"
   },
   "babel": {
     "presets": [
