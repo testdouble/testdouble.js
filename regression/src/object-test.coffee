@@ -25,6 +25,15 @@ describe 'td.object', ->
     And -> @testDouble.toString() == '[test double object]'
     And -> @testDouble.bam.toString() == '[test double for ".bam"]'
 
+  if (global.Symbol)
+    context 'making a test double based on a Symbol', ->
+      Given -> @symbolFoo = Symbol('foo')
+      Given -> @testDouble = td.object([@symbolFoo])
+      When -> td.when(@testDouble[@symbolFoo]()).thenReturn('zing!')
+      Then -> @testDouble[@symbolFoo]() == 'zing!'
+      And -> @testDouble.toString() == '[test double object]'
+      And -> @testDouble[@symbolFoo].toString() == '[test double for ".Symbol(foo)"]'
+
   describe 'passing a function to td.object erroneously (1.x)', ->
     When -> try td.object(->) catch e then @result = e
     Then -> expect(@result.message).to.contain(
@@ -52,6 +61,11 @@ describe 'td.object', ->
         Given -> @testDouble = td.object()
         Then -> @testDouble.toString() == '[test double object]'
         Then -> @testDouble.lol.toString() == '[test double for ".lol"]'
+
+      if (global.Symbol)
+        context 'with Symbol propKey', ->
+          And -> @testDouble[Symbol('foo')].toString() == '[test double for "thing.Symbol(foo)"]'
+
   else
     describe 'getting an error message', ->
       When -> try
