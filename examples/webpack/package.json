@@ -6,7 +6,7 @@
     "test:dev": "testem"
   },
   "devDependencies": {
-    "testdouble": "*",
+    "testdouble": "../../",
     "testem": "^1.15.0",
     "webpack": "^2.2.1"
   }
