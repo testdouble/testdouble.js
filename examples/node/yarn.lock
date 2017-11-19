@@ -291,7 +291,7 @@ es6-iterator@2, es6-iterator@^2.0.1, es6-iterator@~2.0.1:
     es5-ext "^0.10.14"
     es6-symbol "^3.1"
 
-es6-map@^0.1.3:
+es6-map@^0.1.3, es6-map@^0.1.5:
   version "0.1.5"
   resolved "https://registry.yarnpkg.com/es6-map/-/es6-map-0.1.5.tgz#9136e0503dcc06a301690f0bb14ff4e364e949f0"
   dependencies:
@@ -832,7 +832,7 @@ lodash.cond@^4.3.0:
   version "4.5.2"
   resolved "https://registry.yarnpkg.com/lodash.cond/-/lodash.cond-4.5.2.tgz#f471a1da486be60f6ab955d17115523dd1d255d5"
 
-lodash@>=4.13.1, lodash@^4.0.0, lodash@^4.12.0, lodash@^4.13.1, lodash@^4.15.0, lodash@^4.17.2, lodash@^4.3.0:
+lodash@>=4.13.1, lodash@^4.0.0, lodash@^4.12.0, lodash@^4.13.1, lodash@^4.17.2, lodash@^4.17.4, lodash@^4.3.0:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
@@ -1018,9 +1018,9 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-quibble@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/quibble/-/quibble-0.4.0.tgz#a1535c4a80b3d3617d23c5d770f1ec2c7b5523a1"
+quibble@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/quibble/-/quibble-0.5.1.tgz#b7fd1fc0a9c1eea012ac9d71bcb6da8d9a5dc9e9"
   dependencies:
     lodash "^4.17.2"
 
@@ -1064,6 +1064,12 @@ resolve-from@^1.0.0:
 resolve@^1.1.6, resolve@^1.1.7:
   version "1.3.3"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.3.3.tgz#655907c3469a8680dc2de3a275a8fdd69691f0e5"
+  dependencies:
+    path-parse "^1.0.5"
+
+resolve@^1.3.3:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.5.0.tgz#1f09acce796c9a762579f31b2c1cc4c3cddf9f36"
   dependencies:
     path-parse "^1.0.5"
 
@@ -1158,9 +1164,9 @@ string_decoder@~1.0.0:
   dependencies:
     buffer-shims "~1.0.0"
 
-stringify-object@^2.4.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/stringify-object/-/stringify-object-2.4.0.tgz#c62d11023eb21fe2d9b087be039a26df3b22a09d"
+stringify-object-es5@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/stringify-object-es5/-/stringify-object-es5-2.5.0.tgz#057c3c9a90a127339bb9d1704a290bb7bd0a1ec5"
   dependencies:
     is-plain-obj "^1.0.0"
     is-regexp "^1.0.0"
@@ -1206,13 +1212,14 @@ teenytest@^5.0.2:
     minimist "^1.2.0"
     resolve "^1.1.7"
 
-testdouble@*:
-  version "1.11.2"
-  resolved "https://registry.yarnpkg.com/testdouble/-/testdouble-1.11.2.tgz#8b6a2e418ad1da9991e479203e37528dfd81d557"
+testdouble@../../:
+  version "3.2.6"
   dependencies:
-    lodash "^4.15.0"
-    quibble "^0.4.0"
-    stringify-object "^2.4.0"
+    es6-map "^0.1.5"
+    lodash "^4.17.4"
+    quibble "^0.5.1"
+    resolve "^1.3.3"
+    stringify-object-es5 "^2.5.0"
 
 text-table@~0.2.0:
   version "0.2.0"
