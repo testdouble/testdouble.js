@@ -222,7 +222,7 @@ FakeCat.prototype.scratch // a test double function named '#scratch'
 
 ## Conclusion
 
-As you can see, there are a plethora of ways to create test doubles with testdouble.js, each designed to handle a different style of organizing JavaScript code. We recommend on landing on one consistent style (e.g. each module as one function) for each project, which in turn would encourage one consistent style of creating test doubles. This API is written to be flexible for a number of potential contexts across objects, but it has come at the cost of a large enough surface area that if any project were to make ample use of all or most of the above invocation styles, it would confuse readers.
+As you can see, there are a plethora of ways to create test doubles with testdouble.js, each designed to handle a different style of organizing JavaScript code. We recommend landing on one consistent style (e.g. each module as one function) for each project, which in turn would encourage one consistent style of creating test doubles. This API is written to be flexible for a number of potential contexts across objects, but it has come at the cost of a large enough surface area that if any project were to make ample use of all or most of the above invocation styles, it would confuse readers.
 
 ***
 Previous: [Getting Started](3-getting-started.md#getting-started)
