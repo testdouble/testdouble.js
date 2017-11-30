@@ -1,4 +1,4 @@
-import _ from './util/lodash-wrap'
+import _ from './wrap/lodash'
 import isMatcher from './matchers/is-matcher'
 
 export default (expectedArgs, actualArgs, config = {}) => {

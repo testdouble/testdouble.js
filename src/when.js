@@ -1,4 +1,4 @@
-import _ from './util/lodash-wrap'
+import _ from './wrap/lodash'
 import callback from './callback'
 import isCallback from './matchers/is-callback'
 import calls from './store/calls'

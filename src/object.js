@@ -1,4 +1,4 @@
-import _ from './util/lodash-wrap'
+import _ from './wrap/lodash'
 import log from './log'
 import tdFunction from './function'
 import imitate from './imitate'

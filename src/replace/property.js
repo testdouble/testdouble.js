@@ -1,4 +1,4 @@
-import _ from '../util/lodash-wrap'
+import _ from '../wrap/lodash'
 import imitate from '../imitate'
 import log from '../log'
 import reset from '../reset'

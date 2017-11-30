@@ -1,4 +1,4 @@
-import _ from './util/lodash-wrap'
+import _ from './wrap/lodash'
 import calls from './store/calls'
 import store from './store'
 import stubbings from './store/stubbings'
