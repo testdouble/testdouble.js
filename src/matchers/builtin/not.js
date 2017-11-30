@@ -1,4 +1,4 @@
-import _ from '../../util/lodash-wrap'
+import _ from '../../wrap/lodash'
 import create from '../create'
 
 export default create({
