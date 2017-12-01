@@ -108,7 +108,7 @@
     "pryjs": "^1.0.3",
     "require-globify": "^1.4.1",
     "standard": "^10.0.2",
-    "teenytest": "^5.1.0",
+    "teenytest": "^5.1.1",
     "testdouble": "3.2.1",
     "testem": "^1.18.0",
     "typescript": "^2.4.1"
