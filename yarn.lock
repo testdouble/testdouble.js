@@ -4517,9 +4517,9 @@ tar@~2.2.1:
     fstream "^1.0.2"
     inherits "2"
 
-teenytest@^5.0.2:
-  version "5.0.2"
-  resolved "https://registry.yarnpkg.com/teenytest/-/teenytest-5.0.2.tgz#e6d6f8ec38835b1e2383147e0904ff4832bda498"
+teenytest@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/teenytest/-/teenytest-5.1.0.tgz#4d649f9e5939f9ac87a132f5a0f8c31828dcb097"
   dependencies:
     async "^1.5.2"
     function-names-at-line "^1.0.0"
