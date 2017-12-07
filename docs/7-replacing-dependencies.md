@@ -43,17 +43,53 @@ This sounds a little like magic, so let's look at a simple example. Suppose we
 write a simple test in `test/lib/car-test.js`:
 
 ``` javascript
-var brake = td.replace('../../lib/brake'),
-    subject = require('../../lib/car')
+module.exports = {
+  beforeEach: function() {
+    var brake = td.replace('../../lib/brake')
+    var subject = require('../../lib/car')
+  },
+  'slowing applies the break': function () {
+    subject.slowDown()
 
-subject.slowDown()
-
-td.verify(brake(10))
+    td.verify(brake(10))
+  }
+}
 ```
 
-In order to make the above test pass, we first need to create `lib/brake.js` and
-export a function, so that testdouble.js knows to replace `require` calls with
-a test double function (as opposed to a default `module.exports` object):
+There are few very important things to note about how to use module replacement
+safely (with great power, etc.):
+
+* Most importantly: **move your replacements and requirements into a
+  `beforeEach` hook (or equivalent)** and be sure you're calling `td.reset()`
+  after each test case. Because `td.replace('../module/path')` will disrupt
+  Node's module caching behavior and cause `require()` to return a fake, it
+  would cause test pollution to keep the `require` stanzas at the top of the
+  file
+* As a result, your tests will need to use `require` and not the ES static
+  `import` keyword. This _only applies to your test files_, however, you can
+  still feel free to use `import` in your production source files, where it
+  actually matters if you're leveraging a bundling tool like Webpack or Rollup.
+  Keep in mind that you'll like be doing a lot of
+  `td.replace('../path').default` assignments if you're using default exports
+* `td.replace` is designed to be used as part of an outside-in test-driven
+  development workflow, and so calling `td.replace` for some path will trigger
+  an error until it actually exists and exports the basic shape (e.g. a
+  function, or a bag of functions, or a class) that is expected to be consumed
+  by the subject under test
+* Because `td.replace` first requires the module being replaced and then
+  performs a deep imitation of whatever the real module exports, any
+  side-effects the to-be-replaced module has will be inadvertently triggered by
+  the test (remember, good modules should be loadable without triggering side
+  effects!)
+
+That's a lot of caveats, but so long as your test and module design is simple
+and consistent, it's a powerful feature that can drastically simplify the setup
+of your isolation tests.
+
+Now, in order to make the above test pass, we first need to create
+`lib/brake.js` and export a function, so that testdouble.js knows to replace
+`require` calls with a test double function (as opposed to a default
+`module.exports` object):
 
 ``` javascript
 module.exports = function(){}
@@ -82,8 +118,8 @@ API, read on.
 
 If you'd like an example of replacing ES classes that use the `export` keyword,
 check out the [babel example
-project](../examples/babel/test/lib/calculator-test.js). (Note that the test
-itself must fall back to CommonJS-style `require` statements, since module
+project](../examples/babel/test/lib/calculator-test.js). (Note again that the
+test itself must fall back to CommonJS-style `require` statements, since module
 replacement requires the dependency be loaded after the replacements are
 configured, which precludes the use of the static `import` statement.)
 
