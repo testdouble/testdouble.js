@@ -28,6 +28,15 @@ export default {
     }
   },
 
+  capture (testDouble, args, config) {
+    const matchingInvocations = this.where(testDouble, args, config)
+    matchingInvocations.forEach(call => {
+      args.forEach((arg, key) => {
+        arg.__capture && arg.__capture(call.args[key])
+      })
+    })
+  },
+
   where (testDouble, args, config) {
     return _.filter(store.for(testDouble).calls, call =>
       argsMatch(args, call.args, config))

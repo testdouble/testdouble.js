@@ -18,6 +18,7 @@ export default {
   invoke (testDouble, actualArgs, actualContext) {
     const stubbing = stubbingFor(testDouble, actualArgs)
     if (stubbing) {
+      captureArgs(stubbing, actualArgs)
       return executePlan(stubbing, actualArgs, actualContext)
     }
   },
@@ -26,6 +27,11 @@ export default {
     return store.for(testDouble).stubbings
   }
 }
+
+var captureArgs = (stubbing, actualArgs) =>
+  stubbing.args.forEach((expectedArg, key) => {
+    expectedArg.__capture && expectedArg.__capture(actualArgs[key])
+  })
 
 var stubbingFor = (testDouble, actualArgs) =>
   _.findLast(store.for(testDouble).stubbings, stubbing =>

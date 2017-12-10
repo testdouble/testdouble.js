@@ -10,7 +10,7 @@ export default (__userDoesRehearsalInvocationHere__, config = {}) => {
   const last = callsStore.pop()
   ensureRehearsalOccurred(last)
   if (callsStore.wasInvoked(last.testDouble, last.args, config)) {
-    // Do nothing! We're verified! :-D
+    callsStore.capture(last.testDouble, last.args, config)
     warnIfStubbed(last.testDouble, last.args)
   } else {
     log.fail(unsatisfiedErrorMessage(last.testDouble, last.args, config))

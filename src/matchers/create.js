@@ -7,6 +7,9 @@ export default config =>
       __name: nameFor(config, matcherArgs),
       __matches (actualArg) {
         return config.matches(matcherArgs, actualArg)
+      },
+      __capture (actualArg) {
+        config.capture && config.capture(matcherArgs, actualArg)
       }
     }, (matcherInstance) =>
       _.invoke(config, 'onCreate', matcherInstance, matcherArgs)
