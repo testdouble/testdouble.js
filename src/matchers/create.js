@@ -8,9 +8,12 @@ export default config =>
       __matches (actualArg) {
         return config.matches(matcherArgs, actualArg)
       }
-    }, (matcherInstance) =>
+    }, (matcherInstance) => {
+      matcherInstance.__matches.afterSatisfaction = (actualArg) => {
+        _.invoke(config, 'afterSatisfaction', matcherArgs, actualArg)
+      }
       _.invoke(config, 'onCreate', matcherInstance, matcherArgs)
-    )
+    })
 
 var nameFor = (config, matcherArgs) => {
   if (_.isFunction(config.name)) {

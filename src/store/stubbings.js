@@ -1,6 +1,7 @@
 import _ from '../wrap/lodash'
 import argsMatch from '../args-match'
 import isCallback from '../matchers/is-callback'
+import notifyAfterSatisfaction from '../matchers/notify-after-satisfaction'
 import config from '../config'
 import log from '../log'
 import store from './index'
@@ -18,6 +19,7 @@ export default {
   invoke (testDouble, actualArgs, actualContext) {
     const stubbing = stubbingFor(testDouble, actualArgs)
     if (stubbing) {
+      notifyAfterSatisfaction(stubbing.args, actualArgs)
       return executePlan(stubbing, actualArgs, actualContext)
     }
   },
