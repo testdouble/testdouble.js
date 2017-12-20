@@ -4,8 +4,8 @@
   "scripts": {
     "test:unit": "teenytest",
     "test:style": "standard",
-    "test": "yarn run test:unit && yarn run test:style",
-    "test:debug": "yarn test -- --debug-brk"
+    "test": "npm run test:unit && npm run test:style",
+    "test:debug": "npm test -- --debug-brk"
   },
   "devDependencies": {
     "core-assert": "^0.2.1",
@@ -16,7 +16,10 @@
     "testdouble": "../../"
   },
   "standard": {
-    "globals": ["td", "assert"]
+    "globals": [
+      "td",
+      "assert"
+    ]
   },
   "teenytest": {
     "timeout": 20000
