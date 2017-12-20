@@ -5,13 +5,12 @@ import log from './log'
 import store from './store'
 import stringifyArgs from './stringify/arguments'
 import stubbingsStore from './store/stubbings'
-import isMatcher from './matchers/is-matcher'
+import notifyAfterSatisfaction from './matchers/notify-after-satisfaction'
 
 export default (__userDoesRehearsalInvocationHere__, config = {}) => {
   const last = callsStore.pop()
   ensureRehearsalOccurred(last)
   if (callsStore.wasInvoked(last.testDouble, last.args, config)) {
-    // Do nothing! We're verified! :-D
     notifyMatchers(last.testDouble, last.args, config)
     warnIfStubbed(last.testDouble, last.args)
   } else {
@@ -32,11 +31,7 @@ No test double invocation detected for \`verify()\`.
 
 const notifyMatchers = (testDouble, expectedArgs, config) => {
   _.each(callsStore.where(testDouble, expectedArgs, config), (invocation) => {
-    _.each(expectedArgs, (expectedArg, i) => {
-      if (isMatcher(expectedArg)) {
-        _.invoke(expectedArg, '__matches.afterSatisfaction', invocation.args[i])
-      }
-    })
+    notifyAfterSatisfaction(expectedArgs, invocation.args)
   })
 }
 
