@@ -95,7 +95,7 @@
     "babelify": "^7.3.0",
     "browserify": "^14.4.0",
     "chai": "^3.2.0",
-    "codeclimate-test-reporter": "^0.4.1",
+    "codeclimate-test-reporter": "^0.5.0",
     "coffee-script": "^1.10.0",
     "coffeeify": "^2.1.0",
     "core-assert": "^0.2.1",
@@ -109,7 +109,7 @@
     "require-globify": "^1.4.1",
     "standard": "^10.0.2",
     "teenytest": "^5.1.1",
-    "testdouble": "3.2.1",
+    "testdouble": "3.2.6",
     "testem": "^1.18.0",
     "typescript": "^2.4.1"
   },
