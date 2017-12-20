@@ -1,5 +1,33 @@
 # Change Log
 
+## [v3.2.7](https://github.com/testdouble/testdouble.js/tree/v3.2.7) (2017-12-20)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.2.6...v3.2.7)
+
+**Fixed bugs:**
+
+- Disallow captors in `td.when\(...\)` [\#308](https://github.com/testdouble/testdouble.js/issues/308)
+
+**Closed issues:**
+
+- Enforce calling with new for `td.constructor`, disallow for `td.function` [\#309](https://github.com/testdouble/testdouble.js/issues/309)
+- Unexpected output with td.matchers.isA\(Function\) [\#307](https://github.com/testdouble/testdouble.js/issues/307)
+- Different objects created using the same constructor function obtained using td.constructor share the same stubs [\#305](https://github.com/testdouble/testdouble.js/issues/305)
+- Using invocation verification with QUnit [\#304](https://github.com/testdouble/testdouble.js/issues/304)
+- example tests don't work on latest master [\#302](https://github.com/testdouble/testdouble.js/issues/302)
+- Error when running install inside testdouble.js [\#298](https://github.com/testdouble/testdouble.js/issues/298)
+- Can I use test double with enzyme on client end to test if method runs on button click ? [\#297](https://github.com/testdouble/testdouble.js/issues/297)
+- Node module mocking with td.replace\(\) [\#294](https://github.com/testdouble/testdouble.js/issues/294)
+- replacing a nested dependency does not get reset correctly [\#293](https://github.com/testdouble/testdouble.js/issues/293)
+- How to verify the value of "this" keyword on a call? [\#292](https://github.com/testdouble/testdouble.js/issues/292)
+- How to mock typescript fields [\#291](https://github.com/testdouble/testdouble.js/issues/291)
+
+**Merged pull requests:**
+
+- Ensure captors only fire when invocation satisfies when/verify [\#311](https://github.com/testdouble/testdouble.js/pull/311) ([searls](https://github.com/searls))
+- Remove extra word [\#306](https://github.com/testdouble/testdouble.js/pull/306) ([carlbennettnz](https://github.com/carlbennettnz))
+- Fix example tests [\#303](https://github.com/testdouble/testdouble.js/pull/303) ([jasonkarns](https://github.com/jasonkarns))
+- grammar tweak [\#289](https://github.com/testdouble/testdouble.js/pull/289) ([jasonkarns](https://github.com/jasonkarns))
+
 ## [v3.2.6](https://github.com/testdouble/testdouble.js/tree/v3.2.6) (2017-09-18)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.2.5...v3.2.6)
 
