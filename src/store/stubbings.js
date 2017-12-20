@@ -1,6 +1,7 @@
 import _ from '../wrap/lodash'
 import argsMatch from '../args-match'
 import isCallback from '../matchers/is-callback'
+import isMatcher from '../matchers/is-matcher'
 import config from '../config'
 import log from '../log'
 import store from './index'
@@ -18,6 +19,12 @@ export default {
   invoke (testDouble, actualArgs, actualContext) {
     const stubbing = stubbingFor(testDouble, actualArgs)
     if (stubbing) {
+      _.each(stubbing.args, (expectedArg, i) => {
+        if (isMatcher(expectedArg)) {
+          _.invoke(expectedArg, '__matches.afterSatisfaction', actualArgs[i])
+        }
+      })
+
       return executePlan(stubbing, actualArgs, actualContext)
     }
   },
