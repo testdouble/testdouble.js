@@ -13,4 +13,3 @@ export default function gatherProps (thing) {
   }
   return props
 }
-
