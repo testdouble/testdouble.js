@@ -1,6 +1,5 @@
-import _ from '../../wrap/lodash'
-
 import isFakeable from './is-fakeable'
+import isNativePrototype from './is-native-prototype'
 
 export default function gatherProps (thing) {
   const props = {}
@@ -15,7 +14,3 @@ export default function gatherProps (thing) {
   return props
 }
 
-const isNativePrototype = (thing) => {
-  if (!_.isFunction(thing.isPrototypeOf)) return false
-  return _.some([Object, Function], (nativeType) => thing.isPrototypeOf(nativeType))
-}
