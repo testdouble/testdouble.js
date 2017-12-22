@@ -22,6 +22,7 @@
     "compile:node": "babel src -d lib",
     "compile": "yarn run compile:node && yarn run compile:browser && yarn run compile:browser:test",
     "cover": "nyc --reporter=lcov --reporter=text-summary --require babel-core/register _mocha --ui mocha-given --reporter $npm_package_config_mocha_reporter --compilers coffee:coffee-script --recursive regression/node-helper.coffee regression/src",
+    "cover:unit": "nyc --reporter=html --all yarn test:unit",
     "cover:report": "codeclimate-test-reporter < coverage/lcov.info",
     "style": "standard --fix",
     "test": "mocha --ui mocha-given --reporter $npm_package_config_mocha_reporter --compilers js:babel-core/register,coffee:coffee-script --recursive regression/node-helper.coffee regression/src",
@@ -78,6 +79,9 @@
       "generated",
       "lib"
     ]
+  },
+  "nyc": {
+    "include": ["src/**/*"]
   },
   "dependencies": {
     "es6-map": "^0.1.5",
