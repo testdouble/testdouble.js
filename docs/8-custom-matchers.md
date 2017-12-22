@@ -70,7 +70,7 @@ The `create` function takes a configuration object with the following properties
   captors](6-verifying-invocations.md#multi-phase-assertions-with-argument-captors))
 
 For some examples of `td.matchers.create()` in action, check out the
-[built-in matchers](src/matchers/index.coffee) provided by testdouble.js.
+[built-in matchers](src/matchers/builtin) provided by testdouble.js.
 
 ***
 Previous: [Replacing Real Dependencies with Test Doubles](7-replacing-dependencies.md#replacing-real-dependencies-with-test-doubles)
