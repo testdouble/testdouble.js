@@ -42,6 +42,16 @@ module.exports = {
     assert.equal(td.explain(warnIfAlsoStubbed).callCount, 0)
   },
   'demonstration missing blows up': () => {
+    const config = {some: 'option'}
+    td.when(ensureDemonstration(undefined)).thenThrow(new Error('wups'))
+
+    assert.throws(() => {
+      subject(/*imagine double('a','b','X')*/ undefined, config)
+    }, /wups/)
+
+    assert.equal(td.explain(notifySatisfiedMatchers).callCount, 0)
+    assert.equal(td.explain(warnIfAlsoStubbed).callCount, 0)
+    assert.equal(td.explain(fail).callCount, 0)
   }
 
 }
