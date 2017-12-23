@@ -7,7 +7,7 @@ import warnIfAlsoStubbed from './warn-if-also-stubbed'
 import fail from './fail'
 
 export default function verify (__userInvokesDemonstrationHere__, config) {
-  const {double, call} = CallLog.instance.pop()
+  const {double, call} = CallLog.instance.pop() || {}
   ensureDemonstration(call)
   if (didCallOccur(double, call, config)) {
     notifySatisfiedMatchers(double, call, config)
