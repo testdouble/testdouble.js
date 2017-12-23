@@ -28,6 +28,18 @@ module.exports = {
     assert.equal(td.explain(fail).callCount, 0)
   },
   'demonstrated call DID NOT occur, failing test': () => {
+    const double = new Double()
+    const call = new Call()
+    CallLog.instance.log(double, call)
+    const config = {some: 'option'}
+    td.when(didCallOccur(double, call, config)).thenReturn(false)
+
+    subject(/*imagine double('a','b','X')*/ undefined, config)
+
+    td.verify(ensureDemonstration(call))
+    td.verify(fail(double, call, config))
+    assert.equal(td.explain(notifySatisfiedMatchers).callCount, 0)
+    assert.equal(td.explain(warnIfAlsoStubbed).callCount, 0)
   },
   'demonstration missing blows up': () => {
   }
