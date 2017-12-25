@@ -1,5 +1,6 @@
 import _ from '../../wrap/lodash'
 import create from '../create'
+import isMatcher from '../is-matcher'
 
 export default create({
   name: 'contains',
@@ -22,10 +23,9 @@ export default create({
 
 var containsAllSpecified = (containing, actual) => {
   return actual != null && _.every(containing, (val, key) => {
-    if (_.isObjectLike(val)) {
-      if (_.isFunction(val.__matches)) {
-        return val.__matches(actual[key])
-      }
+    if (isMatcher(val)) {
+      return val.__matches(actual[key])
+    } else if (_.isObjectLike(val)) {
       return containsAllSpecified(val, actual[key])
     } else {
       return _.isEqual(val, actual[key])
