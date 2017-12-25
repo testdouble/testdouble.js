@@ -22,10 +22,22 @@ export default create({
 })
 
 var containsAllSpecified = (containing, actual) => {
+  if (_.isArray(actual) && !_.isArray(containing)) {
+    return _.some(actual, el => {
+      if (isMatcher(containing)) {
+        return containing.__matches(el)
+      }
+      return containsAllSpecified([containing], el)
+    })
+  }
   return actual != null && _.every(containing, (val, key) => {
     if (isMatcher(val)) {
       return val.__matches(actual[key])
-    } else if (_.isObjectLike(val)) {
+    }
+    if (_.isArray(containing)) {
+      return containsAllSpecified(val, actual)
+    }
+    if (_.isObjectLike(val)) {
       return containsAllSpecified(val, actual[key])
     } else {
       return _.isEqual(val, actual[key])
