@@ -87,6 +87,9 @@ describe '.matchers', ->
       Then -> @matches(td.matchers.contains(true, 5, null, undefined), [true, 5, undefined, null]) == true
       Then -> @matches(td.matchers.contains(true, 5, null, undefined), [true, 5, null]) == false
 
+      describe 'elements containing matchers', ->
+        Then -> @matches(td.matchers.contains('b', td.matchers.isA(Number)), ['a', 3, 'b']) == true
+
     context 'objects', ->
       Then -> @matches(td.matchers.contains(foo: 'bar', baz: 42), foo: 'bar', baz: 42, stuff: this) == true
       Then -> @matches(td.matchers.contains(foo: 'bar', lol: 42), foo: 'bar', baz: 42) == false
@@ -100,6 +103,12 @@ describe '.matchers', ->
         ) == true
 
       describe 'objects containing matchers', ->
+        Then -> @matches(td.matchers.contains({a: td.matchers.contains(1,2)}),
+            {a: [4,1,2,3]}
+          ) == true
+        Then -> @matches(td.matchers.contains({a: td.matchers.contains(1,5)}),
+            {a: [4,1,2,3]}
+          ) == false
         Then -> @matches(
             td.matchers.contains({someString: td.matchers.isA(String)}),
             {someString: "beautifulString"}
@@ -126,6 +135,14 @@ describe '.matchers', ->
             }),
             {nested: {nestedString: "abc", irrelevant: true}, irrelevantHere: "alsoTrue"}
           ) == true
+        Then -> @matches(
+            td.matchers.contains({
+              nested: td.matchers.contains({
+                nestedString: td.matchers.isA(Number)
+              })
+            }),
+            {nested: {nestedString: "abc", irrelevant: true}, irrelevantHere: "not a number!"}
+          ) == false
 
 
     context 'regexp', ->
