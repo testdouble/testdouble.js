@@ -88,7 +88,7 @@ describe '.matchers', ->
       Then -> @matches(td.matchers.contains(true, 5, null, undefined), [true, 5, null]) == false
 
       describe 'elements containing matchers', ->
-        xThen -> @matches(td.matchers.contains('b', td.matchers.isA(Number)), ['a', 3, 'b']) == true
+        Then -> @matches(td.matchers.contains('b', td.matchers.isA(Number)), ['a', 3, 'b']) == true
 
     context 'objects', ->
       Then -> @matches(td.matchers.contains(foo: 'bar', baz: 42), foo: 'bar', baz: 42, stuff: this) == true
