@@ -20,8 +20,15 @@ export default create({
   }
 })
 
-var containsAllSpecified = (containing, actual) =>
-  actual != null && _.every(containing, (val, key) =>
-    _.isObjectLike(val)
-      ? containsAllSpecified(val, actual[key])
-      : _.isEqual(val, actual[key]))
+var containsAllSpecified = (containing, actual) => {
+  return actual != null && _.every(containing, (val, key) => {
+    if (_.isObjectLike(val)) {
+      if (_.isFunction(val.__matches)) {
+        return val.__matches(actual[key])
+      }
+      return containsAllSpecified(val, actual[key])
+    } else {
+      return _.isEqual(val, actual[key])
+    }
+  })
+}

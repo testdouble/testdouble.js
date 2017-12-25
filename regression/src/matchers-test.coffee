@@ -94,6 +94,24 @@ describe '.matchers', ->
       Then -> @matches(td.matchers.contains(deep: {thing: 'stuff'}), {}) == false
       Then -> @matches(td.matchers.contains(deep: {thing: 'stuff'}), deep: {thing: 'stuff', shallow: 5}) == true
       Then -> @matches(td.matchers.contains({container: {size: 'S'}}), {ingredient: 'beans', container: { type: 'cup', size: 'S'}}) == true
+      Then -> @matches(td.matchers.contains({someString: td.matchers.isA(String)}), {someString: "beautifulString"}) == true
+      Then -> @matches(
+        td.matchers.contains({someString: td.matchers.isA(String)}),
+        {someString: "beautifulString", irrelevant: true}
+      ) == true
+      Then -> @matches(
+        td.matchers.contains({nested: {someString: td.matchers.isA(String)}, relevant: true}),
+        {nested: {someString: "beautifulString"}, relevant: true}
+      ) == true
+      Then -> @matches(
+        td.matchers.contains({someString: td.matchers.isA(String)}),
+        {someString: 4}
+      ) == false
+      Then -> @matches(
+        td.matchers.contains({nested: td.matchers.contains({nestedString: td.matchers.isA(String)})}),
+        {nested: {nestedString: "abc", irrelevant: true}, irrelevantHere: "alsoTrue"}
+      ) == true
+
 
     context 'regexp', ->
       Then -> @matches(td.matchers.contains(/abc/), 'abc') == true
