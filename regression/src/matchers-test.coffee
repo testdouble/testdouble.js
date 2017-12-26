@@ -143,6 +143,9 @@ describe '.matchers', ->
             }),
             {nested: {nestedString: "abc", irrelevant: true}, irrelevantHere: "not a number!"}
           ) == false
+        Then -> @matches(td.matchers.contains({a: [td.matchers.isA(Number)]}),
+            {a: [5]}
+          ) == true
 
 
     context 'regexp', ->
