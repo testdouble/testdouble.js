@@ -1,6 +1,7 @@
 # testdouble.js
 
-[![Build Status](https://secure.travis-ci.org/testdouble/testdouble.js.svg)](http://travis-ci.org/testdouble/testdouble.js) [![npmjs](https://img.shields.io/badge/npm-testdouble-red.svg)](https://www.npmjs.com/package/testdouble)
+[![Build Status](https://travis-ci.org/testdouble/testdouble.js.svg?branch=master)](https://travis-ci.org/testdouble/testdouble.js)
+[![npmjs](https://img.shields.io/badge/npm-testdouble-red.svg)](https://www.npmjs.com/package/testdouble)
 [![Test Coverage](https://codeclimate.com/github/testdouble/testdouble.js/badges/coverage.svg)](https://codeclimate.com/github/testdouble/testdouble.js/coverage)
 
 Welcome! Are you writing JavaScript tests and in the market for a mocking library to
