@@ -1,5 +1,12 @@
 # Change Log
 
+## [v3.3.0](https://github.com/testdouble/testdouble.js/tree/v3.3.0) (2017-12-26)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.2.7...v3.3.0)
+
+**Merged pull requests:**
+
+- allow using matchers inside contains [\#317](https://github.com/testdouble/testdouble.js/pull/317) ([lgandecki](https://github.com/lgandecki))
+
 ## [v3.2.7](https://github.com/testdouble/testdouble.js/tree/v3.2.7) (2017-12-20)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.2.6...v3.2.7)
 
@@ -9,7 +16,6 @@
 
 **Closed issues:**
 
-- Enforce calling with new for `td.constructor`, disallow for `td.function` [\#309](https://github.com/testdouble/testdouble.js/issues/309)
 - Unexpected output with td.matchers.isA\(Function\) [\#307](https://github.com/testdouble/testdouble.js/issues/307)
 - Different objects created using the same constructor function obtained using td.constructor share the same stubs [\#305](https://github.com/testdouble/testdouble.js/issues/305)
 - Using invocation verification with QUnit [\#304](https://github.com/testdouble/testdouble.js/issues/304)
