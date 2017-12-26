@@ -10,6 +10,8 @@ export default create({
     return _.every(containings, (containing) => {
       if (_.isArray(containing)) {
         return _.some(actualArg, actualElement => _.isEqual(actualElement, containing))
+      } else if (isMatcher(containing)) {
+        return _.some(actualArg, containing.__matches)
       } else if (_.isRegExp(containing)) {
         return containing.test(actualArg)
       } else if (_.isObjectLike(containing) && _.isObjectLike(actualArg)) {
@@ -22,22 +24,12 @@ export default create({
 })
 
 var containsAllSpecified = (containing, actual) => {
-  if (_.isArray(actual) && !_.isArray(containing)) {
-    return _.some(actual, el => {
-      if (isMatcher(containing)) {
-        return containing.__matches(el)
-      }
-      return containsAllSpecified([containing], el)
-    })
-  }
   return actual != null && _.every(containing, (val, key) => {
     if (isMatcher(val)) {
       return val.__matches(actual[key])
-    }
-    if (_.isArray(containing)) {
+    } else if (_.isArray(containing)) {
       return containsAllSpecified(val, actual)
-    }
-    if (_.isObjectLike(val)) {
+    } else if (_.isObjectLike(val)) {
       return containsAllSpecified(val, actual[key])
     } else {
       return _.isEqual(val, actual[key])

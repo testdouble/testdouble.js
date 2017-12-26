@@ -103,6 +103,12 @@ describe '.matchers', ->
         ) == true
 
       describe 'objects containing matchers', ->
+        Then -> @matches(td.matchers.contains(td.matchers.isA(Number)),
+            {a: 'foo', b: 32}
+          ) == true
+        Then -> @matches(td.matchers.contains(td.matchers.isA(Function)),
+            {a: 'foo', b: 32}
+          ) == false
         Then -> @matches(td.matchers.contains({a: td.matchers.contains(1,2)}),
             {a: [4,1,2,3]}
           ) == true
