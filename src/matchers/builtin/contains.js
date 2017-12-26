@@ -31,8 +31,6 @@ var containsPartialObject = (containing, actual) => {
   return actual != null && _.every(containing, (val, key) => {
     if (isMatcher(val)) {
       return val.__matches(actual[key])
-    } else if (_.isArray(containing)) {
-      return containsPartialObject(val, actual)
     } else if (_.isObjectLike(val)) {
       return containsPartialObject(val, actual[key])
     } else {
