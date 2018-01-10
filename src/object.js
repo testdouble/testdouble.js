@@ -18,7 +18,7 @@ var fakeObject = (nameOrType, config) => {
   } else if (_.isString(nameOrType) || arguments.length === 0) {
     return createTestDoubleViaProxy(nameOrType, withDefaults(config))
   } else if (nameOrType === undefined) {
-
+    ensureUndifinedVariableNotPassed()
   } else if (_.isFunction(nameOrType)) {
     ensureFunctionIsNotPassed()
   } else {
