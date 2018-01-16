@@ -34,8 +34,12 @@ describe 'td.object', ->
     When -> @testDouble = td.object(Object.create(respond: -> 'no'))
     Then -> td.explain(@testDouble.respond).isTestDouble == true
 
+  describe 'passing undefined raises error / compatibility note', ->
+    When -> try td.object(undefined) catch error then @error = error
+    Then -> /pass it a plain object/.test(@error.message)
+
   if global.Proxy?
-    describe 'creating a proxy object (ES2015; only supported in FF + Edge atm)', ->
+    describe 'creating a ES Proxy object', ->
       Given -> @testDouble = td.object('thing')
       Given -> @testDouble.magic('sauce')
       When -> td.when(@testDouble.whateverYouWant()).thenReturn('YESS')

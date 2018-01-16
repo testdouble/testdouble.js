@@ -5,20 +5,19 @@ import imitate from './imitate'
 
 const DEFAULT_OPTIONS = {excludeMethods: ['then']}
 
-export default (nameOrType, config) =>
-  _.tap(fakeObject(nameOrType, config), (obj) => {
+export default function object (nameOrType, config) {
+  return _.tap(fakeObject(nameOrType, config, arguments.length), (obj) => {
     addToStringToDouble(obj, nameOrType)
   })
+}
 
-var fakeObject = (nameOrType, config) => {
+var fakeObject = function (nameOrType, config, argCount) {
   if (_.isArray(nameOrType)) {
     return createTestDoublesForFunctionNames(nameOrType)
   } else if (_.isObjectLike(nameOrType)) {
     return imitate(nameOrType)
-  } else if (_.isString(nameOrType) || arguments.length === 0) {
+  } else if (_.isString(nameOrType) || argCount === 0) {
     return createTestDoubleViaProxy(nameOrType, withDefaults(config))
-  } else if (nameOrType === undefined) {
-    ensureUndifinedVariableNotPassed()
   } else if (_.isFunction(nameOrType)) {
     ensureFunctionIsNotPassed()
   } else {
@@ -57,9 +56,6 @@ Did you mean \`td.object(['${name}'])\`?\
 `)
   }
 }
-
-var ensureUndifinedVariableNotPassed = () => 
-  log.error('td.object', `undefined variable was passed to \`td.object\` (as of testdouble@3.3.2). Please use \`td.object()\` or \`td.object('someString')\` to create a test doulbe via proxy.`)
 
 var ensureFunctionIsNotPassed = () =>
   log.error('td.object', `Functions are not valid arguments to \`td.object\` (as of testdouble@2.0.0). Please use \`td.function()\` or \`td.constructor()\` instead for creating fake functions.`)
