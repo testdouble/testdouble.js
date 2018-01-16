@@ -1,5 +1,20 @@
 # Change Log
 
+## [v3.3.2](https://github.com/testdouble/testdouble.js/tree/v3.3.2) (2018-01-16)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.3.1...v3.3.2)
+
+**Fixed bugs:**
+
+- td.replace\(\) on an un-parseable source will claim the module is missing instead of printing the parse error [\#320](https://github.com/testdouble/testdouble.js/issues/320)
+
+**Closed issues:**
+
+- thenThrow does not work if stub passed down [\#319](https://github.com/testdouble/testdouble.js/issues/319)
+
+**Merged pull requests:**
+
+- Erroring on undefined for td.object [\#322](https://github.com/testdouble/testdouble.js/pull/322) ([gotenxds](https://github.com/gotenxds))
+
 ## [v3.3.1](https://github.com/testdouble/testdouble.js/tree/v3.3.1) (2018-01-05)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.3.0...v3.3.1)
 
