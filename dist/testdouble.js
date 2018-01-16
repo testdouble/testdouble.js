@@ -1,5 +1,5 @@
 /*
- * testdouble@3.3.1
+ * testdouble@3.3.2
  *
  *   A minimal test double library for TDD with JavaScript
  *
@@ -10430,6 +10430,7 @@ function notifyAfterSatisfaction(expectedArgs, actualArgs) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.default = object;
 
 var _lodash = require('./wrap/lodash');
 
@@ -10451,18 +10452,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var DEFAULT_OPTIONS = { excludeMethods: ['then'] };
 
-exports.default = function (nameOrType, config) {
-  return _lodash2.default.tap(fakeObject(nameOrType, config), function (obj) {
+function object(nameOrType, config) {
+  return _lodash2.default.tap(fakeObject(nameOrType, config, arguments.length), function (obj) {
     addToStringToDouble(obj, nameOrType);
   });
-};
+}
 
-var fakeObject = function fakeObject(nameOrType, config) {
+var fakeObject = function fakeObject(nameOrType, config, argCount) {
   if (_lodash2.default.isArray(nameOrType)) {
     return createTestDoublesForFunctionNames(nameOrType);
   } else if (_lodash2.default.isObjectLike(nameOrType)) {
     return (0, _imitate2.default)(nameOrType);
-  } else if (_lodash2.default.isString(nameOrType) || nameOrType === undefined) {
+  } else if (_lodash2.default.isString(nameOrType) || argCount === 0) {
     return createTestDoubleViaProxy(nameOrType, withDefaults(config));
   } else if (_lodash2.default.isFunction(nameOrType)) {
     ensureFunctionIsNotPassed();
@@ -11157,7 +11158,7 @@ var ignoreMessage = function ignoreMessage(config) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = '3.3.1';
+exports.default = '3.3.2';
 
 },{}],339:[function(require,module,exports){
 'use strict';
