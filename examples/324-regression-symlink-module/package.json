@@ -1,0 +1,12 @@
+{
+  "name": "testdouble-issue-324-symlink-module-regression",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "test": "lerna bootstrap && node ./packages/package-b/test.js"
+  },
+  "devDependencies": {
+    "lerna": "^2.7.1",
+    "testdouble": "../.."
+  }
+}

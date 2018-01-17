@@ -1,0 +1,15 @@
+{
+  "lerna": "2.0.0-rc.5",  
+  "packages": [
+    "packages/*"
+  ],
+  "commands": {
+    "bootstrap": {
+      "hoist": true
+    },
+    "run": {
+      "stream": true
+    }
+  },
+  "version": "independent"
+}

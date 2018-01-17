@@ -1,4 +1,4 @@
-var symlinkedThing = require('symlinked-thing')
+var symlinkedThing = require('package-a')
 
 module.exports = function () {
   return symlinkedThing()
