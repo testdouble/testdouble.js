@@ -1,8 +1,8 @@
 import _ from '../wrap/lodash'
-import path from 'path'
-import quibble from 'quibble'
 
 import imitate from '../imitate'
+import quibble from 'quibble'
+import resolve from 'resolve'
 
 quibble.ignoreCallsFromThisFile()
 
@@ -19,14 +19,12 @@ const nameFor = (realThing) => {
   return realThing.name ? realThing.name : '(anonymous function)'
 }
 
-var requireAt = (modulePath) => {
+var requireAt = (path) => {
   try {
     // 1. Try just following quibble's inferred path
-    return require(quibble.absolutify(modulePath))
+    return require(quibble.absolutify(path))
   } catch (e) {
     // 2. Try including npm packages
-    return require(require.resolve(modulePath, { paths: [
-      path.join(process.cwd(), 'node_modules')
-    ]}))
+    return require(resolve.sync(path, { basedir: process.cwd() }))
   }
 }
