@@ -9,3 +9,5 @@ module.exports =
   shift: require('./shift')
   isASpeed: (thing) ->
     require('is-number')(thing)
+  symlinkedModule: require('./symlinked-module')
+  fileModule: require('./file-module')
