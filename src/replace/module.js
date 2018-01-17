@@ -25,6 +25,9 @@ var requireAt = (path) => {
     return require(quibble.absolutify(path))
   } catch (e) {
     // 2. Try including npm packages
-    return require(resolve.sync(path, { basedir: process.cwd() }))
+    return require(resolve.sync(path, {
+      basedir: process.cwd(),
+      preserveSymlinks: true
+    }))
   }
 }
