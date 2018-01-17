@@ -1,0 +1,11 @@
+{
+  "name": "324-regression-test",
+  "private": true,
+  "scripts": {
+    "test": "node test.js"
+  },
+  "devDependencies": {
+    "testdouble": "../../",
+    "symlinked-thing": "./symlinked-thing"
+  }
+}
