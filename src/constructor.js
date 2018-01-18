@@ -13,7 +13,7 @@ var fakeConstructorFromNames = (funcNames) => {
       '[test double instance of constructor]'
 
     _.each(funcNames, (funcName) => {
-      fakeConstructor.prototype[funcName] = tdFunction(`#${funcName}`)
+      fakeConstructor.prototype[funcName] = tdFunction(`#${String(funcName)}`)
     })
   })
 }

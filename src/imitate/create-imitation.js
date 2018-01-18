@@ -11,7 +11,7 @@ export default (original, names) => {
       return original
     } else {
       // TODO: this will become src/function/create and include parent reference instead of name joining here
-      return tdFunction(names.join('') || '(anonymous function)')
+      return tdFunction(_.map(names, String).join('') || '(anonymous function)')
     }
   } else {
     return _.clone(original)

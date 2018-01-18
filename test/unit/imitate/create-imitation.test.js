@@ -30,6 +30,20 @@ module.exports = {
 
     assert.deepEqual(result, 'fake thing')
   },
+  'a function with symbols' () {
+    if (!global.Symbol) return
+
+    const someFunc = () => {}
+    const symFoo = Symbol('foo')
+    const symBar = Symbol('bar')
+    td.when(tdFunction('Symbol(foo)Symbol(bar)'))
+      .thenReturn('fake thing')
+    td.when(isGenerator(someFunc)).thenReturn(false)
+
+    const result = subject(someFunc, [symFoo, symBar])
+
+    assert.deepEqual(result, 'fake thing')
+  },
   'other instances': () => {
     const original = {a: 'b'}
 
