@@ -1,5 +1,5 @@
 /*
- * testdouble@3.3.2
+ * testdouble@3.3.3
  *
  *   A minimal test double library for TDD with JavaScript
  *
@@ -9499,7 +9499,7 @@ var fakeConstructorFromNames = function fakeConstructorFromNames(funcNames) {
     };
 
     _lodash2.default.each(funcNames, function (funcName) {
-      fakeConstructor.prototype[funcName] = (0, _function2.default)('#' + funcName);
+      fakeConstructor.prototype[funcName] = (0, _function2.default)('#' + String(funcName));
     });
   });
 };
@@ -9691,7 +9691,7 @@ exports.default = function (original, names) {
       return original;
     } else {
       // TODO: this will become src/function/create and include parent reference instead of name joining here
-      return (0, _function2.default)(names.join('') || '(anonymous function)');
+      return (0, _function2.default)(_lodash2.default.map(names, String).join('') || '(anonymous function)');
     }
   } else {
     return _lodash2.default.clone(original);
@@ -10474,7 +10474,7 @@ var fakeObject = function fakeObject(nameOrType, config, argCount) {
 
 var createTestDoublesForFunctionNames = function createTestDoublesForFunctionNames(names) {
   return _lodash2.default.transform(names, function (acc, funcName) {
-    acc[funcName] = (0, _function2.default)('.' + funcName);
+    acc[funcName] = (0, _function2.default)('.' + String(funcName));
   });
 };
 
@@ -10484,7 +10484,7 @@ var createTestDoubleViaProxy = function createTestDoubleViaProxy(name, config) {
   return new Proxy(obj, {
     get: function get(target, propKey, receiver) {
       if (!obj.hasOwnProperty(propKey) && !_lodash2.default.includes(config.excludeMethods, propKey)) {
-        obj[propKey] = (0, _function2.default)(nameOf(name) + '.' + propKey);
+        obj[propKey] = (0, _function2.default)(nameOf(name) + '.' + String(propKey));
       }
       return obj[propKey];
     }
@@ -11158,7 +11158,7 @@ var ignoreMessage = function ignoreMessage(config) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = '3.3.2';
+exports.default = '3.3.3';
 
 },{}],339:[function(require,module,exports){
 'use strict';
