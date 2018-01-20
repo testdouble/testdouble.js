@@ -1,5 +1,24 @@
 # Change Log
 
+## [v3.3.3](https://github.com/testdouble/testdouble.js/tree/v3.3.3) (2018-01-18)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.3.2...v3.3.3)
+
+**Fixed bugs:**
+
+- Cannot convert a Symbol value to a string [\#300](https://github.com/testdouble/testdouble.js/issues/300)
+
+**Closed issues:**
+
+- Stubbing function from same module under test not replacing real implementation [\#325](https://github.com/testdouble/testdouble.js/issues/325)
+- td.replace does not follow node\_modules symlinks since v3.3.2 [\#324](https://github.com/testdouble/testdouble.js/issues/324)
+- td.explain does not work on new instance of td.replace\('lib'\)  [\#323](https://github.com/testdouble/testdouble.js/issues/323)
+- td.object\(undefined\) allowes to call any method [\#321](https://github.com/testdouble/testdouble.js/issues/321)
+- td.replace\('mongoose'\) throws exception [\#316](https://github.com/testdouble/testdouble.js/issues/316)
+
+**Merged pull requests:**
+
+- Symbols must be stringified explicitly [\#301](https://github.com/testdouble/testdouble.js/pull/301) ([jasonkarns](https://github.com/jasonkarns))
+
 ## [v3.3.2](https://github.com/testdouble/testdouble.js/tree/v3.3.2) (2018-01-16)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.3.1...v3.3.2)
 
