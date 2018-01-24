@@ -1,48 +1,53 @@
-### Background
-<!-- A quick description of what you're trying to do -->
+### Description
+<!-- A quick description of what you're trying to accomplish -->
 
-### Expected behavior
-<!-- Tell us what should happen -->
-
-### Actual behavior
-<!-- Tell us what happens instead -->
-
-### Example
+### Issue
 
 <!--
-We want to resolve this problem quickly, and in order to that we need to understand it.  The better the example, the sooner this issue can be resolved.  With that in mind pick _one_ below:
+  What went wrong? (If this issue is a general question or a proposed change,
+  feel free to delete this and subsequent sections.
 -->
 
-#### New testdouble.js test
+### Environment
+
+- [ ] `node -v` output:
+- [ ] `npm -v` (or `yarn --version`) output:
+- [ ] `npm ls testdouble` (or `yarn list testdouble`) version:
+
 <!--
-1.  Fork this repo
-2.  Add a failing test demonstrating the problem
--->
-Link to your repo:
+  The easier you make it for others to reproduce what you're describing, the
+  sooner it will be addressed. If we can't replicate the described behavior, we
+  may be forced to close the issue without finding a satisfying resolution.
 
-#### Simple self-contained app w/test showing the issue
+  Below are four approaches you might take to communicate the issue, in
+  descending order of awesomeness. Please choose one and feel free to delete
+  the others from this template.
+-->
+
+### Failing Test
+
+- [ ] Fork the repo
+- [ ] Add a failing test (probably to the `/regression/src' directory)
+- [ ] Submit a pull request for the failing test or link to your branch here
+
+### Example Repo
+
+- [ ] Create a minimal repository that reproduces the issue
+- [ ] Make sure that a fresh clone can run only `npm it` and observe the issue
+- [ ] Link to that repo here
+
+#### Runkit Notebook
+
+- [ ] [Create a Runkit notebook](https://runkit.com/new)
+- [ ] Invoke `var td = require('testdouble')` at the top
+- [ ] Verify the behavior your issue is concerned with by clicking "Run"
+- [ ] Link to the Runkit here
+
+#### Code-fenced Examples
+
 <!--
-1.  Create a minimal example that shows the behavior
-2.  Explain any steps needed to run the test
+  If none of the above approaches are feasible or appropriate, you may use
+  Markdown code fences (e.g. ```js ……… ```) to demonstrate the behavior here.
+  Please note that issues submitted with only code-fence examples will be
+  deprioritized if they prove difficult to reproduce.
 -->
-Link to example:
-
-#### Your app w/test showing the issue
-<!--
-1.  Provide your app w/failing test
-2.  Add instructions on how to reproduce
--->
-Link to repo:
-
-#### Test example
-<!--
-1. Provide a concise failing test that shows the unwanted behavior
--->
-
-#### Reproduction Steps
-<!-- These are usually harder for us to puzzle through, but we'll try to help! -->
-
-### System configuration
-
-OS:
-Node version:
