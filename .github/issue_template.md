@@ -47,7 +47,17 @@
 
 <!--
   If none of the above approaches are feasible or appropriate, you may use
-  Markdown code fences (e.g. ```js ……… ```) to demonstrate the behavior here.
+  Markdown code fences like the one below to demonstrate the behavior.
+
   Please note that issues submitted with only code-fence examples will be
-  deprioritized if they prove difficult to reproduce.
+  deprioritized if they prove difficult to reproduce. (That is to say, try to
+  be as complete as possible, and use baseline JavaScript that doesn't require
+  preprocessing to execute)
 -->
+
+```js
+var td = require('testdouble')
+
+// Your steps here.
+```
+
