@@ -177,7 +177,7 @@ describe('MathProblem', function(){
   var subject, createRandomProblem, savesProblem;
   beforeEach(function(){
     createRandomProblem = td.function('createRandomProblem')
-    savesProblem = td.object(SavesProblem)
+    savesProblem = td.object(new SavesProblem())
     subject = new MathProblem(createRandomProblem, savesProblem)
   })
   it('POSTs a random problem', function(){
@@ -188,7 +188,7 @@ describe('MathProblem', function(){
 
 As you can see above, we used a different method to create this test double!
 Because our second dependency is an instantiable type, we used
-`td.object([constructor function])` to create a test double for it. This test
+`td.object([instance object])` to create a test double for it. This test
 double function is smart enough to hunt for any methods defined on the function's
 prototype, and therefore will return an object that has a test double function
 defined as the property `save`.
