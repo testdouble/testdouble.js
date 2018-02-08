@@ -14,19 +14,19 @@ terse, clear, and easy-to-understand tests. There's an awful lot to cover, so
 please take some time and enjoy our documentation, which is designed to show you
 how to make the most out of test doubles in your tests.
 
-This library was designed to work for both Node.js and browser interpeters and
-to be test-framework agnostic, so you can plop it into a codebase using Jasmine,
+This library was designed to work for both Node.js and browser interpeters. It's
+also test-framework agnostic, so you can plop it into a codebase using Jasmine,
 Mocha, Tape, Jest, or our own
 [teenytest](https://github.com/testdouble/teenytest).
 
 ## Install
 
-```js
-npm install -D testdouble
+```
+$ npm install -D testdouble
 ```
 
-If you just want to fetch the browser distribution, you can also get it from
-[unpkg](https://unpkg.com/testdouble/dist/)
+If you just want to fetch the browser distribution, you can also curl it from
+[unpkg](https://unpkg.com/testdouble/dist/).
 
 We recommend requiring the library in a test helper and setting it globally for
 convenience to the shorthand `td`:
@@ -38,13 +38,13 @@ global.td = require('testdouble') // Node.js; `window.td` for browsers
 (You may need to declare the global in order to make your linter handy.
 Instructions:
 [eslint](https://eslint.org/docs/user-guide/configuring#specifying-globals),
-[Standard](https://github.com/standard/standard/#i-use-a-library-that-pollutes-the-global-namespace-how-do-i-prevent-variable-is-not-defined-errors).)
+[standard](https://github.com/standard/standard/#i-use-a-library-that-pollutes-the-global-namespace-how-do-i-prevent-variable-is-not-defined-errors).)
 
 ## Getting started
 
 Mocking libraries are more often abused than used effectively, so figuring out
-how to document a mocking library that is designed to encourage only productive
-use has been a real challenge. Here are a few paths to getting started:
+how to document a mocking library in such a way as to only encourage healthy
+use has proven to be a real challenge. Here are a few paths to getting started:
 
 * The [API section of this README](#api) to get an at-a-glance view of
   the API so you can get started stubbing and verifying right away
@@ -60,6 +60,10 @@ use has been a real challenge. Here are a few paths to getting started:
   the various faetures of testdouble.js. Its outline is at the [bottom of this
   README](#docs)
 
+Of course, if you're unsure of how to approach writing an isolated test with
+testdouble.js, we welcome you to [open a issue on GitHub to ask a
+question](https://github.com/testdouble/testdouble.js/issues/new).
+
 ## API
 
 ### `td.replace()` for replacing dependencies
@@ -69,9 +73,15 @@ the production dependencies of your [subject under
 test](https://github.com/testdouble/contributing-tests/wiki/Subject) with fake
 ones created by the library.
 
-testdouble.js provides a top-level method called `td.replace()`
+We provide a top-level method called `td.replace()` that operates in two
+different modes: CommonJS module replacement and object-property replacement.
+Both modes will, by default, perform a deep clone the real dependency but
+replace all of its functions with fake test double functions that you can
+configure and observe.
 
 #### Module replacement with Node.js
+
+**`td.replace('../path/to/module'[, customReplacement])`**
 
 If you're using Node.js and don't mind using the CommonJS `require` method in
 your tests (you can still use `import`/`export` in your production code,
@@ -95,10 +105,20 @@ module.exports = {
     subject = require('../src/index')
   }
   //…
+  afterEach: function () { td.reset() }
 }
 ```
 
-Things to remember about replacing Node.js modules:
+In the above example, at the point when `src/index` is required, the module
+cache will be bypassed, and if `index` goes on to subsequently require any of
+the `td.replace()`'d dependencies, it will receive a reference to the same fake
+dependency returned to the test. If `loads-purchases` exports a function, a test
+double function will be created to imitate it. If `generates-invoice` exports a
+constructor, the constructor and all of its instance methods will also be
+imitated. If `sends-invoice` exports a plain object of function properties, each
+function will be replaced with a test double (and the other values cloned).
+
+To repeat, important things to remember about replacing Node.js modules:
 
 * The test must `td.replace` and `require` everything in a before-each hook,
 in order to bypass Node's module cache and avoid test pollution
@@ -108,12 +128,93 @@ in order to bypass Node's module cache and avoid test pollution
 * The test suite (usually in a global after-each hook) must call `td.reset()` to
 avoid test pollution
 
+##### default exports with ES modules
+
+If your production code is written in ES module syntax and specifies a default
+export, just remember that you'll need to reference `.default` when translating
+to CJS syntax. That means:
+
+```js
+loadsPurchases = td.replace('../src/loads-purchases')
+```
+
+Probably needs to be written as:
+
+```js
+loadsPurchases = td.replace('../src/loads-purchases').default
+```
+
 #### Property replacement
+
+**`td.replace(containingObject, nameOfPropertyToReplace[, customReplacement])`**
 
 If you're running tests outside Node.js or otherwise injecting dependencies
 manually (or with a DI tool like
-[dependable](https://github.com/testdouble/dependable)), then you can still use
-`td.replace` to automatically replace and imitate
+[dependable](https://github.com/testdouble/dependable)), then you may still use
+`td.replace` to automatically replace things if they're addressable as
+properties on an object.
+
+To illustrate, suppose our subject depends on `app.signup` below:
+
+``` js
+app.signup = {
+  onSubmit: function () {},
+  onCancel: function () {}
+}
+```
+
+If our goal is to replace `app.signup` so during a test of `app.user.create(),
+our test setup might look like this:
+
+```js
+let signup, subject
+module.exports = {
+  beforeEach: function () {
+    signup = td.replace(app, 'signup')
+    subject = app.user
+  }
+  // …
+  afterEach: function () { td.reset() }
+}
+```
+
+`td.replace()` will always return the newly-created fake imitation, even though
+in this case it's obviously still referenceable by the test and subject alike
+with `app.signup`. If we had wanted to only replace the `onCancel` function for
+whatever reason (though in this case, that would smell like a [partial
+mock](https://github.com/testdouble/contributing-tests/wiki/Partial-Mock)), we
+could have called `td.replace(app.signup, 'onCancel)`, instead.
+
+Remember, calling `td.reset()` in an after-each hook (preferably globally so one
+doesn't have to remember in each-and-every test) so that testdouble.js can
+replace the original is crucial to avoiding test pollution!
+
+#### Specifying a custom replacement
+
+The library's [imitation
+feature](https://github.com/testdouble/testdouble.js/blob/updte-readme/src/imitate/index.js)
+is pretty sophisticated, but it's not perfect. It's also going to be pretty slow
+on large, complex objects. If you'd like to specify exactly what to replace a
+real dependency with, you can do so in either of the above modes by providing a
+final optional argument.
+
+When replacing a Node.js module:
+
+```js
+generatesInvoice = td.replace('../generates-invoice', {
+  generate: td.func('a generate function'),
+  name: 'fake invoices'
+})
+```
+
+When replacing a property:
+
+```js
+signup = td.replace(app, 'signup', {
+  onSubmit: td.func('fake submit handler'),
+  onCancel: function () { throw Error('do not call me') }
+})
+```
 
 ### Stubbing return values for functions
 
