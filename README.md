@@ -35,7 +35,7 @@ convenience to the shorthand `td`:
 global.td = require('testdouble') // Node.js; `window.td` for browsers
 ```
 
-(You may need to declare the global in order to make your linter handy.
+(You may need to configure your linter to ingore the `td`  global.
 Instructions:
 [eslint](https://eslint.org/docs/user-guide/configuring#specifying-globals),
 [standard](https://github.com/standard/standard/#i-use-a-library-that-pollutes-the-global-namespace-how-do-i-prevent-variable-is-not-defined-errors).)
@@ -43,8 +43,9 @@ Instructions:
 ## Getting started
 
 Mocking libraries are more often abused than used effectively, so figuring out
-how to document a mocking library in such a way as to only encourage healthy
-use has proven to be a real challenge. Here are a few paths to getting started:
+how to document a mocking library so as to only encourage healthy uses has
+proven to be a real challenge. Here are a few paths we've prepared for getting
+started with testdouble.js:
 
 * The [API section of this README](#api) to get an at-a-glance view of the API
   so you can get started stubbing and verifying right away
@@ -88,12 +89,11 @@ your tests (you can still use `import`/`export` in your production code,
 assuming you're compiling it down for consumption by your tests), testdouble.js
 uses a library we wrote called [quibble](https://github.com/testdouble/quibble)
 to monkey-patch the `require()` feature so that your subject will automatically
-receive your faked dependencies simply by requiring them. (If you've used
+receive your faked dependencies simply by requiring them. If you've used
 something like [proxyquire](https://github.com/thlorenz/proxyquire), this is
-like a slightly terser form of that.)
+like a slightly terser form of that.
 
-Here's an example of using `td.replace` in the setup of a test of a Node.js
-module:
+Here's an example of using `td.replace()` in a Node.js test's setup:
 
 ```js
 let loadsPurchases, generatesInvoice, sendsInvoice, subject
@@ -112,21 +112,28 @@ module.exports = {
 In the above example, at the point when `src/index` is required, the module
 cache will be bypassed, and if `index` goes on to subsequently require any of
 the `td.replace()`'d dependencies, it will receive a reference to the same fake
-dependency returned to the test. If `loads-purchases` exports a function, a test
-double function will be created to imitate it. If `generates-invoice` exports a
-constructor, the constructor and all of its instance methods will also be
-imitated. If `sends-invoice` exports a plain object of function properties, each
-function will be replaced with a test double (and the other values cloned).
+dependencies that were returned to the test.
 
-To repeat, important things to remember about replacing Node.js modules:
+Because `td.replace()` first loads the actual file, it will do its best to
+return a fake that is shaped just like the real thing. That means that if
+`loads-purchases` exports a function, a test double function will be created and
+returned. If `generates-invoice` exports a constructor, the constructor and all
+of its static and instance methods will be replaced with test double functions.
+If `sends-invoice` exports a plain object of function properties, each function
+will be replaced with a test double (and the other values cloned).
 
-* The test must `td.replace` and `require` everything in a before-each hook,
-in order to bypass Node's module cache and avoid test pollution
-* Relative paths to each replaced dependency are relative *from the test listing
-  to the dependency*. This runs counter to how some other tools do it, but we
-  feel it makes more sense
+There are a few important things to keep in mind about replacing Node.js modules
+using `td.replace()`:
+
+* The test must `td.replace()` and `require()` everything in a before-each hook,
+  in order to bypass the Node.js module cache and to avoid pollution between
+  tests
+* Any relative paths passed to `td.replace()` are relative *from the test to the
+  dependency*. This runs counter to how some other tools do it, but we feel it
+  makes more sense
 * The test suite (usually in a global after-each hook) must call `td.reset()` to
-avoid test pollution
+  ensure the real `require()` function and dependency modules are restored after
+  each test case.
 
 ##### Default exports with ES modules
 
@@ -187,7 +194,7 @@ whatever reason (though in this case, that would smell like a [partial
 mock](https://github.com/testdouble/contributing-tests/wiki/Partial-Mock)), we
 could have called `td.replace(app.signup, 'onCancel')`, instead.
 
-Remember, calling `td.reset()` in an after-each hook (preferably globally so one
+Remember to call `td.reset()` in an after-each hook (preferably globally so one
 doesn't have to remember to do so in each-and-every test) so that testdouble.js
 can replace the original is crucial to avoiding hard-to-debug test pollution!
 
@@ -242,7 +249,7 @@ double function and can be called in three modes:
 * **`td.func()`** - returns an anonymous test double function that can be used
   for stubbing and verifying any calls against it, but whose error messages and
   debugging output won't have a name to trace back to it
-* **`td.func('some name')** - returns a test double function named 'some name',
+* **`td.func('some name')`** - returns a test double function named 'some name',
   which will appear in any error messages as well as the debug info returned by
   passing the returned test double into `td.explain()`
 
@@ -255,13 +262,13 @@ and supports three types of invocations:
   [imitation](https://github.com/testdouble/testdouble.js/blob/master/src/imitate/index.js)
   the passed object, where each function is replaced with a test double function
   named for the property path (e.g. If `realObject.invoices.send()` was a
-  function, the returned object would have a test double named
-  `'.invoices.send'`)
+  function, the returned object would have property `invoices.send` set to a
+  test double named `'.invoices.send'`)
 * **`td.object(['add', 'subtract'])`** - returns a plain JavaScript object
   containing two properties `add` and `subtract` that are both assigned to test
   double functions named `'.add'` and `'.subtract'`, respectively.
-* **`td.object(['a Person', {excludeMethods: ['then']})`** - when passed with no
-  args or with a string as the first argument, returns an [ES
+* **`td.object('a Person'[, {excludeMethods: ['then']})`** - when passed with no
+  args or with a string name as the first argument, returns an [ES
   Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy).
   The proxy will automatically intercept any call made to it and shunt in a test
   double that can be used for stubbing or verification. More details can be
@@ -277,18 +284,19 @@ well.
   be verified and whose `prototype` functions have all been replaced with test
   double functions using the same
   [imitation](https://github.com/testdouble/testdouble.js/blob/master/src/imitate/index.js)
+  mechanism described above
 * **`td.constructor(['select', 'save'])`** - returns a constructor with `select`
-  and `save` properties set to test double functions named `'#select'` and
-  `'#save'` on its `prototype` object
+  and `save` properties on its `prototype` object set to test double functions
+  named `'#select'` and `'#save'`, respectively
 
 When replacing a constructor, typically the test will configure stubbing &
-verification by directly addressing its prototype functions.
-
-To illustrate, That means in your test you might write:
+verification by directly addressing its prototype functions. To illustrate, that
+means in your test you might write:
 
 ```js
 const FakeConstructor = td.constructor(RealConstructor)
 td.when(FakeConstructor.prototype.doStuff()).thenReturn('ok')
+
 subject(FakeConstructor)
 ```
 
@@ -351,17 +359,17 @@ Then, in the hands of your subject under test:
 
 ```js
 loadsPurchases(2018, 8) // returns `['a purchase', 'another']`
-loadsPurchases(2018, 7) // returns undefined, since no stubbing matched
+loadsPurchases(2018, 7) // returns undefined, since no stubbing was satisfied
 ```
 
 If you're not used to stubbing, it may seem contrived to think a test will know
 exactly what argument to pass in and expect back from a dependency, but in an
 isolated unit test this is not only feasible but entirely normal and expected!
-It can help the test author ensure the test remains minimal and obvious to
+Doing so helps the author ensure the test remains minimal and obvious to
 future readers.
 
-Note as well that subsequence instances of matching invocations can be stubbed
-by passing additional arguments to `thenReturn()`, such that:
+Note as well that subsequent matching invocations can be stubbed by passing
+additional arguments to `thenReturn()`, like this:
 
 ```js
 const hitCounter = td.func()
@@ -377,6 +385,7 @@ hitCounter() // 5
 #### `td.when().thenResolve()` and `td.when().thenReject()`
 
 **`td.when(__rehearsal__[, options]).thenResolve('some value'[, more, values])`**
+
 **`td.when(__rehearsal__[, options]).thenReject('some value'[, more, values])`**
 
 The `thenResolve()` and `thenReject()` stubbings will take whatever value is
@@ -419,21 +428,22 @@ readFile('my-secret-doc.txt', function (er, contents) {
 ```
 
 If the callback isn't in the final position, or if the test double also needs to
-return something, it can be configured using the
+return something, callbacks can be configured using the
 [td.callback](/docs/5-stubbing-results.md#callback-apis-with-a-callback-argument-at-an-arbitrary-position)
 argument matcher.
 
 #### `td.when().thenThrow()`
 
-**`td.when(__rehearsal__[, options]).thenThrow(someError)`**
+**`td.when(__rehearsal__[, options]).thenThrow(new Error('boom'))`**
 
 The `thenThrow()` function does exactly what it says on the tin. Once this
 stubbing is configured, any matching invocations will throw the specified error.
 
-Note that because "rehearsal" calls invoke the test double function, that it's
-possible to configure `thenThrow` and then find that subsequent stubbings or
-verifications can't be configured without also `catch`'ing the error. This ought
-to be a rarely encountered edge case.
+Note that because rehearsal calls invoke the test double function, it's possible
+to configure a `thenThrow` stubbing and then accidentally trigger it when you
+attempt to configure subsequent stubbings or verifications. In these cases,
+you'll need to workaround it by re-ordering your configurations or `catch`'ing
+the error.
 
 #### `td.when().thenDo()`
 
@@ -477,18 +487,23 @@ module.exports = function shouldSaveThings () {
 ```
 
 The above will verify that `save` was called with the two specified arguments.
+If the verification fails (say it passed `'010100'` instead), testdouble.js will
+throw a nice long error message to explain how the test double function was
+actually called, so that you can spot the error.
+
 Just like with `td.when()`, more complex cases can be covered with [argument
 matchers](/docs/6-verifying-invocations.md#relaxing-verifications-with-argument-matchers)
 and [configuration
 options](/docs/6-verifying-invocations.md#configuring-verifications).
 
-A word of caution: when you verify a function was called, as opposed to what it
-returns, you're asserting that your code has a desired side effect. Code with
-lots of side effects is bad, so mocking libraries are often abused to make
-side-effect heavy code easier to test. In these cases, refactoring each
-dependency to return values instead is almost always the better design approach.
-Sometimes in the interest of completeness, people will attempt to verify an
-invocation that already satisfies a stub, but this is almost [provably
+A word of caution: `td.verify()` should be needed only sparingly. When you
+verify a function was called (as opposed to what it returns) you're asserting
+that your code has a desired side effect. Code with lots of side effects is bad,
+so mocking libraries are often abused to make side-effect heavy code easier to
+test. In these cases, refactoring each dependency to return values instead is
+almost always the better design approach.  Sometimes in the interest of
+completeness, people will attempt to verify an invocation that already satisfies
+a stub, but this is almost [provably
 unnecessary](/docs/B-frequently-asked-questions.md#why-shouldnt-i-call-both-tdwhen-and-tdverify-for-a-single-interaction-with-a-test-double).
 
 ### Other functions
@@ -496,9 +511,13 @@ unnecessary](/docs/B-frequently-asked-questions.md#why-shouldnt-i-call-both-tdwh
 For other top-level features in the testdouble.js API, consult the [docs](/docs)
 directory:
 
-* [td.explain()](/docs/9-debugging.md#tdexplainsometestdouble)
-* [td.config()](/docs/C-configuration.md#tdconfig)
-* [td.reset()](/docs/1-installation.md#resetting-state-between-test-runs)
+* [td.explain()](/docs/9-debugging.md#tdexplainsometestdouble) - for help
+  debugging and introspecting test doubles
+* [td.config()](/docs/C-configuration.md#tdconfig) - for changing globally
+  configurable options
+* [td.reset()](/docs/1-installation.md#resetting-state-between-test-runs) - for
+  resetting testdouble.js state between tests
 * [td.matchers](/docs/5-stubbing-results.md#loosening-stubbings-with-argument-matchers)
-  (and [custom matchers](/docs/8-custom-matchers.md#custom-argument-matchers))
+  and [custom matchers](/docs/8-custom-matchers.md#custom-argument-matchers) for
+  configuring more advanced stubbings and verifications
 
