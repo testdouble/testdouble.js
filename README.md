@@ -4,35 +4,116 @@
 [![npmjs](https://img.shields.io/badge/npm-testdouble-red.svg)](https://www.npmjs.com/package/testdouble)
 [![Test Coverage](https://codeclimate.com/github/testdouble/testdouble.js/badges/coverage.svg)](https://codeclimate.com/github/testdouble/testdouble.js/coverage)
 
-Welcome! Are you writing JavaScript tests and in the market for a mocking library to
-fake out real things for you? testdouble.js is an opinionated, carefully-designed
-test double library maintained by, oddly enough, a software agency that's also
-named [Test Double](http://testdouble.com).
+Welcome! Are you writing JavaScript tests and in the market for a mocking
+library to fake out real things for you? testdouble.js is an opinionated,
+carefully-designed test double library maintained by, oddly enough, a software
+agency that's also named [Test Double](http://testdouble.com).
 
 If you practice test-driven development, testdouble.js was designed to promote
 terse, clear, and easy-to-understand tests. There's an awful lot to cover, so
-please take some time and enjoy our documentation, which itself is designed to
-show you how to make the most out of test doubles in your tests.
+please take some time and enjoy our documentation, which is designed to show you
+how to make the most out of test doubles in your tests.
 
-## The pitch
+This library was designed to work for both Node.js and browser interpeters and
+to be test-framework agnostic, so you can plop it into a codebase using Jasmine,
+Mocha, Tape, Jest, or our own
+[teenytest](https://github.com/testdouble/teenytest).
 
-Interested in learning what testdouble.js is, why it exists, and what the API
-offers? The quickest path is this fast-paced 20-minute talk:
+## Install
 
-[<img width="633" alt="screenshot of testdouble.js talk" src="https://cloud.githubusercontent.com/assets/79303/16356401/1a9d7ffc-3aa4-11e6-833f-9d6094547297.png">
-](https://vimeo.com/169413322)
+```js
+npm install -D testdouble
+```
 
-## Coming from Sinon.js?
+If you just want to fetch the browser distribution, you can also get it from
+[unpkg](https://unpkg.com/testdouble/dist/)
 
-Right now, Sinon.js is the test double incumbent in JavaScript, with over 1.7
-million downloads in the last month. If you've got experience with Sinon, [check
-out our side-by-side
-comparison](http://blog.testdouble.com/posts/2016-03-13-testdouble-vs-sinon.html)
-to see why we wrote testdouble.js and how some of the API translates.
+We recommend requiring the library in a test helper and setting it globally for
+convenience to the shorthand `td`:
 
-## The Very Basics
+```js
+global.td = require('testdouble') // Node.js; `window.td` for browsers
+```
 
-Before diving into our in-depth docs, here is a quick intro of the basic uses:
+(You may need to declare the global in order to make your linter handy.
+Instructions:
+[eslint](https://eslint.org/docs/user-guide/configuring#specifying-globals),
+[Standard](https://github.com/standard/standard/#i-use-a-library-that-pollutes-the-global-namespace-how-do-i-prevent-variable-is-not-defined-errors).)
+
+## Getting started
+
+Mocking libraries are more often abused than used effectively, so figuring out
+how to document a mocking library that is designed to encourage only productive
+use has been a real challenge. Here are a few paths to getting started:
+
+* The [API section of this README](#api) to get an at-a-glance view of
+  the API so you can get started stubbing and verifying right away
+* A [20-minute
+  video](http://blog.testdouble.com/posts/2016-06-05-happier-tdd-with-testdouble-js)
+  overview of the library, its goals, and the basics of its API
+* A [comparison between testdouble.js and
+  Sinon.js](http://blog.testdouble.com/posts/2016-03-13-testdouble-vs-sinon.html),
+  in case you've already got experience working with Sinon and you're looking
+  for a high-level overview of the differences
+* The full testdouble.js [documentation](/docs), which is quite lengthy, but
+  will do a thorough job to explain when to (and when not to) take advantage of
+  the various faetures of testdouble.js. Its outline is at the [bottom of this
+  README](#docs)
+
+## API
+
+### `td.replace()` for replacing dependencies
+
+The first thing a test double library needs to do is give you a way to replace
+the production dependencies of your [subject under
+test](https://github.com/testdouble/contributing-tests/wiki/Subject) with fake
+ones created by the library.
+
+testdouble.js provides a top-level method called `td.replace()`
+
+#### Module replacement with Node.js
+
+If you're using Node.js and don't mind using the CommonJS `require` method in
+your tests (you can still use `import`/`export` in your production code,
+assuming you're compiling it down for consumption by your tests), testdouble.js
+uses a library we wrote called [quibble](https://github.com/testdouble/quibble)
+to monkey-patch the `require()` feature so that your subject will automatically
+receive your faked dependencies simply by requiring them. (If you've used
+something like [proxyquire](https://github.com/thlorenz/proxyquire), this is
+like a slightly terser form of that)
+
+Here's an example of using `td.replace` in the setup of a test of a Node.js
+module:
+
+```js
+let loadsPurchases, generatesInvoice, sendsInvoice, subject
+module.exports = {
+  beforeEach: () => {
+    loadsPurchases = td.replace('../src/loads-purchases')
+    generatesInvoice = td.replace('../src/generates-invoice')
+    sendsInvoice = td.replace('../src/sends-invoice')
+    subject = require('../src/index')
+  }
+  //…
+}
+```
+
+Things to remember about replacing Node.js modules:
+
+* The test must `td.replace` and `require` everything in a before-each hook,
+in order to bypass Node's module cache and avoid test pollution
+* Relative paths to each replaced dependency are relative *from the test listing
+  to the dependency*. This runs counter to how some other tools do it, but we
+  feel it makes more sense
+* The test suite (usually in a global after-each hook) must call `td.reset()` to
+avoid test pollution
+
+#### Property replacement
+
+If you're running tests outside Node.js or otherwise injecting dependencies
+manually (or with a DI tool like
+[dependable](https://github.com/testdouble/dependable)), then you can still use
+`td.replace` to automatically replace and imitate
 
 ### Stubbing return values for functions
 
