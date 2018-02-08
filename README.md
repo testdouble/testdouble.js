@@ -46,8 +46,8 @@ Mocking libraries are more often abused than used effectively, so figuring out
 how to document a mocking library in such a way as to only encourage healthy
 use has proven to be a real challenge. Here are a few paths to getting started:
 
-* The [API section of this README](#api) to get an at-a-glance view of
-  the API so you can get started stubbing and verifying right away
+* The [API section of this README](#api) to get an at-a-glance view of the API
+  so you can get started stubbing and verifying right away
 * A [20-minute
   video](http://blog.testdouble.com/posts/2016-06-05-happier-tdd-with-testdouble-js)
   overview of the library, its goals, and the basics of its API
@@ -55,10 +55,10 @@ use has proven to be a real challenge. Here are a few paths to getting started:
   Sinon.js](http://blog.testdouble.com/posts/2016-03-13-testdouble-vs-sinon.html),
   in case you've already got experience working with Sinon and you're looking
   for a high-level overview of the differences
-* The full testdouble.js [documentation](/docs), which is quite lengthy, but
+* The full testdouble.js [documentation](/docs), which is lengthier, but
   will do a thorough job to explain when to (and when not to) take advantage of
-  the various faetures of testdouble.js. Its outline is at the [bottom of this
-  README](#docs)
+  the various faetures of testdouble.js. Its outline is in
+  [docs/README.md](/docs#readme)
 
 Of course, if you're unsure of how to approach writing an isolated test with
 testdouble.js, we welcome you to [open a issue on GitHub to ask a
@@ -301,37 +301,204 @@ const subject = function (SomeConstructor) {
 }
 ```
 
----
-# old docs:
----
+### `td.when()` for stubbing responses
 
-### Stubbing return values for functions
+**`td.when(__rehearsal__[, options])`**
 
-```js
-var td = require('testdouble');
+Once you have your subject's dependencies replaced with test double functions,
+you'll want to be able to to stub return values (and other sorts of responses)
+when the subject invokes the test double in the way that the test expects.
 
-var fetch = td.function();
-td.when(fetch(42)).thenReturn('Jane User');
-
-fetch(42); // -> 'Jane User'
-```
-
-### Verifying a function was invoked
+To make stubbing configuration easy to read and grep, `td.when()`'s first
+argument isn't an argument at all, but rather a placeholder to demonstrate the
+way you're expecting the test double to be invoked by the subject, like so:
 
 ```js
-var td = require('testdouble');
-
-var save = td.function('.save');
-save(41, 'Jane');
-
-td.verify(save(41, 'Jill'));
-//
-// Error: Unsatisfied verification on test double `.save`.
-//
-//   Wanted:
-//     - called with `(41, "Jill")`.
-//
-//   But was actually called:
-//     - called with `(41, "Jane")`.
+const increment = td.func()
+td.when(increment(5)).thenReturn(6)
 ```
+
+We would say that `increment(5)` is "rehearsing the invocation". Note that by
+default, a stubbing is only satisfied when the subject calls the test double
+exactly as it was rehearsed. This can be customized with [argument
+matchers](/docs/5-stubbing-results.md#loosening-stubbings-with-argument-matchers),
+which allow for rehearsals that do things like
+`increment(td.matchers.isA(Number))` or `save(td.matchers.contains({age: 21}))`.
+
+Also note that, `td.when()` takes an [optional configuration
+object](/docs/5-stubbing-results.md#configuring-stubbings) as a second
+parameter, which enables advanced usage like ignoring extraneous arguments and
+limiting the number of times a stubbing can be satisfied.
+
+Calling `td.when()` returns an object of functions that each represent
+the type of outcome you want to configure whenever the test double is invoked as
+demonstrated by your rehearsal, which we'll describe below, beginning with
+`thenReturn`.
+
+#### `td.when().thenReturn()`
+
+**`td.when(__rehearsal__[, options]).thenReturn('some value'[, more, values])`**
+
+The simplest example is when you want to return a specific value in exchange for
+a known argument, like so:
+
+```js
+const loadsPurchases = td.replace('../src/loads-purchases')
+td.when(loadsPurchases(2018, 7)).thenReturn(['a purchase', 'another'])
+```
+
+Then, in the hands of your subject under test:
+
+```js
+loadsPurchases(2018, 8) // returns `['a purchase', 'another']`
+loadsPurchases(2018, 7) // returns undefined, since no stubbing matched
+```
+
+If you're not used to stubbing, it may seem contrived to think a test will know
+exactly what argument to pass in and expect back from a dependency, but in an
+isolated unit test this is not only feasible but entirely normal and expected!
+It can help the test author ensure the test remains minimal and obvious to
+future readers.
+
+Note as well that subsequence instances of matching invocations can be stubbed
+by passing additional arguments to `thenReturn()`, such that:
+
+```js
+const hitCounter = td.func()
+td.when(hitCounter()).thenReturn(1, 2, 3, 4)
+
+hitCounter() // 1
+hitCounter() // 2
+hitCounter() // 3
+hitCounter() // 4
+hitCounter() // 5
+```
+
+#### `td.when().thenResolve()` and `td.when().thenReject()`
+
+**`td.when(__rehearsal__[, options]).thenResolve('some value'[, more, values])`**
+**`td.when(__rehearsal__[, options]).thenReject('some value'[, more, values])`**
+
+The `thenResolve()` and `thenReject()` stubbings will take whatever value is
+passed to them and wrap it in an immediately resolved or rejected promise,
+respectively. By default testdouble.js will use whatever `Promise` is globally
+defined, but you can specify your own like this:
+
+```js
+td.config({promiseConstructor: require('bluebird')})`
+```
+
+Because the Promise spec indicates that all promises must tick the event loop,
+keep in mind that any stubbing configured with `thenResolve` or `thenReject`
+must be managed as an asynchronous test (consult your test framework's
+documentation if you're not sure).
+
+#### `td.when().thenCallback()`
+
+**`td.when(__rehearsal__[, options]).thenCallback('some value'[,other,
+args])`**
+
+The `thenCallback()` stubbing will assume that the rehearsed invocation has an
+additional final argument that takes a function. When invoked by the subject,
+testdouble.js will invoke that function and pass whatever arguments were sent to
+`thenCallback()`.
+
+To illustrate, consider this stubbing:
+
+```js
+const readFile = td.replace('../src/read-file')
+td.when(readFile('my-secret-doc.txt')).thenCallback(null, 'secrets!')
+```
+
+Then, the subject might invoke readFile and pass an anonymous function:
+
+```js
+readFile('my-secret-doc.txt', function (er, contents) {
+  console.log(contents) // will print 'secrets!'
+})
+```
+
+If the callback isn't in the final position, or if the test double also needs to
+return something, it can be configured using the
+[td.callback](/docs/5-stubbing-results.md#callback-apis-with-a-callback-argument-at-an-arbitrary-position)
+argument matcher.
+
+#### `td.when().thenThrow()`
+
+**`td.when(__rehearsal__[, options]).thenThrow(someError)`**
+
+The `thenThrow()` function does exactly what it says on the tin. Once this
+stubbing is configured, any matching invocations will throw the specified error.
+
+Note that because "rehearsal" calls invoke the test double function, that it's
+possible to configure `thenThrow` and then find that subsequent stubbings or
+verifications can't be configured without also `catch`'ing the error. This ought
+to be a rarely encountered edge case.
+
+#### `td.when().thenDo()`
+
+**`td.when(__rehearsal__[, options]).thenDo(function (arg1, arg2) {})`**
+
+For everything else, there is `thenDo()`. `thenDo` takes a function which, for
+matching rehearsals, testdouble.js will invoke and forward along all arguments
+passed as well as bind the `this` context the test double function was invoked
+with. This callback is useful for covering tricky cases not handled elsewhere,
+and may be a useful extension point for building on top of the library's
+stubbing capabilities.
+
+### `td.verify()` for verifying interactions
+
+**`td.verify(__demonstration__[, options])`**
+
+If you've learned how to stub responses with `td.when()` then you already know
+how to verify an invocation took place with `td.verify()`! We've gone out of our
+way to make the two as symmetrical as possible. You'll find that they have
+matching function signatures, support the same argument matchers, and take the
+same options.
+
+The difference, then, is their purpose. While stubbings are meant to facilitate
+some behavior we want to exercise in our subject, verifications are meant to
+ensure a dependency was called in a particular expected way. Since `td.verify()`
+is an assertion step, it goes [at the
+end](https://github.com/testdouble/contributing-tests/wiki/Arrange-Act-Assert)
+of our test after we've invoked the subject under test.
+
+A trivial example might be:
+
+```js
+module.exports = function shouldSaveThings () {
+  const save = td.replace('../src/save')
+  const subject = require('../src/index')
+
+  subject({name: 'dataz', data: '010101'})
+
+  td.verify(save('dataz', '010101'))
+}
+```
+
+The above will verify that `save` was called with the two specified arguments.
+Just like with `td.when()`, more complex cases can be covered with [argument
+matchers](/docs/6-verifying-invocations.md#relaxing-verifications-with-argument-matchers)
+and [configuration
+options](/docs/6-verifying-invocations.md#configuring-verifications).
+
+A word of caution: when you verify a function was called, as opposed to what it
+returns, you're asserting that your code has a desired side effect. Code with
+lots of side effects is bad, so mocking libraries are often abused to make
+side-effect heavy code easier to test. In these cases, refactoring each
+dependency to return values instead is almost always the better design approach.
+Sometimes in the interest of completeness, people will attempt to verify an
+invocation that already satisfies a stub, but this is almost [provably
+unnecessary](/docs/B-frequently-asked-questions.md#why-shouldnt-i-call-both-tdwhen-and-tdverify-for-a-single-interaction-with-a-test-double).
+
+### Other functions
+
+For other top-level features in the testdouble.js API, consult the [docs](/docs)
+directory:
+
+* [td.explain()](/docs/9-debugging.md#tdexplainsometestdouble)
+* [td.config()](/docs/C-configuration.md#tdconfig)
+* [td.reset()](/docs/1-installation.md#resetting-state-between-test-runs)
+* [td.matchers](/docs/5-stubbing-results.md#loosening-stubbings-with-argument-matchers)
+  (and [custom matchers](/docs/8-custom-matchers.md#custom-argument-matchers))
 
