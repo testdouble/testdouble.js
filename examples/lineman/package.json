@@ -5,7 +5,8 @@
   "private": true,
   "author": "Test Double, LLC",
   "devDependencies": {
-    "lineman": "~0.36.6"
+    "lineman": "~0.36.6",
+    "testem": "^2.0.0"
   },
   "scripts": {
     "start": "lineman run",
