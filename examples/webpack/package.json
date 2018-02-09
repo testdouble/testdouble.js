@@ -7,7 +7,7 @@
   },
   "devDependencies": {
     "testdouble": "../../",
-    "testem": "^1.15.0",
-    "webpack": "^2.2.1"
+    "testem": "^2.0.0",
+    "webpack": "^3.10.0"
   }
 }

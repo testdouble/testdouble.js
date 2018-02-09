@@ -2,13 +2,13 @@
 
 ## Verify your environment
 
-To release to npm, testdouble has quite a lot going on in its `preversion`, `version`, 
-and `postversion` scripts. First, you'll want to make sure your environment is happy 
+To release to npm, testdouble has quite a lot going on in its `preversion`, `version`,
+and `postversion` scripts. First, you'll want to make sure your environment is happy
 enough:
 
 ```
-$ yarn install
-$ yarn test:ci
+$ npm install
+$ npm run test:ci
 $ echo $?
 ```
 
@@ -24,7 +24,7 @@ Before releasing, make sure:
 
 - [ ] You're on the `master` branch and have a clean working directory
 - [ ] It's in sync with `origin/master` (e.g `git pull` status indicates up-to-date)
-- [ ] `yarn test:ci` passes
+- [ ] `npm run test:ci` passes
 - [ ] `which github_changelog_generator` is present on your PATH
 
 ## Publishing a release:
