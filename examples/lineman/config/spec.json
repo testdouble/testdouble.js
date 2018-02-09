@@ -1,7 +1,20 @@
 {
   "framework" : "jasmine2",
-  "launch_in_dev" : ["Chrome"],
-  "launch_in_ci" : ["PhantomJS"],
+  "launch_in_dev": ["chrome"],
+  "launch_in_ci": ["chrome"],
+  "browser_args": {
+    "chrome": {
+      "all": "--no-sandbox",
+      "ci": [
+        "--headless",
+        "--disable-gpu",
+        "--remote-debugging-port=9222",
+        "--remote-debugging-address=0.0.0.0",
+        "--no-sandbox",
+        "--user-data-dir=/tmp"
+      ]
+    }
+  },
   "src_files" : [
     "generated/js/app.js",
     "generated/js/spec.js"

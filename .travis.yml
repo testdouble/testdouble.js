@@ -3,17 +3,6 @@ node_js:
   - 4
   - 6
   - 8
-cache:
-  directories:
-    - travis_phantomjs
-before_install:
-  # Ensure we have newer version of PhantomJS to fix weird test failures from 1.9.8
-  - export TRAVIS_PHANTOMJS_INSTALL_PATH="$PWD/travis_phantomjs"
-  - export TRAVIS_PHANTOMJS_VERSION_NAME="phantomjs-2.1.1-linux-x86_64"
-  - export PATH="$TRAVIS_PHANTOMJS_INSTALL_PATH/$TRAVIS_PHANTOMJS_VERSION_NAME/bin:$PATH"
-  - hash -d phantomjs || true
-  - echo "phantomjs version is $(phantomjs --version)"
-  - if [ $(phantomjs --version) != '2.1.1' ]; then $PWD/script/travis_get_updated_phantomjs; hash -d phantomjs || true; echo "updated phantomjs version is $(phantomjs --version)"; fi
 script: npm run test:ci
 after_script:
   - node -v | grep "v6" && npm run cover && npm run cover:report
