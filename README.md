@@ -83,14 +83,14 @@ configured by your test to either stub responses or assert invocations.
 
 **`td.replace('../path/to/module'[, customReplacement])`**
 
-If you're using Node.js and don't mind using the CommonJS `require` method in
+If you're using Node.js and don't mind using the CommonJS `require()` method in
 your tests (you can still use `import`/`export` in your production code,
 assuming you're compiling it down for consumption by your tests), testdouble.js
 uses a library we wrote called [quibble](https://github.com/testdouble/quibble)
-to monkey-patch the `require()` feature so that your subject will automatically
-receive your faked dependencies simply by requiring them. If you've used
-something like [proxyquire](https://github.com/thlorenz/proxyquire), this is
-like a slightly terser form of that.
+to monkey-patch `require()` so that your subject will automatically receive your
+faked dependencies simply by requiring them. This approach may be familiar if you've used something like
+[proxyquire](https://github.com/thlorenz/proxyquire), but our focus was to
+enable an even more minimal test setup.
 
 Here's an example of using `td.replace()` in a Node.js test's setup:
 
