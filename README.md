@@ -47,19 +47,18 @@ how to document a mocking library so as to only encourage healthy uses has
 proven to be a real challenge. Here are a few paths we've prepared for getting
 started with testdouble.js:
 
-* The [API section of this README](#api) to get an at-a-glance view of the API
-  so you can get started stubbing and verifying right away
+* The [API section of this README](#api) so you can get started stubbing and
+  verifying right away
 * A [20-minute
   video](http://blog.testdouble.com/posts/2016-06-05-happier-tdd-with-testdouble-js)
-  overview of the library, its goals, and the basics of its API
+  overview of the library, its goals, and basic usage
 * A [comparison between testdouble.js and
   Sinon.js](http://blog.testdouble.com/posts/2016-03-13-testdouble-vs-sinon.html),
   in case you've already got experience working with Sinon and you're looking
-  for a high-level overview of the differences
-* The full testdouble.js [documentation](/docs), which is lengthier, but
-  will do a thorough job to explain when to (and when not to) take advantage of
-  the various faetures of testdouble.js. Its outline is in
-  [docs/README.md](/docs#readme)
+  for a high-level overview of how they differ
+* The full testdouble.js [documentation](/docs), which describes at length how
+  to (and how not to) take advantage of the various features of testdouble.js.
+  Its outline is in [docs/README.md](/docs#readme)
 
 Of course, if you're unsure of how to approach writing an isolated test with
 testdouble.js, we welcome you to [open a issue on GitHub to ask a
