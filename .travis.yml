@@ -21,3 +21,13 @@ after_script:
 addons:
   code_climate:
     repo_token: c92188dcdeaca7d9732f8ea38fdd41d6bff18dc27a8d6f8b64a5b1311b7b6c21
+  chrome: stable
+packages:
+  - google-chrome-stable
+  - libnss3
+  - libnss3-tools
+  - libfontconfig1
+  - wget
+  - ca-certificates
+  - apt-transport-https
+  - inotify-tools
