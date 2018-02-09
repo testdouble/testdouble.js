@@ -35,7 +35,7 @@ convenience to the shorthand `td`:
 global.td = require('testdouble') // Node.js; `window.td` for browsers
 ```
 
-(You may need to configure your linter to ingore the `td`  global.
+(You may need to configure your linter to ignore the `td`  global.
 Instructions:
 [eslint](https://eslint.org/docs/user-guide/configuring#specifying-globals),
 [standard](https://github.com/standard/standard/#i-use-a-library-that-pollutes-the-global-namespace-how-do-i-prevent-variable-is-not-defined-errors).)
