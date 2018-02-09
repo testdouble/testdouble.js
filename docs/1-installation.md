@@ -22,25 +22,17 @@ All examples in these documents will assume `testdouble` is available as `td`.
 
 ### For use in Browsers
 
-The most recent release (not master itself) is always available on the master
-branch of the git repo, to make it easier to fetch the browser distribution of
-testdouble.js
+When we publish new versions of testdouble.js, we also generate a browser build
+of the library that's ready to be used in browsers, which you'll find in
+"dist/testdouble.js" of the installed package. This distribution will also
+define a `td` global variable, so you can use the library without necessitating
+any kind of module system in your test build.
 
-#### curl
+#### via npm
 
-The easiest way to fetch testdouble is to curl it:
-
-```
-$ curl https://raw.githubusercontent.com/testdouble/testdouble.js/master/dist/testdouble.js -o test/helpers/testdouble.js
-```
-
-And then just check it into source control. It may be old-fashioned, but it
-still works.
-
-#### npm
-
-You can also install testdouble from npm and then copy, move, symlink, or point
-your front-end build tool at it:
+Most people manage their front-end dependencies these days with `npm`, so most
+commonly we'd expect people to pull down testdouble.js by installing it with npm
+and pointing whatever front-end build tool they use to it.
 
 ```
 $ npm install --save-dev testdouble
@@ -49,11 +41,17 @@ $ npm install --save-dev testdouble
 And then find the browser distribution of the library in
 `node_modules/testdouble/dist/testdouble.js`.
 
+#### via unpkg
 
+You can also just fetch the latest (or any) version of the library from
+the unpkg CDN. You can even curl it:
 
 ```
+$ curl -L https://unpkg.com/testdouble/dist/testdouble.js
 ```
 
+And then just check it into source control. It may be old-fashioned, but it
+still works.
 
 ## Configuring testdouble.js Setting up in your test suite
 
