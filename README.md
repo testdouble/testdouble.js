@@ -109,17 +109,19 @@ module.exports = {
 ```
 
 In the above example, at the point when `src/index` is required, the module
-cache will be bypassed, and if `index` goes on to subsequently require any of
-the `td.replace()`'d dependencies, it will receive a reference to the same fake
-dependencies that were returned to the test.
+cache will be bypassed as `index` is loaded. If `index` goes on to subsequently
+require any of the `td.replace()`'d dependencies, it will receive a reference to
+the same fake dependencies that were returned to the test.
 
 Because `td.replace()` first loads the actual file, it will do its best to
 return a fake that is shaped just like the real thing. That means that if
 `loads-purchases` exports a function, a test double function will be created and
-returned. If `generates-invoice` exports a constructor, the constructor and all
-of its static and instance methods will be replaced with test double functions.
-If `sends-invoice` exports a plain object of function properties, each function
-will be replaced with a test double (and the other values cloned).
+returned. If `generates-invoice` exports a constructor, a constructor test
+double will be returned, complete with test doubles for all of the original's
+static functions and instance methods.  If `sends-invoice` exports a plain
+object of function properties, an object will be returned with test double
+functions in place of the originals' function properties. In every case, any
+non-function properties will be deep-cloned.
 
 There are a few important things to keep in mind about replacing Node.js modules
 using `td.replace()`:
@@ -137,8 +139,8 @@ using `td.replace()`:
 ##### Default exports with ES modules
 
 If your modules are written in the ES module syntax and they specify default
-exports, just remember that you'll need to reference `.default` when translating
-to CJS syntax.
+exports (e.g. `export default function loadsPurcases()`), just remember that
+you'll need to reference `.default` when translating to the CJS module format.
 
 That means instead of this:
 
@@ -146,7 +148,7 @@ That means instead of this:
 loadsPurchases = td.replace('../src/loads-purchases')
 ```
 
-You probable mean to assign the fake like this:
+You probably want to assign the fake like this:
 
 ```js
 loadsPurchases = td.replace('../src/loads-purchases').default
@@ -195,7 +197,8 @@ could have called `td.replace(app.signup, 'onCancel')`, instead.
 
 Remember to call `td.reset()` in an after-each hook (preferably globally so one
 doesn't have to remember to do so in each-and-every test) so that testdouble.js
-can replace the original is crucial to avoiding hard-to-debug test pollution!
+can replace the original. This is crucial to avoiding hard-to-debug test
+pollution!
 
 #### Specifying a custom replacement
 
@@ -248,9 +251,10 @@ double function and can be called in three modes:
 * **`td.func()`** - returns an anonymous test double function that can be used
   for stubbing and verifying any calls against it, but whose error messages and
   debugging output won't have a name to trace back to it
-* **`td.func('some name')`** - returns a test double function named 'some name',
-  which will appear in any error messages as well as the debug info returned by
-  passing the returned test double into `td.explain()`
+* **`td.func('some name')`** - returns a test double function named `'some
+  name'`, which will appear in any error messages as well as the debug info
+  returned by passing the returned test double into
+  [td.explain()](/docs/9-debugging.md#tdexplainsometestdouble)
 
 #### `td.object()`
 
@@ -265,7 +269,7 @@ and supports three types of invocations:
   test double named `'.invoices.send'`)
 * **`td.object(['add', 'subtract'])`** - returns a plain JavaScript object
   containing two properties `add` and `subtract` that are both assigned to test
-  double functions named `'.add'` and `'.subtract'`, respectively.
+  double functions named `'.add'` and `'.subtract'`, respectively
 * **`td.object('a Person'[, {excludeMethods: ['then']})`** - when passed with no
   args or with a string name as the first argument, returns an [ES
   Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy).
@@ -280,8 +284,8 @@ If your code depends on ES classes or functions intended to be called with
 well.
 
 * **`td.constructor(RealConstructor)`** - returns a constructor whose calls can
-  be verified and whose `prototype` functions have all been replaced with test
-  double functions using the same
+  be verified and whose static and `prototype` functions have all been replaced
+  with test double functions using the same
   [imitation](https://github.com/testdouble/testdouble.js/blob/master/src/imitate/index.js)
   mechanism described above
 * **`td.constructor(['select', 'save'])`** - returns a constructor with `select`
@@ -337,10 +341,9 @@ object](/docs/5-stubbing-results.md#configuring-stubbings) as a second
 parameter, which enables advanced usage like ignoring extraneous arguments and
 limiting the number of times a stubbing can be satisfied.
 
-Calling `td.when()` returns an object of functions that each represent
-the type of outcome you want to configure whenever the test double is invoked as
-demonstrated by your rehearsal, which we'll describe below, beginning with
-`thenReturn`.
+Calling `td.when()` returns a number of functions that allow you to specify your
+desired outcome when the test double is invoked as demonstrated by your
+rehearsal. We'll begin with the most common of these: `thenReturn`.
 
 #### `td.when().thenReturn()`
 
@@ -378,7 +381,7 @@ hitCounter() // 1
 hitCounter() // 2
 hitCounter() // 3
 hitCounter() // 4
-hitCounter() // 5
+hitCounter() // 4
 ```
 
 #### `td.when().thenResolve()` and `td.when().thenReject()`
