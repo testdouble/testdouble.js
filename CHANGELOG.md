@@ -1,5 +1,15 @@
 # Change Log
 
+## [v3.3.4](https://github.com/testdouble/testdouble.js/tree/v3.3.4) (2018-02-09)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.3.3...v3.3.4)
+
+**Merged pull requests:**
+
+- Update readme, move doc outline to docs/ [\#332](https://github.com/testdouble/testdouble.js/pull/332) ([searls](https://github.com/searls))
+- Updated Getting Started to match td.object\(\)'s changes [\#330](https://github.com/testdouble/testdouble.js/pull/330) ([StanleySathler](https://github.com/StanleySathler))
+- First draft of issue template [\#328](https://github.com/testdouble/testdouble.js/pull/328) ([stevenjackson](https://github.com/stevenjackson))
+- WIP - remove dist from git [\#299](https://github.com/testdouble/testdouble.js/pull/299) ([jasonkarns](https://github.com/jasonkarns))
+
 ## [v3.3.3](https://github.com/testdouble/testdouble.js/tree/v3.3.3) (2018-01-18)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.3.2...v3.3.3)
 
