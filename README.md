@@ -497,7 +497,7 @@ module.exports = function shouldSaveThings () {
 The above will verify that `save` was called with the two specified arguments.
 If the verification fails (say it passed `'010100'` instead), testdouble.js will
 throw a nice long error message to explain how the test double function was
-actually called, so that you can spot the error.
+actually called, hopefully helping you spot the error.
 
 Just like with `td.when()`, more complex cases can be covered with [argument
 matchers](/docs/6-verifying-invocations.md#relaxing-verifications-with-argument-matchers)
@@ -505,13 +505,14 @@ and [configuration
 options](/docs/6-verifying-invocations.md#configuring-verifications).
 
 A word of caution: `td.verify()` should be needed only sparingly. When you
-verify a function was called (as opposed to what it returns) you're asserting
-that your code has a desired side effect. Code with lots of side effects is bad,
-so mocking libraries are often abused to make side-effect heavy code easier to
-test. In these cases, refactoring each dependency to return values instead is
-almost always the better design approach.  Sometimes in the interest of
-completeness, people will attempt to verify an invocation that already satisfies
-a stub, but this is almost [provably
+verify a function was called (as opposed to relying on what it returns) you're
+asserting that your subject has a side effect. Code with lots of side effects is
+bad, so mocking libraries are often abused to make side-effect heavy code easier
+to proliferate. In these cases, refactoring each dependency to return values
+instead is almost always the better design approach.  A separate test smell with
+verifying calls is that sometimes—perhaps in the interest of maximal
+completeness—a test will verify an invocation that already satisfied a stubbing,
+but this is almost [provably
 unnecessary](/docs/B-frequently-asked-questions.md#why-shouldnt-i-call-both-tdwhen-and-tdverify-for-a-single-interaction-with-a-test-double).
 
 ### Other functions
