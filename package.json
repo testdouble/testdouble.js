@@ -126,7 +126,7 @@
     "standard": "^10.0.2",
     "teenytest": "^5.1.1",
     "testdouble": "3.3.4",
-    "testem": "^1.18.0",
+    "testem": "^2.0.0",
     "typescript": "^2.4.1",
     "yarn": "^1.3.2"
   },
