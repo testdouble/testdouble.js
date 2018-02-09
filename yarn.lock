@@ -1131,7 +1131,7 @@ center-align@^0.1.1:
     align-text "^0.1.3"
     lazy-cache "^1.0.3"
 
-chai@4.1.2:
+chai@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/chai/-/chai-4.1.2.tgz#0f64584ba642f0f2ace2806279f4f06ca23ad73c"
   dependencies:
@@ -1258,9 +1258,9 @@ coffeeify@^3.0.1:
     convert-source-map "^1.3.0"
     through2 "^2.0.0"
 
-coffeescript@2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/coffeescript/-/coffeescript-2.2.1.tgz#39fa2ac2e369f9bf0c651792e1f74552b4081b8e"
+coffeescript@^1.12.7:
+  version "1.12.7"
+  resolved "https://registry.yarnpkg.com/coffeescript/-/coffeescript-1.12.7.tgz#e57ee4c4867cf7f606bfc4a0f2d550c0981ddd27"
 
 combine-source-map@~0.7.1:
   version "0.7.2"
@@ -3295,7 +3295,7 @@ mocha-given@^0.1.3:
   dependencies:
     coffee-script "~1.7.1"
 
-mocha@5.0.0:
+mocha@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/mocha/-/mocha-5.0.0.tgz#cccac988b0bc5477119cba0e43de7af6d6ad8f4e"
   dependencies:
