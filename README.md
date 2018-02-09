@@ -61,7 +61,7 @@ started with testdouble.js:
   Its outline is in [docs/README.md](/docs#readme)
 
 Of course, if you're unsure of how to approach writing an isolated test with
-testdouble.js, we welcome you to [open a issue on GitHub to ask a
+testdouble.js, we welcome you to [open an issue on GitHub to ask a
 question](https://github.com/testdouble/testdouble.js/issues/new).
 
 ## API
@@ -71,13 +71,13 @@ question](https://github.com/testdouble/testdouble.js/issues/new).
 The first thing a test double library needs to do is give you a way to replace
 the production dependencies of your [subject under
 test](https://github.com/testdouble/contributing-tests/wiki/Subject) with fake
-ones created by the library.
+ones controlled by your test.
 
 We provide a top-level method called `td.replace()` that operates in two
 different modes: CommonJS module replacement and object-property replacement.
-Both modes will, by default, perform a deep clone the real dependency but
-replace all of its functions with fake test double functions that you can
-configure and observe.
+Both modes will, by default, perform a deep clone the real dependency which
+replaces all functions it encounters with fake test double functions that can be
+configured by your test to either stub responses or assert invocations.
 
 #### Module replacement with Node.js
 
