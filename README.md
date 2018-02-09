@@ -410,9 +410,9 @@ documentation if you're not sure).
 args])`**
 
 The `thenCallback()` stubbing will assume that the rehearsed invocation has an
-additional final argument that takes a function. When invoked by the subject,
-testdouble.js will invoke that function and pass whatever arguments were sent to
-`thenCallback()`.
+additional final argument that takes a callback function. When this stubbing is
+satisfied, testdouble.js will invoke that callback function and pass in whatever
+arguments were sent to `thenCallback()`.
 
 To illustrate, consider this stubbing:
 
@@ -434,6 +434,12 @@ return something, callbacks can be configured using the
 [td.callback](/docs/5-stubbing-results.md#callback-apis-with-a-callback-argument-at-an-arbitrary-position)
 argument matcher.
 
+On one hand, `thenCallback()` can be a great way to write fast and clear
+synchronous isolated unit tests of production code that's actually asynchronous.
+On the other hand, if it's necessary to verify the subject behaves correctly
+over multiple ticks of the event loop, you can control this with the [`defer`
+and `delay` options](/docs/5-stubbing-results.md#defer).
+
 #### `td.when().thenThrow()`
 
 **`td.when(__rehearsal__[, options]).thenThrow(new Error('boom'))`**
@@ -451,12 +457,12 @@ the error.
 
 **`td.when(__rehearsal__[, options]).thenDo(function (arg1, arg2) {})`**
 
-For everything else, there is `thenDo()`. `thenDo` takes a function which, for
-matching rehearsals, testdouble.js will invoke and forward along all arguments
-passed as well as bind the `this` context the test double function was invoked
-with. This callback is useful for covering tricky cases not handled elsewhere,
-and may be a useful extension point for building on top of the library's
-stubbing capabilities.
+For everything else, there is `thenDo()`. `thenDo` takes a function which will
+be invoked whenever satisfied  with all the arguments and bound to the same
+`this` context that the test double function was actually invoked with. This
+callback is useful for covering tricky cases not handled elsewhere, and may be a
+potential extension point for building on top of the library's stubbing
+capabilities.
 
 ### `td.verify()` for verifying interactions
 
