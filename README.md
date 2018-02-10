@@ -41,6 +41,13 @@ Instructions:
 [eslint](https://eslint.org/docs/user-guide/configuring#specifying-globals),
 [standard](https://github.com/standard/standard/#i-use-a-library-that-pollutes-the-global-namespace-how-do-i-prevent-variable-is-not-defined-errors).)
 
+If you're using testdouble.js in conjunction with another test framework, you
+may also want to check out one of these extensions:
+
+* [testdouble-jest](https://github.com/testdouble/testdouble-jest)
+* [testdouble-chai](https://github.com/basecase/testdouble-chai)
+* [testdouble-jasmine](https://github.com/BrianGenisio/testdouble-jasmine)
+
 ## Getting started
 
 Mocking libraries are more often abused than used effectively, so figuring out
