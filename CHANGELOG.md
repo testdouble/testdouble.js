@@ -1,5 +1,22 @@
 # Change Log
 
+## [v3.4.0](https://github.com/testdouble/testdouble.js/tree/v3.4.0) (2018-02-10)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.3.4...v3.4.0)
+
+**Fixed bugs:**
+
+- The webpack example project doesn't work [\#334](https://github.com/testdouble/testdouble.js/issues/334)
+
+**Closed issues:**
+
+- Update Getting Started to pass instance object instead of constructor to td.object\(\) [\#329](https://github.com/testdouble/testdouble.js/issues/329)
+
+**Merged pull requests:**
+
+- Publicize td.imitate\(\) [\#336](https://github.com/testdouble/testdouble.js/pull/336) ([searls](https://github.com/searls))
+- fix webpack example project [\#335](https://github.com/testdouble/testdouble.js/pull/335) ([searls](https://github.com/searls))
+- Upgrade dependencies, remove yarn [\#333](https://github.com/testdouble/testdouble.js/pull/333) ([searls](https://github.com/searls))
+
 ## [v3.3.4](https://github.com/testdouble/testdouble.js/tree/v3.3.4) (2018-02-09)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.3.3...v3.3.4)
 
