@@ -1,10 +1,22 @@
 {
   "framework": "jasmine2",
+  "before_tests": "$(npm bin)/webpack",
   "serve_files": [
-    "built/test-bundle.js"
+    "test-bundle.js"
   ],
-  "before_tests": "webpack",
-  "launch_in_dev": ["PhantomJS", "Chrome"],
-  "launch_in_ci": ["PhantomJS"]
+  "launch_in_dev": ["chrome"],
+  "launch_in_ci": ["chrome"],
+  "browser_args": {
+    "chrome": {
+      "all": "--no-sandbox",
+      "ci": [
+        "--headless",
+        "--disable-gpu",
+        "--remote-debugging-port=9223",
+        "--remote-debugging-address=0.0.0.0",
+        "--user-data-dir=/tmp"
+      ]
+    }
+  }
 }
 
