@@ -17,11 +17,12 @@ your preferred testing framework. However, it may be the case that you'd prefer
 to bridge the `verify()` method of testdouble.js with your preferred assertion
 API for aesthetic or error-handling reasons.
 
-Thes plugins developed by the community:
+Thes plugins developed by ourselves & the community:
 
+* [testdouble-jest](https://github.com/testdouble/testdouble-jest) - module mocking support for Jest users
 * [testdouble-chai](https://github.com/basecase/testdouble-chai) - Chai assertions
-* [testdouble-jasmine](https://github.com/testdouble/testdouble.js/issues/41) -
-Jasmine `expect` matchers (WIP by @BrianGenisio)
+* [testdouble-jasmine](https://github.com/BrianGenisio/testdouble-jasmine) -
+Jasmine `expect` matchers (by @BrianGenisio)
 
 ## Build Plugins
 
