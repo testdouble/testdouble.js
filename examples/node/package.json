@@ -13,7 +13,7 @@
     "is-number": "^3.0.0",
     "standard": "^10.0.2",
     "teenytest": "^5.0.2",
-    "testdouble": "../../"
+    "testdouble": "file://../.."
   },
   "standard": {
     "globals": [
