@@ -1,6 +1,7 @@
 import tdFunction from './function'
 import object from './object'
 import constructor from './constructor'
+import imitate from './imitate'
 import when from './when'
 import verify from './verify'
 import matchers from './matchers'
@@ -16,6 +17,7 @@ module.exports = {
   func: tdFunction,
   object,
   constructor,
+  imitate,
   when,
   verify,
   matchers,

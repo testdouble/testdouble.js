@@ -4,6 +4,7 @@ describe "td.*", ->
     Then -> td.verify == require('../../src/verify').default
     Then -> td.function == require('../../src/function').default
     Then -> td.func == require('../../src/function').default
+    Then -> td.imitate == require('../../src/imitate').default
     Then -> td.object == require('../../src/object').default
     Then -> td.constructor == require('../../src/constructor').default
     Then -> td.matchers == require('../../src/matchers').default

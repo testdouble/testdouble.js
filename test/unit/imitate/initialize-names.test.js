@@ -12,5 +12,8 @@ module.exports = {
   },
   'a plain object': () => {
     assert.deepEqual(subject({}), [])
+  },
+  'a string names param gets wrapped in []': () => {
+    assert.deepEqual(subject(function () {}, 'o_O'), ['o_O'])
   }
 }

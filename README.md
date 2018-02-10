@@ -228,7 +228,7 @@ signup = td.replace(app, 'signup', {
 })
 ```
 
-### `td.func()`, `td.object()`, and `td.constructor()` to create test doubles
+### `td.func()`, `td.object()`, `td.constructor()`, and `td.imitate()` to create test doubles
 
 `td.replace()`'s imitation and injection convenience is great when your
 project's build configuration allows for it, but in many cases you'll want or
@@ -312,6 +312,14 @@ const subject = function (SomeConstructor) {
   return thing.doStuff() // returns "ok"
 }
 ```
+
+#### `td.imitate()`
+
+**`td.imitate(realThing[, name])`**
+
+If you know you want to imitate something, but don't know (or care) whether it's
+a function, object, or constructor, you can also just pass it to `td.imitate()`
+with an optional name parameter.
 
 ### `td.when()` for stubbing responses
 
