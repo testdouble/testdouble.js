@@ -15,7 +15,7 @@ MathProblem.prototype.generate = function(){
   this.submitProblem(savedProblem)
 }
 
-var td = require('testdouble')
+var td = require('../../..')
 describe('MathProblem', function(){
   var subject, createRandomProblem, FakeSavesProblem, submitProblem;
   beforeEach(function(){

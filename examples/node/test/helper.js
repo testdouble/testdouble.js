@@ -1,4 +1,4 @@
-global.td = require('testdouble')
+global.td = require('../../..')
 global.assert = require('core-assert')
 
 module.exports = {
