@@ -8,7 +8,7 @@ import imitate from '../imitate'
 quibble.ignoreCallsFromThisFile()
 
 export default function (path, stub) {
-  if(typeof jest === 'object') return jestModule(...arguments)
+  if (typeof jest === 'object') return jestModule(...arguments)
   if (arguments.length > 1) { return quibble(path, stub) }
   const realThing = requireAt(path)
   const fakeThing = imitate(realThing, `${path}: ${nameFor(realThing)}`)

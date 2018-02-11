@@ -1,6 +1,6 @@
 import log from '../log'
 
-export default function jestModule(path, stub) {
+export default function jestModule (path, stub) {
   const tdMock = require('../index').mock
   if (!tdMock) {
     log.error('td.replace', 'It appears the test is being run by Jest, but the testdouble-jest module has not been initialized, so testdouble.js cannot replace modules. For setup instructions, visit: https://github.com/testdouble/testdouble-jest')
