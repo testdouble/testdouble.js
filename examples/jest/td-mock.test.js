@@ -1,8 +1,3 @@
-const td = require('../..')
-const expect = require('expect')
-
-require('testdouble-jest')(td, jest)
-
 let subject
 describe('td.replace', () => {
   beforeEach(() => {
@@ -42,9 +37,6 @@ describe('td.replace', () => {
     subject()
 
     td.verify(quux(1337), {times: 1})
-  })
-  afterEach(() => {
-    td.reset()
   })
 })
 
