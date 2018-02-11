@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -e
+
+# Must be run from project root
+echo "<------ Setting up testdouble for use with npm link"
+npm link
+cd examples
+for D in */; do
+  echo "<------ Running tests for example project '${D}'"
+  cd "${D}"
+  npm install
+  npm link testdouble
+  npm test
+  cd ..
+done
