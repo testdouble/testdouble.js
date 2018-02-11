@@ -9,8 +9,6 @@ cd examples
 for D in */; do
   echo "<------ Running tests for example project '${D}'"
   cd "${D}"
-  npm install
-  npm link testdouble
-  npm test
+  npm run --silent skip-ci || (npm install && npm link testdouble && npm test)
   cd ..
 done
