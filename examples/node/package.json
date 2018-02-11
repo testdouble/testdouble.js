@@ -9,7 +9,6 @@
   },
   "devDependencies": {
     "core-assert": "^0.2.1",
-    "elasticsearch": "^12.1.3",
     "is-number": "^3.0.0",
     "standard": "^10.0.2",
     "teenytest": "^5.0.2"
