@@ -1,5 +1,17 @@
 # Change Log
 
+## [v3.5.0](https://github.com/testdouble/testdouble.js/tree/v3.5.0) (2018-02-11)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.4.0...v3.5.0)
+
+**Closed issues:**
+
+- Warn jest users when they call td.replace\(moduleName\) and point them to testdouble-jest [\#337](https://github.com/testdouble/testdouble.js/issues/337)
+- td.replace doesn't work with Jest [\#331](https://github.com/testdouble/testdouble.js/issues/331)
+
+**Merged pull requests:**
+
+- Jest support for td replace [\#338](https://github.com/testdouble/testdouble.js/pull/338) ([searls](https://github.com/searls))
+
 ## [v3.4.0](https://github.com/testdouble/testdouble.js/tree/v3.4.0) (2018-02-10)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.3.4...v3.4.0)
 
