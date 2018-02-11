@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var td = require('../..')
+var td = require('testdouble')
 
 afterEach(function(){
   td.reset()

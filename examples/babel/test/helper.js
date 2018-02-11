@@ -1,4 +1,4 @@
-import td from '../../..'
+import td from 'testdouble'
 import semver from 'semver'
 
 global.context = describe
