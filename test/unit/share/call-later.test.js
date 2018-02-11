@@ -20,15 +20,15 @@ module.exports = {
     }, 0)
   },
   'invoke something with a delay': (done) => {
-    subject(func, [42, 'nope'], true, 10)
+    subject(func, [42, 'nope'], true, 100)
 
     setTimeout(() => {
       assert.deepEqual(calledWith, undefined)
-    }, 9)
+    }, 30)
 
     setTimeout(() => {
       assert.deepEqual(calledWith, [42, 'nope'])
       done()
-    }, 11)
+    }, 300)
   }
 }
