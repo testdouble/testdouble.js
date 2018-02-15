@@ -81,18 +81,19 @@ the production dependencies of your [subject under
 test](https://github.com/testdouble/contributing-tests/wiki/Subject) with fake
 ones controlled by your test.
 
-We provide a top-level method called `td.replace()` that operates in two
+We provide a top-level function called `td.replace()` that operates in two
 different modes: CommonJS module replacement and object-property replacement.
-Both modes will, by default, perform a deep clone the real dependency which
-replaces all functions it encounters with fake test double functions that can be
-configured by your test to either stub responses or assert invocations.
+Both modes will, by default, perform a deep clone of the real dependency which
+replaces all functions it encounters with fake test double functions which can,
+in turn, be configured by your test to either stub responses or assert
+invocations.
 
 #### Module replacement with Node.js
 
 **`td.replace('../path/to/module'[, customReplacement])`**
 
-If you're using Node.js and don't mind using the CommonJS `require()` method in
-your tests (you can still use `import`/`export` in your production code,
+If you're using Node.js and don't mind using the CommonJS `require()` function
+in your tests (you can still use `import`/`export` in your production code,
 assuming you're compiling it down for consumption by your tests), testdouble.js
 uses a library we wrote called [quibble](https://github.com/testdouble/quibble)
 to monkey-patch `require()` so that your subject will automatically receive your
@@ -204,7 +205,7 @@ mock](https://github.com/testdouble/contributing-tests/wiki/Partial-Mock)), we
 could have called `td.replace(app.signup, 'onCancel')`, instead.
 
 Remember to call `td.reset()` in an after-each hook (preferably globally so one
-doesn't have to remember to do so in each-and-every test) so that testdouble.js
+doesn't have to remember to do so in each and every test) so that testdouble.js
 can replace the original. This is crucial to avoiding hard-to-debug test
 pollution!
 
@@ -295,7 +296,7 @@ well.
   be verified and whose static and `prototype` functions have all been replaced
   with test double functions using the same
   [imitation](https://github.com/testdouble/testdouble.js/blob/master/src/imitate/index.js)
-  mechanism described above
+  mechanism as `td.func(realFunction)` and `td.object(realObject)`
 * **`td.constructor(['select', 'save'])`** - returns a constructor with `select`
   and `save` properties on its `prototype` object set to test double functions
   named `'#select'` and `'#save'`, respectively
@@ -370,7 +371,7 @@ a known argument, like so:
 
 ```js
 const loadsPurchases = td.replace('../src/loads-purchases')
-td.when(loadsPurchases(2018, 7)).thenReturn(['a purchase', 'another'])
+td.when(loadsPurchases(2018, 8)).thenReturn(['a purchase', 'another'])
 ```
 
 Then, in the hands of your subject under test:
@@ -440,7 +441,7 @@ td.when(readFile('my-secret-doc.txt')).thenCallback(null, 'secrets!')
 Then, the subject might invoke readFile and pass an anonymous function:
 
 ```js
-readFile('my-secret-doc.txt', function (er, contents) {
+readFile('my-secret-doc.txt', function (err, contents) {
   console.log(contents) // will print 'secrets!'
 })
 ```
@@ -466,7 +467,7 @@ stubbing is configured, any matching invocations will throw the specified error.
 Note that because rehearsal calls invoke the test double function, it's possible
 to configure a `thenThrow` stubbing and then accidentally trigger it when you
 attempt to configure subsequent stubbings or verifications. In these cases,
-you'll need to workaround it by re-ordering your configurations or `catch`'ing
+you'll need to work around it by re-ordering your configurations or `catch`'ing
 the error.
 
 #### `td.when().thenDo()`
@@ -475,10 +476,11 @@ the error.
 
 For everything else, there is `thenDo()`. `thenDo` takes a function which will
 be invoked whenever satisfied  with all the arguments and bound to the same
-`this` context that the test double function was actually invoked with. This
-callback is useful for covering tricky cases not handled elsewhere, and may be a
-potential extension point for building on top of the library's stubbing
-capabilities.
+`this` context that the test double function was actually invoked with. Whatever
+your `thenDo` function returns will be returned by the test double when the
+stubbing is satisfied. This configuration is useful for covering tricky cases
+not handled elsewhere, and may be a potential extension point for building on
+top of the library's stubbing capabilities.
 
 ### `td.verify()` for verifying interactions
 
