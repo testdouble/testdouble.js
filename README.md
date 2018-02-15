@@ -83,15 +83,16 @@ ones controlled by your test.
 
 We provide a top-level method called `td.replace()` that operates in two
 different modes: CommonJS module replacement and object-property replacement.
-Both modes will, by default, perform a deep clone the real dependency which
-replaces all functions it encounters with fake test double functions that can be
-configured by your test to either stub responses or assert invocations.
+Both modes will, by default, perform a deep clone of the real dependency,
+replacing all functions it encounters with fake test double functions. These
+fake test double functions can be configured by your test to either stub
+responses or assert invocations.
 
 #### Module replacement with Node.js
 
 **`td.replace('../path/to/module'[, customReplacement])`**
 
-If you're using Node.js and don't mind using the CommonJS `require()` method in
+If you're using Node.js and don't mind using the CommonJS `require()` function in
 your tests (you can still use `import`/`export` in your production code,
 assuming you're compiling it down for consumption by your tests), testdouble.js
 uses a library we wrote called [quibble](https://github.com/testdouble/quibble)
@@ -204,7 +205,7 @@ mock](https://github.com/testdouble/contributing-tests/wiki/Partial-Mock)), we
 could have called `td.replace(app.signup, 'onCancel')`, instead.
 
 Remember to call `td.reset()` in an after-each hook (preferably globally so one
-doesn't have to remember to do so in each-and-every test) so that testdouble.js
+doesn't have to remember to do so in each and every test) so that testdouble.js
 can replace the original. This is crucial to avoiding hard-to-debug test
 pollution!
 
@@ -295,7 +296,7 @@ well.
   be verified and whose static and `prototype` functions have all been replaced
   with test double functions using the same
   [imitation](https://github.com/testdouble/testdouble.js/blob/master/src/imitate/index.js)
-  mechanism described above
+  mechanism as described in `td.object(realObject)`
 * **`td.constructor(['select', 'save'])`** - returns a constructor with `select`
   and `save` properties on its `prototype` object set to test double functions
   named `'#select'` and `'#save'`, respectively
@@ -357,9 +358,9 @@ object](/docs/5-stubbing-results.md#configuring-stubbings) as a second
 parameter, which enables advanced usage like ignoring extraneous arguments and
 limiting the number of times a stubbing can be satisfied.
 
-Calling `td.when()` returns a number of functions that allow you to specify your
-desired outcome when the test double is invoked as demonstrated by your
-rehearsal. We'll begin with the most common of these: `thenReturn`.
+Calling `td.when()` returns an object with a number of methods that allow you
+to specify your desired outcome when the test double is invoked as demonstrated
+by your rehearsal. We'll begin with the most common of these: `thenReturn`.
 
 #### `td.when().thenReturn()`
 
@@ -376,8 +377,8 @@ td.when(loadsPurchases(2018, 7)).thenReturn(['a purchase', 'another'])
 Then, in the hands of your subject under test:
 
 ```js
-loadsPurchases(2018, 8) // returns `['a purchase', 'another']`
-loadsPurchases(2018, 7) // returns undefined, since no stubbing was satisfied
+loadsPurchases(2018, 7) // returns `['a purchase', 'another']`
+loadsPurchases(2018, 8) // returns undefined, since no stubbing was satisfied
 ```
 
 If you're not used to stubbing, it may seem contrived to think a test will know
@@ -440,7 +441,7 @@ td.when(readFile('my-secret-doc.txt')).thenCallback(null, 'secrets!')
 Then, the subject might invoke readFile and pass an anonymous function:
 
 ```js
-readFile('my-secret-doc.txt', function (er, contents) {
+readFile('my-secret-doc.txt', function (err, contents) {
   console.log(contents) // will print 'secrets!'
 })
 ```
@@ -466,7 +467,7 @@ stubbing is configured, any matching invocations will throw the specified error.
 Note that because rehearsal calls invoke the test double function, it's possible
 to configure a `thenThrow` stubbing and then accidentally trigger it when you
 attempt to configure subsequent stubbings or verifications. In these cases,
-you'll need to workaround it by re-ordering your configurations or `catch`'ing
+you'll need to work around it by re-ordering your configurations or `catch`'ing
 the error.
 
 #### `td.when().thenDo()`
