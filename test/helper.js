@@ -1,7 +1,7 @@
 require('babel-core/register')({
-  presets: ['env', 'babel-preset-power-assert']
+  presets: ['env']
 })
-global.assert = require('power-assert')
+global.assert = require('assert')
 global.td = require('testdouble') // <-- a known previous devDep version!!!!
 // global.pry = require('pryjs')
 
