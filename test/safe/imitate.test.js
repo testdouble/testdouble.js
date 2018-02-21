@@ -1,7 +1,6 @@
 import _ from 'lodash'
 
-import explain from '../../../src/explain'
-import subject from '../../../src/imitate'
+import td from '../../../src/index'
 
 module.exports = {
   'strict equal stuff (not objects typically)': () => {
@@ -18,9 +17,9 @@ module.exports = {
     ].forEach(entry => {
       const [original, expected] = entry
 
-      assert.strictEqual(subject(original), expected)
+      assert.strictEqual(td.imitate(original), expected)
     })
-    assert.ok(isNaN(subject(NaN)))
+    assert.ok(isNaN(td.imitate(NaN)))
   },
   'deep equal but not strict equal stuff': () => {
     [
@@ -35,10 +34,10 @@ module.exports = {
     ].forEach(entry => {
       const [original, expected] = entry
 
-      assert.deepEqual(subject(original), expected)
-      assert.notStrictEqual(subject(original), expected)
+      assert.deepEqual(td.imitate(original), expected)
+      assert.notStrictEqual(td.imitate(original), expected)
     })
-    assert.equal(subject(new Error('foo')).message, 'foo')
+    assert.equal(td.imitate(new Error('foo')).message, 'foo')
   },
   'skips encountered objects': () => {
     const foo = {a: 1, b: 2}
@@ -46,7 +45,7 @@ module.exports = {
     foo.bar = bar
     const original = {item: foo}
 
-    const result = subject(original)
+    const result = td.imitate(original)
 
     assert.notStrictEqual(result, original)
     assert.ok(_.isEqual(result, {
@@ -76,7 +75,7 @@ module.exports = {
     const thing = new Thing()
     const original = { item: thing }
 
-    const result = subject(original)
+    const result = td.imitate(original)
 
     assert.ok(result.item instanceof Thing)
     assert.notStrictEqual(result.item, thing)
@@ -87,11 +86,11 @@ module.exports = {
     original.shirt = function () {}
     original.shirt.tie = function () {}
 
-    const result = subject(original)
+    const result = td.imitate(original)
 
-    assert.equal(explain(result).name, 'pants')
-    assert.equal(explain(result.shirt).name, 'pants.shirt')
-    assert.equal(explain(result.shirt.tie).name, 'pants.shirt.tie')
+    assert.equal(td.explain(result).name, 'pants')
+    assert.equal(td.explain(result.shirt).name, 'pants.shirt')
+    assert.equal(td.explain(result.shirt.tie).name, 'pants.shirt.tie')
   },
   'skips over generator functions, even their custom properties': () => {
     // This is currently unsupported, expect to kill this test someday
@@ -102,7 +101,7 @@ module.exports = {
     const otherRef = {}
     original.func.customProp = otherRef
 
-    const result = subject(original)
+    const result = td.imitate(original)
 
     assert.strictEqual(result.func, original.func)
     assert.strictEqual(result.func.customProp, otherRef) // e.g. NOT cloned
@@ -114,12 +113,12 @@ module.exports = {
       }
       Thing.prototype.doStuff.bar = { baz: function () {} }
 
-      const result = subject(Thing)
+      const result = td.imitate(Thing)
 
-      assert.equal(explain(result).name, 'Thing')
-      assert.equal(explain(result.prototype.doStuff).name,
+      assert.equal(td.explain(result).name, 'Thing')
+      assert.equal(td.explain(result.prototype.doStuff).name,
         'Thing.prototype.doStuff')
-      assert.equal(explain(result.prototype.doStuff.bar.baz).name,
+      assert.equal(td.explain(result.prototype.doStuff.bar.baz).name,
         'Thing.prototype.doStuff.bar.baz')
     },
     'array things': () => {
@@ -134,19 +133,19 @@ module.exports = {
         ]
       }
 
-      const result = subject(original)
+      const result = td.imitate(original)
 
-      assert.equal(explain(result.items[0]).name, '.items[0]')
-      assert.equal(explain(result.items[1]).name, '.items[1]')
-      assert.equal(explain(result.items[2]).name, '.items[2]')
-      assert.equal(explain(result.items[3].biz).name, '.items[3].biz')
+      assert.equal(td.explain(result.items[0]).name, '.items[0]')
+      assert.equal(td.explain(result.items[1]).name, '.items[1]')
+      assert.equal(td.explain(result.items[2]).name, '.items[2]')
+      assert.equal(td.explain(result.items[3].biz).name, '.items[3].biz')
     },
     'other top level things': () => {
-      assert.equal(explain(subject([() => 1])[0]).name, '[0]')
+      assert.equal(td.explain(td.imitate([() => 1])[0]).name, '[0]')
       const foo = (function () { return function () {} })()
       foo.bar = function () {}
-      assert.equal(explain(subject(foo)).name, '(anonymous function)')
-      assert.equal(explain(subject(foo).bar).name, '.bar')
+      assert.equal(td.explain(td.imitate(foo)).name, '(anonymous function)')
+      assert.equal(td.explain(td.imitate(foo).bar).name, '.bar')
     }
   }
 }
