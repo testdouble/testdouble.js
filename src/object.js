@@ -61,7 +61,7 @@ var ensureFunctionIsNotPassed = () =>
   log.error('td.object', `Functions are not valid arguments to \`td.object\` (as of testdouble@2.0.0). Please use \`td.function()\` or \`td.constructor()\` instead for creating fake functions.`)
 
 var ensureOtherGarbageIsNotPassed = () =>
-    log.error('td.object', `\
+  log.error('td.object', `\
 To create a fake object with td.object(), pass it a plain object that contains
 functions, an array of function names, or (if your runtime supports ES Proxy
 objects) a string name.

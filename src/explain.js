@@ -22,21 +22,21 @@ export default (testDouble) => {
 }
 
 var nullDescription = () =>
-({
-  name: undefined,
-  callCount: 0,
-  calls: [],
-  description: 'This is not a test double.',
-  isTestDouble: false
-})
+  ({
+    name: undefined,
+    callCount: 0,
+    calls: [],
+    description: 'This is not a test double.',
+    isTestDouble: false
+  })
 
 var testdoubleDescription = (testDouble, stubs, calls) =>
-`This test double ${stringifyName(testDouble)}has ${stubs.length} stubbings and ${calls.length} invocations.`
+  `This test double ${stringifyName(testDouble)}has ${stubs.length} stubbings and ${calls.length} invocations.`
 
 var stubbingDescription = (stubs) =>
   stubs.length > 0
     ? _.reduce(stubs, (desc, stub) =>
-        desc + `\n  - when called with \`(${stringifyArgs(stub.args)})\`, then ${planFor(stub)} ${argsFor(stub)}.`
+      desc + `\n  - when called with \`(${stringifyArgs(stub.args)})\`, then ${planFor(stub)} ${argsFor(stub)}.`
       , '\n\nStubbings:')
     : ''
 
