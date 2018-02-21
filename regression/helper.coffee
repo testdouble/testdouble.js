@@ -1,3 +1,7 @@
+global.chai = require('chai')
+global.NODE_JS = true
+global.td = require('../src')
+
 global.expect = chai.expect
 
 global.xThen = ->
