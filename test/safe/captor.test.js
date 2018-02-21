@@ -9,31 +9,31 @@ module.exports = {
 
     const stubbing = testDouble('PANTS!')
 
-    assert.equal(captor.value, 'PANTS!')
-    assert.equal(stubbing, 'foobaby')
+    assert._isEqual(captor.value, 'PANTS!')
+    assert._isEqual(stubbing, 'foobaby')
   },
   'when stubbing and other matchers do match': () => {
     td.when(testDouble(captor.capture(), 'PANTS!')).thenReturn('barbaby')
 
     const stubbing = testDouble('SHIRTS!', 'PANTS!')
 
-    assert.equal(captor.value, 'SHIRTS!')
-    assert.equal(stubbing, 'barbaby')
+    assert._isEqual(captor.value, 'SHIRTS!')
+    assert._isEqual(stubbing, 'barbaby')
   },
   'when stubbing and other matchers do not match': () => {
     td.when(testDouble(captor.capture(), 'PANTS!')).thenReturn('barbaby')
 
     const stubbing = testDouble('SHIRTS!', 'HATS!')
 
-    assert.strictEqual(captor.value, undefined)
+    assert._isEqual(captor.value, undefined)
   },
   'when verifying': () => {
     testDouble("SHIRTS!")
 
     td.verify(testDouble(captor.capture()))
 
-    assert.equal(captor.value, "SHIRTS!")
-    assert.deepEqual(captor.values, ["SHIRTS!"])
+    assert._isEqual(captor.value, "SHIRTS!")
+    assert._isEqual(captor.values, ["SHIRTS!"])
   },
   'when verifying multiple': () => {
     testDouble("SHIRTS!")
@@ -41,8 +41,8 @@ module.exports = {
 
     td.verify(testDouble(captor.capture()))
 
-    assert.equal(captor.value, "SHIRTS AGAIN!")
-    assert.deepEqual(captor.values, ["SHIRTS!", "SHIRTS AGAIN!"])
+    assert._isEqual(captor.value, "SHIRTS AGAIN!")
+    assert._isEqual(captor.values, ["SHIRTS!", "SHIRTS AGAIN!"])
   }
 }
 

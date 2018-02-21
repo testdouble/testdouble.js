@@ -13,10 +13,10 @@ module.exports = {
         results = r
       })
 
-      assert.strictEqual(callbackInvoked, true)
-      assert.strictEqual(er, null)
-      assert.equal(results, 'some results')
-      assert.equal(returnValue, 'pandas')
+      assert._isEqual(callbackInvoked, true)
+      assert._isEqual(er, null)
+      assert._isEqual(results, 'some results')
+      assert._isEqual(returnValue, 'pandas')
     },
     'TERSE: use thenCallback chain with td.callback implied as last arg': () => {
       td.when(testDouble('/foo')).thenCallback(null, 'some results')
@@ -27,10 +27,10 @@ module.exports = {
         results = r
       })
 
-      assert.strictEqual(callbackInvoked, true)
-      assert.strictEqual(er, null)
-      assert.equal(results, 'some results')
-      assert.strictEqual(returnValue, undefined)
+      assert._isEqual(callbackInvoked, true)
+      assert._isEqual(er, null)
+      assert._isEqual(results, 'some results')
+      assert._isEqual(returnValue, undefined)
     },
     'ORDER-EXPLICIT: use td.callback as a marker with a thenCallback chain': () => {
       td.when(testDouble('/foo', td.callback)).thenCallback(null, 'some results')
@@ -41,10 +41,10 @@ module.exports = {
         results = r
       })
 
-      assert.strictEqual(callbackInvoked, true)
-      assert.strictEqual(er, null)
-      assert.equal(results, 'some results')
-      assert.strictEqual(returnValue, undefined)
+      assert._isEqual(callbackInvoked, true)
+      assert._isEqual(er, null)
+      assert._isEqual(results, 'some results')
+      assert._isEqual(returnValue, undefined)
     },
     'EDGE CASE: use td.callback() as a matcher with a thenCallback chain (callback() wins)': () => {
       td.when(testDouble('/foo', td.callback('lolz'))).thenCallback(null, 'some results')
@@ -55,8 +55,8 @@ module.exports = {
         results = r
       })
 
-      assert.equal(er, 'lolz')
-      assert.strictEqual(results, undefined)
+      assert._isEqual(er, 'lolz')
+      assert._isEqual(results, undefined)
     },
     'EDGE CASE: Multiple td.callbacks, some markers and some matchers': () => {
       let cb1arg1, cb2arg1
@@ -64,8 +64,8 @@ module.exports = {
 
       testDouble('/bar', arg => { cb1arg1 = arg }, arg => { cb2arg1 = arg }, 'hi')
 
-      assert.equal(cb1arg1, 'neat')
-      assert.equal(cb2arg1, 'perfect')
+      assert._isEqual(cb1arg1, 'neat')
+      assert._isEqual(cb2arg1, 'perfect')
     },
     'EDGE CASE: use td.callback as a marker with thenReturn (no-arg invocation is made)': () => {
       td.when(testDouble('/foo', td.callback)).thenReturn(null)
@@ -76,9 +76,9 @@ module.exports = {
         results = r
       })
 
-      assert.strictEqual(callbackInvoked, true)
-      assert.strictEqual(er, undefined)
-      assert.strictEqual(results, undefined)
+      assert._isEqual(callbackInvoked, true)
+      assert._isEqual(er, undefined)
+      assert._isEqual(results, undefined)
     },
     'EDGE CASE: thenCallback used but not satisfied': () => {
       td.when(testDouble('/bar')).thenCallback('a-ha')
@@ -86,7 +86,7 @@ module.exports = {
 
       const result = testDouble('/bar')
 
-      assert.equal(result, 'o_O')
+      assert._isEqual(result, 'o_O')
     }
   },
   'callback is asynchronous': {
@@ -102,9 +102,9 @@ module.exports = {
         if (results) invokedSynchronously = true
       },
       afterEach: () => {
-        assert.strictEqual(callbackInvoked, true)
-        assert.equal(results, 'B')
-        assert.strictEqual(invokedSynchronously, undefined)
+        assert._isEqual(callbackInvoked, true)
+        assert._isEqual(results, 'B')
+        assert._isEqual(invokedSynchronously, undefined)
       }
     },
     'using the delay option': {
@@ -138,8 +138,8 @@ module.exports = {
         if (results.length > 0) invokedSynchronously = true
       },
       afterEach: () => {
-        assert.deepEqual(results, ['H', 'D', 'F', 'B'])
-        assert.strictEqual(invokedSynchronously, undefined)
+        assert._isEqual(results, ['H', 'D', 'F', 'B'])
+        assert._isEqual(invokedSynchronously, undefined)
       }
     }
   }

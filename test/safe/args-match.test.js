@@ -5,7 +5,7 @@ module.exports = {
   'allow matchers': () => {
     result = subject([td.matchers.anything()], [5])
 
-    assert.equal(result, true)
+    assert._isEqual(result, true)
   },
   'disallow matchers': {
     'with a matcher': () => {
@@ -13,12 +13,12 @@ module.exports = {
         allowMatchers: false
       })
 
-      assert.equal(result, false)
+      assert._isEqual(result, false)
     },
     'exact match': () => {
       result = subject([5], [5], {allowMatchers: false})
 
-      assert.equal(result, true)
+      assert._isEqual(result, true)
     }
   }
 }
