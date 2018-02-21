@@ -36,7 +36,7 @@
     "test:unit": "teenytest --helper test/unit-helper.js \"test/unit/**/*.test.js\"",
     "test:safe": "teenytest --helper test/safe-helper.js \"test/safe/**/*.test.js\"",
     "test:ci": "npm run compile && npm run style && npm run test:all && echo \"All done!\"",
-    "test:typescript": "tsc --outDir generated/typescript -p regression/typescript && node generated/typescript/test.js",
+    "test:typescript": "tsc --outDir generated/typescript -p test/typescript && node generated/typescript/test.js",
     "test:example": "./script/run-examples",
     "version:write": "echo \"export default '$npm_package_version'\" > src/version.js",
     "version:changelog": "if command -v github_changelog_generator &>/dev/null; then github_changelog_generator; git commit -m \"Changelog for $npm_package_version\" CHANGELOG.md; else echo Versioning requires you first run 'gem install github_changelog_generator' >&2; fi",
