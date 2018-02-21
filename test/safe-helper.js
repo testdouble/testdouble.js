@@ -11,5 +11,6 @@ module.exports = {
   },
   afterEach: function () {
     td.reset()
+    td.config.reset()
   }
 }

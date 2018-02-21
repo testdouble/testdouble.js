@@ -37,8 +37,5 @@ module.exports = {
       'Error: testdouble.js - td.config - "wat" is not a valid configuration ' +
       'key (valid keys are: ["ignoreWarnings", ' +
       '"promiseConstructor", "suppressErrors"])')
-  },
-  afterEach: () => {
-    td.config.reset()
   }
 }
