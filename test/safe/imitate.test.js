@@ -1,5 +1,3 @@
-import _ from 'lodash'
-
 module.exports = {
   'strict _isEqual stuff (not objects typically)': () => {
     [

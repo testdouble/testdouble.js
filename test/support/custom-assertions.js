@@ -47,6 +47,5 @@ const stringify = (thing) =>
   stringifyObject(thing, {
     indent: '  ',
     singleQuotes: false,
-    inlineCharacterLimit: 65,
+    inlineCharacterLimit: 65
   })
-
