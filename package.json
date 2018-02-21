@@ -32,8 +32,9 @@
     "cover:report": "codeclimate-test-reporter < coverage/lcov.info",
     "style": "standard --fix",
     "test": "mocha --ui mocha-given --reporter $npm_package_config_mocha_reporter --compilers js:babel-core/register,coffee:coffeescript --recursive regression/helper.coffee regression/src",
-    "test:all": "npm run test:unit && npm test && npm run test:example && npm run test:typescript",
-    "test:unit": "teenytest",
+    "test:all": "npm run test:unit && npm run test:safe && npm test && npm run test:example && npm run test:typescript",
+    "test:unit": "teenytest --helper test/unit-helper.js \"test/unit/**/*.test.js\"",
+    "test:safe": "teenytest --helper test/safe-helper.js \"test/safe/**/*.test.js\"",
     "test:ci": "npm run compile && npm run style && npm run test:all && echo \"All done!\"",
     "test:typescript": "tsc --outDir generated/typescript -p regression/typescript && node generated/typescript/test.js",
     "test:example": "./script/run-examples",
@@ -56,10 +57,6 @@
         }
       ]
     ]
-  },
-  "teenytest": {
-    "testLocator": "test/**/*.test.js",
-    "helper": "test/helper.js"
   },
   "browser": {
     "./lib/replace/module.js": "./lib/replace/module.browser.js",

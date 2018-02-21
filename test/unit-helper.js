@@ -2,6 +2,7 @@ require('babel-core/register')({
   presets: ['env']
 })
 global.assert = require('assert')
+global.ES_SUPPORT = require('./support/es-support')
 global.td = require('testdouble') // <-- a known previous devDep version!!!!
 // global.pry = require('pryjs')
 

@@ -1,7 +1,5 @@
 import _ from 'lodash'
 
-import td from '../../../src/index'
-
 module.exports = {
   'strict equal stuff (not objects typically)': () => {
     [
