@@ -62,7 +62,7 @@ module.exports = {
       let cb1arg1, cb2arg1
       td.when(testDouble('/bar', td.callback('neat'), td.callback, 'hi')).thenCallback('perfect')
 
-      testDouble('/bar', (arg => cb1arg1 = arg), (arg => cb2arg1 = arg), 'hi')
+      testDouble('/bar', arg => { cb1arg1 = arg }, arg => { cb2arg1 = arg }, 'hi')
 
       assert.equal(cb1arg1, 'neat')
       assert.equal(cb2arg1, 'perfect')
@@ -90,7 +90,7 @@ module.exports = {
     }
   },
   'callback is asynchronous': {
-    'using the defer option':  {
+    'using the defer option': {
       'like this': (done) => {
         td.when(testDouble('/A'), {defer: true}).thenCallback(null, 'B')
 

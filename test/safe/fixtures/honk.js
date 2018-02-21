@@ -1,3 +1,3 @@
 module.exports = function () {
-  throw 'honk'
+  throw 'honk' // eslint-disable-line
 }
