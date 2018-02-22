@@ -1,8 +1,7 @@
-let subject, ogWarn, warnings
+import subject from '../../src/log'
+
+let ogWarn, warnings
 module.exports = {
-  beforeEach: () => {
-    subject = require('../../src/log')['default']
-  },
   '.warn': {
     beforeEach: () => {
       ogWarn = console.warn
