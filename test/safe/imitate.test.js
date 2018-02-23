@@ -1,5 +1,5 @@
 module.exports = {
-  'strict _isEqual stuff (not objects typically)': () => {
+  'strict _isEqual stuff (not objects typically)' () {
     [
       [null, null],
       [undefined, undefined],
@@ -17,7 +17,7 @@ module.exports = {
     })
     assert._isEqual(isNaN(td.imitate(NaN)), true)
   },
-  'deep _isEqual but not strict equal stuff': () => {
+  'deep _isEqual but not strict equal stuff' () {
     [
       [new Boolean(true), new Boolean(true)], // eslint-disable-line
       [new Number(8), new Number(8)], // eslint-disable-line
@@ -35,7 +35,7 @@ module.exports = {
     })
     assert._isEqual(td.imitate(new Error('foo')).message, 'foo')
   },
-  'skips encountered objects': () => {
+  'skips encountered objects' () {
     const foo = {a: 1, b: 2}
     const bar = {c: 3, foo: foo}
     foo.bar = bar
@@ -61,7 +61,7 @@ module.exports = {
     assert._isEqual(result.item, result.item.bar.foo)
     assert._isEqual(result.item.bar, result.item.bar.foo.bar)
   },
-  'ensure we do NOT invoke custom user constructors bc side effects': () => {
+  'ensure we do NOT invoke custom user constructors bc side effects' () {
     let calls = 0
     class Thing {
       constructor () {
@@ -77,7 +77,7 @@ module.exports = {
     assert._isNotEqual(result.item, thing)
     assert._isEqual(calls, 1)
   },
-  'any functions are converted to test doubles with prefixed names': () => {
+  'any functions are converted to test doubles with prefixed names' () {
     const original = function pants () {}
     original.shirt = function () {}
     original.shirt.tie = function () {}
@@ -88,7 +88,7 @@ module.exports = {
     assert._isEqual(td.explain(result.shirt).name, 'pants.shirt')
     assert._isEqual(td.explain(result.shirt.tie).name, 'pants.shirt.tie')
   },
-  'skips over generator functions, even their custom properties': () => {
+  'skips over generator functions, even their custom properties' () {
     // This is currently unsupported, expect to kill this test someday
     if (!ES_SUPPORT.GENERATORS) return
     const original = {
@@ -103,7 +103,7 @@ module.exports = {
     assert._isEqual(result.func.customProp, otherRef) // e.g. NOT cloned
   },
   'naming stuff': {
-    'prototypal things': () => {
+    'prototypal things' () {
       class Thing {
         doStuff () {}
       }
@@ -117,7 +117,7 @@ module.exports = {
       assert._isEqual(td.explain(result.prototype.doStuff.bar.baz).name,
         'Thing.prototype.doStuff.bar.baz')
     },
-    'array things': () => {
+    'array things' () {
       const original = {
         items: [
           function () {},
@@ -136,7 +136,7 @@ module.exports = {
       assert._isEqual(td.explain(result.items[2]).name, '.items[2]')
       assert._isEqual(td.explain(result.items[3].biz).name, '.items[3].biz')
     },
-    'other top level things': () => {
+    'other top level things' () {
       assert._isEqual(td.explain(td.imitate([() => 1])[0]).name, '[0]')
       const foo = (function () { return function () {} })()
       foo.bar = function () {}

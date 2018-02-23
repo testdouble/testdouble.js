@@ -6,8 +6,8 @@ import log from './log'
 import stubbings from './store/stubbings'
 import tdConfig from './config'
 
-export default (__userDoesRehearsalInvocationHere__, config = {}) =>
-  ({
+export default function when (__userDoesRehearsalInvocationHere__, config = {}) {
+  return ({
     thenReturn (...stubbedValues) {
       return addStubbing(stubbedValues, config, 'thenReturn')
     },
@@ -29,8 +29,9 @@ export default (__userDoesRehearsalInvocationHere__, config = {}) =>
       return addStubbing(stubbedValues, config, 'thenReject')
     }
   })
+}
 
-var addStubbing = (stubbedValues, config, plan) => {
+function addStubbing (stubbedValues, config, plan) {
   const last = calls.pop()
   ensureRehearsalOccurred(last)
   _.assign(config, {plan})
@@ -38,7 +39,7 @@ var addStubbing = (stubbedValues, config, plan) => {
   return last.testDouble
 }
 
-var ensureRehearsalOccurred = (last) => {
+function ensureRehearsalOccurred (last) {
   if (!last) {
     return log.error('td.when', `\
 No test double invocation call detected for \`when()\`.
@@ -50,7 +51,7 @@ No test double invocation call detected for \`when()\`.
   }
 }
 
-var concatImpliedCallback = (args, config) => {
+function concatImpliedCallback (args, config) {
   if (config.plan !== 'thenCallback') {
     return args
   } else if (!_.some(args, isCallback)) {
@@ -60,7 +61,7 @@ var concatImpliedCallback = (args, config) => {
   }
 }
 
-var warnIfPromiseless = () => {
+function warnIfPromiseless () {
   if (tdConfig().promiseConstructor == null) {
     log.warn('td.when', `\
 no promise constructor is set, so this \`thenResolve\` or \`thenReject\` stubbing

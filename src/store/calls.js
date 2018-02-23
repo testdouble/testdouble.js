@@ -12,7 +12,7 @@ export default {
   },
 
   pop () {
-    return _.tap(callHistory.pop(), (call) => {
+    return _.tap(callHistory.pop(), function (call) {
       if (call != null) {
         store.for(call.testDouble).calls.pop()
       }
@@ -29,8 +29,9 @@ export default {
   },
 
   where (testDouble, args, config) {
-    return _.filter(store.for(testDouble).calls, call =>
-      argsMatch(args, call.args, config))
+    return _.filter(store.for(testDouble).calls, function (call) {
+      return argsMatch(args, call.args, config)
+    })
   },
 
   for (testDouble) {

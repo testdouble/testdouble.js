@@ -1,9 +1,9 @@
 let testDouble, result
 module.exports = {
-  beforeEach: () => {
+  beforeEach () {
     testDouble = td.function()
   },
-  'a brand new test double': () => {
+  'a brand new test double' () {
     result = td.explain(testDouble)
 
     assert._isEqual(result, {
@@ -14,7 +14,7 @@ module.exports = {
       isTestDouble: true
     })
   },
-  'a named test double': () => {
+  'a named test double' () {
     testDouble = td.function('foobaby')
 
     result = td.explain(testDouble)
@@ -22,19 +22,19 @@ module.exports = {
     assert._isEqual(result.description, 'This test double `foobaby` has 0 stubbings and 0 invocations.')
     assert._isEqual(result.name, 'foobaby')
   },
-  'a double with some interactions': () => {
+  'a double with some interactions' () {
     td.when(testDouble(88)).thenReturn(5)
     td.when(testDouble('two things!')).thenReturn('woah', 'such')
-    testDouble(88)
-    testDouble('not 88', 44)
+    testDouble.call('lol', 88)
+    testDouble.call('woo', 'not 88', 44)
 
     result = td.explain(testDouble)
 
     assert._isEqual(result, {
       name: undefined,
       calls: [
-        {context: this, args: [88]},
-        {context: this, args: ['not 88', 44]}
+        {context: 'lol', args: [88]},
+        {context: 'woo', args: ['not 88', 44]}
       ],
       callCount: 2,
       description: `This test double has 2 stubbings and 2 invocations.
@@ -49,7 +49,7 @@ Invocations:
       isTestDouble: true
     })
   },
-  'a double with callback': () => {
+  'a double with callback' () {
     td.when(testDouble(14)).thenCallback(null, 8)
 
     result = td.explain(testDouble)
@@ -65,7 +65,7 @@ Stubbings:
       isTestDouble: true
     })
   },
-  'a double with resolve': () => {
+  'a double with resolve' () {
     td.when(testDouble(14)).thenResolve(8)
 
     result = td.explain(testDouble)
@@ -81,7 +81,7 @@ Stubbings:
       isTestDouble: true
     })
   },
-  'a double with reject': () => {
+  'a double with reject' () {
     td.when(testDouble(14)).thenReject(8)
 
     result = td.explain(testDouble)
@@ -97,7 +97,7 @@ Stubbings:
       isTestDouble: true
     })
   },
-  'passed a non-test double': () => {
+  'passed a non-test double' () {
     testDouble = 42
 
     result = td.explain(testDouble)

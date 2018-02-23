@@ -3,30 +3,30 @@ import subject from '../../src/log'
 let ogWarn, warnings
 module.exports = {
   '.warn': {
-    beforeEach: () => {
+    beforeEach () {
       ogWarn = console.warn
     },
-    afterEach: () => {
+    afterEach () {
       console.warn = ogWarn
     },
     'when console.warn is a thing': {
-      beforeEach: () => {
+      beforeEach () {
         warnings = []
         console.warn = function (msg) {
           warnings.push(msg)
         }
       },
-      'no URL': () => {
+      'no URL' () {
         subject.warn('td.someFunc', 'ugh')
 
         assert._isEqual(warnings[0], 'Warning: testdouble.js - td.someFunc - ugh')
       },
-      'with a documentation URL': () => {
+      'with a documentation URL' () {
         subject.warn('td.someFunc', 'ugh', 'http?')
 
         assert._isEqual(warnings[0], 'Warning: testdouble.js - td.someFunc - ugh (see: http? )')
       },
-      'with td.config({ignoreWarnings: true})': () => {
+      'with td.config({ignoreWarnings: true})' () {
         td.config({ignoreWarnings: true})
 
         subject.warn('waaaarning')
@@ -34,14 +34,14 @@ module.exports = {
         assert._isEqual(warnings.length, 0)
       }
     },
-    'when console.warn does not exist': () => {
+    'when console.warn does not exist' () {
       console.warn = null
 
       subject.warn('lolololol', 'lol')
 
       // No explosions occur
     },
-    'when console does not exist': () => {
+    'when console does not exist' () {
       const ogConsole = console
       delete global.console
 
@@ -52,14 +52,14 @@ module.exports = {
     }
   },
   '.error': {
-    'suppressErrors: true': () => {
+    'suppressErrors: true' () {
       td.config({suppressErrors: true})
 
       subject.error('hi', 'hi')
 
       // It does not actually fail
     },
-    'without url': () => {
+    'without url' () {
       let e
       try {
         subject.error('td.lol', 'oops')
@@ -69,7 +69,7 @@ module.exports = {
 
       assert._isEqual(e.message, 'Error: testdouble.js - td.lol - oops')
     },
-    'with url': () => {
+    'with url' () {
       let e
       try {
         subject.error('td.lol', 'oops', 'ftp:')
@@ -80,7 +80,7 @@ module.exports = {
       assert._isEqual(e.message, 'Error: testdouble.js - td.lol - oops (see: ftp: )')
     }
   },
-  '.fail': () => {
+  '.fail' () {
     let e
     try {
       subject.fail('boom. failed.')

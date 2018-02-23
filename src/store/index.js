@@ -24,9 +24,9 @@ export default {
         stubbings: [],
         calls: [],
         verifications: []
-      }, newEntry =>
-        globalStore.push(newEntry)
-      )
+      }, function (newEntry) {
+        return globalStore.push(newEntry)
+      })
     }
   }
 }

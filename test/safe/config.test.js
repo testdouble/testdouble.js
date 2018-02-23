@@ -1,19 +1,19 @@
 module.exports = {
-  'sets some ok defaults': () => {
+  'sets some ok defaults' () {
     assert.deepEqual(td.config(), {
       ignoreWarnings: false,
       promiseConstructor: global.Promise,
       suppressErrors: false
     })
   },
-  'overriding a real property': () => {
+  'overriding a real property' () {
     const config = td.config({ignoreWarnings: true})
 
     assert._isEqual(config.ignoreWarnings, true)
     assert._isEqual(config.ignoreWarnings, true)
     assert._isEqual(td.config().ignoreWarnings, true)
   },
-  'overriding a deprecated property': () => {
+  'overriding a deprecated property' () {
     const ogWarn = console.warn
     const warnings = []
     console.warn = function (warning) { warnings.push(warning) }
@@ -28,7 +28,7 @@ module.exports = {
 
     console.warn = ogWarn
   },
-  'overriding a non-existent property': () => {
+  'overriding a non-existent property' () {
     let error
 
     try { td.config({wat: 'wat?'}) } catch (e) { error = e }

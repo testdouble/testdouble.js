@@ -1,10 +1,10 @@
 let testDouble, returnValue, callbackInvoked, er, results, invokedSynchronously
 module.exports = {
-  beforeEach: () => {
+  beforeEach () {
     testDouble = td.func()
   },
   'callback is synchronous': {
-    'VERBOSE: using td.callback() as a matcher with a thenReturn chain': () => {
+    'VERBOSE: using td.callback() as a matcher with a thenReturn chain' () {
       td.when(testDouble('/foo', td.callback(null, 'some results'))).thenReturn('pandas')
 
       returnValue = testDouble('/foo', (e, r) => {
@@ -18,7 +18,7 @@ module.exports = {
       assert._isEqual(results, 'some results')
       assert._isEqual(returnValue, 'pandas')
     },
-    'TERSE: use thenCallback chain with td.callback implied as last arg': () => {
+    'TERSE: use thenCallback chain with td.callback implied as last arg' () {
       td.when(testDouble('/foo')).thenCallback(null, 'some results')
 
       returnValue = testDouble('/foo', (e, r) => {
@@ -32,7 +32,7 @@ module.exports = {
       assert._isEqual(results, 'some results')
       assert._isEqual(returnValue, undefined)
     },
-    'ORDER-EXPLICIT: use td.callback as a marker with a thenCallback chain': () => {
+    'ORDER-EXPLICIT: use td.callback as a marker with a thenCallback chain' () {
       td.when(testDouble('/foo', td.callback)).thenCallback(null, 'some results')
 
       returnValue = testDouble('/foo', (e, r) => {
@@ -46,7 +46,7 @@ module.exports = {
       assert._isEqual(results, 'some results')
       assert._isEqual(returnValue, undefined)
     },
-    'EDGE CASE: use td.callback() as a matcher with a thenCallback chain (callback() wins)': () => {
+    'EDGE CASE: use td.callback() as a matcher with a thenCallback chain (callback() wins)' () {
       td.when(testDouble('/foo', td.callback('lolz'))).thenCallback(null, 'some results')
 
       returnValue = testDouble('/foo', (e, r) => {
@@ -58,7 +58,7 @@ module.exports = {
       assert._isEqual(er, 'lolz')
       assert._isEqual(results, undefined)
     },
-    'EDGE CASE: Multiple td.callbacks, some markers and some matchers': () => {
+    'EDGE CASE: Multiple td.callbacks, some markers and some matchers' () {
       let cb1arg1, cb2arg1
       td.when(testDouble('/bar', td.callback('neat'), td.callback, 'hi')).thenCallback('perfect')
 
@@ -67,7 +67,7 @@ module.exports = {
       assert._isEqual(cb1arg1, 'neat')
       assert._isEqual(cb2arg1, 'perfect')
     },
-    'EDGE CASE: use td.callback as a marker with thenReturn (no-arg invocation is made)': () => {
+    'EDGE CASE: use td.callback as a marker with thenReturn (no-arg invocation is made)' () {
       td.when(testDouble('/foo', td.callback)).thenReturn(null)
 
       returnValue = testDouble('/foo', (e, r) => {
@@ -80,7 +80,7 @@ module.exports = {
       assert._isEqual(er, undefined)
       assert._isEqual(results, undefined)
     },
-    'EDGE CASE: thenCallback used but not satisfied': () => {
+    'EDGE CASE: thenCallback used but not satisfied' () {
       td.when(testDouble('/bar')).thenCallback('a-ha')
       td.when(testDouble('/bar')).thenReturn('o_O')
 
@@ -101,7 +101,7 @@ module.exports = {
         })
         if (results) invokedSynchronously = true
       },
-      afterEach: () => {
+      afterEach () {
         assert._isEqual(callbackInvoked, true)
         assert._isEqual(results, 'B')
         assert._isEqual(invokedSynchronously, undefined)
@@ -137,7 +137,7 @@ module.exports = {
 
         if (results.length > 0) invokedSynchronously = true
       },
-      afterEach: () => {
+      afterEach () {
         assert._isEqual(results, ['H', 'D', 'F', 'B'])
         assert._isEqual(invokedSynchronously, undefined)
       }

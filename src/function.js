@@ -4,13 +4,14 @@ import store from './store'
 import stubbings from './store/stubbings'
 import imitate from './imitate'
 
-export default (nameOrFunc, __optionalName) =>
-  _.isFunction(nameOrFunc)
+export default function func (nameOrFunc, __optionalName) {
+  return _.isFunction(nameOrFunc)
     ? imitate(nameOrFunc)
     : createTestDoubleNamed(nameOrFunc || __optionalName)
+}
 
-var createTestDoubleNamed = (name) =>
-  _.tap(createTestDoubleFunction(), (testDouble) => {
+var createTestDoubleNamed = function (name) {
+  return _.tap(createTestDoubleFunction(), (testDouble) => {
     const entry = store.for(testDouble, true)
     if (name != null) {
       entry.name = name
@@ -19,9 +20,11 @@ var createTestDoubleNamed = (name) =>
       testDouble.toString = () => '[test double (unnamed)]'
     }
   })
+}
 
-var createTestDoubleFunction = () =>
-  function testDouble (...args) {
+var createTestDoubleFunction = function () {
+  return function testDouble (...args) {
     calls.log(testDouble, args, this)
     return stubbings.invoke(testDouble, args, this)
   }
+}

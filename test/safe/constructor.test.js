@@ -2,12 +2,12 @@ let Thing, SuperThing, FakeConstructor, fakeInstance
 
 module.exports = {
   'being given a constructor function': {
-    beforeEach: () => {
+    beforeEach () {
       SuperThing = function SuperThing () {}
       SuperThing.prototype.biz = () => 1
       Object.defineProperties(SuperThing.prototype, {
         secretFunc: {
-          value: () => {},
+          value () {},
           enumerable: false,
           writable: true
         }
@@ -21,7 +21,7 @@ module.exports = {
       Thing.staticAttr = 'qux'
       Object.defineProperties(Thing, {
         secretStaticFunc: {
-          value: () => {},
+          value () {},
           enumerable: false,
           writable: true
         }
@@ -30,10 +30,10 @@ module.exports = {
       FakeConstructor = td.constructor(Thing)
       fakeInstance = new FakeConstructor('pants')
     },
-    'the constructor function itself is called': () => {
+    'the constructor function itself is called' () {
       td.verify(new FakeConstructor('pants'))
     },
-    'stubbing it (with an error, return makes no sense)': () => {
+    'stubbing it (with an error, return makes no sense)' () {
       let error
       td.when(new FakeConstructor('!')).thenThrow('¡')
 
@@ -45,46 +45,46 @@ module.exports = {
 
       assert._isEqual(error, '¡')
     },
-    'instance methods can be stubbed': () => {
+    'instance methods can be stubbed' () {
       td.when(fakeInstance.foo()).thenReturn(7)
 
       assert._isEqual(fakeInstance.foo(), 7)
     },
-    'stub method on prototype, use from any instance': () => {
+    'stub method on prototype, use from any instance' () {
       td.when(FakeConstructor.prototype.foo()).thenReturn(4)
 
       assert._isEqual(FakeConstructor.prototype.foo(), 4)
       assert._isEqual(fakeInstance.foo(), 4)
     },
-    'the static method can be stubbed': () => {
+    'the static method can be stubbed' () {
       td.when(FakeConstructor.bar()).thenReturn(5)
 
       assert._isEqual(FakeConstructor.bar(), 5)
     },
-    'super type methods can be stubbed, too': () => {
+    'super type methods can be stubbed, too' () {
       td.when(fakeInstance.biz()).thenReturn(6)
 
       assert._isEqual(fakeInstance.biz(), 6)
     },
-    'things print OK': () => {
+    'things print OK' () {
       assert._isEqual(FakeConstructor.toString(), '[test double for "Thing"]')
       assert._isEqual(FakeConstructor.prototype.foo.toString(), '[test double for "Thing.prototype.foo"]')
       assert._isEqual(FakeConstructor.bar.toString(), '[test double for "Thing.bar"]')
     },
-    'non-enumerables are covered': () => {
+    'non-enumerables are covered' () {
       assert._isEqual(td.explain(FakeConstructor.secretStaticFunc).isTestDouble, true)
       assert._isEqual(td.explain(fakeInstance.secretFunc).isTestDouble, true)
     },
-    'instanceof checks out': () => {
+    'instanceof checks out' () {
       assert._isEqual(fakeInstance instanceof Thing, true)
     },
-    'original attributes are carried over': () => {
+    'original attributes are carried over' () {
       assert._isEqual(FakeConstructor.prototype.instanceAttr, 'baz')
       assert._isEqual(fakeInstance.instanceAttr, 'baz')
       assert._isEqual(FakeConstructor.staticAttr, 'qux')
     }
   },
-  'being given an array of function names': () => {
+  'being given an array of function names' () {
     FakeConstructor = td.constructor(['foo', 'bar'])
     fakeInstance = new FakeConstructor('biz')
 
@@ -96,7 +96,7 @@ module.exports = {
     assert._isEqual(fakeInstance.toString(), '[test double instance of constructor]')
     assert._isEqual(fakeInstance.foo.toString(), '[test double for "#foo"]')
   },
-  'edge case: being given a Symbol as function name': () => {
+  'edge case: being given a Symbol as function name' () {
     if (!global.Symbol) return
     const symbolFoo = Symbol('foo')
     FakeConstructor = td.constructor([symbolFoo])
@@ -109,7 +109,7 @@ module.exports = {
     assert._isEqual(fakeInstance.toString(), '[test double instance of constructor]')
     assert._isEqual(fakeInstance[symbolFoo].toString(), '[test double for "#Symbol(foo)"]')
   },
-  'edge case: being given a function without prototypal methods': () => {
+  'edge case: being given a function without prototypal methods' () {
     const boringFunc = function () {}
     boringFunc.foo = function () {}
 
