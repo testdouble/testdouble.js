@@ -6,7 +6,7 @@ module.exports = {
   turnSignal: function () {
     throw 'turnSignal' // eslint-disable-line
   },
-  brights: class Brights {
+  Brights: class Brights {
     beBright () {
       throw 'too bright!' // eslint-disable-line
     }
