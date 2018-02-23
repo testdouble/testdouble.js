@@ -1,7 +1,10 @@
 import argsMatch from '../../src/args-match'
 
 const matches = (expected, actual) =>
-  argsMatch([expected], [actual], {})
+  assert._isEqual(argsMatch([expected], [actual], {}), true)
+
+const doesntMatch = (expected, actual) =>
+  assert._isEqual(argsMatch([expected], [actual], {}), false)
 
 let matcher, matcherInstance
 module.exports = {
@@ -55,34 +58,34 @@ module.exports = {
     'numbers' () {
       matcher = td.matchers.isA(Number)
 
-      assert._isEqual(matches(matcher, 5), true)
-      assert._isEqual(matches(matcher, new Number(5)), true) // eslint-disable-line
-      assert._isEqual(matches(matcher, Number(5)), true)
-      assert._isEqual(matches(matcher, Number('foo')), true)
-      assert._isEqual(matches(matcher, 'foo'), false)
+      matches(matcher, 5)
+      matches(matcher, new Number(5)) // eslint-disable-line
+      matches(matcher, Number(5))
+      matches(matcher, Number('foo'))
+      doesntMatch(matcher, 'foo')
     },
     'strings' () {
       matcher = td.matchers.isA(String)
 
-      assert._isEqual(matches(matcher, 5), false)
-      assert._isEqual(matches(matcher, 'plop'), true)
-      assert._isEqual(matches(matcher, String('plop')), true)
-      assert._isEqual(matches(matcher, new String('plop')), true) // eslint-disable-line
+      doesntMatch(matcher, 5)
+      matches(matcher, 'plop')
+      matches(matcher, String('plop'))
+      matches(matcher, new String('plop')) // eslint-disable-line
     },
     'booleans' () {
       matcher = td.matchers.isA(Boolean)
-      assert._isEqual(matches(matcher, false), true)
-      assert._isEqual(matches(matcher, true), true)
-      assert._isEqual(matches(matcher, Boolean(false)), true)
-      assert._isEqual(matches(matcher, new Boolean(false)), true)  // eslint-disable-line
-      assert._isEqual(matches(matcher, 'false'), false)
-      assert._isEqual(matches(matcher, void 0), false)
+      matches(matcher, false)
+      matches(matcher, true)
+      matches(matcher, Boolean(false))
+      matches(matcher, new Boolean(false))  // eslint-disable-line
+      doesntMatch(matcher, 'false')
+      doesntMatch(matcher, void 0)
     },
     'other junk' () {
-      assert._isEqual(matches(td.matchers.isA(Array), []), true)
-      assert._isEqual(matches(td.matchers.isA(Object), []), true)
-      assert._isEqual(matches(td.matchers.isA(Date), new Date()), true)
-      assert._isEqual(matches(td.matchers.isA(Date), new Object()), false)  // eslint-disable-line
+      matches(td.matchers.isA(Array), [])
+      matches(td.matchers.isA(Object), [])
+      matches(td.matchers.isA(Date), new Date())
+      doesntMatch(td.matchers.isA(Date), new Object())  // eslint-disable-line
     },
     'names' () {
       assert._isEqual(td.matchers.isA({
@@ -95,48 +98,48 @@ module.exports = {
     }
   },
   '.anything' () {
-    assert._isEqual(matches(td.matchers.anything(), null), true)
-    assert._isEqual(matches(td.matchers.anything(), void 0), true)
-    assert._isEqual(matches(td.matchers.anything(), new Date()), true)
-    assert._isEqual(matches(td.matchers.anything(), {
+    matches(td.matchers.anything(), null)
+    matches(td.matchers.anything(), void 0)
+    matches(td.matchers.anything(), new Date())
+    matches(td.matchers.anything(), {
       a: 'foo',
       b: 'bar'
-    }), true)
+    })
   },
   '.contains': {
     'strings' () {
-      assert._isEqual(matches(td.matchers.contains('bar'), 'foobarbaz'), true)
-      assert._isEqual(matches(td.matchers.contains('biz'), 'foobarbaz'), false)
+      matches(td.matchers.contains('bar'), 'foobarbaz')
+      doesntMatch(td.matchers.contains('biz'), 'foobarbaz')
     },
     'arrays' () {
-      assert._isEqual(matches(td.matchers.contains('a'), ['a', 'b', 'c']), true)
-      assert._isEqual(matches(td.matchers.contains('a', 'c'), ['a', 'b', 'c']), true)
-      assert._isEqual(matches(td.matchers.contains(['a', 'c']), ['a', 'b', 'c']), false)
-      assert._isEqual(matches(td.matchers.contains(['a', 'c']), [1, ['a', 'c'], 4]), true)
-      assert._isEqual(matches(td.matchers.contains(['a', 'c']), ['a', 'b', 'z']), false)
-      assert._isEqual(matches(td.matchers.contains(true, 5, null, void 0), [true, 5, void 0, null]), true)
-      assert._isEqual(matches(td.matchers.contains(true, 5, null, void 0), [true, 5, null]), false)
-      assert._isEqual(matches(td.matchers.contains('b', td.matchers.isA(Number)), ['a', 3, 'b']), true)
+      matches(td.matchers.contains('a'), ['a', 'b', 'c'])
+      matches(td.matchers.contains('a', 'c'), ['a', 'b', 'c'])
+      doesntMatch(td.matchers.contains(['a', 'c']), ['a', 'b', 'c'])
+      matches(td.matchers.contains(['a', 'c']), [1, ['a', 'c'], 4])
+      doesntMatch(td.matchers.contains(['a', 'c']), ['a', 'b', 'z'])
+      matches(td.matchers.contains(true, 5, null, void 0), [true, 5, void 0, null])
+      doesntMatch(td.matchers.contains(true, 5, null, void 0), [true, 5, null])
+      matches(td.matchers.contains('b', td.matchers.isA(Number)), ['a', 3, 'b'])
     },
     'objects' () {
-      assert._isEqual(matches(td.matchers.contains({
+      matches(td.matchers.contains({
         foo: 'bar',
         baz: 42
       }), {
         foo: 'bar',
         baz: 42,
         stuff: this
-      }), true)
+      })
 
-      assert._isEqual(matches(td.matchers.contains({
+      doesntMatch(td.matchers.contains({
         foo: 'bar',
         lol: 42
       }), {
         foo: 'bar',
         baz: 42
-      }), false)
+      })
 
-      assert._isEqual(matches(td.matchers.contains({
+      matches(td.matchers.contains({
         lol: {
           deep: [4, 2]
         }
@@ -145,15 +148,15 @@ module.exports = {
           deep: [4, 2],
           other: 'stuff'
         }
-      }), true)
+      })
 
-      assert._isEqual(matches(td.matchers.contains({
+      doesntMatch(td.matchers.contains({
         deep: {
           thing: 'stuff'
         }
-      }), {}), false)
+      }), {})
 
-      assert._isEqual(matches(td.matchers.contains({
+      matches(td.matchers.contains({
         deep: {
           thing: 'stuff'
         }
@@ -162,9 +165,9 @@ module.exports = {
           thing: 'stuff',
           shallow: 5
         }
-      }), true)
+      })
 
-      assert._isEqual(matches(td.matchers.contains({
+      matches(td.matchers.contains({
         container: {
           size: 'S'
         }
@@ -174,45 +177,45 @@ module.exports = {
           type: 'cup',
           size: 'S'
         }
-      }), true)
+      })
     },
     'objects containing matchers' () {
-      assert._isEqual(matches(td.matchers.contains(td.matchers.isA(Number)), {
+      matches(td.matchers.contains(td.matchers.isA(Number)), {
         a: 'foo',
         b: 32
-      }), true)
+      })
 
-      assert._isEqual(matches(td.matchers.contains(td.matchers.isA(Function)), {
+      doesntMatch(td.matchers.contains(td.matchers.isA(Function)), {
         a: 'foo',
         b: 32
-      }), false)
+      })
 
-      assert._isEqual(matches(td.matchers.contains({
+      matches(td.matchers.contains({
         a: td.matchers.contains(1, 2)
       }), {
         a: [4, 1, 2, 3]
-      }), true)
+      })
 
-      assert._isEqual(matches(td.matchers.contains({
+      doesntMatch(td.matchers.contains({
         a: td.matchers.contains(1, 5)
       }), {
         a: [4, 1, 2, 3]
-      }), false)
+      })
 
-      assert._isEqual(matches(td.matchers.contains({
+      matches(td.matchers.contains({
         someString: td.matchers.isA(String)
       }), {
         someString: 'beautifulString'
-      }), true)
+      })
 
-      assert._isEqual(matches(td.matchers.contains({
+      matches(td.matchers.contains({
         someString: td.matchers.isA(String)
       }), {
         someString: 'beautifulString',
         irrelevant: true
-      }), true)
+      })
 
-      assert._isEqual(matches(td.matchers.contains({
+      matches(td.matchers.contains({
         nested: {
           someString: td.matchers.isA(String)
         },
@@ -222,15 +225,15 @@ module.exports = {
           someString: 'beautifulString'
         },
         relevant: true
-      }), true)
+      })
 
-      assert._isEqual(matches(td.matchers.contains({
+      doesntMatch(td.matchers.contains({
         someString: td.matchers.isA(String)
       }), {
         someString: 4
-      }), false)
+      })
 
-      assert._isEqual(matches(td.matchers.contains({
+      matches(td.matchers.contains({
         nested: td.matchers.contains({
           nestedString: td.matchers.isA(String)
         })
@@ -240,9 +243,9 @@ module.exports = {
           irrelevant: true
         },
         irrelevantHere: 'alsoTrue'
-      }), true)
+      })
 
-      assert._isEqual(matches(td.matchers.contains({
+      doesntMatch(td.matchers.contains({
         nested: td.matchers.contains({
           nestedString: td.matchers.isA(Number)
         })
@@ -252,40 +255,40 @@ module.exports = {
           irrelevant: true
         },
         irrelevantHere: 'not a number!'
-      }), false)
+      })
 
-      assert._isEqual(matches(td.matchers.contains({
+      matches(td.matchers.contains({
         a: [td.matchers.isA(Number)]
       }), {
         a: [5]
-      }), true)
+      })
     },
     'regexp' () {
-      assert._isEqual(matches(td.matchers.contains(/abc/), 'abc'), true)
-      assert._isEqual(matches(td.matchers.contains(/abc/), {
+      matches(td.matchers.contains(/abc/), 'abc')
+      doesntMatch(td.matchers.contains(/abc/), {
         foo: 'bar'
-      }), false)
-      assert._isEqual(matches(td.matchers.contains(/abc/), ['foo', 'bar']), false)
+      })
+      doesntMatch(td.matchers.contains(/abc/), ['foo', 'bar'])
     },
     'nonsense' () {
-      assert._isEqual(matches(td.matchers.contains(42), 42), false)
-      assert._isEqual(matches(td.matchers.contains(null), 'shoo'), false)
-      assert._isEqual(matches(td.matchers.contains(), 'shoo'), false)
-      assert._isEqual(matches(td.matchers.contains({}), void 0), false)
+      doesntMatch(td.matchers.contains(42), 42)
+      doesntMatch(td.matchers.contains(null), 'shoo')
+      doesntMatch(td.matchers.contains(), 'shoo')
+      doesntMatch(td.matchers.contains({}), void 0)
     }
   },
   'argThat' () {
-    assert._isEqual(matches(td.matchers.argThat(function (arg) {
+    matches(td.matchers.argThat(function (arg) {
       return arg > 5
-    }), 6), true)
+    }), 6)
 
-    assert._isEqual(matches(td.matchers.argThat(function (arg) {
+    doesntMatch(td.matchers.argThat(function (arg) {
       return arg > 5
-    }), 5), false)
+    }), 5)
   },
   'not' () {
-    assert._isEqual(matches(td.matchers.not(5), 6), true)
-    assert._isEqual(matches(td.matchers.not(5), 5), false)
-    assert._isEqual(matches(td.matchers.not(['hi']), ['hi']), false)
+    matches(td.matchers.not(5), 6)
+    doesntMatch(td.matchers.not(5), 5)
+    doesntMatch(td.matchers.not(['hi']), ['hi'])
   }
 }
