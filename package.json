@@ -58,8 +58,8 @@
     ]
   },
   "browser": {
-    "./lib/replace/module.js": "./lib/replace/module.browser.js",
-    "quibble": "./lib/quibble.browser.js"
+    "./src/replace/module.js": "./src/replace/module.browser.js",
+    "quibble": "./src/quibble.browser.js"
   },
   "standard": {
     "globals": [

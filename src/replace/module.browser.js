@@ -1,3 +1,3 @@
 export default () => {
-  throw Error('This is only supported on Node.js')
+  throw Error('Sorry, but CommonJS module replacement with td.replace() is only supported under Node.js runtimes.')
 }
