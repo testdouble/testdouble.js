@@ -1,6 +1,4 @@
 // Run `npm run test:typescript` to ensure TypeScript works correctly
-import * as assert from 'assert'
-
 //td library under test
 import * as td from "../..";
 
@@ -74,4 +72,6 @@ console.log(
   explanation.callCount
 );
 
-assert.equal(explanation.description.split('\n')[0], 'This test double has 5 stubbings and 1 invocations.')
+if (explanation.description.split('\n')[0] !== 'This test double has 5 stubbings and 1 invocations.') {
+  throw 'Error: call to td.explain() is not working correctly!'
+}
