@@ -5,7 +5,7 @@ module.exports = {
   name: 'tdify',
   interceptors: {
     test: function (runTest, metadata, cb) {
-      if (metadata.ancestorNames[1].indexOf("/test/unit/") !== -1) {
+      if (metadata.ancestorNames[1].indexOf('/test/unit/') !== -1) {
         // Unit test -- `td` is a safe npm release so they can mock!
         global.td = releaseTd
       } else {
