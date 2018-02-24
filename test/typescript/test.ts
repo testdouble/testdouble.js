@@ -1,5 +1,5 @@
 // Run `npm run test:typescript` to ensure TypeScript works correctly
-import { assert } from 'chai'
+import * as assert from 'assert'
 
 //td library under test
 import * as td from "../..";
