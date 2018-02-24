@@ -27,13 +27,13 @@
     "compile:node": "babel src -d lib",
     "precompile": "npm run clean",
     "compile": "npm run compile:node && npm run compile:browser",
-    "cover": "nyc --reporter=lcov --reporter=text-summary --reporter=html npm run test:unit",
+    "cover": "nyc --reporter=lcov --reporter=text-summary --reporter=html npm test",
     "cover:report": "codeclimate-test-reporter < coverage/lcov.info",
     "style": "standard --fix",
-    "test": "npm run test:unit && npm run test:safe",
+    "test": "teenytest --helper test/helper.js \"test/**/*.test.js\"",
     "test:all": "npm test && npm run test:example && npm run test:typescript",
-    "test:unit": "teenytest --helper test/unit-helper.js \"test/unit/**/*.test.js\"",
-    "test:safe": "teenytest --helper test/safe-helper.js \"test/safe/**/*.test.js\"",
+    "test:unit": "teenytest --helper test/helper.js \"test/unit/**/*.test.js\"",
+    "test:safe": "teenytest --helper test/helper.js \"test/safe/**/*.test.js\"",
     "test:ci": "npm run compile && npm run style && npm run test:all && echo \"All done!\"",
     "test:typescript": "tsc --outDir generated/typescript -p test/typescript && node generated/typescript/test.js",
     "test:example": "./script/run-examples",
@@ -82,6 +82,11 @@
       "examples"
     ],
     "all": true
+  },
+  "teenytest": {
+    "plugins": [
+      "test/support/tdify-plugin.js"
+    ]
   },
   "dependencies": {
     "es6-map": "^0.1.5",
