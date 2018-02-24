@@ -33,7 +33,7 @@ module.exports = {
   'short strings should have quotes escaped' () {
     const shortString = 'hey "justin"!'
 
-    assert._isEqual(subject(shortString), '"hey \\\"justin\\\"!"')
+    assert._isEqual(subject(shortString), '"hey \\\"justin\\\"!"') // eslint-disable-line
   },
   'multiline strings should be heredoc-d' () {
     const longString = 'ojsaodjasiodjsaodijsado asj asodjaosdj asodjsaoidjsa odjasoidjasodjas\nasdojsadojdosajodsajd saoji joasdjoajsd\nasdjoj\n\nasdojasdoajsdoasjdaosjdoasjsaodjoadjoasjdojasdojsaodijsaidojojsoidjasodij\naoso'
