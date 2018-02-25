@@ -28,7 +28,7 @@
     "cover": "nyc --reporter=lcov --reporter=text-summary --reporter=html npm test",
     "cover:report": "codeclimate-test-reporter < coverage/lcov.info",
     "style": "npm run style:ts && npm run style:js",
-    "style:ts": "tslint -p . --fix",
+    "style:ts": "tslint -p tsconfig-tslint.json --fix",
     "style:js": "standard --fix",
     "test": "teenytest --helper test/helper.js \"test/**/*.test.{js,ts}\"",
     "test:all": "npm test && npm run test:example",
