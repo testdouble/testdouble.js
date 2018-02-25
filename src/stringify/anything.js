@@ -1,6 +1,6 @@
 import _ from '../wrap/lodash'
 import isMatcher from '../matchers/is-matcher'
-import stringifyObject from 'stringify-object-es5'
+import * as stringifyObject from 'stringify-object-es5'
 
 export default (anything) => {
   if (_.isString(anything)) {

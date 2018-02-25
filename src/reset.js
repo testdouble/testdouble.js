@@ -1,5 +1,5 @@
 import _ from './wrap/lodash'
-import quibble from 'quibble'
+import * as quibble from 'quibble'
 import store from './store'
 
 let resetHandlers = []

@@ -1,5 +1,5 @@
-import _ from 'lodash'
-import stringifyObject from 'stringify-object-es5'
+import * as _ from 'lodash'
+import * as stringifyObject from 'stringify-object-es5'
 
 export default function customAssertions (assert) {
   assert._isEqual = (actual, expected) => {
