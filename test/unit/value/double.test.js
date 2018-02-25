@@ -20,10 +20,10 @@ module.exports = {
     grandparent.addChild(parent)
     parent.addChild(child)
 
-    assert.deepEqual([...grandparent.children], [parent])
+    assert.deepEqualSet(grandparent.children, [parent])
     assert.equal(parent.parent, grandparent)
     assert.equal(parent.fullName, 'foo.bar')
-    assert.deepEqual([...parent.children], [child])
+    assert.deepEqualSet(parent.children, [child])
     assert.equal(child.parent, parent)
     assert.equal(child.fullName, 'foo.bar.baz')
   },

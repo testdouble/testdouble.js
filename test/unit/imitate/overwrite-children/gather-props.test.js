@@ -62,7 +62,7 @@ module.exports = {
     })
     assert.deepEqual(result.bar, {
       value: Thing.prototype.bar,
-      enumerable: false,
+      enumerable: true, // TODO: should be false for native ES class, compiled to ES5 & this will return true
       writable: true,
       configurable: true
     })
