@@ -1,6 +1,4 @@
-require('babel-core/register')({
-  presets: ['env']
-})
+require('ts-node/register')
 global.assert = require('assert')
 global.ES_SUPPORT = require('./support/es-support')
 

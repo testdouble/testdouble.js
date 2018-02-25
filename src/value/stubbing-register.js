@@ -1,4 +1,4 @@
-import Map from 'es6-map'
+import * as Map from 'es6-map'
 
 let instance = null
 

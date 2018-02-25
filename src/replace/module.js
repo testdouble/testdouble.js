@@ -1,6 +1,6 @@
 import _ from '../wrap/lodash'
 import path from 'path'
-import quibble from 'quibble'
+import * as quibble from 'quibble'
 
 import jestModule from './jest-module'
 import imitate from '../imitate'

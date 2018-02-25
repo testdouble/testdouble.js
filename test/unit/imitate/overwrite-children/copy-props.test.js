@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import _ from '../../../../src/wrap/lodash'
 
 import subject from '../../../../src/imitate/overwrite-children/copy-props'
 
