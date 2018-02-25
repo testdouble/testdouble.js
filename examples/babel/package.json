@@ -2,9 +2,10 @@
   "name": "testdouble-babel-example",
   "private": true,
   "scripts": {
-    "test": "mocha --compilers js:babel-core/register -R spec --recursive test/helper.js test/lib/"
+    "test": "mocha --timeout 20000 --require babel-core/register -R spec --recursive test/helper.js test/lib/"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "mocha": "^5.0.1",
