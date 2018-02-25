@@ -4,6 +4,15 @@ node_js:
   - 6
   - 8
 script: npm run test:ci
+cache:
+  directories:
+    - node_modules
+    - examples/babel/node_modules
+    - examples/jest/node_modules
+    - examples/jest-broken/node_modules
+    - examples/plain-html/node_modules
+    - examples/node/node_modules
+    - examples/webpack/node_modules
 after_script:
   - node -v | grep "v8" && npm run cover && npm run cover:report
 addons:
