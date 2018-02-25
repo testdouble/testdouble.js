@@ -5,7 +5,6 @@ class Dog {
 }
 
 class Cat {
-  constructor () {}
   meow (): string { return 'meow! meow!' }
 }
 
@@ -21,13 +20,19 @@ export = {
     const bird = td.object({ fly: function () {} })
     td.when(bird.fly()).thenReturn('swoosh!')
 
-    const kitty = td.object(['scratch','meow'])
+    const kitty = td.object(['scratch', 'meow'])
     td.when(kitty.scratch()).thenReturn('scratch!')
     td.when(kitty.meow()).thenReturn('meow!')
 
-    if (eval('typeof Proxy') !== 'undefined') { // tslint:disable-line
-      class Bear { constructor () {} sleep () {} }
+    if (eval('typeof Proxy') !== 'undefined') { // eslint-disable-line
+      class Bear { sleep () {} }
+
+      const FakeBear = td.constructor<Class>(Bear)
+
+      assert.equal(td.explain(FakeBear.prototype.sleep).isTestDouble, true)
+
       const bear = td.object<Bear>('A bear')
+
       td.when(bear.sleep()).thenReturn('zzzzzz')
 
       assert.equal(bear.sleep(), 'zzzzzz')
