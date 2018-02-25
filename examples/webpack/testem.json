@@ -1,5 +1,6 @@
 {
   "framework": "jasmine2",
+  "port": 7358,
   "before_tests": "$(npm bin)/webpack",
   "serve_files": [
     "test-bundle.js"

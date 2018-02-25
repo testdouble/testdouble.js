@@ -1,5 +1,6 @@
 {
   "framework" : "jasmine2",
+  "port": 7359,
   "launch_in_dev": ["chrome"],
   "launch_in_ci": ["chrome"],
   "browser_args": {
