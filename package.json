@@ -61,7 +61,7 @@
     ],
     "ignore": [
       "index.d.ts",
-      "examples"
+      "examples/**"
     ]
   },
   "nyc": {
