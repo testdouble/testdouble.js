@@ -49,9 +49,6 @@
   },
   "standard": {
     "globals": [
-      "describe",
-      "it",
-      "expect",
       "td",
       "assert",
       "ES_SUPPORT"
