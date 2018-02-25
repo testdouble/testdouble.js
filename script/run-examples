@@ -2,13 +2,14 @@
 
 set -e
 
+projects=${1-*/}
+
 # Must be run from project root
-echo "<------ Setting up testdouble for use with npm link"
-npm link
+echo "<------ If this fails be sure to run 'npm link' in the root dir!"
 cd examples
-for D in */; do
+for D in $projects; do
   echo "<------ Running tests for example project '${D}'"
   cd "${D}"
   npm run --silent skip-ci || (npm install && npm link testdouble && npm test)
-  cd ..
+cd ..
 done
