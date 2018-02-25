@@ -5,7 +5,7 @@ node_js:
   - 8
 script: npm run test:ci
 after_script:
-  - node -v | grep "v6" && npm run cover && npm run cover:report
+  - node -v | grep "v8" && npm run cover && npm run cover:report
 addons:
   code_climate:
     repo_token: c92188dcdeaca7d9732f8ea38fdd41d6bff18dc27a8d6f8b64a5b1311b7b6c21
