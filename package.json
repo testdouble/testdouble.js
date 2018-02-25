@@ -80,8 +80,6 @@
     "stringify-object-es5": "^2.5.0"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.104",
-    "@types/node": "^9.4.6",
     "browserify": "^16.1.0",
     "codeclimate-test-reporter": "^0.5.0",
     "headerify": "^1.0.1",
