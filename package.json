@@ -16,15 +16,13 @@
     "index.d.ts"
   ],
   "config": {
-    "build_file": "dist/testdouble.js",
-    "test_bundle": "generated/tests.js",
-    "mocha_reporter": "dot"
+    "build_file": "dist/testdouble.js"
   },
   "scripts": {
     "clean": "rm -rf generated dist lib coverage",
     "postclean": "mkdirp generated dist",
-    "compile:browser": "browserify src/index.js --standalone td --outfile $npm_package_config_build_file -p headerify -t babelify",
-    "compile:node": "babel src -d lib",
+    "compile:browser": "browserify src/index.js --standalone td --outfile $npm_package_config_build_file -p tsify -p headerify",
+    "compile:node": "tsc --outDir lib",
     "precompile": "npm run clean",
     "compile": "npm run compile:node && npm run compile:browser",
     "cover": "nyc --reporter=lcov --reporter=text-summary --reporter=html npm test",
@@ -43,19 +41,6 @@
     "version": "npm run version:write && npm run compile && git add src/version.js",
     "postversion": "git push --tags && npm run version:changelog && git push && npm publish",
     "prepare": "npm run compile"
-  },
-  "babel": {
-    "presets": [
-      [
-        "env",
-        {
-          "targets": {
-            "node": "4",
-            "browsers": "last 2 versions"
-          }
-        }
-      ]
-    ]
   },
   "browser": {
     "./src/replace/module.js": "./src/replace/module.browser.js",
@@ -95,10 +80,8 @@
     "stringify-object-es5": "^2.5.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-core": "^6.26.0",
-    "babel-preset-env": "^1.5.2",
-    "babelify": "^8.0.0",
+    "@types/lodash": "^4.14.104",
+    "@types/node": "^9.4.6",
     "browserify": "^16.1.0",
     "codeclimate-test-reporter": "^0.5.0",
     "headerify": "^1.0.1",
@@ -109,6 +92,8 @@
     "standard": "^11.0.0",
     "teenytest": "^5.1.1",
     "testdouble": "^3.5.0",
+    "ts-node": "^5.0.0",
+    "tsify": "^3.0.4",
     "typescript": "^2.7.2"
   },
   "directories": {
