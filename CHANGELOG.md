@@ -1,5 +1,18 @@
 # Change Log
 
+## [v3.5.1](https://github.com/testdouble/testdouble.js/tree/v3.5.1) (2018-02-25)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.5.0...v3.5.1)
+
+**Closed issues:**
+
+- slow performance when replacing big modules [\#340](https://github.com/testdouble/testdouble.js/issues/340)
+- Replace method in tested file [\#339](https://github.com/testdouble/testdouble.js/issues/339)
+
+**Merged pull requests:**
+
+- Try out TypeScript [\#343](https://github.com/testdouble/testdouble.js/pull/343) ([searls](https://github.com/searls))
+- Simplify build [\#342](https://github.com/testdouble/testdouble.js/pull/342) ([searls](https://github.com/searls))
+
 ## [v3.5.0](https://github.com/testdouble/testdouble.js/tree/v3.5.0) (2018-02-11)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.4.0...v3.5.0)
 
