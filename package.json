@@ -27,9 +27,7 @@
     "compile": "npm run compile:node && npm run compile:browser",
     "cover": "nyc --reporter=lcov --reporter=text-summary --reporter=html npm test",
     "cover:report": "codeclimate-test-reporter < coverage/lcov.info",
-    "style": "npm run style:ts && npm run style:js",
-    "style:ts": "tslint -p tsconfig-tslint.json --fix",
-    "style:js": "standard --fix",
+    "style": "standard --fix",
     "test": "teenytest --helper test/helper.js \"test/**/*.test.{js,ts}\"",
     "test:all": "npm test && npm run test:example",
     "test:unit": "teenytest --helper test/helper.js \"test/unit/**/*.test.{js,ts}\"",
@@ -93,8 +91,6 @@
     "testdouble": "^3.5.0",
     "ts-node": "^5.0.0",
     "tsify": "^3.0.4",
-    "tslint": "^5.9.1",
-    "tslint-config-standard": "^7.0.0",
     "typescript": "^2.7.2"
   },
   "directories": {
