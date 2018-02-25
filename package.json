@@ -22,7 +22,7 @@
     "clean": "rm -rf dist lib coverage",
     "postclean": "mkdirp dist",
     "compile:browser": "browserify src/index.js --standalone td --outfile $npm_package_config_build_file -p tsify -p headerify",
-    "compile:node": "tsc --outDir lib",
+    "compile:node": "tsc",
     "precompile": "npm run clean",
     "compile": "run-s compile:node compile:browser",
     "cover": "nyc --reporter=lcov --reporter=text-summary --reporter=html npm test",
