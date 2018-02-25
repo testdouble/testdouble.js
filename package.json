@@ -16,9 +16,7 @@
     "index.d.ts"
   ],
   "config": {
-    "build_file": "dist/testdouble.js",
-    "test_bundle": "generated/tests.js",
-    "mocha_reporter": "dot"
+    "build_file": "dist/testdouble.js"
   },
   "scripts": {
     "clean": "rm -rf generated dist lib coverage",
