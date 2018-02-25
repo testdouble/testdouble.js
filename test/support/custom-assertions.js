@@ -34,6 +34,18 @@ But it totally did.
     }
   }
 
+  assert.containsAll = (actual, expectedItems) => {
+    _.each(expectedItems, (expectedItem) => {
+      if (!_.includes(actual, expectedItem)) {
+        throw new Error(`
+  Error: expected ${stringify(actual)} to contain ${stringify(expectedItem)}
+
+  But it did not.
+`)
+      }
+    })
+  }
+
   assert.deepEqualSet = (actual, expected) => {
     assert.deepEqual(Array.from(actual), expected)
   }

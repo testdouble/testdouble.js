@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import _ from '../../../../src/wrap/lodash'
 import subject from '../../../../src/imitate/overwrite-children/gather-props'
 
 module.exports = {
@@ -41,7 +41,7 @@ module.exports = {
 
     const result = subject(Thing)
 
-    assert.deepEqual(_.keys(result), ['length', 'name', 'prototype', 'foo', 'bar'])
+    assert.containsAll(_.keys(result), ['length', 'name', 'prototype', 'foo', 'bar'])
   },
   'instance props on a class': () => {
     class Thing {
