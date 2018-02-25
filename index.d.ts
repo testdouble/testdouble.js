@@ -2,13 +2,13 @@
 // types and interfaces
 // ----------------------------------------------------------------------------
 
-export type DoubledObject<T> = T;
+export type DoubledObject < T > = T
 
-export type DoubledObjectWithKey<T extends string> = { [K in T] };
+export type DoubledObjectWithKey < T extends string > = { [K in T] }
 
-export type TestDouble<T> = T;
+export type TestDouble < T > = T
 
-export type TestDoubleConstructor<T> = Constructor<T>;
+export type TestDoubleConstructor < T > = Constructor<T>
 
 interface Call {
   context: {};
@@ -40,7 +40,7 @@ export interface Matchers {
   captor(): Captor
 }
 
-export const matchers: Matchers;
+export const matchers: Matchers
 
 export interface Stubber {
   thenReturn<T>(...args: any[]): TestDouble<T>;
@@ -95,7 +95,6 @@ export function reset(): void;
  */
 export function explain<T>(f: TestDouble<T>): Explanation;
 
-
 //
 // fake: constructors
 // ----------------------------------------------------------------------------
@@ -131,8 +130,8 @@ declare function functionDouble(name?: string): TestDouble<Function>;
  */
 declare function functionDouble<T>(name?: T): TestDouble<T>;
 
-export { functionDouble as function };
-export { functionDouble as func };
+export { functionDouble as function }
+export { functionDouble as func }
 
 //
 // fake: objects
@@ -146,7 +145,7 @@ export { functionDouble as func };
  * @param {{ new (...args: any[]): T }} constructor
  * @returns {DoubledObject<T>}
  */
-export function object<T>(constructor: Constructor<T> ): DoubledObject<T>;
+export function object<T>(constructor: Constructor<T>): DoubledObject<T>;
 
 /**
  * Create a fake object that has the given list of properties.
@@ -182,7 +181,6 @@ export function object<T>(object: T): DoubledObject<T>;
 // stubbing
 // ----------------------------------------------------------------------------
 
-
 /**
  * Callback marker.
  *
@@ -190,7 +188,6 @@ export function object<T>(object: T): DoubledObject<T>;
  * @param {...any[]} args
  */
 export function callback(...args: any[]): void;
-
 
 /**
  * Swap out real dependenencies with fake one. Intercept calls to `require`
@@ -214,7 +211,6 @@ export function replace(path: string, f?: any): any;
  * @returns {*}
  */
 export function replace(path: {}, property: string, f?: any): any;
-
 
 /**
  * Stub a specific function call.
