@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "allowJs": true,
     "target": "es5",
     "lib": ["es2015"],
     "noImplicitAny": false,
@@ -8,7 +7,5 @@
     "moduleResolution": "node",
     "outDir": "lib"
   },
-  "include": [
-    "src/**/*"
-  ]
+  "include": ["src/**/*"]
 }
