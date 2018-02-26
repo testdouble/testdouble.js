@@ -1,5 +1,5 @@
 module.exports = {
-  absolutify () {},
-  ignoreCallsFromThisFile () {},
-  reset () {}
+  absolutify: function absolutify() {},
+  ignoreCallsFromThisFile: function ignoreCallsFromThisFile() {},
+  reset: function reset() {}
 }
