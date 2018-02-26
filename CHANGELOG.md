@@ -1,5 +1,14 @@
 # Change Log
 
+## [v3.5.2](https://github.com/testdouble/testdouble.js/tree/v3.5.2) (2018-02-26)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.5.1...v3.5.2)
+
+**Merged pull requests:**
+
+- replace quibble.browser.js with ES5 version [\#347](https://github.com/testdouble/testdouble.js/pull/347) ([davemo](https://github.com/davemo))
+- Fixed broken npm install on Windows [\#345](https://github.com/testdouble/testdouble.js/pull/345) ([duluca](https://github.com/duluca))
+- Speed up the build [\#344](https://github.com/testdouble/testdouble.js/pull/344) ([searls](https://github.com/searls))
+
 ## [v3.5.1](https://github.com/testdouble/testdouble.js/tree/v3.5.1) (2018-02-25)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.5.0...v3.5.1)
 
