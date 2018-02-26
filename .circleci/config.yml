@@ -25,15 +25,15 @@ version: 2.0
 jobs:
   "node-4":
     docker:
-      - image: circleci/node-browsers:4
+      - image: circleci/node:4-browsers
     steps: *defaults
   "node-6":
     docker:
-      - image: circleci/node-browsers:6
+      - image: circleci/node:6-browsers
     steps: *defaults
   "node-8":
     docker:
-      - image: circleci/node-browsers:8
+      - image: circleci/node:8-browsers
     steps: *defaults
 
 workflows:
