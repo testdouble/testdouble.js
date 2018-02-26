@@ -35,7 +35,7 @@
     "test:unit": "teenytest --helper test/helper.js \"test/unit/**/*.test.{js,ts}\"",
     "test:safe": "teenytest --helper test/helper.js \"test/safe/**/*.test.{js,ts}\"",
     "test:ci": "npm run compile && run-p style test:all && echo \"All done!\"",
-    "test:example": "npm link && run-p test:example:babel test:example:jest test:example:jest-broken test:example:plain-html test:example:node test:example:webpack",
+    "test:example": "run-p test:example:babel test:example:jest test:example:jest-broken test:example:plain-html test:example:node test:example:webpack",
     "test:example:babel": "./script/run-examples babel",
     "test:example:jest": "./script/run-examples jest",
     "test:example:jest-broken": "./script/run-examples jest-broken",
