@@ -21,23 +21,20 @@ defaults: &defaults
       path: coverage
       prefix: coverage
 
-version: 2
+version: 2.0
 jobs:
   "node-4":
     docker:
       - image: circleci/node-browsers:4
-    steps:
-      <<: *defaults
+    steps: *defaults
   "node-6":
     docker:
       - image: circleci/node-browsers:6
-    steps:
-      <<: *defaults
+    steps: *defaults
   "node-8":
     docker:
       - image: circleci/node-browsers:8
-    steps:
-      <<: *defaults
+    steps: *defaults
 
 workflows:
   version: 2
