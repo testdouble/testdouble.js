@@ -1,0 +1,48 @@
+defaults: &defaults
+  - checkout
+  - restore_cache:
+      keys:
+        - dependency-cache-{{ checksum "package.json" }}
+        - dependency-cache-
+  - run: npm install
+  - save_cache:
+      key: dependency-cache-{{ checksum "package.json" }}
+      paths:
+        - ./node_modules
+        - examples/babel/node_modules
+        - examples/jest/node_modules
+        - examples/jest-broken/node_modules
+        - examples/plain-html/node_modules
+        - examples/node/node_modules
+        - examples/webpack/node_modules
+  - run: node -v | grep "v8" && npm run cover && npm run cover:report
+  - run: npm run test:ci
+  - store_artifacts:
+      path: coverage
+      prefix: coverage
+
+version: 2
+jobs:
+  "node-4":
+    docker:
+      - image: circleci/node-browsers:4
+    steps:
+      <<: *defaults
+  "node-6":
+    docker:
+      - image: circleci/node-browsers:6
+    steps:
+      <<: *defaults
+  "node-8":
+    docker:
+      - image: circleci/node-browsers:8
+    steps:
+      <<: *defaults
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - "node-4"
+      - "node-6"
+      - "node-8"
