@@ -19,9 +19,9 @@
     "build_file": "dist/testdouble.js"
   },
   "scripts": {
-    "clean": "rm -rf dist lib coverage",
+    "clean": "rimraf dist lib coverage",
     "postclean": "mkdirp dist",
-    "compile:browser": "browserify src/index.js --standalone td --outfile $npm_package_config_build_file -p tsify -p headerify",
+    "compile:browser": "cross-conf-env browserify src/index.js --standalone td --outfile $npm_package_config_build_file -p tsify -p headerify",
     "compile:node": "tsc",
     "precompile": "npm run clean",
     "compile": "run-s compile:node compile:browser",
@@ -87,6 +87,7 @@
   "devDependencies": {
     "browserify": "^16.1.0",
     "codeclimate-test-reporter": "^0.5.0",
+    "cross-conf-env": "^1.1.2",
     "eslint-plugin-typescript": "^0.9.0",
     "headerify": "^1.0.1",
     "is-number": "^5.0.0",
@@ -94,6 +95,7 @@
     "npm-run-all": "^4.1.2",
     "nyc": "^11.5.0",
     "pryjs": "^1.0.3",
+    "rimraf": "^2.6.2",
     "standard": "^11.0.0",
     "teenytest": "^5.1.1",
     "testdouble": "^3.5.0",
