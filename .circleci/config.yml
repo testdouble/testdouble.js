@@ -1,6 +1,6 @@
 defaults: &defaults
   - checkout
-  - run: sudo npm install -g
+  - run: npm install -g
   - run: npm run test:ci
   - run: node -v | grep "v8" && npm run cover && npm run cover:report
   - store_artifacts:
