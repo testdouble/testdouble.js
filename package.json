@@ -9,15 +9,19 @@
     "url": "http://testdouble.com"
   },
   "main": "lib/index.js",
-  "files": ["src", "lib", "dist", "index.d.ts"],
+  "files": [
+    "src",
+    "lib",
+    "dist",
+    "index.d.ts"
+  ],
   "config": {
     "build_file": "dist/testdouble.js"
   },
   "scripts": {
     "clean": "rimraf dist lib coverage",
     "postclean": "mkdirp dist",
-    "compile:browser":
-      "cross-conf-env browserify src/index.js --standalone td --outfile $npm_package_config_build_file -p tsify -p headerify",
+    "compile:browser": "cross-conf-env browserify src/index.js --standalone td --outfile $npm_package_config_build_file -p tsify -p headerify",
     "compile:node": "tsc",
     "precompile": "npm run clean",
     "compile": "run-s compile:node compile:browser",
@@ -25,15 +29,13 @@
     "cover:report": "codeclimate-test-reporter < coverage/lcov.info",
     "style": "run-p style:js style:ts",
     "style:js": "standard --fix",
-    "style:ts":
-      "standard --fix --parser typescript-eslint-parser --plugin typescript \"**/*.ts\"",
+    "style:ts": "standard --fix --parser typescript-eslint-parser --plugin typescript \"**/*.ts\"",
     "test": "teenytest --helper test/helper.js \"test/**/*.test.{js,ts}\"",
     "test:all": "run-s test test:example",
     "test:unit": "teenytest --helper test/helper.js \"test/unit/**/*.test.{js,ts}\"",
     "test:safe": "teenytest --helper test/helper.js \"test/safe/**/*.test.{js,ts}\"",
     "test:ci": "npm run compile && run-p style test:all && echo \"All done!\"",
-    "test:example":
-      "npm link && run-p test:example:babel test:example:jest test:example:jest-broken test:example:plain-html test:example:node test:example:webpack",
+    "test:example": "npm link && run-p test:example:babel test:example:jest test:example:jest-broken test:example:plain-html test:example:node test:example:webpack",
     "test:example:babel": "./script/run-examples babel",
     "test:example:jest": "./script/run-examples jest",
     "test:example:jest-broken": "./script/run-examples jest-broken",
@@ -41,12 +43,10 @@
     "test:example:node": "./script/run-examples node",
     "test:example:webpack": "./script/run-examples webpack",
     "version:write": "echo \"export default '$npm_package_version'\" > src/version.js",
-    "version:changelog":
-      "if command -v github_changelog_generator &>/dev/null; then github_changelog_generator; git commit -m \"Changelog for $npm_package_version\" CHANGELOG.md; else echo Versioning requires you first run 'gem install github_changelog_generator' >&2; fi",
+    "version:changelog": "if command -v github_changelog_generator &>/dev/null; then github_changelog_generator; git commit -m \"Changelog for $npm_package_version\" CHANGELOG.md; else echo Versioning requires you first run 'gem install github_changelog_generator' >&2; fi",
     "preversion": "git pull --rebase && npm run test:ci",
     "version": "npm run version:write && npm run compile && git add src/version.js",
-    "postversion":
-      "git push --tags && npm run version:changelog && git push && npm publish",
+    "postversion": "git push --tags && npm run version:changelog && git push && npm publish",
     "prepare": "npm run compile"
   },
   "browser": {
@@ -54,16 +54,29 @@
     "quibble": "./src/quibble.browser.js"
   },
   "standard": {
-    "globals": ["td", "assert", "ES_SUPPORT"],
-    "ignore": ["index.d.ts", "examples/**"]
+    "globals": [
+      "td",
+      "assert",
+      "ES_SUPPORT"
+    ],
+    "ignore": [
+      "index.d.ts",
+      "examples/**"
+    ]
   },
   "nyc": {
-    "include": ["src/**/*.js"],
-    "exclude": ["examples"],
+    "include": [
+      "src/**/*.js"
+    ],
+    "exclude": [
+      "examples"
+    ],
     "all": true
   },
   "teenytest": {
-    "plugins": ["test/support/tdify-plugin.js"]
+    "plugins": [
+      "test/support/tdify-plugin.js"
+    ]
   },
   "dependencies": {
     "es6-map": "^0.1.5",
@@ -98,7 +111,15 @@
     "src": "./src"
   },
   "typings": "./index.d.ts",
-  "keywords": ["tdd", "bdd", "mock", "stub", "spy", "test double", "double"],
+  "keywords": [
+    "tdd",
+    "bdd",
+    "mock",
+    "stub",
+    "spy",
+    "test double",
+    "double"
+  ],
   "bugs": {
     "url": "https://github.com/testdouble/testdouble.js/issues"
   },
