@@ -27,6 +27,7 @@
     "compile": "run-s compile:node compile:browser",
     "cover": "nyc --reporter=lcov --reporter=text-summary --reporter=html npm test",
     "cover:report": "codeclimate-test-reporter < coverage/lcov.info",
+    "cover:ci": "if test \"`node -v | awk '{print substr($1, 2, 1)}'`\" = \"8\" ; then run-s cover cover:report ; fi",
     "style": "run-p style:js style:ts",
     "style:js": "standard --fix",
     "style:ts": "standard --fix --parser typescript-eslint-parser --plugin typescript \"**/*.ts\"",
