@@ -1,6 +1,6 @@
 # testdouble.js
 
-[![Build Status](https://travis-ci.org/testdouble/testdouble.js.svg?branch=master)](https://travis-ci.org/testdouble/testdouble.js)
+[![Build Status](https://circleci.com/gh/testdouble/testdouble.js/tree/master.svg?style=svg)](https://circleci.com/gh/testdouble/testdouble.js/tree/master)
 [![npmjs](https://img.shields.io/badge/npm-testdouble-red.svg)](https://www.npmjs.com/package/testdouble)
 [![unpkg](https://img.shields.io/badge/unpkg-download-blue.svg)](https://unpkg.com/testdouble/dist/)
 [![Test Coverage](https://codeclimate.com/github/testdouble/testdouble.js/badges/coverage.svg)](https://codeclimate.com/github/testdouble/testdouble.js/coverage)
