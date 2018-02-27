@@ -1,23 +1,8 @@
 defaults: &defaults
   - checkout
-  - restore_cache:
-      keys:
-        - dependency-cache-{{ checksum "package.json" }}
-        - dependency-cache-
-  - run: sudo npm install -g npm@latest
-  - run: sudo npm install -g
-  - save_cache:
-      key: dependency-cache-{{ checksum "package.json" }}
-      paths:
-        - ./node_modules
-        - examples/babel/node_modules
-        - examples/jest/node_modules
-        - examples/jest-broken/node_modules
-        - examples/plain-html/node_modules
-        - examples/node/node_modules
-        - examples/webpack/node_modules
-  - run: sudo npm run test:ci
-  - run: sudo npm run cover:ci
+  - run: npm install
+  - run: npm run test:ci
+  - run: npm run cover:ci
   - store_artifacts:
       path: coverage
       prefix: coverage
