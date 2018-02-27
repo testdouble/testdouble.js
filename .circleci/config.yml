@@ -1,0 +1,37 @@
+defaults: &defaults
+  - checkout
+  - run: npm install
+  - run: npm run test:ci
+  - run: node -v | grep "v8" && npm run cover && npm run cover:report
+  - store_artifacts:
+      path: coverage
+      prefix: coverage
+
+version: 2.0
+jobs:
+  "node-4":
+    docker:
+      - image: circleci/node:4-browsers
+    environment:
+      - CODECLIMATE_REPO_TOKEN: c92188dcdeaca7d9732f8ea38fdd41d6bff18dc27a8d6f8b64a5b1311b7b6c21
+    steps: *defaults
+  "node-6":
+    docker:
+      - image: circleci/node:6-browsers
+    environment:
+      - CODECLIMATE_REPO_TOKEN: c92188dcdeaca7d9732f8ea38fdd41d6bff18dc27a8d6f8b64a5b1311b7b6c21
+    steps: *defaults
+  "node-8":
+    docker:
+      - image: circleci/node:8-browsers
+    environment:
+      - CODECLIMATE_REPO_TOKEN: c92188dcdeaca7d9732f8ea38fdd41d6bff18dc27a8d6f8b64a5b1311b7b6c21
+    steps: *defaults
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - "node-4"
+      - "node-6"
+      - "node-8"
