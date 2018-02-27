@@ -10,6 +10,6 @@ cd examples
 for D in $projects; do
   echo "<------ Running tests for example project '${D}'"
   cd "${D}"
-  npm run --silent skip-ci || (npm install && npm link testdouble && npm test)
+  npm run --silent skip-ci || (npm install && (npm link testdouble || sudo npm link testdouble) && npm test)
 cd ..
 done
