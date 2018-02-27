@@ -14,7 +14,7 @@ cache:
     - examples/node/node_modules
     - examples/webpack/node_modules
 after_script:
-  - node -v | grep "v8" && npm run cover && npm run cover:report
+  - npm run cover:ci
 addons:
   code_climate:
     repo_token: c92188dcdeaca7d9732f8ea38fdd41d6bff18dc27a8d6f8b64a5b1311b7b6c21
