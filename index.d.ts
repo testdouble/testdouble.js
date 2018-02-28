@@ -4,7 +4,7 @@
 
 export type DoubledObject < T > = T
 
-export type DoubledObjectWithKey < T extends string > = { [K in T] }
+export type DoubledObjectWithKey < T extends string > = { [K in T] : any }
 
 export type TestDouble < T > = T
 
