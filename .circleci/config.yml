@@ -7,7 +7,7 @@ jobs:
       - CODECLIMATE_REPO_TOKEN: c92188dcdeaca7d9732f8ea38fdd41d6bff18dc27a8d6f8b64a5b1311b7b6c21
     steps:
       - checkout
-      - run: npm install tap-junit
+      - run: npm install tap-junit@1.1.0
       - run: npm install
       - run: npm run test:ci | ./node_modules/tap-junit/bin/tap-junit --output test_results --name junit
       - run: npm run cover:ci
