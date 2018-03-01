@@ -1,18 +1,3 @@
-defaults: &defaults
-  - checkout
-  - run: npm install tap-junit
-  - run: npm install
-  - run: npm run test:ci | ./node_modules/tap-junit/bin/tap-junit --output test_results --name junit
-  - run: npm run cover:ci
-  - store_artifacts:
-      path: test_results
-      prefix: test_results
-  - store_test_results:
-      path: test_results
-  - store_artifacts:
-      path: coverage
-      prefix: coverage
-
 version: 2.0
 jobs:
   "node-4":
@@ -20,20 +5,58 @@ jobs:
       - image: circleci/node:4-browsers
     environment:
       - CODECLIMATE_REPO_TOKEN: c92188dcdeaca7d9732f8ea38fdd41d6bff18dc27a8d6f8b64a5b1311b7b6c21
-    steps: *defaults
+    steps:
+      - checkout
+      - run: npm install tap-junit
+      - run: npm install
+      - run: npm run test:ci | ./node_modules/tap-junit/bin/tap-junit --output test_results --name junit
+      - run: npm run cover:ci
+      - store_artifacts:
+          path: test_results
+          prefix: test_results
+      - store_test_results:
+          path: test_results
+      - store_artifacts:
+          path: coverage
+          prefix: coverage
   "node-6":
     docker:
       - image: circleci/node:6-browsers
     environment:
       - CODECLIMATE_REPO_TOKEN: c92188dcdeaca7d9732f8ea38fdd41d6bff18dc27a8d6f8b64a5b1311b7b6c21
-    steps: *defaults
+    steps:
+      - checkout
+      - run: npm install tap-junit
+      - run: npm install
+      - run: npm run test:ci | ./node_modules/tap-junit/bin/tap-junit --output test_results --name junit
+      - run: npm run cover:ci
+      - store_artifacts:
+          path: test_results
+          prefix: test_results
+      - store_test_results:
+          path: test_results
+      - store_artifacts:
+          path: coverage
+          prefix: coverage
   "node-8":
     docker:
       - image: circleci/node:8-browsers
     environment:
       - CODECLIMATE_REPO_TOKEN: c92188dcdeaca7d9732f8ea38fdd41d6bff18dc27a8d6f8b64a5b1311b7b6c21
-    steps: *defaults
-
+    steps:
+      - checkout
+      - run: npm install tap-junit
+      - run: npm install
+      - run: npm run test:ci | ./node_modules/tap-junit/bin/tap-junit --output test_results --name junit
+      - run: npm run cover:ci
+      - store_artifacts:
+          path: test_results
+          prefix: test_results
+      - store_test_results:
+          path: test_results
+      - store_artifacts:
+          path: coverage
+          prefix: coverage
 workflows:
   version: 2
   build:
