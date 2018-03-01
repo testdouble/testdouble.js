@@ -2,13 +2,13 @@ defaults: &defaults
   - checkout
   - run: npm install tap-junit
   - run: npm install
-  - run: npm run test:ci | ./node_modules/tap-junit/bin/tap-junit --output test_results
+  - run: npm run test:ci | ./node_modules/tap-junit/bin/tap-junit --output test_results --name junit.xml
   - run: npm run cover:ci
   - store_artifacts:
       path: test_results
       prefix: test_results
   - store_test_results:
-      path: test_results/tap.xml
+      path: test_results
   - store_artifacts:
       path: coverage
       prefix: coverage
