@@ -6,7 +6,8 @@
     "noImplicitAny": false,
     "module": "commonjs",
     "moduleResolution": "node",
-    "outDir": "lib"
+    "outDir": "lib",
+    "checkJs": true
   },
   "include": [
     "src/**/*"

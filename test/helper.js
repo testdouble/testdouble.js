@@ -1,4 +1,5 @@
-require('ts-node/register')
+require('ts-node/register/type-check')
+require('./support/global-types')
 global.assert = require('assert')
 global.ES_SUPPORT = require('./support/es-support')
 
