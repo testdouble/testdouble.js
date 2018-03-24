@@ -1,5 +1,18 @@
 # Change Log
 
+## [v3.6.0](https://github.com/testdouble/testdouble.js/tree/v3.6.0) (2018-03-24)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.5.2...v3.6.0)
+
+**Closed issues:**
+
+- td.replace a required method? [\#353](https://github.com/testdouble/testdouble.js/issues/353)
+
+**Merged pull requests:**
+
+- Avoid implicit any for TypeScript definitions [\#351](https://github.com/testdouble/testdouble.js/pull/351) ([rayalan](https://github.com/rayalan))
+- Merge Circle CI config to master [\#349](https://github.com/testdouble/testdouble.js/pull/349) ([searls](https://github.com/searls))
+- Merge in Circle CI config [\#348](https://github.com/testdouble/testdouble.js/pull/348) ([searls](https://github.com/searls))
+
 ## [v3.5.2](https://github.com/testdouble/testdouble.js/tree/v3.5.2) (2018-02-26)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.5.1...v3.5.2)
 
