@@ -17,6 +17,7 @@ module.exports = () => {
   const reset = td.replace('../../src/reset').default
   const config = td.replace('../../src/config').default
   const version = td.replace('../../src/version').default
+  const quibble = td.replace('quibble')
 
   const subject = require('../../src')
 
@@ -34,6 +35,7 @@ module.exports = () => {
     explain: explain,
     reset: reset,
     config: config,
-    version: version
+    version: version,
+    quibble
   })
 }
