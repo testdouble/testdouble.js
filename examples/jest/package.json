@@ -13,6 +13,6 @@
     "testdouble-jest": "testdouble/testdouble-jest"
   },
   "jest": {
-    "setupTestFrameworkScriptFile": "./helper.js"
+    "setupTestFrameworkScriptFile": "./support/helper.js"
   }
 }
