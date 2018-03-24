@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-require('coffee-script/register')
 require('ts-node/register')
 var repl = require('repl')
 
