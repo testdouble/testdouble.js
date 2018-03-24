@@ -1,4 +1,7 @@
+import * as quibble from 'quibble'
 import log from '../log'
+
+quibble.ignoreCallsFromThisFile()
 
 export default function jestModule (path, stub) {
   const tdMock = require('../index').mock
