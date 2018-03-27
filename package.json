@@ -86,6 +86,7 @@
     "stringify-object-es5": "^2.5.0"
   },
   "devDependencies": {
+    "@types/node": "^9.6.0",
     "browserify": "^16.1.0",
     "codeclimate-test-reporter": "^0.5.0",
     "cross-conf-env": "^1.1.2",
