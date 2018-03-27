@@ -4,7 +4,7 @@ import log from '../log'
 import reset from '../reset'
 import stringifyAnything from '../stringify/anything'
 
-export default function (object, property, manualReplacement) {
+export default function (object, property, manualReplacement?) {
   const isManual = arguments.length > 2
   const realThingExists = object[property] || object.hasOwnProperty(property)
 

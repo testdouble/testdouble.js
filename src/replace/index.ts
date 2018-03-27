@@ -5,10 +5,10 @@ import replaceProperty from './property'
 
 quibble.ignoreCallsFromThisFile()
 
-export default function (target) {
+export default function (target, ...rest) {
   if (_.isString(target)) {
-    return replaceModule(...arguments)
+    return replaceModule(target, ...rest)
   } else {
-    return replaceProperty(...arguments)
+    return replaceProperty(target, rest[0], ...rest.slice(1))
   }
 }

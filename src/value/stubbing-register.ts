@@ -13,6 +13,8 @@ export default class StubbingRegister {
     instance = null
   }
 
+  stubbings: Map<any>
+
   constructor () {
     this.stubbings = new Map()
   }

@@ -1,7 +1,13 @@
 import _ from '../wrap/lodash'
 import stringifyArguments from '../stringify/arguments'
 
-export default config =>
+export interface Created {
+  (...matcherArgs): any
+  __name?: string
+  __matches?: string
+}
+
+export default (config): Created =>
   (...matcherArgs) =>
     _.tap({
       __name: nameFor(config, matcherArgs),

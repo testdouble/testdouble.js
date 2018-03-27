@@ -1,6 +1,12 @@
 import _ from '../wrap/lodash'
 
 export default class Stubbing {
+  type: any
+  args: any
+  outcomes: any
+  options: any
+  satisfyingCalls: Set<any>
+
   constructor (type, args, outcomes, options = {}) {
     this.type = type
     this.args = args

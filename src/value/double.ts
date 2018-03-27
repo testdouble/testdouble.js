@@ -1,6 +1,12 @@
 import _ from '../wrap/lodash'
 
 export default class Double {
+  fake?: any
+  name?: any
+  real?: any
+  children?: Set<any>
+  parent?: any
+
   static create (name, real, parent, fakeCreator) {
     const double = new Double(name, real, parent)
     if (fakeCreator) double.fake = fakeCreator(double)

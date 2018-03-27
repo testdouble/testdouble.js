@@ -13,6 +13,9 @@ export default class CallLog {
     instance = null
   }
 
+  calls: Map<any>
+  callHistory: any[]
+
   constructor () {
     this.calls = new Map()
     this.callHistory = []

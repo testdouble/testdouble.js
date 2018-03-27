@@ -1,7 +1,11 @@
 import _ from './wrap/lodash'
 import isMatcher from './matchers/is-matcher'
 
-export default (expectedArgs, actualArgs, config = {}) => {
+export interface Config {
+  allowMatchers?: boolean
+}
+
+export default (expectedArgs, actualArgs, config: Config = {}) => {
   if (arityMismatch(expectedArgs, actualArgs, config)) {
     return false
   } else if (config.allowMatchers !== false) {

@@ -1,5 +1,5 @@
 import _ from '../wrap/lodash'
-import path from 'path'
+import * as path from 'path'
 import * as quibble from 'quibble'
 
 import jestModule from './jest-module'
@@ -7,8 +7,8 @@ import imitate from '../imitate'
 
 quibble.ignoreCallsFromThisFile()
 
-export default function (path, stub) {
-  if (typeof jest === 'object') return jestModule(...arguments)
+export default function (path, stub?, ...rest) {
+  if (typeof jest === 'object') return jestModule(path, stub, ...rest)
   if (arguments.length > 1) { return quibble(path, stub) }
   const realThing = requireAt(path)
   const fakeThing = imitate(realThing, `${path}: ${nameFor(realThing)}`)

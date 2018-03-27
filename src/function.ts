@@ -4,7 +4,7 @@ import store from './store'
 import stubbings from './store/stubbings'
 import imitate from './imitate'
 
-export default function func (nameOrFunc, __optionalName) {
+export default function func (nameOrFunc, __optionalName?) {
   return _.isFunction(nameOrFunc)
     ? imitate(nameOrFunc)
     : createTestDoubleNamed(nameOrFunc || __optionalName)

@@ -1,2 +1,2 @@
-export default function popDemonstration () {
+export default function popDemonstration (): any {
 }
