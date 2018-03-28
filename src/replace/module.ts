@@ -7,7 +7,7 @@ import imitate from '../imitate'
 
 quibble.ignoreCallsFromThisFile()
 
-export default function (path, stub?, ...rest) {
+export default function (path: string, stub?, ...rest) {
   if (typeof jest === 'object') return jestModule(path, stub, ...rest)
   if (arguments.length > 1) { return quibble(path, stub) }
   const realThing = requireAt(path)
@@ -16,7 +16,7 @@ export default function (path, stub?, ...rest) {
   return fakeThing
 }
 
-const nameFor = (realThing) => {
+const nameFor = (realThing: Function) => {
   if (!_.isFunction(realThing)) return ''
   return realThing.name ? realThing.name : '(anonymous function)'
 }

@@ -1,12 +1,11 @@
-import * as Map from 'es6-map'
 
 import initializeNames from './initialize-names'
 import createImitation from './create-imitation'
 import overwriteChildren from './overwrite-children'
 
-export default function imitate (original, names?, encounteredObjects = new Map()) {
+export default function imitate<T> (original: T, originalNames?: string | string[], encounteredObjects = new Map()): T {
   if (encounteredObjects.has(original)) return encounteredObjects.get(original)
-  names = initializeNames(original, names)
+  const names = initializeNames(original, originalNames)
   const target = createImitation(original, names)
   encounteredObjects.set(original, target)
   overwriteChildren(original, target, (originalValue, name) =>
