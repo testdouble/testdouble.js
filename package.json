@@ -22,7 +22,7 @@
     "clean": "rimraf dist lib coverage",
     "postclean": "mkdirp dist",
     "compile:browser": "cross-conf-env browserify src/index.ts --standalone td --outfile $npm_package_config_build_file -p tsify -p headerify",
-    "compile:node": "tsc",
+    "compile:node": "tsc --project ./tsconfig.node.json",
     "precompile": "npm run clean",
     "compile": "run-s compile:node compile:browser",
     "cover": "nyc --reporter=lcov --reporter=text-summary --reporter=html npm test",
