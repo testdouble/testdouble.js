@@ -11,7 +11,7 @@ export default function object (nameOrType, config) {
   })
 }
 
-var fakeObject = function (nameOrType, config, argCount) {
+var fakeObject = function <T>(nameOrType: T | (keyof T)[], config, argCount): T {
   if (_.isArray(nameOrType)) {
     return createTestDoublesForFunctionNames(nameOrType)
   } else if (_.isObjectLike(nameOrType)) {
@@ -25,15 +25,15 @@ var fakeObject = function (nameOrType, config, argCount) {
   }
 }
 
-var createTestDoublesForFunctionNames = (names) =>
-  _.transform(names, (acc, funcName) => {
+var createTestDoublesForFunctionNames = <T>(names: (keyof T)[]): T => 
+  _.transform<keyof T, keyof T>(names, (acc: any, funcName) => {
     acc[funcName] = tdFunction(`.${String(funcName)}`)
-  })
+  }, {}) as { [P in keyof T] }
 
-var createTestDoubleViaProxy = (name, config) => {
+var createTestDoubleViaProxy = <T>(name, config): T => {
   ensureProxySupport(name)
-  const obj = {}
-  return new Proxy(obj, {
+  const obj = {} as T & object
+  return new Proxy<T & object>(obj, {
     get (target, propKey, receiver) {
       if (!obj.hasOwnProperty(propKey) && !_.includes(config.excludeMethods, propKey)) {
         obj[propKey] = tdFunction(`${nameOf(name)}.${String(propKey)}`)

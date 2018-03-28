@@ -4,13 +4,18 @@ import store from './store'
 
 let resetHandlers = []
 
-export default _.tap(() => {
+interface Reset {
+  (): void
+  onNextReset: (cb: () => void) => void
+}
+
+export default _.tap((() => {
   store.reset()
   quibble.reset()
   _.each(resetHandlers, (resetHandler) =>
     resetHandler())
   resetHandlers = []
-}, (reset) => {
+}) as Reset, (reset) => {
   reset.onNextReset = (func) =>
     resetHandlers.push(func)
 })

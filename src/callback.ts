@@ -1,5 +1,5 @@
 import _ from './wrap/lodash'
-import create from './matchers/create'
+import create, { CreatedResult } from './matchers/create'
 
 const callback = create({
   name: 'callback',
@@ -10,7 +10,7 @@ const callback = create({
     matcherInstance.args = matcherArgs
     matcherInstance.__testdouble_callback = true
   }
-})
+}) as CreatedResult
 
 // Make callback itself quack like a matcher for its non-invoked use case.
 callback.__name = 'callback'

@@ -2,20 +2,31 @@ import _ from './wrap/lodash'
 import log from './log'
 import stringifyAnything from './stringify/anything'
 
-const DEFAULTS = {
+export interface ConfigObject {
+  ignoreWarnings?: boolean
+  promiseConstructor?: PromiseConstructor
+  suppressErrors?: boolean
+}
+
+const DEFAULTS: ConfigObject = {
   ignoreWarnings: false,
-  promiseConstructor: global.Promise,
+  promiseConstructor: global.Promise as PromiseConstructor,
   suppressErrors: false
 }
 const DELETED_OPTIONS = ['extendWhenReplacingConstructors']
 
 let configData = _.extend({}, DEFAULTS)
 
-export default _.tap((overrides) => {
+interface Config {
+  (overrides?: ConfigObject): ConfigObject
+  reset: () => void
+}
+
+export default _.tap(((overrides) => {
   deleteDeletedOptions(overrides)
   ensureOverridesExist(overrides)
   return _.extend(configData, overrides)
-}, (config) => {
+}) as Config, (config) => {
   config.reset = () => {
     configData = _.extend({}, DEFAULTS)
   }

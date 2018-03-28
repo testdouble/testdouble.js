@@ -1,20 +1,26 @@
 import _ from '../wrap/lodash'
 import stringifyArguments from '../stringify/arguments'
 
-export interface Created {
-  (...matcherArgs): any
+export interface CreatedResult {
   __name?: string
-  __matches?: string
+  __matches?: {
+    (value: any): boolean
+    afterSatisfaction?: Function
+  }
+}
+
+export interface Created {
+  (...matcherArgs): CreatedResult
 }
 
 export default (config): Created =>
   (...matcherArgs) =>
-    _.tap({
+    _.tap(({
       __name: nameFor(config, matcherArgs),
       __matches (actualArg) {
         return config.matches(matcherArgs, actualArg)
       }
-    }, (matcherInstance) => {
+    }) as CreatedResult, (matcherInstance) => {
       matcherInstance.__matches.afterSatisfaction = (actualArg) => {
         _.invoke(config, 'afterSatisfaction', matcherArgs, actualArg)
       }

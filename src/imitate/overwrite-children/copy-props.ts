@@ -1,6 +1,6 @@
 import _ from '../../wrap/lodash'
 
-export default (target, props, visitor) => {
+export default (target, props: PropertyDescriptorMap, visitor) => {
   Object.defineProperties(target, _.transform(props, (acc, descriptor, name) => {
     if (propOnTargetAndNotWritable(target, name, descriptor)) {
       if (name === 'prototype') {

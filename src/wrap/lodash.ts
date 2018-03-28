@@ -1,40 +1,40 @@
-import * as assign from 'lodash/assign'
-import * as capitalize from 'lodash/capitalize'
-import * as clone from 'lodash/clone'
-import * as compact from 'lodash/compact'
-import * as defer from 'lodash/defer'
-import * as delay from 'lodash/delay'
-import * as each from 'lodash/each'
-import * as every from 'lodash/every'
-import * as extend from 'lodash/extend'
-import * as filter from 'lodash/filter'
-import * as find from 'lodash/find'
-import * as findLast from 'lodash/findLast'
-import * as get from 'lodash/get'
-import * as groupBy from 'lodash/groupBy'
-import * as includes from 'lodash/includes'
-import * as invoke from 'lodash/invoke'
-import * as isArguments from 'lodash/isArguments'
-import * as isArray from 'lodash/isArray'
-import * as isBoolean from 'lodash/isBoolean'
-import * as isEmpty from 'lodash/isEmpty'
-import * as isEqual from 'lodash/isEqual'
-import * as isEqualWith from 'lodash/isEqualWith'
-import * as isFunction from 'lodash/isFunction'
-import * as isNumber from 'lodash/isNumber'
-import * as isObject from 'lodash/isObject'
-import * as isObjectLike from 'lodash/isObjectLike'
-import * as isRegExp from 'lodash/isRegExp'
-import * as isString from 'lodash/isString'
-import * as keys from 'lodash/keys'
-import * as last from 'lodash/last'
-import * as map from 'lodash/map'
-import * as reduce from 'lodash/reduce'
-import * as reject from 'lodash/reject'
-import * as some from 'lodash/some'
-import * as tap from 'lodash/tap'
-import * as toArray from 'lodash/toArray'
-import * as transform from 'lodash/transform'
+import assign = require('lodash/assign')
+import capitalize = require('lodash/capitalize')
+import clone = require('lodash/clone')
+import compact = require('lodash/compact')
+import defer = require('lodash/defer')
+import delay = require('lodash/delay')
+import each = require('lodash/each')
+import every = require('lodash/every')
+import extend = require('lodash/extend')
+import filter = require('lodash/filter')
+import find = require('lodash/find')
+import findLast = require('lodash/findLast')
+import get = require('lodash/get')
+import groupBy = require('lodash/groupBy')
+import includes = require('lodash/includes')
+import invoke = require('lodash/invoke')
+import isArguments = require('lodash/isArguments')
+import isArray = require('lodash/isArray')
+import isBoolean = require('lodash/isBoolean')
+import isEmpty = require('lodash/isEmpty')
+import isEqual = require('lodash/isEqual')
+import isEqualWith = require('lodash/isEqualWith')
+import isFunction = require('lodash/isFunction')
+import isNumber = require('lodash/isNumber')
+import isObject = require('lodash/isObject')
+import isObjectLike = require('lodash/isObjectLike')
+import isRegExp = require('lodash/isRegExp')
+import isString = require('lodash/isString')
+import keys = require('lodash/keys')
+import last = require('lodash/last')
+import map = require('lodash/map')
+import reduce = require('lodash/reduce')
+import reject = require('lodash/reject')
+import some = require('lodash/some')
+import tap = require('lodash/tap')
+import toArray = require('lodash/toArray')
+import transform = require('lodash/transform')
 
 export default {
   assign,
