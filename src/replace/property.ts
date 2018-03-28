@@ -4,7 +4,7 @@ import log from '../log'
 import reset from '../reset'
 import stringifyAnything from '../stringify/anything'
 
-export default function (object, property, manualReplacement?) {
+export default function <T, P extends keyof T>(object: T, property: P, manualReplacement?: T[P]): T[P] {
   const isManual = arguments.length > 2
   const realThingExists = object[property] || object.hasOwnProperty(property)
 
@@ -25,7 +25,7 @@ export default function (object, property, manualReplacement?) {
   }
 }
 
-var getFake = (isManual, property, manualReplacement, realThing) => {
+var getFake = <T>(isManual: boolean, property: string, manualReplacement: T, realThing: T): T => {
   if (isManual) {
     warnIfTypeMismatch(property, manualReplacement, realThing)
     return manualReplacement
@@ -34,7 +34,7 @@ var getFake = (isManual, property, manualReplacement, realThing) => {
   }
 }
 
-var warnIfTypeMismatch = (property, fakeThing, realThing) => {
+var warnIfTypeMismatch = <T>(property: string, fakeThing: T, realThing: T) => {
   const fakeType = typeof fakeThing
   const realType = typeof realThing
   if (realThing !== undefined && fakeType !== realType) {
