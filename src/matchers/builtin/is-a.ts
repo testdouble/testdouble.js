@@ -1,5 +1,5 @@
 import _ from '../../wrap/lodash'
-import create from '../create'
+import create, { Created } from '../create'
 import stringifyArguments from '../../stringify/arguments'
 
 export default create({

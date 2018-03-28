@@ -17,7 +17,7 @@ const DELETED_OPTIONS = ['extendWhenReplacingConstructors']
 
 let configData = _.extend({}, DEFAULTS)
 
-interface Config {
+export interface Config {
   (overrides?: ConfigObject): ConfigObject
   reset: () => void
 }

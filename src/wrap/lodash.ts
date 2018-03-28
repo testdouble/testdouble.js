@@ -1,3 +1,6 @@
+
+import { Dictionary, NumericDictionary, PartialDeep } from 'lodash'
+
 import assign = require('lodash/assign')
 import capitalize = require('lodash/capitalize')
 import clone = require('lodash/clone')

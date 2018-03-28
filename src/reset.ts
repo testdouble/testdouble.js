@@ -4,7 +4,7 @@ import store from './store'
 
 let resetHandlers = []
 
-interface Reset {
+export interface Reset {
   (): void
   onNextReset: (cb: () => void) => void
 }

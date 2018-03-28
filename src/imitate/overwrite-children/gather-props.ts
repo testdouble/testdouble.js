@@ -1,7 +1,7 @@
 import isFakeable from './is-fakeable'
 import isNativePrototype from './is-native-prototype'
 
-type PropertyDescriptors<T> = {
+export type PropertyDescriptors<T> = {
   [P in keyof T]: PropertyDescriptor
 }
 

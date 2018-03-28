@@ -1,32 +1,14 @@
-import tdFunction from './function'
-import object from './object'
-import constructor from './constructor'
-import imitate from './imitate'
-import when from './when'
-import verify from './verify'
-import matchers from './matchers'
-import replace from './replace'
-import explain from './explain'
-import reset from './reset'
-import config from './config'
-import callback from './callback'
-import version from './version'
-import * as quibble from 'quibble'
-
-module.exports = {
-  function: tdFunction,
-  func: tdFunction,
-  object,
-  constructor,
-  imitate,
-  when,
-  verify,
-  matchers,
-  replace,
-  explain,
-  reset,
-  config,
-  callback,
-  version,
-  quibble
-}
+export { default as function, default as func } from './function'
+export { default as object } from './object'
+export { default as constructor } from './constructor'
+export { default as imitate } from './imitate'
+export { default as when } from './when'
+export { default as verify } from './verify'
+export { default as matchers, Captor, Created } from './matchers'
+export { default as replace } from './replace'
+export { default as explain } from './explain'
+export { default as reset } from './reset'
+export { default as config, ConfigObject } from './config'
+export { default as callback } from './callback'
+export { default as version } from './version'
+export { * as quibble } from 'quibble'

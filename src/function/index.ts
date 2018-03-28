@@ -5,7 +5,7 @@ import _ from '../wrap/lodash'
 
 import create from './create'
 
-interface FuncType {
+export interface FuncType {
   (name: string): Function0<void>
   <R>(func: Function0<R>): Function0<R>
   <T1, R>(func: Function1<T1, R>): Function1<T1, R>

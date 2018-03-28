@@ -5,11 +5,11 @@ import imitate from './imitate'
 
 const DEFAULT_OPTIONS = {excludeMethods: ['then']}
 
-interface ObjectProxyConfig {
+export interface ObjectProxyConfig {
   excludeMethods: string[]
 }
 
-interface ObjectType {
+export interface ObjectType {
   <T>(original: T): T
   <T>(names: (keyof T)[]): T
   (names: string, config?: ObjectProxyConfig): any
@@ -94,3 +94,5 @@ var nameOf = (nameOrType) =>
   _.isString(nameOrType)
     ? nameOrType
     : ''
+
+export default object

@@ -5,7 +5,7 @@ import gatherProps from './gather-props'
 import copyProps from './copy-props'
 import chainPrototype from './chain-prototype'
 
-interface OverwriteChildrenType {
+export interface OverwriteChildrenType {
   <T>(original: T[], target: T[], overwriteChild: (val: T, name: string) => T)
   <T>(original: T, target: T, overwriteChild: (val: T[keyof T], name: string) => T[keyof T])
 }

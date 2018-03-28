@@ -1,4 +1,4 @@
-import create from '../create'
+import create, { Created } from '../create'
 
 export default create({
   name: 'argThat',

@@ -13,7 +13,7 @@
     "src",
     "lib",
     "dist",
-    "index.d.ts"
+    "ts"
   ],
   "config": {
     "build_file": "dist/testdouble.js"
@@ -113,7 +113,7 @@
     "lib": "./lib",
     "src": "./src"
   },
-  "typings": "./index.d.ts",
+  "typings": "./ts/index.d.ts",
   "keywords": [
     "tdd",
     "bdd",

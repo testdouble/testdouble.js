@@ -11,6 +11,7 @@ npm-debug.log*
 /lib
 /coverage
 /dist
+/ts
 
 .node-version
 .vscode

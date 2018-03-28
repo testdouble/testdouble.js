@@ -5,7 +5,7 @@ import _ from './wrap/lodash'
 import tdFunction from './function'
 import imitate from './imitate'
 
-interface ConstructorType {
+export interface ConstructorType {
   <T>(typeOrNames: (keyof T)[]): Constructor0<T>
   <T>(typeOrNames: Constructor0<T>): Constructor0<T>
   <A1, T>(typeOrNames: Constructor1<A1, T>): Constructor1<A1, T>

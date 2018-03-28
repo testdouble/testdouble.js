@@ -5,7 +5,10 @@
     "noImplicitAny": false,
     "module": "commonjs",
     "moduleResolution": "node",
-    "outDir": "lib"
+    "outDir": "lib",
+    "declaration": true,
+    "declarationDir": "ts"
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*"],
+  "exclude": ["ts/**/*"]
 }

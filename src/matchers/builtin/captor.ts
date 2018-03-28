@@ -1,6 +1,6 @@
 import create, { Created } from '../create'
 
-interface Captor {
+export interface Captor {
   capture: Created
   values: any[]
   value: any

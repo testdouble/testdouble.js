@@ -7,7 +7,7 @@ import store from './store'
 import stubbings from './store/stubbings'
 import imitate from './imitate'
 
-interface FuncType {
+export interface FuncType {
   (): Function0<void>
   (name: string): Function0<void>
   <R>(func: Function0<R>): Function0<R>

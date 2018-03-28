@@ -3,7 +3,7 @@ import _ from '../wrap/lodash'
 import tdFunction from '../function'
 import isGenerator from './is-generator'
 
-interface CreateImitationType {
+export interface CreateImitationType {
   (original: IArguments, names: string[]): any[]
   <T>(original: T[], names: string[]): T[]
   <T>(original: T, names: string[]): T
