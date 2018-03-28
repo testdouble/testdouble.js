@@ -5,19 +5,31 @@ import imitate from './imitate'
 
 const DEFAULT_OPTIONS = {excludeMethods: ['then']}
 
-export default function object (nameOrType, config) {
+interface ObjectProxyConfig {
+  excludeMethods: string[]
+}
+
+interface ObjectType {
+  <T>(original: T): T
+  <T>(names: (keyof T)[]): T
+  (names: string, config?: ObjectProxyConfig): any
+}
+
+type a = ProxyConstructor
+
+const object: ObjectType = function <T>(nameOrType: T | (keyof T)[] | string, config?: ObjectProxyConfig): T {
   return _.tap(fakeObject(nameOrType, config, arguments.length), (obj) => {
     addToStringToDouble(obj, nameOrType)
   })
 }
 
-var fakeObject = function <T>(nameOrType: T | (keyof T)[], config, argCount): T {
+var fakeObject = function <T>(nameOrType: T | (keyof T)[] | string, config, argCount: number): T {
   if (_.isArray(nameOrType)) {
     return createTestDoublesForFunctionNames(nameOrType)
-  } else if (_.isObjectLike(nameOrType)) {
-    return imitate(nameOrType)
   } else if (_.isString(nameOrType) || argCount === 0) {
     return createTestDoubleViaProxy(nameOrType, withDefaults(config))
+  } else if (_.isObjectLike(nameOrType)) {
+    return imitate(nameOrType)
   } else if (_.isFunction(nameOrType)) {
     ensureFunctionIsNotPassed()
   } else {
