@@ -87,6 +87,7 @@
   },
   "devDependencies": {
     "@types/jest": "^22.2.2",
+    "@types/lodash": "^4.14.106",
     "@types/node": "^9.6.0",
     "browserify": "^16.1.0",
     "codeclimate-test-reporter": "^0.5.0",
