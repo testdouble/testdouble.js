@@ -263,6 +263,11 @@ module.exports = {
         a: [5]
       })
     },
+    'errors' () {
+      matches(td.matchers.contains(new Error('eek')), new Error('eek'))
+      matches(td.matchers.contains(new Error('message')), new Error('long message'))
+      doesntMatch(td.matchers.contains(new Error('eek')), new Error('woah'))
+    },
     'regexp' () {
       matches(td.matchers.contains(/abc/), 'abc')
       doesntMatch(td.matchers.contains(/abc/), {
