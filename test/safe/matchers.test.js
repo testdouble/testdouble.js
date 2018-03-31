@@ -121,6 +121,24 @@ module.exports = {
       doesntMatch(td.matchers.contains(true, 5, null, void 0), [true, 5, null])
       matches(td.matchers.contains('b', td.matchers.isA(Number)), ['a', 3, 'b'])
     },
+    'dates' () {
+      matches(td.matchers.contains(new Date('2011')), new Date('2011'))
+      doesntMatch(td.matchers.contains(new Date('2011')), new Date('2012'))
+    },
+    'errors' () {
+      matches(td.matchers.contains(new Error('eek')), new Error('eek'))
+      matches(td.matchers.contains(new Error('message')), new Error('long message'))
+      doesntMatch(td.matchers.contains(new Error('eek')), new Error('woah'))
+    },
+    'regexp' () {
+      matches(td.matchers.contains(/abc/), 'abc')
+      matches(td.matchers.contains(/abc/), /abc/)
+      doesntMatch(td.matchers.contains(/abc/), /abcd/)
+      doesntMatch(td.matchers.contains(/abc/), {
+        foo: 'bar'
+      })
+      doesntMatch(td.matchers.contains(/abc/), ['foo', 'bar'])
+    },
     'objects' () {
       matches(td.matchers.contains({
         foo: 'bar',
@@ -263,26 +281,25 @@ module.exports = {
         a: [5]
       })
     },
-    'dates' () {
-      matches(td.matchers.contains(new Date('2011')), new Date('2011'))
-      doesntMatch(td.matchers.contains(new Date('2011')), new Date('2012'))
-    },
-    'errors' () {
-      matches(td.matchers.contains(new Error('eek')), new Error('eek'))
-      matches(td.matchers.contains(new Error('message')), new Error('long message'))
-      doesntMatch(td.matchers.contains(new Error('eek')), new Error('woah'))
-    },
-    'regexp' () {
-      matches(td.matchers.contains(/abc/), 'abc')
-      matches(td.matchers.contains(/abc/), /abc/)
-      doesntMatch(td.matchers.contains(/abc/), /abcd/)
-      doesntMatch(td.matchers.contains(/abc/), {
-        foo: 'bar'
-      })
-      doesntMatch(td.matchers.contains(/abc/), ['foo', 'bar'])
+    'objects with nested edge cases' () {
+      matches(td.matchers.contains({d: new Date('1999')}), {d: new Date('1999')})
+      doesntMatch(td.matchers.contains({d: new Date('1999')}), {d: new Date('2099')})
+
+      matches(td.matchers.contains({e: new Error('ew')}), {e: new Error('eww')})
+      doesntMatch(td.matchers.contains({e: new Error('?')}), {e: new Error('!')})
+
+      matches(td.matchers.contains({r: /abc/}), {r: /abc/})
+      matches(td.matchers.contains({r: /abc/}), {r: 'abc'})
+      doesntMatch(td.matchers.contains({r: /abc/}), {r: /abcd/})
     },
     'nonsense' () {
-      doesntMatch(td.matchers.contains(42), 42)
+      // These are a bit stupid, but necessary to support deep comparisons
+      matches(td.matchers.contains(42), 42)
+      matches(td.matchers.contains(td.matchers.isA(Number)), 42)
+
+      // These definitely should not match
+      doesntMatch(td.matchers.contains(43), 42)
+      doesntMatch(td.matchers.contains(td.matchers.isA(String)), 42)
       doesntMatch(td.matchers.contains(null), 'shoo')
       doesntMatch(td.matchers.contains(), 'shoo')
       doesntMatch(td.matchers.contains({}), void 0)
