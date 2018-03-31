@@ -17,7 +17,11 @@ const argumentContains = function (containing, actualArg) {
   if (_.isArray(containing)) {
     return _.some(actualArg, actualElement => _.isEqual(actualElement, containing))
   } else if (_.isRegExp(containing)) {
-    return containing.test(actualArg)
+    if (_.isString(actualArg)) {
+      return containing.test(actualArg)
+    } else if (_.isRegExp(actualArg)) {
+      return containing.toString() === actualArg.toString()
+    }
   } else if (isMatcher(containing)) {
     return _.some(actualArg, containing.__matches)
   } else if (containing instanceof Date) {

@@ -274,6 +274,8 @@ module.exports = {
     },
     'regexp' () {
       matches(td.matchers.contains(/abc/), 'abc')
+      matches(td.matchers.contains(/abc/), /abc/)
+      doesntMatch(td.matchers.contains(/abc/), /abcd/)
       doesntMatch(td.matchers.contains(/abc/), {
         foo: 'bar'
       })
