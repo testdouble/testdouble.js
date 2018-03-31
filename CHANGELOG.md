@@ -1,5 +1,21 @@
 # Change Log
 
+## [v3.7.0](https://github.com/testdouble/testdouble.js/tree/v3.7.0) (2018-03-31)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.6.0...v3.7.0)
+
+**Closed issues:**
+
+- Compare dates when using td.matchers.contains [\#358](https://github.com/testdouble/testdouble.js/issues/358)
+- verifiable thenThrow [\#288](https://github.com/testdouble/testdouble.js/issues/288)
+- docs: simple page that lists the entire API [\#253](https://github.com/testdouble/testdouble.js/issues/253)
+- Planning Discussion for a move to TypeScript  [\#252](https://github.com/testdouble/testdouble.js/issues/252)
+- More support for ES Modules [\#246](https://github.com/testdouble/testdouble.js/issues/246)
+- Consider using \_.isObjectLike rather than \_.isPlainObject within td.object [\#224](https://github.com/testdouble/testdouble.js/issues/224)
+
+**Merged pull requests:**
+
+- Enhance contains for edge cases, make nesting behave consistently [\#359](https://github.com/testdouble/testdouble.js/pull/359) ([searls](https://github.com/searls))
+
 ## [v3.6.0](https://github.com/testdouble/testdouble.js/tree/v3.6.0) (2018-03-24)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.5.2...v3.6.0)
 
@@ -9,6 +25,7 @@
 
 **Merged pull requests:**
 
+- Export td.quibble [\#357](https://github.com/testdouble/testdouble.js/pull/357) ([searls](https://github.com/searls))
 - Avoid implicit any for TypeScript definitions [\#351](https://github.com/testdouble/testdouble.js/pull/351) ([rayalan](https://github.com/rayalan))
 - Merge Circle CI config to master [\#349](https://github.com/testdouble/testdouble.js/pull/349) ([searls](https://github.com/searls))
 - Merge in Circle CI config [\#348](https://github.com/testdouble/testdouble.js/pull/348) ([searls](https://github.com/searls))
