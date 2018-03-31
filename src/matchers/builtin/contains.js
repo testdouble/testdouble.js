@@ -15,26 +15,42 @@ export default create({
 
 const argumentContains = function (containing, actualArg) {
   if (_.isArray(containing)) {
-    return _.some(actualArg, actualElement => _.isEqual(actualElement, containing))
-  } else if (_.isRegExp(containing)) {
-    return containing.test(actualArg)
-  } else if (isMatcher(containing)) {
-    return _.some(actualArg, containing.__matches)
-  } else if (_.isObjectLike(containing) && _.isObjectLike(actualArg)) {
-    return containsPartialObject(containing, actualArg)
+    return _.some(actualArg, actualElement =>
+      _.isEqualWith(containing, actualElement, equalish))
   } else {
-    return _.includes(actualArg, containing)
+    return _.isEqualWith(containing, actualArg, equalish)
   }
 }
 
-var containsPartialObject = (containing, actual) => {
-  return actual != null && _.every(containing, (val, key) => {
-    if (isMatcher(val)) {
-      return val.__matches(actual[key])
-    } else if (_.isObjectLike(val)) {
-      return containsPartialObject(val, actual[key])
+const equalish = function (containing, actualArg) {
+  if (_.isRegExp(containing)) {
+    if (_.isString(actualArg)) {
+      return containing.test(actualArg)
+    } else if (_.isRegExp(actualArg)) {
+      return containing.toString() === actualArg.toString()
     } else {
-      return _.isEqual(val, actual[key])
+      return false
     }
-  })
+  } else if (isMatcher(containing)) {
+    return containing.__matches(actualArg) ||
+      _.some(actualArg, containing.__matches)
+  } else if (containing instanceof Date) {
+    return actualArg instanceof Date &&
+      containing.getTime() === actualArg.getTime()
+  } else if (containing instanceof Error) {
+    return actualArg instanceof Error &&
+      _.includes(actualArg.message, containing.message)
+  } else if (_.isObjectLike(containing) && _.isObjectLike(actualArg)) {
+    return containsPartialObject(containing, actualArg)
+  } else if (_.isString(actualArg) || _.isArray(actualArg)) {
+    return _.includes(actualArg, containing)
+  } else {
+    _.isEqual(actualArg, containing)
+  }
+}
+
+const containsPartialObject = (containing, actual) => {
+  return _.every(containing, (val, key) =>
+    _.isEqualWith(val, actual[key], equalish)
+  )
 }
