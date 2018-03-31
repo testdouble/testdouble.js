@@ -20,6 +20,9 @@ const argumentContains = function (containing, actualArg) {
     return containing.test(actualArg)
   } else if (isMatcher(containing)) {
     return _.some(actualArg, containing.__matches)
+  } else if (containing instanceof Date) {
+    return actualArg instanceof Date &&
+      containing.getTime() === actualArg.getTime()
   } else if (containing instanceof Error) {
     return actualArg instanceof Error &&
       _.includes(actualArg.message, containing.message)

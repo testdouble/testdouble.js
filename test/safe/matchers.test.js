@@ -263,6 +263,10 @@ module.exports = {
         a: [5]
       })
     },
+    'dates' () {
+      matches(td.matchers.contains(new Date('2011')), new Date('2011'))
+      doesntMatch(td.matchers.contains(new Date('2011')), new Date('2012'))
+    },
     'errors' () {
       matches(td.matchers.contains(new Error('eek')), new Error('eek'))
       matches(td.matchers.contains(new Error('message')), new Error('long message'))
