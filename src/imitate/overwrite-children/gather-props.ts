@@ -1,11 +1,11 @@
 import isFakeable from './is-fakeable'
 import isNativePrototype from './is-native-prototype'
 
-export type PropertyDescriptors<T> = {
+export type PropertyDescriptors < T > = {
   [P in keyof T]: PropertyDescriptor
 }
 
-export default function gatherProps <T>(thing: T): PropertyDescriptors<T> {
+export default function gatherProps <T> (thing: T): PropertyDescriptors<T> {
   const props = {} as PropertyDescriptors<T>
   while (isFakeable(thing) && !isNativePrototype(thing)) {
     Object.getOwnPropertyNames(thing).forEach((propName) => {

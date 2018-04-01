@@ -14,4 +14,3 @@ export { default as config } from './config'
 export { default as callback } from './callback'
 export { default as version } from './version'
 export { quibble }
-

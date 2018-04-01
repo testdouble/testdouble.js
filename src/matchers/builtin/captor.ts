@@ -17,10 +17,10 @@ export default () => {
         captor.values = captor.values || []
         captor.values.push(actual)
         captor.value = actual
-      },
+      }
     }),
     values: [],
-    value: undefined,
+    value: undefined
   }
   return captor
 }
