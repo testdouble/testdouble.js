@@ -5,6 +5,7 @@ import CallLog from '../value/call-log'
 import StubbingRegister from '../value/stubbing-register'
 import Stubbing from '../value/stubbing'
 
+// tslint:disable-next-line:variable-name
 export default (__rehearseInvocationHere__, options) => {
   const rehearsal = CallLog.instance.pop()
   ensureRehearsal(rehearsal)

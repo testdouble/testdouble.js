@@ -10,8 +10,7 @@ export interface ObjectProxyConfig {
 }
 
 export interface ObjectType {
-  <T>(original: T): T
-  <T>(names: (keyof T)[]): T
+  <T>(originalOrNames: T | (keyof T)[]): T
   (names: string, config?: ObjectProxyConfig): any
 }
 
@@ -23,7 +22,7 @@ const object: ObjectType = function <T>(nameOrType: T | (keyof T)[] | string, co
   })
 }
 
-var fakeObject = function <T>(nameOrType: T | (keyof T)[] | string, config, argCount: number): T {
+let fakeObject = function <T>(nameOrType: T | (keyof T)[] | string, config, argCount: number): T {
   if (_.isArray(nameOrType)) {
     return createTestDoublesForFunctionNames(nameOrType)
   } else if (_.isString(nameOrType) || argCount === 0) {
@@ -37,12 +36,12 @@ var fakeObject = function <T>(nameOrType: T | (keyof T)[] | string, config, argC
   }
 }
 
-var createTestDoublesForFunctionNames = <T>(names: (keyof T)[]): T => 
+let createTestDoublesForFunctionNames = <T>(names: (keyof T)[]): T =>
   _.transform<keyof T, keyof T>(names, (acc: any, funcName) => {
     acc[funcName] = tdFunction(`.${String(funcName)}`)
   }, {}) as { [P in keyof T] }
 
-var createTestDoubleViaProxy = <T>(name, config): T => {
+let createTestDoubleViaProxy = <T>(name, config): T => {
   ensureProxySupport(name)
   const obj = {} as T & object
   return new Proxy<T & object>(obj, {
@@ -55,7 +54,7 @@ var createTestDoubleViaProxy = <T>(name, config): T => {
   })
 }
 
-var ensureProxySupport = (name) => {
+let ensureProxySupport = (name) => {
   if (typeof Proxy === 'undefined') {
     log.error('td.object', `\
 The current runtime does not have Proxy support, which is what
@@ -69,10 +68,10 @@ Did you mean \`td.object(['${name}'])\`?\
   }
 }
 
-var ensureFunctionIsNotPassed = () =>
+let ensureFunctionIsNotPassed = () =>
   log.error('td.object', `Functions are not valid arguments to \`td.object\` (as of testdouble@2.0.0). Please use \`td.function()\` or \`td.constructor()\` instead for creating fake functions.`)
 
-var ensureOtherGarbageIsNotPassed = () =>
+let ensureOtherGarbageIsNotPassed = () =>
   log.error('td.object', `\
 To create a fake object with td.object(), pass it a plain object that contains
 functions, an array of function names, or (if your runtime supports ES Proxy
@@ -82,15 +81,15 @@ If you passed td.object an instance of a custom type, consider passing the
 type's constructor to \`td.constructor()\` instead.
 `)
 
-var withDefaults = (config) =>
+let withDefaults = (config) =>
   _.extend({}, DEFAULT_OPTIONS, config)
 
-var addToStringToDouble = (fakeObject, nameOrType) => {
+let addToStringToDouble = (fakeObject, nameOrType) => {
   const name = nameOf(nameOrType)
   fakeObject.toString = () => `[test double object${name ? ` for "${name}"` : ''}]`
 }
 
-var nameOf = (nameOrType) =>
+let nameOf = (nameOrType) =>
   _.isString(nameOrType)
     ? nameOrType
     : ''

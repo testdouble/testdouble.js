@@ -3,6 +3,14 @@ import * as Map from 'es6-map'
 let instance = null
 
 export default class CallLog {
+  calls: Map<any>
+  callHistory: any[]
+
+  constructor () {
+    this.calls = new Map()
+    this.callHistory = []
+  }
+
   static get instance () {
     if (instance) return instance
     instance = new CallLog()
@@ -11,14 +19,6 @@ export default class CallLog {
 
   static reset () {
     instance = null
-  }
-
-  calls: Map<any>
-  callHistory: any[]
-
-  constructor () {
-    this.calls = new Map()
-    this.callHistory = []
   }
 
   log (double, call) {

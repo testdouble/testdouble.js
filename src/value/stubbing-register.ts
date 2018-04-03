@@ -3,6 +3,12 @@ import * as Map from 'es6-map'
 let instance = null
 
 export default class StubbingRegister {
+  stubbings: Map<any>
+
+  constructor () {
+    this.stubbings = new Map()
+  }
+
   static get instance () {
     if (instance) return instance
     instance = new StubbingRegister()
@@ -11,12 +17,6 @@ export default class StubbingRegister {
 
   static reset () {
     instance = null
-  }
-
-  stubbings: Map<any>
-
-  constructor () {
-    this.stubbings = new Map()
   }
 
   add (double, stubbing) {

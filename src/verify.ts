@@ -7,6 +7,7 @@ import stringifyArgs from './stringify/arguments'
 import stubbingsStore from './store/stubbings'
 import notifyAfterSatisfaction from './matchers/notify-after-satisfaction'
 
+// tslint:disable-next-line:variable-name
 export default (__userDoesRehearsalInvocationHere__, config = {}) => {
   const last = callsStore.pop()
   ensureRehearsalOccurred(last)
@@ -18,7 +19,7 @@ export default (__userDoesRehearsalInvocationHere__, config = {}) => {
   }
 }
 
-var ensureRehearsalOccurred = (last) => {
+let ensureRehearsalOccurred = (last) => {
   if (!last) {
     log.error('td.verify', `\
 No test double invocation detected for \`verify()\`.
@@ -35,7 +36,7 @@ const notifyMatchers = (testDouble, expectedArgs, config) => {
   })
 }
 
-var warnIfStubbed = (testDouble, actualArgs) => {
+let warnIfStubbed = (testDouble, actualArgs) => {
   if (_.some(stubbingsStore.for(testDouble), (stubbing) =>
     argsMatch(stubbing.args, actualArgs, stubbing.config))
   ) {
@@ -46,17 +47,17 @@ var warnIfStubbed = (testDouble, actualArgs) => {
   }
 }
 
-var unsatisfiedErrorMessage = (testDouble, args, config) =>
+let unsatisfiedErrorMessage = (testDouble, args, config) =>
   baseSummary(testDouble, args, config) +
   matchedInvocationSummary(testDouble, args, config) +
   invocationSummary(testDouble, args, config)
 
-var stringifyName = (testDouble) => {
+let stringifyName = (testDouble) => {
   const name = store.for(testDouble).name
   return name ? ` \`${name}\`` : ''
 }
 
-var baseSummary = (testDouble, args, config) =>
+let baseSummary = (testDouble, args, config) =>
   `\
 Unsatisfied verification on test double${stringifyName(testDouble)}.
 
@@ -64,7 +65,7 @@ Unsatisfied verification on test double${stringifyName(testDouble)}.
     - called with \`(${stringifyArgs(args)})\`${timesMessage(config)}${ignoreMessage(config)}.\
 `
 
-var invocationSummary = (testDouble, args, config) => {
+let invocationSummary = (testDouble, args, config) => {
   const calls = callsStore.for(testDouble)
   if (calls.length === 0) {
     return '\n\n  But there were no invocations of the test double.'
@@ -75,7 +76,7 @@ var invocationSummary = (testDouble, args, config) => {
   }
 }
 
-var matchedInvocationSummary = (testDouble, args, config) => {
+let matchedInvocationSummary = (testDouble, args, config) => {
   const calls = callsStore.where(testDouble, args, config)
   const expectedCalls = config.times || 0
 
@@ -88,15 +89,15 @@ var matchedInvocationSummary = (testDouble, args, config) => {
   }
 }
 
-var pluralize = (x, msg) =>
+let pluralize = (x, msg) =>
   `${x} ${msg}${x === 1 ? '' : 's'}`
 
-var timesMessage = (config) =>
+let timesMessage = (config) =>
   config.times != null
     ? ` ${pluralize(config.times, 'time')}`
     : ''
 
-var ignoreMessage = (config) =>
+let ignoreMessage = (config) =>
   config.ignoreExtraArgs != null
     ? ', ignoring any additional arguments'
     : ''

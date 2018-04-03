@@ -25,7 +25,7 @@ export default function <T, P extends keyof T>(object: T, property: P, manualRep
   }
 }
 
-var getFake = <T>(isManual: boolean, property: string, manualReplacement: T, realThing: T): T => {
+let getFake = <T>(isManual: boolean, property: string, manualReplacement: T, realThing: T): T => {
   if (isManual) {
     warnIfTypeMismatch(property, manualReplacement, realThing)
     return manualReplacement
@@ -34,7 +34,7 @@ var getFake = <T>(isManual: boolean, property: string, manualReplacement: T, rea
   }
 }
 
-var warnIfTypeMismatch = <T>(property: string, fakeThing: T, realThing: T) => {
+let warnIfTypeMismatch = <T>(property: string, fakeThing: T, realThing: T) => {
   const fakeType = typeof fakeThing
   const realType = typeof realThing
   if (realThing !== undefined && fakeType !== realType) {

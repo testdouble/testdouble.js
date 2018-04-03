@@ -6,6 +6,7 @@ import log from './log'
 import stubbings from './store/stubbings'
 import tdConfig from './config'
 
+// tslint:disable-next-line:variable-name
 export default function when (__userDoesRehearsalInvocationHere__, config = {}) {
   return ({
     thenReturn (...stubbedValues) {

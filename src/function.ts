@@ -8,8 +8,7 @@ import stubbings from './store/stubbings'
 import imitate from './imitate'
 
 export interface FuncType {
-  (): Function0<void>
-  (name: string): Function0<void>
+  (name?: string): Function0<void>
   <R>(func: Function0<R>): Function0<R>
   <T1, R>(func: Function1<T1, R>): Function1<T1, R>
   <T1, T2, R>(func: Function2<T1, T2, R>): Function2<T1, T2, R>
@@ -17,13 +16,13 @@ export interface FuncType {
   <T1, T2, T3, T4, R>(func: Function4<T1, T2, T3, T4, R>): Function4<T1, T2, T3, T4, R>
 }
 
-const func: FuncType = (nameOrFunc?, __optionalName?) => {
+const func: FuncType = (nameOrFunc, optionalName?) => {
   return _.isFunction(nameOrFunc)
     ? imitate(nameOrFunc)
-    : createTestDoubleNamed(nameOrFunc || __optionalName)
+    : createTestDoubleNamed(nameOrFunc || optionalName)
 }
 
-var createTestDoubleNamed = function (name) {
+let createTestDoubleNamed = function (name) {
   return _.tap(createTestDoubleFunction(), (testDouble) => {
     const entry = store.for(testDouble, true)
     if (name != null) {
@@ -35,7 +34,7 @@ var createTestDoubleNamed = function (name) {
   })
 }
 
-var createTestDoubleFunction = function () {
+let createTestDoubleFunction = function () {
   return function testDouble (...args) {
     calls.log(testDouble, args, this)
     return stubbings.invoke(testDouble, args, this)

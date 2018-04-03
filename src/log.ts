@@ -18,7 +18,7 @@ export default {
   }
 }
 
-var withUrl = (url?: string) =>
+let withUrl = (url?: string) =>
   url != null
     ? ` (see: ${url} )`
     : ''

@@ -4,6 +4,7 @@ import notifySatisfiedMatchers from './notify-satisfied-matchers'
 import warnIfAlsoStubbed from './warn-if-also-stubbed'
 import fail from './fail'
 
+// tslint:disable-next-line:variable-name
 export default function verify (__userInvokesDemonstrationHere__, config) {
   const { double, call } = popDemonstration()
   if (didCallOccur(double, call, config)) {

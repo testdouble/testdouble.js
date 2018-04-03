@@ -6,8 +6,7 @@ import tdFunction from './function'
 import imitate from './imitate'
 
 export interface ConstructorType {
-  <T>(typeOrNames: (keyof T)[]): Constructor0<T>
-  <T>(typeOrNames: Constructor0<T>): Constructor0<T>
+  <T>(typeOrNames: (keyof T)[] | Constructor0<T>): Constructor0<T>
   <A1, T>(typeOrNames: Constructor1<A1, T>): Constructor1<A1, T>
   <A1, A2, T>(typeOrNames: Constructor2<A1, A2, T>): Constructor2<A1, A2, T>
   <A1, A2, A3, T>(typeOrNames: Constructor3<A1, A2, A3, T>): Constructor3<A1, A2, A3, T>
@@ -20,7 +19,7 @@ _.isFunction(typeOrNames)
   : fakeConstructorFromNames(typeOrNames)
 ) as ConstructorType
 
-var fakeConstructorFromNames = <T>(funcNames: (keyof T)[]): Constructor0<T> => {
+let fakeConstructorFromNames = <T>(funcNames: (keyof T)[]): Constructor0<T> => {
   return _.tap<Constructor0<T>>(tdFunction('(unnamed constructor)') as any, (fakeConstructor) => {
     fakeConstructor.prototype.toString = () =>
       '[test double instance of constructor]'

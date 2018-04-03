@@ -15,14 +15,14 @@ export default (expectedArgs, actualArgs, config: Config = {}) => {
   }
 }
 
-var arityMismatch = (expectedArgs, actualArgs, config) =>
+const arityMismatch = (expectedArgs, actualArgs, config) =>
   expectedArgs.length !== actualArgs.length && !config.ignoreExtraArgs
 
-var equalsWithMatchers = (expectedArgs, actualArgs) =>
+const equalsWithMatchers = (expectedArgs, actualArgs) =>
   _.every(expectedArgs, (expectedArg, key) =>
     argumentMatchesExpectation(expectedArg, actualArgs[key]))
 
-var argumentMatchesExpectation = (expectedArg, actualArg) => {
+const argumentMatchesExpectation = (expectedArg, actualArg) => {
   if (isMatcher(expectedArg)) {
     return matcherTestFor(expectedArg)(actualArg)
   } else {
@@ -34,5 +34,5 @@ var argumentMatchesExpectation = (expectedArg, actualArg) => {
   }
 }
 
-var matcherTestFor = (matcher) =>
+const matcherTestFor = (matcher) =>
   matcher.__matches

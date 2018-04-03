@@ -21,7 +21,7 @@ const nameFor = (realThing: Function) => {
   return realThing.name ? realThing.name : '(anonymous function)'
 }
 
-var requireAt = (modulePath) => {
+const requireAt = (modulePath) => {
   try {
     // 1. Try just following quibble's inferred path
     return require(quibble.absolutify(modulePath))

@@ -27,7 +27,7 @@ export default (config): Created =>
       _.invoke(config, 'onCreate', matcherInstance, matcherArgs)
     })
 
-var nameFor = (config, matcherArgs) => {
+let nameFor = (config, matcherArgs) => {
   if (_.isFunction(config.name)) {
     return config.name(matcherArgs)
   } else if (config.name != null) {

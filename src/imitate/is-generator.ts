@@ -1,6 +1,7 @@
 const generatorsAreSupported = (function () {
   try {
-    eval('(function* () {})') // eslint-disable-line
+    // tslint:disable-next-line:no-eval
+    eval('(function* () {})')
     return true
   } catch (e) {
     return false
@@ -9,7 +10,8 @@ const generatorsAreSupported = (function () {
 
 const GeneratorFunction = (function () {
   if (!generatorsAreSupported) return
-  const func = eval('(function* () {})') // eslint-disable-line
+  // tslint:disable-next-line:no-eval
+  const func = eval('(function* () {})')
   return Object.getPrototypeOf(func).constructor
 })()
 

@@ -7,12 +7,6 @@ export default class Double {
   children?: Set<any>
   parent?: any
 
-  static create (name, real, parent, fakeCreator) {
-    const double = new Double(name, real, parent)
-    if (fakeCreator) double.fake = fakeCreator(double)
-    return double
-  }
-
   constructor (name, real, parent) {
     this.name = name
     this.real = real
@@ -21,6 +15,12 @@ export default class Double {
       this.parent = parent
       parent.addChild(this)
     }
+  }
+
+  static create (name, real, parent, fakeCreator) {
+    const double = new Double(name, real, parent)
+    if (fakeCreator) double.fake = fakeCreator(double)
+    return double
   }
 
   addChild (child) {
