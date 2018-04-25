@@ -1,4 +1,6 @@
-require('ts-node/register')
+require('ts-node').register({
+  compilerOptions: { allowJs: true }
+})
 global.assert = require('assert')
 global.ES_SUPPORT = require('./support/es-support')
 
