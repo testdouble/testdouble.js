@@ -27,7 +27,7 @@ export = {
     if (eval('typeof Proxy') !== 'undefined') { // eslint-disable-line
       class Bear { sleep () {} }
 
-      const FakeBear = td.constructor<Class>(Bear)
+      const FakeBear = td.constructor<Bear>(Bear)
 
       assert.equal(td.explain(FakeBear.prototype.sleep).isTestDouble, true)
 

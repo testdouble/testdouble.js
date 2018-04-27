@@ -1,12 +1,11 @@
 #!/usr/bin/env node
 
-require('coffee-script/register')
 require('ts-node/register')
 var repl = require('repl')
 
 console.log('💚  Let\'s play with testdouble.js!  💚')
 global.td = require('../src')
-global._ = require('lodash')
+global.l = require('lodash')
 repl.start({prompt: 'td > ', useGlobal: true})
 
 

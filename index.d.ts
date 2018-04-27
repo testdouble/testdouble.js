@@ -29,6 +29,7 @@ export interface Explanation {
   callCount: number;
   calls: Call[];
   description: string;
+  isTestDouble: boolean;
 }
 
 export interface Matchers {

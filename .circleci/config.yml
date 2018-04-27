@@ -1,32 +1,5 @@
 version: 2.0
 jobs:
-  "node-4":
-    docker:
-      - image: circleci/node:4-browsers
-    environment:
-      - CODECLIMATE_REPO_TOKEN: c92188dcdeaca7d9732f8ea38fdd41d6bff18dc27a8d6f8b64a5b1311b7b6c21
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - dependency-cache-v4-{{ checksum "package.json" }}
-            - dependency-cache-v4-
-      - run: npm install
-      - save_cache:
-          key: dependency-cache-v4-{{ checksum "package.json" }}
-          paths:
-            - ./node_modules
-            - examples/babel/node_modules
-            - examples/jest/node_modules
-            - examples/jest-broken/node_modules
-            - examples/plain-html/node_modules
-            - examples/node/node_modules
-            - examples/webpack/node_modules
-      - run: npm run test:ci
-      - run: npm run cover:ci
-      - store_artifacts:
-          path: coverage
-          prefix: coverage
   "node-6":
     docker:
       - image: circleci/node:6-browsers
@@ -97,6 +70,5 @@ workflows:
   version: 2
   build:
     jobs:
-      - "node-4"
       - "node-6"
       - "node-8"

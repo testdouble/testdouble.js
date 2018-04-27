@@ -1,6 +1,6 @@
 {
   "name": "testdouble",
-  "version": "3.5.2",
+  "version": "3.7.0",
   "description": "A minimal test double library for TDD with JavaScript",
   "homepage": "https://github.com/testdouble/testdouble.js",
   "author": {
@@ -20,6 +20,7 @@
   },
   "scripts": {
     "clean": "rimraf dist lib coverage",
+    "clean:hard": "npm run clean && rimraf node_modules \"examples/*/node_modules\"",
     "postclean": "mkdirp dist",
     "compile:browser": "cross-conf-env browserify src/index.js --standalone td --outfile $npm_package_config_build_file -p tsify -p headerify",
     "compile:node": "tsc",
@@ -36,7 +37,7 @@
     "test:unit": "teenytest --helper test/helper.js \"test/unit/**/*.test.{js,ts}\"",
     "test:safe": "teenytest --helper test/helper.js \"test/safe/**/*.test.{js,ts}\"",
     "test:ci": "npm run compile && run-p style test:all && echo \"All done!\"",
-    "test:example": "(npm link || sudo npm link) && run-p test:example:babel test:example:jest test:example:jest-broken test:example:plain-html test:example:node test:example:webpack",
+    "test:example": "run-p test:example:babel test:example:jest test:example:jest-broken test:example:plain-html test:example:node test:example:webpack",
     "test:example:babel": "./script/run-examples babel",
     "test:example:jest": "./script/run-examples jest",
     "test:example:jest-broken": "./script/run-examples jest-broken",
@@ -52,6 +53,7 @@
   },
   "browser": {
     "./src/replace/module.js": "./src/replace/module.browser.js",
+    "./lib/replace/module.js": "./lib/replace/module.browser.js",
     "quibble": "./src/quibble.browser.js"
   },
   "standard": {
@@ -82,7 +84,7 @@
   "dependencies": {
     "es6-map": "^0.1.5",
     "lodash": "^4.17.4",
-    "quibble": "^0.5.1",
+    "quibble": "^0.5.5",
     "stringify-object-es5": "^2.5.0"
   },
   "devDependencies": {

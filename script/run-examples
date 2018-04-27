@@ -5,11 +5,10 @@ set -e
 projects=${1-*/}
 
 # Must be run from project root
-echo "<------ If this fails be sure to run 'npm link' in the root dir!"
 cd examples
 for D in $projects; do
   echo "<------ Running tests for example project '${D}'"
   cd "${D}"
-  npm run --silent skip-ci || (npm install && (npm link testdouble || sudo npm link testdouble) && npm test)
+  npm run --silent skip-ci || npm it 2>&1
 cd ..
 done
