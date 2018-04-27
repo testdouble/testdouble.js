@@ -82,7 +82,7 @@
   "dependencies": {
     "es6-map": "^0.1.5",
     "lodash": "^4.17.4",
-    "quibble": "^0.5.1",
+    "quibble": "^0.5.5",
     "stringify-object-es5": "^2.5.0"
   },
   "devDependencies": {
