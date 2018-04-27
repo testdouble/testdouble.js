@@ -10,6 +10,7 @@
   },
   "devDependencies": {
     "jest": "^22.2.2",
-    "testdouble-jest": "github:testdouble/testdouble-jest"
+    "testdouble-jest": "github:testdouble/testdouble-jest",
+    "testdouble": "file:../.."
   }
 }

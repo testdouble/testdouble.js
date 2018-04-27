@@ -16,6 +16,7 @@
     }
   },
   "src_files" : [
+    "node_modules/testdouble/dist/testdouble.js",
     "test/helpers/**/*.js",
     "test/**/*.js"
   ]
