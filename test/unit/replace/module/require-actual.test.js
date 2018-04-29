@@ -30,7 +30,7 @@ module.exports = {
       How do I fix it?
       ----------------
       You probably specified a path that could not be resolved relative
-      to your test file (or whatever listing from which  you called \`td.replace()\`).
+      to your test file (or whatever listing from which you called \`td.replace()\`).
       Be sure you didn't specify the path relative to the subject under test!
 
       First, we tried to absolutify that path and require it, with:
