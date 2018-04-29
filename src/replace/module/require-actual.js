@@ -35,14 +35,13 @@ export default function requireActual (modulePath) {
     You called \`td.replace('${modulePath}')\`, but we failed to locate that
     module. How td.replace() works is that it first loads the actual module
     being faked in order to properly imitate it (i.e. to see whether it exports
-    a default function, or an object of other named functions, and son on).
+    a default function, or an object of other named functions, and so on).
 
     How do I fix it?
     ----------------
-    You probably specified a relative path that could not be resolved relative
-    to your test file (or whatever listing from which  you called
-    \`td.replace()\`). Be sure you didn't specify the path relative to the
-    subject under test!
+    You probably specified a path that could not be resolved relative
+    to your test file (or whatever listing from which  you called \`td.replace()\`).
+    Be sure you didn't specify the path relative to the subject under test!
 
     First, we tried to absolutify that path and require it, with:
       \`require('${absolutePath}')\`
@@ -58,7 +57,7 @@ export default function requireActual (modulePath) {
       "${moduleNameLoadError.message}"
 
     Make sure the path specified exists (either relative to the call-site or
-    as an installed module. If any of the paths above seem to be internal to
+    as an installed module). If any of the paths above seem to be internal to
     testdouble.js or a dependency, that's probably a bug and you should open an
     issue.
   `, 'https://github.com/testdouble/testdouble.js#module-replacement-with-nodejs')
