@@ -1,10 +1,10 @@
 import * as quibble from 'quibble'
-import log from '../log'
+import log from '../../log'
 
 quibble.ignoreCallsFromThisFile()
 
 export default function jestModule (path, stub) {
-  const tdMock = require('../index').mock
+  const tdMock = require('../../index').mock
   if (!tdMock) {
     log.error('td.replace', 'It appears the test is being run by Jest, but the testdouble-jest module has not been initialized, so testdouble.js cannot replace modules. For setup instructions, visit: https://github.com/testdouble/testdouble-jest')
   } else if (arguments.length > 1) {

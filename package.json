@@ -52,8 +52,8 @@
     "prepare": "npm run compile"
   },
   "browser": {
-    "./src/replace/module.js": "./src/replace/module.browser.js",
-    "./lib/replace/module.js": "./lib/replace/module.browser.js",
+    "./src/replace/module/index.js": "./src/replace/module/index.browser.js",
+    "./lib/replace/module/index.js": "./lib/replace/module/index.browser.js",
     "quibble": "./src/quibble.browser.js"
   },
   "standard": {
