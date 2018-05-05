@@ -1,5 +1,36 @@
 # Change Log
 
+## [v3.8.1](https://github.com/testdouble/testdouble.js/tree/v3.8.1) (2018-05-05)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.8.0...v3.8.1)
+
+**Implemented enhancements:**
+
+- Better verification messages [\#161](https://github.com/testdouble/testdouble.js/issues/161)
+
+**Closed issues:**
+
+- Trouble replacing ES6 classes [\#365](https://github.com/testdouble/testdouble.js/issues/365)
+- You have a global leak: `\_\_core-js\_shared\_\_` [\#364](https://github.com/testdouble/testdouble.js/issues/364)
+- testdouble causes bluebird to emit Unhandled rejection [\#168](https://github.com/testdouble/testdouble.js/issues/168)
+- Should style API of chai.js doesn't always work on test doubles since 1.6.2 [\#134](https://github.com/testdouble/testdouble.js/issues/134)
+
+## [v3.8.0](https://github.com/testdouble/testdouble.js/tree/v3.8.0) (2018-04-29)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.7.0...v3.8.0)
+
+**Implemented enhancements:**
+
+- Improve td.replace error message for incorrect module path [\#355](https://github.com/testdouble/testdouble.js/issues/355)
+
+**Closed issues:**
+
+- td.verify\(object.function\(new Class\("param"\)\)\) not asserting "param" [\#362](https://github.com/testdouble/testdouble.js/issues/362)
+- How to Stub a Chained Function [\#360](https://github.com/testdouble/testdouble.js/issues/360)
+- Critical dependency: the request of a dependency is an expression? [\#354](https://github.com/testdouble/testdouble.js/issues/354)
+
+**Merged pull requests:**
+
+- Better missing module message for td.replace\(\) [\#363](https://github.com/testdouble/testdouble.js/pull/363) ([searls](https://github.com/searls))
+
 ## [v3.7.0](https://github.com/testdouble/testdouble.js/tree/v3.7.0) (2018-03-31)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.6.0...v3.7.0)
 
