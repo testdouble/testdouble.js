@@ -1,4 +1,4 @@
-import {heredoc} from '../../../../src/wrap/common-tags'
+import * as theredoc from 'theredoc'
 
 import subject from '../../../../src/replace/module/require-actual'
 
@@ -17,7 +17,7 @@ module.exports = {
     assert._isEqual(isNumber(5), true)
   },
   'print a huge error when both fail' () {
-    assert.throwsMessage(() => { subject('./lol/not/real') }, heredoc`
+    assert.throwsMessage(() => { subject('./lol/not/real') }, theredoc`
       Error: testdouble.js - td.replace - failed to load the module being replaced.
 
       Why am I seeing this?

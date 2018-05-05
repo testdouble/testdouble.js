@@ -1,11 +1,11 @@
 import * as _ from 'lodash'
 import * as stringifyObject from 'stringify-object-es5'
-import {heredoc} from '../../src/wrap/common-tags'
+import * as theredoc from 'theredoc'
 
 export default function customAssertions (assert) {
   assert._isEqual = (actual, expected) => {
     if (!_.isEqual(actual, expected)) {
-      throw new Error(heredoc`
+      throw new Error(theredoc`
         ERROR: lodash _.isEqual assertion failed.
 
         Expected value:
@@ -20,7 +20,7 @@ export default function customAssertions (assert) {
 
   assert._isNotEqual = (actual, expected) => {
     if (!_.isEqual(actual, expected)) {
-      throw new Error(heredoc`
+      throw new Error(theredoc`
         ERROR: lodash !_.isEqual assertion failed.
 
         Expected this value:
@@ -38,7 +38,7 @@ export default function customAssertions (assert) {
   assert.containsAll = (actual, expectedItems) => {
     _.each(expectedItems, (expectedItem) => {
       if (!_.includes(actual, expectedItem)) {
-        throw new Error(heredoc`
+        throw new Error(theredoc`
           Error: expected ${stringify(actual)} to contain ${stringify(expectedItem)}
 
           But it did not.
@@ -60,7 +60,7 @@ export default function customAssertions (assert) {
   assert.throwsMessage = (func, expectedMessage) => {
     try {
       func()
-      throw new Error(heredoc`
+      throw new Error(theredoc`
         Error: expected function to throw, but it did not.
 
         Function:
@@ -71,7 +71,7 @@ export default function customAssertions (assert) {
         _.includes(e.message, expectedMessageChunk)
       )
       if (!allGood) {
-        throw new Error(heredoc`
+        throw new Error(theredoc`
           Error: expected function to throw message, but it did not.
           (@@@ acts as a wildcard that is ignored)
 

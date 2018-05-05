@@ -1,6 +1,6 @@
 import path from 'path'
 import * as quibble from 'quibble'
-import {heredoc} from '../../wrap/common-tags'
+import * as theredoc from 'theredoc'
 
 import log from '../../log'
 
@@ -27,7 +27,7 @@ export default function requireActual (modulePath) {
   }
 
   // 3. Give up, print a fancy error
-  log.error('td.replace', heredoc`
+  log.error('td.replace', theredoc`
     failed to load the module being replaced.
 
     Why am I seeing this?
