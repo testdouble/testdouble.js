@@ -1,4 +1,5 @@
 import * as td from '../..'
+import * as assert from 'assert'
 
 class Dog {
   bark () {}
