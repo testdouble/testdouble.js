@@ -1,4 +1,4 @@
-# testdouble.js
+# testdouble.js (AKA td.js)
 
 [![Build Status](https://circleci.com/gh/testdouble/testdouble.js/tree/master.svg?style=svg)](https://circleci.com/gh/testdouble/testdouble.js/tree/master)
 [![npmjs](https://img.shields.io/badge/npm-testdouble-red.svg)](https://www.npmjs.com/package/testdouble)
