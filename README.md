@@ -149,7 +149,7 @@ using `td.replace()`:
 ##### Default exports with ES modules
 
 If your modules are written in the ES module syntax and they specify default
-exports (e.g. `export default function loadsPurcases()`), just remember that
+exports (e.g. `export default function loadsPurchases()`), just remember that
 you'll need to reference `.default` when translating to the CJS module format.
 
 That means instead of this:
