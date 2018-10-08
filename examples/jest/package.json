@@ -9,9 +9,9 @@
     "skip-ci": "node -e 'if (parseInt(process.version.match(/^v(\\d+)/)[1], 10) >= 6) process.exit(1)'"
   },
   "devDependencies": {
-    "jest": "^22.2.2",
-    "testdouble-jest": "github:testdouble/testdouble-jest",
-    "testdouble": "file:../.."
+    "jest": "^23.6.0",
+    "testdouble": "file:../..",
+    "testdouble-jest": "github:testdouble/testdouble-jest"
   },
   "jest": {
     "setupTestFrameworkScriptFile": "./support/helper.js"
