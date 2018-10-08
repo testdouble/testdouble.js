@@ -13,6 +13,7 @@ MathProblem.prototype.generate = function(){
       savedProblem = this.savesProblem.save(problem)
 
   this.submitProblem(savedProblem)
+  return 'neat'
 }
 
 var td = require('testdouble')
@@ -28,8 +29,9 @@ describe('MathProblem', function(){
     td.when(createRandomProblem()).thenReturn('some problem')
     td.when(FakeSavesProblem.prototype.save('some problem')).thenReturn('saved problem')
 
-    subject.generate()
+    var result = subject.generate()
 
     td.verify(submitProblem('saved problem'))
+    expect(result).toEqual('neat')
   })
 })
