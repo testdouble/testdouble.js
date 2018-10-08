@@ -15,8 +15,8 @@ module.exports = {
   'verified to have occurred as configured': () => {
     const double = new Double()
     const call = new Call()
-    const config = {some: 'option'}
-    td.when(popDemonstration()).thenReturn({double, call})
+    const config = { some: 'option' }
+    td.when(popDemonstration()).thenReturn({ double, call })
     td.when(didCallOccur(double, call, config)).thenReturn(true)
 
     subject(/* imagine double('a','b','c') */ undefined, config)
@@ -28,8 +28,8 @@ module.exports = {
   'demonstrated call DID NOT occur, failing test': () => {
     const double = new Double()
     const call = new Call()
-    const config = {some: 'option'}
-    td.when(popDemonstration()).thenReturn({double, call})
+    const config = { some: 'option' }
+    td.when(popDemonstration()).thenReturn({ double, call })
     td.when(didCallOccur(double, call, config)).thenReturn(false)
 
     subject(/* imagine double('a','b','X') */ undefined, config)
@@ -39,7 +39,7 @@ module.exports = {
     assert.equal(td.explain(warnIfAlsoStubbed).callCount, 0)
   },
   'demonstration missing blows up': () => {
-    const config = {some: 'option'}
+    const config = { some: 'option' }
     td.when(popDemonstration()).thenThrow(new Error('wups'))
 
     assert.throws(() => {

@@ -7,7 +7,7 @@ module.exports = {
     })
   },
   'overriding a real property' () {
-    const config = td.config({ignoreWarnings: true})
+    const config = td.config({ ignoreWarnings: true })
 
     assert._isEqual(config.ignoreWarnings, true)
     assert._isEqual(config.ignoreWarnings, true)
@@ -18,7 +18,7 @@ module.exports = {
     const warnings = []
     console.warn = function (warning) { warnings.push(warning) }
 
-    const config = td.config({extendWhenReplacingConstructors: true})
+    const config = td.config({ extendWhenReplacingConstructors: true })
 
     assert._isEqual(config.extendWhenReplacingConstructors, undefined)
     assert._isEqual(td.config().extendWhenReplacingConstructors, undefined)
@@ -31,7 +31,7 @@ module.exports = {
   'overriding a non-existent property' () {
     let error
 
-    try { td.config({wat: 'wat?'}) } catch (e) { error = e }
+    try { td.config({ wat: 'wat?' }) } catch (e) { error = e }
 
     assert._isEqual(error.message,
       'Error: testdouble.js - td.config - "wat" is not a valid configuration ' +

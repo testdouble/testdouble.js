@@ -13,7 +13,7 @@ module.exports = {
       assert.equal(subject.hasTimesRemaining, true)
     },
     'times set to 0': () => {
-      const subject = new Stubbing(null, null, null, {times: 0})
+      const subject = new Stubbing(null, null, null, { times: 0 })
 
       assert.equal(subject.hasTimesRemaining, false)
 
@@ -22,7 +22,7 @@ module.exports = {
       assert.equal(subject.hasTimesRemaining, false)
     },
     'times set to 1': () => {
-      const subject = new Stubbing(null, null, null, {times: 1})
+      const subject = new Stubbing(null, null, null, { times: 1 })
 
       assert.equal(subject.hasTimesRemaining, true)
 
@@ -31,7 +31,7 @@ module.exports = {
       assert.equal(subject.hasTimesRemaining, false)
     },
     'times set to 2': () => {
-      const subject = new Stubbing(null, null, null, {times: 2})
+      const subject = new Stubbing(null, null, null, { times: 2 })
 
       assert.equal(subject.hasTimesRemaining, true)
 
@@ -44,7 +44,7 @@ module.exports = {
       assert.equal(subject.hasTimesRemaining, false)
     },
     'guards against duplicate calls (only count once)': () => {
-      const subject = new Stubbing(null, null, null, {times: 2})
+      const subject = new Stubbing(null, null, null, { times: 2 })
 
       assert.equal(subject.hasTimesRemaining, true)
 

@@ -39,7 +39,7 @@ function stubbingDescription (stubs) {
   return stubs.length > 0
     ? _.reduce(stubs, (desc, stub) =>
       desc + `\n  - when called with \`(${stringifyArgs(stub.args)})\`, then ${planFor(stub)} ${argsFor(stub)}.`
-      , '\n\nStubbings:')
+    , '\n\nStubbings:')
     : ''
 }
 

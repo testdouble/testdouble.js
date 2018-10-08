@@ -24,16 +24,16 @@ module.exports = {
   'conditional stubbing' () {
     td.when(testDouble(1)).thenReturn('foo')
     td.when(testDouble(2)).thenReturn('bar')
-    td.when(testDouble({lol: 'cheese'})).thenReturn('nom')
-    td.when(testDouble({lol: 'fungus'})).thenReturn('eww')
-    td.when(testDouble({lol: 'fungus'}, 2)).thenReturn('eww2')
+    td.when(testDouble({ lol: 'cheese' })).thenReturn('nom')
+    td.when(testDouble({ lol: 'fungus' })).thenReturn('eww')
+    td.when(testDouble({ lol: 'fungus' }, 2)).thenReturn('eww2')
 
     assert._isEqual(testDouble(), void 0)
     assert._isEqual(testDouble(1), 'foo')
     assert._isEqual(testDouble(2), 'bar')
-    assert._isEqual(testDouble({lol: 'cheese'}), 'nom')
-    assert._isEqual(testDouble({lol: 'fungus'}), 'eww')
-    assert._isEqual(testDouble({lol: 'fungus'}, 2), 'eww2')
+    assert._isEqual(testDouble({ lol: 'cheese' }), 'nom')
+    assert._isEqual(testDouble({ lol: 'fungus' }), 'eww')
+    assert._isEqual(testDouble({ lol: 'fungus' }, 2), 'eww2')
   },
   'multiple test doubles' () {
     const td1 = td.when(td.func()()).thenReturn('lol1')
@@ -51,10 +51,10 @@ module.exports = {
   },
   'using deep matchers': {
     'single level' () {
-      td.when(testDouble({key: td.matchers.isA(String)})).thenReturn('yay')
+      td.when(testDouble({ key: td.matchers.isA(String) })).thenReturn('yay')
 
-      assert._isEqual(testDouble({key: 'testytest'}), 'yay')
-      assert._isEqual(testDouble({key: 42}), void 0)
+      assert._isEqual(testDouble({ key: 'testytest' }), 'yay')
+      assert._isEqual(testDouble({ key: 42 }), void 0)
       assert._isEqual(testDouble({}), void 0)
       assert._isEqual(testDouble('i am a string'), void 0)
     },
@@ -207,7 +207,7 @@ module.exports = {
             }
           }
         }
-        td.config({promiseConstructor: FakePromise})
+        td.config({ promiseConstructor: FakePromise })
       },
       'td.when…thenResolve' (done) {
         td.when(testDouble(10)).thenResolve('pants')
@@ -229,7 +229,7 @@ module.exports = {
       const errors = []
       console.warn = (m) => { warnings.push(m) }
       console.error = (m) => { errors.push(m) }
-      td.config({promiseConstructor: undefined})
+      td.config({ promiseConstructor: undefined })
 
       td.when(testDouble(10)).thenResolve('pants')
 
@@ -278,7 +278,7 @@ module.exports = {
     },
     'limiting times stubbing will work': {
       'a single stub' () {
-        td.when(testDouble(), {times: 2}).thenReturn('pants')
+        td.when(testDouble(), { times: 2 }).thenReturn('pants')
 
         result = [testDouble(), testDouble(), testDouble()]
 
@@ -286,7 +286,7 @@ module.exports = {
       },
       'two overlapping stubbings' () {
         td.when(testDouble()).thenReturn('NO')
-        td.when(testDouble(), {times: 1}).thenReturn('YES')
+        td.when(testDouble(), { times: 1 }).thenReturn('YES')
 
         result = [testDouble(), testDouble(), testDouble()]
 

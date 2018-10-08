@@ -7,8 +7,8 @@ store.onReset(() => { callHistory = [] })
 
 export default {
   log (testDouble, args, context) {
-    store.for(testDouble).calls.push({args, context})
-    return callHistory.push({testDouble, args, context})
+    store.for(testDouble).calls.push({ args, context })
+    return callHistory.push({ testDouble, args, context })
   },
 
   pop () {

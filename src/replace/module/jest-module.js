@@ -8,7 +8,7 @@ export default function jestModule (path, stub) {
   if (!tdMock) {
     log.error('td.replace', 'It appears the test is being run by Jest, but the testdouble-jest module has not been initialized, so testdouble.js cannot replace modules. For setup instructions, visit: https://github.com/testdouble/testdouble-jest')
   } else if (arguments.length > 1) {
-    tdMock(path, () => stub, {virtual: !moduleExists(tdMock, path)})
+    tdMock(path, () => stub, { virtual: !moduleExists(tdMock, path) })
     return tdMock.requireMock(path)
   } else {
     tdMock(path)

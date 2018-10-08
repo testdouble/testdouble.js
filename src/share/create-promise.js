@@ -9,6 +9,6 @@ export default function createPromise (stubbing, willResolve) {
   return new Promise((resolve, reject) => {
     callLater(() =>
       willResolve ? resolve(value) : reject(value)
-      , [value], stubbing.options.defer, stubbing.options.delay)
+    , [value], stubbing.options.defer, stubbing.options.delay)
   })
 }

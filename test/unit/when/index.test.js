@@ -20,7 +20,7 @@ module.exports = {
 
     const result = subject('_fake rehearsal arg_', 'some options')
 
-    td.verify(ensureRehearsal({double, call}))
+    td.verify(ensureRehearsal({ double, call }))
     assert.equal(result, 'chained methods')
     const stubbings = StubbingRegister.instance.get(double)
     assert.equal(stubbings.length, 1)

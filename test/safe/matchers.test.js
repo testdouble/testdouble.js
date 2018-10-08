@@ -282,15 +282,15 @@ module.exports = {
       })
     },
     'objects with nested edge cases' () {
-      matches(td.matchers.contains({d: new Date('1999')}), {d: new Date('1999')})
-      doesntMatch(td.matchers.contains({d: new Date('1999')}), {d: new Date('2099')})
+      matches(td.matchers.contains({ d: new Date('1999') }), { d: new Date('1999') })
+      doesntMatch(td.matchers.contains({ d: new Date('1999') }), { d: new Date('2099') })
 
-      matches(td.matchers.contains({e: new Error('ew')}), {e: new Error('eww')})
-      doesntMatch(td.matchers.contains({e: new Error('?')}), {e: new Error('!')})
+      matches(td.matchers.contains({ e: new Error('ew') }), { e: new Error('eww') })
+      doesntMatch(td.matchers.contains({ e: new Error('?') }), { e: new Error('!') })
 
-      matches(td.matchers.contains({r: /abc/}), {r: /abc/})
-      matches(td.matchers.contains({r: /abc/}), {r: 'abc'})
-      doesntMatch(td.matchers.contains({r: /abc/}), {r: /abcd/})
+      matches(td.matchers.contains({ r: /abc/ }), { r: /abc/ })
+      matches(td.matchers.contains({ r: /abc/ }), { r: 'abc' })
+      doesntMatch(td.matchers.contains({ r: /abc/ }), { r: /abcd/ })
     },
     'nonsense' () {
       // These are a bit stupid, but necessary to support deep comparisons

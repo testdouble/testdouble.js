@@ -45,7 +45,7 @@ module.exports = {
     assert.deepEqual(result, 'fake thing')
   },
   'other instances': () => {
-    const original = {a: 'b'}
+    const original = { a: 'b' }
 
     const result = subject(original, [])
 
@@ -65,7 +65,7 @@ module.exports = {
   },
   'generators do not blow up and just return themselves i guess': () => {
     const generator = () => {}
-    td.when(tdFunction(), {ignoreExtraArgs: true}).thenReturn('fake thing')
+    td.when(tdFunction(), { ignoreExtraArgs: true }).thenReturn('fake thing')
     td.when(isGenerator(generator)).thenReturn(true)
 
     assert.strictEqual(subject(generator, []), generator)

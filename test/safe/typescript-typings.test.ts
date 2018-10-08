@@ -30,13 +30,13 @@ export = {
 
       const FakeBear = td.constructor<Bear>(Bear)
 
-      assert.equal(td.explain(FakeBear.prototype.sleep).isTestDouble, true)
+      assert.strictEqual(td.explain(FakeBear.prototype.sleep).isTestDouble, true)
 
       const bear = td.object<Bear>('A bear')
 
       td.when(bear.sleep()).thenReturn('zzzzzz')
 
-      assert.equal(bear.sleep(), 'zzzzzz')
+      assert.strictEqual(bear.sleep(), 'zzzzzz')
     }
 
     const testObject = {
@@ -73,7 +73,7 @@ export = {
 
     const explanation = td.explain(f)
 
-    assert.equal(
+    assert.strictEqual(
       explanation.description.split('\n')[0],
       'This test double has 5 stubbings and 1 invocations.'
     )

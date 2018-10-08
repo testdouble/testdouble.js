@@ -7,7 +7,7 @@ module.exports = {
     subject = require('../../../src/log/ensure-promise').default
   },
   'config has no promise set (warn)': () => {
-    td.when(config()).thenReturn({promiseConstructor: null})
+    td.when(config()).thenReturn({ promiseConstructor: null })
 
     subject('warn')
 
@@ -23,7 +23,7 @@ testdouble.js which promise constructor to use with \`td.config\`, like so:
     ))
   },
   'config has a promise set': () => {
-    td.when(config()).thenReturn({promiseConstructor: function () {}})
+    td.when(config()).thenReturn({ promiseConstructor: function () {} })
 
     subject('warn')
 
@@ -31,7 +31,7 @@ testdouble.js which promise constructor to use with \`td.config\`, like so:
     assert.equal(td.explain(log.error).callCount, 0)
   },
   'config has no promise set (error level)': () => {
-    td.when(config()).thenReturn({promiseConstructor: null})
+    td.when(config()).thenReturn({ promiseConstructor: null })
 
     subject('error')
 
@@ -49,7 +49,7 @@ a promise constructor with \`td.config\`, like this:
   },
 
   'config has a promise set (on error level)': () => {
-    td.when(config()).thenReturn({promiseConstructor: function () {}})
+    td.when(config()).thenReturn({ promiseConstructor: function () {} })
 
     subject('error')
 

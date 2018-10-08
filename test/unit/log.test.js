@@ -8,14 +8,14 @@ module.exports = {
   },
   '.warn': {
     'not ignoring warnings': () => {
-      td.when(config()).thenReturn({ignoreWarnings: false})
+      td.when(config()).thenReturn({ ignoreWarnings: false })
 
       subject.warn('aFunc', 'a message', 'http://url')
 
       td.verify(console.warn('Warning: testdouble.js - aFunc - a message (see: http://url )'))
     },
     'ignoring warnings': () => {
-      td.when(config()).thenReturn({ignoreWarnings: true})
+      td.when(config()).thenReturn({ ignoreWarnings: true })
 
       subject.warn('aFunc', 'a message', 'http://url')
 
@@ -24,14 +24,14 @@ module.exports = {
   },
   '.error': {
     'not suppressing errors': () => {
-      td.when(config()).thenReturn({suppressErrors: false})
+      td.when(config()).thenReturn({ suppressErrors: false })
 
       assert.throws(() => {
         subject.error('aFunc', 'a message', 'http://url')
       }, /Error: testdouble\.js - aFunc - a message \(see: http:\/\/url \)/)
     },
     'suppressing errors': () => {
-      td.when(config()).thenReturn({suppressErrors: true})
+      td.when(config()).thenReturn({ suppressErrors: true })
 
       assert.doesntThrow(() => {
         subject.error('aFunc', 'a message', 'http://url')

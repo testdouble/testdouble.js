@@ -16,7 +16,7 @@ module.exports = {
     assert.equal(result, 'pants')
   },
   'thenDo calls current outcome': () => {
-    const call = new Call({a: 1}, ['sauce', 'nice'])
+    const call = new Call({ a: 1 }, ['sauce', 'nice'])
     let context, args
     const userFunc = function (...someArgs) {
       context = this
@@ -28,7 +28,7 @@ module.exports = {
     const result = subject(stubbing, call)
 
     assert.equal(result, 'nailed it')
-    assert.deepEqual(context, {a: 1})
+    assert.deepEqual(context, { a: 1 })
     assert.deepEqual(args, ['sauce', 'nice'])
   },
   'thenThrow throws current outcome': () => {

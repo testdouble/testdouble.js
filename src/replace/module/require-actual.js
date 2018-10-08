@@ -21,7 +21,7 @@ export default function requireActual (modulePath) {
   try {
     return require(require.resolve(modulePath, { paths: [
       path.join(process.cwd(), 'node_modules')
-    ]}))
+    ] }))
   } catch (e) {
     moduleNameLoadError = e
   }

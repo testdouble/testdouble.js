@@ -71,7 +71,7 @@ var invocationSummary = (testDouble, args, config) => {
   } else {
     return _.reduce(calls, (desc, call) =>
       desc + `\n    - called with \`(${stringifyArgs(call.args)})\`.`
-      , '\n\n  All calls of the test double, in order were:')
+    , '\n\n  All calls of the test double, in order were:')
   }
 }
 
@@ -84,7 +84,7 @@ var matchedInvocationSummary = (testDouble, args, config) => {
   } else {
     return _.reduce(_.groupBy(calls, 'args'), (desc, callsMatchingArgs, args) =>
       desc + `\n    - called ${pluralize(callsMatchingArgs.length, 'time')} with \`(${stringifyArgs(callsMatchingArgs[0].args)})\`.`
-      , `\n\n  ${pluralize(calls.length, 'call')} that satisfied this verification:`)
+    , `\n\n  ${pluralize(calls.length, 'call')} that satisfied this verification:`)
   }
 }
 

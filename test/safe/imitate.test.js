@@ -36,10 +36,10 @@ module.exports = {
     assert._isEqual(td.imitate(new Error('foo')).message, 'foo')
   },
   'skips encountered objects' () {
-    const foo = {a: 1, b: 2}
-    const bar = {c: 3, foo: foo}
+    const foo = { a: 1, b: 2 }
+    const bar = { c: 3, foo: foo }
     foo.bar = bar
-    const original = {item: foo}
+    const original = { item: foo }
 
     const result = td.imitate(original)
 

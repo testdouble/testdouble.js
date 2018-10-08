@@ -16,7 +16,7 @@ module.exports = {
       assert._isEqual(result, false)
     },
     'exact match' () {
-      result = subject([5], [5], {allowMatchers: false})
+      result = subject([5], [5], { allowMatchers: false })
 
       assert._isEqual(result, true)
     }

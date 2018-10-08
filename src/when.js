@@ -34,7 +34,7 @@ export default function when (__userDoesRehearsalInvocationHere__, config = {}) 
 function addStubbing (stubbedValues, config, plan) {
   const last = calls.pop()
   ensureRehearsalOccurred(last)
-  _.assign(config, {plan})
+  _.assign(config, { plan })
   stubbings.add(last.testDouble, concatImpliedCallback(last.args, config), stubbedValues, config)
   return last.testDouble
 }

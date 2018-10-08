@@ -27,7 +27,7 @@ module.exports = {
         assert._isEqual(warnings[0], 'Warning: testdouble.js - td.someFunc - ugh (see: http? )')
       },
       'with td.config({ignoreWarnings: true})' () {
-        td.config({ignoreWarnings: true})
+        td.config({ ignoreWarnings: true })
 
         subject.warn('waaaarning')
 
@@ -53,7 +53,7 @@ module.exports = {
   },
   '.error': {
     'suppressErrors: true' () {
-      td.config({suppressErrors: true})
+      td.config({ suppressErrors: true })
 
       subject.error('hi', 'hi')
 

@@ -16,7 +16,7 @@ module.exports = {
   },
   'matchers' () {
     assert._isEqual(subject(td.matchers.isA(Number)), 'isA(Number)')
-    assert._isEqual(subject({val: td.matchers.isA(Number)}), '{val: isA(Number)}')
+    assert._isEqual(subject({ val: td.matchers.isA(Number) }), '{val: isA(Number)}')
   },
   'long strings of objects should be multi-lined' () {
     const object = {

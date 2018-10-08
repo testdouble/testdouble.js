@@ -38,15 +38,15 @@ module.exports = {
     assert.deepEqual(subject.for(double2), [call2])
 
     const third = subject.pop()
-    assert.deepEqual(third, {double: double1, call: call3})
+    assert.deepEqual(third, { double: double1, call: call3 })
     assert.deepEqual(subject.for(double1), [call1])
 
     const second = subject.pop()
-    assert.deepEqual(second, {double: double2, call: call2})
+    assert.deepEqual(second, { double: double2, call: call2 })
     assert.deepEqual(subject.for(double2), [])
 
     const first = subject.pop()
-    assert.deepEqual(first, {double: double1, call: call1})
+    assert.deepEqual(first, { double: double1, call: call1 })
     assert.deepEqual(subject.for(double1), [])
   }
 }

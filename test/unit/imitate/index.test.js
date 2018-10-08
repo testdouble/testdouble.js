@@ -26,10 +26,10 @@ module.exports = {
     td.verify(overwriteChildren('another thing', 'fake2', td.matchers.isA(Function)))
   },
   'breaks cycles by tracking encounteredObjects': () => {
-    const top = {type: 'top'}
+    const top = { type: 'top' }
     const childCallbackCaptor = td.matchers.captor()
     td.when(initializeNames(top, undefined)).thenReturn(['lol'])
-    td.when(createImitation(top, ['lol']), {times: 1}).thenReturn('fake-top')
+    td.when(createImitation(top, ['lol']), { times: 1 }).thenReturn('fake-top')
 
     const result = subject(top)
 
