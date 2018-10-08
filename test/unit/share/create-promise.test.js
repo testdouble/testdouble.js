@@ -19,7 +19,7 @@ module.exports = {
           handler(resolver, rejecter)
         }
       }
-      td.when(config()).thenReturn({promiseConstructor: fakePromise})
+      td.when(config()).thenReturn({ promiseConstructor: fakePromise })
       stubbing = new Stubbing(null, null, ['pants'], {
         defer: 'a defer',
         delay: 'a delay'

@@ -110,7 +110,7 @@ module.exports = {
   'using deep matchers': {
     'single level': {
       beforeEach () {
-        testDouble({value: 55})
+        testDouble({ value: 55 })
       },
       'satisfied' () {
         td.verify(testDouble({

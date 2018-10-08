@@ -82,7 +82,7 @@ var createPromise = (stubbing, value, willResolve) => {
   return new Promise((resolve, reject) => {
     callCallback(stubbing, () =>
       willResolve ? resolve(value) : reject(value)
-      , [value])
+    , [value])
   })
 }
 

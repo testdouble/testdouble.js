@@ -92,7 +92,7 @@ module.exports = {
   'callback is asynchronous': {
     'using the defer option': {
       'like this': (done) => {
-        td.when(testDouble('/A'), {defer: true}).thenCallback(null, 'B')
+        td.when(testDouble('/A'), { defer: true }).thenCallback(null, 'B')
 
         testDouble('/A', (e, r) => {
           callbackInvoked = true
@@ -109,10 +109,10 @@ module.exports = {
     },
     'using the delay option': {
       'like this': (done) => {
-        td.when(testDouble('/A'), {delay: 40}).thenCallback(null, 'B')
-        td.when(testDouble('/C'), {delay: 20}).thenCallback(null, 'D')
-        td.when(testDouble('/E'), {delay: 30}).thenResolve('F')
-        td.when(testDouble('/G'), {delay: 10}).thenReject('H')
+        td.when(testDouble('/A'), { delay: 40 }).thenCallback(null, 'B')
+        td.when(testDouble('/C'), { delay: 20 }).thenCallback(null, 'D')
+        td.when(testDouble('/E'), { delay: 30 }).thenResolve('F')
+        td.when(testDouble('/G'), { delay: 10 }).thenReject('H')
         results = []
 
         testDouble('/A', (er, result) => {

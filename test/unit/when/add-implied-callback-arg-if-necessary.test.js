@@ -12,14 +12,14 @@ module.exports = {
     assert.deepEqual(result, [{}, 50])
   },
   'type is thenCallback and no callback matcher is in the args': () => {
-    td.when(isCallback(), {ignoreExtraArgs: true}).thenReturn(false)
+    td.when(isCallback(), { ignoreExtraArgs: true }).thenReturn(false)
 
     const result = subject('thenCallback', [42, 'pants'])
 
     assert.deepEqual(result, [42, 'pants', callback])
   },
   'type is thenCallback and a callback matcher IS in the args': () => {
-    td.when(isCallback('a callback'), {ignoreExtraArgs: true}).thenReturn(true)
+    td.when(isCallback('a callback'), { ignoreExtraArgs: true }).thenReturn(true)
 
     const result = subject('thenCallback', [42, 'pants', 'a callback'])
 

@@ -49,7 +49,7 @@ module.exports = {
     const call = new Call(this, [42])
     const stubbing1 = new Stubbing('thenBlah', [42], ['blah'])
     const stubbing2 = new Stubbing('thenBlah', ['pants'], ['blah'])
-    const stubbing3 = new Stubbing('thenBlah', [42], ['blah'], {times: 2})
+    const stubbing3 = new Stubbing('thenBlah', [42], ['blah'], { times: 2 })
     stubbingRegister.add(double, stubbing1)
     stubbingRegister.add(double, stubbing2)
     stubbingRegister.add(double, stubbing3)

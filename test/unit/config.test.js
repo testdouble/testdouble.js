@@ -15,13 +15,13 @@ module.exports = {
     })
   },
   'overriding an actual property': () => {
-    const result = subject({ignoreWarnings: true})
+    const result = subject({ ignoreWarnings: true })
 
     assert.equal(result.ignoreWarnings, true)
     assert.equal(subject().ignoreWarnings, true)
   },
   'overriding a deprecated property': () => {
-    const result = subject({extendWhenReplacingConstructors: true})
+    const result = subject({ extendWhenReplacingConstructors: true })
 
     assert.equal(result.extendWhenReplacingConstructors, undefined)
     assert.equal(subject().extendWhenReplacingConstructors, undefined)
@@ -30,7 +30,7 @@ module.exports = {
     ))
   },
   'overriding a non-existent property': () => {
-    subject({wat: 'wat?'})
+    subject({ wat: 'wat?' })
 
     td.verify(log.error('td.config',
       '"wat" is not a valid configuration ' +

@@ -19,7 +19,7 @@ export default class CallLog {
   }
 
   log (double, call) {
-    this.callHistory.push({double, call})
+    this.callHistory.push({ double, call })
     if (this.calls.has(double)) {
       this.calls.get(double).push(call)
     } else {

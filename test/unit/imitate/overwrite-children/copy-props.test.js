@@ -5,7 +5,7 @@ import subject from '../../../../src/imitate/overwrite-children/copy-props'
 module.exports = {
   'copies basic props retaining existing': () => {
     const thing = {}
-    const target = {d: 5}
+    const target = { d: 5 }
 
     subject(target, {
       a: basicPropDescriptorFor(1),
@@ -21,8 +21,8 @@ module.exports = {
   'overwrites only writable and configurable existing props': () => {
     const target = Object.defineProperties({}, {
       a: basicPropDescriptorFor(4),
-      b: basicPropDescriptorFor(5, {writable: false}),
-      c: basicPropDescriptorFor(6, {configurable: false})
+      b: basicPropDescriptorFor(5, { writable: false }),
+      c: basicPropDescriptorFor(6, { configurable: false })
     })
 
     subject(target, {
@@ -53,7 +53,7 @@ module.exports = {
     const target = {}
 
     subject(target, {
-      lol: basicPropDescriptorFor(42, {enumerable: false})
+      lol: basicPropDescriptorFor(42, { enumerable: false })
     })
 
     assert.equal(target.lol, 42)
@@ -69,8 +69,8 @@ module.exports = {
     const target = {}
 
     subject(target, {
-      a: basicPropDescriptorFor(42, {enumerable: true}),
-      b: basicPropDescriptorFor(foo, {enumerable: true})
+      a: basicPropDescriptorFor(42, { enumerable: true }),
+      b: basicPropDescriptorFor(foo, { enumerable: true })
     })
 
     assert.equal(target.a, 42)
@@ -79,7 +79,7 @@ module.exports = {
     assert.strictEqual(Object.getOwnPropertyDescriptor(target, 'b').enumerable, true)
   },
   'only copies props passed to it': () => {
-    const target = {d: 4}
+    const target = { d: 4 }
 
     subject(target, {
       a: basicPropDescriptorFor(1),

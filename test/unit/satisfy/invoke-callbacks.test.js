@@ -11,7 +11,7 @@ module.exports = {
   },
   'invokes a basic callback matcher with args': () => {
     // TODO: once matchers & callbacks are ported to value types, replace w/that
-    const callbackMatcher = {args: ['pants']}
+    const callbackMatcher = { args: ['pants'] }
     const stubbing = new Stubbing('thenBlah', [42, callbackMatcher])
     const realCallback = () => {}
     const call = new Call(null, [42, realCallback])
@@ -68,7 +68,7 @@ module.exports = {
   },
   'passes delay & defer settings to callLater': () => {
     const callbackMatcher = {}
-    const stubbing = new Stubbing('thenBlah', [callbackMatcher], [], {delay: 42, defer: true})
+    const stubbing = new Stubbing('thenBlah', [callbackMatcher], [], { delay: 42, defer: true })
     const realCallback = () => {}
     const call = new Call(null, [realCallback])
     td.when(isCallback(callbackMatcher)).thenReturn(true)

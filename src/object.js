@@ -3,7 +3,7 @@ import log from './log'
 import tdFunction from './function'
 import imitate from './imitate'
 
-const DEFAULT_OPTIONS = {excludeMethods: ['then']}
+const DEFAULT_OPTIONS = { excludeMethods: ['then'] }
 
 export default function object (nameOrType, config) {
   return _.tap(fakeObject(nameOrType, config, arguments.length), (obj) => {

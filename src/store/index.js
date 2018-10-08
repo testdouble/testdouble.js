@@ -15,7 +15,7 @@ export default {
   },
 
   for (testDouble, createIfNew = true) {
-    const entry = _.find(globalStore, {testDouble})
+    const entry = _.find(globalStore, { testDouble })
     if (entry) {
       return entry
     } else if (createIfNew) {

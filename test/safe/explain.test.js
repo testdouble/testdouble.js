@@ -33,8 +33,8 @@ module.exports = {
     assert._isEqual(result, {
       name: undefined,
       calls: [
-        {context: 'lol', args: [88]},
-        {context: 'woo', args: ['not 88', 44]}
+        { context: 'lol', args: [88] },
+        { context: 'woo', args: ['not 88', 44] }
       ],
       callCount: 2,
       description: `This test double has 2 stubbings and 2 invocations.

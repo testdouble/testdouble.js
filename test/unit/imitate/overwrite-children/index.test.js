@@ -14,9 +14,9 @@ module.exports = {
 
     subject('some original', 'some target', () => { throw new Error('do not fire!') })
 
-    td.verify(gatherProps(), {ignoreExtraArgs: true, times: 0})
-    td.verify(copyProps(), {ignoreExtraArgs: true, times: 0})
-    td.verify(chainPrototype(), {ignoreExtraArgs: true, times: 0})
+    td.verify(gatherProps(), { ignoreExtraArgs: true, times: 0 })
+    td.verify(copyProps(), { ignoreExtraArgs: true, times: 0 })
+    td.verify(chainPrototype(), { ignoreExtraArgs: true, times: 0 })
   },
   'an array': () => {
     const target = []
@@ -27,8 +27,8 @@ module.exports = {
     subject(['foo', 'bar'], target, overwriteChildren)
 
     assert.deepEqual(target, ['fake foo', 'fake bar'])
-    td.verify(gatherProps(), {ignoreExtraArgs: true, times: 0})
-    td.verify(copyProps(), {ignoreExtraArgs: true, times: 0})
+    td.verify(gatherProps(), { ignoreExtraArgs: true, times: 0 })
+    td.verify(copyProps(), { ignoreExtraArgs: true, times: 0 })
   },
   'an object': () => {
     const overwriteChildren = td.function('.overwriteChildren')
