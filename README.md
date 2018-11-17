@@ -273,7 +273,7 @@ and supports three types of invocations:
 
 * **`td.object(realObject)`** - returns a deep
   [imitation](https://github.com/testdouble/testdouble.js/blob/master/src/imitate/index.js)
-  the passed object, where each function is replaced with a test double function
+  of the passed object, where each function is replaced with a test double function
   named for the property path (e.g. If `realObject.invoices.send()` was a
   function, the returned object would have property `invoices.send` set to a
   test double named `'.invoices.send'`)
@@ -335,7 +335,7 @@ with an optional name parameter.
 **`td.when(__rehearsal__[, options])`**
 
 Once you have your subject's dependencies replaced with test double functions,
-you'll want to be able to to stub return values (and other sorts of responses)
+you'll want to be able to stub return values (and other sorts of responses)
 when the subject invokes the test double in the way that the test expects.
 
 To make stubbing configuration easy to read and grep, `td.when()`'s first
