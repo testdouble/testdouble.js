@@ -1,5 +1,48 @@
 # Change Log
 
+## [v3.9.0](https://github.com/testdouble/testdouble.js/tree/v3.9.0) (2018-11-20)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.8.2...v3.9.0)
+
+**Closed issues:**
+
+- There are legitimate cases to use td.verify [\#389](https://github.com/testdouble/testdouble.js/issues/389)
+- TypeError on td.replace\('aws-sdk'\) [\#388](https://github.com/testdouble/testdouble.js/issues/388)
+- Multiple stubs, count wrong? [\#387](https://github.com/testdouble/testdouble.js/issues/387)
+
+**Merged pull requests:**
+
+- Add onReset hook. [\#393](https://github.com/testdouble/testdouble.js/pull/393) ([primarilysnark](https://github.com/primarilysnark))
+- fix simple typos [\#392](https://github.com/testdouble/testdouble.js/pull/392) ([lpmi-13](https://github.com/lpmi-13))
+- feat: Add ava tests examples [\#385](https://github.com/testdouble/testdouble.js/pull/385) ([pke](https://github.com/pke))
+
+## [v3.8.2](https://github.com/testdouble/testdouble.js/tree/v3.8.2) (2018-10-08)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.8.1...v3.8.2)
+
+**Implemented enhancements:**
+
+- Verifying stubs that return promises without warnings? [\#245](https://github.com/testdouble/testdouble.js/issues/245)
+
+**Closed issues:**
+
+- How do I verify only 1 of 2 stubbed functions was called? [\#384](https://github.com/testdouble/testdouble.js/issues/384)
+- Fake timers / mock Date [\#383](https://github.com/testdouble/testdouble.js/issues/383)
+- Getting a not a constructor error when trying to stub an external class dependency [\#382](https://github.com/testdouble/testdouble.js/issues/382)
+- how to handle async callbacks [\#380](https://github.com/testdouble/testdouble.js/issues/380)
+- mocking non-direct dependency [\#379](https://github.com/testdouble/testdouble.js/issues/379)
+- How to replace momentjs ? [\#378](https://github.com/testdouble/testdouble.js/issues/378)
+- Arguments of mocked functions are saved  by reference.  [\#375](https://github.com/testdouble/testdouble.js/issues/375)
+- testdouble incompatible with coverage tools? [\#374](https://github.com/testdouble/testdouble.js/issues/374)
+- td.replaced module still returning stub after a td.reset\(\) [\#373](https://github.com/testdouble/testdouble.js/issues/373)
+- Awaiting a testdouble function always resolves [\#371](https://github.com/testdouble/testdouble.js/issues/371)
+- Stub one function and use originals for rest  [\#368](https://github.com/testdouble/testdouble.js/issues/368)
+- td.replace is breaking type definitions from sanctuary.js [\#327](https://github.com/testdouble/testdouble.js/issues/327)
+
+**Merged pull requests:**
+
+- upgrade everything [\#386](https://github.com/testdouble/testdouble.js/pull/386) ([searls](https://github.com/searls))
+- Fix method name typo in README example [\#369](https://github.com/testdouble/testdouble.js/pull/369) ([jackjennings](https://github.com/jackjennings))
+- Update deps [\#366](https://github.com/testdouble/testdouble.js/pull/366) ([searls](https://github.com/searls))
+
 ## [v3.8.1](https://github.com/testdouble/testdouble.js/tree/v3.8.1) (2018-05-05)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.8.0...v3.8.1)
 
