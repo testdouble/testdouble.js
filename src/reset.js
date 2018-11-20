@@ -2,15 +2,21 @@ import _ from './wrap/lodash'
 import * as quibble from 'quibble'
 import store from './store'
 
-let resetHandlers = []
+let onResetHandlers = []
+let onNextResetHandlers = []
 
 export default _.tap(() => {
   store.reset()
   quibble.reset()
-  _.each(resetHandlers, (resetHandler) =>
+  _.each(onResetHandlers, (resetHandler) =>
     resetHandler())
-  resetHandlers = []
+  _.each(onNextResetHandlers, (resetHandler) =>
+    resetHandler())
+  onNextResetHandlers = []
 }, (reset) => {
+  reset.onReset = (func) =>
+    onResetHandlers.push(func)
+
   reset.onNextReset = (func) =>
-    resetHandlers.push(func)
+    onNextResetHandlers.push(func)
 })
