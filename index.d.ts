@@ -178,6 +178,30 @@ export function object<T>(object: string): DoubledObject<T>;
  */
 export function object<T>(object: T): DoubledObject<T>;
 
+// fake: imitations
+
+/**
+ * Create a fake object constructor for the given class.
+ *
+ * @export
+ * @template T
+ * @param {{ new (...args: any[]): T }} constructor
+ * @param {string} [name]
+ * @returns {TestDoubleConstructor<T>}
+ */
+export function imitate<T>(constructor: Constructor<T>, name?: string): TestDoubleConstructor<T>;
+
+/**
+ * Create a fake object or function.
+ *
+ * @export
+ * @template T
+ * @param {T} original
+ * @param {string} [name]
+ * @returns {TestDouble<T>}
+ */
+export function imitate<T>(original: T, name?: string): TestDouble<T>;
+
 //
 // stubbing
 // ----------------------------------------------------------------------------
