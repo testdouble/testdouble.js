@@ -1,5 +1,17 @@
 # Change Log
 
+## [v3.9.1](https://github.com/testdouble/testdouble.js/tree/v3.9.1) (2018-11-29)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.9.0...v3.9.1)
+
+**Closed issues:**
+
+- td.replace before it vs td.replace inside of it [\#394](https://github.com/testdouble/testdouble.js/issues/394)
+- Add sticky `td.reset.onReset` hook [\#377](https://github.com/testdouble/testdouble.js/issues/377)
+
+**Merged pull requests:**
+
+- Add type information for imitation to the exported typings file [\#396](https://github.com/testdouble/testdouble.js/pull/396) ([lisamai](https://github.com/lisamai))
+
 ## [v3.9.0](https://github.com/testdouble/testdouble.js/tree/v3.9.0) (2018-11-20)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.8.2...v3.9.0)
 
