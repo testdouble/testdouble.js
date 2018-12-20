@@ -14,3 +14,6 @@ npm-debug.log*
 
 .node-version
 .vscode
+
+# For webstorm IDE
+./idea/*
