@@ -25,16 +25,28 @@ const testDoubleKeys = obj => Object.keys(obj).filter(key => isTestDouble(obj[ke
 const containsTestDoubles = obj => (testDoubleKeys(obj).length > 0)
 
 function explainObject(obj){
-  let isDouble = containsTestDoubles(obj)
-    return !isDouble ?  nullDescription() : {
+  if(!containsTestDoubles(obj)){ return nullDescription() }
+
+  let base = [{
       isTestDouble: true,
       description: `This object contains ${testDoubleKeys(obj).length } test double(s): [${testDoubleKeys(obj)}]`
-    }
+  }]
+
+    let keys = Object.keys(obj).map(key => { return { [key] : explain(obj[key])}})
+    let array = base.concat(keys)
+  return array.reduce((result, current) => Object.assign(result, current), {})
 }
 
 function isTestDouble(candidate){
-  return explainFunction(candidate).isTestDouble
-}
+    let type = typeof candidate
+    if (type === 'function'){
+        return explainFunction(candidate).isTestDouble
+    } else if (type === 'object'){
+        return containsTestDoubles(candidate)
+    } else {
+        return false
+    }
+  }
 
 function explainFunction(testDouble){
     if (store.for(testDouble, false) == null) { return nullDescription() }
