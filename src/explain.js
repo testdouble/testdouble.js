@@ -20,15 +20,16 @@ function getExplainer(candidate){
   }
 }
 
+const testDoubleKeys = obj => Object.keys(obj).filter(key => isTestDouble(obj[key]))
+
+const containsTestDoubles = obj => (testDoubleKeys(obj).length > 0)
+
 function explainObject(obj){
   let isDouble = containsTestDoubles(obj)
-    return isDouble ? { isTestDouble: true } : nullDescription()
-}
-
-let containsTestDoubles = function(obj){
-  let reduceByOR = (result, entry) => result || entry
-  return Object.keys(obj).map(key => isTestDouble(obj[key]))
-      .reduce(reduceByOR, false)
+    return !isDouble ?  nullDescription() : {
+      isTestDouble: true,
+      description: `This object contains ${testDoubleKeys(obj).length } test double(s): [${testDoubleKeys(obj)}]`
+    }
 }
 
 function isTestDouble(candidate){

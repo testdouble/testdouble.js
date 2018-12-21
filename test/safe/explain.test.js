@@ -134,7 +134,9 @@ Stubbings:
         td.when(testDouble()).thenReturn('FUBAR?')
 
         result = td.explain(baz)
-        console.log(`RESULT: ${JSON.stringify(result)}`);
         assert(result.isTestDouble)
+
+        assert._isEqual(result.description,
+            `This object contains 1 test double(s): [foo]`)
     }
 }
