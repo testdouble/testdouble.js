@@ -5,20 +5,51 @@ import stringifyArgs from './stringify/arguments'
 import stubbingsStore from './store/stubbings'
 
 export default function explain (testDouble) {
-  if (store.for(testDouble, false) == null) { return nullDescription() }
-  const calls = callsStore.for(testDouble)
-  const stubs = stubbingsStore.for(testDouble)
+  let explainer = getExplainer(testDouble)
+  return explainer(testDouble)
+}
 
-  return {
-    name: store.for(testDouble).name,
-    callCount: calls.length,
-    calls,
-    description:
-    testdoubleDescription(testDouble, stubs, calls) +
-    stubbingDescription(stubs) +
-    callDescription(calls),
-    isTestDouble: true
+function getExplainer(candidate){
+  let type = typeof candidate
+  if (type === 'function'){
+    return explainFunction
+  } else if (type === 'object'){
+    return explainObject
+  } else {
+    return unusedVar => nullDescription()
   }
+}
+
+function explainObject(obj){
+  let isDouble = containsTestDoubles(obj)
+    return isDouble ? { isTestDouble: true } : nullDescription()
+}
+
+let containsTestDoubles = function(obj){
+  let reduceByOR = (result, entry) => result || entry
+  return Object.keys(obj).map(key => isTestDouble(obj[key]))
+      .reduce(reduceByOR, false)
+}
+
+function isTestDouble(candidate){
+  return explainFunction(candidate).isTestDouble
+}
+
+function explainFunction(testDouble){
+    if (store.for(testDouble, false) == null) { return nullDescription() }
+    const calls = callsStore.for(testDouble)
+    const stubs = stubbingsStore.for(testDouble)
+
+    return {
+        name: store.for(testDouble).name,
+        callCount: calls.length,
+        calls,
+        description:
+        testdoubleDescription(testDouble, stubs, calls) +
+        stubbingDescription(stubs) +
+        callDescription(calls),
+        isTestDouble: true
+    }
 }
 
 function nullDescription () {

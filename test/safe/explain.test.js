@@ -109,5 +109,32 @@ Stubbings:
       description: 'This is not a test double.',
       isTestDouble: false
     })
-  }
+  },
+  'passed an object containing no test doubles' () {
+      testDouble = { foo: ()=> 'foo' }
+
+      result = td.explain(testDouble)
+
+      assert._isEqual(result, {
+          name: undefined,
+          calls: [],
+          callCount: 0,
+          description: 'This is not a test double.',
+          isTestDouble: false
+      })
+  },
+    'passed an object containing a test double' () {
+        testDouble = td.function('foo')
+
+        let baz = {
+          foo: testDouble,
+          bar: () => 'bar'
+        }
+
+        td.when(testDouble()).thenReturn('FUBAR?')
+
+        result = td.explain(baz)
+        console.log(`RESULT: ${JSON.stringify(result)}`);
+        assert(result.isTestDouble)
+    }
 }
