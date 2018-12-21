@@ -140,5 +140,36 @@ Stubbings:
             `This object contains 1 test double(s): [foo]`)
 
         assert._isEqual(result.foo, td.explain(testDouble));
+    },
+
+    'passed an object with test double nested' () {
+        testDouble = td.function('baz')
+
+        let qux = {
+            foo: 'foo',
+            bar:  { baz : testDouble }
+        }
+
+        td.when(testDouble()).thenReturn('FUBAR?')
+
+        result = td.explain(qux)
+        console.log(`result: ${JSON.stringify(result)}`)
+        assert(result.isTestDouble)
+        assert._isEqual(result.description,
+            `This object contains 1 test double(s): [bar]`)
+
+        assert._isEqual(result.bar.baz, td.explain(testDouble));
+    },
+
+    'all this works with td.object'() {
+        let qux = {
+            foo: () => 'foo',
+            bar: {baz: () => 'baz'}
+        }
+
+        testDouble = td.object(qux)
+        result = td.explain(testDouble)
+        assert(result.isTestDouble)
+        assert._isEqual(result.bar.baz, td.explain(testDouble.bar.baz) )
     }
 }
