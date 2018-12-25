@@ -12,6 +12,7 @@ import config from './config'
 import callback from './callback'
 import version from './version'
 import * as quibble from 'quibble'
+import typeOf from './typeOf'
 
 module.exports = {
   function: tdFunction,
@@ -19,6 +20,7 @@ module.exports = {
   object,
   constructor,
   imitate,
+  typeOf,
   when,
   verify,
   matchers,

@@ -7,6 +7,7 @@ module.exports = () => {
   const constructor = td.replace('../../src/constructor').default
   const replace = td.replace('../../src/replace').default
   const imitate = td.replace('../../src/imitate').default
+  const typeOf = td.replace('../../src/typeOf').default
   // Stubbing & Verifying
   const when = td.replace('../../src/when').default
   const verify = td.replace('../../src/verify').default
@@ -28,6 +29,7 @@ module.exports = () => {
     constructor: constructor,
     replace: replace,
     imitate: imitate,
+    typeOf: typeOf,
     when: when,
     verify: verify,
     matchers: matchers,

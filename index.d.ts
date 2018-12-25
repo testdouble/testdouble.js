@@ -254,3 +254,5 @@ export function when(...args: any[]): Stubber;
  * @returns {Stubber}
  */
 export function verify(a: any, check?: VerificationConfig): void;
+
+export function typeOf<T>(): T;
