@@ -167,6 +167,7 @@ export function object<T extends string>(props: T[]): DoubledObjectWithKey<T>;
  * @returns {DoubledObject<T>}
  */
 export function object<T>(object: string): DoubledObject<T>;
+export function object<T>(): DoubledObject<T>;
 
 /**
  * Create a fake object that is deep copy of the given object.
