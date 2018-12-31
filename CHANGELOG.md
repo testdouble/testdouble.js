@@ -1,5 +1,17 @@
 # Change Log
 
+## [v3.9.2](https://github.com/testdouble/testdouble.js/tree/v3.9.2) (2018-12-31)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.9.1...v3.9.2)
+
+**Closed issues:**
+
+- Call a Callback Multiple Times [\#397](https://github.com/testdouble/testdouble.js/issues/397)
+- TypeScript: Update Definition [\#395](https://github.com/testdouble/testdouble.js/issues/395)
+
+**Merged pull requests:**
+
+- allow for creating testdoubles using interface only [\#400](https://github.com/testdouble/testdouble.js/pull/400) ([lgandecki](https://github.com/lgandecki))
+
 ## [v3.9.1](https://github.com/testdouble/testdouble.js/tree/v3.9.1) (2018-11-29)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.9.0...v3.9.1)
 
