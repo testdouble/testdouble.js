@@ -113,7 +113,7 @@ Putting aside explanation of the Dependency Inversion itself - we will focus onl
   
 If your test and subject of your test only depend on the abstractions (types, interfaces, abstract classes), instead of specific implementations, your test won't rerun when the specific implementation changes. It also allows you to really go outside in without even touching or thinking about the implementation. 
 
-To illustrate with an example. We want to have a service that will greet a user. It will first fetch it's last name from some kind of a repository. The repository could internally use MongoDB, a REST based microservice, memory or file-based store, at this point we don't care. We are only defining a contract. Let's start with a test:
+To illustrate with an example. We want to have a service that will greet a user. It will first fetch its last name from some kind of a repository. The repository could internally use MongoDB, a REST based microservice, memory or file-based store, at this point we don't care. We are only defining a contract. Let's start with a test:
 
 ```typescript
 test("Greet a user", () => {
