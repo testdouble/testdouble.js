@@ -23,7 +23,7 @@ const value = mockedRepository.findByName("Alice");
 expect(value).toEqual("Alice Alicy");
 ```
 
-What's different is that we get the typesafety - meaning, typescript will alert as in following three situations:
+What's different is that we get the typesafety - meaning, typescript will alert us in following three situations:
 
 ```typescript
 td.when(mockedRepository.findByName(3)).thenReturn("Alice Alicy");
