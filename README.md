@@ -265,7 +265,9 @@ double function and can be called in three modes:
   name'`, which will appear in any error messages as well as the debug info
   returned by passing the returned test double into
   [td.explain()](/docs/9-debugging.md#tdexplainsometestdouble)
-
+* **`td.func<Type>()`** - returns a test double function imitating the passed type. 
+  Examples and more details can be found in [using with TypeScript](/docs/10-using-with-typescript.md)
+  
 #### `td.object()`
 
 The `td.object()` function returns an object containing test double functions,
@@ -286,7 +288,10 @@ and supports three types of invocations:
   The proxy will automatically intercept any call made to it and shunt in a test
   double that can be used for stubbing or verification. More details can be
   found in [our full docs](/docs/4-creating-test-doubles.md#objectobjectname)
-
+* **`td.object<Interface>()`** - returns an object with methods exposed as test doubles 
+  that are typed according to the passed interface. Examples and more details can be found in 
+  [using with TypeScript](/docs/10-using-with-typescript.md)
+  
 #### `td.constructor()`
 
 If your code depends on ES classes or functions intended to be called with
