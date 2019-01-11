@@ -127,7 +127,7 @@ test("Greet a user", () => {
 });
 ```
 
-We defined the API we need. With current IDEs and TypeScript supports creating the Interface and the Class is almost automatic.
+We defined the API we need. With current IDEs and TypeScript support creating the Interface and the Class is almost automatic.
 
 ![Implementation](http://g.recordit.co/ezNnNi6oEH.gif)
 
