@@ -92,7 +92,7 @@ const mockedRepository = td.object<MyRepository>();
 td.when(mockedRepository.findByName("Alice")).thenReturn("Alice Alicy");
 ```
 
-For classes you have two options:
+For classes:
 
 ```typescript
 class MyRepository implements IUserRepository {
