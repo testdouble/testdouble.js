@@ -49,7 +49,7 @@ const found = mockedRepository.findByName("Alice");
 expect(found.lastName).toEqual("Alicy");
 ```
 
-gives us: `TS2339: Property 'name' does not exist on type 'string'.`
+gives us: `TS2339: Property 'lastName' does not exist on type 'string'.`
 
 ## Function Types
 
