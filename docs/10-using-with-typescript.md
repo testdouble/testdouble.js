@@ -84,11 +84,11 @@ Gives us:
 Abstract and concrete classes work similarly to the interfaces:
 
 ```typescript
-abstract class MyRepository {
+abstract class MyAbstractRepository {
   findByName(name: string): string;
 }
 
-const mockedRepository = td.object<MyRepository>();
+const mockedRepository = td.object<MyAbstractRepository>();
 td.when(mockedRepository.findByName("Alice")).thenReturn("Alice Alicy");
 ```
 
