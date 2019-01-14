@@ -65,7 +65,6 @@ section:
     1. [Interfaces](10-using-with-typescript.md#interfaces)
     2. [Function Types](10-using-with-typescript.md#function-types)
     3. [Abstract and concrete classes](10-using-with-typescript.md#abstract-and-concrete-classes)
-    4. [On reasoning behind using abstractions](10-using-with-typescript.md#on-reasoning-behind-using-abstractions)
 11. [Plugins](A-plugins.md#plugins)
     1. [testdouble-chai](https://github.com/basecase/testdouble-chai)
     2. [testdouble-jasmine](https://github.com/BrianGenisio/testdouble-jasmine)
