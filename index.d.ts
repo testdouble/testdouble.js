@@ -123,8 +123,8 @@ export function constructor<T>(constructor: Constructor<T>): TestDoubleConstruct
 declare function functionDouble(name?: string): TestDouble<Function>;
 
 /**
- * Create a fake function.
- *
+ * Create a fake function. Typed when type is provided.
+ * @example td.func<MyType>();
  * @template T
  * @param {T} [name] Name of function to copy.
  * @returns {TestDouble<T>}
@@ -167,6 +167,14 @@ export function object<T extends string>(props: T[]): DoubledObjectWithKey<T>;
  * @returns {DoubledObject<T>}
  */
 export function object<T>(object: string): DoubledObject<T>;
+
+/**
+ * Create a fake empty object using a Proxy object that is cast as the generic of a passed interface.
+ *
+ * @export
+ * @template T
+ * @returns {DoubledObject<T>}
+ */
 export function object<T>(): DoubledObject<T>;
 
 /**
