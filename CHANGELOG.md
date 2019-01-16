@@ -1,5 +1,12 @@
 # Change Log
 
+## [v3.9.3](https://github.com/testdouble/testdouble.js/tree/v3.9.3) (2019-01-16)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.9.2...v3.9.3)
+
+**Merged pull requests:**
+
+- Typescript usage docs [\#401](https://github.com/testdouble/testdouble.js/pull/401) ([lgandecki](https://github.com/lgandecki))
+
 ## [v3.9.2](https://github.com/testdouble/testdouble.js/tree/v3.9.2) (2018-12-31)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.9.1...v3.9.2)
 
