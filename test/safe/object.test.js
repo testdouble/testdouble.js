@@ -124,9 +124,20 @@ module.exports = {
       td.when(testDouble.something()).thenReturn('Original Something')
       td.when(testDouble.different.something()).thenReturn('Different Something')
 
-      testDouble.___mocks___ = {}
       assert._isEqual(testDouble.something(), 'Original Something')
       assert._isEqual(testDouble.different.something(), 'Different Something')
+    },
+    'Resets all deeply nested test doubles with td.reset' () {
+      if (!global.Proxy) return
+      testDouble = td.object()
+
+      td.when(testDouble.something()).thenReturn('Original Something')
+      td.when(testDouble.different.something()).thenReturn('Different Something')
+
+      td.reset()
+
+      assert._isEqual(testDouble.something(), undefined)
+      assert._isEqual(testDouble.different.something(), undefined)
     }
   }
 }

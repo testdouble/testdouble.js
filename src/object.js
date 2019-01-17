@@ -41,14 +41,12 @@ var createTestDoubleViaProxy = (name, config) => {
     if (!target.hasOwnProperty(propKey) && !_.includes(config.excludeMethods, propKey)) {
       let nameWithProp = `${nameOf(internalName)}.${String(propKey)}`
       const obj = tdFunction(nameWithProp)
-      obj.___mocks___ = {}
       target[propKey] = new Proxy(obj, generateHandler(nameWithProp))
     }
     return target[propKey]
   }
 
   const obj = {}
-  obj.___mocks___ = {}
   return new Proxy(obj, generateHandler(name))
 }
 
