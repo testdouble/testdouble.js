@@ -47,7 +47,7 @@ may also want to check out one of these extensions:
 * [testdouble-jest](https://github.com/testdouble/testdouble-jest)
 * [testdouble-chai](https://github.com/basecase/testdouble-chai)
 * [testdouble-jasmine](https://github.com/BrianGenisio/testdouble-jasmine)
-* [testdouble-qunit](https://github.com/alexlafroscia/testdouble-qunit)
+* [testdouble-qunit](https://github.com/alexlafroscia/testdouble-qunit/tree/master/packages/testdouble-qunit)
 
 ## Getting started
 
