@@ -1,5 +1,3 @@
-import * as Map from 'es6-map'
-
 import initializeNames from './initialize-names'
 import createImitation from './create-imitation'
 import overwriteChildren from './overwrite-children'
