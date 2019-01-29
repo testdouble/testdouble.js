@@ -1,5 +1,3 @@
-import * as Map from 'es6-map'
-
 let instance = null
 
 export default class StubbingRegister {
