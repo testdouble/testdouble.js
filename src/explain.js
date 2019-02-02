@@ -5,18 +5,12 @@ import stringifyArgs from './stringify/arguments'
 import stubbingsStore from './store/stubbings'
 
 export default function explain (testDouble) {
-  let explainer = getExplainer(testDouble)
-  return explainer(testDouble)
-}
-
-function getExplainer (candidate) {
-  let type = typeof candidate
-  if (type === 'function') {
-    return explainFunction
-  } else if (type === 'object') {
-    return explainObject
+  if (_.isFunction(testDouble)) {
+    return explainFunction(testDouble)
+  } else if (_.isObject(testDouble)) {
+    return explainObject(testDouble)
   } else {
-    return unusedVar => nullDescription()
+    return explainNonTestDoubleFunction()
   }
 }
 
@@ -25,7 +19,7 @@ const testDoubleKeys = obj => Object.keys(obj).filter(key => isTestDouble(obj[ke
 const containsTestDoubles = obj => (testDoubleKeys(obj).length > 0)
 
 function explainObject (obj) {
-  if (!containsTestDoubles(obj)) { return nullDescription() }
+  if (!containsTestDoubles(obj)) { return explainNonTestDoubleFunction() }
 
   let base = [{
     isTestDouble: true,
@@ -49,7 +43,7 @@ function isTestDouble (candidate) {
 }
 
 function explainFunction (testDouble) {
-  if (store.for(testDouble, false) == null) { return nullDescription() }
+  if (store.for(testDouble, false) == null) { return explainNonTestDoubleFunction() }
   const calls = callsStore.for(testDouble)
   const stubs = stubbingsStore.for(testDouble)
 
@@ -58,14 +52,14 @@ function explainFunction (testDouble) {
     callCount: calls.length,
     calls,
     description:
-        testdoubleDescription(testDouble, stubs, calls) +
-        stubbingDescription(stubs) +
-        callDescription(calls),
+      testdoubleDescription(testDouble, stubs, calls) +
+      stubbingDescription(stubs) +
+      callDescription(calls),
     isTestDouble: true
   }
 }
 
-function nullDescription () {
+function explainNonTestDoubleFunction () {
   return ({
     name: undefined,
     callCount: 0,
