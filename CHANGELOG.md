@@ -1,11 +1,26 @@
 # Change Log
 
+## [v3.10.0](https://github.com/testdouble/testdouble.js/tree/v3.10.0) (2019-02-02)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.9.3...v3.10.0)
+
+**Closed issues:**
+
+- 2 consecutive 'when\(...\).thenTrow\(...\)' expectations crashes [\#403](https://github.com/testdouble/testdouble.js/issues/403)
+- Remove es6-map polyfill [\#367](https://github.com/testdouble/testdouble.js/issues/367)
+- How to mock typescript abstract class? [\#356](https://github.com/testdouble/testdouble.js/issues/356)
+
+**Merged pull requests:**
+
+- Remove unnecessary dependency on es6-map. [\#405](https://github.com/testdouble/testdouble.js/pull/405) ([primarilysnark](https://github.com/primarilysnark))
+- docs: Correct broken link to testdouble-qunit [\#404](https://github.com/testdouble/testdouble.js/pull/404) ([jasonmit](https://github.com/jasonmit))
+
 ## [v3.9.3](https://github.com/testdouble/testdouble.js/tree/v3.9.3) (2019-01-16)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.9.2...v3.9.3)
 
 **Merged pull requests:**
 
 - Typescript usage docs [\#401](https://github.com/testdouble/testdouble.js/pull/401) ([lgandecki](https://github.com/lgandecki))
+- Explain object [\#398](https://github.com/testdouble/testdouble.js/pull/398) ([robwold](https://github.com/robwold))
 
 ## [v3.9.2](https://github.com/testdouble/testdouble.js/tree/v3.9.2) (2018-12-31)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.9.1...v3.9.2)
