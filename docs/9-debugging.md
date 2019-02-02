@@ -75,9 +75,9 @@ td.explain(myTestDouble) /*
 */
 ```
 
-If you'd like to make `explain()` even better, consider sending a pull request
-to make [`explain` describe test double objects](https://github.com/testdouble/testdouble.js/issues/48)
-in addition to functions.
+You can actually pass anything created by `td.func()`, td.object()`,
+`td.constructor()` and `td.imitate()` to `td.explain()` and it will be
+recursively described, with all of the functions found explained in this format.
 
 ***
 Previous: [Custom argument matchers](8-custom-matchers.md#custom-argument-matchers)
