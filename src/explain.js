@@ -1,5 +1,3 @@
-import * as stringifyObject from 'stringify-object-es5'
-import * as theredoc from 'theredoc'
 import _ from './wrap/lodash'
 import callsStore from './store/calls'
 import store from './store'
