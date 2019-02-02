@@ -1,3 +1,5 @@
+import * as stringifyObject from 'stringify-object-es5'
+import * as theredoc from 'theredoc'
 import _ from './wrap/lodash'
 import callsStore from './store/calls'
 import store from './store'
@@ -10,40 +12,40 @@ export default function explain (testDouble) {
   } else if (_.isObject(testDouble)) {
     return explainObject(testDouble)
   } else {
-    return explainNonTestDoubleFunction()
+    return explainNonTestDouble(testDouble)
   }
 }
-
-const testDoubleKeys = obj => Object.keys(obj).filter(key => isTestDouble(obj[key]))
-
-const containsTestDoubles = obj => (testDoubleKeys(obj).length > 0)
 
 function explainObject (obj) {
-  if (!containsTestDoubles(obj)) { return explainNonTestDoubleFunction() }
+  const explanations = []
+  const children = _.cloneDeepWith(obj, (val) => {
+    if (_.isFunction(val)) {
+      return _.tap(explainFunction(val), (explanation) => {
+        if (explanation.isTestDouble) explanations.push(explanation)
+      })
+    }
+  })
 
-  let base = [{
-    isTestDouble: true,
-    description: `This object contains ${testDoubleKeys(obj).length} test double(s): [${testDoubleKeys(obj)}]`
-  }]
-
-  let keys = Object.keys(obj).map(key => { return { [key]: explain(obj[key]) } })
-  let array = base.concat(keys)
-  return array.reduce((result, current) => Object.assign(result, current), {})
+  return {
+    name: null,
+    callCount: null,
+    calls: [],
+    description: describeObject(explanations),
+    children,
+    isTestDouble: explanations.length > 0
+  }
 }
 
-function isTestDouble (candidate) {
-  let type = typeof candidate
-  if (type === 'function') {
-    return explainFunction(candidate).isTestDouble
-  } else if (type === 'object') {
-    return containsTestDoubles(candidate)
-  } else {
-    return false
-  }
+function describeObject (explanations) {
+  const count = explanations.length
+  if (count === 0) return 'This object contains no test doubles'
+  return `This object contains ${count} test double function${count > 1 ? 's' : ''}: [${_.map(explanations, e =>
+    `"${e.name}"`
+  ).join(', ')}]`
 }
 
 function explainFunction (testDouble) {
-  if (store.for(testDouble, false) == null) { return explainNonTestDoubleFunction() }
+  if (store.for(testDouble, false) == null) { return explainNonTestDouble(testDouble) }
   const calls = callsStore.for(testDouble)
   const stubs = stubbingsStore.for(testDouble)
 
@@ -59,12 +61,12 @@ function explainFunction (testDouble) {
   }
 }
 
-function explainNonTestDoubleFunction () {
+function explainNonTestDouble (thing) {
   return ({
     name: undefined,
     callCount: 0,
     calls: [],
-    description: 'This is not a test double.',
+    description: `This is not a test double${_.isFunction(thing) ? ' function' : ''}.`,
     isTestDouble: false
   })
 }

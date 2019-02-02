@@ -122,59 +122,96 @@ module.exports = {
     result = td.explain(testDouble)
 
     assert._isEqual(result, {
-      name: undefined,
+      name: null,
+      callCount: null,
       calls: [],
-      callCount: 0,
-      description: 'This is not a test double.',
+      description: 'This object contains no test doubles',
+      children: {
+        foo: {
+          name: undefined,
+          callCount: 0,
+          calls: [],
+          description: 'This is not a test double function.',
+          isTestDouble: false
+        }
+      },
       isTestDouble: false
     })
   },
   'passed an object containing a test double' () {
-    testDouble = td.function('foo')
-
-    let baz = {
-      foo: testDouble,
+    const baz = {
+      foo: td.when(td.function('foo')()).thenReturn('biz'),
       bar: () => 'bar'
     }
-
-    td.when(testDouble()).thenReturn('FUBAR?')
+    baz.foo()
 
     result = td.explain(baz)
 
-    assert(result.isTestDouble)
-    assert._isEqual(result.description,
-      `This object contains 1 test double(s): [foo]`)
-
-    assert._isEqual(result.foo, td.explain(testDouble))
+    assert._isEqual(result, {
+      name: null,
+      callCount: null,
+      calls: [],
+      description: theredoc`
+        This object contains 1 test double function: ["foo"]
+      `,
+      children: {
+        foo: {
+          name: 'foo',
+          callCount: 1,
+          calls: [{
+            args: [],
+            context: baz
+          }],
+          description: 'This test double `foo` has 1 stubbings and 1 invocations.\n\nStubbings:\n  - when called with `()`, then return `"biz"`.\n\nInvocations:\n  - called with `()`.',
+          isTestDouble: true
+        },
+        bar: {
+          name: undefined,
+          callCount: 0,
+          calls: [],
+          description: 'This is not a test double function.',
+          isTestDouble: false
+        }
+      },
+      isTestDouble: true
+    })
   },
-
-  'passed an object with test double nested' () {
-    testDouble = td.function('baz')
-
-    let qux = {
-      foo: 'foo',
-      bar: { baz: testDouble }
+  'passed an object with deeply nested test double functions' () {
+    const realThing = {
+      foo: 42,
+      bar: {
+        baz: function () {}
+      }
     }
+    const fakeThing = td.object(realThing)
 
-    td.when(testDouble()).thenReturn('FUBAR?')
+    result = td.explain(fakeThing)
 
-    result = td.explain(qux)
-    assert(result.isTestDouble)
-    assert._isEqual(result.description,
-      `This object contains 1 test double(s): [bar]`)
-
-    assert._isEqual(result.bar.baz, td.explain(testDouble))
-  },
-
-  'all this works with td.object' () {
-    let qux = {
-      foo: () => 'foo',
-      bar: { baz: () => 'baz' }
-    }
-
-    testDouble = td.object(qux)
-    result = td.explain(testDouble)
-    assert(result.isTestDouble)
-    assert._isEqual(result.bar.baz, td.explain(testDouble.bar.baz))
+    assert._isEqual(result, {
+      name: null,
+      callCount: null,
+      calls: [],
+      description: 'This object contains 1 test double function: [".bar.baz"]',
+      children: {
+        foo: 42,
+        bar: {
+          baz: {
+            name: '.bar.baz',
+            callCount: 0,
+            calls: [],
+            description: 'This test double `.bar.baz` has 0 stubbings and 0 invocations.',
+            isTestDouble: true
+          }
+        },
+        toString: {
+          name: undefined,
+          callCount: 0,
+          calls: [],
+          description: 'This is not a test double function.',
+          isTestDouble: false
+        }
+      },
+      isTestDouble: true
+    })
   }
 }
