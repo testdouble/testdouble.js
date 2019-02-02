@@ -9,11 +9,11 @@ export default function explain (testDouble) {
   return explainer(testDouble)
 }
 
-function getExplainer(candidate){
+function getExplainer (candidate) {
   let type = typeof candidate
-  if (type === 'function'){
+  if (type === 'function') {
     return explainFunction
-  } else if (type === 'object'){
+  } else if (type === 'object') {
     return explainObject
   } else {
     return unusedVar => nullDescription()
@@ -24,45 +24,45 @@ const testDoubleKeys = obj => Object.keys(obj).filter(key => isTestDouble(obj[ke
 
 const containsTestDoubles = obj => (testDoubleKeys(obj).length > 0)
 
-function explainObject(obj){
-  if(!containsTestDoubles(obj)){ return nullDescription() }
+function explainObject (obj) {
+  if (!containsTestDoubles(obj)) { return nullDescription() }
 
   let base = [{
-      isTestDouble: true,
-      description: `This object contains ${testDoubleKeys(obj).length } test double(s): [${testDoubleKeys(obj)}]`
+    isTestDouble: true,
+    description: `This object contains ${testDoubleKeys(obj).length} test double(s): [${testDoubleKeys(obj)}]`
   }]
 
-    let keys = Object.keys(obj).map(key => { return { [key] : explain(obj[key])}})
-    let array = base.concat(keys)
+  let keys = Object.keys(obj).map(key => { return { [key]: explain(obj[key]) } })
+  let array = base.concat(keys)
   return array.reduce((result, current) => Object.assign(result, current), {})
 }
 
-function isTestDouble(candidate){
-    let type = typeof candidate
-    if (type === 'function'){
-        return explainFunction(candidate).isTestDouble
-    } else if (type === 'object'){
-        return containsTestDoubles(candidate)
-    } else {
-        return false
-    }
+function isTestDouble (candidate) {
+  let type = typeof candidate
+  if (type === 'function') {
+    return explainFunction(candidate).isTestDouble
+  } else if (type === 'object') {
+    return containsTestDoubles(candidate)
+  } else {
+    return false
   }
+}
 
-function explainFunction(testDouble){
-    if (store.for(testDouble, false) == null) { return nullDescription() }
-    const calls = callsStore.for(testDouble)
-    const stubs = stubbingsStore.for(testDouble)
+function explainFunction (testDouble) {
+  if (store.for(testDouble, false) == null) { return nullDescription() }
+  const calls = callsStore.for(testDouble)
+  const stubs = stubbingsStore.for(testDouble)
 
-    return {
-        name: store.for(testDouble).name,
-        callCount: calls.length,
-        calls,
-        description:
+  return {
+    name: store.for(testDouble).name,
+    callCount: calls.length,
+    calls,
+    description:
         testdoubleDescription(testDouble, stubs, calls) +
         stubbingDescription(stubs) +
         callDescription(calls),
-        isTestDouble: true
-    }
+    isTestDouble: true
+  }
 }
 
 function nullDescription () {
