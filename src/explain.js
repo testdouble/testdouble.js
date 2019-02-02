@@ -15,23 +15,28 @@ export default function explain (testDouble) {
 }
 
 function explainObject (obj) {
-  const explanations = []
-  const children = _.cloneDeepWith(obj, (val) => {
-    if (_.isFunction(val)) {
-      return _.tap(explainFunction(val), (explanation) => {
-        if (explanation.isTestDouble) explanations.push(explanation)
-      })
-    }
-  })
+  const { explanations, children } = explainChildren(obj)
 
   return {
     name: null,
-    callCount: null,
+    callCount: 0,
     calls: [],
     description: describeObject(explanations),
     children,
     isTestDouble: explanations.length > 0
   }
+}
+
+function explainChildren (thing) {
+  const explanations = []
+  const children = _.cloneDeepWith(thing, (val, key, obj, stack) => {
+    if (_.isFunction(val) && stack) {
+      return _.tap(explainFunction(val), (explanation) => {
+        if (explanation.isTestDouble) explanations.push(explanation)
+      })
+    }
+  })
+  return { explanations, children }
 }
 
 function describeObject (explanations) {
@@ -46,6 +51,7 @@ function explainFunction (testDouble) {
   if (store.for(testDouble, false) == null) { return explainNonTestDouble(testDouble) }
   const calls = callsStore.for(testDouble)
   const stubs = stubbingsStore.for(testDouble)
+  const { children } = explainChildren(testDouble)
 
   return {
     name: store.for(testDouble).name,
@@ -55,6 +61,7 @@ function explainFunction (testDouble) {
       testdoubleDescription(testDouble, stubs, calls) +
       stubbingDescription(stubs) +
       callDescription(calls),
+    children,
     isTestDouble: true
   }
 }

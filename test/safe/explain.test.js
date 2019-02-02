@@ -13,6 +13,15 @@ module.exports = {
       calls: [],
       callCount: 0,
       description: 'This test double has 0 stubbings and 0 invocations.',
+      children: {
+        toString: {
+          name: undefined,
+          callCount: 0,
+          calls: [],
+          description: 'This is not a test double function.',
+          isTestDouble: false
+        }
+      },
       isTestDouble: true
     })
   },
@@ -49,6 +58,15 @@ module.exports = {
         Invocations:
           - called with \`(88)\`.
           - called with \`("not 88", 44)\`.`,
+      children: {
+        toString: {
+          name: undefined,
+          callCount: 0,
+          calls: [],
+          description: 'This is not a test double function.',
+          isTestDouble: false
+        }
+      },
       isTestDouble: true
     })
   },
@@ -66,6 +84,15 @@ module.exports = {
 
         Stubbings:
           - when called with \`(14, callback)\`, then callback \`(null, 8)\`.`,
+      children: {
+        toString: {
+          name: undefined,
+          callCount: 0,
+          calls: [],
+          description: 'This is not a test double function.',
+          isTestDouble: false
+        }
+      },
       isTestDouble: true
     })
   },
@@ -83,6 +110,15 @@ module.exports = {
 
         Stubbings:
           - when called with \`(14)\`, then resolve \`8\`.`,
+      children: {
+        toString: {
+          name: undefined,
+          callCount: 0,
+          calls: [],
+          description: 'This is not a test double function.',
+          isTestDouble: false
+        }
+      },
       isTestDouble: true
     })
   },
@@ -100,6 +136,15 @@ module.exports = {
 
         Stubbings:
           - when called with \`(14)\`, then reject \`8\`.`,
+      children: {
+        toString: {
+          name: undefined,
+          callCount: 0,
+          calls: [],
+          description: 'This is not a test double function.',
+          isTestDouble: false
+        }
+      },
       isTestDouble: true
     })
   },
@@ -123,7 +168,7 @@ module.exports = {
 
     assert._isEqual(result, {
       name: null,
-      callCount: null,
+      callCount: 0,
       calls: [],
       description: 'This object contains no test doubles',
       children: {
@@ -149,7 +194,7 @@ module.exports = {
 
     assert._isEqual(result, {
       name: null,
-      callCount: null,
+      callCount: 0,
       calls: [],
       description: theredoc`
         This object contains 1 test double function: ["foo"]
@@ -163,6 +208,15 @@ module.exports = {
             context: baz
           }],
           description: 'This test double `foo` has 1 stubbings and 1 invocations.\n\nStubbings:\n  - when called with `()`, then return `"biz"`.\n\nInvocations:\n  - called with `()`.',
+          children: {
+            toString: {
+              name: undefined,
+              callCount: 0,
+              calls: [],
+              description: 'This is not a test double function.',
+              isTestDouble: false
+            }
+          },
           isTestDouble: true
         },
         bar: {
@@ -189,7 +243,7 @@ module.exports = {
 
     assert._isEqual(result, {
       name: null,
-      callCount: null,
+      callCount: 0,
       calls: [],
       description: 'This object contains 1 test double function: [".bar.baz"]',
       children: {
@@ -200,8 +254,57 @@ module.exports = {
             callCount: 0,
             calls: [],
             description: 'This test double `.bar.baz` has 0 stubbings and 0 invocations.',
+            children: {
+              toString: {
+                name: undefined,
+                callCount: 0,
+                calls: [],
+                description: 'This is not a test double function.',
+                isTestDouble: false
+              }
+            },
             isTestDouble: true
           }
+        },
+        toString: {
+          name: undefined,
+          callCount: 0,
+          calls: [],
+          description: 'This is not a test double function.',
+          isTestDouble: false
+        }
+      },
+      isTestDouble: true
+    })
+  },
+  'passed a function that contains test double children' () {
+    const realThing = function foo () {}
+    realThing.bar = function bar () {}
+    const fakeThing = td.func(realThing)
+
+    result = td.explain(fakeThing)
+
+    assert._isEqual(result, {
+      name: 'foo',
+      callCount: 0,
+      calls: [],
+      description: 'This test double `foo` has 0 stubbings and 0 invocations.',
+      children: {
+        bar: {
+          name: 'foo.bar',
+          callCount: 0,
+          calls: [],
+          description: 'This test double `foo.bar` has 0 stubbings and 0 invocations.',
+          children: {
+            toString: {
+              name: undefined,
+              callCount: 0,
+              calls: [],
+              description: 'This is not a test double function.',
+              isTestDouble: false
+            }
+          },
+          isTestDouble: true
         },
         toString: {
           name: undefined,
