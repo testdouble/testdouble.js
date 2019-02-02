@@ -1,3 +1,5 @@
+import * as theredoc from 'theredoc'
+
 let testDouble, result
 module.exports = {
   beforeEach () {
@@ -37,15 +39,16 @@ module.exports = {
         { context: 'woo', args: ['not 88', 44] }
       ],
       callCount: 2,
-      description: `This test double has 2 stubbings and 2 invocations.
+      description: theredoc`
+        This test double has 2 stubbings and 2 invocations.
 
-Stubbings:
-  - when called with \`(88)\`, then return \`5\`.
-  - when called with \`("two things!")\`, then return \`"woah"\`, then \`"such"\`.
+        Stubbings:
+          - when called with \`(88)\`, then return \`5\`.
+          - when called with \`("two things!")\`, then return \`"woah"\`, then \`"such"\`.
 
-Invocations:
-  - called with \`(88)\`.
-  - called with \`("not 88", 44)\`.`,
+        Invocations:
+          - called with \`(88)\`.
+          - called with \`("not 88", 44)\`.`,
       isTestDouble: true
     })
   },
@@ -58,10 +61,11 @@ Invocations:
       name: undefined,
       calls: [],
       callCount: 0,
-      description: `This test double has 1 stubbings and 0 invocations.
+      description: theredoc`
+        This test double has 1 stubbings and 0 invocations.
 
-Stubbings:
-  - when called with \`(14, callback)\`, then callback \`(null, 8)\`.`,
+        Stubbings:
+          - when called with \`(14, callback)\`, then callback \`(null, 8)\`.`,
       isTestDouble: true
     })
   },
@@ -74,10 +78,11 @@ Stubbings:
       name: undefined,
       calls: [],
       callCount: 0,
-      description: `This test double has 1 stubbings and 0 invocations.
+      description: theredoc`
+        This test double has 1 stubbings and 0 invocations.
 
-Stubbings:
-  - when called with \`(14)\`, then resolve \`8\`.`,
+        Stubbings:
+          - when called with \`(14)\`, then resolve \`8\`.`,
       isTestDouble: true
     })
   },
@@ -90,10 +95,11 @@ Stubbings:
       name: undefined,
       calls: [],
       callCount: 0,
-      description: `This test double has 1 stubbings and 0 invocations.
+      description: theredoc`
+        This test double has 1 stubbings and 0 invocations.
 
-Stubbings:
-  - when called with \`(14)\`, then reject \`8\`.`,
+        Stubbings:
+          - when called with \`(14)\`, then reject \`8\`.`,
       isTestDouble: true
     })
   },
