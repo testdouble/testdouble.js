@@ -1,0 +1,37 @@
+import * as theredoc from 'theredoc'
+import _ from '../wrap/lodash'
+import log from '../log'
+import tdFunction from '../function'
+
+export default function proxy (name, { excludeMethods }) {
+  ensureProxySupport(name)
+  return new Proxy({}, generateHandler(name, excludeMethods))
+}
+
+const ensureProxySupport = (name) => {
+  if (typeof Proxy === 'undefined') {
+    log.error('td.object', theredoc`\
+      The current runtime does not have Proxy support, which is what
+      testdouble.js depends on when a string name is passed to \`td.object()\`.
+
+      More details here:
+        https://github.com/testdouble/testdouble.js/blob/master/docs/4-creating-test-doubles.md#objectobjectname
+
+      Did you mean \`td.object(['${name}'])\`?
+    `)
+  }
+}
+
+const generateHandler = (internalName, excludeMethods) => ({
+  get (target, propKey) {
+    return generateGet(target, propKey, internalName, excludeMethods)
+  }
+})
+
+const generateGet = (target, propKey, internalName, excludeMethods) => {
+  if (!target.hasOwnProperty(propKey) && !_.includes(excludeMethods, propKey)) {
+    const nameWithProp = `${internalName || ''}.${String(propKey)}`
+    target[propKey] = new Proxy(tdFunction(nameWithProp), generateHandler(nameWithProp, excludeMethods))
+  }
+  return target[propKey]
+}
