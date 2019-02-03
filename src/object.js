@@ -39,15 +39,13 @@ var createTestDoubleViaProxy = (name, config) => {
 
   const generateGet = (target, propKey, internalName) => {
     if (!target.hasOwnProperty(propKey) && !_.includes(config.excludeMethods, propKey)) {
-      let nameWithProp = `${nameOf(internalName)}.${String(propKey)}`
-      const obj = tdFunction(nameWithProp)
-      target[propKey] = new Proxy(obj, generateHandler(nameWithProp))
+      const nameWithProp = `${nameOf(internalName)}.${String(propKey)}`
+      target[propKey] = new Proxy(tdFunction(nameWithProp), generateHandler(nameWithProp))
     }
     return target[propKey]
   }
 
-  const obj = {}
-  return new Proxy(obj, generateHandler(name))
+  return new Proxy({}, generateHandler(name))
 }
 
 var ensureProxySupport = (name) => {
