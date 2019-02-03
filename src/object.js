@@ -32,15 +32,22 @@ var createTestDoublesForFunctionNames = (names) =>
 
 var createTestDoubleViaProxy = (name, config) => {
   ensureProxySupport(name)
-  const obj = {}
-  return new Proxy(obj, {
-    get (target, propKey, receiver) {
-      if (!obj.hasOwnProperty(propKey) && !_.includes(config.excludeMethods, propKey)) {
-        obj[propKey] = tdFunction(`${nameOf(name)}.${String(propKey)}`)
-      }
-      return obj[propKey]
-    }
+
+  const generateHandler = (internalName) => ({
+    get: (target, propKey) => generateGet(target, propKey, internalName)
   })
+
+  const generateGet = (target, propKey, internalName) => {
+    if (!target.hasOwnProperty(propKey) && !_.includes(config.excludeMethods, propKey)) {
+      let nameWithProp = `${nameOf(internalName)}.${String(propKey)}`
+      const obj = tdFunction(nameWithProp)
+      target[propKey] = new Proxy(obj, generateHandler(nameWithProp))
+    }
+    return target[propKey]
+  }
+
+  const obj = {}
+  return new Proxy(obj, generateHandler(name))
 }
 
 var ensureProxySupport = (name) => {

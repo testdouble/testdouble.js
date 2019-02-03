@@ -107,6 +107,37 @@ module.exports = {
       } catch (e) {
         assert._isEqual(e.message, "Error: testdouble.js - td.object - The current runtime does not have Proxy support, which is what\ntestdouble.js depends on when a string name is passed to `td.object()`.\n\nMore details here:\n  https://github.com/testdouble/testdouble.js/blob/master/docs/4-creating-test-doubles.md#objectobjectname\n\nDid you mean `td.object(['Woah'])`?")
       }
+    },
+    'Allow for deeply nested test double objects' () {
+      if (!global.Proxy) return
+      testDouble = td.object()
+
+      td.when(testDouble.something.very.deeply.nested()).thenReturn('nay!')
+
+      assert._isEqual(testDouble.something.very.deeply.nested(), 'nay!')
+      assert._isEqual(testDouble.something.very.deeply.nested.toString(), '[test double for ".something.very.deeply.nested"]')
+    },
+    'Deeply nested test double objects work also when its property names are repeated' () {
+      if (!global.Proxy) return
+      testDouble = td.object()
+
+      td.when(testDouble.something()).thenReturn('Original Something')
+      td.when(testDouble.different.something()).thenReturn('Different Something')
+
+      assert._isEqual(testDouble.something(), 'Original Something')
+      assert._isEqual(testDouble.different.something(), 'Different Something')
+    },
+    'Resets all deeply nested test doubles with td.reset' () {
+      if (!global.Proxy) return
+      testDouble = td.object()
+
+      td.when(testDouble.something()).thenReturn('Original Something')
+      td.when(testDouble.different.something()).thenReturn('Different Something')
+
+      td.reset()
+
+      assert._isEqual(testDouble.something(), undefined)
+      assert._isEqual(testDouble.different.something(), undefined)
     }
   }
 }
