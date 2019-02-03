@@ -35,7 +35,7 @@ export default {
     when(context.data.idProvider()).thenReturn('some id provider')
 
     assert._isEqual(context.data.idProvider(), 'some id provider')
-    assert._isEqual(explain(context.data.idProvider), 'someContext.data.idProvider')
+    assert._isEqual(explain(context.data.idProvider).name, 'someContext.data.idProvider')
     assert._isEqual(context.data.users[0].name, 'some name')
   }
 }
