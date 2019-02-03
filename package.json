@@ -89,6 +89,7 @@
     "theredoc": "^1.0.0"
   },
   "devDependencies": {
+    "@types/node": "^10.12.21",
     "browserify": "^16.2.3",
     "codeclimate-test-reporter": "^0.5.1",
     "cross-conf-env": "^1.1.2",

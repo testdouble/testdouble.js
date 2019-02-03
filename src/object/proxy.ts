@@ -3,7 +3,7 @@ import _ from '../wrap/lodash'
 import log from '../log'
 import tdFunction from '../function'
 
-export default function proxy (name, { excludeMethods }) {
+export default function proxy<T> (name: string, { excludeMethods } : { excludeMethods?: string[] } = {}) : T {
   ensureProxySupport(name)
   return new Proxy({}, generateHandler(name, excludeMethods))
 }
