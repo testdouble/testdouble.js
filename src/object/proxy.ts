@@ -2,6 +2,7 @@ import * as theredoc from 'theredoc'
 import _ from '../wrap/lodash'
 import log from '../log'
 import tdFunction from '../function'
+import store from '../store'
 
 export default function proxy<T> (name: string, { excludeMethods } : { excludeMethods?: string[] } = {}) : T {
   ensureProxySupport(name)
@@ -31,7 +32,10 @@ const generateHandler = (internalName, excludeMethods) => ({
 const generateGet = (target, propKey, internalName, excludeMethods) => {
   if (!target.hasOwnProperty(propKey) && !_.includes(excludeMethods, propKey)) {
     const nameWithProp = `${internalName || ''}.${String(propKey)}`
-    target[propKey] = new Proxy(tdFunction(nameWithProp), generateHandler(nameWithProp, excludeMethods))
+    const tdFunc = tdFunction(nameWithProp)
+    const tdFuncProxy = new Proxy(tdFunc, generateHandler(nameWithProp, excludeMethods))
+    store.registerAlias(tdFunc, tdFuncProxy)
+    target[propKey] = tdFuncProxy
   }
   return target[propKey]
 }

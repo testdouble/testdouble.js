@@ -4,7 +4,7 @@ import { EventEmitter } from 'events'
 const storeEmitter = new EventEmitter()
 let globalStore = []
 
-export default {
+const store = {
   onReset (func) {
     storeEmitter.on('reset', func)
   },
@@ -15,7 +15,7 @@ export default {
   },
 
   for (testDouble, createIfNew = true) {
-    const entry = _.find(globalStore, { testDouble })
+    const entry = _.find(globalStore, e => testDouble === e.testDouble || testDouble === e.alias)
     if (entry) {
       return entry
     } else if (createIfNew) {
@@ -28,5 +28,10 @@ export default {
         return globalStore.push(newEntry)
       })
     }
+  },
+  registerAlias (testDouble, alias) {
+    store.for(testDouble).alias = alias
   }
 }
+
+export default store
