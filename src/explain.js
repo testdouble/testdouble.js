@@ -27,22 +27,22 @@ function explainObject (obj) {
   }
 }
 
-const forbidden = ['length', 'name', 'prototype']
+const isSafeWithProxy = key => key && key !== 'constructor' && key.toString() !== 'Symbol(Symbol.toStringTag)'
+
+const proxySafeCloneDeepWith = (thing, callback) =>
+  _.cloneDeepWith(thing, (val, key, obj, stack) => {
+    if (isSafeWithProxy(key)) {
+      return callback(val, key, obj, stack)
+    }
+  })
+
 function explainChildren (thing) {
   const explanations = []
-  const children = {}
-
-  Object.getOwnPropertyNames(thing).forEach((propName) => {
-    if (_.isFunction(thing[propName])) {
-      children[propName] = _.tap(explainFunction(thing[propName]), explanation => {
+  const children = proxySafeCloneDeepWith(thing, (val, key, obj, stack) => {
+    if (_.isFunction(val) && stack) {
+      return _.tap(explainFunction(val), (explanation) => {
         if (explanation.isTestDouble) explanations.push(explanation)
       })
-    } else if (!forbidden.includes(propName) && _.isObject(thing[propName])) {
-      const explained = explainChildren(thing[propName])
-      children[propName] = explained.children
-      explanations.push(...explained.explanations)
-    } else if (!forbidden.includes(propName)) {
-      children[propName] = thing[propName]
     }
   })
   return { explanations, children }
