@@ -1,4 +1,5 @@
 import _ from './wrap/lodash'
+import proxySafeCloneDeepWith from './wrap/proxy-safe-clone-deep-with'
 import callsStore from './store/calls'
 import store from './store'
 import stringifyArgs from './stringify/arguments'
@@ -26,15 +27,6 @@ function explainObject (obj) {
     isTestDouble: explanations.length > 0
   }
 }
-
-const isSafeWithProxy = key => key && key !== 'constructor' && key.toString() !== 'Symbol(Symbol.toStringTag)'
-
-const proxySafeCloneDeepWith = (thing, callback) =>
-  _.cloneDeepWith(thing, (val, key, obj, stack) => {
-    if (isSafeWithProxy(key)) {
-      return callback(val, key, obj, stack)
-    }
-  })
 
 function explainChildren (thing) {
   const explanations = []
