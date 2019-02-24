@@ -1,5 +1,13 @@
 # Change Log
 
+## [v3.11.0](https://github.com/testdouble/testdouble.js/tree/v3.11.0) (2019-02-24)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.10.0...v3.11.0)
+
+**Merged pull requests:**
+
+- allow for deeply nested test double objects [\#407](https://github.com/testdouble/testdouble.js/pull/407) ([searls](https://github.com/searls))
+- have the deep nested proxy work with explain [\#406](https://github.com/testdouble/testdouble.js/pull/406) ([lgandecki](https://github.com/lgandecki))
+
 ## [v3.10.0](https://github.com/testdouble/testdouble.js/tree/v3.10.0) (2019-02-02)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.9.3...v3.10.0)
 
