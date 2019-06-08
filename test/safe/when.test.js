@@ -304,5 +304,15 @@ module.exports = {
     result = knob('twist').door('push')
 
     assert._isEqual(result, 'open')
+  },
+  'support cloneArgs option' () {
+    const person = { age: 19 }
+    td.when(testDouble(person), { cloneArgs: false }).thenReturn('no-clone')
+    td.when(testDouble(person), { cloneArgs: true }).thenReturn('clone')
+
+    person.age = 20
+
+    assert._isEqual(testDouble({ age: 19 }), 'clone')
+    assert._isEqual(testDouble({ age: 20 }), 'no-clone')
   }
 }

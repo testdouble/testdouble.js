@@ -368,6 +368,41 @@ var doNotCall = td.function()
 td.verify(doNotCall(), {times: 0, ignoreExtraArgs: true}) // passes
 ```
 
+
+#### cloneArgs
+
+What if you want to verify a call took place and the subject (for better or
+worse) mutated an argument after it was passed to the test double function?
+Since testdouble.js saves arguments by reference by default, you won't get the
+result you want:
+
+```js
+const func = td.func()
+const person = { age: 17 }
+
+// later, in your code
+func(person)
+person.age = 30
+
+// back in your test
+td.verify(func({ age: 17 })) // 💥 Test failure! td.js recorded age as 30!
+```
+
+For cases like these, you can work around the mutation by setting `cloneArgs` to
+`true`:
+
+```js
+const func = td.func()
+const person = { age: 17 }
+
+// later, in your code
+func(person)
+person.age = 30
+
+// back in your test
+td.verify(func({ age: 17 }), { cloneArgs: true }) // 😌 all good
+```
+
 ## Congratulations!
 
 And that's everything there is to know about verifying behavior with

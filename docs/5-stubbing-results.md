@@ -615,6 +615,45 @@ fetch('/B', function (er, result) {}) // will be invoked 2nd
 fetch('/C').then(function (result) {}) // will be invoked 1st
 ```
 
+#### cloneArgs
+
+Every now and then, the code under test will mutate the object you initially
+pass into a stubbing configuration, and you want to be sure that when the test
+double function is invoked by your code, the stubbing is determined to be
+satisfied (or not) by comparing the actual call against the value at the time
+you configured it.
+
+Confused yet? Here's a quick example of how testdouble.js behaves by default:
+
+```js
+const func = td.func()
+const person = { age: 17 }
+td.when(func(person)).thenReturn('minor')
+
+// Later, in your code
+person.age = 30
+func(person) // 'minor'
+```
+
+Maybe you don't want this! Maybe you want to be sure the stubbing is only
+satisfied so long as the arguments are exactly as they were when you configured
+the stubbing. You can do that! By setting `cloneArgs` to true, you can do the
+following:
+
+```js
+const func = td.func()
+const person = { age: 17 }
+td.when(func(person), { cloneArgs: true }).thenReturn('minor')
+
+// Later, in your code
+person.age = 30
+func(person) // undefined
+```
+
+While passing in data with an expectation that it be mutated by your subject is
+generally Not Recommended™, this option should enable edge cases where mutation
+is unavoidable or out of your control.
+
 ## Congratulations!
 
 And that's about all there is to say about stubbing. Great news, because the

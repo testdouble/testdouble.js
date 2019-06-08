@@ -44,8 +44,8 @@ module.exports = {
     assert._isEqual(result, {
       name: undefined,
       calls: [
-        { context: 'lol', args: [88] },
-        { context: 'woo', args: ['not 88', 44] }
+        { context: 'lol', args: [88], cloneArgs: [88] },
+        { context: 'woo', args: ['not 88', 44], cloneArgs: ['not 88', 44] }
       ],
       callCount: 2,
       description: theredoc`
@@ -205,6 +205,7 @@ module.exports = {
           callCount: 1,
           calls: [{
             args: [],
+            cloneArgs: [],
             context: baz
           }],
           description: 'This test double `foo` has 1 stubbings and 1 invocations.\n\nStubbings:\n  - when called with `()`, then return `"biz"`.\n\nInvocations:\n  - called with `()`.',
