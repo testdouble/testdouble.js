@@ -317,5 +317,36 @@ module.exports = {
       },
       isTestDouble: true
     })
+  },
+  'a double with a mutated argument' () {
+    const person = { age: 17 }
+    testDouble.call('hi', person)
+    person.age = 30
+
+    result = td.explain(testDouble)
+
+    assert._isEqual(result, {
+      name: undefined,
+      calls: [
+        { context: 'hi', args: [{ age: 30 }], cloneArgs: [{ age: 17 }] }
+      ],
+      callCount: 1,
+      description: theredoc`
+        This test double has 0 stubbings and 1 invocations.
+
+        Invocations:
+          - called with \`({age: 17})\`.`,
+      children: {
+        toString: {
+          name: undefined,
+          callCount: 0,
+          calls: [],
+          description: 'This is not a test double function.',
+          isTestDouble: false
+        }
+      },
+      isTestDouble: true
+    })
   }
+
 }

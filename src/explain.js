@@ -107,7 +107,7 @@ function argsFor (stub) {
 
 function callDescription (calls) {
   return calls.length > 0
-    ? _.reduce(calls, (desc, call) => desc + `\n  - called with \`(${stringifyArgs(call.args)})\`.`, '\n\nInvocations:')
+    ? _.reduce(calls, (desc, call) => desc + `\n  - called with \`(${stringifyArgs(call.cloneArgs)})\`.`, '\n\nInvocations:')
     : ''
 }
 
