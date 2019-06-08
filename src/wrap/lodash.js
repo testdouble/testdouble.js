@@ -1,6 +1,7 @@
 import * as assign from 'lodash/assign'
 import * as capitalize from 'lodash/capitalize'
 import * as clone from 'lodash/clone'
+import * as cloneDeep from 'lodash/cloneDeep'
 import * as cloneDeepWith from 'lodash/cloneDeepWith'
 import * as compact from 'lodash/compact'
 import * as defer from 'lodash/defer'
@@ -41,6 +42,7 @@ export default {
   assign,
   capitalize,
   clone,
+  cloneDeep,
   cloneDeepWith,
   compact,
   defer,

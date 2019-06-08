@@ -7,7 +7,7 @@ store.onReset(() => { callHistory = [] })
 
 export default {
   log (testDouble, args, context) {
-    store.for(testDouble).calls.push({ args, context })
+    store.for(testDouble).calls.push({ args, context, cloneArgs: _.cloneDeep(args) })
     return callHistory.push({ testDouble, args, context })
   },
 
@@ -30,7 +30,8 @@ export default {
 
   where (testDouble, args, config) {
     return _.filter(store.for(testDouble).calls, function (call) {
-      return argsMatch(args, call.args, config)
+      const pastArgs = config.cloneArgs ? call.cloneArgs : call.args
+      return argsMatch(args, pastArgs, config)
     })
   },
 

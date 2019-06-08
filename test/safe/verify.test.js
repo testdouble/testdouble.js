@@ -1,9 +1,11 @@
 function shouldFail (fn, message) {
   try {
     fn()
-    assert.fail('should error')
+    assert.fail('expected to have failed, but did not')
   } catch (e) {
-    assert._isEqual(e.message, message)
+    if (message) {
+      assert._isEqual(e.message, message)
+    }
   }
 }
 
@@ -282,6 +284,28 @@ module.exports = {
       td.verify(testDouble())
 
       assert._isEqual(warnings.length, 0)
+    },
+    'verification of a mutated value WITHOUT cloning should fail' () {
+      const person = { age: 20 }
+      testDouble(person)
+
+      person.age = 21
+
+      shouldFail(() => {
+        td.verify(testDouble({ age: 20 }))
+      })
+    },
+    'verification of a mutated value WITH clone: true should succeed' () {
+      const person = { age: 20 }
+      testDouble(person)
+
+      person.age = 21
+
+      td.verify(testDouble(person), { cloneArgs: false })
+      td.verify(testDouble({ age: 20 }), { cloneArgs: true })
+      shouldFail(() => {
+        td.verify(testDouble(person), { cloneArgs: true })
+      })
     }
   }
 }

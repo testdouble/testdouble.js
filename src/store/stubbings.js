@@ -11,7 +11,7 @@ export default {
     return store.for(testDouble).stubbings.push({
       callCount: 0,
       stubbedValues,
-      args,
+      args: config.cloneArgs ? _.cloneDeep(args) : args,
       config
     })
   },
