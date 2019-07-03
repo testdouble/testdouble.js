@@ -29,7 +29,7 @@ var fakeObject = function (nameOrType, config, argCount) {
 var createTestDoublesForFunctionNames = (names) =>
   _.transform(names, (acc, funcName) => {
     acc[funcName] = tdFunction(`.${String(funcName)}`)
-  })
+  }, {})
 
 var ensureFunctionIsNotPassed = () =>
   log.error('td.object', `Functions are not valid arguments to \`td.object\` (as of testdouble@2.0.0). Please use \`td.function()\` or \`td.constructor()\` instead for creating fake functions.`)
