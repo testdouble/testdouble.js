@@ -29,6 +29,7 @@ module.exports = {
 
     td.when(testDouble.biz()).thenReturn('zing!')
 
+    assert._isEqual(Array.isArray(testDouble), false)
     assert._isEqual(testDouble.biz(), 'zing!')
     assert._isEqual(testDouble.toString(), '[test double object]')
     assert._isEqual(testDouble.bam.toString(), '[test double for ".bam"]')
