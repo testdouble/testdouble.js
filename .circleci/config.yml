@@ -21,6 +21,12 @@ jobs:
     environment:
       - CODECLIMATE_REPO_TOKEN: c92188dcdeaca7d9732f8ea38fdd41d6bff18dc27a8d6f8b64a5b1311b7b6c21
     steps: *defaults
+  "node-10":
+    docker:
+      - image: circleci/node:10-browsers
+    environment:
+      - CODECLIMATE_REPO_TOKEN: c92188dcdeaca7d9732f8ea38fdd41d6bff18dc27a8d6f8b64a5b1311b7b6c21
+    steps: *defaults
 
 workflows:
   version: 2
@@ -28,3 +34,4 @@ workflows:
     jobs:
       - "node-6"
       - "node-8"
+      - "node-10"
