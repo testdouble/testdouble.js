@@ -6,7 +6,8 @@ import stringifyAnything from '../stringify/anything'
 
 export default function (object, property, manualReplacement) {
   const isManual = arguments.length > 2
-  const realThingExists = object[property] || object.hasOwnProperty(property)
+  const realThingExists = object[property] ||
+    Object.prototype.hasOwnProperty.call(object, property)
 
   if (isManual || realThingExists) {
     const realThing = object[property]

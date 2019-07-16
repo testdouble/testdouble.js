@@ -30,7 +30,8 @@ const generateHandler = (internalName, excludeMethods) => ({
 })
 
 const generateGet = (target, propKey, internalName, excludeMethods) => {
-  if (!target.hasOwnProperty(propKey) && !_.includes(excludeMethods, propKey)) {
+  if (!Object.prototype.hasOwnProperty.call(target, propKey) &&
+      !_.includes(excludeMethods, propKey)) {
     const nameWithProp = `${internalName || ''}.${String(propKey)}`
     const tdFunc = tdFunction(nameWithProp)
     const tdFuncProxy = new Proxy(tdFunc, generateHandler(nameWithProp, excludeMethods))

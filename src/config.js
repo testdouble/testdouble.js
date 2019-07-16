@@ -32,7 +32,7 @@ const deleteDeletedOptions = (overrides) => {
 
 var ensureOverridesExist = (overrides) => {
   _.each(overrides, (val, key) => {
-    if (!configData.hasOwnProperty(key)) {
+    if (!Object.prototype.hasOwnProperty.call(configData, key)) {
       log.error('td.config',
         `"${key}" is not a valid configuration key (valid keys are: ${stringifyAnything(_.keys(configData))})`)
     }

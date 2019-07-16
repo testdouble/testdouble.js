@@ -25,7 +25,7 @@ module.exports = {
         delay: 'a delay'
       })
     },
-    'resolve': () => {
+    resolve: () => {
       const result = subject(stubbing, true)
 
       assert(result instanceof fakePromise)
@@ -40,7 +40,7 @@ module.exports = {
       td.verify(resolver('pants'))
       assert.equal(td.explain(rejecter).callCount, 0)
     },
-    'reject': () => {
+    reject: () => {
       const result = subject(stubbing, false)
 
       assert(result instanceof fakePromise)

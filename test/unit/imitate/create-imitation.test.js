@@ -9,7 +9,7 @@ module.exports = {
     assert.deepEqual(subject([], []), [])
   },
   'an arguments type': () => {
-    let args = (function () { return arguments })()
+    const args = (function () { return arguments })()
     assert.deepEqual(subject(args, []), [])
   },
   'a function without names': () => {
@@ -52,14 +52,14 @@ module.exports = {
     assert.deepEqual(result, original)
     assert.notStrictEqual(result, original)
   },
-  'primitives': () => {
+  primitives: () => {
     assert.strictEqual(subject(true, []), true)
     assert.strictEqual(subject(5, []), 5)
     assert.strictEqual(subject('hi', []), 'hi')
     assert.strictEqual(subject(null, []), null)
     assert.strictEqual(subject(undefined, []), undefined)
   },
-  'symbols': () => {
+  symbols: () => {
     if (!global.Symbol) return
     assert.strictEqual(subject(Symbol.species, []), Symbol.species)
   },
