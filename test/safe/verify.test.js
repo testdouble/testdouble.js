@@ -166,7 +166,7 @@ module.exports = {
       }
     }
   },
-  'configuration': {
+  configuration: {
     'ignoring extra arguments (more thoroughly tested via when())' () {
       testDouble('matters', 'not')
 

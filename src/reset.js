@@ -2,7 +2,7 @@ import _ from './wrap/lodash'
 import * as quibble from 'quibble'
 import store from './store'
 
-let onResetHandlers = []
+const onResetHandlers = []
 let onNextResetHandlers = []
 
 export default _.tap(() => {

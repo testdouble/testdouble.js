@@ -146,7 +146,7 @@ module.exports = {
 
         // phase 2: reset
         td.reset()
-        assert._isEqual(dependency.hasOwnProperty('notAThing'), false)
+        assert._isEqual(Object.prototype.hasOwnProperty.call(dependency, 'notAThing'), false)
       }
     },
     'Manually specifying the override': {

@@ -5,7 +5,7 @@ module.exports = {
 
     subject = require('../../src/config').default
   },
-  'defaults': () => {
+  defaults: () => {
     const result = subject()
 
     assert.deepEqual(result, {
