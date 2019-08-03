@@ -61,6 +61,7 @@ export interface TestdoubleConfig {
 export interface VerificationConfig {
   ignoreExtraArgs?: boolean;
   times?: number;
+  cloneArgs?: boolean;
 }
 
 //
