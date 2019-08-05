@@ -30,6 +30,10 @@ const generateHandler = (internalName, excludeMethods) => ({
 })
 
 const generateGet = (target, propKey, internalName, excludeMethods) => {
+  if (propKey === Symbol("__is_proxy")) {
+    return true;
+  }
+
   if (!Object.prototype.hasOwnProperty.call(target, propKey) &&
       !_.includes(excludeMethods, propKey)) {
     const nameWithProp = `${internalName || ''}.${String(propKey)}`
