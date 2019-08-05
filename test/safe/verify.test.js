@@ -38,6 +38,13 @@ module.exports = {
       td.verify(testDouble('WOAH'))
     }, 'Unsatisfied verification on test double.\n\n  Wanted:\n    - called with `("WOAH")`.\n\n  All calls of the test double, in order were:\n    - called with `("the wrong WOAH")`.')
   },
+  'unsatisfied verify - wrong double object' () {
+    testDouble(td.object('the wrong double object!'))
+
+    shouldFail(() => {
+      td.verify(testDouble(td.object('double object')))
+    }, 'Unsatisfied verification on test double.\n\n  Wanted:\n    - called with `([test double object for \"double object\"])`.\n\n  All calls of the test double, in order were:\n    - called with `([test double object for \"the wrong double object!\"])`.')
+  },
   'unsatisfied verify - wrong arg count' () {
     testDouble('good', 'bad')
 
@@ -74,7 +81,7 @@ module.exports = {
     assert._isEqual(testDoubleObj.prototype.biz, 'not a function!')
   },
   'with a test double *as an arg* to another': {
-    'with an unnamed double _as an arg_' () {
+    'with an unnamed double function _as an arg_' () {
       testDouble = td.func()
       const someTestDoubleArg = td.func()
 
@@ -82,13 +89,29 @@ module.exports = {
         td.verify(testDouble(someTestDoubleArg))
       }, /called with `\(\[test double \(unnamed\)\]\)`/)
     },
-    'with a named double _as an arg_' () {
+    'with a named double function _as an arg_' () {
       testDouble = td.func()
       const someTestDoubleArg = td.func('#foo')
 
       assert.throws(() => {
         td.verify(testDouble(someTestDoubleArg))
       }, /called with `\(\[test double for "#foo"\]\)`/)
+    },
+    'with an unnamed double object _as an arg_' () {
+      testDouble = td.func()
+      const someTestDoubleArg = td.object()
+
+      assert.throws(() => {
+        td.verify(testDouble(someTestDoubleArg))
+      }, /called with `\(\[test double object\]\)`/)
+    },
+    'with a named double object _as an arg_' () {
+      testDouble = td.func()
+      const someTestDoubleArg = td.object('bar')
+
+      assert.throws(() => {
+        td.verify(testDouble(someTestDoubleArg))
+      }, /called with `\(\[test double object for "bar"\]\)`/)
     }
   },
   'a double-free verification error' () {
