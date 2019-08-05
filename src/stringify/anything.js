@@ -7,7 +7,7 @@ export default (anything) => {
     return stringifyString(anything)
   } else if (isMatcher(anything)) {
     return anything.__name
-  } else if (anything && anything[Symbol("__is_proxy")]) {
+  } else if (anything && anything[Symbol('__is_proxy')]) {
     return anything.toString()
   } else {
     return stringifyObject(anything, {

@@ -43,7 +43,7 @@ module.exports = {
 
     shouldFail(() => {
       td.verify(testDouble(td.object('double object')))
-    }, 'Unsatisfied verification on test double.\n\n  Wanted:\n    - called with `([test double object for \"double object\"])`.\n\n  All calls of the test double, in order were:\n    - called with `([test double object for \"the wrong double object!\"])`.')
+    }, 'Unsatisfied verification on test double.\n\n  Wanted:\n    - called with `([test double object for "double object"])`.\n\n  All calls of the test double, in order were:\n    - called with `([test double object for "the wrong double object!"])`.')
   },
   'unsatisfied verify - wrong arg count' () {
     testDouble('good', 'bad')
