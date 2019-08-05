@@ -1,2 +1,2 @@
 export default (thing) =>
-  thing && thing.__matches
+  thing && !thing[Symbol("__is_proxy")] && thing.__matches
