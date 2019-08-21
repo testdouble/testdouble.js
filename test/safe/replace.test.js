@@ -126,7 +126,7 @@ module.exports = {
 
         const result = td.replace(dependency, 'badType')
 
-        assert._isEqual(result, void 0)
+        assert._isEqual(result, undefined)
       }
     },
     'Replacing a non-existent property': {

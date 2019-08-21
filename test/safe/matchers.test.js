@@ -79,7 +79,7 @@ module.exports = {
       matches(matcher, Boolean(false))
       matches(matcher, new Boolean(false))  // eslint-disable-line
       doesntMatch(matcher, 'false')
-      doesntMatch(matcher, void 0)
+      doesntMatch(matcher, undefined)
     },
     'other junk' () {
       matches(td.matchers.isA(Array), [])
@@ -99,7 +99,7 @@ module.exports = {
   },
   '.anything' () {
     matches(td.matchers.anything(), null)
-    matches(td.matchers.anything(), void 0)
+    matches(td.matchers.anything(), undefined)
     matches(td.matchers.anything(), new Date())
     matches(td.matchers.anything(), {
       a: 'foo',
@@ -117,8 +117,8 @@ module.exports = {
       doesntMatch(td.matchers.contains(['a', 'c']), ['a', 'b', 'c'])
       matches(td.matchers.contains(['a', 'c']), [1, ['a', 'c'], 4])
       doesntMatch(td.matchers.contains(['a', 'c']), ['a', 'b', 'z'])
-      matches(td.matchers.contains(true, 5, null, void 0), [true, 5, void 0, null])
-      doesntMatch(td.matchers.contains(true, 5, null, void 0), [true, 5, null])
+      matches(td.matchers.contains(true, 5, null, undefined), [true, 5, undefined, null])
+      doesntMatch(td.matchers.contains(true, 5, null, undefined), [true, 5, null])
       matches(td.matchers.contains('b', td.matchers.isA(Number)), ['a', 3, 'b'])
     },
     'dates' () {
@@ -302,7 +302,7 @@ module.exports = {
       doesntMatch(td.matchers.contains(td.matchers.isA(String)), 42)
       doesntMatch(td.matchers.contains(null), 'shoo')
       doesntMatch(td.matchers.contains(), 'shoo')
-      doesntMatch(td.matchers.contains({}), void 0)
+      doesntMatch(td.matchers.contains({}), undefined)
     }
   },
   'argThat' () {

@@ -19,9 +19,11 @@ export default function requireActual (modulePath) {
 
   // 2. Try requiring a built-in or npm module of the given `modulePath` name
   try {
-    return require(require.resolve(modulePath, { paths: [
-      path.join(process.cwd(), 'node_modules')
-    ] }))
+    return require(require.resolve(modulePath, {
+      paths: [
+        path.join(process.cwd(), 'node_modules')
+      ]
+    }))
   } catch (e) {
     moduleNameLoadError = e
   }

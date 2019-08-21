@@ -83,16 +83,16 @@
     ]
   },
   "dependencies": {
-    "lodash": "^4.17.14",
+    "lodash": "^4.17.15",
     "quibble": "^0.5.6",
     "stringify-object-es5": "^2.5.0",
     "theredoc": "^1.0.0"
   },
   "devDependencies": {
-    "@types/node": "^10.14.12",
-    "@typescript-eslint/eslint-plugin": "^1.12.0",
-    "@typescript-eslint/parser": "^1.12.0",
-    "browserify": "^16.3.0",
+    "@types/node": "^10.14.16",
+    "@typescript-eslint/eslint-plugin": "^1.13.0",
+    "@typescript-eslint/parser": "^1.13.0",
+    "browserify": "^16.5.0",
     "codeclimate-test-reporter": "^0.5.1",
     "cross-conf-env": "^1.1.2",
     "headerify": "^1.0.1",
@@ -100,8 +100,8 @@
     "mkdirp": "^0.5.1",
     "npm-run-all": "^4.1.5",
     "nyc": "^14.1.1",
-    "rimraf": "^2.6.3",
-    "standard": "^13.0.2",
+    "rimraf": "^3.0.0",
+    "standard": "^14.0.0",
     "teenytest": "^5.2.0",
     "testdouble": "^3.12.1",
     "ts-node": "^8.3.0",

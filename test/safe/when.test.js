@@ -28,7 +28,7 @@ module.exports = {
     td.when(testDouble({ lol: 'fungus' })).thenReturn('eww')
     td.when(testDouble({ lol: 'fungus' }, 2)).thenReturn('eww2')
 
-    assert._isEqual(testDouble(), void 0)
+    assert._isEqual(testDouble(), undefined)
     assert._isEqual(testDouble(1), 'foo')
     assert._isEqual(testDouble(2), 'bar')
     assert._isEqual(testDouble({ lol: 'cheese' }), 'nom')
@@ -46,17 +46,17 @@ module.exports = {
     td.when(testDouble(88, td.matchers.isA(Number))).thenReturn('yay')
 
     assert._isEqual(testDouble(88, 5), 'yay')
-    assert._isEqual(testDouble(44, 5), void 0)
-    assert._isEqual(testDouble(88, 'five'), void 0)
+    assert._isEqual(testDouble(44, 5), undefined)
+    assert._isEqual(testDouble(88, 'five'), undefined)
   },
   'using deep matchers': {
     'single level' () {
       td.when(testDouble({ key: td.matchers.isA(String) })).thenReturn('yay')
 
       assert._isEqual(testDouble({ key: 'testytest' }), 'yay')
-      assert._isEqual(testDouble({ key: 42 }), void 0)
-      assert._isEqual(testDouble({}), void 0)
-      assert._isEqual(testDouble('i am a string'), void 0)
+      assert._isEqual(testDouble({ key: 42 }), undefined)
+      assert._isEqual(testDouble({}), undefined)
+      assert._isEqual(testDouble('i am a string'), undefined)
     },
     'deeply nested' () {
       td.when(testDouble({
