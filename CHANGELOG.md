@@ -1,5 +1,8 @@
 # Change Log
 
+## [v3.12.4](https://github.com/testdouble/testdouble.js/tree/v3.12.4) (2019-08-21)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.12.3...v3.12.4)
+
 ## [v3.12.3](https://github.com/testdouble/testdouble.js/tree/v3.12.3) (2019-08-04)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.12.2...v3.12.3)
 
@@ -842,10 +845,6 @@
 ## [v1.2.0](https://github.com/testdouble/testdouble.js/tree/v1.2.0) (2016-03-20)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v1.1.3...v1.2.0)
 
-**Closed issues:**
-
-- Print version in browserify build [\#23](https://github.com/testdouble/testdouble.js/issues/23)
-
 **Merged pull requests:**
 
 - Stringify objects better [\#84](https://github.com/testdouble/testdouble.js/pull/84) ([searls](https://github.com/searls))
@@ -1085,6 +1084,7 @@
 
 **Closed issues:**
 
+- Print version in browserify build [\#23](https://github.com/testdouble/testdouble.js/issues/23)
 - Add a `require\('testdouble'\).explain` function [\#12](https://github.com/testdouble/testdouble.js/issues/12)
 - Ensure last stubbing wins [\#11](https://github.com/testdouble/testdouble.js/issues/11)
 
