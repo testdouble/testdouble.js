@@ -103,7 +103,7 @@
     "rimraf": "^3.0.0",
     "standard": "^14.0.0",
     "teenytest": "^5.2.0",
-    "testdouble": "^3.12.1",
+    "testdouble": "^3.12.3",
     "ts-node": "^8.3.0",
     "tsify": "^4.0.1",
     "typescript": "^3.5.3"
