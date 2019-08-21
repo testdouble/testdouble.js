@@ -1,5 +1,55 @@
 # Change Log
 
+## [v3.12.3](https://github.com/testdouble/testdouble.js/tree/v3.12.3) (2019-08-04)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.12.2...v3.12.3)
+
+**Closed issues:**
+
+- Destructuring support fail. [\#424](https://github.com/testdouble/testdouble.js/issues/424)
+
+**Merged pull requests:**
+
+- Add cloneArgs to VerificationConfig type [\#425](https://github.com/testdouble/testdouble.js/pull/425) ([lumaxis](https://github.com/lumaxis))
+
+## [v3.12.2](https://github.com/testdouble/testdouble.js/tree/v3.12.2) (2019-07-16)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.12.1...v3.12.2)
+
+**Merged pull requests:**
+
+- Update dependencies [\#423](https://github.com/testdouble/testdouble.js/pull/423) ([lumaxis](https://github.com/lumaxis))
+- Run CI also on Node 10 [\#422](https://github.com/testdouble/testdouble.js/pull/422) ([lumaxis](https://github.com/lumaxis))
+
+## [v3.12.1](https://github.com/testdouble/testdouble.js/tree/v3.12.1) (2019-07-03)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.12.0...v3.12.1)
+
+**Closed issues:**
+
+- MockService Not Working in Angular 8 [\#420](https://github.com/testdouble/testdouble.js/issues/420)
+- ReferenceError: td is not defined  [\#418](https://github.com/testdouble/testdouble.js/issues/418)
+
+**Merged pull requests:**
+
+- \[Issue-370\] - Update createTestDoublesForFunctionNames to return an object [\#421](https://github.com/testdouble/testdouble.js/pull/421) ([bannmoore](https://github.com/bannmoore))
+
+## [v3.12.0](https://github.com/testdouble/testdouble.js/tree/v3.12.0) (2019-06-08)
+[Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.11.0...v3.12.0)
+
+**Closed issues:**
+
+- Challenges testing mutable objects [\#416](https://github.com/testdouble/testdouble.js/issues/416)
+- How to stub out instance methods and replace dependencies  when writing a request test? [\#414](https://github.com/testdouble/testdouble.js/issues/414)
+- Mocking Behavior Similar To Rspec: expect to receive and return  [\#413](https://github.com/testdouble/testdouble.js/issues/413)
+- How can I verify a call to a stub which is configured to throw? [\#412](https://github.com/testdouble/testdouble.js/issues/412)
+- td.replace a double arrow function [\#411](https://github.com/testdouble/testdouble.js/issues/411)
+- Unable to replace mongoose.model [\#410](https://github.com/testdouble/testdouble.js/issues/410)
+- Cannot test testdoubles inside .then function. [\#409](https://github.com/testdouble/testdouble.js/issues/409)
+- How to test a error subscription [\#408](https://github.com/testdouble/testdouble.js/issues/408)
+- Arguments of mocked functions are saved  by reference.  [\#375](https://github.com/testdouble/testdouble.js/issues/375)
+
+**Merged pull requests:**
+
+- add cloneArgs option to td.when/td.verify [\#417](https://github.com/testdouble/testdouble.js/pull/417) ([searls](https://github.com/searls))
+
 ## [v3.11.0](https://github.com/testdouble/testdouble.js/tree/v3.11.0) (2019-02-24)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.10.0...v3.11.0)
 
@@ -84,7 +134,6 @@
 - how to handle async callbacks [\#380](https://github.com/testdouble/testdouble.js/issues/380)
 - mocking non-direct dependency [\#379](https://github.com/testdouble/testdouble.js/issues/379)
 - How to replace momentjs ? [\#378](https://github.com/testdouble/testdouble.js/issues/378)
-- Arguments of mocked functions are saved  by reference.  [\#375](https://github.com/testdouble/testdouble.js/issues/375)
 - testdouble incompatible with coverage tools? [\#374](https://github.com/testdouble/testdouble.js/issues/374)
 - td.replaced module still returning stub after a td.reset\(\) [\#373](https://github.com/testdouble/testdouble.js/issues/373)
 - Awaiting a testdouble function always resolves [\#371](https://github.com/testdouble/testdouble.js/issues/371)
