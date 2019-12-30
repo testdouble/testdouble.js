@@ -32,13 +32,21 @@ export interface Explanation {
   isTestDouble: boolean;
 }
 
+export interface MatcherConfig {
+  matches(matcherArgs: any[], actual: any): boolean;
+  name?: string | ((matcherArgs: any[]) => string);
+  onCreate?(matcherInstance: any, matcherArgs: any[]): void;
+  afterSatisfaction?(matcherArgs: any[], actual: any): void;
+}
+
 export interface Matchers {
   anything(): any;
   isA(type: Function): any;
   contains(a: string | any[] | {}): any;
   argThat(matcher: Function): any;
   not(v: any): any;
-  captor(): Captor
+  captor(): Captor;
+  create(config: MatcherConfig): any;
 }
 
 export const matchers: Matchers
