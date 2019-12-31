@@ -27,6 +27,11 @@ export = {
     });
     td.when(bird.fly()).thenReturn("swoosh!");
 
+    const fish = td.object<{
+      swim(): { speed: number; direction: number };
+    }>();
+    td.when(fish.swim()).thenReturn({ speed: 100 });
+
     const kitty = td.object(["scratch", "meow"]);
     td.when(kitty.scratch()).thenReturn("scratch!");
     td.when(kitty.meow()).thenReturn("meow!");
