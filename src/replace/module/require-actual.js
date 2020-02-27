@@ -49,18 +49,22 @@ export default function requireActual (modulePath) {
       \`require('${absolutePath}')\`
 
     But requiring that absolute path threw this error:
-      "${absolutePathLoadError.message}"
+      "${firstLineOf(absolutePathLoadError.message)}"
 
     Next, we tried to require it as you specified it (in case it's the name of
     a Node.js built-in or an npm package), with:
       \`require('${modulePath}')\`
 
     But that threw this error:
-      "${moduleNameLoadError.message}"
+      "${firstLineOf(moduleNameLoadError.message)}"
 
     Make sure the path specified exists (either relative to the call-site or
     as an installed module). If any of the paths above seem to be internal to
     testdouble.js or a dependency, that's probably a bug and you should open an
     issue.
   `, 'https://github.com/testdouble/testdouble.js#module-replacement-with-nodejs')
+}
+
+function firstLineOf (s) {
+  return s ? s.split('\n')[0] : s
 }
