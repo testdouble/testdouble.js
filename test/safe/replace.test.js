@@ -248,7 +248,7 @@ module.exports = {
         require('./fixtures/car')
         assert.fail('should have errored!')
       } catch (e) {
-        assert._isEqual(e.message, "Cannot find module './brake'")
+        assert._isEqual(e.message.split('\n')[0], "Cannot find module './brake'")
       }
     }
   }
