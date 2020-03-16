@@ -35,12 +35,18 @@ module.exports = {
     assert._isEqual(testDouble({ lol: 'fungus' }), 'eww')
     assert._isEqual(testDouble({ lol: 'fungus' }, 2), 'eww2')
   },
-  'multiple test doubles' () {
+  'multiple test double functions' () {
     const td1 = td.when(td.func()()).thenReturn('lol1')
     const td2 = td.when(td.func()()).thenReturn('lol2')
 
     assert._isEqual(td1(), 'lol1')
     assert._isEqual(td2(), 'lol2')
+  },
+  'using test double object as an argument' () {
+    const obj = td.object()
+    const td1 = td.when(td.func()(obj)).thenReturn('lol')
+
+    assert._isEqual(td1(obj), 'lol')
   },
   'using matchers' () {
     td.when(testDouble(88, td.matchers.isA(Number))).thenReturn('yay')
