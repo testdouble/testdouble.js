@@ -46,10 +46,9 @@
     "test:example:node-ava": "./script/run-examples node-ava",
     "test:example:webpack": "./script/run-examples webpack",
     "version:write": "echo \"export default '$npm_package_version'\" > src/version.js",
-    "version:changelog": "if command -v github_changelog_generator &>/dev/null; then github_changelog_generator; git commit -m \"Changelog for $npm_package_version\" CHANGELOG.md; else echo Versioning requires you first run 'gem install github_changelog_generator' >&2; fi",
     "preversion": "git pull --rebase && npm run test:ci",
     "version": "npm run version:write && npm run compile && git add src/version.js",
-    "postversion": "git push --tags && npm run version:changelog && git push && npm publish",
+    "postversion": "git push --tags && git push && npm publish",
     "prepare": "npm run compile"
   },
   "browser": {

@@ -1,5 +1,12 @@
 # Change Log
 
+## 3.13.1
+
+* Fixes cases where test double objects are passed into `when` or `verify`
+  [#427](https://github.com/testdouble/testdouble.js/pull/427)
+
+## Automated changelog (pre-3.13.0) - github_changelog_generator stopped working for us
+
 ## [v3.12.4](https://github.com/testdouble/testdouble.js/tree/v3.12.4) (2019-08-21)
 [Full Changelog](https://github.com/testdouble/testdouble.js/compare/v3.12.3...v3.12.4)
 
