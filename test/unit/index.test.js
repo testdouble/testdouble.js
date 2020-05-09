@@ -5,7 +5,7 @@ module.exports = () => {
   const func = td.replace('../../src/function').default
   const object = td.replace('../../src/object').default
   const constructor = td.replace('../../src/constructor').default
-  const replace = td.replace('../../src/replace').default
+  const { default: replace, replaceEsm } = td.replace('../../src/replace')
   const imitate = td.replace('../../src/imitate').default
   // Stubbing & Verifying
   const when = td.replace('../../src/when').default
@@ -27,6 +27,7 @@ module.exports = () => {
     object: object,
     constructor: constructor,
     replace: replace,
+    replaceEsm: replaceEsm,
     imitate: imitate,
     when: when,
     verify: verify,

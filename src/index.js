@@ -5,7 +5,7 @@ import imitate from './imitate'
 import when from './when'
 import verify from './verify'
 import matchers from './matchers'
-import replace from './replace'
+import replace, { replaceEsm } from './replace'
 import explain from './explain'
 import reset from './reset'
 import config from './config'
@@ -23,6 +23,7 @@ module.exports = {
   verify,
   matchers,
   replace,
+  replaceEsm,
   explain,
   reset,
   config,
