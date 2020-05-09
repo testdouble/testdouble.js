@@ -188,7 +188,7 @@ module.exports = {
       }
     }
   },
-  'Node.js-specific module replacement': {
+  'Node.js-specific CJS module replacement': {
 
     beforeEach () {
       passenger = td.replace('./fixtures/passenger')

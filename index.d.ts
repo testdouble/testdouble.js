@@ -261,6 +261,28 @@ export function callback(...args: any[]): void;
  * @returns {*}
  */
 export function replace(path: string, f?: any): any;
+/**
+ * Swap out real dependenencies with fake one. Intercept calls to `require`
+ * that dependency module and ensure your subject is handed a fake instead.
+ *
+ * @export
+ * @param {string} path
+ * @param {*} [f]
+ * @returns {*}
+ */
+export function replaceCjs(path: string, f?: any): any;
+/**
+ * Swap out real dependenencies with fake one. Intercept calls to `import`
+ * that dependency module and ensure your subject is handed a fake instead.
+ *
+ * @export
+ * @param {string} path
+ * @param {*} [namedExportStubs]
+ * @param {*} [defaultExportStub]
+ * @returns {Promise<{default?: any, [namedExport: string]: any}>}
+ */
+export function replaceEsm(path: string, namedExportStubs?: any, defaultExportStub?: any):
+  Promise<{default?: any, [namedExport: string]: any}>;
 
 /**
  * Swap out real dependenencies with fake one. Reference to the property will

@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
     "allowJs": true,
-    "target": "es2017",
-    "lib": ["es2017"],
+    "target": "es5",
+    "lib": ["es2015"],
     "noImplicitAny": false,
     "module": "commonjs",
     "moduleResolution": "node",
-    "outDir": "lib",
+    "outDir": "lib"
   },
   "include": [
-    "src/**/*.js"
+    "src/**/*"
   ]
 }
