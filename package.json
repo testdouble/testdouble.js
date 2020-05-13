@@ -9,6 +9,13 @@
     "url": "http://testdouble.com"
   },
   "main": "lib/index.js",
+  "exports": {
+    ".": {
+      "require": "./lib/index.js",
+      "import": "./lib/index.mjs"
+    },
+    "./": "./"
+  },
   "files": [
     "src",
     "lib",
@@ -32,11 +39,11 @@
     "style": "run-p style:js style:ts",
     "style:js": "standard --fix",
     "style:ts": "standard --fix --parser @typescript-eslint/parser --plugin @typescript-eslint/eslint-plugin \"**/*.ts\"",
-    "test": "NODE_OPTIONS='--loader=quibble' TS_NODE_IGNORE='(?:^|/)node_modules/,notypescript' ./test/safe-esm/teenytest-proxy.js --helper test/helper.js \"test/**/*.test.{js,ts}\"",
-    "test:all": "run-s test test:example",
+    "test": "teenytest --helper test/helper.js \"test/**/*.test.{js,ts}\"",
+    "test:all": "run-s test:unit test:safe test:esm test:example",
     "test:unit": "teenytest --helper test/helper.js \"test/unit/**/*.test.{js,ts}\"",
     "test:safe": "teenytest --helper test/helper.js \"test/safe/**/*.test.{js,ts}\"",
-    "test:esm": "NODE_OPTIONS='--loader=quibble' TS_NODE_IGNORE='(?:^|/)node_modules/,notypescript' ./test/safe-esm/teenytest-proxy.js --helper test/helper.js test/safe-esm/replace.test.js",
+    "test:esm": "if node test/supports-esm.js; then NODE_OPTIONS='--loader=quibble' TS_NODE_IGNORE='(?:^|/)node_modules/,notypescript' ./test/safe-esm/teenytest-proxy.js --helper test/helper.js test/safe-esm/replace.test.js; fi",
     "test:ci": "npm run compile && run-p style test:all && echo \"All done!\"",
     "test:example": "run-p test:example:babel test:example:jest test:example:jest-broken test:example:plain-html test:example:node test:example:node-ava test:example:webpack",
     "test:example:babel": "./script/run-examples babel",
