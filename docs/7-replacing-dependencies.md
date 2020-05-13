@@ -37,6 +37,29 @@ out the plumbing of defining the dependency, you can pass a final argument to
 `td.replace('./foo', 42)` will monkey-patch `require` to return `42` for paths
 that resolve to that absolute path.
 
+## ES Module support
+
+> IMPORTANT NOTE: ES module support is experimental, and relies on an experimental feature of
+> Node.js called [Loaders](https://nodejs.org/api/esm.html#esm_experimental_loaders).
+
+Since version 13, Node.js has native support for ES Modules, i.e. modules that use `import` and
+`export` instead of `require` (read all about them
+[here](https://nodejs.org/dist/latest/docs/api/esm.html)). This library also supports replacing ES
+modules, alongside CommonJS (the regular `require` modules). But since ES modules have slightly
+difference semantics, you cannot use `td.replace`, but should rather use `td.replaceEsm` if you want
+to replace a module that is an ES module.
+
+Also, since ES modules are asynchronous in nature,
+`td.replaceEsm` is also asyncronous, and you should usually `await it`. And lastly, `td.replaceEsm`
+always returns an object that contains the doubles of the named exports of the module, and if the
+module has a default export, then that object will also contain a `default` property.
+
+Another interesting change is that, just like in Node.js you have to specify the extension when
+importing the module (i.e. `import('./brake.mjs')`), so you need to do so when replacing the module.
+
+Otherwise, most of what is
+written about `td.replace` also applies to `td.replaceEsm`.
+
 ## Node.js
 
 This sounds a little like magic, so let's look at a simple example. Suppose we
@@ -56,31 +79,62 @@ module.exports = {
 }
 ```
 
+This same, example, using ESM. Given the modules below:
+
+```javascript
+// brake.mjs
+export default function brake() {...}
+export function abs() {...}
+// car.mjs
+import brake, {abs} from './brake.mjs'
+```
+
+You can replace them using the code below:
+
+``` javascript
+module.exports = {
+  beforeEach: async function() {
+    const brakeModule = await td.replaceEsm('../../lib/brake.mjs')
+    const subjectModule = await import('../../lib/car.mjs')
+  },
+  'slowing applies the break': function () {
+    subjectModule.default.slowDown()
+
+    td.verify(brakeModule.default(10))
+  }
+}
+```
+
 There are few very important things to note about how to use module replacement
 safely (with great power, etc.):
 
 * Most importantly: **move your replacements and requirements into a
   `beforeEach` hook (or equivalent)** and be sure you're calling `td.reset()`
-  after each test case. Because `td.replace('../module/path')` will disrupt
-  Node's module caching behavior and cause `require()` to return a fake, it
-  would cause test pollution to keep the `require` stanzas at the top of the
+  after each test case. Because `td.replace/replaceEsm('../module/path')` will disrupt
+  Node's module loading behavior and cause `require/import()` to return a fake, it
+  would cause test pollution to keep the `require/import` stanzas at the top of the
   file
-* As a result, your tests will need to use `require` and not the ES static
-  `import` keyword. This _only applies to your test files_, however, you can
-  still feel free to use `import` in your production source files, where it
-  actually matters if you're leveraging a bundling tool like Webpack or Rollup.
-  Keep in mind that you'll like be doing a lot of
-  `td.replace('../path').default` assignments if you're using default exports
-* `td.replace` is designed to be used as part of an outside-in test-driven
-  development workflow, and so calling `td.replace` for some path will trigger
+* As a result, if you're using CommonJS, your tests will need to use `require` and not the ES static
+  `import` keyword. This _only applies to your test files_, and only if the modules you test are
+  CommonJS. however, you can still feel free to use a transpile to change your `import` to `require`
+  in your production source files, where it actually matters if you're leveraging a bundling tool
+  like Webpack or Rollup. Keep in mind that you'll like be doing a lot of
+  `td.replace('../path').default` assignments if you're using default exports, whether you're
+  transpiling or using native ES modules.
+* `td.replace/replaceEsm` is designed to be used as part of an outside-in test-driven
+  development workflow, and so calling `td.replace/replaceEsm` for some path will trigger
   an error until it actually exists and exports the basic shape (e.g. a
   function, or a bag of functions, or a class) that is expected to be consumed
   by the subject under test
-* Because `td.replace` first requires the module being replaced and then
+* Because `td.replace/replaceEsm` first requires the module being replaced and then
   performs a deep imitation of whatever the real module exports, any
   side-effects the to-be-replaced module has will be inadvertently triggered by
   the test (remember, good modules should be loadable without triggering side
   effects!)
+* If you're using native (and not transpiled) ES modules, and you're using `td.replaceEsm`, you need
+  to load `testdouble.js` as an ESM loader (more about the why below), using `node
+  --loader=testdouble`, or alternatively, if you're using a test runner that does not support
+  loaders, you can use `NODE_OPTIONS="node --loader=testdouble" testrunner ...`.
 
 That's a lot of caveats, but so long as your test and module design is simple
 and consistent, it's a powerful feature that can drastically simplify the setup
@@ -116,14 +170,13 @@ example project](../examples/node/test/lib/car-test.js) found in the
 testdouble.js repository. For a more formal discussion of the `replace()`
 API, read on.
 
-If you'd like an example of replacing ES classes that use the `export` keyword,
-check out the [babel example
-project](../examples/babel/test/lib/calculator-test.js). (Note again that the
-test itself must fall back to CommonJS-style `require` statements, since module
-replacement requires the dependency be loaded after the replacements are
-configured, which precludes the use of the static `import` statement.)
+If you'd like an example of replacing using transpilers to replacr ES classes that use the `export`
+keyword, check out the [babel example project](../examples/babel/test/lib/calculator-test.js). (Note
+again that the test itself must fall back to CommonJS-style `require` statements, since module
+replacement requires the dependency be loaded after the replacements are configured, which precludes
+the use of the static `import` statement.)
 
-### How module replacement works
+### How module replacement works for CommonJS modules (using `require`)
 
 Under the hood, testdouble.js uses a module called
 [quibble](https://github.com/testdouble/quibble) that facilitates `td.replace`'s
@@ -138,6 +191,24 @@ subject's dependencies before you `require` your subject itself**. If you
 `require` your subject before calling `td.replace`, it will load normally
 (potentially from the module cache) and any calls to `td.replace` will be too
 late to have their intended effect).
+
+### How module replacement works for ES modules (using `import`)
+
+Under the hood, testdouble.js uses a loader (which you run using `node loader=testdouble`). A loader
+is a module that can hook into the ES module loading mechanism in an official way. The testdouble
+loader ensures that if you call `td.replaceEsm` on an ES Module, the next time that module is loaded
+by Node.js, the source Node.js will get from the loader is not the regular source, but rather source
+code that contains some replacement code that can be used for the mock doubles.
+
+Also, every time you call `td.replaceEsm` on a module, you generate a new "generation" of that module, so
+that the next time Node.js loads that module, it loads the new generation of that replaced module.
+If you do `td.reset`, then the original module is loaded instead.
+
+As a result, feel free to use `td.replaceEsm` even _after_ you import the module. This is different
+from when using `td.replace` where you must use `td.replace` first before `require`-ing your module.
+
+(All this magic comes courtesy of [quibble](https://github.com/testdouble/quibble), which does the
+actual loading and replacing of the module), and is used by `td.replaceEsm` to do its magic.
 
 ### Aside: third-party modules
 
