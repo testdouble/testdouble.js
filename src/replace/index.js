@@ -14,6 +14,9 @@ export default function (target) {
 }
 
 export function replaceEsm (_modulePath, _namedExportReplacement, _defaultExportReplacement) {
+  if (!quibble.isLoaderLoaded()) {
+    throw new Error('testdouble ESM loader not loaded. You cannot replace ES modules without a loader. Run node with `--loader=testdouble`.')
+  }
   // Sending arguments instead of the above arguments is crucial because `replaceEsModule`
   // uses arguments.length to figure out what to do.
   return replaceEsModule(...arguments)
