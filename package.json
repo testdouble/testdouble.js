@@ -1,6 +1,6 @@
 {
   "name": "testdouble",
-  "version": "3.12.4",
+  "version": "3.13.1",
   "description": "A minimal test double library for TDD with JavaScript",
   "homepage": "https://github.com/testdouble/testdouble.js",
   "author": {
@@ -46,10 +46,9 @@
     "test:example:node-ava": "./script/run-examples node-ava",
     "test:example:webpack": "./script/run-examples webpack",
     "version:write": "echo \"export default '$npm_package_version'\" > src/version.js",
-    "version:changelog": "if command -v github_changelog_generator &>/dev/null; then github_changelog_generator; git commit -m \"Changelog for $npm_package_version\" CHANGELOG.md; else echo Versioning requires you first run 'gem install github_changelog_generator' >&2; fi",
     "preversion": "git pull --rebase && npm run test:ci",
     "version": "npm run version:write && npm run compile && git add src/version.js",
-    "postversion": "git push --tags && npm run version:changelog && git push && npm publish",
+    "postversion": "git push --tags && git push && npm publish",
     "prepare": "npm run compile"
   },
   "browser": {
@@ -84,29 +83,30 @@
   },
   "dependencies": {
     "lodash": "^4.17.15",
-    "quibble": "^0.5.6",
+    "quibble": "^0.5.7",
     "stringify-object-es5": "^2.5.0",
     "theredoc": "^1.0.0"
   },
   "devDependencies": {
-    "@types/node": "^10.14.16",
-    "@typescript-eslint/eslint-plugin": "^1.13.0",
-    "@typescript-eslint/parser": "^1.13.0",
+    "@types/node": "^13.7.6",
+    "@typescript-eslint/eslint-plugin": "^2.21.0",
+    "@typescript-eslint/parser": "^2.21.0",
     "browserify": "^16.5.0",
     "codeclimate-test-reporter": "^0.5.1",
     "cross-conf-env": "^1.1.2",
+    "dedent": "^0.7.0",
     "headerify": "^1.0.1",
     "is-number": "^7.0.0",
-    "mkdirp": "^0.5.1",
+    "mkdirp": "^1.0.3",
     "npm-run-all": "^4.1.5",
-    "nyc": "^14.1.1",
-    "rimraf": "^3.0.0",
-    "standard": "^14.0.0",
-    "teenytest": "^5.2.0",
-    "testdouble": "^3.12.3",
-    "ts-node": "^8.3.0",
+    "nyc": "^15.0.0",
+    "rimraf": "^3.0.2",
+    "standard": "^14.3.1",
+    "teenytest": "^5.3.0",
+    "testdouble": "^3.12.5",
+    "ts-node": "^8.6.2",
     "tsify": "^4.0.1",
-    "typescript": "^3.5.3"
+    "typescript": "^3.8.2"
   },
   "directories": {
     "doc": "./docs",

@@ -24,7 +24,6 @@ module.exports = {
       [new String('pants'), new String('pants')], // eslint-disable-line
       [new Date(38), new Date(38)],
       [/foo/, /foo/],
-      [new Error('pants'), new Error('pants')],
       [[1, 2, 3], [1, 2, 3]],
       [(function () { return arguments })(4, 5, 6), [4, 5, 6]]
     ].forEach(entry => {
@@ -33,6 +32,8 @@ module.exports = {
       assert.deepEqual(td.imitate(original), expected)
       assert.notStrictEqual(td.imitate(original), expected)
     })
+
+    // errors are a special case, but what we care most about is the message:
     assert._isEqual(td.imitate(new Error('foo')).message, 'foo')
   },
   'skips encountered objects' () {
