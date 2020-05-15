@@ -207,6 +207,10 @@ If you do `td.reset`, then the original module is loaded instead.
 As a result, feel free to use `td.replaceEsm` even _after_ you import the module. This is different
 from when using `td.replace` where you must use `td.replace` first before `require`-ing your module.
 
+If you'd like to kick the tires on this, you can play with a [more involved
+example project](../examples/node-esm/test/lib/car-test.mjs) found in the
+testdouble.js repository.
+
 (All this magic comes courtesy of [quibble](https://github.com/testdouble/quibble), which does the
 actual loading and replacing of the module), and is used by `td.replaceEsm` to do its magic.
 
