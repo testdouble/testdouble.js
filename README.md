@@ -75,7 +75,7 @@ question](https://github.com/testdouble/testdouble.js/issues/new).
 
 ## API
 
-### `td.replace()` for replacing dependencies
+### `td.replace()` and `td.replaceEsm()` for replacing dependencies
 
 The first thing a test double library needs to do is give you a way to replace
 the production dependencies of your [subject under
@@ -88,6 +88,10 @@ Both modes will, by default, perform a deep clone of the real dependency which
 replaces all functions it encounters with fake test double functions which can,
 in turn, be configured by your test to either stub responses or assert
 invocations.
+
+Additionally, if you're using Node 13 or newer, you can specify testdouble as a
+module loader and replace native ES modules with `td.replaceEsm()`. More details
+[here](docs/7-replacing-dependencies.md#how-module-replacement-works-for-es-modules-using-import).
 
 #### Module replacement with Node.js
 
@@ -149,8 +153,9 @@ using `td.replace()`:
 ##### Default exports with ES modules
 
 If your modules are written in the ES module syntax and they specify default
-exports (e.g. `export default function loadsPurchases()`), just remember that
-you'll need to reference `.default` when translating to the CJS module format.
+exports (e.g. `export default function loadsPurchases()`), but are actually
+transpiled to CommonJS, just remember that you'll need to reference `.default`
+when translating to the CJS module format.
 
 That means instead of this:
 
@@ -265,9 +270,9 @@ double function and can be called in three modes:
   name'`, which will appear in any error messages as well as the debug info
   returned by passing the returned test double into
   [td.explain()](/docs/9-debugging.md#tdexplainsometestdouble)
-* **`td.func<Type>()`** - returns a test double function imitating the passed type. 
+* **`td.func<Type>()`** - returns a test double function imitating the passed type.
   Examples and more details can be found in [using with TypeScript](/docs/10-using-with-typescript.md)
-  
+
 #### `td.object()`
 
 The `td.object()` function returns an object containing test double functions,
@@ -288,10 +293,10 @@ and supports three types of invocations:
   The proxy will automatically intercept any call made to it and shunt in a test
   double that can be used for stubbing or verification. More details can be
   found in [our full docs](/docs/4-creating-test-doubles.md#objectobjectname)
-* **`td.object<Interface>()`** - returns an object with methods exposed as test doubles 
-  that are typed according to the passed interface. Examples and more details can be found in 
+* **`td.object<Interface>()`** - returns an object with methods exposed as test doubles
+  that are typed according to the passed interface. Examples and more details can be found in
   [using with TypeScript](/docs/10-using-with-typescript.md)
-  
+
 #### `td.constructor()`
 
 If your code depends on ES classes or functions intended to be called with
