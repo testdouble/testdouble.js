@@ -6,7 +6,9 @@ class Dog {
 }
 
 class Cat {
-  meow (): string { return 'meow! meow!' }
+  meow (): string {
+    return 'meow! meow!'
+  }
 }
 
 function sum (first: number, second: number): number {
@@ -18,19 +20,36 @@ export = {
     const dog = td.constructor(Dog)
     td.when(dog.prototype.bark()).thenReturn('woof!')
 
-    const bird = td.object({ fly: function () {} })
+    const bird = td.object({
+      fly: function (): string {
+        return 'swoosh'
+      }
+    })
     td.when(bird.fly()).thenReturn('swoosh!')
+
+    const fish = td.object<{
+      swim(): { speed: number; direction: number };
+    }>()
+    td.when(fish.swim()).thenReturn({ speed: 100 })
 
     const kitty = td.object(['scratch', 'meow'])
     td.when(kitty.scratch()).thenReturn('scratch!')
     td.when(kitty.meow()).thenReturn('meow!')
 
-    if (eval('typeof Proxy') !== 'undefined') { // eslint-disable-line
-      class Bear { sleep () {} }
+    // eslint-disable-next-line
+    if (eval("typeof Proxy") !== "undefined") {
+      class Bear {
+        sleep (): string {
+          return 'test'
+        }
+      }
 
       const FakeBear = td.constructor<Bear>(Bear)
 
-      assert.strictEqual(td.explain(FakeBear.prototype.sleep).isTestDouble, true)
+      assert.strictEqual(
+        td.explain(FakeBear.prototype.sleep).isTestDouble,
+        true
+      )
 
       const bear = td.object<Bear>('A bear')
 
@@ -51,7 +70,9 @@ export = {
     const f = td.function()
     td.when(f(10)).thenReturn(10, 11)
     td.when(f(1)).thenThrow(new Error('ok'))
-    td.when(f(td.matchers.isA(String))).thenDo(function (s: string) { return s })
+    td.when(f(td.matchers.isA(String))).thenDo(function (s: string) {
+      return s
+    })
     td.when(f(td.matchers.not(true))).thenResolve('value1', 'value2')
     td.when(f(td.matchers.not(false))).thenReject(new Error('rejected'))
 
@@ -78,4 +99,4 @@ export = {
       'This test double has 5 stubbings and 1 invocations.'
     )
   }
-}
+};

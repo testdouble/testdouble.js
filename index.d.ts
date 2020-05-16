@@ -2,13 +2,13 @@
 // types and interfaces
 // ----------------------------------------------------------------------------
 
-export type DoubledObject < T > = T
+export type DoubledObject<T> = T;
 
-export type DoubledObjectWithKey < T extends string > = { [K in T] : any }
+export type DoubledObjectWithKey<T extends string> = { [K in T]: any };
 
-export type TestDouble < T > = T
+export type TestDouble<T> = T;
 
-export type TestDoubleConstructor < T > = Constructor<T>
+export type TestDoubleConstructor<T> = Constructor<T>;
 
 interface Call {
   context: {};
@@ -16,7 +16,7 @@ interface Call {
 }
 
 interface Constructor<T> {
-  new (...args: any[]): T
+  new (...args: any[]): T;
 }
 
 export interface Captor {
@@ -49,15 +49,21 @@ export interface Matchers {
   create(config: MatcherConfig): any;
 }
 
-export const matchers: Matchers
+export const matchers: Matchers;
 
-export interface Stubber {
-  thenReturn<T>(...args: any[]): TestDouble<T>;
+export interface Stubber<D, R = D extends object ? Partial<D> : D> {
+  thenReturn<T>(first: R, ...args: Array<R>): TestDouble<T>;
   thenDo<T>(f: Function): TestDouble<T>;
   thenThrow<T>(e: Error): TestDouble<T>;
-  thenResolve<T>(...args: any[]): TestDouble<T>;
+  thenResolve<T>(first: R, ...args: Array<R>): TestDouble<T>;
   thenReject<T>(e: Error): TestDouble<T>;
-  thenCallback<T>(...args: any[]): TestDouble<T>;
+  thenCallback<T>(error: any, data: any): TestDouble<T>;
+}
+
+export interface PromiseStubber<P, R = P extends object ? Partial<P> : P> {
+  thenResolve<T>(first: R, ...args: Array<R>): TestDouble<T>;
+  thenDo<T>(f: Function): TestDouble<T>;
+  thenReject<T>(e: Error): TestDouble<T>;
 }
 
 export interface TestdoubleConfig {
@@ -70,6 +76,14 @@ export interface VerificationConfig {
   ignoreExtraArgs?: boolean;
   times?: number;
   cloneArgs?: boolean;
+}
+
+export interface WhenConfig {
+  ignoreExtraArgs?: boolean;
+  times?: number;
+  cloneArgs?: boolean;
+  defer?: boolean;
+  delay?: number;
 }
 
 //
@@ -117,7 +131,9 @@ export function explain<T>(f: TestDouble<T>): Explanation;
  * @param {{ new (...args: any[]): T }} constructor
  * @returns {DoubledObject<T>}
  */
-export function constructor<T>(constructor: Constructor<T>): TestDoubleConstructor<T>;
+export function constructor<T>(
+  constructor: Constructor<T>
+): TestDoubleConstructor<T>;
 
 //
 // fake: functions
@@ -140,8 +156,8 @@ declare function functionDouble(name?: string): TestDouble<Function>;
  */
 declare function functionDouble<T>(name?: T): TestDouble<T>;
 
-export { functionDouble as function }
-export { functionDouble as func }
+export { functionDouble as function };
+export { functionDouble as func };
 
 //
 // fake: objects
@@ -207,7 +223,10 @@ export function object<T>(object: T): DoubledObject<T>;
  * @param {string} [name]
  * @returns {TestDoubleConstructor<T>}
  */
-export function imitate<T>(constructor: Constructor<T>, name?: string): TestDoubleConstructor<T>;
+export function imitate<T>(
+  constructor: Constructor<T>,
+  name?: string
+): TestDoubleConstructor<T>;
 
 /**
  * Create a fake object or function.
@@ -262,8 +281,8 @@ export function replace(path: {}, property: string, f?: any): any;
  * @param {...any[]} args
  * @returns {Stubber}
  */
-export function when(...args: any[]): Stubber;
-
+export function when<P>(f: Promise<P>, config?: WhenConfig): PromiseStubber<P>;
+export function when<D>(f: D, config?: WhenConfig): Stubber<D>;
 /**
  * Verify a specific function call to a stubbed function.
  *
