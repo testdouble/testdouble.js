@@ -50,15 +50,15 @@ difference semantics, you cannot use `td.replace`, but should rather use `td.rep
 to replace a module that is an ES module.
 
 Also, since ES modules are asynchronous in nature,
-`td.replaceEsm` is also asyncronous, and you should usually `await it`. And lastly, `td.replaceEsm`
+`td.replaceEsm` is also asyncronous, and you should usually `await` it. And lastly, `td.replaceEsm`
 always returns an object that contains the doubles of the named exports of the module, and if the
 module has a default export, then that object will also contain a `default` property.
 
 Another interesting change is that, just like in Node.js you have to specify the extension when
 importing the module (i.e. `import('./brake.mjs')`), so you need to do so when replacing the module.
 
-Otherwise, most of what is
-written about `td.replace` also applies to `td.replaceEsm`.
+Otherwise, most of what is written about `td.replace` also applies to
+`td.replaceEsm`.
 
 ## Node.js
 
@@ -110,31 +110,43 @@ safely (with great power, etc.):
 
 * Most importantly: **move your replacements and requirements into a
   `beforeEach` hook (or equivalent)** and be sure you're calling `td.reset()`
-  after each test case. Because `td.replace/replaceEsm('../module/path')` will disrupt
-  Node's module loading behavior and cause `require/import()` to return a fake, it
-  would cause test pollution to keep the `require/import` stanzas at the top of the
-  file
-* As a result, if you're using CommonJS, your tests will need to use `require` and not the ES static
-  `import` keyword. This _only applies to your test files_, and only if the modules you test are
-  CommonJS. however, you can still feel free to use a transpile to change your `import` to `require`
-  in your production source files, where it actually matters if you're leveraging a bundling tool
-  like Webpack or Rollup. Keep in mind that you'll like be doing a lot of
-  `td.replace('../path').default` assignments if you're using default exports, whether you're
-  transpiling or using native ES modules.
-* `td.replace/replaceEsm` is designed to be used as part of an outside-in test-driven
-  development workflow, and so calling `td.replace/replaceEsm` for some path will trigger
-  an error until it actually exists and exports the basic shape (e.g. a
-  function, or a bag of functions, or a class) that is expected to be consumed
-  by the subject under test
-* Because `td.replace/replaceEsm` first requires the module being replaced and then
-  performs a deep imitation of whatever the real module exports, any
+  after each test case. Because `td.replace` and `td.replaceEsm` will disrupt
+  Node's module loading behavior and cause `require` and `import`, respectively,
+  to return a fake, it would cause test pollution to put the `require` or
+  `import` stanzas at the top of the file. Yes, it'll look and feel a bit weird
+  to `require` or `import` your subject inside a `beforeEach` hook, but it's the
+  only way to ensure the state of one test doesn't leak into another
+
+* Additionally, if you're writing CommonJS modules but transpiling them such
+  that `import` and `export` keywords can be used, your tests will nevertheless
+  need to use `require` and not the ES static `import` keyword. This _only
+  applies to your test files_, and only if the modules you test are CommonJS (as
+  opposed to Node 13+ native ES modules).  However, you can continue to use
+  `import` and `export` in your production source files. Keep in mind that
+  you'll like be doing a lot of `td.replace('../path').default` assignments if
+  you're using default exports, whether you're transpiling or using native ES
+  modules.
+
+* `td.replace` and `td.replaceEsm` are designed to be used as part of an
+  outside-in test-driven development workflow, and so calling `td.replace` or
+  `td.replaceEsm` for some path will trigger an error until it actually exists
+  and exports the basic shape (e.g. a function, or a bag of functions, or a
+  class) that is expected to be consumed by the subject under test. This is
+  good! These errors are messages from your test instructing you what to do next
+  and keep you moving forward!
+
+* Because `td.replace` and `td.replaceEsm` first load a the actual module to be
+  replaced before performing a deep imitation of whatever it exports, any
   side-effects the to-be-replaced module has will be inadvertently triggered by
-  the test (remember, good modules should be loadable without triggering side
-  effects!)
-* If you're using native (and not transpiled) ES modules, and you're using `td.replaceEsm`, you need
-  to load `testdouble.js` as an ESM loader (more about the why below), using `node
-  --loader=testdouble`, or alternatively, if you're using a test runner that does not support
-  loaders, you can use `NODE_OPTIONS="node --loader=testdouble" testrunner ...`.
+  the test. (Remember, good modules should be loadable without triggering side
+  effects!) Note that you can avoid the module from being loaded by specifying
+  your own fake as a second argument (e.g. `td.replace('./path', td.func())`)
+
+* If you're using native (and not transpiled) ES modules, and you're using
+  `td.replaceEsm`, you need to load `testdouble.js` as an ESM loader (more about
+  the why below), using `node --loader=testdouble`, or alternatively, if you're
+  using a test runner that does not support loaders, you can use
+  `NODE_OPTIONS="node --loader=testdouble" testrunner ...`.
 
 That's a lot of caveats, but so long as your test and module design is simple
 and consistent, it's a powerful feature that can drastically simplify the setup
