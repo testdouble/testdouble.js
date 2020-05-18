@@ -1,5 +1,13 @@
 # Change Log
 
+## 3.15
+
+* Add support for faking native ES modules with `td.replaceEsm()` [#445](https://github.com/testdouble/testdouble.js/pull/445)
+
+## 3.14
+
+* Type updates [#437](https://github.com/testdouble/testdouble.js/pull/437)
+
 ## 3.13.1
 
 * Fixes cases where test double objects are passed into `when` or `verify`
