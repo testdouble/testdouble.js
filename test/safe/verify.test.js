@@ -79,6 +79,13 @@ module.exports = {
       td.verify(testDoubleObj.prototype.baz())
     }, /verification on test double `Foo.prototype.baz`/)
     assert._isEqual(testDoubleObj.prototype.biz, 'not a function!')
+
+    const testDoubleInstance = td.instance(SomeType)
+
+    assert.throws(() => {
+      td.verify(testDoubleInstance.baz())
+    }, /verification on test double `Foo.prototype.baz`/)
+    assert._isEqual(testDoubleInstance.biz, 'not a function!')
   },
   'with a test double *as an arg* to another': {
     'with an unnamed double function _as an arg_' () {

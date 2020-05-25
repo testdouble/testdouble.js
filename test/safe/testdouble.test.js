@@ -7,6 +7,7 @@ module.exports = {
     assert._isEqual(td.imitate, require('../../src/imitate').default)
     assert._isEqual(td.object, require('../../src/object').default)
     assert._isEqual(td.constructor, require('../../src/constructor').default)
+    assert._isEqual(td.instance, require('../../src/instance').default)
     assert._isEqual(td.matchers, require('../../src/matchers').default)
     assert._isEqual(td.callback, require('../../src/callback').default)
     assert._isEqual(td.explain, require('../../src/explain').default)

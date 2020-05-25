@@ -25,4 +25,11 @@ test('instance-of', function (t) {
   t.true(td.explain(eightiesGuy.hairspray).isTestDouble)
   t.true(eightiesGuy instanceof EightiesGuy)
   t.true(eightiesGuy instanceof Person)
+
+  const otherGuy = td.instance(EightiesGuy)
+
+  t.true(td.explain(otherGuy.age).isTestDouble)
+  t.true(td.explain(otherGuy.hairspray).isTestDouble)
+  t.true(otherGuy instanceof EightiesGuy)
+  t.true(otherGuy instanceof Person)
 })

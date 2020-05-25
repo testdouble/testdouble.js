@@ -136,6 +136,23 @@ export function constructor<T>(
 ): TestDoubleConstructor<T>;
 
 //
+// fake: instance objects
+//
+
+/**
+ * Construct an instance of a faked class.
+ *
+ * @export
+ * @template T
+ * @param {{ new (...args: any[]): T }} constructor
+ * @returns {DoubledObject<typeof T>}
+ */
+export function instance<T>(
+  constructor: Constructor<T>
+): DoubledObject<T>;
+
+
+//
 // fake: functions
 // ----------------------------------------------------------------------------
 
@@ -252,7 +269,7 @@ export function imitate<T>(original: T, name?: string): TestDouble<T>;
 export function callback(...args: any[]): void;
 
 /**
- * Swap out real dependenencies with fake one. Intercept calls to `require`
+ * Swap out real dependencies with fake one. Intercept calls to `require`
  * that dependency module and ensure your subject is handed a fake instead.
  *
  * @export
@@ -262,7 +279,7 @@ export function callback(...args: any[]): void;
  */
 export function replace(path: string, f?: any): any;
 /**
- * Swap out real dependenencies with fake one. Intercept calls to `require`
+ * Swap out real dependencies with fake one. Intercept calls to `require`
  * that dependency module and ensure your subject is handed a fake instead.
  *
  * @export
@@ -272,7 +289,7 @@ export function replace(path: string, f?: any): any;
  */
 export function replaceCjs(path: string, f?: any): any;
 /**
- * Swap out real dependenencies with fake one. Intercept calls to `import`
+ * Swap out real dependencies with fake one. Intercept calls to `import`
  * that dependency module and ensure your subject is handed a fake instead.
  *
  * @export
@@ -285,7 +302,7 @@ export function replaceEsm(path: string, namedExportStubs?: any, defaultExportSt
   Promise<{default?: any, [namedExport: string]: any}>;
 
 /**
- * Swap out real dependenencies with fake one. Reference to the property will
+ * Swap out real dependencies with fake one. Reference to the property will
  * be replace it during your test.
  *
  * @export

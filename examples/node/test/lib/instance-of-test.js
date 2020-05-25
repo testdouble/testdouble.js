@@ -19,4 +19,11 @@ module.exports = function () {
   assert.ok(td.explain(eightiesGuy.hairspray).isTestDouble)
   assert.ok(eightiesGuy instanceof EightiesGuy)
   assert.ok(eightiesGuy instanceof Person)
+
+  const otherGuy = td.instance(EightiesGuy)
+
+  assert.ok(td.explain(otherGuy.age).isTestDouble)
+  assert.ok(td.explain(otherGuy.hairspray).isTestDouble)
+  assert.ok(otherGuy instanceof EightiesGuy)
+  assert.ok(otherGuy instanceof Person)
 }

@@ -1,6 +1,7 @@
 import function2 from './function.js'
 import object2 from './object.js'
 import constructor2 from './constructor.js'
+import instance2 from './instance.js'
 import imitate2 from './imitate/index.js'
 import when2 from './when.js'
 import verify2 from './verify.js'
@@ -14,6 +15,7 @@ import version2 from './version.js'
 export const func = function2.default
 export const object = object2.default
 export const constructor = constructor2.default
+export const instance = instance2.default
 export const imitate = imitate2.default
 export const when = when2.default
 export const verify = verify2.default

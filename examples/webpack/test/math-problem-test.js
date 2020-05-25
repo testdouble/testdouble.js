@@ -17,7 +17,8 @@ MathProblem.prototype.generate = function(){
 }
 
 var td = require('testdouble')
-describe('MathProblem', function(){
+
+describe('MathProblem', function() {
   var subject, createRandomProblem, FakeSavesProblem, submitProblem;
   beforeEach(function(){
     createRandomProblem = td.function('createRandomProblem')
@@ -28,6 +29,24 @@ describe('MathProblem', function(){
   it('POSTs a random problem', function(){
     td.when(createRandomProblem()).thenReturn('some problem')
     td.when(FakeSavesProblem.prototype.save('some problem')).thenReturn('saved problem')
+
+    var result = subject.generate()
+
+    td.verify(submitProblem('saved problem'))
+    expect(result).toEqual('neat')
+  })
+})
+
+describe('MathProblem (td.instance)', function() {
+  var subject, createRandomProblem, submitProblem;
+  beforeEach(function(){
+    createRandomProblem = td.function('createRandomProblem')
+    submitProblem = td.function('submitProblem')
+    subject = new MathProblem(createRandomProblem, td.instance(SavesProblem), submitProblem)
+  })
+  it('POSTs a random problem', function() {
+    td.when(createRandomProblem()).thenReturn('some problem')
+    td.when(subject.savesProblem.save('some problem')).thenReturn('saved problem')
 
     var result = subject.generate()
 

@@ -242,7 +242,7 @@ signup = td.replace(app, 'signup', {
 })
 ```
 
-### `td.func()`, `td.object()`, `td.constructor()`, and `td.imitate()` to create test doubles
+### `td.func()`, `td.object()`, `td.constructor()`, `td.instance()` and `td.imitate()` to create test doubles
 
 `td.replace()`'s imitation and injection convenience is great when your
 project's build configuration allows for it, but in many cases you'll want or
@@ -330,6 +330,28 @@ const subject = function (SomeConstructor) {
   const thing = new SomeConstructor()
   return thing.doStuff() // returns "ok"
 }
+```
+
+#### `td.instance()`
+
+If your code depends on ES classes or functions, then the `td.instance()` function 
+will create a mock constructor and return a new instance of that mock constructor.
+
+The following code snippets are functionally equiavalent:
+
+```js
+const fakeObject = td.instance(RealConstructor)
+td.when(fakeObject.doStuff()).thenReturn('just did it')
+
+fakeObject.doStuff() // returns "just did it"
+```
+
+```js
+const FakeConstructor = td.constructor(RealConstructor)
+const fakeObject = new FakeConstructor()
+td.when(fakeObject.doStuff()).thenReturn('just did it')
+
+fakeObject.doStuff() // returns "just did it"
 ```
 
 #### `td.imitate()`

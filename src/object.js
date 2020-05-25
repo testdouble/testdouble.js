@@ -32,7 +32,7 @@ var createTestDoublesForFunctionNames = (names) =>
   }, {})
 
 var ensureFunctionIsNotPassed = () =>
-  log.error('td.object', 'Functions are not valid arguments to `td.object` (as of testdouble@2.0.0). Please use `td.function()` or `td.constructor()` instead for creating fake functions.')
+  log.error('td.object', 'Functions are not valid arguments to `td.object` (as of testdouble@2.0.0). Please use `td.function()`, `td.constructor()` or `td.instance()` instead for creating fake functions.')
 
 var ensureOtherGarbageIsNotPassed = () =>
   log.error('td.object', `\
