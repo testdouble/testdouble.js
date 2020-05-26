@@ -50,7 +50,7 @@ module.exports = {
       td.object(function () {})
       assert.fail('This should have errored!')
     } catch (e) {
-      assert.ok(/Please use `td\.function\(\)` or `td\.constructor\(\)` instead/.test(e.message))
+      assert.ok(/Please use `td\.function\(\)`, `td\.constructor\(\)` or `td\.instance\(\)` instead/.test(e.message))
     }
   },
   'passing an Object.create()d thing' () {

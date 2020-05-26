@@ -57,14 +57,12 @@ export = {
 
       assert.strictEqual(bear.sleep(), 'zzzzzz')
 
-      console.log("before")
       const instanceBear = td.instance<Bear>(Bear)
       assert.strictEqual(instanceBear instanceof Bear, true)
       assert.strictEqual(
         td.explain(instanceBear.sleep).isTestDouble,
         true
       )
-      console.log("after")
     }
 
     const testObject = {
