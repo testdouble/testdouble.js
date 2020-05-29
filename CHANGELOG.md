@@ -1,10 +1,14 @@
 # Change Log
 
-## 3.15
+## 3.16.0
+
+* Add new `td.instance()` method which is a one-liner of `FakeFoo = td.constructor(Foo); new FakeFoo()` [#448](https://github.com/testdouble/testdouble.js/pull/448)
+
+## 3.15.0
 
 * Add support for faking native ES modules with `td.replaceEsm()` [#445](https://github.com/testdouble/testdouble.js/pull/445)
 
-## 3.14
+## 3.14.0
 
 * Type updates [#437](https://github.com/testdouble/testdouble.js/pull/437)
 

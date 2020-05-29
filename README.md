@@ -334,24 +334,19 @@ const subject = function (SomeConstructor) {
 
 #### `td.instance()`
 
-If your code depends on ES classes or functions, then the `td.instance()` function 
-will create a mock constructor and return a new instance of that mock constructor.
+As a shorthand convenience, `td.instance()` function will call
+`td.constructor()` and return a `new` instance of the fake constructor function
+it returns.
 
-The following code snippets are functionally equiavalent:
+The following code snippets are functionally equivalent:
 
 ```js
 const fakeObject = td.instance(RealConstructor)
-td.when(fakeObject.doStuff()).thenReturn('just did it')
-
-fakeObject.doStuff() // returns "just did it"
 ```
 
 ```js
 const FakeConstructor = td.constructor(RealConstructor)
 const fakeObject = new FakeConstructor()
-td.when(fakeObject.doStuff()).thenReturn('just did it')
-
-fakeObject.doStuff() // returns "just did it"
 ```
 
 #### `td.imitate()`
