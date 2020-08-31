@@ -146,7 +146,7 @@ safely (with great power, etc.):
   `td.replaceEsm`, you need to load `testdouble.js` as an ESM loader (more about
   the why below), using `node --loader=testdouble`, or alternatively, if you're
   using a test runner that does not support loaders, you can use
-  `NODE_OPTIONS="node --loader=testdouble" testrunner ...`.
+  `NODE_OPTIONS="--loader=testdouble" testrunner ...`.
 
 That's a lot of caveats, but so long as your test and module design is simple
 and consistent, it's a powerful feature that can drastically simplify the setup
