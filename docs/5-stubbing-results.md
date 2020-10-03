@@ -95,9 +95,12 @@ As you can see, any additional invocations will continue to return the final stu
 
 #### A note on unconditional stubbing
 
-Note that these stubbings will only return their stubbed value if called exactly as they're demonstrated when `td.when()` is invoked. That means, given the examples above, that invoking things like:
+Note that these stubbings will only return their stubbed value if called exactly as they're demonstrated when `td.when()` is invoked. That means, that invoking things like so:
 
 ``` javascript
+var quack = td.function('quack')
+td.when(quack()).thenReturn('some return value')
+
 quack('hi')
 quack([1,2,3],4)
 quack('anything','at','all')
