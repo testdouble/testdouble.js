@@ -33,7 +33,14 @@ We recommend requiring the library in a test helper and setting it globally for
 convenience to the shorthand `td`:
 
 ```js
-global.td = require('testdouble') // Node.js; `window.td` for browsers
+// ES import syntax
+import * as td from 'testdouble'
+
+// CommonJS modules (e.g. Node.js)
+global.td = require('testdouble')
+
+// Global set in our browser distribution
+window.td
 ```
 
 (You may need to configure your linter to ignore the `td`  global.
