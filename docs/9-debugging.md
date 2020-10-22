@@ -75,7 +75,7 @@ td.explain(myTestDouble) /*
 */
 ```
 
-You can actually pass anything created by `td.func()`, td.object()`,
+You can actually pass anything created by `td.func()`, `td.object()`,
 `td.constructor()` and `td.imitate()` to `td.explain()` and it will be
 recursively described, with all of the functions found explained in this format.
 
