@@ -135,7 +135,7 @@ safely (with great power, etc.):
   good! These errors are messages from your test instructing you what to do next
   and keep you moving forward!
 
-* Because `td.replace` and `td.replaceEsm` first load a the actual module to be
+* Because `td.replace` and `td.replaceEsm` first load the actual module to be
   replaced before performing a deep imitation of whatever it exports, any
   side-effects the to-be-replaced module has will be inadvertently triggered by
   the test. (Remember, good modules should be loadable without triggering side
