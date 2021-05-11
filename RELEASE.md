@@ -22,8 +22,8 @@ installed (`gem install github_changelog_generator`), which we use to automatica
 
 Before releasing, make sure:
 
-- [ ] You're on the `master` branch and have a clean working directory
-- [ ] It's in sync with `origin/master` (e.g `git pull` status indicates up-to-date)
+- [ ] You're on the `main` branch and have a clean working directory
+- [ ] It's in sync with `origin/main` (e.g `git pull` status indicates up-to-date)
 - [ ] `npm run test:ci` passes
 - [ ] `which github_changelog_generator` is present on your PATH
 
@@ -42,6 +42,6 @@ This will run a full build, tag the release, push everything to github, generate
 If anything goes wrong, odds are good that they went wrong before you published to npm, since that's the last
 step.  You'll probably find you need to:
 
-- [ ] reset to wherever you were prior to the attempt `git reset --hard PREVIOUS_REF` and `git push -f origin/master`
+- [ ] reset to wherever you were prior to the attempt `git reset --hard PREVIOUS_REF` and `git push -f origin/main`
 - [ ] delete the local tag `git tag -d vX.Y.Z` and remotely with `git push origin :vX.Y.Z`
 - [ ] You may want to `git clean -xdf` in case any unstaged build artifacts are present before re-attempting

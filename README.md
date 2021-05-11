@@ -1,6 +1,6 @@
 # testdouble.js (AKA td.js)
 
-[![Build Status](https://circleci.com/gh/testdouble/testdouble.js/tree/master.svg?style=svg)](https://circleci.com/gh/testdouble/testdouble.js/tree/master)
+[![Build Status](https://circleci.com/gh/testdouble/testdouble.js/tree/main.svg?style=svg)](https://circleci.com/gh/testdouble/testdouble.js/tree/main)
 [![npmjs](https://img.shields.io/badge/npm-testdouble-red.svg)](https://www.npmjs.com/package/testdouble)
 [![unpkg](https://img.shields.io/badge/unpkg-download-blue.svg)](https://unpkg.com/testdouble/dist/)
 [![Test Coverage](https://codeclimate.com/github/testdouble/testdouble.js/badges/coverage.svg)](https://codeclimate.com/github/testdouble/testdouble.js/coverage)
@@ -225,7 +225,7 @@ pollution!
 #### Specifying a custom replacement
 
 The library's [imitation
-feature](https://github.com/testdouble/testdouble.js/blob/master/src/imitate/index.js)
+feature](https://github.com/testdouble/testdouble.js/blob/main/src/imitate/index.js)
 is pretty sophisticated, but it's not perfect. It's also going to be pretty slow
 on large, complex objects. If you'd like to specify exactly what to replace a
 real dependency with, you can do so in either of the above modes by providing a
@@ -268,7 +268,7 @@ double function and can be called in three modes:
 
 * **`td.func(someRealFunction)`** - returns a test double function of the same
   `name`, including a deep
-  [imitation](https://github.com/testdouble/testdouble.js/blob/master/src/imitate/index.js)
+  [imitation](https://github.com/testdouble/testdouble.js/blob/main/src/imitate/index.js)
   of all of its custom properties
 * **`td.func()`** - returns an anonymous test double function that can be used
   for stubbing and verifying any calls against it, but whose error messages and
@@ -286,7 +286,7 @@ The `td.object()` function returns an object containing test double functions,
 and supports three types of invocations:
 
 * **`td.object(realObject)`** - returns a deep
-  [imitation](https://github.com/testdouble/testdouble.js/blob/master/src/imitate/index.js)
+  [imitation](https://github.com/testdouble/testdouble.js/blob/main/src/imitate/index.js)
   of the passed object, where each function is replaced with a test double function
   named for the property path (e.g. If `realObject.invoices.send()` was a
   function, the returned object would have property `invoices.send` set to a
@@ -313,7 +313,7 @@ well.
 * **`td.constructor(RealConstructor)`** - returns a constructor whose calls can
   be verified and whose static and `prototype` functions have all been replaced
   with test double functions using the same
-  [imitation](https://github.com/testdouble/testdouble.js/blob/master/src/imitate/index.js)
+  [imitation](https://github.com/testdouble/testdouble.js/blob/main/src/imitate/index.js)
   mechanism as `td.func(realFunction)` and `td.object(realObject)`
 * **`td.constructor(['select', 'save'])`** - returns a constructor with `select`
   and `save` properties on its `prototype` object set to test double functions
