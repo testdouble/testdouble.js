@@ -41,7 +41,7 @@ var warnIfStubbed = (testDouble, actualArgs) => {
   ) {
     log.warn('td.verify',
       `test double${stringifyName(testDouble)} was both stubbed and verified with arguments (${stringifyArgs(actualArgs)}), which is redundant and probably unnecessary.`,
-      'https://github.com/testdouble/testdouble.js/blob/master/docs/B-frequently-asked-questions.md#why-shouldnt-i-call-both-tdwhen-and-tdverify-for-a-single-interaction-with-a-test-double'
+      'https://github.com/testdouble/testdouble.js/blob/main/docs/B-frequently-asked-questions.md#why-shouldnt-i-call-both-tdwhen-and-tdverify-for-a-single-interaction-with-a-test-double'
     )
   }
 }

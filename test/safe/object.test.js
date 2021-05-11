@@ -106,7 +106,7 @@ module.exports = {
         td.object('Woah')
         assert.fail('Show have errored!')
       } catch (e) {
-        assert._isEqual(e.message, "Error: testdouble.js - td.object - The current runtime does not have Proxy support, which is what\ntestdouble.js depends on when a string name is passed to `td.object()`.\n\nMore details here:\n  https://github.com/testdouble/testdouble.js/blob/master/docs/4-creating-test-doubles.md#objectobjectname\n\nDid you mean `td.object(['Woah'])`?")
+        assert._isEqual(e.message, "Error: testdouble.js - td.object - The current runtime does not have Proxy support, which is what\ntestdouble.js depends on when a string name is passed to `td.object()`.\n\nMore details here:\n  https://github.com/testdouble/testdouble.js/blob/main/docs/4-creating-test-doubles.md#objectobjectname\n\nDid you mean `td.object(['Woah'])`?")
       }
     },
     'Allow for deeply nested test double objects' () {
