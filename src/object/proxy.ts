@@ -16,7 +16,7 @@ const ensureProxySupport = (name) => {
       testdouble.js depends on when a string name is passed to \`td.object()\`.
 
       More details here:
-        https://github.com/testdouble/testdouble.js/blob/master/docs/4-creating-test-doubles.md#objectobjectname
+        https://github.com/testdouble/testdouble.js/blob/main/docs/4-creating-test-doubles.md#objectobjectname
 
       Did you mean \`td.object(['${name}'])\`?
     `)

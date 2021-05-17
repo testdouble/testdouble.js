@@ -286,7 +286,7 @@ module.exports = {
 
         td.verify(testDouble(1))
 
-        assert._isEqual(warnings[0], 'Warning: testdouble.js - td.verify - test double `.foo` was both stubbed and verified with arguments (1), which is redundant and probably unnecessary. (see: https://github.com/testdouble/testdouble.js/blob/master/docs/B-frequently-asked-questions.md#why-shouldnt-i-call-both-tdwhen-and-tdverify-for-a-single-interaction-with-a-test-double )')
+        assert._isEqual(warnings[0], 'Warning: testdouble.js - td.verify - test double `.foo` was both stubbed and verified with arguments (1), which is redundant and probably unnecessary. (see: https://github.com/testdouble/testdouble.js/blob/main/docs/B-frequently-asked-questions.md#why-shouldnt-i-call-both-tdwhen-and-tdverify-for-a-single-interaction-with-a-test-double )')
       },
       'a match where stub ignores extra arguments' () {
         td.when(testDouble(1), {
@@ -296,7 +296,7 @@ module.exports = {
 
         td.verify(testDouble(1, 2, 3))
 
-        assert._isEqual(warnings[0], 'Warning: testdouble.js - td.verify - test double `.foo` was both stubbed and verified with arguments (1, 2, 3), which is redundant and probably unnecessary. (see: https://github.com/testdouble/testdouble.js/blob/master/docs/B-frequently-asked-questions.md#why-shouldnt-i-call-both-tdwhen-and-tdverify-for-a-single-interaction-with-a-test-double )')
+        assert._isEqual(warnings[0], 'Warning: testdouble.js - td.verify - test double `.foo` was both stubbed and verified with arguments (1, 2, 3), which is redundant and probably unnecessary. (see: https://github.com/testdouble/testdouble.js/blob/main/docs/B-frequently-asked-questions.md#why-shouldnt-i-call-both-tdwhen-and-tdverify-for-a-single-interaction-with-a-test-double )')
       },
       'a match where stub uses a matcher' () {
         td.when(testDouble(td.matchers.isA(Number))).thenReturn(5)
@@ -304,7 +304,7 @@ module.exports = {
 
         td.verify(testDouble(1))
 
-        assert._isEqual(warnings[0], 'Warning: testdouble.js - td.verify - test double `.foo` was both stubbed and verified with arguments (1), which is redundant and probably unnecessary. (see: https://github.com/testdouble/testdouble.js/blob/master/docs/B-frequently-asked-questions.md#why-shouldnt-i-call-both-tdwhen-and-tdverify-for-a-single-interaction-with-a-test-double )')
+        assert._isEqual(warnings[0], 'Warning: testdouble.js - td.verify - test double `.foo` was both stubbed and verified with arguments (1), which is redundant and probably unnecessary. (see: https://github.com/testdouble/testdouble.js/blob/main/docs/B-frequently-asked-questions.md#why-shouldnt-i-call-both-tdwhen-and-tdverify-for-a-single-interaction-with-a-test-double )')
       }
     },
     'don\'t warn user when verify doesn\'t match the stub' () {
