@@ -15,9 +15,6 @@ $ echo $?
 This should pass within a couple minutes and print 0 afterward, indicating it exited
 cleanly.
 
-Additionally, make sure you have [github_changelog_generator](https://github.com/skywinder/github-changelog-generator)
-installed (`gem install github_changelog_generator`), which we use to automatically generate CHANGELOG.md mid-release
-
 ## Pre-flight checklist
 
 Before releasing, make sure:
@@ -25,7 +22,6 @@ Before releasing, make sure:
 - [ ] You're on the `main` branch and have a clean working directory
 - [ ] It's in sync with `origin/main` (e.g `git pull` status indicates up-to-date)
 - [ ] `npm run test:ci` passes
-- [ ] `which github_changelog_generator` is present on your PATH
 
 ## Publishing a release:
 
@@ -35,7 +31,7 @@ To publish a release, just bump the appropriate version segment:
 $ npm version patch #<-- or "minor" or "major"
 ```
 
-This will run a full build, tag the release, push everything to github, generate a changelog, and publish to npm.
+This will run a full build, tag the release, push everything to github, update CHANGELOG.md, and publish to npm.
 
 ## If something goes wrong
 
