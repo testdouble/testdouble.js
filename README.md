@@ -7,7 +7,9 @@
 Welcome! Are you writing JavaScript tests and in the market for a mocking
 library to fake out real things for you? testdouble.js is an opinionated,
 carefully-designed test double library maintained by, oddly enough, a software
-agency that's also named [Test Double](http://testdouble.com).
+agency that's also named [Test Double](http://testdouble.com). (The term "test
+double" was coined by Gerard Meszaros in his book [xUnit Test
+Patterns](http://xunitpatterns.com/Test%20Double.html).)
 
 If you practice test-driven development, testdouble.js was designed to promote
 terse, clear, and easy-to-understand tests. There's an awful lot to cover, so
