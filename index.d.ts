@@ -1,3 +1,5 @@
+export as namespace testdouble;
+
 //
 // types and interfaces
 // ----------------------------------------------------------------------------
