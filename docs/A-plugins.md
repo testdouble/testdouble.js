@@ -23,7 +23,7 @@ Thes plugins developed by ourselves & the community:
 * [testdouble-chai](https://github.com/basecase/testdouble-chai) - Chai assertions
 * [testdouble-jasmine](https://github.com/BrianGenisio/testdouble-jasmine) -
 Jasmine `expect` matchers (by @BrianGenisio)
-* [testdouble-qunit](https://github.com/alexlafroscia/testdouble-qunit/tree/master/packages/testdouble-qunit) -
+* [testdouble-qunit](https://github.com/alexlafroscia/testdouble-qunit) -
 QUnit assertion
 
 ## Build Plugins
