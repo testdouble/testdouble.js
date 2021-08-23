@@ -7,7 +7,14 @@ store.onReset(() => { callHistory = [] })
 
 export default {
   log (testDouble, args, context) {
-    store.for(testDouble).calls.push({ args, context, cloneArgs: _.cloneDeep(args) })
+    let cloneArgs
+    try {
+      cloneArgs = _.cloneDeep(args)
+    } catch (e) {
+      console.error(e)
+      cloneArgs = args
+    }
+    store.for(testDouble).calls.push({ args, context, cloneArgs: cloneArgs })
     return callHistory.push({ testDouble, args, context })
   },
 
