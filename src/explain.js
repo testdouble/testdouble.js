@@ -4,6 +4,7 @@ import callsStore from './store/calls'
 import store from './store'
 import stringifyArgs from './stringify/arguments'
 import stubbingsStore from './store/stubbings'
+import symbols from './symbols'
 
 export default function explain (testDouble) {
   if (_.isFunction(testDouble)) {
@@ -107,7 +108,15 @@ function argsFor (stub) {
 
 function callDescription (calls) {
   return calls.length > 0
-    ? _.reduce(calls, (desc, call) => desc + `\n  - called with \`(${stringifyArgs(call.cloneArgs)})\`.`, '\n\nInvocations:')
+    ? _.reduce(calls, (desc, call) => {
+      let argDescription
+      if (call.cloneArgs !== symbols.uncloneable) {
+        argDescription = `\`(${stringifyArgs(call.cloneArgs)})\`.`
+      } else {
+        argDescription = `\`(${stringifyArgs(call.args)})\` [Cloning argument values failed; displaying current references]`
+      }
+      return desc + `\n  - called with ${argDescription}`
+    }, '\n\nInvocations:')
     : ''
 }
 

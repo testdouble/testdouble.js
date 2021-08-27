@@ -55,6 +55,16 @@ export default function customAssertions (assert) {
     func()
   }
 
+  assert.contains = (actual, expected) => {
+    if (!_.includes(actual, expected)) {
+      throw new Error(theredoc`
+        Error: expected ${actual} to contain ${expected}
+
+        But it did not.
+      `)
+    }
+  }
+
   // Ensure func throws a message, with @@@ serving as a wildcard (e.g. for
   // expunging absolute paths or timestamps)
   assert.throwsMessage = (func, expectedMessage) => {

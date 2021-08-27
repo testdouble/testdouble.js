@@ -5,6 +5,8 @@ import calls from './store/calls'
 import log from './log'
 import stubbings from './store/stubbings'
 import tdConfig from './config'
+import cloneDeepIfPossible from './clone-deep-if-possible'
+import symbols from './symbols'
 
 export default function when (__userDoesRehearsalInvocationHere__, config = {}) {
   return ({
@@ -34,6 +36,7 @@ export default function when (__userDoesRehearsalInvocationHere__, config = {}) 
 function addStubbing (stubbedValues, config, plan) {
   const last = calls.pop()
   ensureRehearsalOccurred(last)
+  ensureCloneableIfCloneArgs(last, config)
   _.assign(config, { plan })
   stubbings.add(last.testDouble, concatImpliedCallback(last.args, config), stubbedValues, config)
   return last.testDouble
@@ -48,6 +51,14 @@ No test double invocation call detected for \`when()\`.
     when(myTestDouble('foo')).thenReturn('bar')\
 `
     )
+  }
+}
+
+function ensureCloneableIfCloneArgs (last, config) {
+  if (config.cloneArgs && cloneDeepIfPossible(last.args) === symbols.uncloneable) {
+    return log.error('td.when', `\
+Failed to deep-clone arguments. Ensure lodash _.cloneDeep works on them
+`)
   }
 }
 

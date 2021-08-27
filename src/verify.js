@@ -6,10 +6,13 @@ import store from './store'
 import stringifyArgs from './stringify/arguments'
 import stubbingsStore from './store/stubbings'
 import notifyAfterSatisfaction from './matchers/notify-after-satisfaction'
+import cloneDeepIfPossible from './clone-deep-if-possible'
+import symbols from './symbols'
 
 export default (__userDoesRehearsalInvocationHere__, config = {}) => {
   const last = callsStore.pop()
   ensureRehearsalOccurred(last)
+  ensureCloneableIfCloneArgs(last, config)
   if (callsStore.wasInvoked(last.testDouble, last.args, config)) {
     notifyMatchers(last.testDouble, last.args, config)
     warnIfStubbed(last.testDouble, last.args)
@@ -25,6 +28,14 @@ No test double invocation detected for \`verify()\`.
 
   Usage:
     verify(myTestDouble('foo'))\
+`)
+  }
+}
+
+function ensureCloneableIfCloneArgs (last, config) {
+  if (config.cloneArgs && cloneDeepIfPossible(last.args) === symbols.uncloneable) {
+    return log.error('td.verify', `\
+Failed to deep-clone arguments. Ensure lodash _.cloneDeep works on them
 `)
   }
 }

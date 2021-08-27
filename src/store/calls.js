@@ -1,5 +1,6 @@
 import _ from '../wrap/lodash'
 import argsMatch from '../args-match'
+import cloneDeepIfPossible from '../clone-deep-if-possible'
 import store from './index'
 
 let callHistory = [] // <-- remember this to pop our DSL of when(<call>)/verify(<call>)
@@ -7,14 +8,7 @@ store.onReset(() => { callHistory = [] })
 
 export default {
   log (testDouble, args, context) {
-    let cloneArgs
-    try {
-      cloneArgs = _.cloneDeep(args)
-    } catch (e) {
-      console.error(e)
-      cloneArgs = args
-    }
-    store.for(testDouble).calls.push({ args, context, cloneArgs: cloneArgs })
+    store.for(testDouble).calls.push({ args, context, cloneArgs: cloneDeepIfPossible(args) })
     return callHistory.push({ testDouble, args, context })
   },
 
