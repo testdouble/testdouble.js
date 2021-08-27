@@ -1,5 +1,13 @@
 # Change Log
 
+## 3.16.1
+
+* Handle cases where deep-cloning arguments fails. If `cloneArgs` is specified
+  on a stubbing or verification, the error will be propagated and thrown,
+  otherwise it will be swallowed and td.explain will warn the user that clone
+  failed (and therefore its log message may be inaccurate). See
+  [#469](https://github.com/testdouble/testdouble.js/pull/469/files)
+
 ## 3.16.0
 
 * Add new `td.instance()` method which is a one-liner of `FakeFoo = td.constructor(Foo); new FakeFoo()` [#448](https://github.com/testdouble/testdouble.js/pull/448)
