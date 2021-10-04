@@ -15,7 +15,7 @@ test suite and to name that global something brief. We've been accustomed to
 using `td`, so in a test helper loaded before your tests:
 
 ```
-global.td = require('testdouble')
+globalThis.td = require('testdouble')
 ```
 
 All examples in these documents will assume `testdouble` is available as `td`.
@@ -64,7 +64,7 @@ without any test library at all.
 
 Our browser distribution sets the library on a global variable named `window.td`.
 In Node.js, the library is loaded via `require('testdouble')`, as you might
-expect (though we recommend assigning it to `global.td` in a test helper, for
+expect (though we recommend assigning it to `globalThis.td` in a test helper, for
 terseness sake).
 
 You're welcome to address testdouble.js or any of its functions however you prefer,

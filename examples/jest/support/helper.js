@@ -1,5 +1,5 @@
-global.td = require('../../..')
-global.expect = require('expect')
+globalThis.td = require('../../..')
+globalThis.expect = require('expect')
 
 require('testdouble-jest')(td, jest)
 

@@ -2,7 +2,7 @@ module.exports = {
   'sets some ok defaults' () {
     assert.deepEqual(td.config(), {
       ignoreWarnings: false,
-      promiseConstructor: global.Promise,
+      promiseConstructor: globalThis.Promise,
       suppressErrors: false
     })
   },

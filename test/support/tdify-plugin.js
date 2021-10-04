@@ -7,10 +7,10 @@ module.exports = {
     test: function (runTest, metadata, cb) {
       if (metadata.ancestorNames[1].indexOf('/test/unit/') !== -1) {
         // Unit test -- `td` is a safe npm release so they can mock!
-        global.td = releaseTd
+        globalThis.td = releaseTd
       } else {
         // Safe test -- `td` is the current working copy so we can assert it!
-        global.td = workingTd
+        globalThis.td = workingTd
       }
       runTest(cb)
     }

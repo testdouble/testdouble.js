@@ -38,13 +38,13 @@ convenience to the shorthand `td`:
 import * as td from 'testdouble'
 
 // CommonJS modules (e.g. Node.js)
-global.td = require('testdouble')
+globalThis.td = require('testdouble')
 
 // Global set in our browser distribution
 window.td
 ```
 
-(You may need to configure your linter to ignore the `td`  global.
+(You may need to configure your linter to ignore the `td`  globalThis.
 Instructions:
 [eslint](https://eslint.org/docs/user-guide/configuring#specifying-globals),
 [standard](https://github.com/standard/standard/#i-use-a-library-that-pollutes-the-global-namespace-how-do-i-prevent-variable-is-not-defined-errors).)

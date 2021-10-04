@@ -97,7 +97,7 @@ module.exports = {
     assert._isEqual(fakeInstance.foo.toString(), '[test double for "#foo"]')
   },
   'edge case: being given a Symbol as function name' () {
-    if (!global.Symbol) return
+    if (!globalThis.Symbol) return
     const symbolFoo = Symbol('foo')
     FakeConstructor = td.constructor([symbolFoo])
     fakeInstance = new FakeConstructor('biz')

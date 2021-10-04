@@ -1,6 +1,6 @@
 require('ts-node/register')
-global.assert = require('assert')
-global.ES_SUPPORT = require('./support/es-support')
+globalThis.assert = require('assert')
+globalThis.ES_SUPPORT = require('./support/es-support')
 
 var CallLog = require('../src/value/call-log').default
 var StubbingRegister = require('../src/value/stubbing-register').default

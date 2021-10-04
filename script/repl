@@ -4,8 +4,8 @@ require('ts-node/register')
 var repl = require('repl')
 
 console.log('💚  Let\'s play with testdouble.js!  💚')
-global.td = require('../src')
-global.l = require('lodash')
+globalThis.td = require('../src')
+globalThis.l = require('lodash')
 repl.start({prompt: 'td > ', useGlobal: true})
 
 

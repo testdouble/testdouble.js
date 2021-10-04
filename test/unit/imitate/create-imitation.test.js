@@ -31,7 +31,7 @@ module.exports = {
     assert.deepEqual(result, 'fake thing')
   },
   'a function with symbols' () {
-    if (!global.Symbol) return
+    if (!globalThis.Symbol) return
 
     const someFunc = () => {}
     const symFoo = Symbol('foo')
@@ -60,7 +60,7 @@ module.exports = {
     assert.strictEqual(subject(undefined, []), undefined)
   },
   symbols: () => {
-    if (!global.Symbol) return
+    if (!globalThis.Symbol) return
     assert.strictEqual(subject(Symbol.species, []), Symbol.species)
   },
   'generators do not blow up and just return themselves i guess': () => {

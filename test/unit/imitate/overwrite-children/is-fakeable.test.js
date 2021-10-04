@@ -12,7 +12,7 @@ module.exports = {
     assert.equal(subject(NaN), false)
   },
   'identifies symbols': () => {
-    if (!global.Symbol) return
+    if (!globalThis.Symbol) return
 
     assert.equal(subject(Symbol.species), false)
   },
