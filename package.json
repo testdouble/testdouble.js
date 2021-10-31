@@ -56,7 +56,7 @@
     "test:example:node-esm": "if node test/supports-esm.js; then ./script/run-examples node-esm; fi",
     "test:example:webpack": "./script/run-examples webpack",
     "version:write": "echo \"export default '$npm_package_version'\" > src/version.js",
-    "preversion": "git pull --rebase && npm run test:ci",
+    "preversion": "git pull --rebase",
     "version": "npm run version:write && npm run compile && git add src/version.js",
     "postversion": "git push --tags && git push && npm publish",
     "prepare": "npm run compile"
