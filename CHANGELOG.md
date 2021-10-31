@@ -1,5 +1,11 @@
 # Change Log
 
+## 3.16.3
+
+* Fix `replaceEsm` for the latest release of Node 16, which changed the loader
+  interface. See [#474](https://github.com/testdouble/testdouble.js/issues/474)
+  and [quibble#54](https://github.com/testdouble/quibble/pull/54)
+
 ## 3.16.2
 
 * Handle cases where deep-cloning arguments fails. If `cloneArgs` is specified
