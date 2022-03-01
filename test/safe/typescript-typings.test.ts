@@ -90,7 +90,7 @@ export = {
     td.when(f(td.matchers.not(false))).thenReject(new Error('rejected'))
 
     const asyncCat = td.instance(AsyncCat)
-    td.when(asyncCat.mewConcurrently()).thenReturn(Promise.resolve("purr"), Promise.reject("hiss!"))
+    td.when(asyncCat.mewConcurrently()).thenReturn(Promise.resolve('purr'), Promise.reject(new Error('hiss!')))
 
     const fakeSum = td.function(sum)
     td.when(fakeSum(1, 2)).thenReturn(3)
