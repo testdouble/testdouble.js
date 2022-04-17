@@ -11,6 +11,12 @@ class Cat {
   }
 }
 
+class AsyncCat {
+  async mewConcurrently (): Promise<string> {
+    return 'meow! meow!'
+  }
+}
+
 function sum (first: number, second: number): number {
   return first + second
 }
@@ -82,6 +88,9 @@ export = {
     })
     td.when(f(td.matchers.not(true))).thenResolve('value1', 'value2')
     td.when(f(td.matchers.not(false))).thenReject(new Error('rejected'))
+
+    const asyncCat = td.instance(AsyncCat)
+    td.when(asyncCat.mewConcurrently()).thenReturn(Promise.resolve('purr'), Promise.reject(new Error('hiss!')))
 
     const fakeSum = td.function(sum)
     td.when(fakeSum(1, 2)).thenReturn(3)

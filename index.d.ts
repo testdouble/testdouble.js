@@ -63,6 +63,7 @@ export interface Stubber<D, R = D extends object ? Partial<D> : D> {
 }
 
 export interface PromiseStubber<P, R = P extends object ? Partial<P> : P> {
+  thenReturn<T>(first: Promise<R>, ...args: Array<Promise<R>>): TestDouble<T>;
   thenResolve<T>(first: R, ...args: Array<R>): TestDouble<T>;
   thenDo<T>(f: Function): TestDouble<T>;
   thenReject<T>(e: Error): TestDouble<T>;
