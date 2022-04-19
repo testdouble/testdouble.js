@@ -1,5 +1,10 @@
 # Change Log
 
+## 3.16.4
+
+* Improve type definition for stubbing a sequence of promises
+  [#481](https://github.com/testdouble/testdouble.js/pull/481)
+
 ## 3.16.3
 
 * Fix `replaceEsm` for the latest release of Node 16, which changed the loader
