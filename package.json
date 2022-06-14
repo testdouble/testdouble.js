@@ -11,6 +11,7 @@
   "main": "lib/index.js",
   "exports": {
     ".": {
+      "types": "./index.d.ts",
       "require": "./lib/index.js",
       "import": "./lib/index.mjs"
     },
