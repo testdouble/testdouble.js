@@ -276,21 +276,24 @@ export function callback(...args: any[]): void;
  * that dependency module and ensure your subject is handed a fake instead.
  *
  * @export
- * @param {string} path
- * @param {*} [f]
+ * @param {string} module
+ * @param {*} [f] replacement
  * @returns {*}
  */
-export function replace(path: string, f?: any): any;
+export function replace<F>(path: string, f?: F): F;
+export function replace(path: string): TestDouble<any>;
 /**
  * Swap out real dependencies with fake one. Intercept calls to `require`
  * that dependency module and ensure your subject is handed a fake instead.
  *
  * @export
- * @param {string} path
+ * @param {string} obj
  * @param {*} [f]
  * @returns {*}
  */
-export function replaceCjs(path: string, f?: any): any;
+
+export function replace<T, K extends keyof T>(obj: T, property: K): TestDouble<T[K]>;
+export function replace(obj: {}, property: string): TestDouble<any>;
 /**
  * Swap out real dependencies with fake one. Intercept calls to `import`
  * that dependency module and ensure your subject is handed a fake instead.
@@ -301,21 +304,20 @@ export function replaceCjs(path: string, f?: any): any;
  * @param {*} [defaultExportStub]
  * @returns {Promise<{default?: any, [namedExport: string]: any}>}
  */
-export function replaceEsm(path: string, namedExportStubs?: any, defaultExportStub?: any):
-  Promise<{default?: any, [namedExport: string]: any}>;
+export function replaceEsm(path: string, namedExportStubs?: any, defaultExportStub?: any): Promise<void>;
+export function replaceEsm(path: string): Promise<{default?: any, [namedExport: string]: any}>;
 
 /**
  * Swap out real dependencies with fake one. Reference to the property will
  * be replace it during your test.
  *
  * @export
- * @param {{}} path
+ * @param {{}} obj
  * @param {string} property
  * @param {*} [f]
  * @returns {*}
  */
-export function replace(path: {}, property: string, f?: any): any;
-
+export function replace<F>(obj: {}, property: string, replacement: F): F;
 /**
  * Stub a specific function call.
  *
