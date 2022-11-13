@@ -47,7 +47,7 @@
     "test:esm": "if node test/supports-esm.js; then NODE_OPTIONS='--loader=quibble' TS_NODE_IGNORE='(?:^|/)node_modules/,notypescript' ./test/safe-esm/teenytest-proxy.js --helper test/helper.js test/safe-esm/replace.test.js; fi",
     "test:no-loader-esm": "if node test/supports-esm.js; then TS_NODE_IGNORE='(?:^|/)node_modules/,notypescript' teenytest test/helper.js './test/safe-esm/*.no-loader-test.{mjs,js}'; fi",
     "test:ci": "npm run compile && run-p style test && echo \"All done!\"",
-    "test:example": "run-p test:example:babel test:example:jest test:example:jest-broken test:example:plain-html test:example:node test:example:node-ava test:example:webpack test:example:node-esm",
+    "test:example": "run-s test:example:babel test:example:jest test:example:jest-broken test:example:node test:example:node-ava test:example:node-esm",
     "test:example:babel": "./script/run-examples babel",
     "test:example:jest": "./script/run-examples jest",
     "test:example:jest-broken": "./script/run-examples jest-broken",
