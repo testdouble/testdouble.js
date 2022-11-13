@@ -44,7 +44,7 @@ module.exports = {
         \`require('./lol/not/real')\`
 
       But that threw this error:
-        "Cannot read property 'join' of undefined"
+        "Cannot read properties of undefined (reading 'join')"
 
       Make sure the path specified exists (either relative to the call-site or
       as an installed module). If any of the paths above seem to be internal to
