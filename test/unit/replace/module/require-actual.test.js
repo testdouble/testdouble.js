@@ -1,6 +1,7 @@
 import * as theredoc from 'theredoc'
 
 import subject from '../../../../src/replace/module/require-actual'
+import { nodeVersionLessThan } from '../../../support/versions'
 
 module.exports = {
   'require a relative path' () {
@@ -17,6 +18,8 @@ module.exports = {
     assert._isEqual(isNumber(5), true)
   },
   'print a huge error when both fail' () {
+    if (nodeVersionLessThan(16)) return
+
     assert.throwsMessage(() => { subject('./lol/not/real') }, theredoc`
       Error: testdouble.js - td.replace - failed to load the module being replaced.
 
