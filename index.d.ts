@@ -304,8 +304,8 @@ export function replace(obj: {}, property: string): TestDouble<any>;
  * @param {*} [defaultExportStub]
  * @returns {Promise<{default?: any, [namedExport: string]: any}>}
  */
-export function replaceEsm(path: string, namedExportStubs?: any, defaultExportStub?: any): Promise<void>;
 export function replaceEsm(path: string): Promise<{default?: any, [namedExport: string]: any}>;
+export function replaceEsm(path: string, namedExportStubs?: any, defaultExportStub?: any): Promise<void>;
 
 /**
  * Swap out real dependencies with fake one. Reference to the property will
