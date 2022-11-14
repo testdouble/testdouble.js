@@ -1,5 +1,10 @@
 # Change Log
 
+## 3.16.7
+
+* Update typings around `replace` and related methods
+  [#499](https://github.com/testdouble/testdouble.js/pull/499#issuecomment-1312799604)
+
 ## 3.16.5
 
 * Improve type definition for stubbing a sequence of promises
