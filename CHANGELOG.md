@@ -1,5 +1,9 @@
 # Change Log
 
+## 3.16.8
+
+* Tweak typings again [#500](https://github.com/testdouble/testdouble.js/pull/500)
+
 ## 3.16.7
 
 * Update typings around `replace` and related methods
