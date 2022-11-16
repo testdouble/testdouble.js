@@ -9,6 +9,7 @@ cd examples
 for D in $projects; do
   echo "<------ Running tests for example project '${D}'"
   cd "${D}"
-  npm run --silent skip-ci || (npm install --no-package-lock && npm test)
+  npm ci
+  npm test
 cd ..
 done

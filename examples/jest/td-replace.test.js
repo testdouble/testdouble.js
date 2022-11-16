@@ -1,3 +1,5 @@
+const expect = require('@jest/globals').expect
+
 let bar, baz, qux, quux, subject
 describe('td.replace', () => {
   beforeEach(() => {
@@ -33,7 +35,6 @@ describe('td.replace', () => {
   it('can assert a call', () => {
     subject()
 
-    td.verify(quux(1337), {times: 1})
+    td.verify(quux(1337), { times: 1 })
   })
 })
-

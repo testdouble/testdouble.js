@@ -5,15 +5,26 @@
   "description": "An example project using testdouble-jest",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "skip-ci": "node -e 'if (parseInt(process.version.match(/^v(\\d+)/)[1], 10) >= 6) process.exit(1)'"
+    "test": "jest"
   },
   "devDependencies": {
-    "jest": "^23.6.0",
+    "@jest/globals": "^29.3.1",
+    "jest": "^29.3.1",
     "testdouble": "file:../..",
     "testdouble-jest": "github:testdouble/testdouble-jest"
   },
   "jest": {
-    "setupTestFrameworkScriptFile": "./support/helper.js"
+    "setupFilesAfterEnv": [
+      "./support/helper.js"
+    ]
+  },
+  "standard": {
+    "globals": [
+      "td",
+      "describe",
+      "beforeEach",
+      "afterEach",
+      "it"
+    ]
   }
 }

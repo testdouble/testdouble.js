@@ -34,7 +34,7 @@ test('going over 60 -> engages the brake for 2 units', function (t) {
 })
 
 test('going exactly 60 invokes the copilot for some weird reason', function (t) {
-  var result = t.context.subject.goSixty()
+  const result = t.context.subject.goSixty()
 
   t.is(result, 'HIGHFIVE')
 })

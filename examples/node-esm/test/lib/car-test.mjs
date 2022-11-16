@@ -32,7 +32,7 @@ mocha.describe('car-test', function () {
   })
 
   mocha.it('going exactly 60 invokes the copilot for some weird reason', function () {
-    var result = this.subject.goSixty()
+    const result = this.subject.goSixty()
 
     assert.strictEqual(result, 'HIGHFIVE')
   })

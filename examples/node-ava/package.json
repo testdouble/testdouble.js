@@ -8,9 +8,9 @@
     "test:debug": "npm test -- --debug-brk"
   },
   "devDependencies": {
-    "ava": "1.0.0-beta.8",
-    "is-number": "^3.0.0",
-    "standard": "^10.0.2",
+    "ava": "5.1.0",
+    "is-number": "^7.0.0",
+    "standard": "^17.0.0",
     "testdouble": "file:../.."
   },
   "standard": {

@@ -8,9 +8,9 @@
     "test:debug": "npm test -- --debug-brk"
   },
   "devDependencies": {
-    "is-number": "^3.0.0",
-    "mocha": "^7.1.2",
-    "standard": "^14.3.4",
+    "is-number": "^7.0.0",
+    "mocha": "^10.1.0",
+    "standard": "^17.0.0",
     "testdouble": "file:../.."
   },
   "standard": {

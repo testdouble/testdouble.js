@@ -1,10 +1,12 @@
+const expect = require('@jest/globals').expect
+
 let subject
 describe('td.replace', () => {
   beforeEach(() => {
     td.mock('./bar')
-    td.mock('./baz', () => (() => 'woot'))
-    td.mock('./qux', () => (() => 'so fake!'), {virtual: true})
-    td.mock('./quux', () => td.func('quux'), {virtual: true})
+    td.mock('./baz', () => () => 'woot')
+    td.mock('./qux', () => () => 'so fake!', { virtual: true })
+    td.mock('./quux', () => td.func('quux'), { virtual: true })
 
     subject = require('./foo')
   })
@@ -36,7 +38,6 @@ describe('td.replace', () => {
 
     subject()
 
-    td.verify(quux(1337), {times: 1})
+    td.verify(quux(1337), { times: 1 })
   })
 })
-

@@ -8,14 +8,12 @@ describe('Calculator', () => {
     Multiplier = td.replace('../../lib/multiplier').default
     divider = td.replace('../../lib/divider').default
     const Calculator = require('../../lib/calculator').default
-    subject = new Calculator
+    subject = new Calculator()
   })
 
   describe('#calculate', () => {
-    if (!NODE_JS) return 'module replacement is not supported!'
-
     it('delegates to an Adder', () => {
-      td.when(Adder.prototype.add(4,9)).thenReturn('yay math!')
+      td.when(Adder.prototype.add(4, 9)).thenReturn('yay math!')
 
       result = subject.calculate('add', 4, 9)
 
@@ -23,7 +21,7 @@ describe('Calculator', () => {
     })
 
     it('delegates to a Subtractor', () => {
-      td.when(Subtractor.prototype.subtract(9,8)).thenReturn('minus math!')
+      td.when(Subtractor.prototype.subtract(9, 8)).thenReturn('minus math!')
 
       result = subject.calculate('subtract', 9, 8)
 

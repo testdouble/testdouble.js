@@ -14,7 +14,7 @@ test.afterEach(function (t) {
 test('third-party-thing', function (t) {
   td.when(t.context.isNumber(5)).thenReturn('pants')
 
-  var result = t.context.subject(5)
+  const result = t.context.subject(5)
 
   t.is(result, 'pants')
 })

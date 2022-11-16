@@ -1,12 +1,12 @@
-var accelerometer = require('./accelerometer')
-var gasPedal = require('./gas-pedal')
-var Brake = require('./brake')
-var copilot = require('./copilot')
+const accelerometer = require('./accelerometer')
+const gasPedal = require('./gas-pedal')
+const Brake = require('./brake')
+const copilot = require('./copilot')
 
 module.exports = {
   goSixty: function () {
-    var speed = accelerometer.read()
-    var brake = new Brake()
+    const speed = accelerometer.read()
+    const brake = new Brake()
 
     if (speed < 60) {
       gasPedal(60 - speed)

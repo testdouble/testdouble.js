@@ -1,7 +1,6 @@
 const td = require('../..')
-const expect = require('expect')
+const expect = require('@jest/globals').expect
 
-let subject
 describe('td.replace', () => {
   it('will not have td.mock defined b/c no testdouble-jest', () => {
     expect(td.mock).toBeFalsy()
@@ -15,4 +14,3 @@ describe('td.replace', () => {
     td.reset()
   })
 })
-

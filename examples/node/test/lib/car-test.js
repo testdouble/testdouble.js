@@ -1,4 +1,4 @@
-var subject, gasPedal, accelerometer, Brake
+let subject, gasPedal, accelerometer, Brake
 
 module.exports = {
   beforeEach: function () {
@@ -27,7 +27,7 @@ module.exports = {
     },
 
     'going exactly 60 invokes the copilot for some weird reason': function () {
-      var result = subject.goSixty()
+      const result = subject.goSixty()
 
       assert.equal(result, 'HIGHFIVE')
     }

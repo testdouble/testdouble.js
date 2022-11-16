@@ -4,8 +4,8 @@ import Brake from './brake.mjs'
 import copilot from './copilot.mjs'
 
 export function goSixty () {
-  var speed = accelerometer.read()
-  var brake = new Brake()
+  const speed = accelerometer.read()
+  const brake = new Brake()
 
   if (speed < 60) {
     gasPedal(60 - speed)
