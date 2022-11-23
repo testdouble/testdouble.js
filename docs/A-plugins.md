@@ -17,14 +17,22 @@ your preferred testing framework. However, it may be the case that you'd prefer
 to bridge the `verify()` method of testdouble.js with your preferred assertion
 API for aesthetic or error-handling reasons.
 
-Thes plugins developed by ourselves & the community:
+These plugins developed by ourselves & the community:
 
-* [testdouble-jest](https://github.com/testdouble/testdouble-jest) - module mocking support for Jest users
 * [testdouble-chai](https://github.com/basecase/testdouble-chai) - Chai assertions
 * [testdouble-jasmine](https://github.com/BrianGenisio/testdouble-jasmine) -
 Jasmine `expect` matchers (by @BrianGenisio)
 * [testdouble-qunit](https://github.com/alexlafroscia/testdouble-qunit) -
 QUnit assertion
+
+## Module Replacement Plugins
+
+Some testing frameworks have built-in module replacement systems for injecting
+fakes into your tests. Depending on the framework and your configuration,
+you may need a plugin to use `replace()` / `replaceEsm()` in your tests:
+
+* [testdouble-jest](https://github.com/testdouble/testdouble-jest) - module mocking support for Jest users
+* [testdouble-vitest](https://github.com/mcous/testdouble-vitest) - module module support for Vitest users
 
 ## Build Plugins
 
