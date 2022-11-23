@@ -55,6 +55,7 @@ may also want to check out one of these extensions:
 * [testdouble-chai](https://github.com/basecase/testdouble-chai)
 * [testdouble-jasmine](https://github.com/BrianGenisio/testdouble-jasmine)
 * [testdouble-qunit](https://github.com/alexlafroscia/testdouble-qunit/tree/master/packages/testdouble-qunit)
+* [testdouble-vitest](https://github.com/mcous/testdouble-vitest)
 
 ## Getting started
 
