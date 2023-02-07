@@ -351,6 +351,31 @@ path shouldn't exist yet, a second argument `manualReplacement` can be provided
 to short-circuit any attempts to load and imitate a module at
 `relativePathToModule`.
 
+## td.replaceEsm() API
+
+`td.replaceEsm` can only be used to replace ESM module compared to `td.replace`
+which can either replace properties on object or replace a Nodejs module.
+
+### td.replaceEsm(relativePathToModule)
+
+Without any argument, `td.replaceEsm` will imitate the module with all exported
+properties replaced with `td.function()`.
+
+### td.replaceEsm(relativePathToModule, namedExportReplacements, defaultExportReplacement)
+
+When you need to give replacement implementations, you can do it by giving
+`namedExportReplacements` and `defaultExportReplacement` arguments.
+
+`namedExportReplacements` is an object to be used to replace ESM named exports.
+Each object properties will have its key matching the export name and value
+must be the implementation to use.
+
+`defaultExportReplacement` is used to replace the default export and can be
+directly the implementation to use as default export.
+
+See [quibble ESM API](https://github.com/testdouble/quibble#quibble-esm-api)
+for more information and note about mocking internal Node.js modules.
+
 ***
 Previous: [Verifying interactions](6-verifying-invocations.md#verifying-interactions)
 Next: [Custom argument matchers](8-custom-matchers.md#custom-argument-matchers)
