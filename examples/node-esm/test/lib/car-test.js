@@ -7,7 +7,7 @@ mocha.describe('car-test', function () {
     this.gasPedal = (await td.replaceEsm('../../lib/gas-pedal.mjs')).default // <-- a plain ol' function
     this.accelerometer = await td.replaceEsm('../../lib/accelerometer.mjs') // <-- a named export
     this.Brake = (await td.replaceEsm('../../lib/brake.mjs')).default // <-- a constructor function
-    await td.replaceEsm('../../lib/copilot.mjs', undefined, function () { return 'HIGHFIVE' }) // <-- a manual override
+    await td.replaceEsm('../../lib/copilot.mjs', function () { return 'HIGHFIVE' }) // <-- a manual override
     this.subject = await import('../../lib/car.mjs')
   })
 
