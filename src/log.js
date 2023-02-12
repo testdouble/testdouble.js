@@ -18,7 +18,7 @@ export default {
   }
 }
 
-var withUrl = (url) =>
+const withUrl = (url) =>
   url != null
     ? ` (see: ${url} )`
     : ''

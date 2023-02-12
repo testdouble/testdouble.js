@@ -23,22 +23,22 @@ module.exports = () => {
   const subject = require('../../src')
 
   assert.deepEqual(subject, {
-    func: func,
+    func,
     function: func,
-    object: object,
-    constructor: constructor,
-    instance: instance,
-    replace: replace,
-    replaceEsm: replaceEsm,
-    imitate: imitate,
-    when: when,
-    verify: verify,
-    matchers: matchers,
-    callback: callback,
-    explain: explain,
-    reset: reset,
-    config: config,
-    version: version,
+    object,
+    constructor,
+    instance,
+    replace,
+    replaceEsm,
+    imitate,
+    when,
+    verify,
+    matchers,
+    callback,
+    explain,
+    reset,
+    config,
+    version,
     quibble
   })
 }

@@ -29,11 +29,11 @@ export default {
   }
 }
 
-var stubbingFor = (testDouble, actualArgs) =>
+const stubbingFor = (testDouble, actualArgs) =>
   _.findLast(store.for(testDouble).stubbings, stubbing =>
     isSatisfied(stubbing, actualArgs))
 
-var executePlan = (stubbing, actualArgs, actualContext) => {
+const executePlan = (stubbing, actualArgs, actualContext) => {
   const value = stubbedValueFor(stubbing)
   stubbing.callCount += 1
   invokeCallbackFor(stubbing, actualArgs)
@@ -46,7 +46,7 @@ var executePlan = (stubbing, actualArgs, actualContext) => {
   }
 }
 
-var invokeCallbackFor = (stubbing, actualArgs) => {
+const invokeCallbackFor = (stubbing, actualArgs) => {
   if (_.some(stubbing.args, isCallback)) {
     _.each(stubbing.args, (expectedArg, i) => {
       if (isCallback(expectedArg)) {
@@ -56,7 +56,7 @@ var invokeCallbackFor = (stubbing, actualArgs) => {
   }
 }
 
-var callbackArgs = (stubbing, expectedArg) => {
+const callbackArgs = (stubbing, expectedArg) => {
   if (expectedArg.args != null) {
     return expectedArg.args
   } else if (stubbing.config.plan === 'thenCallback') {
@@ -66,7 +66,7 @@ var callbackArgs = (stubbing, expectedArg) => {
   }
 }
 
-var callCallback = (stubbing, callback, args) => {
+const callCallback = (stubbing, callback, args) => {
   if (stubbing.config.delay) {
     _.delay(callback, stubbing.config.delay, ...args)
   } else if (stubbing.config.defer) {
@@ -76,7 +76,7 @@ var callCallback = (stubbing, callback, args) => {
   }
 }
 
-var createPromise = (stubbing, value, willResolve) => {
+const createPromise = (stubbing, value, willResolve) => {
   const Promise = config().promiseConstructor
   ensurePromise(Promise)
   return new Promise((resolve, reject) => {
@@ -86,21 +86,21 @@ var createPromise = (stubbing, value, willResolve) => {
   })
 }
 
-var stubbedValueFor = (stubbing) =>
+const stubbedValueFor = (stubbing) =>
   stubbing.callCount < stubbing.stubbedValues.length
     ? stubbing.stubbedValues[stubbing.callCount]
     : _.last(stubbing.stubbedValues)
 
-var isSatisfied = (stubbing, actualArgs) =>
+const isSatisfied = (stubbing, actualArgs) =>
   argsMatch(stubbing.args, actualArgs, stubbing.config) &&
     hasTimesRemaining(stubbing)
 
-var hasTimesRemaining = (stubbing) =>
+const hasTimesRemaining = (stubbing) =>
   stubbing.config.times == null
     ? true
     : stubbing.callCount < stubbing.config.times
 
-var ensurePromise = (Promise) => {
+const ensurePromise = (Promise) => {
   if (Promise == null) {
     return log.error('td.when', `\
 no promise constructor is set (perhaps this runtime lacks a native Promise

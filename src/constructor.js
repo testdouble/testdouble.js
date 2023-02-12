@@ -7,7 +7,7 @@ export default (typeOrNames) =>
     ? imitate(typeOrNames)
     : fakeConstructorFromNames(typeOrNames)
 
-var fakeConstructorFromNames = (funcNames) => {
+const fakeConstructorFromNames = (funcNames) => {
   return _.tap(tdFunction('(unnamed constructor)'), (fakeConstructor) => {
     fakeConstructor.prototype.toString = () =>
       '[test double instance of constructor]'

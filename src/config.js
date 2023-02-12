@@ -30,7 +30,7 @@ const deleteDeletedOptions = (overrides) => {
   })
 }
 
-var ensureOverridesExist = (overrides) => {
+const ensureOverridesExist = (overrides) => {
   _.each(overrides, (val, key) => {
     if (!Object.prototype.hasOwnProperty.call(configData, key)) {
       log.error('td.config',

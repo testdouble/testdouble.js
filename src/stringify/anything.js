@@ -25,7 +25,7 @@ export default (anything) => {
   }
 }
 
-var stringifyString = (string) =>
+const stringifyString = (string) =>
   _.includes(string, '\n')
     ? `"""\n${string}\n"""`
-    : `"${string.replace(new RegExp('"', 'g'), '\\"')}"`
+    : `"${string.replace(/"/g, '\\"')}"`

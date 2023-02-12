@@ -15,7 +15,7 @@ export default config =>
       _.invoke(config, 'onCreate', matcherInstance, matcherArgs)
     })
 
-var nameFor = (config, matcherArgs) => {
+const nameFor = (config, matcherArgs) => {
   if (_.isFunction(config.name)) {
     return config.name(matcherArgs)
   } else if (config.name != null) {

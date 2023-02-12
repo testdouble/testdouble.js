@@ -12,7 +12,7 @@ export default function object (nameOrType, config) {
   })
 }
 
-var fakeObject = function (nameOrType, config, argCount) {
+const fakeObject = function (nameOrType, config, argCount) {
   if (_.isArray(nameOrType)) {
     return createTestDoublesForFunctionNames(nameOrType)
   } else if (_.isObjectLike(nameOrType)) {
@@ -26,15 +26,15 @@ var fakeObject = function (nameOrType, config, argCount) {
   }
 }
 
-var createTestDoublesForFunctionNames = (names) =>
+const createTestDoublesForFunctionNames = (names) =>
   _.transform(names, (acc, funcName) => {
     acc[funcName] = tdFunction(`.${String(funcName)}`)
   }, {})
 
-var ensureFunctionIsNotPassed = () =>
+const ensureFunctionIsNotPassed = () =>
   log.error('td.object', 'Functions are not valid arguments to `td.object` (as of testdouble@2.0.0). Please use `td.function()`, `td.constructor()` or `td.instance()` instead for creating fake functions.')
 
-var ensureOtherGarbageIsNotPassed = () =>
+const ensureOtherGarbageIsNotPassed = () =>
   log.error('td.object', `\
 To create a fake object with td.object(), pass it a plain object that contains
 functions, an array of function names, or (if your runtime supports ES Proxy
@@ -44,15 +44,15 @@ If you passed td.object an instance of a custom type, consider passing the
 type's constructor to \`td.constructor()\` instead.
 `)
 
-var withDefaults = (config) =>
+const withDefaults = (config) =>
   _.extend({}, DEFAULT_OPTIONS, config)
 
-var addToStringToDouble = (fakeObject, nameOrType) => {
+const addToStringToDouble = (fakeObject, nameOrType) => {
   const name = nameOf(nameOrType)
   fakeObject.toString = () => `[test double object${name ? ` for "${name}"` : ''}]`
 }
 
-var nameOf = (nameOrType) =>
+const nameOf = (nameOrType) =>
   _.isString(nameOrType)
     ? nameOrType
     : ''

@@ -38,7 +38,7 @@ module.exports = {
   },
   'skips encountered objects' () {
     const foo = { a: 1, b: 2 }
-    const bar = { c: 3, foo: foo }
+    const bar = { c: 3, foo }
     foo.bar = bar
     const original = { item: foo }
 
@@ -51,7 +51,7 @@ module.exports = {
         b: 2,
         bar: {
           c: 3,
-          foo: foo // <- and so on
+          foo // <- and so on
         }
       }
     })

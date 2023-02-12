@@ -26,7 +26,7 @@ export default function (object, property, manualReplacement) {
   }
 }
 
-var getFake = (isManual, property, manualReplacement, realThing) => {
+const getFake = (isManual, property, manualReplacement, realThing) => {
   if (isManual) {
     warnIfTypeMismatch(property, manualReplacement, realThing)
     return manualReplacement
@@ -35,7 +35,7 @@ var getFake = (isManual, property, manualReplacement, realThing) => {
   }
 }
 
-var warnIfTypeMismatch = (property, fakeThing, realThing) => {
+const warnIfTypeMismatch = (property, fakeThing, realThing) => {
   const fakeType = typeof fakeThing
   const realType = typeof realThing
   if (realThing !== undefined && fakeType !== realType) {

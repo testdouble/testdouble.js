@@ -1,11 +1,7 @@
 import proxy from '../../../src/object/proxy'
 import when from '../../../src/when'
 import explain from '../../../src/explain'
-declare var assert : any // globally defined in test/helper.js for now
-
-export interface Context {
-  data: Data
-}
+declare const assert : any // globally defined in test/helper.js for now
 
 export interface User {
   id: string
@@ -25,6 +21,10 @@ export interface Data {
   posts: Post[]
   users: User[]
   idProvider: () => string
+}
+
+export interface Context {
+  data: Data
 }
 
 export default {

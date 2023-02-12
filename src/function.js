@@ -10,7 +10,7 @@ export default function func (nameOrFunc, __optionalName) {
     : createTestDoubleNamed(nameOrFunc || __optionalName)
 }
 
-var createTestDoubleNamed = function (name) {
+const createTestDoubleNamed = function (name) {
   return _.tap(createTestDoubleFunction(), (testDouble) => {
     const entry = store.for(testDouble, true)
     if (name != null) {
@@ -22,7 +22,7 @@ var createTestDoubleNamed = function (name) {
   })
 }
 
-var createTestDoubleFunction = function () {
+const createTestDoubleFunction = function () {
   return function testDouble (...args) {
     calls.log(testDouble, args, this)
     return stubbings.invoke(testDouble, args, this)

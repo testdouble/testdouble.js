@@ -15,7 +15,7 @@ module.exports = {
 
       subject(double).call('fake this', 1, 2, 3)
 
-      var calls = CallLog.instance.for(double)
+      const calls = CallLog.instance.for(double)
       assert.equal(calls.length, 1)
       assert.equal(calls[0].context, 'fake this')
       assert.deepEqual(calls[0].args, [1, 2, 3])

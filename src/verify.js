@@ -21,7 +21,7 @@ export default (__userDoesRehearsalInvocationHere__, config = {}) => {
   }
 }
 
-var ensureRehearsalOccurred = (last) => {
+const ensureRehearsalOccurred = (last) => {
   if (!last) {
     log.error('td.verify', `\
 No test double invocation detected for \`verify()\`.
@@ -46,7 +46,7 @@ const notifyMatchers = (testDouble, expectedArgs, config) => {
   })
 }
 
-var warnIfStubbed = (testDouble, actualArgs) => {
+const warnIfStubbed = (testDouble, actualArgs) => {
   if (_.some(stubbingsStore.for(testDouble), (stubbing) =>
     argsMatch(stubbing.args, actualArgs, stubbing.config))
   ) {
@@ -57,17 +57,17 @@ var warnIfStubbed = (testDouble, actualArgs) => {
   }
 }
 
-var unsatisfiedErrorMessage = (testDouble, args, config) =>
+const unsatisfiedErrorMessage = (testDouble, args, config) =>
   baseSummary(testDouble, args, config) +
   matchedInvocationSummary(testDouble, args, config) +
   invocationSummary(testDouble, args, config)
 
-var stringifyName = (testDouble) => {
+const stringifyName = (testDouble) => {
   const name = store.for(testDouble).name
   return name ? ` \`${name}\`` : ''
 }
 
-var baseSummary = (testDouble, args, config) =>
+const baseSummary = (testDouble, args, config) =>
   `\
 Unsatisfied verification on test double${stringifyName(testDouble)}.
 
@@ -75,7 +75,7 @@ Unsatisfied verification on test double${stringifyName(testDouble)}.
     - called with \`(${stringifyArgs(args)})\`${timesMessage(config)}${ignoreMessage(config)}.\
 `
 
-var invocationSummary = (testDouble, args, config) => {
+const invocationSummary = (testDouble, args, config) => {
   const calls = callsStore.for(testDouble)
   if (calls.length === 0) {
     return '\n\n  But there were no invocations of the test double.'
@@ -86,7 +86,7 @@ var invocationSummary = (testDouble, args, config) => {
   }
 }
 
-var matchedInvocationSummary = (testDouble, args, config) => {
+const matchedInvocationSummary = (testDouble, args, config) => {
   const calls = callsStore.where(testDouble, args, config)
   const expectedCalls = config.times || 0
 
@@ -99,15 +99,15 @@ var matchedInvocationSummary = (testDouble, args, config) => {
   }
 }
 
-var pluralize = (x, msg) =>
+const pluralize = (x, msg) =>
   `${x} ${msg}${x === 1 ? '' : 's'}`
 
-var timesMessage = (config) =>
+const timesMessage = (config) =>
   config.times != null
     ? ` ${pluralize(config.times, 'time')}`
     : ''
 
-var ignoreMessage = (config) =>
+const ignoreMessage = (config) =>
   config.ignoreExtraArgs != null
     ? ', ignoring any additional arguments'
     : ''
