@@ -9,7 +9,7 @@ cd examples
 for D in $projects; do
   echo "<------ Running tests for example project '${D}'"
   cd "${D}"
-  npm ci
+  npm install
   npm test
 cd ..
 done
