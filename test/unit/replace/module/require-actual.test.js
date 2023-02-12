@@ -37,10 +37,10 @@ module.exports = {
       Be sure you didn't specify the path relative to the subject under test!
 
       First, we tried to absolutify that path and require it, with:
-        \`require('@@@test/unit/replace/module/lol/not/real')\`
+        \`require('@@@real')\`
 
       But requiring that absolute path threw this error:
-        "Cannot find module '@@@test/unit/replace/module/lol/not/real'"
+        "Cannot find module '@@@real'"
 
       Next, we tried to require it as you specified it (in case it's the name of
       a Node.js built-in or an npm package), with:
