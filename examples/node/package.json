@@ -11,7 +11,7 @@
     "core-assert": "^0.2.1",
     "is-number": "^7.0.0",
     "standard": "^17.0.0",
-    "teenytest": "^6.0.3",
+    "teenytest": "^6.0.4",
     "testdouble": "file:../.."
   },
   "standard": {

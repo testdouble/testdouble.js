@@ -9,7 +9,7 @@
   },
   "devDependencies": {
     "is-number": "^7.0.0",
-    "mocha": "^10.1.0",
+    "mocha": "^10.2.0",
     "standard": "^17.0.0",
     "testdouble": "file:../.."
   },

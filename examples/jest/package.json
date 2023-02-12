@@ -8,8 +8,8 @@
     "test": "jest"
   },
   "devDependencies": {
-    "@jest/globals": "^29.3.1",
-    "jest": "^29.3.1",
+    "@jest/globals": "^29.4.2",
+    "jest": "^29.4.2",
     "testdouble": "file:../..",
     "testdouble-jest": "github:testdouble/testdouble-jest"
   },
