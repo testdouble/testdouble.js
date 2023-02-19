@@ -6,4 +6,4 @@
 //
 // Once these bugs are solved, we can go back to running teenytest regularly for ESM tests
 
-require('../../node_modules/.bin/teenytest')
+require('../../node_modules/teenytest/bin/teenytest')
