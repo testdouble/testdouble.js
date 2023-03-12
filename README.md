@@ -37,7 +37,7 @@ convenience to the shorthand `td`:
 import * as td from 'testdouble'
 
 // CommonJS modules (e.g. Node.js)
-global.td = require('testdouble')
+globalThis.td = require('testdouble')
 
 // Global set in our browser distribution
 window.td
@@ -583,5 +583,3 @@ directory:
 * [td.matchers](/docs/5-stubbing-results.md#loosening-stubbings-with-argument-matchers)
   and [custom matchers](/docs/8-custom-matchers.md#custom-argument-matchers) for
   configuring more advanced stubbings and verifications
-
-
