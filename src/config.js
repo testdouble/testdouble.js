@@ -4,7 +4,7 @@ import stringifyAnything from './stringify/anything'
 
 const DEFAULTS = {
   ignoreWarnings: false,
-  promiseConstructor: global.Promise,
+  promiseConstructor: Promise,
   suppressErrors: false
 }
 const DELETED_OPTIONS = ['extendWhenReplacingConstructors']
