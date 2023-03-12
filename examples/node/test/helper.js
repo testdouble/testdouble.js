@@ -1,5 +1,5 @@
-global.td = require('testdouble')
-global.assert = require('core-assert')
+globalThis.td = require('testdouble')
+globalThis.assert = require('core-assert')
 
 module.exports = {
   afterEach: function () {

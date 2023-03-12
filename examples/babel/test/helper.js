@@ -1,6 +1,6 @@
 import td from 'testdouble'
 
-global.context = describe
-global.td = td
+globalThis.context = describe
+globalThis.td = td
 
 afterEach(() => td.reset())
