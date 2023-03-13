@@ -10,7 +10,7 @@ module.exports = {
 
     assert.deepEqual(result, {
       ignoreWarnings: false,
-      promiseConstructor: global.Promise,
+      promiseConstructor: Promise,
       suppressErrors: false
     })
   },

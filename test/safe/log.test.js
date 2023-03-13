@@ -43,12 +43,12 @@ module.exports = {
     },
     'when console does not exist' () {
       const ogConsole = console
-      delete global.console
+      delete globalThis.console
 
       subject.warn('lolololol', 'lol')
 
       // No explosions occur
-      global.console = ogConsole
+      globalThis.console = ogConsole
     }
   },
   '.error': {

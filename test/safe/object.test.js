@@ -35,7 +35,6 @@ module.exports = {
     assert._isEqual(testDouble.bam.toString(), '[test double for ".bam"]')
   },
   'making a test double based on a Symbol' () {
-    if (!global.Symbol) return
     const symbolFoo = Symbol('foo')
     testDouble = td.object([symbolFoo])
 
@@ -70,7 +69,6 @@ module.exports = {
   },
   'creating a ES Proxy object': {
     'basic use' () {
-      if (!global.Proxy) return
       testDouble = td.object('thing')
       testDouble.magic('sauce')
 
@@ -81,7 +79,6 @@ module.exports = {
       assert._isEqual(testDouble.foo.toString(), '[test double for "thing.foo"]')
     },
     'with custom excludeMethods definitions' () {
-      if (!global.Proxy) return
       testDouble = td.object('Stuff', {
         excludeMethods: ['then', 'fun']
       })
@@ -89,28 +86,16 @@ module.exports = {
       assert._isEqual(testDouble.fun, undefined)
     },
     'unnamed double' () {
-      if (!global.Proxy) return
       testDouble = td.object()
 
       assert._isEqual(testDouble.toString(), '[test double object]')
       assert._isEqual(testDouble.lol.toString(), '[test double for ".lol"]')
     },
     'with Symbol propKey' () {
-      if (!global.Proxy || !global.Symbol) return
       testDouble = td.object('thing')
       assert._isEqual(testDouble[Symbol('foo')].toString(), '[test double for "thing.Symbol(foo)"]')
     },
-    'if Proxy is not defined will print an error message' () {
-      if (global.Proxy) return
-      try {
-        td.object('Woah')
-        assert.fail('Show have errored!')
-      } catch (e) {
-        assert._isEqual(e.message, "Error: testdouble.js - td.object - The current runtime does not have Proxy support, which is what\ntestdouble.js depends on when a string name is passed to `td.object()`.\n\nMore details here:\n  https://github.com/testdouble/testdouble.js/blob/main/docs/4-creating-test-doubles.md#objectobjectname\n\nDid you mean `td.object(['Woah'])`?")
-      }
-    },
     'Allow for deeply nested test double objects' () {
-      if (!global.Proxy) return
       testDouble = td.object()
 
       td.when(testDouble.something.very.deeply.nested()).thenReturn('nay!')
@@ -119,7 +104,6 @@ module.exports = {
       assert._isEqual(testDouble.something.very.deeply.nested.toString(), '[test double for ".something.very.deeply.nested"]')
     },
     'Deeply nested test double objects work also when its property names are repeated' () {
-      if (!global.Proxy) return
       testDouble = td.object()
 
       td.when(testDouble.something()).thenReturn('Original Something')
@@ -129,7 +113,6 @@ module.exports = {
       assert._isEqual(testDouble.different.something(), 'Different Something')
     },
     'Resets all deeply nested test doubles with td.reset' () {
-      if (!global.Proxy) return
       testDouble = td.object()
 
       td.when(testDouble.something()).thenReturn('Original Something')

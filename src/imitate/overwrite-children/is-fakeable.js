@@ -11,5 +11,5 @@ const isBoxedType = (thing) =>
     Number,
     RegExp,
     String,
-    global.Symbol
+    Symbol
   ]).some(type => thing instanceof type)

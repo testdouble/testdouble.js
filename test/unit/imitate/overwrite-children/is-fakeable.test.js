@@ -12,8 +12,6 @@ module.exports = {
     assert.equal(subject(NaN), false)
   },
   'identifies symbols': () => {
-    if (!global.Symbol) return
-
     assert.equal(subject(Symbol.species), false)
   },
   'identifies boxed types and basic value types': () => {
