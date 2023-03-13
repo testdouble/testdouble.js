@@ -1,5 +1,11 @@
 # Change Log
 
+## 3.17.0
+
+* Swap `global` for `globalThis`
+  [#508](https://github.com/testdouble/testdouble.js/pull/508)
+* Bump `quibble` to 0.6.17
+
 ## 3.16.8
 
 * Tweak typings again [#500](https://github.com/testdouble/testdouble.js/pull/500)
