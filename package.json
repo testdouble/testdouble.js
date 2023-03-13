@@ -95,7 +95,7 @@
   },
   "dependencies": {
     "lodash": "^4.17.21",
-    "quibble": "^0.6.16",
+    "quibble": "^0.6.17",
     "stringify-object-es5": "^2.5.0",
     "theredoc": "^1.0.0"
   },
