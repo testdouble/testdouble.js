@@ -13,6 +13,7 @@ import config2 from './config.js'
 import callback2 from './callback.js'
 import version2 from './version.js'
 export const func = function2.default
+export { func as function }
 export const object = object2.default
 export const constructor = constructor2.default
 export const instance = instance2.default
