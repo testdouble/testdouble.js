@@ -1,5 +1,10 @@
 # Change Log
 
+## 3.17.1
+
+* Add missing alias to `td.function` for ESM
+  [#509](https://github.com/testdouble/testdouble.js/pull/509)
+
 ## 3.17.0
 
 * Swap `global` for `globalThis`
