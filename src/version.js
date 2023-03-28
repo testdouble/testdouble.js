@@ -1,1 +1,1 @@
-export default '3.17.1'
+export default '3.17.2'
