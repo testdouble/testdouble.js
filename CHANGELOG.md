@@ -1,5 +1,10 @@
 # Change Log
 
+## 3.17.2
+
+* Loosen typing file to allow non-Error types to be rejected
+  [#511](https://github.com/testdouble/testdouble.js/pull/511)
+
 ## 3.17.1
 
 * Add missing alias to `td.function` for ESM
