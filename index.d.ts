@@ -335,3 +335,5 @@ export function when<D>(f: D, config?: WhenConfig): Stubber<D>;
  * @returns {Stubber}
  */
 export function verify(a: any, check?: VerificationConfig): void;
+
+export const version: string;
