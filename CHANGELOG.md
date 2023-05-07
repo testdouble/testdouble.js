@@ -1,5 +1,13 @@
 # Change Log
 
+## 3.18.0
+
+* Update quibble to 0.7.0 for Node 20 support
+  [quibble#96](https://github.com/testdouble/quibble/pull/96). Bumping minor for
+  test double because it's a big change to how modules are resolved
+* Update typings for version property
+  [#515](https://github.com/testdouble/testdouble.js/pull/515)
+
 ## 3.17.2
 
 * Loosen typing file to allow non-Error types to be rejected
