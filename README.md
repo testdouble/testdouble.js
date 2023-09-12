@@ -97,8 +97,7 @@ replaces all functions it encounters with fake test double functions which can,
 in turn, be configured by your test to either stub responses or assert
 invocations.
 
-Additionally, if you're using Node 13 or newer, you can specify testdouble as a
-module loader and replace native ES modules with `td.replaceEsm()`. More details
+Additionally, if you're using Node 16 or newer, you can replace native ES modules with `td.replaceEsm()`. More details
 [here](docs/7-replacing-dependencies.md#how-module-replacement-works-for-es-modules-using-import).
 
 #### Module replacement with Node.js
