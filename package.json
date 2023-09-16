@@ -45,7 +45,7 @@
     "test:unit": "teenytest --helper test/helper.js \"test/unit/**/*.test.{js,ts}\"",
     "test:safe": "teenytest --helper test/helper.js \"test/safe/**/*.test.{js,ts}\"",
     "test:esm": "cross-env NODE_OPTIONS=\"--loader=quibble\" TS_NODE_IGNORE=\"node_modules,notypescript\" ./test/safe-esm/teenytest-proxy.js --helper test/helper.js test/safe-esm/replace.test.js",
-    "test:esm-auto-loader": "node test/support/supports-auto-load.js not || TS_NODE_IGNORE=\"node_modules,notypescript\" ./test/safe-esm/teenytest-proxy.js --helper test/helper.js test/safe-esm/replace.test.js",
+    "test:esm-auto-loader": "node test/support/supports-auto-load.js not || cross-env TS_NODE_IGNORE=\"node_modules,notypescript\" ./test/safe-esm/teenytest-proxy.js --helper test/helper.js test/safe-esm/replace.test.js",
     "test:no-loader-esm": "node test/support/supports-auto-load.js || cross-env TS_NODE_IGNORE=\"node_modules,notypescript\" teenytest test/helper.js './test/safe-esm/*.no-loader-test.{mjs,js}'",
     "test:ci": "npm run compile && run-p style test && echo \"All done!\"",
     "test:example": "run-s test:example:babel test:example:jest test:example:jest-broken test:example:node test:example:node-ava test:example:node-esm test:example-esm-auto-loader",
