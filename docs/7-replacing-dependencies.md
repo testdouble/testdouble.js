@@ -206,11 +206,14 @@ late to have their intended effect).
 
 ### How module replacement works for ES modules (using `import`)
 
-Under the hood, testdouble.js uses a loader (which you run using `node loader=testdouble`). A loader
+Under the hood, testdouble.js uses a loader. A loader
 is a module that can hook into the ES module loading mechanism in an official way. The testdouble
 loader ensures that if you call `td.replaceEsm` on an ES Module, the next time that module is loaded
 by Node.js, the source Node.js will get from the loader is not the regular source, but rather source
 code that contains some replacement code that can be used for the mock doubles.
+
+If you're using Node.js v20.6.0 or higher, the loader is registered automatically. But if you're using a lower
+version of Node.js, you must run Node with `--loader=testdouble`, or `td.replaceEsm` won't work.
 
 Also, every time you call `td.replaceEsm` on a module, you generate a new "generation" of that module, so
 that the next time Node.js loads that module, it loads the new generation of that replaced module.

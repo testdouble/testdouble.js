@@ -1,0 +1,22 @@
+{
+  "name": "testdouble-node-esm-example",
+  "private": true,
+  "scripts": {
+    "test:unit": "mocha ./test/lib/*.{mjs,js}",
+    "test:style": "standard",
+    "test": "npm run test:unit && npm run test:style",
+    "test:debug": "npm test -- --debug-brk"
+  },
+  "devDependencies": {
+    "is-number": "^7.0.0",
+    "mocha": "^10.2.0",
+    "standard": "^17.0.0",
+    "testdouble": "file:../.."
+  },
+  "standard": {
+    "globals": [
+      "td",
+      "assert"
+    ]
+  }
+}
