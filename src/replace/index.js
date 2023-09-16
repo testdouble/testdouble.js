@@ -2,6 +2,7 @@ import _ from '../wrap/lodash'
 import * as quibble from 'quibble'
 import replaceModule, { replaceEsModule } from './module'
 import replaceProperty from './property'
+import { canRegisterLoader } from '../can-register-loader'
 
 quibble.ignoreCallsFromThisFile()
 
@@ -14,7 +15,7 @@ export default function (target) {
 }
 
 export function replaceEsm (_modulePath, _namedExportReplacement, _defaultExportReplacement) {
-  if (!quibble.isLoaderLoaded()) {
+  if (!canRegisterLoader() && !quibble.isLoaderLoaded()) {
     throw new Error('testdouble ESM loader not loaded. You cannot replace ES modules without a loader. Run node with `--loader=testdouble`.')
   }
   // Sending arguments instead of the above arguments is crucial because `replaceEsModule`
