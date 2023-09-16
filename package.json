@@ -15,7 +15,7 @@
       "require": "./lib/index.js",
       "import": "./lib/index.mjs"
     },
-    "./": "./"
+    "./package.json": "./package.json"
   },
   "files": [
     "src",
@@ -151,6 +151,6 @@
   },
   "license": "MIT",
   "engines": {
-    "node": ">= 14"
+    "node": ">= 16"
   }
 }
