@@ -143,7 +143,8 @@ safely (with great power, etc.):
   your own fake as a second argument (e.g. `td.replace('./path', td.func())`)
 
 * If you're using native (and not transpiled) ES modules, and you're using
-  `td.replaceEsm`, you need to load `testdouble.js` as an ESM loader (more about
+  `td.replaceEsm`, and you're using a Node.js version smaller than 20.6.0,
+  you need to load `testdouble.js` as an ESM loader (more about
   the why below), using `node --loader=testdouble`, or alternatively, if you're
   using a test runner that does not support loaders, you can use
   `NODE_OPTIONS="--loader=testdouble" testrunner ...`.
