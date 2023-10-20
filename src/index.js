@@ -7,6 +7,7 @@ import when from './when'
 import verify from './verify'
 import matchers from './matchers'
 import replace, { replaceEsm } from './replace'
+import listReplacedModules from './list'
 import explain from './explain'
 import reset from './reset'
 import config from './config'
@@ -26,6 +27,7 @@ module.exports = {
   matchers,
   replace,
   replaceEsm,
+  listReplacedModules,
   explain,
   reset,
   config,
