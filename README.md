@@ -97,7 +97,7 @@ replaces all functions it encounters with fake test double functions which can,
 in turn, be configured by your test to either stub responses or assert
 invocations.
 
-Additionally, if you're using Node 16 or newer, you can replace native ES modules with `td.replaceEsm()`. More details
+For ES modules, you should use `td.replaceEsm()`. More details
 [here](docs/7-replacing-dependencies.md#how-module-replacement-works-for-es-modules-using-import).
 
 #### Module replacement with Node.js
@@ -567,6 +567,36 @@ verifying calls is that sometimes—perhaps in the interest of maximal
 completeness—a test will verify an invocation that already satisfied a stubbing,
 but this is almost [provably
 unnecessary](/docs/B-frequently-asked-questions.md#why-shouldnt-i-call-both-tdwhen-and-tdverify-for-a-single-interaction-with-a-test-double).
+
+### `td.listReplacedModules()` for listing the modules that were replaced
+
+**`td.listReplacedModules()`**
+
+
+Use `td.listReplacedModules()` to list the modules that are replaced. This function will return an array of the modules that are
+currently being replaced via `td.replace()` or `td.replaceEsm()`.
+
+The list is in no particular order, and returns the full path to the module that was replaced.
+The path is returned as a `file:` URL as is customary in ESM (this is true even if the
+replaced module was CJS).
+
+For example, if you do this:
+
+```js
+td.replace('../src/save')
+```
+
+Then
+
+```js
+td.listReplacedModules()
+```
+
+will return something like:
+
+```js
+['file:///users/example/code/foo/src/save.js']
+```
 
 ### Other functions
 
