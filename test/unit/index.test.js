@@ -7,6 +7,7 @@ module.exports = () => {
   const constructor = td.replace('../../src/constructor').default
   const instance = td.replace('../../src/instance').default
   const { default: replace, replaceEsm } = td.replace('../../src/replace')
+  const listReplacedModules = td.replace('../../src/list').default
   const imitate = td.replace('../../src/imitate').default
   // Stubbing & Verifying
   const when = td.replace('../../src/when').default
@@ -30,6 +31,7 @@ module.exports = () => {
     instance,
     replace,
     replaceEsm,
+    listReplacedModules,
     imitate,
     when,
     verify,
