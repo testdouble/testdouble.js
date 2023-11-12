@@ -1,9 +1,7 @@
-function canRegisterLoader () {
-  const [major, minor] = process.versions.node
-    .split('.')
-    .map((m) => parseInt(m, 10))
+const Module = require('module')
 
-  return major > 20 || (major === 20 && minor >= 6)
+function canRegisterLoader () {
+  return !!Module.register
 }
 
 exports.canRegisterLoader = canRegisterLoader
