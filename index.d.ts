@@ -56,9 +56,9 @@ export const matchers: Matchers;
 export interface Stubber<D, R = D extends object ? Partial<D> : D> {
   thenReturn<T>(first: R, ...args: Array<R>): TestDouble<T>;
   thenDo<T>(f: Function): TestDouble<T>;
-  thenThrow<T>(e: any): TestDouble<T>;
+  thenThrow<T>(first: unknown, ...args: Array<unknown>): TestDouble<T>;
   thenResolve<T>(first: R, ...args: Array<R>): TestDouble<T>;
-  thenReject<T>(e: any): TestDouble<T>;
+  thenReject<T>(first: unknown, ...args: Array<unknown>): TestDouble<T>;
   thenCallback<T>(error: any, data: any): TestDouble<T>;
 }
 
@@ -66,7 +66,7 @@ export interface PromiseStubber<P, R = P extends object ? Partial<P> : P> {
   thenReturn<T>(first: Promise<R>, ...args: Array<Promise<R>>): TestDouble<T>;
   thenResolve<T>(first: R, ...args: Array<R>): TestDouble<T>;
   thenDo<T>(f: Function): TestDouble<T>;
-  thenReject<T>(e: any): TestDouble<T>;
+  thenReject<T>(first: unknown, ...args: Array<unknown>): TestDouble<T>;
 }
 
 export interface TestdoubleConfig {
