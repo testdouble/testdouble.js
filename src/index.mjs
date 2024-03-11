@@ -12,7 +12,7 @@ import reset2 from './reset.js'
 import config2 from './config.js'
 import callback2 from './callback.js'
 import version2 from './version.js'
-import listReplacedModules from './list'
+import listReplacedModules2 from './list'
 export const func = function2.default
 export { func as function }
 export const object = object2.default
@@ -29,7 +29,7 @@ export const reset = reset2.default
 export const config = config2.default
 export const callback = callback2.default
 export const version = version2.default
-export const listReplacedModules = listReplacedModules.default
+export const listReplacedModules = listReplacedModules2.default
 
 export { default as quibble } from 'quibble'
 
