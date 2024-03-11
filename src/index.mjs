@@ -12,7 +12,7 @@ import reset2 from './reset.js'
 import config2 from './config.js'
 import callback2 from './callback.js'
 import version2 from './version.js'
-import listReplacedModules2 from './list'
+import listReplacedModules2 from './list.js'
 export const func = function2.default
 export { func as function }
 export const object = object2.default
