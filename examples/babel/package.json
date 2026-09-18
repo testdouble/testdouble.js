@@ -1,6 +1,7 @@
 {
   "name": "testdouble-babel-example",
   "private": true,
+  "type": "commonjs",
   "scripts": {
     "test": "mocha --timeout 20000 --require babel-core/register -R spec --recursive test/helper.js test/lib/"
   },
