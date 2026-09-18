@@ -1,17 +1,25 @@
 import assert from 'assert'
+import { describe, it, beforeEach, afterEach } from 'node:test'
+import { td, setup, teardown } from '../helper'
 
 let subject, Adder, Subtractor, Multiplier, divider, result
 describe('Calculator', () => {
-  beforeEach(() => {
-    Adder = td.replace('../../lib/adder')
-    Subtractor = td.replace('../../lib/subtractor')
-    Multiplier = td.replace('../../lib/multiplier').default
-    divider = td.replace('../../lib/divider').default
-    const Calculator = require('../../lib/calculator').default
-    subject = new Calculator()
-  })
-
   describe('#calculate', () => {
+    beforeEach(() => {
+      setup()
+
+      Adder = td.replace('../../lib/adder')
+      Subtractor = td.replace('../../lib/subtractor')
+      Multiplier = td.replace('../../lib/multiplier').default
+      divider = td.replace('../../lib/divider').default
+      const Calculator = require('../../lib/calculator').default
+      subject = new Calculator()
+    })
+
+    afterEach(() => {
+      teardown()
+    })
+
     it('delegates to an Adder', () => {
       td.when(Adder.prototype.add(4, 9)).thenReturn('yay math!')
 

@@ -1,6 +1,9 @@
 import td from 'testdouble'
 
-globalThis.context = describe
-globalThis.td = td
+export { td }
 
-afterEach(() => td.reset())
+export function setup () {}
+
+export function teardown () {
+  td.reset()
+}
