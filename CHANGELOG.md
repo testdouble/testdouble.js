@@ -1,5 +1,11 @@
 # Change Log
 
+## 3.21.0
+
+* Add support for Node 22 and 24 by updating quibble to 0.10.0, which also fixes
+  the ESM loader leaking a `?__quibble=N` query string on Node 22+ that could
+  cause stub replacements to silently miss [#530](https://github.com/testdouble/testdouble.js/issues/530) [#542](https://github.com/testdouble/testdouble.js/pull/542)
+
 ## 3.20.2
 
 * Fix missing`listReplacedModules` [#527](https://github.com/testdouble/testdouble.js/pull/527)
