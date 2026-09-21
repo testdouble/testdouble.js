@@ -2,21 +2,13 @@
   "name": "testdouble-node-esm-example",
   "private": true,
   "scripts": {
-    "test:unit": "mocha ./test/lib/*.{mjs,js}",
+    "test:unit": "node --test ./test/lib/car-test.js ./test/lib/car-test.mjs",
     "test:style": "standard",
-    "test": "npm run test:unit && npm run test:style",
-    "test:debug": "npm test -- --debug-brk"
+    "test": "npm run test:unit && npm run test:style"
   },
   "devDependencies": {
     "is-number": "^7.0.0",
-    "mocha": "^10.2.0",
     "standard": "^17.0.0",
     "testdouble": "file:../.."
-  },
-  "standard": {
-    "globals": [
-      "td",
-      "assert"
-    ]
   }
 }
