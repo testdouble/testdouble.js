@@ -3,12 +3,13 @@
   "private": true,
   "type": "commonjs",
   "scripts": {
-    "test": "node --require babel-core/register --test test/lib/calculator-test.js"
+    "test": "node --require @babel/register --test test/lib/calculator-test.js"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-preset-es2015": "^6.24.1",
+    "@babel/cli": "^7.28.0",
+    "@babel/core": "^7.28.0",
+    "@babel/preset-env": "^7.28.0",
+    "@babel/register": "^7.28.0",
     "testdouble": "file:../.."
   }
 }
