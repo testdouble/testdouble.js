@@ -1,5 +1,12 @@
 # Change Log
 
+## 3.21.1
+
+* Update quibble to 0.10.1, which stops emitting the `[DEP0205] module.register()
+  is deprecated` warning on Node 26+
+  [quibble#121](https://github.com/testdouble/quibble/pull/121)
+  [#544](https://github.com/testdouble/testdouble.js/pull/544)
+
 ## 3.21.0
 
 * Add support for Node 22 and 24 by updating quibble to 0.10.0, which also fixes
