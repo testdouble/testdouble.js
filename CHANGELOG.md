@@ -1,5 +1,22 @@
 # Change Log
 
+## 3.22.0
+
+* Fix unbounded memory growth when replacing ES modules by updating quibble to
+  0.11.0. Quibble used to re-evaluate, and permanently retain, every module
+  imported after a `td.replaceEsm()` call, including modules that had nothing to
+  do with the replacement. It now only does that for modules that are replaced
+  or that import one that is, so memory plateaus instead of growing with every
+  test [#534](https://github.com/testdouble/testdouble.js/issues/534)
+  [quibble#122](https://github.com/testdouble/quibble/pull/122)
+* **Behavior change:** an ES module that nothing replaced can reach is now a
+  single instance for the life of the process, where it used to get a fresh one
+  after every `td.replaceEsm()` or `td.reset()`. Module-level state in such a
+  module (counters, caches, singletons) now persists between tests. Modules that
+  are replaced, or that import a replaced module, are still re-evaluated against
+  each new replacement, so the documented `td.replaceEsm()` then `import()`
+  pattern works as before
+
 ## 3.21.1
 
 * Update quibble to 0.10.1, which stops emitting the `[DEP0205] module.register()
