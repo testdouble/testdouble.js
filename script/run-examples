@@ -9,7 +9,16 @@ cd examples
 for D in $projects; do
   echo "<------ Running tests for example project '${D}'"
   cd "${D}"
-  npm install
+  if [ -f pnpm-workspace.yaml ]; then
+    if ! command -v pnpm > /dev/null; then
+      echo "pnpm is required to run the example project '${D}' (npm install --global pnpm)"
+      exit 1
+    fi
+    # Its lockfile isn't committed, which pnpm refuses by default on CI
+    pnpm install --no-frozen-lockfile
+  else
+    npm install
+  fi
   npm test
 cd ..
 done

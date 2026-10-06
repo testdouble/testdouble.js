@@ -1,0 +1,11 @@
+packages:
+  - packages/*
+
+# Keep each package's dependencies out of reach of the packages installed in
+# the workspace root, so td.replaceEsm() has to resolve bare specifiers from
+# the test file (pnpm 10+ reads this here, pnpm 8 and 9 from .npmrc)
+hoist: false
+
+# Install testdouble's dependencies even when they were just released,
+# instead of pnpm adding exclusions to this file for them
+minimumReleaseAge: 0

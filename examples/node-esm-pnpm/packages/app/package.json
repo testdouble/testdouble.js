@@ -1,0 +1,11 @@
+{
+  "name": "testdouble-node-esm-pnpm-example-app",
+  "private": true,
+  "scripts": {
+    "test": "node --loader=testdouble --test ./test/numbers-only-test.mjs"
+  },
+  "devDependencies": {
+    "is-number": "^7.0.0",
+    "testdouble": "file:../../../.."
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "name": "testdouble-node-esm-pnpm-example",
+  "private": true,
+  "scripts": {
+    "test": "pnpm --recursive test"
+  }
+}

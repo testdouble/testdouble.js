@@ -26,5 +26,13 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+    - name: Install pnpm (for the pnpm example project)
+      shell: bash
+      run: |
+        case "$(node -p 'process.versions.node.split(".")[0]')" in
+          16) npm install --global pnpm@8 ;;
+          18) npm install --global pnpm@9 ;;
+          *) npm install --global pnpm ;;
+        esac
     - run: npm ci
     - run: npm test
