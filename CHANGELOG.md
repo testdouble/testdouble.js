@@ -1,5 +1,24 @@
 # Change Log
 
+## 3.23.0
+
+* Add support for replacing third-party ES modules under pnpm by updating
+  quibble to 0.12.1. `td.replaceEsm('some-package')` used to look the package up
+  from quibble's own directory. Under pnpm, that lookup either couldn't find the
+  package (`Cannot find package 'some-package'`) or found a different copy than
+  the one the test imports, and replaced that copy instead
+  [#546](https://github.com/testdouble/testdouble.js/pull/546)
+  [quibble#123](https://github.com/testdouble/quibble/pull/123)
+  [quibble#84](https://github.com/testdouble/quibble/issues/84)
+* Fix `td.replaceEsm('some-package')` of a CommonJS package failing on Node 24+
+  with `SyntaxError: Unexpected token '.'`
+  [quibble#125](https://github.com/testdouble/quibble/pull/125)
+* **Behavior change:** `td.replaceEsm()` now looks up a package by name from the
+  test file that calls it, the same way it already resolved relative paths. When
+  the test file and testdouble.js see different copies of a package, the test
+  file's copy is now the one replaced. A package the test file can't resolve can
+  no longer be replaced by name
+
 ## 3.22.0
 
 * Fix unbounded memory growth when replacing ES modules by updating quibble to
