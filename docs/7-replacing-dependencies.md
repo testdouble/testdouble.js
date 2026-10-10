@@ -149,6 +149,11 @@ safely (with great power, etc.):
   using a test runner that does not support loaders, you can use
   `NODE_OPTIONS="--loader=testdouble" testrunner ...`.
 
+* If you're running TypeScript through a loader like tsx, whether to use
+  `td.replace` or `td.replaceEsm` depends on whether your files run as ES
+  modules or get compiled to CommonJS. See [Using with
+  TypeScript](10-using-with-typescript.md#replacing-modules).
+
 That's a lot of caveats, but so long as your test and module design is simple
 and consistent, it's a powerful feature that can drastically simplify the setup
 of your isolation tests.

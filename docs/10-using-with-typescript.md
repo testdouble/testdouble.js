@@ -105,3 +105,24 @@ const mockedRepository = td.object<MyRepository>();
 td.when(mockedRepository.findByName("Alice")).thenReturn("Alice Alicy");
 ```
 
+
+## Replacing modules
+
+`td.replace()` and `td.replaceEsm()` work with TypeScript loaders like
+[tsx](https://tsx.is) and [@swc-node/register](https://github.com/swc-project/swc-node).
+On Node.js v20.6.0 or higher, testdouble.js registers its own loader automatically,
+alongside whichever loader runs your TypeScript, so you don't need `--loader=testdouble`.
+
+Which function you use depends on whether your TypeScript runs as ES modules or as
+CommonJS, not on whether your source uses `import` syntax. Most TypeScript loaders
+follow the same rules Node.js does:
+
+* `.ts` files run as ES modules only if the nearest `package.json` has
+  `"type": "module"`. Otherwise, they're compiled to CommonJS, and their `import`
+  statements become `require()` calls.
+* `.mts` files always run as ES modules, and `.cts` files always run as CommonJS.
+
+If your code runs as ES modules, use `await td.replaceEsm()` and then `await import()`
+your subject. If it runs as CommonJS, use `td.replace()` and then `require()` your
+subject. Using `td.replaceEsm()` on code that's been compiled to CommonJS fails
+silently: the subject still gets the real module.
