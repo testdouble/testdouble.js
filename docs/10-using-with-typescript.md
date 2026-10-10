@@ -137,6 +137,7 @@ Using the `.js` path won't replace anything, and you won't get an error.
 import { toBeMocked } from './other.js'
 
 // test/main.test.ts
-await td.replaceEsm('../src/other.ts')
+const toBeMocked = td.func<() => string>()
+await td.replaceEsm('../src/other.ts', { toBeMocked })
 const { main } = await import('../src/main.js')
 ```
