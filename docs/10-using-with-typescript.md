@@ -109,7 +109,8 @@ td.when(mockedRepository.findByName("Alice")).thenReturn("Alice Alicy");
 ## Replacing modules
 
 `td.replace()` and `td.replaceEsm()` work with TypeScript loaders like
-[tsx](https://tsx.is) and [@swc-node/register](https://github.com/swc-project/swc-node).
+[tsx](https://tsx.is), [@swc-node/register](https://github.com/swc-project/swc-node),
+and [ts-node](https://typestrong.org/ts-node/).
 On Node.js v20.6.0 or higher, testdouble.js registers its own loader automatically,
 alongside whichever loader runs your TypeScript, so you don't need `--loader=testdouble`.
 
@@ -126,3 +127,16 @@ If your code runs as ES modules, use `await td.replaceEsm()` and then `await imp
 your subject. If it runs as CommonJS, use `td.replace()` and then `require()` your
 subject. Using `td.replaceEsm()` on code that's been compiled to CommonJS fails
 silently: the subject still gets the real module.
+
+When you call `td.replaceEsm()`, pass the path to the file that actually exists on
+disk, including its `.ts` extension, even if your source imports it as `./other.js`.
+Using the `.js` path won't replace anything, and you won't get an error.
+
+```typescript
+// src/main.ts
+import { toBeMocked } from './other.js'
+
+// test/main.test.ts
+await td.replaceEsm('../src/other.ts')
+const { main } = await import('../src/main.js')
+```
