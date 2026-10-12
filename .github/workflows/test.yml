@@ -14,7 +14,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x, 18.x, 20.x, 22.x, 24.x, current]
+        node-version: [22.x, 24.x, current]
         os: [ubuntu-latest, windows-latest]
 
     runs-on: ${{ matrix.os }}
@@ -27,12 +27,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - name: Install pnpm (for the pnpm example project)
-      shell: bash
-      run: |
-        case "$(node -p 'process.versions.node.split(".")[0]')" in
-          16) npm install --global pnpm@8 ;;
-          18) npm install --global pnpm@9 ;;
-          *) npm install --global pnpm ;;
-        esac
+      run: npm install --global pnpm
     - run: npm ci
     - run: npm test
