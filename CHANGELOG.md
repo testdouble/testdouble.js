@@ -1,49 +1,47 @@
 # Change Log
 
-## Unreleased
+## 4.0.0
 
-* Fix a CommonJS module loaded with `import()` having empty exports when the
-  test file had already called `td.replace()` (Node 20.6–24.17 and 25.x), by
-  updating quibble to 0.13.0
-  [quibble#111](https://github.com/testdouble/quibble/issues/111)
-* **Behavior change:** importing an ES module that doesn't exist, and that
-  isn't replaced with `td.replaceEsm()`, now fails with Node's usual
-  `ERR_MODULE_NOT_FOUND` instead of `ENOENT`. This includes importing a module
-  that only existed as a replacement after `td.reset()`. Tests that check for
-  `ENOENT` (or its message) need updating
-  [quibble#100](https://github.com/testdouble/quibble/issues/100)
-* Fix webpack 5 browser builds failing with `Can't resolve 'module'` (broken
-  since 3.20.1). testdouble no longer pulls Node's `module` or `events` into
-  browser bundles. In a browser, `td.replaceEsm()` now throws a clear
-  "only supported under Node.js" error, and `td.listReplacedModules()` returns
-  `[]` [#531](https://github.com/testdouble/testdouble.js/issues/531)
-* Add an ES module build for browsers, so `import * as td from 'testdouble'`
-  works in tools that load native ES modules, like @web/test-runner. Tools that
-  resolve with the `browser` export condition get `dist/testdouble.mjs`. Webpack,
-  Vite and esbuild apply it when targeting the browser; @web/test-runner needs
-  `nodeResolve: { exportConditions: ['browser', 'development'] }` in its config.
+* **Breaking change:** drop support for Node.js versions before 22, all of
+  which have reached end-of-life
+* Fix getters being imitated as `undefined` by `td.replace(path)`, `td.object`,
+  `td.constructor` and `td.imitate`. This made every export of an SWC-compiled
+  module, and re-exports compiled by Babel or `tsc`, impossible to stub
+  [#526](https://github.com/testdouble/testdouble.js/issues/526)
+  [#550](https://github.com/testdouble/testdouble.js/pull/550)
+* Fix `td.replace(object, 'property')` throwing `Cannot set property ... which
+  has only a getter` on a getter with no setter. It now replaces the getter,
+  and `td.reset()` restores it. A getter that can't be redefined, as SWC
+  defines exports, gets an error suggesting `td.replace('path/to/module')`
+  [#526](https://github.com/testdouble/testdouble.js/issues/526)
+  [#550](https://github.com/testdouble/testdouble.js/pull/550)
+* Fix webpack 5 browser builds failing with `Can't resolve 'module'`, broken
+  since 3.20.1. In a browser, `td.replaceEsm()` now throws an "only supported
+  under Node.js" error, and `td.listReplacedModules()` returns `[]`
+  [#531](https://github.com/testdouble/testdouble.js/issues/531)
+* Add an ES module build for browsers, `dist/testdouble.mjs`, so
+  `import * as td from 'testdouble'` works in tools that load native ES
+  modules. Tools resolving with the `browser` export condition get it: webpack,
+  Vite and esbuild do when targeting the browser, and @web/test-runner does
+  with `nodeResolve: { exportConditions: ['browser', 'development'] }`.
   `testdouble/dist/testdouble.js` can be imported by path again
   [#494](https://github.com/testdouble/testdouble.js/issues/494)
-* **Behavior change:** any `import` of testdouble resolved with the `browser`
-  condition now gets the browser build, which can't replace modules. That
-  includes Jest's jsdom environment with `--experimental-vm-modules`, and Node
-  run with `--conditions=browser`. `require('testdouble')` is unaffected
-* Fix getter properties coming out of `td.imitate` as `undefined`. This affected
-  `td.replace(path)` (including through testdouble-jest), `td.object`,
-  `td.constructor` and `td.imitate`. Most visibly, every export of a module
-  compiled by SWC, and re-exports compiled by Babel or `tsc`, couldn't be
-  stubbed [#526](https://github.com/testdouble/testdouble.js/issues/526)
-* Fix `td.replace(object, 'property')` throwing `Cannot set property ... which
-  has only a getter` when the property is a getter with no setter. It now
-  replaces the getter, and `td.reset()` restores the original getter. A getter
-  that can't be redefined (as SWC defines exports) gets an error that suggests
-  `td.replace('path/to/module')` instead
+* Fix a CommonJS module loaded with `import()` having empty exports after the
+  test file called `td.replace()` (Node 20.6–24.17 and 25.x), by updating
+  quibble to 0.13.0 [quibble#111](https://github.com/testdouble/quibble/issues/111)
+* **Behavior change:** imitating an object now calls its getters, so their side
+  effects run. Getters that throw, getters on prototypes (as `td.constructor`
+  reads them), and getters nested more than 3 deep still give `undefined`
   [#526](https://github.com/testdouble/testdouble.js/issues/526)
-* **Behavior change:** when imitating an object, testdouble now calls its
-  getters and imitates what they return, instead of using `undefined`. Any side
-  effects of those getters now run. Getters that throw, getters on prototypes
-  (like those `td.constructor` reads), and getters nested more than 3 deep still
-  give `undefined`
+* **Behavior change:** an `import` of testdouble resolved with the `browser`
+  condition now gets the browser build, which can't replace modules. That
+  includes Jest's jsdom environment with `--experimental-vm-modules` and Node
+  run with `--conditions=browser`. `require('testdouble')` is unaffected
+  [#494](https://github.com/testdouble/testdouble.js/issues/494)
+* **Behavior change:** importing a missing ES module that isn't replaced, such
+  as one that only existed as a replacement before `td.reset()`, now fails with
+  `ERR_MODULE_NOT_FOUND` instead of `ENOENT`. Update tests that check for
+  `ENOENT` [quibble#100](https://github.com/testdouble/quibble/issues/100)
 
 ## 3.23.0
 
