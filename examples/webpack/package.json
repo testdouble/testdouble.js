@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "build": "node build.js",
-    "test": "npm run build && node dist/cjs.js && node dist/esm.js"
+    "test": "npm run build && node dist/cjs.js && node dist/esm.js && node dist/esm-lib.js"
   },
   "devDependencies": {
     "testdouble": "file:../..",

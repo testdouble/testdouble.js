@@ -41,9 +41,32 @@ $ npm install --save-dev testdouble
 And then find the browser distribution of the library in
 `node_modules/testdouble/dist/testdouble.js`.
 
-testdouble.js can also be bundled for the browser with webpack 5 and other
-bundlers. Module replacement with `td.replace(path)` and `td.replaceEsm()` is
-only supported under Node.js.
+#### As an ES module
+
+You can also `import * as td from 'testdouble'` in browser tests. Tools that
+resolve packages with the `browser` export condition get a self-contained ES
+module build of the library, `testdouble/dist/testdouble.mjs`. That build
+doesn't set a `td` global.
+
+Bundlers that target the browser apply the `browser` condition already, so
+they need no setup. That includes webpack 5 (`target: 'web'`), Vite and
+esbuild (`--platform=browser`).
+
+[@web/test-runner](https://modern-web.dev/docs/test-runner/overview/) and
+@web/dev-server don't apply it by default. Turn it on in your config file:
+
+```js
+// web-test-runner.config.mjs
+export default {
+  nodeResolve: {
+    exportConditions: ['browser', 'development']
+  }
+}
+```
+
+Module replacement with `td.replace(path)` and `td.replaceEsm()` is only
+supported under Node.js, so the browser build throws an error if you call them.
+`td.replace(object, property)` works everywhere.
 
 #### via unpkg
 

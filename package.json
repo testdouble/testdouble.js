@@ -12,8 +12,19 @@
   "exports": {
     ".": {
       "types": "./index.d.ts",
+      "browser": {
+        "import": "./dist/testdouble.mjs"
+      },
       "require": "./lib/index.js",
       "import": "./lib/index.mjs"
+    },
+    "./dist/testdouble.js": {
+      "types": "./index.d.ts",
+      "default": "./dist/testdouble.js"
+    },
+    "./dist/testdouble.mjs": {
+      "types": "./index.d.ts",
+      "default": "./dist/testdouble.mjs"
     },
     "./package.json": "./package.json"
   },
@@ -32,9 +43,10 @@
     "postclean": "mkdirp dist",
     "compile:browser": "cross-conf-env browserify src/index.js --standalone td --outfile $npm_package_config_build_file -p [ tsify --project tsconfig-browser.json ] -p headerify",
     "compile:node": "tsc",
+    "compile:browser-esm": "node script/build-browser-esm.js",
     "compile:esm": "cp src/index.mjs lib/index.mjs",
     "precompile": "npm run clean",
-    "compile": "npm run compile:node && npm run compile:browser && npm run compile:esm",
+    "compile": "npm run compile:node && npm run compile:browser && npm run compile:browser-esm && npm run compile:esm",
     "cover": "nyc --reporter=lcov --reporter=text-summary --reporter=html npm test",
     "style": "npm run style:js && npm run style:ts",
     "style:js": "standard --fix",
@@ -46,8 +58,9 @@
     "test:esm-auto-loader": "node test/support/supports-auto-load.js not || cross-env TS_NODE_IGNORE=\"node_modules,notypescript\" ./test/safe-esm/teenytest-proxy.js --helper test/helper.js test/safe-esm/replace.test.js",
     "test:no-loader-esm": "node test/support/supports-auto-load.js || cross-env TS_NODE_IGNORE=\"node_modules,notypescript\" teenytest test/helper.js './test/safe-esm/*.no-loader-test.{mjs,js}'",
     "test:ci": "npm run compile && npm run style && npm test && echo \"All done!\"",
-    "test:example": "npm run test:example:babel && npm run test:example:jest && npm run test:example:jest-broken && npm run test:example:node && npm run test:example:node-ava && npm run test:example:node-esm && npm run test:example:node-esm-pnpm && npm run test:example:webpack && npm run test:example-esm-auto-loader",
+    "test:example": "npm run test:example:babel && npm run test:example:jest && npm run test:example:jest-broken && npm run test:example:node && npm run test:example:node-ava && npm run test:example:node-esm && npm run test:example:node-esm-pnpm && npm run test:example:webpack && npm run test:example-web-test-runner && npm run test:example-esm-auto-loader",
     "test:example-esm-auto-loader": "node test/support/supports-auto-load.js not || npm run test:example:node-esm-auto-loader",
+    "test:example-web-test-runner": "node test/support/supports-web-test-runner.js not || npm run test:example:web-test-runner",
     "test:example:babel": "bash ./script/run-examples babel",
     "test:example:jest": "bash ./script/run-examples jest",
     "test:example:jest-broken": "bash ./script/run-examples jest-broken",
@@ -56,6 +69,7 @@
     "test:example:node-esm": "bash ./script/run-examples node-esm",
     "test:example:node-esm-pnpm": "bash ./script/run-examples node-esm-pnpm",
     "test:example:node-esm-auto-loader": "bash ./script/run-examples node-esm-auto-loader",
+    "test:example:web-test-runner": "bash ./script/run-examples web-test-runner",
     "test:example:webpack": "bash ./script/run-examples webpack",
     "version:write": "echo \"export default '$npm_package_version'\" > src/version.js",
     "preversion": "git pull --rebase",

@@ -1,0 +1,17 @@
+{
+  "name": "testdouble-web-test-runner-example",
+  "private": true,
+  "scripts": {
+    "test": "web-test-runner \"test/**/*.test.js\" && standard"
+  },
+  "devDependencies": {
+    "@web/test-runner": "1.0.0",
+    "standard": "^17.0.0",
+    "testdouble": "file:../.."
+  },
+  "standard": {
+    "env": [
+      "mocha"
+    ]
+  }
+}
