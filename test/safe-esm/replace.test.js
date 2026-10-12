@@ -59,7 +59,7 @@ module.exports = {
         await require('../../notypescript/import-esm-car.js')()
         assert.fail('should have errored!')
       } catch (e) {
-        assert._isEqual(e.message.split("'")[0], 'ENOENT: no such file or directory, open ')
+        assert._isEqual(e.code, 'ERR_MODULE_NOT_FOUND')
       }
     }
   }

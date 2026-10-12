@@ -1,5 +1,18 @@
 # Change Log
 
+## Unreleased
+
+* Fix a CommonJS module loaded with `import()` having empty exports when the
+  test file had already called `td.replace()` (Node 20.6–24.17 and 25.x), by
+  updating quibble to 0.13.0
+  [quibble#111](https://github.com/testdouble/quibble/issues/111)
+* **Behavior change:** importing an ES module that doesn't exist, and that
+  isn't replaced with `td.replaceEsm()`, now fails with Node's usual
+  `ERR_MODULE_NOT_FOUND` instead of `ENOENT`. This includes importing a module
+  that only existed as a replacement after `td.reset()`. Tests that check for
+  `ENOENT` (or its message) need updating
+  [quibble#100](https://github.com/testdouble/quibble/issues/100)
+
 ## 3.23.0
 
 * Add support for replacing third-party ES modules under pnpm by updating
