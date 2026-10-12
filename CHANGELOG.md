@@ -12,6 +12,11 @@
   that only existed as a replacement after `td.reset()`. Tests that check for
   `ENOENT` (or its message) need updating
   [quibble#100](https://github.com/testdouble/quibble/issues/100)
+* Fix webpack 5 browser builds failing with `Can't resolve 'module'` (broken
+  since 3.20.1). testdouble no longer pulls Node's `module` or `events` into
+  browser bundles. In a browser, `td.replaceEsm()` now throws a clear
+  "only supported under Node.js" error, and `td.listReplacedModules()` returns
+  `[]` [#531](https://github.com/testdouble/testdouble.js/issues/531)
 
 ## 3.23.0
 

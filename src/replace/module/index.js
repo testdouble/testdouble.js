@@ -4,6 +4,7 @@ import imitate from '../../imitate'
 import jestModule from './jest-module'
 import requireActual from './require-actual'
 import fakeName from './fake-name'
+import { canRegisterLoader } from '../../can-register-loader'
 
 quibble.ignoreCallsFromThisFile()
 
@@ -16,7 +17,14 @@ export default function replaceCjsModule (path, stub) {
   return fakeThing
 }
 
-export async function replaceEsModule (path, namedExportsStub, defaultExportStub) {
+export function replaceEsModule (path, namedExportsStub, defaultExportStub) {
+  if (!canRegisterLoader() && !quibble.isLoaderLoaded()) {
+    throw new Error('testdouble ESM loader not loaded. You cannot replace ES modules without a loader. Run node with `--loader=testdouble`.')
+  }
+  return replaceEsModuleWithLoader(...arguments)
+}
+
+async function replaceEsModuleWithLoader (path, namedExportsStub, defaultExportStub) {
   if (typeof jest === 'object') {
     throw new Error(`stubbing ES modules (${path}) under Jest is not yet supported`)
   }
