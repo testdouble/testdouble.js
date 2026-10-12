@@ -17,6 +17,17 @@
   browser bundles. In a browser, `td.replaceEsm()` now throws a clear
   "only supported under Node.js" error, and `td.listReplacedModules()` returns
   `[]` [#531](https://github.com/testdouble/testdouble.js/issues/531)
+* Add an ES module build for browsers, so `import * as td from 'testdouble'`
+  works in tools that load native ES modules, like @web/test-runner. Tools that
+  resolve with the `browser` export condition get `dist/testdouble.mjs`. Webpack,
+  Vite and esbuild apply it when targeting the browser; @web/test-runner needs
+  `nodeResolve: { exportConditions: ['browser', 'development'] }` in its config.
+  `testdouble/dist/testdouble.js` can be imported by path again
+  [#494](https://github.com/testdouble/testdouble.js/issues/494)
+* **Behavior change:** any `import` of testdouble resolved with the `browser`
+  condition now gets the browser build, which can't replace modules. That
+  includes Jest's jsdom environment with `--experimental-vm-modules`, and Node
+  run with `--conditions=browser`. `require('testdouble')` is unaffected
 
 ## 3.23.0
 
