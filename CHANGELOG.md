@@ -28,6 +28,22 @@
   condition now gets the browser build, which can't replace modules. That
   includes Jest's jsdom environment with `--experimental-vm-modules`, and Node
   run with `--conditions=browser`. `require('testdouble')` is unaffected
+* Fix getter properties coming out of `td.imitate` as `undefined`. This affected
+  `td.replace(path)` (including through testdouble-jest), `td.object`,
+  `td.constructor` and `td.imitate`. Most visibly, every export of a module
+  compiled by SWC, and re-exports compiled by Babel or `tsc`, couldn't be
+  stubbed [#526](https://github.com/testdouble/testdouble.js/issues/526)
+* Fix `td.replace(object, 'property')` throwing `Cannot set property ... which
+  has only a getter` when the property is a getter with no setter. It now
+  replaces the getter, and `td.reset()` restores the original getter. A getter
+  that can't be redefined (as SWC defines exports) gets an error that suggests
+  `td.replace('path/to/module')` instead
+  [#526](https://github.com/testdouble/testdouble.js/issues/526)
+* **Behavior change:** when imitating an object, testdouble now calls its
+  getters and imitates what they return, instead of using `undefined`. Any side
+  effects of those getters now run. Getters that throw, getters on prototypes
+  (like those `td.constructor` reads), and getters nested more than 3 deep still
+  give `undefined`
 
 ## 3.23.0
 

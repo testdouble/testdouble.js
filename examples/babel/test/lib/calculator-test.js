@@ -2,7 +2,7 @@ import assert from 'assert'
 import { describe, it, beforeEach, afterEach } from 'node:test'
 import { td, setup, teardown } from '../helper'
 
-let subject, Adder, Subtractor, Multiplier, divider, result
+let subject, Adder, Subtractor, Multiplier, divider, operations, result
 describe('Calculator', () => {
   describe('#calculate', () => {
     beforeEach(() => {
@@ -12,6 +12,7 @@ describe('Calculator', () => {
       Subtractor = td.replace('../../lib/subtractor')
       Multiplier = td.replace('../../lib/multiplier').default
       divider = td.replace('../../lib/divider').default
+      operations = td.replace('../../lib/operations')
       const Calculator = require('../../lib/calculator').default
       subject = new Calculator()
     })
@@ -54,6 +55,15 @@ describe('Calculator', () => {
       td.verify(divider.numerator.set(10))
       td.verify(divider.otherOptions.divisor.setThatToo(2))
       assert.equal(result, 'lol')
+    })
+
+    it('delegates to a squarer re-exported from a barrel file', () => {
+      assert.equal(td.explain(operations.square).isTestDouble, true)
+      td.when(operations.square(3)).thenReturn('squared math!')
+
+      result = subject.calculate('square', 3)
+
+      assert.equal(result, 'squared math!')
     })
   })
 })

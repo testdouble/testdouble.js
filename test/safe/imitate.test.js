@@ -144,5 +144,30 @@ module.exports = {
       assert._isEqual(td.explain(td.imitate(foo)).name, '(anonymous function)')
       assert._isEqual(td.explain(td.imitate(foo).bar).name, '.bar')
     }
+  },
+  'imitating getters': {
+    'imitates the value a getter returns' () {
+      const result = td.imitate({
+        get answer () { return 42 },
+        get fn () { return function doIt () {} }
+      })
+
+      assert._isEqual(result.answer, 42)
+      assert._isEqual(td.explain(result.fn).isTestDouble, true)
+    },
+    'stops expanding getters that return fresh objects forever' () {
+      const makeLink = () => ({ get next () { return makeLink() } })
+
+      const result = td.imitate(makeLink())
+
+      assert._isEqual(typeof result.next.next.next, 'object')
+      assert._isEqual(result.next.next.next.next, undefined)
+    },
+    'uses undefined when the getter\'s value can\'t be imitated' () {
+      const result = td.imitate({ get p () { return process } })
+
+      assert._isEqual(Object.prototype.hasOwnProperty.call(result, 'p'), true)
+      assert._isEqual(result.p, undefined)
+    }
   }
 }

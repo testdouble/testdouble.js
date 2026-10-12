@@ -115,5 +115,19 @@ module.exports = {
     const fakeFunc = td.constructor(boringFunc)
 
     assert._isEqual(td.explain(fakeFunc.foo).isTestDouble, true)
+  },
+  'getters on the prototype' () {
+    let called = false
+    class Foo {
+      get bar () {
+        called = true
+        return 'real bar'
+      }
+    }
+
+    FakeConstructor = td.constructor(Foo)
+
+    assert._isEqual(new FakeConstructor().bar, undefined)
+    assert._isEqual(called, false)
   }
 }

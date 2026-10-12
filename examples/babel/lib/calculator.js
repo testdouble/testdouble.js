@@ -2,6 +2,7 @@ import Adder from './adder'
 import Subtractor from './subtractor'
 import Multiplier from './multiplier'
 import divider from './divider'
+import { square } from './operations'
 
 export default class Calculator {
   calculate(operation, ...operands) {
@@ -16,6 +17,8 @@ export default class Calculator {
         divider.numerator.set(operands[0])
         divider.otherOptions.divisor.setThatToo(operands[1])
         return new divider.ohAndAlso.Executor().execute()
+      case 'square':
+        return square(operands[0])
     }
   }
 }

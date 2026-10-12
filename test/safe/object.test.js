@@ -123,5 +123,37 @@ module.exports = {
       assert._isEqual(testDouble.something(), undefined)
       assert._isEqual(testDouble.different.something(), undefined)
     }
+  },
+  'getters on class instances': {
+    'reads the getter\'s value from the instance' () {
+      class Foo {
+        constructor () { this.k = 'abc' }
+        get bar () { return this.k.length }
+        get broken () { throw new Error('nope') }
+      }
+
+      testDouble = td.object(new Foo())
+
+      assert._isEqual(testDouble.bar, 3)
+      assert._isEqual(testDouble.broken, undefined)
+    },
+    'turns a getter that returns a function into a test double' () {
+      class Foo {
+        get doIt () { return function doIt () {} }
+      }
+
+      testDouble = td.object(new Foo())
+
+      assert._isEqual(td.explain(testDouble.doIt).isTestDouble, true)
+    },
+    'finishes when a getter returns a fresh instance of its own class' () {
+      class A {
+        get kid () { return new A() }
+      }
+
+      testDouble = td.object(new A())
+
+      assert._isEqual(typeof testDouble.kid, 'object')
+    }
   }
 }
