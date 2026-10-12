@@ -41,6 +41,10 @@ $ npm install --save-dev testdouble
 And then find the browser distribution of the library in
 `node_modules/testdouble/dist/testdouble.js`.
 
+testdouble.js can also be bundled for the browser with webpack 5 and other
+bundlers. Module replacement with `td.replace(path)` and `td.replaceEsm()` is
+only supported under Node.js.
+
 #### via unpkg
 
 You can also just fetch the latest (or any) version of the library from

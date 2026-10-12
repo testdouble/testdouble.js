@@ -8,5 +8,14 @@ module.exports = {
     subject.reset()
 
     assert._isEqual(result, 'yay')
+  },
+  '.onReset runs listeners in the order they were added' () {
+    const calls = []
+    subject.onReset(() => calls.push(1))
+    subject.onReset(() => calls.push(2))
+
+    subject.reset()
+
+    assert._isEqual(calls, [1, 2])
   }
 }

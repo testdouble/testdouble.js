@@ -1,17 +1,16 @@
 import _ from '../wrap/lodash'
-import { EventEmitter } from 'events'
 
-const storeEmitter = new EventEmitter()
+const resetListeners = []
 let globalStore = []
 
 const store = {
   onReset (func) {
-    storeEmitter.on('reset', func)
+    resetListeners.push(func)
   },
 
   reset () {
     globalStore = []
-    storeEmitter.emit('reset')
+    resetListeners.forEach(func => func())
   },
 
   for (testDouble, createIfNew = true) {

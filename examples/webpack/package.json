@@ -1,0 +1,12 @@
+{
+  "name": "testdouble-webpack-example",
+  "private": true,
+  "scripts": {
+    "build": "node build.js",
+    "test": "npm run build && node dist/cjs.js && node dist/esm.js"
+  },
+  "devDependencies": {
+    "testdouble": "file:../..",
+    "webpack": "^5.0.0"
+  }
+}
