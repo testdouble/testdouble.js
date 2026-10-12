@@ -10,11 +10,23 @@ export default function (object, property, manualReplacement) {
     Object.prototype.hasOwnProperty.call(object, property)
 
   if (isManual || realThingExists) {
+    const getter = findGetterOnly(object, property)
+    if (getter && getter.isOwn && !getter.descriptor.configurable) {
+      return log.error('td.replace', `"${property}" is defined with a getter that cannot be redefined. Compilers like SWC and Babel define ES module exports this way. To replace a module's export, replace the whole module with td.replace('path/to/module') instead.`)
+    }
     const realThing = object[property]
     return _.tap(getFake(isManual, property, manualReplacement, realThing), (fakeThing) => {
-      object[property] = fakeThing
+      if (getter) {
+        defineValue(object, property, fakeThing, getter.descriptor.enumerable)
+      } else {
+        object[property] = fakeThing
+      }
       reset.onNextReset(() => {
-        if (realThingExists) {
+        if (getter && getter.isOwn) {
+          Object.defineProperty(object, property, getter.descriptor)
+        } else if (getter) {
+          delete object[property]
+        } else if (realThingExists) {
           object[property] = realThing
         } else {
           delete object[property]
@@ -24,6 +36,30 @@ export default function (object, property, manualReplacement) {
   } else {
     log.error('td.replace', `No "${property}" property was found.`)
   }
+}
+
+// Assigning to a getter with no setter throws, so find any such accessor
+// (on the object or up its prototype chain) to replace it by definition
+const findGetterOnly = (object, property) => {
+  let thing = object
+  while (thing != null) {
+    const descriptor = Object.getOwnPropertyDescriptor(thing, property)
+    if (descriptor) {
+      return descriptor.get && !descriptor.set
+        ? { descriptor, isOwn: thing === object }
+        : undefined
+    }
+    thing = Object.getPrototypeOf(thing)
+  }
+}
+
+const defineValue = (object, property, value, enumerable) => {
+  Object.defineProperty(object, property, {
+    configurable: true,
+    writable: true,
+    enumerable,
+    value
+  })
 }
 
 const getFake = (isManual, property, manualReplacement, realThing) => {

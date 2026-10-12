@@ -149,6 +149,134 @@ module.exports = {
         assert._isEqual(Object.prototype.hasOwnProperty.call(dependency, 'notAThing'), false)
       }
     },
+    'Replacing a property defined with a getter': {
+      'own and configurable (tsc re-exports)': {
+        beforeEach () {
+          Object.defineProperty(dependency, 'beep', {
+            configurable: true,
+            enumerable: true,
+            get: () => () => 'og beep'
+          })
+        },
+        'using automatic replacement' () {
+          const ogDescriptor = Object.getOwnPropertyDescriptor(dependency, 'beep')
+
+          const double = td.replace(dependency, 'beep')
+
+          assert._isEqual(td.explain(double).isTestDouble, true)
+          assert._isEqual(dependency.beep, double)
+
+          // phase 2: reset puts the getter itself back
+          td.reset()
+          assert._isEqual(Object.getOwnPropertyDescriptor(dependency, 'beep'), ogDescriptor)
+          assert._isEqual(dependency.beep(), 'og beep')
+        },
+        'with manual replacement' () {
+          const ogDescriptor = Object.getOwnPropertyDescriptor(dependency, 'beep')
+
+          const fake = td.replace(dependency, 'beep', () => 'fake beep')
+
+          assert._isEqual(dependency.beep, fake)
+
+          // phase 2: reset puts the getter itself back
+          td.reset()
+          assert._isEqual(Object.getOwnPropertyDescriptor(dependency, 'beep'), ogDescriptor)
+        }
+      },
+      'inherited from a class': {
+        beforeEach () {
+          class Horn {
+            get beep () { return () => 'og beep' }
+          }
+          dependency = new Horn()
+        },
+        'using automatic replacement' () {
+          const double = td.replace(dependency, 'beep')
+
+          assert._isEqual(td.explain(double).isTestDouble, true)
+          assert._isEqual(dependency.beep, double)
+          assert._isEqual(Object.prototype.hasOwnProperty.call(dependency, 'beep'), true)
+
+          // phase 2: reset uncovers the inherited getter again
+          td.reset()
+          assert._isEqual(Object.prototype.hasOwnProperty.call(dependency, 'beep'), false)
+          assert._isEqual(dependency.beep(), 'og beep')
+        },
+        'with manual replacement' () {
+          const fake = td.replace(dependency, 'beep', () => 'fake beep')
+
+          assert._isEqual(dependency.beep, fake)
+
+          // phase 2: reset uncovers the inherited getter again
+          td.reset()
+          assert._isEqual(Object.prototype.hasOwnProperty.call(dependency, 'beep'), false)
+          assert._isEqual(dependency.beep(), 'og beep')
+        }
+      },
+      'own and non-configurable (SWC exports)': {
+        beforeEach () {
+          Object.defineProperty(dependency, 'beep', {
+            enumerable: true,
+            get: () => () => 'og beep'
+          })
+        },
+        'using automatic replacement' () {
+          const ogDescriptor = Object.getOwnPropertyDescriptor(dependency, 'beep')
+
+          try {
+            td.replace(dependency, 'beep')
+            assert.fail('should error!')
+          } catch (e) {
+            assert._isEqual(e.message, 'Error: testdouble.js - td.replace - "beep" is defined with a getter that cannot be redefined. Compilers like SWC and Babel define ES module exports this way. To replace a module\'s export, replace the whole module with td.replace(\'path/to/module\') instead.')
+          }
+          assert._isEqual(Object.getOwnPropertyDescriptor(dependency, 'beep'), ogDescriptor)
+        },
+        'with manual replacement' () {
+          const ogDescriptor = Object.getOwnPropertyDescriptor(dependency, 'beep')
+
+          try {
+            td.replace(dependency, 'beep', () => 'fake beep')
+            assert.fail('should error!')
+          } catch (e) {
+            assert._isEqual(e.message, 'Error: testdouble.js - td.replace - "beep" is defined with a getter that cannot be redefined. Compilers like SWC and Babel define ES module exports this way. To replace a module\'s export, replace the whole module with td.replace(\'path/to/module\') instead.')
+          }
+          assert._isEqual(Object.getOwnPropertyDescriptor(dependency, 'beep'), ogDescriptor)
+        }
+      },
+      'with a setter': {
+        beforeEach () {
+          let beep = () => 'og beep'
+          Object.defineProperty(dependency, 'beep', {
+            configurable: true,
+            enumerable: true,
+            get: () => beep,
+            set: (value) => { beep = value }
+          })
+        },
+        'using automatic replacement' () {
+          const ogDescriptor = Object.getOwnPropertyDescriptor(dependency, 'beep')
+
+          const double = td.replace(dependency, 'beep')
+
+          assert._isEqual(td.explain(double).isTestDouble, true)
+          assert._isEqual(dependency.beep, double)
+          assert._isEqual(Object.getOwnPropertyDescriptor(dependency, 'beep'), ogDescriptor)
+
+          // phase 2: reset restores through the setter
+          td.reset()
+          assert._isEqual(dependency.beep(), 'og beep')
+        },
+        'with manual replacement' () {
+          const fake = td.replace(dependency, 'beep', () => 'fake beep')
+
+          assert._isEqual(dependency.beep, fake)
+
+          // phase 2: reset restores through the setter
+          td.reset()
+          assert._isEqual(dependency.beep(), 'og beep')
+        }
+      }
+    },
     'Manually specifying the override': {
       beforeEach () {
         ogWarn = console.warn
