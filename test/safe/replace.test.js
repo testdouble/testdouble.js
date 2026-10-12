@@ -241,6 +241,14 @@ module.exports = {
 
       assert._isEqual(car.isASpeed('a speed'), true)
     },
+    'a module whose exports are getters' () {
+      const getterExports = td.replace('./fixtures/getter-exports')
+
+      assert._isEqual(td.explain(getterExports.doTheThing).isTestDouble, true)
+      assert._isEqual(td.explain(getterExports.beep).isTestDouble, true)
+      td.when(getterExports.doTheThing()).thenReturn(123)
+      assert._isEqual(require('./fixtures/getter-exports').doTheThing(), 123)
+    },
     'post-reset usage' () {
       td.reset()
 

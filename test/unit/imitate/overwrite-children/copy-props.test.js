@@ -107,6 +107,87 @@ module.exports = {
       b: 'b: 12',
       c: 'c: 13'
     })
+  },
+  'copies the value a getter returns, calling it on the original': () => {
+    const original = { k: 'kay' }
+    const target = {}
+    let receiver
+
+    subject(target, {
+      a: getterDescriptorFor(function () {
+        receiver = this
+        return this.k
+      })
+    }, undefined, original)
+
+    assert.equal(target.a, 'kay')
+    assert.strictEqual(receiver, original)
+  },
+  'passes the value a getter returns through the visitor': () => {
+    const target = {}
+
+    subject(target, {
+      a: getterDescriptorFor(() => 1)
+    }, (name, value) => `${name}: ${value + 10}`, {})
+
+    assert.equal(target.a, 'a: 11')
+  },
+  'copies undefined for a getter that throws': () => {
+    const target = {}
+
+    subject(target, {
+      a: getterDescriptorFor(() => { throw new Error('nope') })
+    }, undefined, {})
+
+    assert.ok('a' in target)
+    assert.strictEqual(target.a, undefined)
+  },
+  'copies undefined when the visitor throws on a getter\'s value': () => {
+    const target = {}
+
+    subject(target, {
+      a: getterDescriptorFor(() => 1)
+    }, () => { throw new Error('nope') }, {})
+
+    assert.ok('a' in target)
+    assert.strictEqual(target.a, undefined)
+  },
+  'copies undefined for a setter-only accessor': () => {
+    const target = {}
+
+    subject(target, {
+      a: { set (v) {}, configurable: true, enumerable: true }
+    }, undefined, {})
+
+    assert.ok('a' in target)
+    assert.strictEqual(target.a, undefined)
+  },
+  'does not call getters when the original is a prototype': () => {
+    class Foo {}
+    const target = {}
+    let called = false
+
+    subject(target, {
+      a: getterDescriptorFor(() => { called = true })
+    }, undefined, Foo.prototype)
+
+    assert.ok('a' in target)
+    assert.strictEqual(target.a, undefined)
+    assert.strictEqual(called, false)
+  },
+  'stops expanding getters 3 levels deep': () => {
+    const makeLink = () => ({ get next () { return makeLink() } })
+    const visitor = (name, value) => {
+      const nested = {}
+      subject(nested, Object.getOwnPropertyDescriptors(value), visitor, value)
+      return nested
+    }
+    const target = {}
+
+    subject(target, { next: getterDescriptorFor(() => makeLink()) }, visitor, {})
+
+    assert.ok(target.next.next.next)
+    assert.strictEqual(target.next.next.next.next, undefined)
   }
 }
 
@@ -117,3 +198,9 @@ const basicPropDescriptorFor = (val, except = {}) =>
     configurable: true,
     enumerable: true
   }, except)
+
+const getterDescriptorFor = (get) => ({
+  get,
+  configurable: true,
+  enumerable: true
+})

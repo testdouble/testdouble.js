@@ -15,7 +15,6 @@ export default (original, target, overwriteChild) => {
   } else {
     copyProps(target, gatherProps(original), (name, originalValue) =>
       chainPrototype(original, target, name, originalValue,
-        overwriteChild(originalValue, `.${name}`))
-    )
+        overwriteChild(originalValue, `.${name}`)), original)
   }
 }

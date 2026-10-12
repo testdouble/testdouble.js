@@ -37,7 +37,7 @@ module.exports = {
 
     subject('og', 'target', overwriteChildren)
 
-    td.verify(copyProps('target', 'props', propCaptor.capture()))
+    td.verify(copyProps('target', 'props', propCaptor.capture(), 'og'))
 
     // Phase two: test the prop overwriter directly
     td.when(overwriteChildren('og val', '.aName')).thenReturn('new val')
