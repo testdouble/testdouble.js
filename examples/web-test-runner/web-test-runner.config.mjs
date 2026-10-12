@@ -4,5 +4,7 @@
 export default {
   nodeResolve: {
     exportConditions: ['browser', 'development']
-  }
+  },
+  // Chrome can take longer than the default 30s to start on Windows CI runners.
+  browserStartTimeout: 60000
 }
