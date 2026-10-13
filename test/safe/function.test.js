@@ -44,6 +44,17 @@ module.exports = {
 
     assert._isEqual(td.explain(result.foo).isTestDouble, true)
     assert._isEqual(result.bar, 42)
+  },
+  'resetting spy/stub state with .reset()' () {
+    const f = td.func()
+    td.when(f()).thenReturn(42)
+    assert._isEqual(f(), 42)
+    assert._isEqual(td.explain(f).callCount, 1)
+
+    f.reset()
+
+    assert._isEqual(f(), undefined)
+    assert._isEqual(td.explain(f).callCount, 0)
   }
 
 }

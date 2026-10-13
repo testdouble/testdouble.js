@@ -5,9 +5,14 @@ import stubbings from './store/stubbings'
 import imitate from './imitate'
 
 export default function func (nameOrFunc, __optionalName) {
-  return _.isFunction(nameOrFunc)
+  const testDouble = _.isFunction(nameOrFunc)
     ? imitate(nameOrFunc)
     : createTestDoubleNamed(nameOrFunc || __optionalName)
+  testDouble.reset = () => {
+    store.for(testDouble, false)?.stubbings.length && (store.for(testDouble, false).stubbings = [])
+    store.for(testDouble, false)?.calls.length && (store.for(testDouble, false).calls = [])
+  }
+  return testDouble
 }
 
 const createTestDoubleNamed = function (name) {
