@@ -27,6 +27,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - name: Install pnpm (for the pnpm example project)
-      run: npm install --global pnpm
+      run: npm install --global pnpm --allow-scripts=pnpm
     - run: npm ci
     - run: npm test
